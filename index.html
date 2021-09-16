@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./source/lib/prism/prism.css">
+</head>
+
+<body>
+  <pre class="language-js">
+    <code>console.log(565)</code>
+    <code>console.log(565)</code>
+    <code>console.log(565)</code>
+    <code>console.log(565)</code>
+  </pre>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      $("pre[class*='language-']").each(function (index, item) {
+        let text = $(item).find("code[class*='language-']").text();
+        let span = $(`<span class="copy-button"><i class="joe-font joe-icon-copy" title="复制代码"></i></span>`);
+        // 代码折叠
+        let expander = $(`<i class="joe-font joe-icon-arrow-downb code-expander" title="折叠/展开"></i>`);
+        expander.on('click', function () {
+          expander.parent('pre').toggleClass('close')
+        })
+        $(item).prepend(expander);
+        $(item).addClass('line-numbers copyable');
+        $(item).append(span);
+      });
+      var script = document.createElement('script')
+      script.src = "./source/lib/prism/prism.js"
+      document.body.appendChild(script)
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+id: joe2.0
+name: Joe2.0
+author:
+  name: M酷
+  website: https://bbchin.com
+description: Halo主题 joe2.0
+logo: https://avatars.githubusercontent.com/u/11992612?v=4
+website: https://bbchin.com
+repo: https://github.com/qinhua/halo-theme-joe2.0
+version: 1.0.0
+require: 1.4.11

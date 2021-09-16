@@ -1,0 +1,185 @@
+// 所有布尔值需要使用 ?string 转成字符串才取得到
+        window.JoeConfig = {
+          enable_auto_switch_theme: Boolean("${settings.enable_auto_switch_theme?string}"), // 自动切换主题模式
+          static_theme: "${settings.static_theme!}", // 固定主题模式
+          dark_time_scope: "${settings.dark_time_scope!}", // 浅色模式生效时间范围
+          enable_banner_autoplay: Boolean("${settings.enable_banner_autoplay?string}"), // 轮播图自动播放
+          banner_direction: "${settings.banner_direction!}", // 轮播图方向
+          banner_delay: Number("${settings.banner_delay?string}") || 3500, // 轮播图切换间隔
+          enable_code_copy: Boolean("${settings.enable_code_copy?string}"), // 代码复制
+          enable_code_expander: Boolean("${settings.enable_code_expander?string}"), // 代码折叠
+          enable_code_line_number: Boolean("${settings.enable_code_line_number?string}"), // 代码行号
+        };
+        console.log(JSON.stringify(window.JoeConfig,null,2));
+
+
+
+            <!-- 页面 -->
+            <li>
+                <a class="link panel" href="#" rel="nofollow">
+                    <span>页面</span>
+                    <i class="joe-font joe-icon-arrow-right"></i>
+                </a>
+                <ul class="slides panel-body">
+                    <?php foreach ($pages->stack as $item) : ?>
+                        <li>
+                            <a class="link <?php echo $this->is('page', $item['slug']) ? 'current' : '' ?>" href="<?php echo $item['permalink'] ?>" title="<?php echo $item['title'] ?>"><?php echo $item['title'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+            <!-- 推荐 -->
+            <?php if (sizeof($custom) > 0) : ?>
+                <li>
+                    <a class="link panel" href="#" rel="nofollow">
+                        <span>推荐</span>
+                        <i class="joe-font joe-icon-arrow-right"></i>
+                    </a>
+                    <ul class="slides panel-body">
+                        <?php foreach ($custom as $item) : ?>
+                            <li>
+                                <a class="link" href="<?php echo $item['url'] ?>" target="_blank" rel="noopener noreferrer nofollow"><?php echo $item['title'] ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+            <?php endif; ?>
+
+
+
+
+
+// 文章
+{
+    "id": 51,
+    "title": "el-table 添加行内操作时，列宽不够如何处理",
+    "status": "PUBLISHED",
+    "slug": "el-table-column",
+    "editorType": "MARKDOWN",
+    "updateTime": 1631618692720,
+    "createTime": 1631515431036,
+    "editTime": 1631618692719,
+    "metaKeywords": "el-table,elementui,vue",
+    "metaDescription": "el-table 添加行内操作时，列宽自由调整，如何保证内容展示正常。",
+    "fullPath": "https://bbchin.com/archives/el-table-column",
+    "summary": "el-table 添加行内操作时，列宽自由调整，如何保证内容展示正常。",
+    "thumbnail": "https://bbchin.com/upload/2021/09/el-table-column-74599725cc4a4bcfab63531e699d8749.png",
+    "visits": 13,
+    "disallowComment": false,
+    "password": "",
+    "template": "",
+    "topPriority": 1,
+    "likes": 0,
+    "wordCount": 2910,
+    "commentCount": 0,
+    "tags": [
+        {
+            "id": 16,
+            "name": "el-table",
+            "slug": "el-table",
+            "thumbnail": "",
+            "createTime": 1623825624130,
+            "fullPath": "https://bbchin.com/tags/el-table"
+        },
+        {
+            "id": 6,
+            "name": "elementui",
+            "slug": "elementui",
+            "thumbnail": "",
+            "createTime": 1609691332776,
+            "fullPath": "https://bbchin.com/tags/elementui"
+        },
+        {
+            "id": 8,
+            "name": "vue",
+            "slug": "vue",
+            "thumbnail": "",
+            "createTime": 1609946549314,
+            "fullPath": "https://bbchin.com/tags/vue"
+        }
+    ],
+    "categories": [
+        {
+            "id": 7,
+            "name": "elementui",
+            "slug": "elementui",
+            "description": "",
+            "thumbnail": "",
+            "parentId": 2,
+            "password": null,
+            "createTime": 1618549372325,
+            "fullPath": "https://bbchin.com/categories/elementui"
+        },
+        {
+            "id": 10,
+            "name": "vue",
+            "slug": "vue",
+            "description": "",
+            "thumbnail": "",
+            "parentId": 2,
+            "password": null,
+            "createTime": 1631165229769,
+            "fullPath": "https://bbchin.com/categories/vue"
+        }
+    ],
+    "metas": {},
+    "topped": true
+}
+
+
+// 日志
+{
+    "id": 2,
+    "sourceContent": "人间有味是清欢",
+    "content": "<p>人间有味是清欢</p>\n",
+    "likes": 0,
+    "createTime": 1609122492365,
+    "type": "PUBLIC",
+    "commentCount": 0
+}
+
+// 评论
+{
+    "id": 16,
+    "author": "鲜花店",
+    "email": "352484006@qq.com",
+    "ipAddress": "127.0.0.1",
+    "authorUrl": "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/default_avatar.jpg",
+    "gravatarMd5": "8e7c538ae05eaf972e6af4a10b50b002",
+    "content": "优秀",
+    "status": "PUBLISHED",
+    "userAgent": "PostmanRuntime/7.26.8",
+    "parentId": 0,
+    "isAdmin": false,
+    "allowNotification": true,
+    "createTime": 1631640532322,
+    "avatar": "//gravatar.com/avatar/8e7c538ae05eaf972e6af4a10b50b002?d=wavatar",
+    "post": {
+        "id": 25,
+        "title": "一文搞懂浏览器缓存策略",
+        "status": "DRAFT",
+        "slug": "一文搞懂浏览器缓存策略",
+        "editorType": "MARKDOWN",
+        "updateTime": 1612267138194,
+        "createTime": 1612267138194,
+        "editTime": 1612267138194,
+        "metaKeywords": null,
+        "metaDescription": null,
+        "fullPath": "https://bbchin.com/archives/一文搞懂浏览器缓存策略"
+    }
+}
+
+// 图库
+{
+    "id": 10,
+    "name": "夜色-大桥之下",
+    "thumbnail": "https://bbchin.com/upload/2021/01/_AKA2558-49f690fbe2944bfb96690c91eda0413d-thumbnail.jpg",
+    "takeTime": 1610117847870,
+    "url": "https://bbchin.com/upload/2021/01/_AKA2558-49f690fbe2944bfb96690c91eda0413d.jpg",
+    "team": "风光",
+    "location": "宜昌-沿江大道",
+    "description": ""
+}
+
+
+https://cdn.jsdelivr.net/gh/LIlGG/halo-comment-sakura@v1.3.5/dist/halo-comment.min.js

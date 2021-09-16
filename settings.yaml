@@ -1,0 +1,998 @@
+# 基本设置
+genernal:
+  label: 基本设置
+  items:
+    enable_search:
+      name: enable_search
+      label: 搜索功能
+      type: radio
+      data-type: bool
+      default: true
+      description: "控制博客的搜索功能"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    icp:
+      name: icp
+      label: ICP备案号
+      type: text
+      placeholder: "请填写ICP备案号"
+    site_notice:
+      name: site_notice
+      label: 网站公告
+      type: textarea
+      placeholder: 请输入公告信息
+      description: "网站公告信息，将展示在页面右侧，尽量简洁明了（不填不展示该模块，也可单独开关）"
+    baidu_statistic:
+      name: baidu_statistic
+      label: 百度统计
+      type: textarea
+      placeholder: 请输入百度统计代码
+      description: "百度统计代码，将插入head标签中"
+
+# 主题
+theme:
+  label: 主题相关
+  items:
+    static_theme:
+      name: static_theme
+      label: 固定的模式
+      type: select
+      default: ""
+      description: "为博客设置固定的主题模式（浅色/暗黑），改模式下不展示切换按钮"
+      options:
+        - value: ""
+          label: 无
+        - value: light
+          label: 浅色模式
+        - value: dark
+          label: 暗黑模式
+    enable_auto_switch_theme:
+      name: enable_fixed_header
+      label: 自动切换主题模式
+      type: switch
+      data-type: bool
+      default: false
+      description: "在特定时间自动切换浅色/暗黑模式，可配置时间范围"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    dark_time_scope:
+      name: dark_time_scope
+      label: 浅色模式生效时间范围
+      type: text
+      default: "5:00~19:00"
+      placeholder: "输入格式如：5:00~19:00"
+      description: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式，仅在“自动切换”开启情况下生效"
+    theme_color_day:
+      name: theme_color_day
+      label: 主题色（浅色）
+      type: text
+      default: "#9999ff"
+      placeholder: "浅色主题色色值，默认#9999ff"
+    theme_color_night:
+      name: theme_color_night
+      label: 主题色（暗黑）
+      type: text
+      default: "#54b5db"
+      placeholder: "暗黑主题色色值，默认#54b5db"
+    enable_fixed_header:
+      name: enable_fixed_header
+      label: 固定导航栏
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    show_logo:
+      name: show_logo
+      label: 博客LOGO
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 展示
+        - value: false
+          label: 不展示
+    logo_radius:
+      name: logo_radius
+      label: 博客LOGO圆角值
+      type: text
+      default: "4px"
+      placeholder: "请输入"
+      description: "导航栏博客LOGO的圆角值，像素或百分比，默认4px"
+    content_max_width:
+      name: content_max_width
+      label: 内容区最大宽度
+      type: text
+      default: "1320px"
+      placeholder: "请输入"
+      description: "限制内容区域的宽度，像素或百分比，默认1320px"
+    enable_loading_bar:
+      name: enable_loading_bar
+      label: 页面加载条
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    loading_bar_height:
+      name: loading_bar_height
+      label: 加载条高度
+      type: text
+      placeholder: "加载条高度，默认2px"
+    loading_bar_color:
+      name: loading_bar_color
+      label: 加载条颜色
+      type: text
+      placeholder: "加载条背景色，默认跟随主题色"
+
+# 博主信息
+blogger:
+  label: 博主信息
+  items:
+    show_blogger:
+      name: show_blogger
+      label: 展示博主信息
+      type: radio
+      data-type: bool
+      default: true
+      description: "不展示的情况下，下面配置均无效"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    show_level:
+      name: show_level
+      label: 展示博主等级
+      type: radio
+      data-type: bool
+      default: true
+      description: "博主等级基于文章数和评论数计算得到"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    motto:
+      name: motto
+      label: 个人独白
+      type: text
+      description: "将覆盖每日一句，若为空则展示每日一句或博客描述"
+    enable_day_words:
+      name: enable_day_words
+      label: 每日一句
+      type: radio
+      data-type: bool
+      default: true
+      description: "将覆盖博客描述，资源来自 https://www.jinrishici.com"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    lazyload_avatar:
+      name: lazyload_avatar
+      label: 头像预载图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazy_avatar.jpg"
+      description: "头像加载出来之前展示的图片"
+    default_avatar:
+      name: default_avatar
+      label: 默认头像
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/default_avatar.jpg"
+      description: "用于头像加载出错时显示的图片"
+    user_bg_pic:
+      name: user_bg_pic
+      label: 博主栏背景图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg"
+      description: "用于博主信息的背景图"
+    avatar_type:
+      name: avatar_type
+      label: 头像类型
+      type: radio
+      default: "1"
+      description: "圆形或者矩形"
+      options:
+        - value: "1"
+          label: "圆形"
+        - value: "2"
+          label: "矩形"
+    avatar_frame:
+      name: avatar_frame
+      label: 头像挂架
+      type: select
+      default: "0"
+      description: "作用于博主头像的相框"
+      options:
+        - value: "0"
+          label: 无
+        - value: "rainbow-girl"
+          label: "彩虹之女"
+        - value: "honor-light"
+          label: "荣誉之光"
+        - value: "bird-girl"
+          label: "彩雀之女"
+        - value: "purple-crystal"
+          label: "紫水晶"
+        - value: "flower-ring"
+          label: "清新花环"
+        - value: "lantern-cloud"
+          label: "灯笼祥云"
+        - value: "ease-cloud"
+          label: "福气祥云"
+        - value: "festival-luck"
+          label: "节日福旺"
+        - value: "happy-mouse"
+          label: "快乐小鼠"
+        - value: "two-mouse"
+          label: "两只小鼠"
+        - value: "bull-puff"
+          label: "牛气大发"
+        - value: "christmas-knot"
+          label: "圣诞彩结"
+        - value: "christmas-ring"
+          label: "圣诞花环"
+        - value: "santa-claus"
+          label: "圣诞老人"
+        - value: "cactus"
+          label: "仙人掌"
+    avatar_widget:
+      name: avatar_widget
+      label: 头像挂架
+      type: select
+      default: "0"
+      description: "作用于博主头像的挂件"
+      options:
+        - value: "0"
+          label: 无
+        - value: "sakura"
+          label: 樱花
+        - value: "mechanic"
+          label: 机械
+        - value: "heart"
+          label: 爱心
+        - value: "fire"
+          label: 火焰
+    enable_strips:
+      name: enable_strips
+      label: 展示彩条
+      type: radio
+      data-type: bool
+      default: true
+      description: "控制悬浮时的彩条动画"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    show_social:
+      name: show_social
+      label: 展示社交账号
+      type: radio
+      data-type: bool
+      default: true
+      description: "控制是否展示社交账号"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+
+# 轮播图
+carousel:
+  label: 轮播图
+  items:
+    enable_banner:
+      name: enable_banner
+      label: 轮播图
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    banner_direction:
+      name: banner_direction
+      label: 轮播方向
+      type: radio
+      data-type: string
+      default: horizontal
+      options:
+        - value: horizontal
+          label: 水平
+        - value: vertical
+          label: 垂直
+    enable_banner_autoplay:
+      name: enable_banner_autoplay
+      label: 自动切换
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    banner_delay:
+      name: banner_delay
+      label: 切换间隔
+      type: text
+      default: "3500"
+      placeholder: "请输入"
+      description: "设置轮播图切换的间隔时间，默认3500（仅在自动切换开启时生效）"
+    banner1_title:
+      name: banner1_title
+      label: 轮播1标题
+      type: text
+      placeholder: "标题可不填"
+    banner1_img:
+      name: banner1_img
+      label: 轮播1图片
+      type: attachment
+      placeholder: "轮播图片地址"
+    banner1_url:
+      name: banner1_url
+      label: 轮播1链接
+      type: text
+      placeholder: "轮播图片url"
+    banner2_title:
+      name: banner2_title
+      label: 轮播2标题
+      type: text
+      placeholder: "标题可不填"
+    banner2_img:
+      name: banner2_img
+      label: 轮播2图片
+      type: attachment
+      placeholder: "轮播图片地址"
+    banner2_url:
+      name: banner2_url
+      label: 轮播2链接
+      type: text
+      placeholder: "轮播图片url"
+    banner3_title:
+      name: banner3_title
+      label: 轮播3标题
+      type: text
+      placeholder: "标题可不填"
+    banner3_img:
+      name: banner3_img
+      label: 轮播3图片
+      type: attachment
+      placeholder: "轮播图片地址"
+    banner3_url:
+      name: banner3_url
+      label: 轮播3链接
+      type: text
+      placeholder: "轮播图片url"
+
+# 文章页
+passage:
+  label: 文章页
+  items:
+    enable_title_shadow:
+      name: enable_title_shadow
+      label: 标题阴影
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_passage_tips:
+      name: enable_passage_tips
+      label: 温馨提示
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    lazyload_thumbnail:
+      name: lazyload_thumbnail
+      label: 预载图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazy_thumbnail.jpg"
+      description: "配图加载出来之前展示的图片"
+    passage_thumbnail:
+      name: passage_thumbnail
+      label: 文章默认缩略图
+      width: 100%
+      type: attachment
+      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=16&fontfamily=2
+      placeholder: "为空则展示占位文字"
+      description: "文章无配图时生效，可使用占位图服务 http://placeholder.idcd.com"
+    fallback_img:
+      name: fallback_img
+      label: 错误缺省图
+      type: attachment
+      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=16&fontfamily=2
+      placeholder: "为空则展示占位文字"
+      description: "图片加载出错时生效，可使用占位图服务 http://placeholder.idcd.com"
+    enable_comment:
+      name: enable_comment
+      label: 文章评论
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_toc:
+      name: enable_toc
+      label: 文章TOC目录
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_share:
+      name: enable_share
+      label: 文章分享
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否开启文章分享功能，可单独配置分享渠道"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_copy:
+      name: enable_copy
+      label: 文章复制
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+          label: 关闭
+    enable_like:
+      name: enable_like
+      label: 文章点赞
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_indent:
+      name: enable_indent
+      label: 首行缩进
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启后，文章页中的p标签将首行缩进2个字符"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_copy:
+      name: enable_code_copy
+      label: 代码复制
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_line_number:
+      name: enable_code_line_number
+      label: 代码行号
+      type: switch
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_expander:
+      name: enable_code_expander
+      label: 代码折叠
+      type: switch
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    code_theme:
+      name: code_theme
+      label: 代码主题
+      type: select
+      data-type: string
+      default: "one-dark"
+      description: "来自prism-themes的主题，见https://github.com/PrismJS/prism-themes"
+      options:
+        - value: "one-dark"
+          label: "one-dark"
+        - value: "one-light"
+          label: "one-light"
+        - value: "a11y-dark"
+          label: "a11y-dark"
+        - value: "atom-dark"
+          label: "atom-dark"
+        - value: "base16-ateliersulphurpool.light"
+          label: "base16-ateliersulphurpool.light"
+        - value: "cb"
+          label: "cb"
+        - value: "coldark-cold"
+          label: "coldark-cold"
+        - value: "coldark-dark"
+          label: "coldark-dark"
+        - value: "coy-without-shadows"
+          label: "coy-without-shadows"
+        - value: "darcula"
+          label: "darcula"
+        - value: "dracula"
+          label: "dracula"
+        - value: "duotone-dark"
+          label: "duotone-dark"
+        - value: "duotone-earth"
+          label: "duotone-earth"
+        - value: "duotone-forest"
+          label: "duotone-forest"
+        - value: "duotone-light"
+          label: "duotone-light"
+        - value: "duotone-sea"
+          label: "duotone-sea"
+        - value: "duotone-space"
+          label: "duotone-space"
+        - value: "ghcolors"
+          label: "ghcolors"
+        - value: "gruvbox-dark"
+          label: "gruvbox-dark"
+        - value: "gruvbox-light"
+          label: "gruvbox-light"
+        - value: "holi-theme"
+          label: "holi-theme"
+        - value: "hopscotch"
+          label: "hopscotch"
+        - value: "lucario"
+          label: "lucario"
+        - value: "material-dark"
+          label: "material-dark"
+        - value: "material-light"
+          label: "material-light"
+        - value: "material-oceanic"
+          label: "material-oceanic"
+        - value: "night-owl"
+          label: "night-owl"
+        - value: "nord"
+          label: "nord"
+        - value: "pojoaque"
+          label: "pojoaque"
+        - value: "shades-of-purple"
+          label: "shades-of-purple"
+        - value: "solarized-dark-atom"
+          label: "solarized-dark-atom"
+        - value: "synthwave84"
+          label: "synthwave84"
+        - value: "vs"
+          label: "vs"
+        - value: "vsc-dark-plus"
+          label: "vsc-dark-plus"
+        - value: "xonokai"
+          label: "xonokai"
+        - value: "z-touch"
+          label: "z-touch"
+    enable_share_weixin:
+      name: enable_share_weixin
+      label: 微信分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_share_qq:
+      name: enable_share_qq
+      label: QQ分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_share_qzone:
+      name: enable_share_qzone
+      label: QQ空间分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_share_weibo:
+      name: enable_share_weibo
+      label: 微博分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_share_link:
+      name: enable_share_link
+      label: 链接分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    copy_right_text:
+      name: copy_right_text
+      label: 版权文案（代码区）
+      type: textarea
+      default: "本内容版权归“M酷”本人所有，未经授权禁止随意转载。"
+      description: "文章页复制代码内容时，追加的版权文案（添加后复制代码或文章均有效），注意不要填写表情等特殊内容，否则可能导致网站崩溃"
+    enable_donate:
+      name: passage_enable_donate
+      label: 打赏二维码
+      type: radio
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    qrcode_zfb:
+      name: qrcode_zfb
+      label: "支付宝二维码链接"
+      type: attachment
+      placeholder: "支付宝收款二维码链接，不填不显示"
+    qrcode_wx:
+      name: qrcode_wx
+      label: "微信二维码链接"
+      type: attachment
+      placeholder: "微信收款二维码链接，不填不显示"
+
+# 侧边栏
+aside:
+  label: 侧边栏
+  items:
+    enable_notice:
+      name: enable_notice
+      label: 网站公告
+      type: radio
+      data-type: bool
+      default: false
+      description: "在右侧展示公告信息模块，必须配置公告内容才生效"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    qrcode_url:
+      name: qrcode_url
+      label: 二维码图片
+      type: attachment
+      description: "二维码图片的url，支持配置标题、二维码图片、和描述文字"
+    qrcode_title:
+      name: qrcode_title
+      label: 二维码标题
+      type: text
+      default: "我的二维码"
+      placeholder: "请输入二维码标题（仅在二维码url不为空时生效）"
+    qrcode_description:
+      name: qrcode_description
+      label: 二维码描述
+      type: textarea
+      placeholder: "请输入二维码描述（仅在二维码url不为空时生效）"
+    music_id:
+      name: music_id
+      label: 歌单ID
+      type: text
+      placeholder: "网易歌单ID，不填不展示"
+    show_newest_post:
+      name: show_newest_post
+      label: 最新文章
+      type: radio
+      data-type: bool
+      default: true
+      description: "在右侧展示最新文章"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    newest_page_size:
+      name: newest_page_size
+      label: 最新文章条数
+      default: 5
+      description: "右侧最新文章展示条数，填写数字即可，默认展示最新的5篇文章（需开启最新文章）"
+    show_lifetime:
+      name: show_lifetime
+      label: 人生倒计时
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    show_newreply:
+      name: show_newreply
+      label: 最新评论
+      type: radio
+      data-type: bool
+      default: true
+      description: "在右侧展示最新的评论"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    newreply_page_size:
+      name: newreply_page_size
+      label: 最新评论条数
+      default: 5
+      description: "右侧最新评论展示条数，填写数字即可，默认展示最新的5条评论（需开启最新评论）"
+    show_tag:
+      name: show_tag
+      label: 标签云
+      type: radio
+      data-type: bool
+      default: true
+      description: ""
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+
+# 社交
+social:
+  label: 社交
+  items:
+    email:
+      name: email
+      label: 邮箱
+      type: text
+      # default: "352484005@qq.com"
+      placeholder: "邮箱地址"
+    github:
+      name: github
+      label: Github
+      type: text
+      # default: "https://github.com/qinhua"
+      placeholder: "github主页地址"
+    zhihu:
+      name: zhihu
+      label: 知乎
+      type: text
+      # default: "https://juejin.cn/user/817692384432407"
+      placeholder: "知乎主页地址"
+    juejin:
+      name: juejin
+      label: 掘金
+      type: text
+      # default: "https://juejin.cn/user/817692384432407"
+      placeholder: "掘金主页地址"
+    bilibili:
+      name: bilibili
+      label: B站
+      type: text
+      # default: "https://space.bilibili.com/89927969"
+      placeholder: "B站主页地址"
+    qq:
+      name: qq
+      label: QQ
+      type: text
+      # default: "352484005"
+      placeholder: "QQ号"
+    weibo:
+      name: weibo
+      label: 微博
+      type: text
+      # default: "https://weibo.com/duider"
+      placeholder: "微博主页地址"
+    qq_group:
+      name: qq_group
+      label: QQ交流群
+      type: textarea
+      default: '<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi"><img style="height:16px;border:none;border-radius: 3px;" src="//pub.idqqimg.com/wpa/images/group.png" alt="加入学习群" title="加入学习群"></a>'
+      placeholder: "请填入QQ交流群内嵌代码"
+      description: "可通过 https://qun.qq.com/join.html 获取代码，和默认值格式保持一致即可"
+
+# 看板娘
+character:
+  label: 看板娘
+  items:
+    enable_live2d:
+      name: enable_live2d
+      label: 开启看板娘
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+
+# 自定义
+custom:
+  label: 自定义
+  items:
+    favicon:
+      name: favicon图标
+      label: favicon
+      type: attachment
+      default: ""
+      description: "覆盖博客默认的favicon图标，尺寸64*64，格式jpg、png等"
+    birthday:
+      name: birthday
+      label: "博客运行时间"
+      type: text
+      description: "填入博客创建时间，格式：年/月/日 时:分:秒，如2021/01/01 00:00:00，不填或填错则不展示"
+    iconfont:
+      name: iconfont
+      label: "字体图标链接"
+      type: text
+      description: "填入iconfont生成的图标链接，无需link标签，将插入head标签尾部"
+    external_css:
+      name: external_css
+      label: "外部CSS链接"
+      type: text
+      description: "填入外部CSS链接，无需link标签，将插入head标签尾部"
+    custom_css:
+      name: custom_css
+      label: "自定义CSS"
+      type: textarea
+      description: "填入CSS代码，无需style标签，将插入head标签尾部"
+    custom_external_js_head:
+      name: custom_external_js_head
+      label: "外部JS链接（head）"
+      type: textarea
+      description: "填入外部JS链接，需要script标签，可按情况指定async和defer属性，将插入head标签尾部"
+    custom_js_head:
+      name: custom_js_head
+      label: "自定义JS（head）"
+      type: textarea
+      description: "填入JS代码，无需script标签，将插入head标签尾部"
+    custom_external_js_body:
+      name: custom_external_js_body
+      label: "外部JS链接（body）"
+      type: text
+      description: "填入外部JS链接，无需script标签，将插入body标签尾部（可用于添加百度统计代码等）"
+    custom_js_body:
+      name: custom_js_body
+      label: "自定义JS（body）"
+      type: textarea
+      description: "填入JS代码，无需script标签，将插入body标签尾部"
+
+# 广告位
+advertise:
+  label: 广告位
+  items:
+    ad_address:
+      name: ad_address
+      label: 广告地址
+      type: text
+      placeholder: "和ad_image组合生效不填不展示"
+    ad_image:
+      name: ad_image
+      label: 广告图片
+      type: text
+      placeholder: "和ad_address组合生效不填不展示"
+
+# 其它
+others:
+  label: 其它
+  items:
+    baidu_token:
+      name: baidu_token
+      label: 百度推送Token
+      # default: "TZLa5Xk302pBBySo"
+      placeholder: "请填入token"
+      description: "前台文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（不填不自动推送）"
+    enable_pjax:
+      name: enable_pjax
+      label: 全局Pjax
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启音乐播放器后，建议开启pjax以优化用户体验"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_offscreen_tip:
+      name: enable_offscreen_tip
+      label: 离屏提示
+      type: switch
+      data-type: bool
+      default: true
+      description: "在切换到其它站点或后台时，通过页面title提示"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    offscreen_title_leave:
+      name: offscreen_title_leave
+      label: "离屏文案（离开）"
+      default: "歪，你去哪里了？"
+      placeholder: "请输入"
+      description: "在切换到其它站点标签或后台时，页面title展示的文字"
+    offscreen_title_back:
+      name: offscreen_title_back
+      label: "离屏文案（回来）"
+      default: "(つェ⊂)咦，又回来了!"
+      placeholder: "请输入"
+      description: "在返回到当前标签时，通过title展示的文字"
+    enable_backup:
+      name: enable_backup
+      label: 博客自动备份
+      type: switch
+      data-type: bool
+      default: true
+      description: "开启后，系统将每隔5天备份1次，最多备份版本为20份，超过后自动删除最晚的版本，此功能需要先配置相应服务端程序，请戳 xxxxx"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    rip_mode:
+      name: rip_mode
+      label: 整站变灰
+      type: switch
+      data-type: bool
+      default: false
+      description: "向生命致敬，愿精神长存 <愿此功能永不被启用>"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
