@@ -2,11 +2,11 @@
 
 <p align="center">
   <a class="logo" href="https://github.com/qinhua/halo-theme-joe2.0">
-    <img src="./halo-theme-joe2.0.png" height="62" alt="halo-theme-joe2.0">
+    <img src="./halo-theme-joe2.0.png" height="86" alt="halo-theme-joe2.0">
   </a>
 </p>
 
-<h1 align="center" style="display:none">halo-theme-joe2.0</h1>
+<!-- <h1 align="center" style="display:none">halo-theme-joe2.0</h1> -->
 
 <p align="center">joe 主题 halo 移植版</p>
 
