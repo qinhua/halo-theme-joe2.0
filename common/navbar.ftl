@@ -1,5 +1,6 @@
 <#import "macro/searchpart.ftl" as sp>
 <header class="joe_header">
+    <#--  web菜单  -->
     <div class="joe_header__above">
         <div class="joe_container joe_header_container">
             <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
@@ -22,20 +23,24 @@
                                 <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                             </div>
                             <nav class="joe_dropdown__menu">
-                            <#list menu.children as child>
-                                <li>
-                                    <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon??><i class="${child.icon}"></i></#if>${child.name!}</a>
-                                </li>
-                                <#if child.children?? && child.children?size gt 0>
-                                  <ol class="joe_nav_sub">
-                                    <#list child.children as child1>
-                                    <li>
-                                        <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if child.icon??><i class="${child1.icon}"></i></#if>${child1.name!}</a>
+                              <#list menu.children as child>
+                                  <#if child.children?? && child.children?size gt 0>
+                                    <li class="joe_nav_sub-li">
+                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon??><i class="${child.icon}"></i></#if>${child.name!}</a>
+                                        <ol class="joe_nav_sub">
+                                          <#list child.children as child1>
+                                          <li>
+                                              <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if child.icon??><i class="${child1.icon}"></i></#if>${child1.name!}</a>
+                                          </li>
+                                          </#list>
+                                        </ol>
                                     </li>
-                                    </#list>
-                                  </ol>
-                                </#if> 
-                            </#list>
+                                  <#else> 
+                                    <li>
+                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon??><i class="${child.icon}"></i></#if>${child.name!}</a>
+                                    </li>
+                                  </#if> 
+                              </#list>
                             </nav>
                         </div>
                         <#else>
@@ -61,12 +66,98 @@
         </div>
     </div>
 
-<div class="joe_header__searchout">
+    <#--  mobile菜单  -->
+    <div class="joe_header__slideout">
+        <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg'}" alt="侧边栏壁纸" />
+        <div class="joe_header__slideout-author">
+            <img width="50" height="50" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+            <div class="info">
+                <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
+                <p class="motto joe_motto">${user.description!}</p>
+            </div>
+        </div>
+        <ul class="joe_header__slideout-count">
+            <li class="item">
+                <i class="joe-font joe-icon-riji"></i>
+                <@postTag method="count"><span>累计撰写 <strong>${count!"0"}</strong> 篇文章</span></@postTag>
+            </li>
+            <li class="item">
+                <i class="joe-font joe-icon-remen"></i>
+                <@tagTag method="count"><span>累计创建 <strong>${count!"0"}</strong> 个标签</span></@tagTag>
+            </li>
+            <li class="item">
+                <i class="joe-font joe-icon-message"></i>
+                <@commentTag method="count"><span>累计收到 <strong>${count!"0"}</strong> 条评论</span></@commentTag>
+            </li>
+        </ul>
+        <ul class="joe_header__slideout-menu panel-box">
+            <li>
+                <a class="link" href="/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a class="link panel" href="#" rel="nofollow">
+                    <span>栏目</span>
+                    <i class="joe-font joe-icon-arrow-right"></i>
+                </a>
+                <ul class="slides panel-body panel-box panel-side-menu">
+                    <@menuTag method="tree">
+                        <#list menus?sort_by('priority') as menu>
+                          <#if menu_index != 0>
+                            <#if menu.children?? && menu.children?size gt 0>
+                                <li>
+                                    <div class="link panel">
+                                        <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                                        <i class="joe-font joe-icon-arrow-right"></i>
+                                    </div>
+                                    <ul class="slides panel-body">
+                                        <#if menu.children?? && menu.children?size gt 0>
+                                          <#list menu.children as child>
+                                            <#if child.children?? && child.children?size gt 0>
+                                              <li>
+                                                  <div class="link panel">
+                                                      <a href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                                                      <i class="joe-font joe-icon-arrow-right"></i>
+                                                  </div>
+                                                  <ul class="slides panel-body">
+                                                      <#list child.children as child1>
+                                                        <li>
+                                                          <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
+                                                        </li>
+                                                      </#list>
+                                                  </ul>
+                                              </li>
+                                            <#else>
+                                              <li>
+                                                  <a class="link" href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                                              </li>
+                                            </#if> 
+                                          </#list>
+                                        </#if> 
+                                    </ul>
+                                </li>
+                            <#else>
+                                <li>
+                                    <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                                </li>
+                            </#if> 
+                          </#if> 
+                        </#list>
+                    </@menuTag>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <#--  mobile搜索  -->
+    <div class="joe_header__searchout">
         <div class="joe_container">
             <div class="joe_header__searchout-inner">
-                <form class="search" method="post" action="<?php $this->options->siteUrl(); ?>">
-                    <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="s" value="" class="input" type="text" />
-                    <button type="submit" class="submit">搜索</button>
+                <form class="joe_header__above-search-mobile" method="get" action="${blog_url!}/search">
+                    <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value class="input" type="text"/>
+                    <button type="submit" class="submit">
+                    <#--  <i class="joe-font joe-icon-search"></i>  -->
+                    搜索</button>
                 </form>
                 <@tagTag method="list">
                   <#if tags?size gt 0>
@@ -87,72 +178,6 @@
                 </@tagTag>
             </div>
         </div>
-    </div>
-
-    <div class="joe_header__slideout">
-        <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg'}" alt="侧边栏壁纸" />
-        <div class="joe_header__slideout-author">
-            <img width="50" height="50" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
-            <div class="info">
-                <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
-                <p class="motto joe_motto">${user.description!}</p>
-            </div>
-        </div>
-        <ul class="joe_header__slideout-count">
-            <li class="item">
-                <i class="joe-font joe-icon-riji"></i>
-                <@postTag method="count"><span>累计撰写 <strong>${count!"0"}</strong> 篇文章</span></@postTag>
-            </li>
-            <li class="item">
-                <i class="joe-font joe-icon-biaoqian"></i>
-                <@tagTag method="count"><span>累计创建 <strong>${count!"0"}</strong> 个标签</span></@tagTag>
-            </li>
-            <li class="item">
-                <i class="joe-font joe-icon-message"></i>
-                <@commentTag method="count"><span>累计收到 <strong>${count!"0"}</strong> 条评论</span></@commentTag>
-            </li>
-        </ul>
-        <ul class="joe_header__slideout-menu panel-box">
-            <li>
-                <a class="link" href="/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <!-- 栏目 -->
-            <li>
-                <a class="link panel" href="#" rel="nofollow">
-                    <span>栏目</span>
-                    <i class="joe-font joe-icon-arrow-right"></i>
-                </a>
-                <ul class="slides panel-body panel-box panel-side-menu">
-                    <@menuTag method="tree">
-                        <#list menus?sort_by('priority') as menu>
-                            <#if menu.children?? && menu.children?size gt 0>
-                                <li>
-                                    <div class="link panel">
-                                        <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                                        <i class="joe-font joe-icon-arrow-right"></i>
-                                    </div>
-                                    <ul class="slides panel-body">
-                                        <#if menu.children?? && menu.children?size gt 0>
-                                          <#list menu.children as child1>
-                                            <li>
-                                                <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
-                                            </li>
-                                          </#list>
-                                        </#if> 
-                                    </ul>
-                                </li>
-                            <#else>
-                                <li>
-                                    <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                                </li>
-                            </#if> 
-                        </#list>
-                    </@menuTag>
-                </ul>
-            </li>
-        </ul>
     </div>
 
     <div class="joe_header__mask"></div>

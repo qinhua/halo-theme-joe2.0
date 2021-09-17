@@ -15,12 +15,13 @@
         value = Number(value);
       }
       ThemeConfig[field] = value;
-      // ThemeConfig['HOST'] = '${blog_url}';
-      ThemeConfig['HOST'] = 'https://bbchin.com';
+      ThemeConfig['HOST'] = '${blog_url}';
+      // ThemeConfig['HOST'] = 'https://bbchin.com'; // 当前接口，记得切换
       ThemeConfig['blog_title'] = '${blog_title}';
       ThemeConfig['blog_url'] = '${blog_url}';
       ThemeConfig['author'] = '${user.nickname}';
       ThemeConfig['toc_depth'] = 3;
+      ThemeConfig['leaving_sheetid'] = 48; //留言板对于的自定义页面Id
     </#if>
   </#list>
   window.onload = function () {

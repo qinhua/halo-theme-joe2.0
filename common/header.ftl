@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js"></script>  
     
-    <#if settings.enable_loading_bar>
+    <#--  <#if settings.enable_loading_bar>  -->
       <!-- 加载条 -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css">
       <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
@@ -40,13 +40,13 @@
           }
       </style>  
       <script>
+            window.onload = function(){
             NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false });
             NProgress.start();
-            window.onload = function(){
               NProgress.done();
             }
           </script>
-    </#if>
+    <#--  </#if>  -->
 
     <#-- ===== 引入脚本 start ===== -->
     <#if settings.favicon??>
@@ -75,28 +75,38 @@
 <#-- ===== 引入脚本 start ===== -->
 <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/assets/js/joe.extend.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
 <#if settings.show_tag!true>
 <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.2.3/plugin/3dtag/3dtag.min.js"></script>
 </#if>
 <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn-assets/js/joe.scroll.js"></script>
-<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn-assets/js/joe.sketchpad.js"></script>  -->
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn-assets/js/joe.extend.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn-assets/js/joe.smooth.js"></script>    
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.scroll.js"></script>
+<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.sketchpad.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.extend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>    
 <#-- ===== 引入页面级js start===== -->
 <script src="${theme_base!}/source/js/joe.common.min.js"></script>
 <script src="${theme_base!}/source/js/joe.short.min.js"></script>
 <#--  <#if type?? && type == 'post'>  -->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js"></script>
-<#--  <script src="${theme_base!}/source/js/lib/prism/prism.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js" defer></script>
+<#if settings.enable_pjax!false>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js" type="text/javascript"></script>
+    <script src="${theme_base!}/source/js/pjax.js?v=${theme.version!}" type="text/javascript"></script>
+</#if>
 <script src="${theme_base!}/source/js/joe.post_page.min.js"></script>
 <#--  </#if>  -->
 <#if type?? && type == 'index'>
   <script src="${theme_base!}/source/js/joe.index.min.js"></script>
 </#if>
+
+<#if type?? && type == 'sheet'>
+<script src="https://cdn.jsdelivr.net/npm/draggabilly@2.3.0/dist/draggabilly.pkgd.js" defer></script>
+<script src="${theme_base!}/source/js/joe.leaving.min.js"></script>
+</#if>
+
+
 <#-- ===== 引入脚本 end ===== -->
 
     <#if settings.baidu_statistic??>

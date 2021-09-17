@@ -1,37 +1,132 @@
-.joe_journals__list {
-  padding: 20px 0 30px;
-
-  li {
-    position: relative;
-    padding: 10px;
-    color: var(--main);
-    background: var(--classD);
-    border-bottom: 1px solid var(--classC);
-    border-radius: 4px;
-    &:last-child {
-      border-bottom: none;
+.joe {
+  &_journals__list {
+    padding: 20px 0 30px;
+  }
+  &_journal {
+    &__item {
+      position: relative;
+      padding: 0px 0 30px 40px;
+      &:before {
+        position: absolute;
+        left: 12px;
+        top: 0;
+        z-index: 0;
+        content: "";
+        width: 0;
+        height: 100%;
+        border-left: 1px dashed var(--classG);
+      }
     }
-    // &:hover {
-    //   background: var(--classD);
-    // }
-    p {
-      padding-right: 140px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      /*! autoprefixer: off */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    &_date {
+      position: relative;
+      left: -36px;
+      z-index: 1;
+      height: 34px;
+      line-height: 34px;
       font-size: 14px;
       color: var(--routine);
+      background: var(--background);
+      i {
+        margin-right: 5px;
+      }
+    }
+    &_block {
+      position: relative;
+      padding: 10px;
+      box-sizing: border-box;
+      color: var(--main);
+      background: var(--classD);
+      border-bottom: 1px solid var(--classC);
+      border-radius: 4px;
+      border: 1px solid var(--classC);
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    &_body {
+      position: relative;
+      max-height: 300px;
+      overflow: hidden;
+      padding: 14px;
+      background: #fff;
+      border-radius: 4px;
+      transition: all 0.2s;
+      &.open {
+        max-height: auto;
+      }
+    }
+    &_footer {
+      padding: 12px 0 2px;
     }
 
-    span {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 12px;
-      color: #999;
+    &_operate_item {
+      margin-right: 8px;
+      font-size: 14px;
+      color: var(--routine);
+      i {
+        cursor: pointer;
+        margin-right: 3px;
+        vertical-align: text-top;
+        transition: all 0.2s;
+      }
+
+      &.journal_content_expander {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-right: 0;
+        padding-top: 10px;
+        text-align: right;
+        background: linear-gradient(0deg, #d4d4d4, transparent 80%);
+        i {
+          font-size: 20px;
+        }
+      }
+      &.journal_comment_expander {
+        // display: block;
+        // padding-top: 10px;
+        float: right;
+        margin-right: 0;
+      }
+      .joe-icon-xihuan-fill {
+        display: none;
+        color: rgba(255, 38, 0, 0.979);
+      }
     }
   }
+
+  // li {
+  //   position: relative;
+  //   padding: 10px;
+  //   color: var(--main);
+  //   background: var(--classD);
+  //   border-bottom: 1px solid var(--classC);
+  //   border-radius: 4px;
+  //   &:last-child {
+  //     border-bottom: none;
+  //   }
+  //   // &:hover {
+  //   //   background: var(--classD);
+  //   // }
+  //   p {
+  //     padding-right: 140px;
+  //     display: -webkit-box;
+  //     -webkit-line-clamp: 2;
+  //     /*! autoprefixer: off */
+  //     -webkit-box-orient: vertical;
+  //     overflow: hidden;
+  //     text-overflow: ellipsis;
+  //     font-size: 14px;
+  //     color: var(--routine);
+  //   }
+
+  //   span {
+  //     position: absolute;
+  //     top: 10px;
+  //     right: 10px;
+  //     font-size: 12px;
+  //     color: #999;
+  //   }
+  // }
 }

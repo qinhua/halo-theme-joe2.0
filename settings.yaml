@@ -387,6 +387,18 @@ carousel:
 passage:
   label: 文章页
   items:
+    enable_aside_expander:
+      name: enable_aside_expander
+      label: 展示隐藏侧边栏按钮
+      type: radio
+      data-type: bool
+      default: true
+      description: "文章页顶部显示用于切换侧边栏显示状态的按钮"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     enable_title_shadow:
       name: enable_title_shadow
       label: 标题阴影
@@ -699,6 +711,18 @@ passage:
 aside:
   label: 侧边栏
   items:
+    enable_aside:
+      name: enable_aside
+      label: 开启侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示整个侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     enable_notice:
       name: enable_notice
       label: 网站公告
@@ -930,12 +954,24 @@ advertise:
 others:
   label: 其它
   items:
+    check_baidu_collect:
+      name: check_baidu_collect
+      label: 检查百度收录情况
+      type: switch
+      data-type: bool
+      default: true
+      description: "启用后，文章页打开时会自动检测百度收录情况，并显示提示文字"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     baidu_token:
       name: baidu_token
       label: 百度推送Token
       # default: "TZLa5Xk302pBBySo"
       placeholder: "请填入token"
-      description: "前台文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（不填不自动推送）"
+      description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效）"
     enable_pjax:
       name: enable_pjax
       label: 全局Pjax
@@ -948,6 +984,7 @@ others:
           label: 开启
         - value: false
           label: 关闭
+    
     enable_offscreen_tip:
       name: enable_offscreen_tip
       label: 离屏提示

@@ -11,30 +11,11 @@
                     <h1 class="joe_detail__title">日志页</h1>                    
                     <ul class="joe_journals__list">
                       <#list journals.content as journal>
-                            <li class="joe_journal__item">
-                                <p class="joe_journal_date"><i class="joe-font joe-icon-feather"></i>发布于 ${journal.createTime?string('yyyy年MM月dd日 HH:mm')}</p>
-                                <div class="joe_journal_block">
-                                    <div class="joe_journal_body">
-                                      ${journal.content!}
-                                      <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
-                                    </div>
-                                    <div class="joe_journal_footer">
-                                        <div >
-                                            <span class="joe_journal_operate_item like">
-                                              <i class="joe-font joe-icon-xihuan"></i>
-                                              <i class="joe-font joe-icon-xihuan-fill"></i>
-                                              ${journal.likes!0}
-                                            </span>
-                                            <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message"></i>${journal.commentCount!0}</span>
-                                            <#--  <#if journal.commentCount &gt; 0>  -->
-                                              <span class="joe_journal_operate_item journal_comment_expander">展开评论<i class="joe-font joe-icon-arrow-downb"></i></span>
-                                            <#--  </#if>  -->
-                                            <#--  <halo-comment id="${journal.id?c}" type="journal"/>  -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </#list>
+                        <li class="joe_journals_list-item">
+                          <p title="${journal.sourceContent!}">${journal.sourceContent!}</p>
+                          <span>${journal.createTime?string('yyyy-MM-dd HH:mm')}</span>
+                        </li>
+                      </#list>
                     </ul>                      
                     <@paginationTag method="journals" page="${journals.number}" total="${journals.totalPages}" display="10">
                           <#if (journals.totalPages == 0)>

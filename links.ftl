@@ -46,9 +46,11 @@
                         </div>
                     </article>
                 </div>
-                  <#--  <div class="joe_comment">
-                      <@global.comment target=links type="links" />
-                  </div>  -->
+                <#--  <div class="joe_comment">
+                    <@global.comment target=links type="links" />
+                    <#assign commentType="post">
+                    <#include "common/comment.ftl">
+                </div>  -->
             </div>
             <#include "common/aside.ftl">
         </div>

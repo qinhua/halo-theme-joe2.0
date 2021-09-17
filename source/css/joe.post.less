@@ -36,6 +36,7 @@
 }
 
 .joe_post {
+  position: relative;
   &__pagination {
     display: flex;
     justify-content: space-between;
@@ -191,6 +192,19 @@
     &:active {
       color: #f16520;
     }
+  }
+}
+
+.aside-expander {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: var(--routine);
+  &:hover {
+    color: var(--theme);
   }
 }
 

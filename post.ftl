@@ -10,6 +10,7 @@
         </script>
         <div class="joe_container joe_main_container">
             <div class="joe_main joe_post">
+                <#if settings.enable_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
                 <div class="joe_detail" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
                     <#list categories as category>
                       <#if category_index==1>
@@ -34,10 +35,10 @@
                                     <span class="text" >${post.visits} 阅读</span>  
                                     <span class="line">/</span>
                                     <span class="text" >${post.wordCount!0} 字</span>
-                                    <#--  <#if settings.baidu_token?? && settings.baidu_token!=''>  -->
+                                    <#if settings.check_baidu_collect>
                                       <span class="line">/</span>
                                       <span class="text" id="Joe_Baidu_Record">正在检测是否收录...</span>
-                                    <#--  </#if>  -->
+                                    </#if>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +62,7 @@
                             </div>
                         </#if>
                     </div>
-                    <article class="joe_detail__article${settings.enable_copy?string(' copyable', '')}${settings.enable_indent?string(' indent','')}">
+                    <article class="joe_detail__article${settings.enable_code_line_number?string(' line-numbers', '')}${settings.enable_copy?string(' copyable', '')}${settings.enable_indent?string(' indent','')}">
                         ${post.formatContent!}
                     </article>
                     <#if settings.enable_toc!true>
@@ -100,7 +101,9 @@
                             <span>博主关闭了当前页面的评论</span>
                       </div>
                     <#else>
-                      <@global.comment target=post type="post" />
+                      <#--  <@global.comment target=post type="post" />  -->
+                      <#assign commentType="post">
+                      <#include "common/comment.ftl">
                     </#if>
                   </div>
                 <#else>

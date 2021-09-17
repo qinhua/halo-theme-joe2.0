@@ -224,14 +224,15 @@ html {
 
           a {
             display: block;
-            line-height: 34px;
             height: 34px;
-            transition: color 0.35s, background 0.35s;
+            margin-right: 0;
+            line-height: 34px;
             color: var(--minor);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             padding: 0 15px;
+            transition: color 0.35s, background 0.35s;
 
             &:hover,
             &.current {
@@ -244,15 +245,51 @@ html {
           display: none;
         }
       }
+      .joe_nav_sub-li {
+        position: relative;
+        height: 34px;
+        &:hover {
+          .joe_nav_sub {
+            display: block;
+          }
+        }
+      }
       .joe_nav_sub {
-        .item {
-          padding-left: 30px;
-          font-size: 13px;
+        display: none;
+        position: relative;
+        left: 100%;
+        top: -34px;
+        padding-left: 7px;
+        box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+        border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+        &::before {
+          position: absolute;
+          top: 10px;
+          left: 0;
+          content: "";
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border: 7px solid transparent;
+          border-right-color: var(--theme);
+        }
+        &::after {
+          position: absolute;
+          top: 0;
+          left: 7px;
+          content: "";
+          width: 2px;
+          height: 100%;
+          background: var(--theme);
+        }
+        li {
+          background: var(--background);
         }
       }
     }
 
-    &-search {
+    &-search,
+    &-search-mobile {
       position: relative;
       margin-left: auto;
       display: flex;
@@ -399,6 +436,11 @@ html {
             margin-left: 5px;
           }
         }
+      }
+    }
+    &-search-mobile {
+      input {
+        flex: 1;
       }
     }
 
@@ -838,6 +880,9 @@ html {
 .joe_aside {
   padding-bottom: 15px;
   margin-left: 15px;
+  &.hide {
+    display: none;
+  }
 
   &__item {
     position: relative;
@@ -3943,6 +3988,7 @@ html {
   }
 
   &__leaving {
+    display: none;
     padding-top: 15px;
 
     &-none {
@@ -4162,6 +4208,14 @@ html {
   }
 }
 
+.joe_comment_box {
+  h2 {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    color: var(--routine);
+  }
+}
 .joe_comment {
   background: var(--background);
   border-radius: var(--radius-wrap);

@@ -24,24 +24,25 @@
                                     <span class="text" >${sheet.visits} 阅读</span>    
                                     <span class="line">/</span>
                                     <span class="text" >${post.wordCount!0} 字</span>
-                                    <#--  <#if settings.baidu_token?? && settings.baidu_token!=''>  -->
+                                    <#if settings.check_baidu_collect>
                                       <span class="line">/</span>
                                       <span class="text" id="Joe_Baidu_Record">正在检测是否收录...</span>
-                                    <#--  </#if>  -->
+                                    </#if>
                                 </div>
                             </div>
                         </div>
                         <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>
                     </div>
-                    <article class="joe_detail__article">
+                    <article class="joe_detail__article${settings.enable_code_line_number?string(' line-numbers', '')}${settings.enable_copy?string(' copyable', '')}${settings.enable_indent?string(' indent','')}">
                         ${sheet.formatContent!}
                     </article>
                     <#--  <#import "common/post_copyright.ftl" as pc>  -->
                     <#--  <@pc.post_copyright post_url="${sheet.fullPath}"/>  -->
                 </div>
-                <#--  <div class="joe_comment">
-                    <@global.comment target=sheet type="sheet" />
-                </div>  -->
+                <div class="joe_comment">
+                    <#assign commentType="sheet">
+                    <#include "common/comment.ftl">
+                </div>
             </div>
             <#include "common/aside.ftl">
         </div>
