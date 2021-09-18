@@ -49,28 +49,28 @@
 <#if settings.iconfont??>
   <link rel="stylesheet" href="${settings.iconfont!}">
 </#if>
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.mode.min.css">
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.normalize.min.css"> 
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.mode.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.normalize.min.css"> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/themes/prism-${settings.code_theme!'dark'}.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
-<link rel="stylesheet" href="${theme_base!}/source/css/jquery.fancybox.min.css" />
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.global.min.css">
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.cursor.min.css">
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.responsive.min.css">
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.archive.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/jquery.fancybox.min.css" />
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.global.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.cursor.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">
 <#if type == 'photo'>
-  <link rel="stylesheet" href="${theme_base!}/source/css/joe.wallpaper.min.css">
+  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.wallpaper.min.css">
 </#if>
-<#--  <#if type == 'links'><link rel="stylesheet" href="${theme_base!}/source/css/joe.links.min.css"></#if>  -->
-<#if type == 'journals'><link rel="stylesheet" href="${theme_base!}/source/css/joe.journals.min.css"></#if>
-  <link rel="stylesheet" href="${theme_base!}/source/css/joe.index.min.css">
+<#--  <#if type == 'links'><link rel="stylesheet" href="${theme_base!}/source/css/min/joe.links.min.css"></#if>  -->
+<#if type == 'journals'><link rel="stylesheet" href="${theme_base!}/source/css/min/joe.journals.min.css"></#if>
+  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.index.min.css">
 <#if type == 'archive'>
-  <link rel="stylesheet" href="${theme_base!}/source/css/joe.census.min.css">
+  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.census.min.css">
 </#if>
 <#if type == 'post'>
-<link rel="stylesheet" href="${theme_base!}/source/css/joe.post.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.post.min.css">
 </#if>
 <style>
   #Joe .joe_container {

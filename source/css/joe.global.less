@@ -250,18 +250,25 @@ html {
         height: 34px;
         &:hover {
           .joe_nav_sub {
-            display: block;
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0) perspective(600px) rotateY(0);
           }
         }
       }
       .joe_nav_sub {
-        display: none;
+        visibility: hidden;
+        z-index: 999;
+        transform-origin: top;
+        opacity: 0;
         position: relative;
         left: 100%;
         top: -34px;
         padding-left: 7px;
         box-shadow: 0 0 10px rgb(0 0 0 / 15%);
         border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+        transform: translateX(-20%) perspective(600px) rotateY(-45deg);
+        transition: opacity 0.35s, visibility 0.35s, transform 0.35s;
         &::before {
           position: absolute;
           top: 10px;
@@ -3663,7 +3670,7 @@ html {
     &-share {
       position: relative;
       top: 2px;
-      z-index: 21;
+      z-index: 10;
       width: 30px;
       height: 30px;
       margin-right: 6px;
@@ -3759,7 +3766,7 @@ html {
 
   .joe_donate {
     position: relative;
-    z-index: 21;
+    z-index: 10;
     width: 30px;
     height: 30px;
     font-size: 30px;
@@ -3938,7 +3945,7 @@ html {
 
       .contain {
         display: block;
-        border-radius: var(--radius-inner);
+        border-radius: 8px 0 28px 0;
         overflow: hidden;
         padding: 15px;
         color: #fff;
@@ -4030,6 +4037,7 @@ html {
             min-width: 0;
             flex: 1;
             margin: 0 5px;
+            font-size: 13px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -4041,6 +4049,7 @@ html {
 
           .date {
             margin-left: auto;
+            font-size: 12px;
           }
         }
 
@@ -4157,6 +4166,7 @@ html {
 }
 
 .joe_action {
+  pointer-events: none;
   position: fixed;
   bottom: 90px;
   right: 30px;
@@ -4183,17 +4193,20 @@ html {
     }
 
     &.scroll {
+      pointer-events: none;
       visibility: hidden;
       transform: scale(0);
       transition: visibility 0.35s, transform 0.35s;
 
       &.active {
+        pointer-events: auto;
         visibility: visible;
         transform: scale(1);
       }
     }
 
     &.mode {
+      pointer-events: auto;
       svg {
         transform: scale(0);
         opacity: 0;

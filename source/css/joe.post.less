@@ -77,6 +77,7 @@
   background: var(--background-toc);
   border-radius: var(--radius-wrap) 0 0 var(--radius-wrap);
   box-shadow: var(--box-shadow-toc);
+  transition: top 0.3s;
   .toc-expander {
     position: absolute;
     top: 0;
@@ -177,6 +178,11 @@
       display: none;
     }
   }
+}
+
+.is-position-fixed {
+  position: fixed !important;
+  top: 70px;
 }
 
 .joe_like {

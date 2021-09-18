@@ -34,6 +34,7 @@
   ThemeConfig.enable_auto_switch_theme && localStorage.removeItem("data-mode");
   var localMode = localStorage.getItem("data-mode") || sessionStorage.getItem("data-mode");
   localMode && document.querySelector("html").setAttribute("data-mode", localMode);
+  var meting_api="https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id";
   Joe = {
       // BASE_URL: "https://bbchin.com",
       BASE_URL: "http://127.0.0.1:8090",

@@ -65,9 +65,6 @@
     <#if settings.music_id??>
       <!-- 音乐播放器 -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"> 
-      <script type="text/javascript">
-        var meting_api="https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id";
-      </script>
       <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
     </#if>
@@ -85,25 +82,25 @@
 <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.extend.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>    
 <#-- ===== 引入页面级js start===== -->
-<script src="${theme_base!}/source/js/joe.common.min.js"></script>
-<script src="${theme_base!}/source/js/joe.short.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
 <#--  <#if type?? && type == 'post'>  -->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js" defer></script>
 <#if settings.enable_pjax!false>
     <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js" type="text/javascript"></script>
-    <script src="${theme_base!}/source/js/pjax.js?v=${theme.version!}" type="text/javascript"></script>
+    <script src="${theme_base!}/source/js/min/pjax.js?v=${theme.version!}" type="text/javascript"></script>
 </#if>
-<script src="${theme_base!}/source/js/joe.post_page.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.post_page.min.js"></script>
 <#--  </#if>  -->
 <#if type?? && type == 'index'>
-  <script src="${theme_base!}/source/js/joe.index.min.js"></script>
+  <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
 </#if>
 
 <#if type?? && type == 'sheet'>
 <script src="https://cdn.jsdelivr.net/npm/draggabilly@2.3.0/dist/draggabilly.pkgd.js" defer></script>
-<script src="${theme_base!}/source/js/joe.leaving.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.leaving.min.js"></script>
 </#if>
 
 

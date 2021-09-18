@@ -12,6 +12,7 @@ logs/
 *.js
 !.autod.conf.js
 
+dist/
 app/**/*.js
 test/**/*.js
 config/**/*.js
