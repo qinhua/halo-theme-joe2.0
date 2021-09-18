@@ -13,8 +13,13 @@
         z-index: 0;
         content: "";
         width: 0;
-        height: 100%;
+        height: 130%;
         border-left: 1px dashed var(--classG);
+      }
+      &:hover {
+        .joe_journal_block {
+          box-shadow: 3px 8px 15px 0 var(--box-shadow-journal);
+        }
       }
     }
     &_date {
@@ -27,50 +32,79 @@
       color: var(--routine);
       background: var(--background);
       i {
-        margin-right: 5px;
+        margin-right: 8px;
       }
     }
     &_block {
       position: relative;
-      padding: 10px;
+      z-index: 2;
       box-sizing: border-box;
+      padding: 10px;
+      margin-top: 10px;
       color: var(--main);
-      background: var(--classD);
+      background: var(--background-journal);
       border-bottom: 1px solid var(--classC);
-      border-radius: 4px;
+      border-radius: 0 18px 18px 18px;
       border: 1px solid var(--classC);
-      &:last-child {
-        border-bottom: none;
-      }
+      box-shadow: 1px 1px 5px 0 var(--box-shadow-journal);
+      transform: skew(-2deg);
+      transition: box-shadow 0.2s;
     }
     &_body {
       position: relative;
       max-height: 300px;
       overflow: hidden;
       padding: 14px;
-      background: #fff;
-      border-radius: 4px;
-      transition: all 0.2s;
+      background: var(--background-journal-block);
+      border-radius: 0 6px 6px 6px;
+      transition: height 0.2s;
       &.open {
-        max-height: auto;
+        max-height: unset;
+        .journal_content_expander {
+          background: none;
+          i {
+            transform: rotate(180deg);
+          }
+        }
       }
     }
     &_footer {
       padding: 12px 0 2px;
+      .footer-wrap.open {
+        .joe_journal_comment {
+          display: block;
+        }
+        .journal_comment_expander i {
+          vertical-align: text-bottom;
+          transform: rotate(180deg);
+        }
+      }
     }
-
     &_operate_item {
       margin-right: 8px;
       font-size: 14px;
+      user-select: none;
       color: var(--routine);
       i {
+        display: inline-block;
         cursor: pointer;
         margin-right: 3px;
         vertical-align: text-top;
         transition: all 0.2s;
       }
-
+      em {
+        font-style: normal;
+      }
+      &.like,
+      &.comment {
+        margin-left: 10px;
+        margin-right: 0;
+        i:hover {
+          transform: scale(1.1);
+        }
+      }
       &.journal_content_expander {
+        display: none;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -78,55 +112,25 @@
         margin-right: 0;
         padding-top: 10px;
         text-align: right;
-        background: linear-gradient(0deg, #d4d4d4, transparent 80%);
+        background: var(--background-journal-gradient);
         i {
           font-size: 20px;
         }
       }
       &.journal_comment_expander {
-        // display: block;
-        // padding-top: 10px;
         float: right;
         margin-right: 0;
       }
       .joe-icon-xihuan-fill {
         display: none;
-        color: rgba(255, 38, 0, 0.979);
+        color: #f15c43;
       }
     }
+    &_comment {
+      display: none;
+    }
   }
-
-  // li {
-  //   position: relative;
-  //   padding: 10px;
-  //   color: var(--main);
-  //   background: var(--classD);
-  //   border-bottom: 1px solid var(--classC);
-  //   border-radius: 4px;
-  //   &:last-child {
-  //     border-bottom: none;
-  //   }
-  //   // &:hover {
-  //   //   background: var(--classD);
-  //   // }
-  //   p {
-  //     padding-right: 140px;
-  //     display: -webkit-box;
-  //     -webkit-line-clamp: 2;
-  //     /*! autoprefixer: off */
-  //     -webkit-box-orient: vertical;
-  //     overflow: hidden;
-  //     text-overflow: ellipsis;
-  //     font-size: 14px;
-  //     color: var(--routine);
-  //   }
-
-  //   span {
-  //     position: absolute;
-  //     top: 10px;
-  //     right: 10px;
-  //     font-size: 12px;
-  //     color: #999;
-  //   }
-  // }
+}
+.page-journals .joe_detail {
+  overflow-y: hidden;
 }

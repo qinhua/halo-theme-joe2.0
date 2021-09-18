@@ -5,7 +5,7 @@
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
-        <div class="joe_container joe_main_container">
+        <div class="joe_container joe_main_container page-sheet">
             <div class="joe_main">
                 <div class="joe_detail">
                     <h1 class="joe_detail__title">${sheet.title}</h1>
@@ -23,7 +23,7 @@
                                     <span class="line">/</span>
                                     <span class="text" >${sheet.visits} 阅读</span>    
                                     <span class="line">/</span>
-                                    <span class="text" >${post.wordCount!0} 字</span>
+                                    <span class="text" >${sheet.wordCount!0} 字</span>
                                     <#if settings.check_baidu_collect>
                                       <span class="line">/</span>
                                       <span class="text" id="Joe_Baidu_Record">正在检测是否收录...</span>

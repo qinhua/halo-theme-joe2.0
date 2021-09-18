@@ -8,7 +8,7 @@
 
 <!-- <h1 align="center" style="display:none">halo-theme-joe2.0</h1> -->
 
-<p align="center">joe 主题 halo 移植版</p>
+<p align="center">Joe 主题 Halo 移植版</p>
 
 <p align="center">
   <a href="https://halo.run" target="_blank">
@@ -25,13 +25,13 @@
   </a>
 </p>
 
-> Joe2.0 为 [Typecho Themes Joe joe](https://github.com/HaoOuBa/Joe) 主题的 halo 版，此次在原版主题上做了大量修改和适配，去除了 Halo 上不支持的一些特性，也增加了一些特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
+> Joe2.0 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，此次在原版主题上做了大量修改和适配，由原版的 php 模板调整为 freemarker， 移除了 Halo 上暂不支持的一些特性，也增加了一些特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
 
 <br>
 
-## 主题预览
+## 主题预览（目前还没移植完，敬请期待…）
 
-#### [线上 Demo](https://bbchin.com)
+<!-- #### [线上 Demo](https://bbchin.com) -->
 
 <br>
 
@@ -45,8 +45,7 @@
 
 1. 访问 https://github.com/qinhua/halo-theme-joe2.0 获取仓库地址；
 
-2. 进入博客后台-外观-主题-安装-在线安装，填入仓库地址进行安装，如果出错也可以选择本地安装，将下载的主题包压缩包直接
-   上传上去；
+2. 进入博客后台-外观-主题-安装-在线安装，填入仓库地址进行安装，如果出错也可以选择本地安装，将下载的主题压缩包直接传上去；
 
 3. 等待提示安装完成即可。
 
@@ -64,23 +63,39 @@
 
 > 此次在功能上做了大量移植，在保证不破坏主题风格的情况下，加入了主流主题常见的配置项，也融入了一些自己的思考 🤔。
 
-- 多级导航
-- 轮播图
-- 文章分享
-- 代码高亮 + 行号 + 复制 + 折叠
-- 全站 Pjax
-- 网易歌单
 - 白天/黑夜模式
 - 自定义主题色
+- 三级导航
+- 轮播图
+- 留言页面
+- 日志页面定制
+- 文章分享
+- Toc 目录
+- 代码高亮 + 行号 + 复制 + 折叠
+- 文章和日志页 点赞 + 评论
+- 文章页 a 标签新页面打开
+- 文章页复制加版权文字
+- 全站 Pjax
+- 网易歌单
+- 博主可选头像框
+- 博主等级展示
+- 全局预载图自定义
+- 缺省图片配置
 - 每日一句
+- 百度收录查询 + 主动推送
 - 页面加载条
+- 离屏提醒
 - 网站公告
+- 二维码模块
 - 3D 标签云
+- 看板娘
 - 图库页面定制
 - 社交账号配置
-- 自定义 JS/CSS
 - 二维码打赏
-- 配置广告
+- 广告配置
+- 自定义 JS/CSS
+- 自定义 favicon，支持视频
+- 站点运行时间
 - 整站变灰（RIP 模式）
 
 <br>
@@ -88,34 +103,43 @@
 ## 改进点
 
 - meta 标签优化
+- 高亮当前 Tab
 - SEO 优化
+- 样式优化
+  - 使用 Less 替换了 Scss
+  - 降低了部分颜色的鲜艳度
 - 代码风格
   - prettier
 - JS 和 CSS 兼容性处理
   - JS 使用 babel 转换
   - CSS 引入 autoprefixer
-  - 为兼容放弃 Grid 布局
+  - 移除部分页面 Grid 布局
 - 页面性能优化
   - 按需引入
   - DNS 预解析
 - 加载状态优化
   - 加载条
 - 去除无用配置
+- 项目目录调整
+- 部分缺陷修复
+- 统一提取当前主题配置
 
 <br>
 
 ## TODO
 
-> 目前仍有部分功能不支持，希望新版本 `halo` 能够支持。
+> 目前仍有部分功能不支持，有些是没时间做，有些是后台暂时不支持，会继续迭代的。
 
 - 博客总访问量
-- 点赞功能
-- 动态背景
-- 多级菜单
-- 多种布局切换
+- 评论组件定制化
 - 评论参数简化
+- 动态背景
+- 首页大屏制作
+- 递归菜单
+- 多种布局切换
 - 外链页面评论模块
 - 自定义模板引擎
+- 博客备份
 
 ## 开发指南
 
@@ -123,6 +147,7 @@
 
 ```js
 "less.compile": {
+    "out": "./min/",
     "outExt": ".min.css",
     "compress": true,
     "sourceMap": false,
@@ -143,11 +168,17 @@
     },
     "warnings": true
   },
-  // 保存时自动生成，no为手动，可点击编辑器底部 Minify 按钮生产
-  "es6-css-minify.minifyOnSave": "yes"
+  // 保存时自动生成，no为手动，可点击编辑器底部 Minify 按钮生成
+  "es6-css-minify.minifyOnSave": "yes",
+  "es6-css-minify.jsMinPath": "/source/js/min"
 ```
 
-<br>
+> 3、转换并压缩 `ES6+` 代码（前 2 步里的 js 没有经过 babel 编译，只可用于开发环境）：
+
+- 安装 `nodejs`;
+- 主题目录下执行 `npm i` 安装依赖;
+- 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 文件
+  <br>
 
 ## 注意点
 
@@ -191,7 +222,7 @@
 location /upload/ {
   access_log off;
   # 域名白名单，去掉则阻止所有非本站请求
-  alid_referers none blocked server_names *.bbchin.com 127.0.0.1 ~\.google\. ~\.baidu\. ~\.qq\.;
+  alid_referers none blocked server_names *.bbchin.com 127.0.0.1 localhost ~\.google\. ~\.baidu\. ~\.qq\.;
   if ($invalid_referer) {
     rewrite ^/ https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/robber.jpg;
     # return 403;
