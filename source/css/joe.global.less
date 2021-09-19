@@ -1030,7 +1030,7 @@ html {
           position: absolute;
           left: 0;
           top: 0;
-          z-index: 3;
+          z-index: 2;
           width: 75px;
           height: 75px;
           transform: scale(1.23);
@@ -1118,10 +1118,17 @@ html {
         .avatar_widget {
           position: absolute;
           left: 0;
-          top: 0;
-          z-index: 2;
+          top: -10px;
+          z-index: 3;
           width: 75px;
-          mix-blend-mode: multiply;
+
+          &.wing {
+            top: -33px;
+          }
+          &.zouni {
+            left: 0px;
+            top: 52px;
+          }
         }
 
         .link {
@@ -3224,6 +3231,7 @@ html {
     a:not([class]) {
       display: inline-block;
       line-height: 26px;
+      text-indent: 0;
       color: var(--theme);
       position: relative;
 
@@ -3291,6 +3299,9 @@ html {
             display: none;
           }
         }
+        .autofold-tip {
+          padding-left: 5px;
+        }
       }
 
       pre[class*="language-"] {
@@ -3338,7 +3349,6 @@ html {
             background: none;
           }
         }
-
         .line-numbers-rows {
           left: 0;
           top: 0;
