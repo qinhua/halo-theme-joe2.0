@@ -3,11 +3,11 @@
         <div class="user">
             <div class="avatar_wrapper${(settings.avatar_type=='2')?string(' rect','')}">
               <img class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
-              <#if settings.avatar_widget?? && settings.avatar_widget!="0">
-                <img class="avatar_widget" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
-              </#if>
               <#if settings.avatar_frame?? && settings.avatar_frame!="0">
                 <img class="avatar_frame ${settings.avatar_frame}" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
+              </#if>
+              <#if settings.avatar_widget?? && settings.avatar_widget!="0">
+                <img class="avatar_widget ${settings.avatar_widget}" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
               </#if>
             </div>
             <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">
