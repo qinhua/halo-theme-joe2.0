@@ -1,16 +1,4 @@
-// 所有布尔值需要使用 ?string 转成字符串才取得到
-        window.JoeConfig = {
-          enable_auto_switch_theme: Boolean("${settings.enable_auto_switch_theme?string}"), // 自动切换主题模式
-          static_theme: "${settings.static_theme!}", // 固定主题模式
-          dark_time_scope: "${settings.dark_time_scope!}", // 浅色模式生效时间范围
-          enable_banner_autoplay: Boolean("${settings.enable_banner_autoplay?string}"), // 轮播图自动播放
-          banner_direction: "${settings.banner_direction!}", // 轮播图方向
-          banner_delay: Number("${settings.banner_delay?string}") || 3500, // 轮播图切换间隔
-          enable_code_copy: Boolean("${settings.enable_code_copy?string}"), // 代码复制
-          enable_code_expander: Boolean("${settings.enable_code_expander?string}"), // 代码折叠
-          enable_code_line_number: Boolean("${settings.enable_code_line_number?string}"), // 代码行号
-        };
-        console.log(JSON.stringify(window.JoeConfig,null,2));
+
 
 
 

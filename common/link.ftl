@@ -57,7 +57,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
 <link rel="stylesheet" href="${theme_base!}/source/css/min/jquery.fancybox.min.css" />
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.global.min.css">
+<#if settings.cursor_skin?? && settings.cursor_skin!='none'>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.cursor.min.css">
+</#if>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">
 <#if type == 'photo'>

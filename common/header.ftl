@@ -22,6 +22,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js"></script>  
+    <script src="${theme_base!}/source/utils/index.js"></script>
     
     <#--  <#if settings.enable_loading_bar>  -->
       <!-- 加载条 -->
@@ -80,10 +81,7 @@
 <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.scroll.js"></script>
 <#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.sketchpad.js"></script>  -->
 <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.extend.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>    
-<#-- ===== 引入页面级js start===== -->
-<script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
-<script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>  
 <#--  <#if type?? && type == 'post'>  -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js"></script>
@@ -91,18 +89,29 @@
 <#if settings.enable_pjax!false>
     <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js" type="text/javascript"></script>
     <script src="${theme_base!}/source/js/min/pjax.js?v=${theme.version!}" type="text/javascript"></script>
-</#if>
+</#if> 
+<#if settings.enable_mathjax!false>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" defer></script>
+</#if> 
+
+<#-- ===== 引入页面级js start===== -->
+<script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
 <script src="${theme_base!}/source/js/min/joe.post_page.min.js"></script>
 <#--  </#if>  -->
 <#if type?? && type == 'index'>
   <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
 </#if>
 
+<#--  <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>  -->
+<#--  <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js'}"></script>
+<#local configs = '{"autoLoad": true, "showUserAgent": true}'>  -->
 <#if type?? && type == 'sheet'>
 <script src="https://cdn.jsdelivr.net/npm/draggabilly@2.3.0/dist/draggabilly.pkgd.js" defer></script>
 <script src="${theme_base!}/source/js/min/joe.leaving.min.js"></script>
 </#if>
-
 
 <#-- ===== 引入脚本 end ===== -->
 

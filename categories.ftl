@@ -24,7 +24,7 @@
                                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                                         <figure class="inner">
                                             <span class="views">${category.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="${category.thumbnail!}" alt="${category.name!}">
+                                            <img width="100%" height="120" class="image lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${category.name!}">
                                             <figcaption class="title">${category.name!}</figcaption>
                                         </figure>
                                     </a>

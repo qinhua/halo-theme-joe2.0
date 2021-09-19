@@ -16,12 +16,13 @@
       }
       ThemeConfig[field] = value;
       ThemeConfig['HOST'] = '${blog_url}';
-      // ThemeConfig['HOST'] = 'https://bbchin.com'; // 当前接口，记得切换
+      // ThemeConfig['HOST'] = 'https://bbchin.com'; // 当前接口，测试用
       ThemeConfig['blog_title'] = '${blog_title}';
       ThemeConfig['blog_url'] = '${blog_url}';
       ThemeConfig['author'] = '${user.nickname}';
       ThemeConfig['toc_depth'] = 3;
-      ThemeConfig['leaving_sheetid'] = 48; //留言板对于的自定义页面Id
+      ThemeConfig['leaving_sheetid'] = 48; //留言板对应的自定义页面Id
+      ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
     </#if>
   </#list>
   window.onload = function () {

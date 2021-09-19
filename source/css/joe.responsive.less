@@ -1088,8 +1088,23 @@ html {
         }
       }
       &_wallpaper {
+        &__type {
+          margin-top: 10px;
+          border-radius: 0;
+        }
         &__list {
           grid-template-columns: repeat(2, 1fr);
+          gap: 6px;
+          .item {
+            border-radius: 4px;
+            &:before,
+            &:after {
+              display: none;
+            }
+          }
+          .info {
+            display: none;
+          }
         }
         &__pagination {
           justify-content: center;

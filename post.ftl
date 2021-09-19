@@ -37,7 +37,7 @@
                                     <span class="text" >${post.wordCount!0} 字</span>
                                     <#if settings.check_baidu_collect>
                                       <span class="line">/</span>
-                                      <span class="text" id="Joe_Baidu_Record">正在检测是否收录...</span>
+                                      <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                                     </#if>
                                 </div>
                             </div>
@@ -102,8 +102,8 @@
                       </div>
                     <#else>
                       <#--  <@global.comment target=post type="post" />  -->
-                      <#assign commentType="post">
                       <#include "common/comment.ftl">
+                      <@comment target=post type="post"/>
                     </#if>
                   </div>
                 <#else>
