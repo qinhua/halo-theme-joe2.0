@@ -7,7 +7,7 @@
                 <img class="avatar_widget" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
               </#if>
               <#if settings.avatar_frame?? && settings.avatar_frame!="0">
-                <img class="avatar_frame" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
+                <img class="avatar_frame ${settings.avatar_frame}" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
               </#if>
             </div>
             <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">

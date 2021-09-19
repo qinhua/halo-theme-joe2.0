@@ -5,7 +5,7 @@
     </ul>
 </div>
 <div class="joe_index__list" data-wow="on">
-    <ul class="joe_list"></ul>
+    <ul class="joe_list">
     <#list posts.content as post>
         <li class="joe_list__item wow default animated fadeInUp">
             <div class="line"></div>
@@ -15,7 +15,7 @@
                     <#else>
                       <#assign thumbnail=settings.passage_thumbnail>
                     </#if>
-                    <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazy_thumbnail.jpg'}" data-src="${thumbnail}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title}">
+                    <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg'}" data-src="${thumbnail!}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title}">
                     <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
                     <i class="joe-font joe-icon-picture"></i>
                 </a>
