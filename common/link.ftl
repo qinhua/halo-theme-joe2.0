@@ -14,22 +14,11 @@
       filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
     } 
   </#if>
-  @font-face {
-    font-family: &#x27;
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    src: url(fonts/webfont.woff2&#x27;);
-    src: url(fonts/webfont.woff2&#x27;) format(&#x27; woff2&#x27; );
-  }
   html body {
     --theme: ${settings.theme_color_day!'#54b5db'};
   }
   html[data-mode='dark'] body {
     --theme: ${settings.theme_color_night!'#9999ff'};
-  }
-  body {
-    font-family: &#x27;
   }
   body:after {
     background: #e2e2e2;
