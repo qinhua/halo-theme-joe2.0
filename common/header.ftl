@@ -99,7 +99,7 @@
 <#-- ===== 引入页面级js start===== -->
 <script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
 <script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
-<script src="${theme_base!}/source/js/min/joe.post_page.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.post.min.js"></script>
 <#--  </#if>  -->
 <#if type?? && type == 'index'>
   <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>

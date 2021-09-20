@@ -6,6 +6,10 @@ html {
   min-height: calc(100vh - 60px - 160px - 60px);
 }
 
+.takagi {
+  z-index: 50 !important;
+}
+
 /* music player */
 .aplayer {
   min-height: 90px;
@@ -143,6 +147,7 @@ html {
       align-items: center;
 
       .item {
+        cursor: pointer;
         position: relative;
         height: 60px;
         line-height: 60px;
@@ -1321,13 +1326,16 @@ html {
       background: var(--background);
 
       .joe_aside__item-title {
-        filter: hue-rotate(-200deg);
-        color: var(--theme);
+        color: var(--notice);
+        .joe-font {
+          color: var(--notice);
+        }
       }
 
       .joe_aside__item-contain {
         background: var(--background-notice);
         box-shadow: var(--shadow-notice);
+        animation: var(--animation-notice);
       }
 
       .notice_description {
@@ -5323,6 +5331,17 @@ html {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes twinkle {
+  to {
+    box-shadow: inset 0 0 15px #f4b393;
+  }
+}
+@keyframes twinkle-night {
+  to {
+    box-shadow: inset 0 0 15px #595997;
   }
 }
 

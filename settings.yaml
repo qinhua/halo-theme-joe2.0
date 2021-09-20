@@ -2,18 +2,18 @@
 genernal:
   label: 基本设置
   items:
-    enable_splash:
-      name: enable_splash
-      label: 开启首页欢迎界面
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否展示首页的欢迎界面"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
+    # enable_splash:
+    #   name: enable_splash
+    #   label: 开启首页欢迎界面
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "是否展示首页的欢迎界面"
+    #   options:
+    #     - value: true
+    #       label: 是
+    #     - value: false
+    #       label: 否
     enable_search:
       name: enable_search
       label: 搜索功能
@@ -879,105 +879,105 @@ aside:
           label: 关闭
 
 # 相册页
-photos:
-  label: 相册页
-  items:
-    photos_style:
-      name: photos_style
-      label: 相册布局风格
-      type: select
-      default: justify
-      options:
-        - value: justify
-          label: 合理布局
-        - value: masonry
-          label: 瀑布流布局
-        - value: packery
-          label: 填充式瀑布流布局（实验性）
-    is_thumbnail:
-      name: is_thumbnail
-      label: 相册列表使用缩略图
-      type: radio
-      data-type: bool
-      default: true
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    default_group:
-      name: default_group
-      label: 默认展示分组
-      type: text
-      data-type: string
-      default: ''
-      placeholder: '请填写分组名称'
-    photos_gutter:
-      name: photos_gutter
-      label: 图像之间的间距
-      type: text
-      data-type: long
-      default: 10
-    masonry_column:
-      name: masonry_column
-      label: 瀑布流列数(移动端始终为1)
-      type: select
-      default: 3
-      options:
-        - value: 2
-          label: 2
-        - value: 3
-          label: 3
-        - value: 4
-          label: 4
-        - value: 5
-          label: 5
-        - value: 6
-          label: 6
-        - value: 7
-          label: 7
-        - value: 8
-          label: 8
-    masonry_changer_min:
-      name: masonry_changer_min
-      label: 瀑布流切换功能最小列数
-      type: select
-      default: 3
-      options:
-        - value: 2
-          label: 2
-        - value: 3
-          label: 3
-        - value: 4
-          label: 4
-        - value: 5
-          label: 5
-        - value: 6
-          label: 6
-        - value: 7
-          label: 7
-        - value: 8
-          label: 8
-    masonry_changer_max:
-      name: masonry_changer_max
-      label: 瀑布流切换功能最大列数
-      type: select
-      default: 5
-      options:
-        - value: 2
-          label: 2
-        - value: 3
-          label: 3
-        - value: 4
-          label: 4
-        - value: 5
-          label: 5
-        - value: 6
-          label: 6
-        - value: 7
-          label: 7
-        - value: 8
-          label: 8
+# photos:
+#   label: 相册页
+#   items:
+#     photos_style:
+#       name: photos_style
+#       label: 相册布局风格
+#       type: select
+#       default: justify
+#       options:
+#         - value: justify
+#           label: 合理布局
+#         - value: masonry
+#           label: 瀑布流布局
+#         - value: packery
+#           label: 填充式瀑布流布局（实验性）
+#     is_thumbnail:
+#       name: is_thumbnail
+#       label: 相册列表使用缩略图
+#       type: radio
+#       data-type: bool
+#       default: true
+#       options:
+#         - value: true
+#           label: 开启
+#         - value: false
+#           label: 关闭
+#     default_group:
+#       name: default_group
+#       label: 默认展示分组
+#       type: text
+#       data-type: string
+#       default: ''
+#       placeholder: '请填写分组名称'
+#     photos_gutter:
+#       name: photos_gutter
+#       label: 图像之间的间距
+#       type: text
+#       data-type: long
+#       default: 10
+#     masonry_column:
+#       name: masonry_column
+#       label: 瀑布流列数(移动端始终为1)
+#       type: select
+#       default: 3
+#       options:
+#         - value: 2
+#           label: 2
+#         - value: 3
+#           label: 3
+#         - value: 4
+#           label: 4
+#         - value: 5
+#           label: 5
+#         - value: 6
+#           label: 6
+#         - value: 7
+#           label: 7
+#         - value: 8
+#           label: 8
+#     masonry_changer_min:
+#       name: masonry_changer_min
+#       label: 瀑布流切换功能最小列数
+#       type: select
+#       default: 3
+#       options:
+#         - value: 2
+#           label: 2
+#         - value: 3
+#           label: 3
+#         - value: 4
+#           label: 4
+#         - value: 5
+#           label: 5
+#         - value: 6
+#           label: 6
+#         - value: 7
+#           label: 7
+#         - value: 8
+#           label: 8
+#     masonry_changer_max:
+#       name: masonry_changer_max
+#       label: 瀑布流切换功能最大列数
+#       type: select
+#       default: 5
+#       options:
+#         - value: 2
+#           label: 2
+#         - value: 3
+#           label: 3
+#         - value: 4
+#           label: 4
+#         - value: 5
+#           label: 5
+#         - value: 6
+#           label: 6
+#         - value: 7
+#           label: 7
+#         - value: 8
+#           label: 8
 
 # 社交
 social:
@@ -1029,7 +1029,7 @@ social:
       name: qq_group
       label: QQ交流群
       type: textarea
-      default: '<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi"><img style="height:16px;border:none;border-radius: 3px;" src="//pub.idqqimg.com/wpa/images/group.png" alt="加入学习群" title="加入学习群"></a>'
+      # default: '<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi"><img style="height:16px;border:none;border-radius: 3px;" src="//pub.idqqimg.com/wpa/images/group.png" alt="加入学习群" title="加入学习群"></a>'
       placeholder: "请填入QQ交流群内嵌代码"
       description: "可通过 https://qun.qq.com/join.html 获取代码，和默认值格式保持一致即可"
 

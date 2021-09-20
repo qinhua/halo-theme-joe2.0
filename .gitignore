@@ -12,6 +12,7 @@ logs/
 *.js
 !.autod.conf.js
 
+settings copy.yaml
 dist/
 app/**/*.js
 test/**/*.js

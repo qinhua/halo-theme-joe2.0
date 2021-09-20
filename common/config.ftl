@@ -30,7 +30,9 @@
   }
 </script>
 <script>
-  console.log('主题配置：',ThemeConfig);
+  if(location.host.indexOf('localhost') > -1 || location.host.indexOf('127.0.0.1') > -1){
+    console.log('主题配置：',ThemeConfig);
+  }
   // 读取本地主题模式
   ThemeConfig.enable_auto_switch_theme && localStorage.removeItem("data-mode");
   var localMode = localStorage.getItem("data-mode") || sessionStorage.getItem("data-mode");
