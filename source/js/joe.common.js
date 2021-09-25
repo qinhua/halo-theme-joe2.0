@@ -5,16 +5,9 @@
     const comments = document.getElementsByTagName("halo-comment");
     const curMode = $("html").attr("data-mode");
     // 黑夜模式下
-    if (curMode === "light") {
-      for (var i = 0; i < comments.length; i++) {
-        var shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
-        $(shadowDom).removeClass("dark");
-      }
-    } else {
-      for (var i = 0; i < comments.length; i++) {
-        var shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
-        $(shadowDom).addClass("dark");
-      }
+    for (var i = 0; i < comments.length; i++) {
+      var shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
+      $(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
     }
   };
   document.addEventListener("DOMContentLoaded", function () {

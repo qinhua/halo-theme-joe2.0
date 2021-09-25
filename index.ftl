@@ -3,6 +3,7 @@
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="首页" type="index"/>
 <#import "common/macro/hotcategory.ftl" as hp>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
@@ -59,6 +60,6 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="index"/> 
 </body>
 </html>

@@ -12,12 +12,12 @@
         <ul class="joe_index__hot-list">
             <@categoryTag method="list">
             <#list categories?sort_by("postCount")?reverse as category>
-                <#if category_index<4>
+                <#if category_index < 4>
                 <li class="item">
                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                         <figure class="inner">
                             <span class="views">${category.postCount!} ℃</span>
-                            <img width="100%" height="120" class="image lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${category.name!}">
+                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/100${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" alt="${category.name!}">
                             <figcaption class="title">${category.name!}</figcaption>
                         </figure>
                     </a>

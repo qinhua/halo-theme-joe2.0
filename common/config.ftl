@@ -1,5 +1,5 @@
-<#--  取出主题配置  -->
-<script id="theme-config-getter">
+<script id="theme-config-getter" type="text/javascript">
+  // 获取主题配置
   var ThemeConfig = {};
   <#list settings?keys as key>
     <#assign valueString = settings[key]?string>
@@ -15,21 +15,35 @@
         value = Number(value);
       }
       ThemeConfig[field] = value;
-      ThemeConfig['HOST'] = '${blog_url}';
-      // ThemeConfig['HOST'] = 'https://bbchin.com'; // 当前接口，测试用
-      ThemeConfig['blog_title'] = '${blog_title}';
-      ThemeConfig['blog_url'] = '${blog_url}';
-      ThemeConfig['author'] = '${user.nickname}';
-      ThemeConfig['toc_depth'] = 3;
-      ThemeConfig['leaving_sheetid'] = 48; //留言板对应的自定义页面Id
-      ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
     </#if>
   </#list>
+  ThemeConfig['blog_title'] = '${blog_title}';
+  ThemeConfig['blog_url'] = '${blog_url}';
+  ThemeConfig['author'] = '${user.nickname}';
+  ThemeConfig['HOST'] = '${blog_url}';
+  ThemeConfig['BASE_URL'] = '${blog_url}';
+  // ThemeConfig['CDN_URL'] = ThemeConfig.enable_cdn ? "https://cdn.jsdelivr.net" : '${theme_base!}';
+  ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
+</script>
+
+<script id="metas-getter" type="text/javascript">
+    // 获取页面元数据
+    var PageAttrs = {
+        "metas": {
+			<#if metas??>
+				<#list metas?keys as key>
+					"${key}": "${metas['${key}']}",
+				</#list>
+			</#if>
+        }
+    }
   window.onload = function () {
     document.head.removeChild(document.querySelector('#theme-config-getter'));
+    document.head.removeChild(document.querySelector('#metas-getter'));
   }
 </script>
-<script>
+
+<script type="text/javascript">
   if(location.host.indexOf('localhost') > -1 || location.host.indexOf('127.0.0.1') > -1){
     console.log('主题配置：',ThemeConfig);
   }
@@ -39,8 +53,7 @@
   localMode && document.querySelector("html").setAttribute("data-mode", localMode);
   var meting_api="https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id";
   Joe = {
-      // BASE_URL: "https://bbchin.com",
-      BASE_URL: "http://127.0.0.1:8090",
+      BASE_URL: "https://bbchin.com",
       LIVE2D: "off",
       DYNAMIC_BACKGROUND: "off",
       WALLPAPER_BACKGROUND_PC: "",

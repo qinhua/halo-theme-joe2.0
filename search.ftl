@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="${keyword!}的搜索结果" type="search"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
        <#include "common/navbar.ftl">
@@ -91,6 +92,6 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="search"/> 
 </body>
 </html>

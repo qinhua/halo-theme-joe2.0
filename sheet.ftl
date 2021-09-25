@@ -2,13 +2,14 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="${sheet.title}" type="sheet"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
         <div class="joe_container joe_main_container page-sheet">
             <div class="joe_main">
                 <div class="joe_detail">
-                    <h1 class="joe_detail__title">${sheet.title}</h1>
+                    <h1 class="joe_detail__title" data-sheetid="${sheet.id}">${sheet.title}</h1>
                     <div class="joe_detail__count">
                         <div class="joe_detail__count-information">
                             <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" alt="${user.nickname!}">
@@ -57,6 +58,6 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="sheet"/>
 </body>
 </html>

@@ -5,12 +5,6 @@
             <a href="${tag.fullPath!}">${tag.name!}</a>
         </#list>
     </div>
-    <#--  <#if settings.enable_like!true>
-      <div class="joe_like">
-        <i class="joe-font joe-icon-like"></i>
-        <i class="joe-font joe-icon-like-fill"></i>
-      </div>
-    </#if>  -->
       <#if settings.enable_share>
         <div class="joe_detail__operate-share">
             <i class="joe-font joe-icon-share"></i>
@@ -19,11 +13,6 @@
                 <a class="icon-share-link" href="javascript:;" rel="noopener noreferrer" title="复制文章链接">
                     <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3509" width="30" height="30"><path d="M515.2 64c-246.4 0-448 198.4-448 444.8S268.8 953.6 512 953.6c246.4 0 444.8-201.6 444.8-444.8S758.4 64 515.2 64z m-118.4 441.6c-9.6 9.6-28.8 9.6-41.6 0l-22.4-25.6-12.8-9.6c-19.2-22.4-32-48-35.2-76.8 0-28.8 9.6-57.6 28.8-76.8 22.4-19.2 48-28.8 76.8-28.8 28.8 0 60.8 12.8 83.2 35.2l86.4 86.4c22.4 22.4 35.2 51.2 35.2 80 0 25.6-9.6 51.2-28.8 70.4-9.6 9.6-28.8 9.6-41.6 0-9.6-9.6-9.6-28.8 0-38.4 19.2-19.2 16-51.2-3.2-73.6l-86.4-86.4c-12.8-12.8-25.6-19.2-41.6-19.2-9.6 0-22.4 3.2-32 12.8-12.8 12.8-12.8 25.6-12.8 35.2 0 12.8 6.4 28.8 19.2 38.4l12.8 12.8 22.4 22.4c3.2 12.8 3.2 28.8-6.4 41.6z m307.2 201.6c-19.2 19.2-44.8 28.8-73.6 28.8-28.8 0-60.8-12.8-83.2-35.2l-86.4-86.4c-22.4-22.4-35.2-51.2-35.2-80 0-25.6 9.6-51.2 28.8-70.4 9.6-9.6 28.8-9.6 41.6 0 9.6 9.6 9.6 28.8 0 38.4-19.2 19.2-16 51.2 3.2 73.6l86.4 86.4c12.8 12.8 25.6 19.2 41.6 19.2 9.6 0 22.4-3.2 32-12.8 12.8-12.8 12.8-25.6 12.8-35.2 0-12.8-6.4-28.8-19.2-38.4l-25.6-25.6-9.6-9.6c-9.6-9.6-9.6-28.8 0-38.4 9.6-9.6 28.8-9.6 41.6 0l12.8 12.8 19.2 19.2c22.4 19.2 35.2 48 35.2 73.6 9.6 32-3.2 57.6-22.4 80z" fill="#989b9e"></path></svg>
                 </a>
-                <script>
-                  new ClipboardJS(document.querySelector('.icon-share-link'), {
-                    text: () => location.href
-                  }).on("success", () => Qmsg.success("文章链接已复制"));
-                </script>
                 </#if>
                 <#if settings.enable_share_weibo>
                 <a href="http://service.weibo.com/share/share.php?sharesource=weibo&title=分享：${post.title!}，原文链接：${post.fullPath!}&pic=${post.thumbnail!}" target="_blank" rel="noopener noreferrer" title="分享到新浪微博">
@@ -58,20 +47,6 @@
                         <div id="qrcode_wx"></div>
                         <p>微信扫一扫</p>
                     </div>
-                    <script>
-                    $(function() {
-                      $('#qrcode_wx').qrcode({
-                            width: 140,
-                            height: 140,
-                            render: "canvas",
-                            typeNumber: -1,
-                            correctLevel: 0,
-                            background: "#ffffff",
-                            foreground: "#000000",
-                            text: location.href
-                        });
-                    })   
-                    </script>
                 </a>
                 </#if>
             </div>
