@@ -201,4 +201,9 @@
     }
 }
 
+
+//cdn.jsdelivr.net/npm/halo-comment@latest/dist/halo-comment.min.js
+
 https://cdn.jsdelivr.net/gh/LIlGG/halo-comment-sakura@v1.3.5/dist/halo-comment.min.js
+
+https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment.min.js

@@ -7,27 +7,22 @@ const JoeContext = {
   // decrypt: (str) => decodeURIComponent(escape(window.atob(str))),
   /* 文章目录 */
   initToc() {
-    if (!ThemeConfig.enable_toc || !$(".toc-container")) return;
+    if (!ThemeConfig.enable_toc || !$(".toc-container").length) return;
     if (document.body.clientWidth <= 1200) return;
-    try {
-      tocbot.init({
-        tocSelector: "#js-toc",
-        contentSelector: ".joe_detail__article",
-        ignoreSelector: ".js-toc-ignore",
-        headingSelector: "h1, h2, h3, h4, h5",
-        // collapseDepth: ThemeConfig.tocDepth,
-        collapseDepth: 0,
-        hasInnerContainers: false,
-        headingsOffset: -80, // 目录高亮的偏移值，和scrollSmoothOffset有关联
-        scrollSmoothOffset: -70, // 滚动的偏移值
-        positionFixedSelector: ".toc-container", // 固定类添加的容器
-        positionFixedClass: "is-position-fixed", // 固定类名称
-        fixedSidebarOffset: "auto",
-        // scrollEndCallback: function (e) {},
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    tocbot.init({
+      tocSelector: "#js-toc",
+      contentSelector: ".joe_detail__article",
+      ignoreSelector: ".js-toc-ignore",
+      headingSelector: "h1, h2, h3, h4, h5",
+      collapseDepth: ThemeConfig.tocDepth || 0,
+      hasInnerContainers: false,
+      headingsOffset: -80, // 目录高亮的偏移值，和scrollSmoothOffset有关联
+      scrollSmoothOffset: -70, // 滚动的偏移值
+      positionFixedSelector: ".toc-container", // 固定类添加的容器
+      positionFixedClass: "is-position-fixed", // 固定类名称
+      fixedSidebarOffset: "auto",
+      // scrollEndCallback: function (e) {},
+    });
     // toc 菜单收起/展开
     $(".toc-container").show();
     $(".toc-expander i").on("click", function () {
@@ -36,8 +31,8 @@ const JoeContext = {
   },
   /* 文章复制 + 版权文字 */
   initCopy() {
-    if (!ThemeConfig.enable_copy) return;
-    const curl = +$(".joe_detail").attr("data-curl");
+    if (!ThemeConfig.enable_copy || !$(".joe_post").length) return;
+    const curl = $(".joe_detail").attr("data-curl");
     $(".joe_post").on("copy", function (e) {
       const body_element = document.body;
       const selection = window.getSelection();
@@ -67,9 +62,10 @@ const JoeContext = {
 
   /* 获取本篇文章百度收录情况 */
   initBaidu() {
-    if (!ThemeConfig.check_baidu_collect) return;
+    if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
+      return;
     $.ajax({
-      url: ThemeConfig.HOST + "/halo-api/bd/iscollect",
+      url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
       type: "GET",
       dataType: "json",
       data: {
@@ -86,7 +82,7 @@ const JoeContext = {
             );
             const _timer = setTimeout(function () {
               $.ajax({
-                url: ThemeConfig.HOST + "/halo-api/bd/push",
+                url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -126,8 +122,11 @@ const JoeContext = {
 
   /* 初始化代码区域，高亮 + 折叠 +  复制 */
   initCode() {
-    if (!ThemeConfig.enable_code_expander && !ThemeConfig.enable_code_copy)
-      rerturn;
+    if (
+      (!ThemeConfig.enable_code_expander && !ThemeConfig.enable_code_copy) ||
+      !$("pre[class*='language-']").length
+    )
+      return;
     $("pre[class*='language-']").each(function (index, item) {
       // 代码折叠
       if (ThemeConfig.enable_code_expander) {
@@ -193,7 +192,9 @@ const JoeContext = {
 
   /* 图片预览功能 */
   initGallery() {
-    $(".joe_detail__article img:not(img.owo_image)").each(function () {
+    $(
+      ".joe_detail__article img:not(img.owo_image), .joe_journal_block img"
+    ).each(function () {
       $(this).wrap(
         $(
           `<span style="display: block;" data-fancybox="Joe" href="${$(
@@ -202,6 +203,28 @@ const JoeContext = {
         )
       );
     });
+  },
+
+  /* 初始化文章分享 */
+  initPostShare() {
+    if (!ThemeConfig.enable_share) return;
+    if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
+      new ClipboardJS($(".icon-share-link")[0], {
+        text: () => location.href,
+      }).on("success", () => Qmsg.success("文章链接已复制"));
+    }
+    if (ThemeConfig.enable_share_weixin && $("#qrcode_wx").length) {
+      $("#qrcode_wx").qrcode({
+        width: 140,
+        height: 140,
+        render: "canvas",
+        typeNumber: -1,
+        correctLevel: 0,
+        background: "#ffffff",
+        foreground: "#000000",
+        text: location.href,
+      });
+    }
   },
 
   /* 设置文章内的链接为新窗口打开 */
@@ -218,7 +241,7 @@ const JoeContext = {
 
   /* 文章点赞 */
   initLike() {
-    if (!ThemeConfig.enable_like) return;
+    if (!ThemeConfig.enable_like || !$(".joe_detail__agree").length) return;
     const cid = $(".joe_detail").attr("data-cid");
     const clikes = +($(".joe_detail").attr("data-clikes") || 0);
     let agreeArr = localStorage.getItem(encryption("agree"))
@@ -243,11 +266,10 @@ const JoeContext = {
         : [];
       let flag = agreeArr.includes(cid);
       $.ajax({
-        url: ThemeConfig.HOST + "/api/content/posts/" + cid + "/likes",
+        url: "/api/content/posts/" + cid + "/likes",
         type: "POST",
         dataType: "json",
         data: {
-          // routeType: "handle_agree",
           type: flag ? "disagree" : "agree",
         },
         success(res) {
@@ -328,7 +350,7 @@ const JoeContext = {
 
   /* 文章视频模块 */
   initVideo() {
-    if ($(".joe_detail__article-video").length > 0) {
+    if ($(".joe_detail__article-video").length) {
       const player = $(".joe_detail__article-video .play iframe").attr(
         "data-player"
       );
@@ -344,7 +366,7 @@ const JoeContext = {
   },
 
   /* 初始化pjax */
-  initPjax() {},
+  // initPjax() {},
 
   /* 初始化日志页 */
   initJournals() {
@@ -353,16 +375,8 @@ const JoeContext = {
       $(this).parent().toggleClass("open");
     });
     // 点赞
-    // $.ajax({
-    //   url: ThemeConfig.HOST + "/api/content/journals",
-    //   type: "GET",
-    //   dataType: "json",
-    //   success(res) {
-    //     console.log(res);
-    //   },
-    // });
-    {
-      const $allItems = $(".joe_journal__item");
+    const $allItems = $(".joe_journal__item");
+    if ($allItems.length) {
       $allItems.each(function (_, item) {
         const $this = $(this);
         const cid = $this.attr("data-cid");
@@ -394,7 +408,7 @@ const JoeContext = {
             : [];
           let flag = agreeArr.includes(cid);
           $.ajax({
-            url: ThemeConfig.HOST + "/api/content/journals/" + cid + "/likes",
+            url: "/api/content/journals/" + cid + "/likes",
             type: "POST",
             dataType: "json",
             data: {
@@ -434,24 +448,32 @@ const JoeContext = {
       });
     }
     // 评论及折叠
-    $(".journal_comment_expander,.journal-comment").on("click", function () {
-      const $this = $(this);
-      const $parent = $this.parents(".footer-wrap");
-      $parent.toggleClass("open");
-      $parent
-        .find(".journal_comment_expander_txt")
-        .html(($parent.hasClass("open") ? "收起" : "展开") + "评论");
-    });
+    if (ThemeConfig.enable_comment_journal) {
+      $(".journal_comment_expander,.journal-comment").on("click", function () {
+        const $this = $(this);
+        const $parent = $this.parents(".footer-wrap");
+        const compComment = $parent
+          .find("halo-comment")[0]
+          .shadowRoot.getElementById("halo-comment").__vue__;
+        // 展开加载评论
+        if (!$parent.hasClass("open") && !compComment.loaded) {
+          compComment.loadComments();
+        }
+        $parent.toggleClass("open");
+        $parent
+          .find(".journal_comment_expander_txt")
+          .html(($parent.hasClass("open") ? "收起" : "查看") + "评论");
+      });
+    }
   },
   /* 初始化图库 */
   // initGallery(){
   // }
 
   // 渲染数学公式
-  MATHJAX() {
+  initMathjax() {
     if (ThemeConfig.enable_mathjax && window.katex) {
       renderMathInElement(document.body, {
-        // customised options
         delimiters: [
           { left: "$$", right: "$$", display: true },
           { left: "$", right: "$", display: false },
@@ -466,6 +488,77 @@ const JoeContext = {
 
 document.addEventListener("DOMContentLoaded", () => {
   Object.keys(JoeContext).forEach((item) => JoeContext[item]());
+
+  /* 初始化3D标签云 */
+  if (ThemeConfig.show_tag_cloud) {
+    const entries = [];
+    const colors = [
+      "#F8D800",
+      "#0396FF",
+      "#EA5455",
+      "#7367F0",
+      "#32CCBC",
+      "#F6416C",
+      "#28C76F",
+      "#9F44D3",
+      "#F55555",
+      "#736EFE",
+      "#E96D71",
+      "#DE4313",
+      "#D939CD",
+      "#4C83FF",
+      "#F072B6",
+      "#C346C2",
+      "#5961F9",
+      "#FD6585",
+      "#465EFB",
+      "#FFC600",
+      "#FA742B",
+      "#5151E5",
+      "#BB4E75",
+      "#FF52E5",
+      "#49C628",
+      "#00EAFF",
+      "#F067B4",
+      "#F067B4",
+      "#ff9a9e",
+      "#00f2fe",
+      "#4facfe",
+      "#f093fb",
+      "#6fa3ef",
+      "#bc99c4",
+      "#46c47c",
+      "#f9bb3c",
+      "#e8583d",
+      "#f68e5f",
+    ];
+    const random = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    $(".tags-cloud-list li").each((i, item) => {
+      entries.push({
+        label: $(item).attr("data-label"),
+        url: $(item).attr("data-url"),
+        target: "_blank",
+        fontColor: colors[random(0, colors.length - 1)],
+        fontSize: 15,
+      });
+    });
+    $("#tags-3d").svg3DTagCloud({
+      entries,
+      width: 250,
+      height: 250,
+      radius: "65%",
+      radiusMin: 75,
+      bgDraw: false,
+      fov: 800,
+      speed: 0.5,
+      fontWeight: 500,
+    });
+    $(".tags-cloud-list").remove();
+  }
 });
 
 /* 写在load事件里，为了解决图片未加载完时，滚动距离获取不准确的问题 */

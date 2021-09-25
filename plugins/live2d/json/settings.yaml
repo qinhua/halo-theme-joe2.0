@@ -176,7 +176,7 @@ live2d:
       label: 空闲时出现一言
       type: radio
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 开启

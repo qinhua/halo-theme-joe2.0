@@ -373,5 +373,5 @@ function loadTipsMessage(result) {
     
     $('.takagi-tool .fui-eye').click(function (){loadOtherModel()});
     $('.takagi-tool .fui-user').click(function (){loadRandTextures()});
-    $('.takagi-tool .fui-chat').click(function (){showHitokoto()});
+    // $('.takagi-tool .fui-chat').click(function (){showHitokoto()});
 }

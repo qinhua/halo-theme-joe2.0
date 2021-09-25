@@ -3,6 +3,7 @@
 
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="文章分类" type="categorys"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
@@ -19,12 +20,11 @@
                         <ul class="joe_index__hot-list">
                             <@categoryTag method="list">
                                 <#list categories as category>
-                                <#--  ${category.postCount}  -->
                                 <li class="item">
                                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                                         <figure class="inner">
                                             <span class="views">${category.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${category.name!}">
+                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/2${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" alt="${category.name!}">
                                             <figcaption class="title">${category.name!}</figcaption>
                                         </figure>
                                     </a>
@@ -39,6 +39,6 @@
         </div>
     </div>
     <#include "common/footer.ftl">
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="categories"/> 
 </body>
 </html>

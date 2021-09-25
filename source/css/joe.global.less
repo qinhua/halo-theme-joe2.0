@@ -148,6 +148,10 @@ html {
 
       .item {
         cursor: pointer;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
         position: relative;
         height: 60px;
         line-height: 60px;
@@ -159,12 +163,9 @@ html {
         white-space: nowrap;
         color: var(--main);
 
-        .joe-font {
-          position: relative;
-          top: -1px;
+        > i {
           display: inline-block;
           margin-right: 4px;
-          vertical-align: bottom;
           font-size: 18px;
           transition: transform 0.5s;
         }
@@ -212,6 +213,7 @@ html {
       }
 
       .joe_dropdown {
+        margin-right: 15px;
         &__link {
           a {
             height: 60px;
@@ -4807,6 +4809,11 @@ html {
       }
     }
   }
+}
+
+.joe_nodata {
+  padding: 20px;
+  color: var(--minor);
 }
 
 .profile-color-modes-illu-frame {

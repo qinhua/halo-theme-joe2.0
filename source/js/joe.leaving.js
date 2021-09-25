@@ -2,12 +2,9 @@
 const leavingContext = {
   /* 获取留言板数据 */
   getData() {
+    const sheetId = $(".joe_detail__title").attr("data-sheetid");
     $.ajax({
-      url:
-        ThemeConfig.HOST +
-        "/api/content/sheets/" +
-        ThemeConfig.leaving_sheetid +
-        "/comments/top_view",
+      url: `/api/content/sheets/${sheetId}/comments/top_view`,
       type: "GET",
       dataType: "json",
       success(res) {
@@ -76,7 +73,7 @@ const leavingContext = {
       "#BB4E75",
       "#e255cd",
       "#63c549",
-      "#00EAFF",
+      "#0ECDDE",
       "#F067B4",
       "#F067B4",
       "#ff9a9e",
@@ -143,28 +140,26 @@ const leavingContext = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => {
-  /* 当前页的CID */
-  // const cid = $(".joe_detail").attr("data-cid");
   leavingContext.getData();
 });
 
 /* 写在load事件里，为了解决图片未加载完成，滚动距离获取会不准确的问题 */
-window.addEventListener("load", function () {
-  /* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-  {
-    const scroll = new URLSearchParams(location.search).get("scroll");
-    if (scroll) {
-      const height = $(".joe_header").height();
-      let elementEL = null;
-      if ($("#" + scroll).length > 0) {
-        elementEL = $("#" + scroll);
-      } else {
-        elementEL = $("." + scroll);
-      }
-      if (elementEL && elementEL.length > 0) {
-        const top = elementEL.offset().top - height - 15;
-        window.scrollTo({ top, behavior: "smooth" });
-      }
-    }
-  }
-});
+// window.addEventListener("load", function () {
+//   /* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
+//   {
+//     const scroll = new URLSearchParams(location.search).get("scroll");
+//     if (scroll) {
+//       const height = $(".joe_header").height();
+//       let elementEL = null;
+//       if ($("#" + scroll).length > 0) {
+//         elementEL = $("#" + scroll);
+//       } else {
+//         elementEL = $("." + scroll);
+//       }
+//       if (elementEL && elementEL.length > 0) {
+//         const top = elementEL.offset().top - height - 15;
+//         window.scrollTo({ top, behavior: "smooth" });
+//       }
+//     }
+//   }
+// });

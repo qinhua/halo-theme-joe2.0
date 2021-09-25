@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="友情链接" type="links"/>
+<#import "common/tail.ftl" as tailInfo>
 <style>
   html[data-mode='dark'] .joe_detail__friends {
     -webkit-filter: brightness(0.7);
@@ -17,29 +18,33 @@
                     <h1 class="joe_detail__title">友情链接</h1>
                     <article class="joe_detail__article">
                       <h5>本站友链列表</h5>
-                      <ul class="joe_detail__friends">
+                      <@linkTag method="list">
+                        <#if links?size &gt;0>
                           <#assign colors=["#F8D800", "#0396FF", "#EA5455", "#7367F0", "#32CCBC", "#F6416C", "#32B76E", "#9F44D3", "#F55555", "#736EFE", "#E96D71", "#DE4313", "#D939CD", "#4C83FF", "#F072B6", "#C346C2", "#5961F9", "#FD6585", "#5569E8", "#FFC600", "#FA742B", "#5151E5", "#BB4E75", "#FF52E5", "#4DA037", "#15D1E2", "#F067B4", "#F067B4", "#ff9a9e", "#00f2fe", "#4facfe", "#f093fb", "#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c", "#e8583d", "#f68e5f"]>
                           <#assign nextRandom = .now?string["HHmmssSSS"]?number>
-                          <@linkTag method="list">
+                          <ul class="joe_detail__friends">
                             <#list links as link>
-                                  <li class="joe_detail__friends-item">
-                                      <a class="contain" href="${link.url!}" target="_blank" style="background:${colors[nextRandom % colors?size]}" rel="noopener noreferrer">
-                                      <span style="font-weight:bold;" class="title">${link.name!}</span>
-                                      <div class="content">
-                                          <div class="desc" title="${link.description!}">${link.description!}</div>
-                                          <#if link.logo?? && link.logo!=''>
-                                            <#assign logo=link.logo>
-                                          <#else>
-                                            <#assign logo="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png">
-                                          </#if>
-                                          <img width="40" height="40" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${logo!}" onerror="this.src='https:\/\/cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png'" alt="${link.name!}">
-                                      </div>
-                                      </a>
-                                  </li>
-                                  <#assign nextRandom = nextRandom * 10 % 38>
-                              </#list>
-                          </@linkTag>              
-                      </ul>
+                              <li class="joe_detail__friends-item">
+                                <a class="contain" href="${link.url!}" target="_blank" style="background:${colors[nextRandom % colors?size]}" rel="noopener noreferrer">
+                                  <span style="font-weight:bold;" class="title">${link.name!}</span>
+                                  <div class="content">
+                                    <div class="desc" title="${link.description!}">${link.description!}</div>
+                                    <#if link.logo?? && link.logo!=''>
+                                      <#assign logo=link.logo>
+                                    <#else>
+                                      <#assign logo="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png">
+                                    </#if>
+                                    <img width="40" height="40" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${logo!}" onerror="this.src='https:\/\/cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png'" alt="${link.name!}">
+                                  </div>
+                                </a>
+                              </li>
+                              <#assign nextRandom = nextRandom * 10 % 38>
+                            </#list>           
+                          </ul>
+                        <#else>
+                          <div class="joe_nodata">暂无友链</div>
+                        </#if>
+                      </@linkTag>   
                     </article>
                     <article class="joe_detail__article">
                         <h5>申请格式</h5>
@@ -58,7 +63,7 @@
             <#include "common/aside.ftl">
         </div>
         <#include "common/footer.ftl">
-        <#include "common/tail.ftl">
+        <@tailInfo.tail type="links"/> 
     </div>
 </body>
 </html>

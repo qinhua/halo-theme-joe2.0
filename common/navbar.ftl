@@ -13,12 +13,12 @@
             <@menuTag method="tree">
                 <#list menus?sort_by('priority') as menu>
                     <#if menu.children?? && menu.children?size gt 0>
-                        <div class="joe_dropdown" trigger="hover" placement="60px" style="margin-right: 15px;">
+                        <div class="joe_dropdown" trigger="hover" placement="60px">
                             <div class="joe_dropdown__link">
                                 <#if menu.url!='#'>
-                                  <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if menu.icon??><i class="${menu.icon}"></i></#if>${menu.name!}</a>
+                                  <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if menu.icon?? && settings.enable_navbar_icon!true><i class="${menu.icon}"></i></#if>${menu.name!}</a>
                                 <#else>
-                                  <a class="item" style="cursor:default;" href="javascript:;" title="${menu.name!}"><#if menu.icon??><i class="${menu.icon}"></i></#if>${menu.name!}</a>
+                                  <a class="item" style="cursor:default;" href="javascript:;" title="${menu.name!}"><#if menu.icon?? && settings.enable_navbar_icon!true><i class="${menu.icon}"></i></#if>${menu.name!}</a>
                                 </#if>
                                 <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                             </div>
@@ -26,25 +26,25 @@
                               <#list menu.children as child>
                                   <#if child.children?? && child.children?size gt 0>
                                     <li class="joe_nav_sub-li">
-                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon??><i class="${child.icon}"></i></#if>${child.name!}</a>
+                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon?? && settings.enable_navbar_icon!true><i class="${child.icon}"></i></#if>${child.name!}</a>
                                         <ol class="joe_nav_sub">
                                           <#list child.children as child1>
                                           <li>
-                                              <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if child.icon??><i class="${child1.icon}"></i></#if>${child1.name!}</a>
+                                              <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if child.icon?? && settings.enable_navbar_icon!true><i class="${child1.icon}"></i></#if>${child1.name!}</a>
                                           </li>
                                           </#list>
                                         </ol>
                                     </li>
                                   <#else> 
                                     <li>
-                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon??><i class="${child.icon}"></i></#if>${child.name!}</a>
+                                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if child.icon?? && settings.enable_navbar_icon!true><i class="${child.icon}"></i></#if>${child.name!}</a>
                                     </li>
                                   </#if> 
                               </#list>
                             </nav>
                         </div>
                         <#else>
-                        <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if menu.icon??><i class="${menu.icon}"></i></#if>${menu.name!}</a>
+                        <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if menu.icon?? && settings.enable_navbar_icon!true><i class="${menu.icon}"></i></#if>${menu.name!}</a>
                     </#if> 
                 </#list>
             </@menuTag>
@@ -91,11 +91,11 @@
             </li>
         </ul>
         <ul class="joe_header__slideout-menu panel-box">
-            <li>
+            <#--  <li>
                 <a class="link" href="/" title="首页">
                     <span>首页</span>
                 </a>
-            </li>
+            </li>  -->
             <li>
                 <a class="link panel" href="#" rel="nofollow">
                     <span>栏目</span>
@@ -104,7 +104,6 @@
                 <ul class="slides panel-body panel-box panel-side-menu">
                     <@menuTag method="tree">
                         <#list menus?sort_by('priority') as menu>
-                          <#if menu_index != 0>
                             <#if menu.children?? && menu.children?size gt 0>
                                 <li>
                                     <div class="link panel">
@@ -141,8 +140,7 @@
                                 <li>
                                     <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
                                 </li>
-                            </#if> 
-                          </#if> 
+                            </#if>
                         </#list>
                     </@menuTag>
                 </ul>

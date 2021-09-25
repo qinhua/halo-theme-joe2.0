@@ -35,6 +35,7 @@
   }
 </style>
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2788564_0ecx5wa2nsqa.css">
 <#if settings.iconfont??>
   <link rel="stylesheet" href="${settings.iconfont!}">
 </#if>
@@ -48,6 +49,9 @@
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.global.min.css">
 <#if settings.cursor_skin?? && settings.cursor_skin!='none'>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.cursor.min.css">
+</#if>
+<#if settings.enable_mathjax!false>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
 </#if>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">

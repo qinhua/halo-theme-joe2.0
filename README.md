@@ -188,9 +188,9 @@
 
 #### 1、如何自定义导航条图标？
 
-- 首先通过 [iconfont](https://www.iconfont.cn/) 获取自己的图标链接，注意要使用 font-class 类型，最后这种地址：//at.alicdn.com/t/font_2788564_1f1rnuqwnzj.css
+- 首先通过 [iconfont](https://www.iconfont.cn/) 获取自己的图标链接，也可以用 [fontawesome](http://www.fontawesome.com.cn/) 的字体，注意要使用 font-class 类型，最后这种地址：//at.alicdn.com/t/font_2788564_1f1rnuqwnzj.css
 
-- 通过 `管理后台-外观-主题-Joe2.0-设置-自定义`，将图标地址贴入 `外部CSS链接` 中并保存；
+- 通过 `管理后台-外观-主题-Joe2.0-设置-自定义`，将图标地址贴入 `字体图标链接` 中并保存；
 
 - 通过 `管理后台-外观-菜单`，为相关菜单添加图标，也就是字体图标的类名，类似 `iconfont icon-home` 这种（字体名称+图标名称），记得保存；
 

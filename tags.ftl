@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="所有标签" type="tags"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
@@ -18,12 +19,11 @@
                         <ul class="joe_index__hot-list" style="padding-bottom: 10px;">
                             <@tagTag method="list">
                                 <#list tags as tag>
-                                <#--  ${tag.pageCount}  -->
                                 <li class="item">
                                     <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                                         <figure class="inner">
                                             <span class="views">${tag.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
+                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
                                             <figcaption class="title">${tag.name!}</figcaption>
                                         </figure>
                                     </a>
@@ -38,6 +38,6 @@
         </div>
          <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="tags"/> 
 </body>
 </html>

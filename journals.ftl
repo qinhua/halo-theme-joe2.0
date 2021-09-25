@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
-<#import "common/comment.ftl" as journalComment>
 <@headInfo.head title="动态" type="journals"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
         <div class="joe_container joe_main_container page-journals">
             <div class="joe_main">
                 <div class="joe_detail">
-                    <h1 class="joe_detail__title">😁 记录美好生活 😁</h1>                    
+                    <h1 class="joe_detail__title">😁 记录点滴生活 😁</h1>                    
                     <div class="joe_detail__count">
                         <div class="joe_detail__count-information">
                             <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" alt="${user.nickname!}">
@@ -19,10 +19,10 @@
                                 </div>
                                 <div class="item"> 
                                     <span class="text" >
-                                    <#--  <#assign total=journals.totalPages>  -->
                                     ${journals.total!0} 条动态
                                     </span>
                                     <#if settings.check_baidu_collect>
+                                      <span class="line">/</span>
                                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                                     </#if>
                                 </div>
@@ -54,13 +54,18 @@
                                               <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
                                               <em class="journal-likes-num">${journal.likes!0}</em>
                                             </span>
-                                            <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i>${journal.commentCount!0}</span>
-                                            <#if journal.commentCount &gt; 0>
-                                              <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">展开评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                                            <#if settings.enable_comment_journal!true>
+                                              <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i>${journal.commentCount!0}</span>
+                                              <#if journal.commentCount &gt; 0>
+                                                <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                                              </#if>
                                             </#if>
-                                            <div class="joe_journal_comment">
-                                              <@journalComment.comment target=journal type="journal"/>
-                                            </div>
+                                            <#if settings.enable_comment_journal!true>
+                                              <div class="joe_journal_comment">   
+                                                <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": false}'>
+                                                <halo-comment id="${journal.id?c}" type="journal" configs='${configs}'/>
+                                              </div>
+                                            </#if>
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +117,6 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="journals"/> 
 </body>
 </html>

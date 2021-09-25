@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="${category.name!}" type="category"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
        <#include "common/navbar.ftl">
@@ -90,7 +91,7 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="category"/> 
 </body>
 
 </html>

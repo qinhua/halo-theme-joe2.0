@@ -71,6 +71,6 @@
         </#if>
         <#if settings.enable_strips>
           <canvas id="canvas-strips" width="100%" height="400"></canvas>
-          <script src="${theme_base!}/common/strips.js"></script>
+          <script src="${theme_base!}/source/effect/strips.js"></script>
         </#if>
     </section>

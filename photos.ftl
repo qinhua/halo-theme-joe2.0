@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="我的壁纸" type="photo"/>
- <body> 
+<#import "common/tail.ftl" as tailInfo>
+<body> 
     <div id="Joe"> 
     <#include "common/navbar.ftl"> 
     <div class="joe_container joe_main_container"> 
@@ -68,6 +69,6 @@
    </div> 
    <#include "common/footer.ftl">
   </div>
-  <#include "common/tail.ftl">  
+  <@tailInfo.tail type="photo"/>  
  </body>
 </html>

@@ -14,18 +14,42 @@ genernal:
     #       label: 是
     #     - value: false
     #       label: 否
+    enable_navbar_icon:
+      name: enable_navbar_icon
+      label: 显示导航栏图标
+      type: switch
+      data-type: bool
+      default: true
+      description: "导航条默认展示图标，如果不需要可以在这里关闭"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_search:
       name: enable_search
       label: 搜索功能
       type: radio
       data-type: bool
       default: true
-      description: "控制博客的搜索功能"
+      description: "是否开启博客的搜索功能"
       options:
         - value: true
           label: 开启
         - value: false
           label: 关闭
+    # enable_cdn:
+    #   name: enable_cdn
+    #   label: 从CDN加载静态资源
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "默认使用CDN加载静态资源，关闭后将从项目目录加载"
+    #   options:
+    #     - value: true
+    #       label: 是
+    #     - value: false
+    #       label: 否
     icp:
       name: icp
       label: ICP备案号
@@ -130,14 +154,30 @@ theme:
       description: "限制内容区域的宽度，像素或百分比，默认1320px"
     cursor_skin:
       name: cursor_skin
-      label: 鼠标风格
+      label: 鼠标皮肤
       type: select
-      default: sakura
+      default: none
       options:
         - value: none
           label: 默认
         - value: sakura
           label: sakura
+    click_effect:
+      name: click_effect
+      label: 点击特效
+      type: select
+      default: none
+      options:
+        - value: none
+          label: 无
+        - value: particle
+          label: 粒子
+        - value: heart
+          label: 爱心
+        - value: flower
+          label: 花花
+        - value: social
+          label: 社会价值观
     enable_loading_bar:
       name: enable_loading_bar
       label: 页面加载条
@@ -498,6 +538,12 @@ passage:
           label: 开启
         - value: false
           label: 关闭
+    toc_depth:
+      name: toc_depth
+      label: TOC目录默认展开层级
+      default: "3"
+      placeholder: "请填写数字层级"
+      description: "TOC目录自动展开的标题层级，默认3级"
     enable_share:
       name: enable_share
       label: 文章分享
@@ -771,6 +817,35 @@ passage:
       type: attachment
       placeholder: "微信收款二维码链接，不填不显示"
 
+# 日志页
+journals:
+  label: 日志页
+  items: 
+    enable_comment_journal:
+      name: enable_comment_journal
+      label: 开启日志评论
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否开启对单条日志的评论功能"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_autoload_comment_journal:
+      name: enable_autoload_comment_journal
+      label: 自动加载评论
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否自动加载日志评论，关闭则需要手动点击加载"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+
 # 侧边栏
 aside:
   label: 侧边栏
@@ -865,8 +940,8 @@ aside:
       label: 最新评论条数
       default: 5
       description: "右侧最新评论展示条数，填写数字即可，默认展示最新的5条评论（需开启最新评论）"
-    show_tag:
-      name: show_tag
+    show_tag_cloud:
+      name: show_tag_cloud
       label: 标签云
       type: radio
       data-type: bool
@@ -1049,6 +1124,65 @@ character:
         - value: false
           label: 否
 
+# 音乐播放器
+music_player:
+  label: 音乐播放器
+  items:
+    music_enabled:
+      name: music_enabled
+      label: 开启背景音乐
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    music_source:
+      name: music_source
+      label: 音乐播放器播放源
+      type: select
+      default: netease
+      options:
+        - value: netease
+          label: 网易云音乐
+        - value: tencent
+          label: QQ音乐
+        - value: kugou
+          label: 酷狗音乐
+        - value: xiami
+          label: 虾米音乐
+        - value: baidu
+          label: 百度音乐
+    list_id:
+      name: list_id
+      label: 音乐播放器歌单ID
+      type: text
+      placeholder: '歌单ID'
+      placeholder: '默认为网易云音乐热歌榜'
+    sort_by:
+      name: sort_by
+      label: 歌单排序方式
+      default: 'list'
+      type: select
+      options:
+        - value: random
+          label: 随机
+        - value: list
+          label: 顺序
+    auto_play:
+      name: auto_play
+      label: 自动播放
+      default: false
+      type: radio
+      data-type: bool
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+
 # 自定义
 custom:
   label: 自定义
@@ -1137,18 +1271,18 @@ others:
       # default: "TZLa5Xk302pBBySo"
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效）"
-    enable_pjax:
-      name: enable_pjax
-      label: 全局Pjax
-      type: switch
-      data-type: bool
-      default: false
-      description: "开启音乐播放器后，建议开启pjax以优化用户体验"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
+    # enable_pjax:
+    #   name: enable_pjax
+    #   label: 全局Pjax
+    #   type: switch
+    #   data-type: bool
+    #   default: false
+    #   description: "开启音乐播放器后，建议开启pjax以优化用户体验"
+    #   options:
+    #     - value: true
+    #       label: 开启
+    #     - value: false
+    #       label: 关闭
     
     enable_offscreen_tip:
       name: enable_offscreen_tip

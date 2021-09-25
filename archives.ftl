@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <#import "common/header.ftl" as headInfo>
 <@headInfo.head title="文章归档" type="archive"/>
+<#import "common/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
     <#include "common/navbar.ftl">
@@ -36,6 +37,6 @@
         </div>
         <#include "common/footer.ftl">
     </div>
-    <#include "common/tail.ftl">
+    <@tailInfo.tail type="archive"/> 
 </body>
 </html>

@@ -1,4 +1,4 @@
-
+<#macro tail type>
 <#--  悬浮按钮  -->
 <div class="joe_action">
     <div class="joe_action_item scroll">
@@ -19,43 +19,97 @@
     </#if>
 </div>
 
+<#-- ===== 引入脚本 start ===== -->
+<script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/assets/js/joe.extend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.js"></script> 
+<#--  <script src="${theme_base!}/source/utils/index.js"></script>  -->
+
+<#if settings.favicon??>
+  <!-- favicon -->
+  <script src="https://cdn.jsdelivr.net/npm/favico.js@0.3.10/favico.min.js"></script>
+</#if>
+<#if settings.enable_banner>
+  <!-- banner -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@5.4.5/css/swiper.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@5.4.5/js/swiper.min.js"></script>
+</#if>
+<#if settings.enable_toc!true>
+  <!-- tocbot -->
+  <script src="https://cdn.jsdelivr.net/npm/tocbot@4.10.0/dist/tocbot.min.js"></script>
+</#if>
+<script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment.min.js'}"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<#if settings.show_tag_cloud!true>
+  <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.2.3/plugin/3dtag/3dtag.min.js"></script>
+</#if>
+<#if settings.music_id??>
+  <!-- 音乐播放器 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"> 
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+</#if>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.scroll.js"></script>
+<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.sketchpad.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.extend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<#if settings.enable_pjax!false>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+    <script src="${theme_base!}/source/js/min/pjax.js?v=${theme.version!}"></script>
+</#if> 
+<#if settings.enable_mathjax!false>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+</#if> 
+
+<#-- ===== 引入页面级js start===== -->
+<script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
+<#if type == 'index'>
+  <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
+</#if>
+<#if type == 'post' || type == 'journals'>
+  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js"></script>
+</#if>
+<script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
+<script src="${theme_base!}/source/js/min/joe.post.min.js"></script>
+<#if type == 'sheet'>
+  <script src="https://cdn.jsdelivr.net/npm/draggabilly@2.3.0/dist/draggabilly.pkgd.js"></script>
+  <script src="${theme_base!}/source/js/min/joe.leaving.min.js"></script>
+</#if>
+<#-- ===== 引入页面级js end===== -->
+
 <#--  粒子背景  -->
 <#if settings.bg_particle_rain!false>
   <canvas id="canvas-rain" width="1920" height="1080" style="position:fixed;left:0;top:0;z-index:100;"></canvas>
-  <script src="${theme_base!}/common/canvas-rain.js"></script>
+  <script src="${theme_base!}/source/effect/canvas-rain.js"></script>
+</#if>
+<!-- 鼠标特效 -->
+<#if settings.click_effect!='none'>
+  <script src="${theme_base!}/source/effect/click/${settings.click_effect}.js"></script>
 </#if>
 <!-- live2d -->
 <#if settings.enable_live2d>
   <#include "../plugins/live2d/ftl/live2d.ftl">
   <@live2d />
 </#if>
+<#-- ===== 引入脚本 end ===== -->
 
 <#if settings.custom_external_js_body??>
   <!-- 自定义外部js -->
-  <script type="text/javascript" src="${settings.custom_external_js_body!}"></script>
+  <script src="${settings.custom_external_js_body!}"></script>
 </#if>
 <#if settings.custom_js_body??>
   <!-- 自定义js -->
   <script type="text/javascript">${settings.custom_js_body!}</script>
 </#if>
-<!-- 定义可变属性，会根据页面的改变而变化 -->
-<script type='text/javascript'>
-	/* <![CDATA[ */
-    var PageAttr = {
-        "metas": {
-			<#if metas??>
-				<#list metas?keys as key>
-					"${key}": "${metas['${key}']}",
-				</#list>
-			</#if>
-        },
-    }
-	/* ]]> */
-</script>
 <#--  页面加载耗时  -->
 <script>
   $(function(){
     var cosume_time=performance.now();
-    cosume_time && console.log("%c页面加载耗时："+Math.round(cosume_time)+" ms | Theme By M酷", "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px");
+    cosume_time && console.log("%c页面加载耗时："+Math.round(cosume_time)+" ms | Theme By ${user.nickname}", "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px");
   })
 </script>
+</#macro>
