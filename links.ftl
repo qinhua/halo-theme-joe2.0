@@ -32,7 +32,7 @@
                                     <#if link.logo?? && link.logo!=''>
                                       <#assign logo=link.logo>
                                     <#else>
-                                      <#assign logo="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png">
+                                      <#assign logo="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/icon-qiye.png">
                                     </#if>
                                     <img width="40" height="40" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${logo!}" onerror="this.src='https:\/\/cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/icon-qiye.png'" alt="${link.name!}">
                                   </div>

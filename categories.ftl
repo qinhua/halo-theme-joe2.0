@@ -24,7 +24,7 @@
                                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                                         <figure class="inner">
                                             <span class="views">${category.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/2${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" alt="${category.name!}">
+                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/2${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" alt="${category.name!}">
                                             <figcaption class="title">${category.name!}</figcaption>
                                         </figure>
                                     </a>

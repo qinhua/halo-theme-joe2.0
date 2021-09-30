@@ -93,7 +93,7 @@
     "author": "鲜花店",
     "email": "352484006@qq.com",
     "ipAddress": "127.0.0.1",
-    "authorUrl": "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/default_avatar.jpg",
+    "authorUrl": "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_avatar.jpg",
     "gravatarMd5": "8e7c538ae05eaf972e6af4a10b50b002",
     "content": "优秀",
     "status": "PUBLISHED",

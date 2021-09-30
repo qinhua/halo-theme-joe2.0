@@ -27,7 +27,7 @@
                                 <#else>
                                   <#assign thumbnail=settings.passage_thumbnail>
                                 </#if>
-                                <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg'}" data-src="${thumbnail!}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
+                                <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg'}" data-src="${thumbnail!}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
                                 <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
                                 <i class="joe-font joe-icon-picture"></i>
                             </a>

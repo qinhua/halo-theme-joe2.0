@@ -50,10 +50,10 @@
   <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
 </#if>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.scroll.js"></script>
-<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.sketchpad.js"></script>  -->
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.extend.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/js/joe.smooth.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.scroll.min.js"></script>
+<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.sketchpad.min.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.extend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.smooth.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <#if settings.enable_pjax!false>
     <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
@@ -71,7 +71,7 @@
   <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
 </#if>
 <#if type == 'post' || type == 'journals'>
-  <script src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/prism/prism.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js"></script>
 </#if>
 <script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
