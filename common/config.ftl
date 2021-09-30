@@ -17,12 +17,13 @@
       ThemeConfig[field] = value;
     </#if>
   </#list>
+  ThemeConfig['isProd'] = location.host.indexOf('localhost') < 0 && location.host.indexOf('127.0.0.1') < 0;
   ThemeConfig['blog_title'] = '${blog_title}';
   ThemeConfig['blog_url'] = '${blog_url}';
   ThemeConfig['author'] = '${user.nickname}';
   ThemeConfig['HOST'] = '${blog_url}';
   ThemeConfig['BASE_URL'] = '${blog_url}';
-  // ThemeConfig['CDN_URL'] = ThemeConfig.enable_cdn ? "https://cdn.jsdelivr.net" : '${theme_base!}';
+  ThemeConfig['CDN_URL'] = ThemeConfig.isProd ? "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master" : '${theme_base!}';
   ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
 </script>
 
@@ -44,7 +45,7 @@
 </script>
 
 <script type="text/javascript">
-  if(location.host.indexOf('localhost') > -1 || location.host.indexOf('127.0.0.1') > -1){
+  if(!ThemeConfig.isProd){
     console.log('主题配置：',ThemeConfig);
   }
   // 读取本地主题模式
@@ -53,7 +54,6 @@
   localMode && document.querySelector("html").setAttribute("data-mode", localMode);
   var meting_api="https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id";
   Joe = {
-      BASE_URL: "https://bbchin.com",
       LIVE2D: "off",
       DYNAMIC_BACKGROUND: "off",
       WALLPAPER_BACKGROUND_PC: "",
