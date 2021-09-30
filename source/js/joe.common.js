@@ -104,6 +104,30 @@
       });
     }
 
+    /* 音乐播放器 */
+    {
+      if (ThemeConfig.enabel_music_player) {
+        $.ajax({
+          url: `https://api.i-meto.com/meting/api?server=netease&type=playlist&id=${ThemeConfig.music_id}`,
+          type: "GET",
+          dataType: "json",
+          success(res) {
+            new APlayer({
+              container: document.getElementById("global-aplayer"),
+              fixed: true,
+              lrcType: 3,
+              theme: "#1989fa",
+              autoplay: true,
+              audio: res,
+            });
+          },
+          error(err) {
+            console.log(err);
+          },
+        });
+      }
+    }
+
     /* 动态背景 */
     {
       if (
