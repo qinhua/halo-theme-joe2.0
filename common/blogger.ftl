@@ -1,13 +1,13 @@
 <section class="joe_aside__item author">
-        <img width="100%" height="120" class="image lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg'}" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="博主栏壁纸">
+        <img width="100%" height="120" class="image lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/aside_author_bg.jpg'}" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="博主栏壁纸">
         <div class="user">
             <div class="avatar_wrapper${(settings.avatar_type=='2')?string(' rect','')}">
               <img class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
               <#if settings.avatar_frame?? && settings.avatar_frame!="0">
-                <img class="avatar_frame ${settings.avatar_frame}" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
+                <img class="avatar_frame ${settings.avatar_frame}" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
               </#if>
               <#if settings.avatar_widget?? && settings.avatar_widget!="0">
-                <img class="avatar_widget ${settings.avatar_widget}" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
+                <img class="avatar_widget ${settings.avatar_widget}" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
               </#if>
             </div>
             <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">
@@ -20,7 +20,7 @@
                   <#if count gte 100 && count lt 300><#assign level=4></#if>
                   <#if count gte 300 && count lt 500><#assign level=5></#if>
                   <#if count gte 500><#assign level=6></#if>
-                  <img class="level" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lv${level}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="等级"/>
+                  <img class="level" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lv${level}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="等级"/>
                 </@postTag>
               </#if>
             </a>

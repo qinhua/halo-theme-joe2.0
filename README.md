@@ -226,7 +226,7 @@ location /upload/ {
   # 域名白名单，去掉则阻止所有非本站请求
   alid_referers none blocked server_names *.bbchin.com 127.0.0.1 localhost ~\.google\. ~\.baidu\. ~\.qq\.;
   if ($invalid_referer) {
-    rewrite ^/ https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/robber.jpg;
+    rewrite ^/ https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/robber.jpg;
     # return 403;
   }
   proxy_pass http://127.0.0.1:8090; // 资源来源

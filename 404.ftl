@@ -71,7 +71,7 @@
 <body>
     <div class="joe_page_404">
       <div class="error">
-        <img src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/svg/404.svg" alt="404">
+        <img src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/404.svg" alt="404">
         <h3 class="title">“未找到您要的资源”</h3>
         <a href="/" class="error_link">回到主页</a>
       </div>

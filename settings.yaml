@@ -249,19 +249,19 @@ blogger:
       name: lazyload_avatar
       label: 头像预载图
       type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazy_avatar.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_avatar.jpg"
       description: "头像加载出来之前展示的图片"
     default_avatar:
       name: default_avatar
       label: 默认头像
       type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/default_avatar.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_avatar.jpg"
       description: "用于头像加载出错时显示的图片"
     user_bg_pic:
       name: user_bg_pic
       label: 博主栏背景图
       type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/aside_author_bg.jpg"
       description: "用于博主信息的背景图"
     avatar_type:
       name: avatar_type
@@ -501,7 +501,7 @@ passage:
       name: lazyload_thumbnail
       label: 预载图
       type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazy_thumbnail.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_thumbnail.jpg"
       description: "配图加载出来之前展示的图片，体积尽可能的小"
     passage_thumbnail:
       name: passage_thumbnail

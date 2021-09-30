@@ -41,8 +41,8 @@
 </#if>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.mode.min.css">
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.normalize.min.css"> 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/prism.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/lib/prism/themes/prism-${settings.code_theme!'dark'}.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/prism/prism.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/prism/themes/prism-${settings.code_theme!'dark'}.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
 <link rel="stylesheet" href="${theme_base!}/source/css/min/jquery.fancybox.min.css" />

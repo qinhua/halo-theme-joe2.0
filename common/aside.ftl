@@ -25,7 +25,7 @@
                 <span class="text">${settings.qrcode_title!'我的二维码'}</span>
             </div>
             <div class="joe_aside__item-contain">
-              <img class="qrcode_img lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="${settings.qrcode_url!}" alt="二维码"/>
+              <img class="qrcode_img lazyload" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" data-src="${settings.qrcode_url!}" alt="二维码"/>
               <#if settings.qrcode_description??><p class="qrcode_description">${settings.qrcode_description!}</p></#if>
             </div>
         </section>
@@ -113,7 +113,7 @@
       <#if settings.ad_address?? && settings.ad_address != '' && settings.ad_image?? && settings.ad_image != ''>    
         <section class="joe_aside__item advert">
           <a class="joe_advert" target="_blank" rel="noopener noreferrer nofollow" href="${settings.ad_address}" title="广告">
-              <img class="lazyload" width="100%" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="${settings.ad_image}" alt="广告"/>
+              <img class="lazyload" width="100%" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" data-src="${settings.ad_image}" alt="广告"/>
               <span class="icon">广告</span>
           </a>
         </section>
