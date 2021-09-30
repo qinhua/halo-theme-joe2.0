@@ -68,7 +68,7 @@
 
     <#--  mobile菜单  -->
     <div class="joe_header__slideout">
-        <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/aside_author_bg.jpg'}" alt="侧边栏壁纸" />
+        <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.user_bg_pic!'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/aside_author_bg.jpg'}" alt="侧边栏壁纸" />
         <div class="joe_header__slideout-author">
             <img width="50" height="50" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
             <div class="info">

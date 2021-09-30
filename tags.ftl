@@ -23,7 +23,7 @@
                                     <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                                         <figure class="inner">
                                             <span class="views">${tag.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
+                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
                                             <figcaption class="title">${tag.name!}</figcaption>
                                         </figure>
                                     </a>
