@@ -2,20 +2,21 @@ html {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
-#Joe .joe_main_container {
-  min-height: calc(100vh - 60px - 160px - 60px);
+#Joe {
+  .joe_main_container {
+    min-height: calc(100vh - 60px - 160px - 60px);
+  }
+
+  .aplayer {
+    min-height: 90px;
+    .aplayer-list li {
+      transition: none !important;
+    }
+  }
 }
 
 .takagi {
   z-index: 50 !important;
-}
-
-/* music player */
-.aplayer {
-  min-height: 90px;
-  .aplayer-list li {
-    transition: none !important;
-  }
 }
 
 .joe_dropdown {

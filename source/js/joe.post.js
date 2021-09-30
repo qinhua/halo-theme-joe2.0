@@ -452,12 +452,14 @@ const JoeContext = {
       $(".journal_comment_expander,.journal-comment").on("click", function () {
         const $this = $(this);
         const $parent = $this.parents(".footer-wrap");
-        const compComment = $parent
-          .find("halo-comment")[0]
-          .shadowRoot.getElementById("halo-comment").__vue__;
-        // 展开加载评论
-        if (!$parent.hasClass("open") && !compComment.loaded) {
-          compComment.loadComments();
+        if (ThemeConfig.enable_autoload_comment_journal) {
+          const compComment = $parent
+            .find("halo-comment")[0]
+            .shadowRoot.getElementById("halo-comment").__vue__;
+          // 展开加载评论
+          if (!$parent.hasClass("open") && !compComment.loaded) {
+            compComment.loadComments();
+          }
         }
         $parent.toggleClass("open");
         $parent
