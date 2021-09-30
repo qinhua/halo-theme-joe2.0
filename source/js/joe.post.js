@@ -33,7 +33,7 @@ const JoeContext = {
   initCopy() {
     if (!ThemeConfig.enable_copy || !$(".joe_post").length) return;
     const curl = $(".joe_detail").attr("data-curl");
-    $(".joe_post").on("copy", function (e) {
+    $(".joe_post .joe_detail").on("copy", function (e) {
       const body_element = document.body;
       const selection = window.getSelection();
       const appendLink = `作者：${ThemeConfig.author}<br>
