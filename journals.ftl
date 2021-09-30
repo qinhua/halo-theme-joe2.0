@@ -61,7 +61,7 @@
                                               </#if>
                                             </#if>
                                             <#if settings.enable_comment_journal!true>
-                                              <div class="joe_journal_comment">   
+                                              <div class="joe_journal_comment">
                                                 <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": false}'>
                                                 <halo-comment id="${journal.id?c}" type="journal" configs='${configs}'/>
                                               </div>

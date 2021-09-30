@@ -66,6 +66,7 @@
 
 <#-- ===== 引入页面级js start===== -->
 <script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
+<#--  <script src="${theme_base!}/source/js/min/joe.app.min.js"></script>  -->
 <#if type == 'index'>
   <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
 </#if>
@@ -84,11 +85,15 @@
 <#--  粒子背景  -->
 <#if settings.bg_particle_rain!false>
   <canvas id="canvas-rain" width="1920" height="1080" style="position:fixed;left:0;top:0;z-index:100;"></canvas>
-  <script src="${theme_base!}/source/effect/canvas-rain.js"></script>
+  <script src="${theme_base!}/source/effect/bg/canvas-rain.js"></script>
 </#if>
 <!-- 鼠标特效 -->
 <#if settings.click_effect!='none'>
   <script src="${theme_base!}/source/effect/click/${settings.click_effect}.js"></script>
+</#if>
+<!-- 音乐播放器 -->
+<#if settings.enable_music_player!false>
+  <div id="global-aplayer"></div>
 </#if>
 <!-- live2d -->
 <#if settings.enable_live2d>
