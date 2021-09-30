@@ -1125,63 +1125,63 @@ character:
           label: 否
 
 # 音乐播放器
-music_player:
-  label: 音乐播放器
-  items:
-    music_enabled:
-      name: music_enabled
-      label: 开启背景音乐
-      type: radio
-      data-type: bool
-      default: true
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    music_source:
-      name: music_source
-      label: 音乐播放器播放源
-      type: select
-      default: netease
-      options:
-        - value: netease
-          label: 网易云音乐
-        - value: tencent
-          label: QQ音乐
-        - value: kugou
-          label: 酷狗音乐
-        - value: xiami
-          label: 虾米音乐
-        - value: baidu
-          label: 百度音乐
-    list_id:
-      name: list_id
-      label: 音乐播放器歌单ID
-      type: text
-      placeholder: '歌单ID'
-      placeholder: '默认为网易云音乐热歌榜'
-    sort_by:
-      name: sort_by
-      label: 歌单排序方式
-      default: 'list'
-      type: select
-      options:
-        - value: random
-          label: 随机
-        - value: list
-          label: 顺序
-    auto_play:
-      name: auto_play
-      label: 自动播放
-      default: false
-      type: radio
-      data-type: bool
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
+# music_player:
+#   label: 音乐播放器
+#   items:
+#     music_enabled:
+#       name: music_enabled
+#       label: 开启背景音乐
+#       type: radio
+#       data-type: bool
+#       default: true
+#       options:
+#         - value: true
+#           label: 开启
+#         - value: false
+#           label: 关闭
+#     music_source:
+#       name: music_source
+#       label: 音乐播放器播放源
+#       type: select
+#       default: netease
+#       options:
+#         - value: netease
+#           label: 网易云音乐
+#         - value: tencent
+#           label: QQ音乐
+#         - value: kugou
+#           label: 酷狗音乐
+#         - value: xiami
+#           label: 虾米音乐
+#         - value: baidu
+#           label: 百度音乐
+#     list_id:
+#       name: list_id
+#       label: 音乐播放器歌单ID
+#       type: text
+#       placeholder: '歌单ID'
+#       placeholder: '默认为网易云音乐热歌榜'
+#     sort_by:
+#       name: sort_by
+#       label: 歌单排序方式
+#       default: 'list'
+#       type: select
+#       options:
+#         - value: random
+#           label: 随机
+#         - value: list
+#           label: 顺序
+#     auto_play:
+#       name: auto_play
+#       label: 自动播放
+#       default: false
+#       type: radio
+#       data-type: bool
+#       options:
+#         - value: true
+#           label: 开启
+#         - value: false
+#           label: 关闭
 
 # 自定义
 custom:
@@ -1308,18 +1308,18 @@ others:
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
       description: "在返回到当前标签时，通过title展示的文字"
-    enable_backup:
-      name: enable_backup
-      label: 博客自动备份
-      type: switch
-      data-type: bool
-      default: true
-      description: "开启后，系统将每隔5天备份1次，最多备份版本为20份，超过后自动删除最晚的版本，此功能需要先配置相应服务端程序，请戳 xxxxx"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
+    # enable_backup:
+    #   name: enable_backup
+    #   label: 博客自动备份
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "开启后，系统将每隔5天备份1次，最多备份版本为20份，超过后自动删除最晚的版本，此功能需要先配置相应服务端程序，请戳 xxxxx"
+    #   options:
+    #     - value: true
+    #       label: 开启
+    #     - value: false
+    #       label: 关闭
     rip_mode:
       name: rip_mode
       label: 整站变灰

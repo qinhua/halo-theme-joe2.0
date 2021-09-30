@@ -38,7 +38,8 @@
   <!-- tocbot -->
   <script src="https://cdn.jsdelivr.net/npm/tocbot@4.10.0/dist/tocbot.min.js"></script>
 </#if>
-<script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment.min.js'}"></script>
+<#--  <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment.min.js'}"></script>  -->
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 <#if settings.show_tag_cloud!true>
