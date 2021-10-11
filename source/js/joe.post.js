@@ -371,8 +371,8 @@ const JoeContext = {
   /* 初始化日志页 */
   initJournals() {
     // 内容折叠/展开
-    $(".journal_content_expander").on("click", function () {
-      $(this).parent().toggleClass("open");
+    $(".journal_content_expander i").on("click", function () {
+      $(this).parents(".joe_journal_body").toggleClass("open");
     });
     // 点赞
     const $allItems = $(".joe_journal__item");

@@ -11,9 +11,11 @@
             <div class="joe_main">
                 <div class="joe_index">
                     <#if settings.enable_banner!true>
-                    <#include "common/layout/banner.ftl">   
+                      <#include "common/layout/banner.ftl">   
                     </#if> 
-                    <@hp.hot_category/>
+                    <#if settings.enable_hot_category!true>
+                      <@hp.hot_category/>
+                    </#if> 
                     <#include "common/layout/article.ftl"> 
                 </div>                
                 <@paginationTag method="index" page="${posts.number}" total="${posts.totalPages}" display="3">

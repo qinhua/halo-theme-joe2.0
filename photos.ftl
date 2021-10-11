@@ -19,7 +19,7 @@
                       <p class="tit">${photo.name!}</p>
                       <div class="info">
                         <p class="animated fadeInRightBig"><i class="joe-font joe-icon-paizhao"></i><span>${photo.name!}</span></p>
-                        <p class="animated fadeInRightBig"><i class="joe-font joe-icon-dingwei"></i><span>${photo.location!}</span></p>
+                        <#if photo.location??><p class="animated fadeInRightBig"><i class="joe-font joe-icon-dingwei"></i><span>${photo.location!}</span></p></#if>
                         <p class="animated fadeInRightBig"><i class="joe-font joe-icon-shijian"></i>${photo.takeTime?string('yyyy-MM-dd')}</p>
                       </div
                     </a>
