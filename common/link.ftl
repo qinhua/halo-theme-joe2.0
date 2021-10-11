@@ -47,26 +47,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
 <link rel="stylesheet" href="${theme_base!}/source/css/min/jquery.fancybox.min.css" />
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.global.min.css">
-<#if settings.cursor_skin?? && settings.cursor_skin!='none'>
-<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.cursor.min.css">
-</#if>
 <#if settings.enable_mathjax!false>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
 </#if>
-<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
-<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">
-<#if type == 'photo'>
-  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.wallpaper.min.css">
+<#if settings.cursor_skin?? && settings.cursor_skin!='none'>
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.cursor.min.css">
 </#if>
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.index.min.css">
 <#--  <#if type == 'links'><link rel="stylesheet" href="${theme_base!}/source/css/min/joe.links.min.css"></#if>  -->
-<#if type == 'journals'><link rel="stylesheet" href="${theme_base!}/source/css/min/joe.journals.min.css"></#if>
-  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.index.min.css">
-<#if type == 'archive'>
-  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.census.min.css">
-</#if>
 <#if type == 'post'>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.post.min.css">
 </#if>
+<#if type == 'journals'><link rel="stylesheet" href="${theme_base!}/source/css/min/joe.journals.min.css"></#if>
+<#if type == 'archive'>
+  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.census.min.css">
+</#if>
+<#if type == 'photo'>
+  <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.wallpaper.min.css">
+</#if>
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">
+<link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
 <style>
   #Joe .joe_container {
     max-width: ${settings.content_max_width!'1320px'};

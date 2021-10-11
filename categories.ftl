@@ -16,7 +16,7 @@
                             <li class="line"></li>
                         </ul>
                     </div>
-                    <div class="joe_index__hot">
+                    <div class="joe_index__hot categories">
                         <ul class="joe_index__hot-list">
                             <@categoryTag method="list">
                                 <#list categories as category>

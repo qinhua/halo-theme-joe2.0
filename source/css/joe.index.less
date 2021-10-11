@@ -106,7 +106,9 @@
 
   &__hot {
     padding-top: 10px;
-
+    &.categories {
+      padding-bottom: 10px;
+    }
     &-list {
       display: grid;
       padding-top: 12px;
@@ -117,6 +119,7 @@
         overflow: hidden;
         margin-bottom: 10px;
         border: 1px solid var(--classC);
+        overflow: hidden;
         border-radius: 4px;
 
         .link {
@@ -153,7 +156,6 @@
               line-height: 32px;
               color: var(--minor);
               background: var(--classD);
-              // transition: background 0.35s;
               border-radius: 0 0 var(--radius-inner) var(--radius-inner);
             }
 

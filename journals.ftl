@@ -21,7 +21,7 @@
                                     <span class="text" >
                                     ${journals.total!0} 条动态
                                     </span>
-                                    <#if settings.check_baidu_collect>
+                                    <#if settings.check_baidu_collect!false>
                                       <span class="line">/</span>
                                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                                     </#if>
