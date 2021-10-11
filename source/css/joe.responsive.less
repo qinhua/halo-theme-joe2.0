@@ -913,11 +913,39 @@ html {
   }
 
   @media (max-width: 500px) {
+    .joe_index,
+    .joe_detail,
+    .joe_comment {
+      border-radius: 0;
+    }
     .joe_header_container {
       margin: 0 auto;
     }
     .joe_main_container {
       padding: 0;
+    }
+    .joe_main {
+      padding-bottom: 0;
+    }
+    .joe_journals__list {
+      .joe_journal__item {
+        padding: 0px 0 12px 0;
+        &:before {
+          display: none;
+        }
+        .joe_journal_date {
+          left: 0;
+        }
+        .joe_journal_block {
+          border-radius: 0 10px 10px 10px;
+        }
+      }
+    }
+    .joe_footer {
+      .joe_container {
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
     }
     // .joe_index__banner {
     //   padding: 0;

@@ -459,6 +459,47 @@ carousel:
       type: text
       placeholder: "轮播图片url"
 
+# 精品分类
+hotcategory:
+  label: 精品分类
+  items:
+    enable_hot_category:
+      name: enable_hot_category
+      label: 展示精品分类
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示首页的精品分类，可自定义封面图片（175*90）"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    hot_cover1:
+      name: hot_cover1
+      label: 封面图1
+      type: attachment
+      placeholder: "请填入图片地址"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover1.jpeg"
+    hot_cover2:
+      name: hot_cover2
+      label: 封面图2
+      type: attachment
+      placeholder: "请填入图片地址"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover2.jpeg"
+    hot_cover3:
+      name: hot_cover3
+      label: 封面图3
+      type: attachment
+      placeholder: "请填入图片地址"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover3.jpeg"
+    hot_cover4:
+      name: hot_cover4
+      label: 封面图4
+      type: attachment
+      placeholder: "请填入图片地址"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover4.jpeg"
+
 # 文章页
 passage:
   label: 文章页
@@ -514,7 +555,7 @@ passage:
       name: fallback_img
       label: 错误缺省图
       type: attachment
-      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=16&fontfamily=2
+      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=18&fontfamily=2
       description: "图片加载出错时生效，可使用占位图服务（210*140） http://placeholder.idcd.com"
     enable_comment:
       name: enable_comment
@@ -1074,7 +1115,7 @@ social:
       name: zhihu
       label: 知乎
       type: text
-      # default: "https://juejin.cn/user/817692384432407"
+      # default: "https://www.zhihu.com"
       placeholder: "知乎主页地址"
     juejin:
       name: juejin

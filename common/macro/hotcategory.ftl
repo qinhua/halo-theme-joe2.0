@@ -17,13 +17,19 @@
                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                         <figure class="inner">
                             <span class="views">${category.postCount!} ℃</span>
-                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/100${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" alt="${category.name!}">
+                            <#escape x as x!"">
+                              <#assign cover=settings['hot_cover'+(category_index+1)]>
+                            </#escape>
+                            <#if cover??>
+                              <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" onerror="this.src='${settings.fallback_img!}'" alt="${category.name!}">
+                            <#else>
+                              <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/100${category_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" onerror="this.src='${settings.fallback_img!}'" alt="${category.name!}">
+                            </#if>
                             <figcaption class="title">${category.name!}</figcaption>
                         </figure>
                     </a>
                 </li>
                 </#if>
-                
             </#list>
             </@categoryTag>
         </ul>
