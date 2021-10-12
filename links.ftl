@@ -12,7 +12,7 @@
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
-        <div class="joe_container joe_main_container">
+        <div class="joe_container joe_main_container page-links">
             <div class="joe_main">
                 <div class="joe_detail">
                     <h1 class="joe_detail__title">友情链接</h1>

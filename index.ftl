@@ -7,15 +7,15 @@
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
-        <div class="joe_container joe_main_container">
+        <div class="joe_container joe_main_container page-index">
             <div class="joe_main">
                 <div class="joe_index">
                     <#if settings.enable_banner!true>
                       <#include "common/layout/banner.ftl">   
-                    </#if> 
+                    </#if>
                     <#if settings.enable_hot_category!true>
                       <@hp.hot_category/>
-                    </#if> 
+                    </#if>
                     <#include "common/layout/article.ftl"> 
                 </div>                
                 <@paginationTag method="index" page="${posts.number}" total="${posts.totalPages}" display="3">

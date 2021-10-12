@@ -9,7 +9,7 @@
         <div class="joe_container joe_main_container page-journals">
             <div class="joe_main">
                 <div class="joe_detail">
-                    <h1 class="joe_detail__title">😁 记录点滴生活 😁</h1>                    
+                    <h1 class="joe_detail__title">😜 积跬步至千里 🍺</h1>                    
                     <div class="joe_detail__count">
                         <div class="joe_detail__count-information">
                             <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" alt="${user.nickname!}">
@@ -17,10 +17,9 @@
                                 <div class="author">
                                     <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
                                 </div>
-                                <div class="item"> 
-                                    <span class="text" >
-                                    ${journals.total!0} 条动态
-                                    </span>
+                                <div class="item">
+                                    <#--  <span class="text">${journals.total!0} 条动态</span>  -->
+                                    <span class="text">${user.description!}</span>
                                     <#if settings.check_baidu_collect!false>
                                       <span class="line">/</span>
                                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
@@ -47,27 +46,31 @@
                                       <div class="content-wrp">${journal.content!}</div>
                                       <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
                                     </div>
-                                    <div class="joe_journal_footer">
-                                        <div class="footer-wrap">
-                                            <span class="joe_journal_operate_item like">
-                                              <i class="joe-font joe-icon-xihuan journal-like"></i>
-                                              <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
-                                              <em class="journal-likes-num">${journal.likes!0}</em>
-                                            </span>
-                                            <#if settings.enable_comment_journal!true>
-                                              <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i>${journal.commentCount!0}</span>
-                                              <#if journal.commentCount &gt; 0>
-                                                <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                                    <#if settings.enable_like_journal || settings.enable_comment_journal>
+                                      <div class="joe_journal_footer">
+                                          <div class="footer-wrap">
+                                              <#if settings.enable_like_journal!true>
+                                                <span class="joe_journal_operate_item like">
+                                                  <i class="joe-font joe-icon-xihuan journal-like"></i>
+                                                  <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
+                                                  <em class="journal-likes-num">${journal.likes!0}</em>
+                                                </span>
                                               </#if>
-                                            </#if>
-                                            <#if settings.enable_comment_journal!true>
-                                              <div class="joe_journal_comment">
-                                                <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": false}'>
-                                                <halo-comment id="${journal.id?c}" type="journal" configs='${configs}'/>
-                                              </div>
-                                            </#if>
-                                        </div>
-                                    </div>
+                                              <#if settings.enable_comment_journal!true>
+                                                <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i>${journal.commentCount!0}</span>
+                                                <#if journal.commentCount &gt; 0>
+                                                  <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                                                </#if>
+                                              </#if>
+                                              <#if settings.enable_comment_journal!true>
+                                                <div class="joe_journal_comment">
+                                                  <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": false}'>
+                                                  <halo-comment id="${journal.id?c}" type="journal" configs='${configs}'/>
+                                                </div>
+                                              </#if>
+                                          </div>
+                                      </div>
+                                    </#if>
                                 </div>
                             </li>
                         </#list>

@@ -1,7 +1,6 @@
 <link rel="shortcut icon" size="32x32" href="${blog_favicon!}">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="apple-touch-icon" sizes="180x180" href="${blog_favicon!}">
-
 <#--  global css  -->
 <style type="text/css">
   <#if settings.rip_mode>
@@ -34,7 +33,6 @@
     background-repeat: repeat;
   }
 </style>
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_2788564_0ecx5wa2nsqa.css">
 <#if settings.iconfont??>
   <link rel="stylesheet" href="${settings.iconfont!}">
@@ -67,6 +65,7 @@
 </#if>
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.archive.min.css">
 <link rel="stylesheet" href="${theme_base!}/source/css/min/joe.responsive.min.css">
+
 <style>
   #Joe .joe_container {
     max-width: ${settings.content_max_width!'1320px'};

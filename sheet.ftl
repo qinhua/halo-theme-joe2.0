@@ -25,7 +25,7 @@
                                     <span class="text" >${sheet.visits} 阅读</span>    
                                     <span class="line">/</span>
                                     <span class="text" >${sheet.wordCount!0} 字</span>
-                                    <#if settings.check_baidu_collect>
+                                    <#if settings.check_baidu_collect!false>
                                       <span class="line">/</span>
                                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                                     </#if>

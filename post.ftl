@@ -9,9 +9,9 @@
         <#include "common/post_bread.ftl">
         <script type="text/plain">
         </script>
-        <div class="joe_container joe_main_container">
+        <div class="joe_container joe_main_container page-post">
             <div class="joe_main joe_post">
-                <#if settings.enable_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
+                <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
                 <div class="joe_detail" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
                     <#list categories as category>
                       <#if category_index==1>
@@ -36,7 +36,7 @@
                                     <span class="text" >${post.visits} 阅读</span>  
                                     <span class="line">/</span>
                                     <span class="text" >${post.wordCount!0} 字</span>
-                                    <#if settings.check_baidu_collect>
+                                    <#if settings.check_baidu_collect!false>
                                       <span class="line">/</span>
                                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                                     </#if>
@@ -118,7 +118,9 @@
                   </div>
                 </#if>
             </div>
-            <#include "common/aside.ftl">
+            <#if settings.enable_post_aside!false>
+              <#include "common/aside.ftl">
+            </#if>
         </div>
         <#include "common/footer.ftl">
     </div>

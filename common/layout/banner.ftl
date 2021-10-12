@@ -30,7 +30,9 @@
             </#if>
         </div>
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <#if settings.enable_banner_handle!true>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </#if>
     </div>
 </div>

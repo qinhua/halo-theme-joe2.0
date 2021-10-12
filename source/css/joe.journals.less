@@ -1,6 +1,6 @@
 .joe {
   &_journals__list {
-    padding: 20px 0 30px;
+    padding: 20px 0;
   }
   &_journal {
     &__item {
@@ -13,7 +13,7 @@
         z-index: 0;
         content: "";
         width: 0;
-        height: 130%;
+        height: 150%;
         border-left: 1px dashed var(--classG);
       }
       &:hover {
@@ -108,7 +108,7 @@
         }
 
         .code-toolbar {
-          margin: 20px 0;
+          margin: 5px 0;
           overflow: hidden;
           box-shadow: 1px 1px 5px 0 var(--shadow-code);
           border-radius: var(--radius-inner);
@@ -309,6 +309,7 @@
         }
       }
       &.journal_content_expander {
+        pointer-events: none;
         display: none;
         position: absolute;
         bottom: 0;
@@ -319,6 +320,7 @@
         text-align: right;
         background: var(--background-journal-gradient);
         i {
+          pointer-events: auto;
           font-size: 20px;
         }
       }
@@ -336,6 +338,9 @@
       display: none;
     }
   }
+}
+.joe_pagination {
+  padding: 0 0 20px 0;
 }
 .page-journals .joe_detail {
   overflow-y: hidden;

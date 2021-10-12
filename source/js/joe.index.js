@@ -2,18 +2,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* 激活轮播图功能 */
   {
-    if ($(".joe_index__banner .swiper-container").length !== 0) {
+    if (
+      ThemeConfig.enable_banner &&
+      $(".joe_index__banner .swiper-container").length !== 0
+    ) {
       new Swiper(".swiper-container", {
-        keyboard: false,
-        loop: true,
         direction: ThemeConfig.banner_direction,
+        loop: true,
+        keyboard: false,
+        mousewheel: false,
+        grabCursor: ThemeConfig.enable_banner_handle,
+        allowTouchMove: ThemeConfig.enable_banner_handle,
         autoplay: ThemeConfig.enable_banner_autoplay
           ? {
               delay: ThemeConfig.banner_delay,
               disableOnInteraction: false,
             }
           : false,
-        mousewheel: false,
+        observer: true,
         pagination: {
           el: ".swiper-pagination",
         },
