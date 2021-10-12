@@ -6,7 +6,7 @@
 <body> 
     <div id="Joe"> 
     <#include "common/navbar.ftl"> 
-    <div class="joe_container joe_main_container"> 
+    <div class="joe_container joe_main_container page-photos"> 
         <div class="joe_main"> 
             <div class="joe_wallpaper__type"> 
                 <div class="joe_wallpaper__type-title"><i class="joe-font joe-icon-tupian"></i>&nbsp;照片&美图</div>
