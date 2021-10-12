@@ -6,11 +6,11 @@
 <body>
     <div id="Joe">
         <#include "common/navbar.ftl">
-        <div class="joe_container joe_main_container">
+        <div class="joe_container joe_main_container page-tags">
             <div class="joe_main">
                 <div class="joe_index">
                     <div class="joe_index__title">
-                        <ul class="joe_index__title-title">
+                        <ul class="joe_index__title-title pl-15">
                             <li class="item" data-type="created">全部标签</li>
                             <li class="line"></li>
                         </ul>

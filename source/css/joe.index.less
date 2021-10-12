@@ -1,13 +1,122 @@
 /* 首页样式 */
 .joe_index {
-  padding: 0 15px;
   background: var(--background);
   border-radius: var(--radius-wrap);
   box-shadow: var(--box-shadow);
 
   &__banner {
-    padding-top: 15px;
-    display: flex;
+    padding: 15px 15px 5px;
+    background: var(--background);
+    border-radius: var(--radius-wrap) var(--radius-wrap) 0 0;
+    .swiper-container {
+      min-width: 0;
+      flex: 1;
+      height: 335px;
+      --swiper-theme-color: #fff;
+      border-radius: var(--radius-inner);
+
+      .item {
+        display: block;
+        height: 335px;
+
+        .thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: opacity 0.35s;
+
+          &.lazyload,
+          &.lazyloading {
+            object-fit: scale-down;
+          }
+
+          &:hover {
+            opacity: 0.85;
+          }
+        }
+
+        .title {
+          position: absolute;
+          z-index: 1;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          text-align: center;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.45)
+          );
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #fff;
+          font-size: 15px;
+          padding: 10px;
+          font-weight: normal;
+        }
+
+        .joe-font {
+          position: absolute;
+          z-index: 1;
+          top: 10px;
+          left: 10px;
+          font-size: 20px;
+          color: #fff;
+          opacity: 0.5;
+        }
+      }
+
+      &.swiper-container-horizontal {
+        .swiper-pagination-bullets {
+          bottom: 10px;
+          left: unset;
+          width: auto;
+          right: 10px;
+          top: unset;
+        }
+      }
+
+      &.swiper-container-vertical {
+        .swiper-button-next,
+        .swiper-button-prev {
+          display: none;
+        }
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.35s, right 0.35s, left 0.35s;
+        border-radius: 2px;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.25);
+        }
+
+        &::after {
+          font-size: 20px;
+        }
+      }
+
+      .swiper-button-next {
+        right: -27px;
+      }
+
+      .swiper-button-prev {
+        left: -27px;
+      }
+
+      &:hover {
+        .swiper-button-next {
+          right: 10px;
+        }
+
+        .swiper-button-prev {
+          left: 10px;
+        }
+      }
+    }
 
     &-recommend {
       width: 270px;
@@ -46,11 +155,10 @@
           display: block;
           width: 100%;
           height: 100%;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+          object-fit: cover;
+          &.lazyload,
+          &.lazyloading {
+            object-fit: scale-down;
           }
         }
 
@@ -105,7 +213,7 @@
   }
 
   &__hot {
-    padding-top: 10px;
+    padding: 0 15px;
     &.categories {
       padding-bottom: 10px;
     }
@@ -114,6 +222,11 @@
       padding-top: 12px;
       grid-template-columns: repeat(4, 1fr);
       column-gap: 15px;
+      &.hotlist {
+        .item {
+          margin-bottom: 0;
+        }
+      }
 
       .item {
         overflow: hidden;
@@ -181,6 +294,10 @@
     }
   }
 
+  &__article {
+    padding: 0 15px;
+  }
+
   &__ad {
     padding-top: 15px;
 
@@ -226,12 +343,14 @@
       align-items: center;
       color: var(--theme);
       font-weight: 500;
-      height: 40px;
-      line-height: 40px;
-
+      height: 44px;
+      line-height: 44px;
+      &.pl-15 {
+        padding-left: 15px;
+      }
       .item {
         cursor: pointer;
-        margin-right: 20px;
+        margin-right: 16px;
         user-select: none;
         transition: color 0.35s;
 
@@ -257,6 +376,10 @@
       margin-left: auto;
       height: 40px;
 
+      svg {
+        margin-right: 3px;
+        vertical-align: bottom;
+      }
       a {
         color: var(--minor);
         line-height: 20px;
@@ -265,10 +388,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         transition: color 0.35s;
-        i {
-          margin-right: 3px;
-          vertical-align: bottom;
-        }
         &:hover {
           color: var(--theme);
         }
@@ -278,111 +397,5 @@
 
   &__list {
     overflow: hidden;
-  }
-}
-
-.swiper-container {
-  min-width: 0;
-  flex: 1;
-  height: 335px;
-  --swiper-theme-color: #fff;
-  border-radius: var(--radius-inner);
-
-  .item {
-    display: block;
-    height: 335px;
-    border-radius: var(--radius-inner);
-
-    .thumbnail {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: opacity 0.35s;
-
-      &:hover {
-        opacity: 0.85;
-      }
-    }
-
-    .title {
-      position: absolute;
-      z-index: 1;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      text-align: center;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.45)
-      );
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #fff;
-      font-size: 15px;
-      padding: 10px;
-      font-weight: normal;
-    }
-
-    .joe-font {
-      position: absolute;
-      z-index: 1;
-      top: 10px;
-      left: 10px;
-      font-size: 20px;
-      color: #fff;
-      opacity: 0.5;
-    }
-  }
-
-  &.swiper-container-horizontal {
-    .swiper-pagination-bullets {
-      bottom: 10px;
-      left: unset;
-      width: auto;
-      right: 10px;
-      top: unset;
-    }
-  }
-
-  &.swiper-container-vertical {
-    .swiper-button-next,
-    .swiper-button-prev {
-      display: none;
-    }
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    background: rgba(0, 0, 0, 0.1);
-    transition: background 0.35s, right 0.35s, left 0.35s;
-    border-radius: 2px;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.25);
-    }
-
-    &::after {
-      font-size: 20px;
-    }
-  }
-
-  .swiper-button-next {
-    right: -27px;
-  }
-
-  .swiper-button-prev {
-    left: -27px;
-  }
-
-  &:hover {
-    .swiper-button-next {
-      right: 10px;
-    }
-
-    .swiper-button-prev {
-      left: 10px;
-    }
   }
 }

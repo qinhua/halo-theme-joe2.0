@@ -9,7 +9,7 @@
 				<a href="${blog_url}/categories" target="_blank" rel="noopener noreferrer nofollow"><i class="joe-font joe-icon-application"></i>全部分类</a>
 			</div>
         </div>
-        <ul class="joe_index__hot-list">
+        <ul class="joe_index__hot-list hotlist">
             <@categoryTag method="list">
             <#list categories?sort_by("postCount")?reverse as category>
                 <#if category_index < 4>

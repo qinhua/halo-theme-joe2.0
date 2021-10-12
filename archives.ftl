@@ -6,10 +6,9 @@
 <body>
     <div id="Joe">
     <#include "common/navbar.ftl">
-    <div class="joe_header__mask"></div>
-    <div class="joe_container joe_main_container">
+    <div class="joe_container joe_main_container page-archives">
             <div class="joe_main">
-                <div class="joe_census__filing">
+                <div class="joe_index joe_census__filing">
                     <div class="title">文章归档</div>
                     <div class="content">
                         <div id="filing"></div>

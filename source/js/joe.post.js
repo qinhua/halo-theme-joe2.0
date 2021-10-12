@@ -120,7 +120,7 @@ const JoeContext = {
     });
   },
 
-  /* 初始化代码区域，高亮 + 折叠 +  复制 */
+  /* 初始化代码区域，高亮 + 折叠 + 复制 */
   initCode() {
     if (
       (!ThemeConfig.enable_code_expander && !ThemeConfig.enable_code_copy) ||
@@ -142,7 +142,7 @@ const JoeContext = {
         });
         $item.prepend(expander);
 
-        // 自动折叠长代码
+        // 自动折叠长代码，只针对文章页生效
         if (
           ThemeConfig.fold_long_code &&
           location.pathname.includes("archives")
@@ -176,7 +176,8 @@ const JoeContext = {
 
   // 侧边栏切换
   initAside() {
-    if (!ThemeConfig.enable_aside && !ThemeConfig.enable_aside_expander) return;
+    if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
+      return;
     $(".aside-expander").on("click", function () {
       const $this = $(this);
       if ($this.hasClass("active")) {
@@ -365,9 +366,6 @@ const JoeContext = {
     }
   },
 
-  /* 初始化pjax */
-  // initPjax() {},
-
   /* 初始化日志页 */
   initJournals() {
     // 内容折叠/展开
@@ -375,77 +373,79 @@ const JoeContext = {
       $(this).parents(".joe_journal_body").toggleClass("open");
     });
     // 点赞
-    const $allItems = $(".joe_journal__item");
-    if ($allItems.length) {
-      $allItems.each(function (_, item) {
-        const $this = $(this);
-        const cid = $this.attr("data-cid");
-        const clikes = +($this.attr("data-clikes") || 0);
-        let agreeArr = localStorage.getItem(encryption("agree-journal"))
-          ? JSON.parse(
-              decrypt(localStorage.getItem(encryption("agree-journal")))
-            )
-          : [];
-        const $iconLike = $this.find(".journal-like");
-        const $iconUnlike = $this.find(".journal-unlike");
-        const $likeNum = $this.find(".journal-likes-num");
-        if (agreeArr.includes(cid)) {
-          $iconLike.hide();
-          $iconUnlike.show();
-        } else {
-          $iconLike.show();
-          $iconUnlike.hide();
-        }
-        $likeNum.html(clikes);
-        $iconLike.on("click", function () {
-          let _loading = false;
-          if (_loading) return;
-          _loading = true;
-          agreeArr = localStorage.getItem(encryption("agree-journal"))
+    if (ThemeConfig.enable_like_journal) {
+      const $allItems = $(".joe_journal__item");
+      if ($allItems.length) {
+        $allItems.each(function (_, item) {
+          const $this = $(this);
+          const cid = $this.attr("data-cid");
+          const clikes = +($this.attr("data-clikes") || 0);
+          let agreeArr = localStorage.getItem(encryption("agree-journal"))
             ? JSON.parse(
                 decrypt(localStorage.getItem(encryption("agree-journal")))
               )
             : [];
-          let flag = agreeArr.includes(cid);
-          $.ajax({
-            url: "/api/content/journals/" + cid + "/likes",
-            type: "POST",
-            dataType: "json",
-            data: {
-              type: flag ? "disagree" : "agree",
-            },
-            success(res) {
-              if (res.status !== 200) {
-                return;
-              }
-              let likes = clikes;
-              if (flag) {
-                likes--;
-                const index = agreeArr.findIndex((_) => _ === cid);
-                agreeArr.splice(index, 1);
-                $iconLike.show();
-                $iconUnlike.hide();
-              } else {
-                likes++;
-                agreeArr.push(cid);
-                $iconLike.hide();
-                $iconUnlike.show();
-              }
-              const name = encryption("agree-journal");
-              const val = encryption(JSON.stringify(agreeArr));
-              localStorage.setItem(name, val);
-              $likeNum.html(likes);
-            },
-            error(err) {
-              _loading = false;
-              return Qmsg.warning(err.responseJSON.message);
-            },
-            complete() {
-              _loading = false;
-            },
+          const $iconLike = $this.find(".journal-like");
+          const $iconUnlike = $this.find(".journal-unlike");
+          const $likeNum = $this.find(".journal-likes-num");
+          if (agreeArr.includes(cid)) {
+            $iconLike.hide();
+            $iconUnlike.show();
+          } else {
+            $iconLike.show();
+            $iconUnlike.hide();
+          }
+          $likeNum.html(clikes);
+          $iconLike.on("click", function () {
+            let _loading = false;
+            if (_loading) return;
+            _loading = true;
+            agreeArr = localStorage.getItem(encryption("agree-journal"))
+              ? JSON.parse(
+                  decrypt(localStorage.getItem(encryption("agree-journal")))
+                )
+              : [];
+            let flag = agreeArr.includes(cid);
+            $.ajax({
+              url: "/api/content/journals/" + cid + "/likes",
+              type: "POST",
+              dataType: "json",
+              data: {
+                type: flag ? "disagree" : "agree",
+              },
+              success(res) {
+                if (res.status !== 200) {
+                  return;
+                }
+                let likes = clikes;
+                if (flag) {
+                  likes--;
+                  const index = agreeArr.findIndex((_) => _ === cid);
+                  agreeArr.splice(index, 1);
+                  $iconLike.show();
+                  $iconUnlike.hide();
+                } else {
+                  likes++;
+                  agreeArr.push(cid);
+                  $iconLike.hide();
+                  $iconUnlike.show();
+                }
+                const name = encryption("agree-journal");
+                const val = encryption(JSON.stringify(agreeArr));
+                localStorage.setItem(name, val);
+                $likeNum.html(likes);
+              },
+              error(err) {
+                _loading = false;
+                return Qmsg.warning(err.responseJSON.message);
+              },
+              complete() {
+                _loading = false;
+              },
+            });
           });
         });
-      });
+      }
     }
     // 评论及折叠
     if (ThemeConfig.enable_comment_journal) {
@@ -468,9 +468,6 @@ const JoeContext = {
       });
     }
   },
-  /* 初始化图库 */
-  // initGallery(){
-  // }
 
   // 渲染数学公式
   initMathjax() {
@@ -486,6 +483,13 @@ const JoeContext = {
       });
     }
   },
+
+  /* 初始化图库 */
+  // initGallery(){
+  // }
+
+  /* 初始化pjax */
+  // initPjax() {},
 };
 
 document.addEventListener("DOMContentLoaded", () => {
