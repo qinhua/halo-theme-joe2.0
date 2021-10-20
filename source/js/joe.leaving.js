@@ -142,24 +142,3 @@ const leavingContext = {
 document.addEventListener("DOMContentLoaded", () => {
   leavingContext.getData();
 });
-
-/* 写在load事件里，为了解决图片未加载完成，滚动距离获取会不准确的问题 */
-// window.addEventListener("load", function () {
-//   /* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-//   {
-//     const scroll = new URLSearchParams(location.search).get("scroll");
-//     if (scroll) {
-//       const height = $(".joe_header").height();
-//       let elementEL = null;
-//       if ($("#" + scroll).length > 0) {
-//         elementEL = $("#" + scroll);
-//       } else {
-//         elementEL = $("." + scroll);
-//       }
-//       if (elementEL && elementEL.length > 0) {
-//         const top = elementEL.offset().top - height - 15;
-//         window.scrollTo({ top, behavior: "smooth" });
-//       }
-//     }
-//   }
-// });

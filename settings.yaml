@@ -332,8 +332,6 @@ blogger:
           label: 天使
         - value: "meteor"
           label: 流星
-        - value: "zouni"
-          label: 走你
         - value: "rain"
           label: 下雨
         - value: "wing"
@@ -704,9 +702,9 @@ passage:
     long_code_height:
       name: long_code_height
       label: 自动折叠的高度
-      default: "400"
+      default: "800"
       placeholder: "请输入数字"
-      description: "触发长代码块自动折叠的高度，填写数字即可（默认400），填0将折叠所有代码块"
+      description: "触发长代码块自动折叠的高度，填写数字即可（默认800），填0将折叠所有代码块"
     code_theme:
       name: code_theme
       label: 代码主题
@@ -971,7 +969,7 @@ aside:
       name: music_id
       label: 歌单ID
       type: text
-      placeholder: "网易歌单ID，不填不展示"
+      placeholder: "网易歌单ID，不填则不展示播放器"
     show_newest_post:
       name: show_newest_post
       label: 最新文章
@@ -1390,6 +1388,12 @@ others:
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
       description: "在返回到当前标签时，通过title展示的文字"
+    cdn_url:
+      name: cdn_url
+      label: "静态资源CDN地址"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master"
+      disabled: true
+      description: "静态资源的cdn路径，随主题版本自动改变，无需手动设置"
     # enable_backup:
     #   name: enable_backup
     #   label: 博客自动备份

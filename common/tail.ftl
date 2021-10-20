@@ -1,4 +1,5 @@
 <#macro tail type>
+<div style="position:fixed;z-index:20;top:100px;left:30px;background:red;">${type}</div>
 <#--  悬浮按钮  -->
 <div class="joe_action">
     <div class="joe_action_item scroll">
@@ -23,7 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/assets/js/joe.extend.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.js"></script> 
-<#--  <script src="${theme_base!}/source/utils/index.js"></script>  -->
+<script src="${theme_base!}/source/utils/index.js"></script>
 
 <#if settings.favicon??>
   <!-- favicon -->
@@ -39,6 +40,7 @@
   <script src="https://cdn.jsdelivr.net/npm/tocbot@4.10.0/dist/tocbot.min.js"></script>
 </#if>
 <#--  <script src="${settings.custome_comment_plugin!'//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment/halo-comment.min.js'}"></script>  -->
+<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment/halo-comment.min.js"></script>  -->
 <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/halo-comment/halo-comment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.0/lazysizes.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
@@ -51,10 +53,10 @@
   <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
 </#if>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.scroll.min.js"></script>
-<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.sketchpad.min.js"></script>  -->
-<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.extend.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/js/min/joe.smooth.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/joe.scroll.min.js"></script>
+<#--  <script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/joe.sketchpad.min.js"></script>  -->
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/joe.extend.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/joe.smooth.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <#if settings.enable_pjax!false>
     <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
@@ -67,7 +69,6 @@
 
 <#-- ===== 引入页面级js start===== -->
 <script src="${theme_base!}/source/js/min/joe.common.min.js"></script>
-<#--  <script src="${theme_base!}/source/js/min/joe.app.min.js"></script>  -->
 <#if type == 'index'>
   <script src="${theme_base!}/source/js/min/joe.index.min.js"></script>
 </#if>
@@ -76,7 +77,12 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js"></script>
 </#if>
 <script src="${theme_base!}/source/js/min/joe.short.min.js"></script>
+<#if type == 'post'>
 <script src="${theme_base!}/source/js/min/joe.post.min.js"></script>
+</#if>
+<#if type == 'journals'>
+<script src="${theme_base!}/source/js/min/joe.journals.min.js"></script>
+</#if>
 <#if type == 'sheet'>
   <script src="https://cdn.jsdelivr.net/npm/draggabilly@2.3.0/dist/draggabilly.pkgd.js"></script>
   <script src="${theme_base!}/source/js/min/joe.leaving.min.js"></script>
