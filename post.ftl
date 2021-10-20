@@ -63,7 +63,7 @@
                             </div>
                         </#if>
                     </div>
-                    <article class="joe_detail__article${settings.enable_code_line_number?string(' line-numbers', '')}${settings.enable_copy?string(' copyable', '')}${settings.enable_indent?string(' indent','')}">
+                    <article class="joe_detail__article animated fadeInUp${settings.enable_code_line_number?string(' line-numbers', '')}${settings.enable_copy?string(' copyable', '')}${settings.enable_indent?string(' indent','')}">
                         ${post.formatContent!}
                     </article>
                     <#if settings.enable_toc!true>

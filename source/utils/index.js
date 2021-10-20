@@ -4,6 +4,75 @@
 var Util = {
   _version: "1.0.0",
   /**
+   * time ago
+   * @param {*} time
+   */
+  timeAgo: function (time) {
+    if (!time) return "未知时间";
+    time = new Date(time).getTime();
+    var currentTime = new Date().getTime();
+    var between = currentTime - time;
+    var days = Math.floor(between / (24 * 3600 * 1000));
+    if (days === 0) {
+      var leave1 = between % (24 * 3600 * 1000);
+      var hours = Math.floor(leave1 / (3600 * 1000));
+      if (hours === 0) {
+        var leave2 = leave1 % (3600 * 1000);
+        var minutes = Math.floor(leave2 / (60 * 1000));
+        if (minutes === 0) {
+          var leave3 = leave2 % (60 * 1000);
+          var seconds = Math.round(leave3 / 1000);
+          if (seconds < 1) return "刚刚";
+          return seconds + " 秒前";
+        }
+        return minutes + " 分钟前";
+      }
+      return Util.formatDate(time, "今天 hh:mm");
+      // return hours + " 小时前";
+    }
+    if (days < 0) return "刚刚";
+    // if (days < 1) {
+    //   return days + " 天前";
+    // } else {
+    //   return Util.formatDate(time, "yyyy年MM月dd日 hh:mm");
+    // }
+    if (days === 1) {
+      return "昨天";
+    } else {
+      return Util.formatDate(time, "yyyy年MM月dd日 hh:mm");
+    }
+  },
+
+  formatDate: function (date, fmt) {
+    date = new Date(date);
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+      );
+    }
+    let o = {
+      "M+": date.getMonth() + 1,
+      "d+": date.getDate(),
+      "h+": date.getHours(),
+      "m+": date.getMinutes(),
+      "s+": date.getSeconds(),
+    };
+    for (let k in o) {
+      if (new RegExp(`(${k})`).test(fmt)) {
+        let str = o[k] + "";
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1 ? str : Util.padLeftZero(str)
+        );
+      }
+    }
+    return fmt;
+  },
+  padLeftZero: function (str) {
+    return ("00" + str).substr(str.length);
+  },
+  /**
    * 获取当前浏览器语言
    * 使用当前方法，只会得到语言前两个字符
    * @return zh、cn 等

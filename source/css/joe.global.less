@@ -1,7 +1,16 @@
-html {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+.joe_main {
+  min-width: 0;
+  flex: 1;
+  padding-bottom: 15px;
 }
+
+.joe_container {
+  display: flex;
+  width: 100%;
+  margin: 0 auto 30px;
+  padding: 0 15px;
+}
+
 #Joe {
   .joe_main_container {
     min-height: calc(100vh - 60px - 160px - 60px);
@@ -1810,6 +1819,15 @@ html {
           }
         }
       }
+
+      .tags_more {
+        float: right;
+        padding-bottom: 10px;
+        color: var(--theme);
+        i {
+          vertical-align: text-top;
+        }
+      }
     }
   }
 }
@@ -3106,7 +3124,7 @@ html {
       }
     }
     &.indent {
-      p {
+      > p {
         text-indent: 2em;
       }
     }
@@ -4324,6 +4342,7 @@ html {
     color: var(--routine);
   }
 }
+
 .joe_comment {
   background: var(--background);
   border-radius: var(--radius-wrap);
@@ -4927,6 +4946,7 @@ html {
   animation: none;
 }
 
+// 动画
 @keyframes wobble-bottom {
   16.65% {
     transform: skew(-12deg);
@@ -5351,6 +5371,7 @@ html {
     box-shadow: inset 0 0 15px #f4b393;
   }
 }
+
 @keyframes twinkle-night {
   to {
     box-shadow: inset 0 0 15px #595997;
@@ -5365,3 +5386,30 @@ html {
     transform: translateY(-3px) scaleY(1);
   }
 }
+
+// 媒体查询
+@media (min-width: 576px) {
+  #Joe > .joe_container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  #Joe > .joe_container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  #Joe > .joe_container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  #Joe > .joe_container {
+    max-width: 1140px;
+  }
+}
+// @media (min-width: 1400px) {
+//   #Joe > .joe_container {
+//     max-width: 1320px;
+//   }
+// }

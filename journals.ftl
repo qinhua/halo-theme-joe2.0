@@ -28,19 +28,10 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="joe_journals__list">
+                    <ul class="joe_journals__list" data-wow="fadeInUp">
                       <#list journals.content as journal>
-                            <li class="joe_journal__item" data-cid="${journal.id}" data-clikes="${journal.likes}">
-                                <#assign diff = (journal.createTime?long / 86400000)?round - (.now?long / 86400000)?round />
-                                <p class="joe_journal_date"><i class="joe-font joe-icon-feather"></i>发布于 
-                                <#if diff==0>
-                                  今天 ${journal.createTime?string('HH:mm')}
-                                <#elseif diff==-1>
-                                  昨天 ${journal.createTime?string('HH:mm')}
-                                <#else>
-                                  ${journal.createTime?string('yyyy年MM月dd日 HH:mm')}
-                                </#if>
-                                </p>
+                            <li class="joe_journal__item wow animated" data-cid="${journal.id}" data-clikes="${journal.likes}">
+                                <p class="joe_journal_date"><i class="joe-font joe-icon-feather"></i><em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em></p>
                                 <div class="joe_journal_block">
                                     <div class="joe_journal_body">
                                       <div class="content-wrp">${journal.content!}</div>

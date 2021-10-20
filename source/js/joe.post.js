@@ -1,10 +1,5 @@
 /**文章页逻辑 */
-const encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
-const decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
-/** Joe上下文对象 */
-const JoeContext = {
-  // encryption: (str) => window.btoa(unescape(encodeURIComponent(str))),
-  // decrypt: (str) => decodeURIComponent(escape(window.atob(str))),
+const postContext = {
   /* 文章目录 */
   initToc() {
     if (!ThemeConfig.enable_toc || !$(".toc-container").length) return;
@@ -24,6 +19,9 @@ const JoeContext = {
       // scrollEndCallback: function (e) {},
     });
     // toc 菜单收起/展开
+    if (!$("#js-toc").children().length) {
+      $("#js-toc").html('<div class="toc-nodata">暂无目录</div>');
+    }
     $(".toc-container").show();
     $(".toc-expander i").on("click", function () {
       $(this).parents(".toc-container").toggleClass("hide");
@@ -59,67 +57,6 @@ const JoeContext = {
       }
     });
   },
-
-  /* 获取本篇文章百度收录情况 */
-  initBaidu() {
-    if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
-      return;
-    $.ajax({
-      url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
-      type: "GET",
-      dataType: "json",
-      data: {
-        url: window.location.href,
-      },
-      success(res) {
-        if (res.data && res.data.collected) {
-          $("#joe_baidu_record").css("color", "#67c23a").html("已收录");
-        } else {
-          /* 如果填写了Token，则自动推送给百度 */
-          if (ThemeConfig.baidu_token) {
-            $("#joe_baidu_record").html(
-              '<span style="color: #e6a23c">未收录，推送中...</span>'
-            );
-            const _timer = setTimeout(function () {
-              $.ajax({
-                url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
-                type: "POST",
-                dataType: "json",
-                data: {
-                  site: ThemeConfig.HOST,
-                  token: ThemeConfig.baidu_token,
-                  urls: window.location.href,
-                },
-                success(res) {
-                  if (res.data.success === 0) {
-                    $("#joe_baidu_record").html(
-                      '<span style="color: #f56c6c">推送失败，请检查！</span>'
-                    );
-                  } else {
-                    $("#joe_baidu_record").html(
-                      '<span style="color: #67c23a">推送成功！</span>'
-                    );
-                  }
-                },
-              });
-              clearTimeout(_timer);
-            }, 1000);
-          } else {
-            const url = `https://ziyuan.baidu.com/linksubmit/url?sitename=${encodeURI(
-              window.location.href
-            )}`;
-            $("#joe_baidu_record").html(
-              `<a target="_blank" href="${url}" rel="noopener noreferrer nofollow" style="color: #f56c6c">未收录，提交收录</a>`
-            );
-          }
-        }
-      },
-      error(err) {
-        console.log(err);
-      },
-    });
-  },
-
   /* 初始化代码区域，高亮 + 折叠 + 复制 */
   initCode() {
     if (
@@ -147,7 +84,7 @@ const JoeContext = {
           ThemeConfig.fold_long_code &&
           location.pathname.includes("archives")
         ) {
-          if ($item.height() > (ThemeConfig.long_code_height || 200)) {
+          if ($item.height() > (ThemeConfig.long_code_height || 800)) {
             const $title = $item
               .siblings(".toolbar")
               .find(".toolbar-item span")
@@ -173,8 +110,7 @@ const JoeContext = {
       }
     });
   },
-
-  // 侧边栏切换
+  /* 侧边栏切换 */
   initAside() {
     if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
       return;
@@ -190,22 +126,6 @@ const JoeContext = {
       $(".joe_aside").toggleClass("hide");
     });
   },
-
-  /* 图片预览功能 */
-  initGallery() {
-    $(
-      ".joe_detail__article img:not(img.owo_image), .joe_journal_block img"
-    ).each(function () {
-      $(this).wrap(
-        $(
-          `<span style="display: block;" data-fancybox="Joe" href="${$(
-            this
-          ).attr("src")}"></span>`
-        )
-      );
-    });
-  },
-
   /* 初始化文章分享 */
   initPostShare() {
     if (!ThemeConfig.enable_share) return;
@@ -227,19 +147,6 @@ const JoeContext = {
       });
     }
   },
-
-  /* 设置文章内的链接为新窗口打开 */
-  initExternalLink() {
-    $(".joe_detail__article a:not(.joe_detail__article-anote)").each(
-      function () {
-        $(this).attr({
-          target: "_blank",
-          rel: "noopener noreferrer nofollow",
-        });
-      }
-    );
-  },
-
   /* 文章点赞 */
   initLike() {
     if (!ThemeConfig.enable_like || !$(".joe_detail__agree").length) return;
@@ -306,8 +213,36 @@ const JoeContext = {
         },
       });
     });
+  } /* 文章视频模块 */,
+  initVideo() {
+    if ($(".joe_detail__article-video").length) {
+      const player = $(".joe_detail__article-video .play iframe").attr(
+        "data-player"
+      );
+      $(".joe_detail__article-video .episodes .item").on("click", function () {
+        $(this).addClass("active").siblings().removeClass("active");
+        const url = $(this).attr("data-src");
+        $(".joe_detail__article-video .play iframe").attr({
+          src: player + url,
+        });
+      });
+      $(".joe_detail__article-video .episodes .item").first().click();
+    }
   },
-
+  /* 渲染数学公式 */
+  initMathjax() {
+    if (ThemeConfig.enable_mathjax && window.katex) {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        throwOnError: false,
+      });
+    }
+  },
   /* 密码保护文章，输入密码访问 */
   // initArticleProtect() {
   //   const cid = $(".joe_detail").attr("data-cid");
@@ -348,252 +283,20 @@ const JoeContext = {
   //     });
   //   });
   // },
-
-  /* 文章视频模块 */
-  initVideo() {
-    if ($(".joe_detail__article-video").length) {
-      const player = $(".joe_detail__article-video .play iframe").attr(
-        "data-player"
-      );
-      $(".joe_detail__article-video .episodes .item").on("click", function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        const url = $(this).attr("data-src");
-        $(".joe_detail__article-video .play iframe").attr({
-          src: player + url,
-        });
-      });
-      $(".joe_detail__article-video .episodes .item").first().click();
-    }
-  },
-
-  /* 初始化日志页 */
-  initJournals() {
-    // 内容折叠/展开
-    $(".journal_content_expander i").on("click", function () {
-      $(this).parents(".joe_journal_body").toggleClass("open");
-    });
-    // 点赞
-    if (ThemeConfig.enable_like_journal) {
-      const $allItems = $(".joe_journal__item");
-      if ($allItems.length) {
-        $allItems.each(function (_, item) {
-          const $this = $(this);
-          const cid = $this.attr("data-cid");
-          const clikes = +($this.attr("data-clikes") || 0);
-          let agreeArr = localStorage.getItem(encryption("agree-journal"))
-            ? JSON.parse(
-                decrypt(localStorage.getItem(encryption("agree-journal")))
-              )
-            : [];
-          const $iconLike = $this.find(".journal-like");
-          const $iconUnlike = $this.find(".journal-unlike");
-          const $likeNum = $this.find(".journal-likes-num");
-          if (agreeArr.includes(cid)) {
-            $iconLike.hide();
-            $iconUnlike.show();
-          } else {
-            $iconLike.show();
-            $iconUnlike.hide();
-          }
-          $likeNum.html(clikes);
-          $iconLike.on("click", function () {
-            let _loading = false;
-            if (_loading) return;
-            _loading = true;
-            agreeArr = localStorage.getItem(encryption("agree-journal"))
-              ? JSON.parse(
-                  decrypt(localStorage.getItem(encryption("agree-journal")))
-                )
-              : [];
-            let flag = agreeArr.includes(cid);
-            $.ajax({
-              url: "/api/content/journals/" + cid + "/likes",
-              type: "POST",
-              dataType: "json",
-              data: {
-                type: flag ? "disagree" : "agree",
-              },
-              success(res) {
-                if (res.status !== 200) {
-                  return;
-                }
-                let likes = clikes;
-                if (flag) {
-                  likes--;
-                  const index = agreeArr.findIndex((_) => _ === cid);
-                  agreeArr.splice(index, 1);
-                  $iconLike.show();
-                  $iconUnlike.hide();
-                } else {
-                  likes++;
-                  agreeArr.push(cid);
-                  $iconLike.hide();
-                  $iconUnlike.show();
-                }
-                const name = encryption("agree-journal");
-                const val = encryption(JSON.stringify(agreeArr));
-                localStorage.setItem(name, val);
-                $likeNum.html(likes);
-              },
-              error(err) {
-                _loading = false;
-                return Qmsg.warning(err.responseJSON.message);
-              },
-              complete() {
-                _loading = false;
-              },
-            });
-          });
-        });
-      }
-    }
-    // 评论及折叠
-    if (ThemeConfig.enable_comment_journal) {
-      $(".journal_comment_expander,.journal-comment").on("click", function () {
-        const $this = $(this);
-        const $parent = $this.parents(".footer-wrap");
-        if (ThemeConfig.enable_autoload_comment_journal) {
-          const compComment = $parent
-            .find("halo-comment")[0]
-            .shadowRoot.getElementById("halo-comment").__vue__;
-          // 展开加载评论
-          if (!$parent.hasClass("open") && !compComment.loaded) {
-            compComment.loadComments();
-          }
-        }
-        $parent.toggleClass("open");
-        $parent
-          .find(".journal_comment_expander_txt")
-          .html(($parent.hasClass("open") ? "收起" : "查看") + "评论");
-      });
-    }
-  },
-
-  // 渲染数学公式
-  initMathjax() {
-    if (ThemeConfig.enable_mathjax && window.katex) {
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: "$$", right: "$$", display: true },
-          { left: "$", right: "$", display: false },
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true },
-        ],
-        throwOnError: false,
-      });
-    }
-  },
-
-  /* 初始化图库 */
-  // initGallery(){
-  // }
-
-  /* 初始化pjax */
-  // initPjax() {},
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  Object.keys(JoeContext).forEach((item) => JoeContext[item]());
-
-  /* 初始化3D标签云 */
-  if (ThemeConfig.show_tag_cloud) {
-    const entries = [];
-    const colors = [
-      "#F8D800",
-      "#0396FF",
-      "#EA5455",
-      "#7367F0",
-      "#32CCBC",
-      "#F6416C",
-      "#28C76F",
-      "#9F44D3",
-      "#F55555",
-      "#736EFE",
-      "#E96D71",
-      "#DE4313",
-      "#D939CD",
-      "#4C83FF",
-      "#F072B6",
-      "#C346C2",
-      "#5961F9",
-      "#FD6585",
-      "#465EFB",
-      "#FFC600",
-      "#FA742B",
-      "#5151E5",
-      "#BB4E75",
-      "#FF52E5",
-      "#49C628",
-      "#00EAFF",
-      "#F067B4",
-      "#F067B4",
-      "#ff9a9e",
-      "#00f2fe",
-      "#4facfe",
-      "#f093fb",
-      "#6fa3ef",
-      "#bc99c4",
-      "#46c47c",
-      "#f9bb3c",
-      "#e8583d",
-      "#f68e5f",
-    ];
-    const random = (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    $(".tags-cloud-list li").each((i, item) => {
-      entries.push({
-        label: $(item).attr("data-label"),
-        url: $(item).attr("data-url"),
-        target: "_blank",
-        fontColor: colors[random(0, colors.length - 1)],
-        fontSize: 15,
-      });
-    });
-    $("#tags-3d").svg3DTagCloud({
-      entries,
-      width: 250,
-      height: 250,
-      radius: "65%",
-      radiusMin: 75,
-      bgDraw: false,
-      fov: 800,
-      speed: 0.5,
-      fontWeight: 500,
-    });
-    $(".tags-cloud-list").remove();
-  }
+var omits = ["initToc"];
+document.addEventListener("DOMContentLoaded", function () {
+  Object.keys(postContext).forEach(
+    (c) => !omits.includes(c) && postContext[c]()
+  );
 });
 
-/* 写在load事件里，为了解决图片未加载完时，滚动距离获取不准确的问题 */
 window.addEventListener("load", function () {
-  /* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-  {
-    const scroll = new URLSearchParams(location.search).get("scroll");
-    if (scroll) {
-      const height = $(".joe_header").height();
-      let elementEL = null;
-      if ($("#" + scroll).length > 0) {
-        elementEL = $("#" + scroll);
-      } else {
-        elementEL = $("." + scroll);
-      }
-      if (elementEL && elementEL.length > 0) {
-        const top = elementEL.offset().top - height - 15;
-        window.scrollTo({
-          top,
-          behavior: "smooth",
-        });
-      }
-    }
+  if (omits.length === 1) {
+    postContext[omits[0]]();
+  } else {
+    omits.forEach((c) => postContext[c]());
   }
-  /* 日记块超长折叠 */
-  const $allBlocks = $(".joe_journal_body .content-wrp");
-  $allBlocks.each(function () {
-    if ($(this)[0].getBoundingClientRect().height > 270) {
-      $(this).siblings(".journal_content_expander").show();
-    }
-  });
+  commonContext.scrollToHash();
 });
