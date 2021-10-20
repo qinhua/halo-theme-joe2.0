@@ -17,16 +17,16 @@
       ThemeConfig[field] = value;
     </#if>
   </#list>
+  const version = "1.0.0";
   ThemeConfig['isProd'] = location.host.indexOf('localhost') < 0 && location.host.indexOf('127.0.0.1') < 0;
   ThemeConfig['blog_title'] = '${blog_title}';
   ThemeConfig['blog_url'] = '${blog_url}';
   ThemeConfig['author'] = '${user.nickname}';
   ThemeConfig['HOST'] = '${blog_url}';
   ThemeConfig['BASE_URL'] = '${blog_url}';
-  ThemeConfig['CDN_URL'] = ThemeConfig.isProd ? "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master" : '${theme_base!}';
+  ThemeConfig['CDN_URL'] = ThemeConfig.isProd ? "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + version : '${theme_base!}';
   ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
 </script>
-
 <script id="metas-getter" type="text/javascript">
     // 获取页面元数据
     var PageAttrs = {

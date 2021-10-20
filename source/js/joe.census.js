@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* 初始化归档 */
   {
     let page = 0;
-    initFiling();
+    // initFiling();
 
     function initFiling() {
       if ($(".joe_census__filing .button").html() === "loading...") return;

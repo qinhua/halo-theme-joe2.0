@@ -11,7 +11,7 @@
                 <div class="joe_index joe_census__filing">
                     <div class="title">文章归档</div>
                     <div class="content">
-                        <div id="filing"></div>
+                        <#--  <div id="filing"></div>  -->
                         <@postTag method="archive" type="month">
                         <#list archives as archive>
                             <div class="item">

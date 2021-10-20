@@ -6,8 +6,6 @@
   </a>
 </p>
 
-<!-- <h1 align="center" style="display:none">halo-theme-joe2.0</h1> -->
-
 <p align="center">Joe 主题 Halo 移植版</p>
 
 <p align="center">
@@ -28,8 +26,6 @@
 > Joe2.0 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，此次在原版主题上做了大量修改和适配，由原版的 php 模板调整为 freemarker， 移除了 Halo 上暂不支持的一些特性，也增加了一些特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
 
 <br>
-
-<!-- ## 主题预览（目前还没移植完，敬请期待…） -->
 
 #### [线上 Demo](https://bbchin.com)
 

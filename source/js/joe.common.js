@@ -1,21 +1,88 @@
 /**通用逻辑 */
-!(function () {
-  /* 初始化评论主题 */
-  const initCommentTheme = () => {
-    const comments = document.getElementsByTagName("halo-comment");
-    const curMode = $("html").attr("data-mode");
-    // 黑夜模式下
-    for (var i = 0; i < comments.length; i++) {
-      var shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
-      $(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
+const encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
+const decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
+const commonContext = {
+  /* 初始化昼夜模式 */
+  initMode() {
+    const $html = $("html");
+    const $icon_light = $(".mode-light");
+    const $icon_dark = $(".mode-dark");
+    let local_theme = "";
+    // 1.固定模式
+    if (ThemeConfig.static_theme) {
+      $html.attr("data-mode", ThemeConfig.static_theme);
+    } else {
+      // 2.自动切换
+      if (ThemeConfig.enable_auto_switch_theme) {
+        local_theme = sessionStorage.getItem("data-mode");
+        localStorage.removeItem("data-mode");
+        if (local_theme) {
+          $html.attr("data-mode", local_theme);
+          if (local_theme === "light") {
+            $icon_light.removeClass("active");
+            $icon_dark.addClass("active");
+          } else {
+            $icon_light.addClass("active");
+            $icon_dark.removeClass("active");
+          }
+        } else {
+          const light_scope = ThemeConfig.dark_time_scope.split("~");
+          const now = new Date();
+          const today = now.toLocaleString().split(" ")[0];
+          const theme =
+            now >= new Date(today + " " + light_scope[0]) &&
+            now <= new Date(today + " " + light_scope[1])
+              ? "light"
+              : "dark";
+          if (theme === "light") {
+            $icon_light.removeClass("active");
+            $icon_dark.addClass("active");
+          } else {
+            $icon_light.addClass("active");
+            $icon_dark.removeClass("active");
+          }
+          $html.attr("data-mode", theme);
+          sessionStorage.setItem("data-mode", theme);
+        }
+      } else {
+        const theme = localStorage.getItem("data-mode") || "light";
+        $(".mode-" + (theme === "light" ? "dark" : "light")).addClass("active");
+        $html.attr("data-mode", theme);
+      }
     }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    /* 导航条高亮 */
-    var $nav_menus = $(".joe_header__above-nav a");
-    var $nav_side_menus = $(".panel-side-menu .link");
-    var activeIndex = 0;
-    var curPath = location.pathname;
+    // 3.手动切换
+    $(".joe_action_item.mode").on("click", function () {
+      const curSource = ThemeConfig.enable_auto_switch_theme
+        ? sessionStorage
+        : localStorage;
+      local_theme = curSource.getItem("data-mode");
+      let theme = "";
+      if (local_theme) {
+        if (local_theme === "light") {
+          theme = "dark";
+          $icon_dark.removeClass("active");
+          $icon_light.addClass("active");
+        } else {
+          theme = "light";
+          $icon_light.removeClass("active");
+          $icon_dark.addClass("active");
+        }
+      } else {
+        theme = "dark";
+        $icon_light.removeClass("active");
+        $icon_dark.addClass("active");
+      }
+      $html.attr("data-mode", theme);
+      curSource.setItem("data-mode", theme);
+      commonContext.initCommentTheme();
+    });
+  },
+  /* 导航条高亮 */
+  initNavbar() {
+    const $nav_menus = $(".joe_header__above-nav a");
+    const $nav_side_menus = $(".panel-side-menu .link");
+    let activeIndex = 0;
+    const curPath = location.pathname;
     if (curPath && curPath !== "/") {
       $nav_menus.each((index, item) => {
         if (curPath.indexOf(item.getAttribute("href")) > -1) {
@@ -25,261 +92,242 @@
     }
     $nav_menus.eq(activeIndex).addClass("current");
     $nav_side_menus.eq(activeIndex).addClass("current");
-
-    /* 初始化昼夜模式 */
-    {
-      var $html = $("html");
-      var $icon_light = $(".mode-light");
-      var $icon_dark = $(".mode-dark");
-      // 固定模式
-      if (ThemeConfig.static_theme) {
-        $html.attr("data-mode", ThemeConfig.static_theme);
-      } else {
-        // 自动切换
-        if (ThemeConfig.enable_auto_switch_theme) {
-          var local_theme = sessionStorage.getItem("data-mode");
-          localStorage.removeItem("data-mode", theme);
-          if (local_theme) {
-            $html.attr("data-mode", local_theme);
-            if (local_theme === "light") {
-              $icon_light.removeClass("active");
-              $icon_dark.addClass("active");
-            } else {
-              $icon_light.addClass("active");
-              $icon_dark.removeClass("active");
-            }
-          } else {
-            var light_scope = ThemeConfig.dark_time_scope.split("~");
-            var now = new Date();
-            var today = now.toLocaleString().split(" ")[0];
-            var theme =
-              now >= new Date(today + " " + light_scope[0]) &&
-              now <= new Date(today + " " + light_scope[1])
-                ? "light"
-                : "dark";
-            if (theme === "light") {
-              $icon_light.removeClass("active");
-              $icon_dark.addClass("active");
-            } else {
-              $icon_light.addClass("active");
-              $icon_dark.removeClass("active");
-            }
-            $html.attr("data-mode", theme);
-            sessionStorage.setItem("data-mode", theme);
-          }
-        } else {
-          var theme = localStorage.getItem("data-mode") || "light";
-          $(".mode-" + (theme === "light" ? "dark" : "light")).addClass(
-            "active"
-          );
-          $html.attr("data-mode", theme);
-        }
-      }
-      initCommentTheme();
-      // 手动切换
-      $(".joe_action_item.mode").on("click", function () {
-        var curSource = ThemeConfig.enable_auto_switch_theme
-          ? sessionStorage
-          : localStorage;
-        local_theme = curSource.getItem("data-mode");
-        var theme = "";
-        if (local_theme) {
-          if (local_theme === "light") {
-            theme = "dark";
-            $icon_dark.removeClass("active");
-            $icon_light.addClass("active");
-          } else {
-            theme = "light";
-            $icon_light.removeClass("active");
-            $icon_dark.addClass("active");
-          }
-        } else {
-          theme = "dark";
-          $icon_light.removeClass("active");
-          $icon_dark.addClass("active");
-        }
-        $html.attr("data-mode", theme);
-        curSource.setItem("data-mode", theme);
-        initCommentTheme();
-      });
+  },
+  /* 初始化评论主题 */
+  initCommentTheme() {
+    const comments = document.getElementsByTagName("halo-comment");
+    const curMode = $("html").attr("data-mode");
+    // 黑夜模式下
+    for (let i = 0; i < comments.length; i++) {
+      const shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
+      $(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
     }
-
-    /* 音乐播放器 */
-    {
-      if (ThemeConfig.enabel_music_player) {
-        $.ajax({
-          url: `https://api.i-meto.com/meting/api?server=netease&type=playlist&id=${ThemeConfig.music_id}`,
-          type: "GET",
-          dataType: "json",
-          success(res) {
-            new APlayer({
-              container: document.getElementById("global-aplayer"),
-              fixed: true,
-              lrcType: 3,
-              theme: "#1989fa",
-              autoplay: true,
-              audio: res,
-            });
-          },
-          error(err) {
-            console.log(err);
-          },
+  },
+  /* 获取页面百度收录情况 */
+  initBaidu() {
+    if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
+      return;
+    $.ajax({
+      url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
+      type: "GET",
+      dataType: "json",
+      data: {
+        url: window.location.href,
+      },
+      success(res) {
+        if (res.data && res.data.collected) {
+          $("#joe_baidu_record").css("color", "#67c23a").html("已收录");
+        } else {
+          /* 如果填写了Token，则自动推送给百度 */
+          if (ThemeConfig.baidu_token) {
+            $("#joe_baidu_record").html(
+              '<span style="color: #e6a23c">未收录，推送中...</span>'
+            );
+            const _timer = setTimeout(function () {
+              $.ajax({
+                url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
+                type: "POST",
+                dataType: "json",
+                data: {
+                  site: ThemeConfig.HOST,
+                  token: ThemeConfig.baidu_token,
+                  urls: window.location.href,
+                },
+                success(res) {
+                  if (res.data.success === 0) {
+                    $("#joe_baidu_record").html(
+                      '<span style="color: #f56c6c">推送失败，请检查！</span>'
+                    );
+                  } else {
+                    $("#joe_baidu_record").html(
+                      '<span style="color: #67c23a">推送成功！</span>'
+                    );
+                  }
+                },
+              });
+              clearTimeout(_timer);
+            }, 1000);
+          } else {
+            const url = `https://ziyuan.baidu.com/linksubmit/url?sitename=${encodeURI(
+              window.location.href
+            )}`;
+            $("#joe_baidu_record").html(
+              `<a target="_blank" href="${url}" rel="noopener noreferrer nofollow" style="color: #f56c6c">未收录，提交收录</a>`
+            );
+          }
+        }
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
+  },
+  /* 音乐播放器 */
+  initMusic() {
+    if (!ThemeConfig.enabel_music_player) return;
+    $.ajax({
+      url: `https://api.i-meto.com/meting/api?server=netease&type=playlist&id=${ThemeConfig.music_id}`,
+      type: "GET",
+      dataType: "json",
+      success(res) {
+        new APlayer({
+          container: document.getElementById("global-aplayer"),
+          fixed: true,
+          lrcType: 3,
+          theme: "#1989fa",
+          autoplay: true,
+          audio: res,
         });
-      }
-    }
-
-    /* 动态背景 */
-    {
-      if (
-        !Joe.IS_MOBILE &&
-        Joe.DYNAMIC_BACKGROUND !== "off" &&
-        Joe.DYNAMIC_BACKGROUND &&
-        !Joe.WALLPAPER_BACKGROUND_PC
-      ) {
-        $.getScript(
-          window.Joe.THEME_URL + `assets/backdrop/${Joe.DYNAMIC_BACKGROUND}`
-        );
-      }
-    }
-
-    /* 自定义favicon */
-    {
-      if (ThemeConfig.favicon) {
-        var favicon = new Favico();
-        var image = new Image();
-        image.onload = function () {
-          favicon.image(image);
-        };
-        image.src = ThemeConfig.favicon;
-      }
-    }
-
-    /* 搜索框弹窗 */
-    {
-      $(".joe_header__above-search .input").on("click", function (e) {
-        e.stopPropagation();
-        $(".joe_header__above-search .result").addClass("active");
-      });
-      $(document).on("click", function () {
-        $(".joe_header__above-search .result").removeClass("active");
-      });
-    }
-
-    /* 激活全局下拉框功能 */
-    {
-      $(".joe_dropdown").each(function (index, item) {
-        const menu = $(this).find(".joe_dropdown__menu");
-        const trigger = $(item).attr("trigger") || "click";
-        const placement = $(item).attr("placement") || $(this).height() || 0;
-        menu.css("top", placement);
-        if (trigger === "hover") {
-          $(this).hover(
-            () => $(this).addClass("active"),
-            () => $(this).removeClass("active")
-          );
-        } else {
-          $(this).on("click", function (e) {
-            $(this).toggleClass("active");
-            $(document).one("click", () => $(this).removeClass("active"));
-            e.stopPropagation();
-          });
-          menu.on("click", (e) => e.stopPropagation());
-        }
-      });
-    }
-
-    /* 激活全局返回顶部功能 */
-    {
-      let _debounce = null;
-      const handleScroll = () =>
-        (document.documentElement.scrollTop || document.body.scrollTop) > 300
-          ? $(".joe_action_item.scroll").addClass("active")
-          : $(".joe_action_item.scroll").removeClass("active");
-      handleScroll();
-      $(document).on("scroll", () => {
-        clearTimeout(_debounce);
-        _debounce = setTimeout(handleScroll, 80);
-      });
-      $(".joe_action_item.scroll").on("click", () =>
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
+  },
+  /* 动态背景 */
+  initDynamicBg() {
+    if (
+      !Joe.IS_MOBILE &&
+      Joe.DYNAMIC_BACKGROUND !== "off" &&
+      Joe.DYNAMIC_BACKGROUND &&
+      !Joe.WALLPAPER_BACKGROUND_PC
+    ) {
+      $.getScript(
+        window.Joe.THEME_URL + `assets/backdrop/${Joe.DYNAMIC_BACKGROUND}`
       );
     }
-
-    /* 激活侧边栏人生倒计时功能 */
+  },
+  /* 自定义favicon */
+  setFavicon() {
+    if (!ThemeConfig.favicon) return;
+    const favicon = new Favico();
+    const image = new Image();
+    image.onload = function () {
+      favicon.image(image);
+    };
+    image.src = ThemeConfig.favicon;
+  },
+  /* 搜索框弹窗 */
+  searchDialog() {
+    $(".joe_header__above-search .input").on("click", function (e) {
+      e.stopPropagation();
+      $(".joe_header__above-search .result").addClass("active");
+    });
+    $(document).on("click", function () {
+      $(".joe_header__above-search .result").removeClass("active");
+    });
+  },
+  /* 激活全局下拉框功能 */
+  initDropMenu() {
+    $(".joe_dropdown").each(function (index, item) {
+      const menu = $(this).find(".joe_dropdown__menu");
+      const trigger = $(item).attr("trigger") || "click";
+      const placement = $(item).attr("placement") || $(this).height() || 0;
+      menu.css("top", placement);
+      if (trigger === "hover") {
+        $(this).hover(
+          () => $(this).addClass("active"),
+          () => $(this).removeClass("active")
+        );
+      } else {
+        $(this).on("click", function (e) {
+          $(this).toggleClass("active");
+          $(document).one("click", () => $(this).removeClass("active"));
+          e.stopPropagation();
+        });
+        menu.on("click", (e) => e.stopPropagation());
+      }
+    });
+  },
+  /* 激活全局返回顶部功能 */
+  back2Top() {
+    let _debounce = null;
+    const handleScroll = () =>
+      (document.documentElement.scrollTop || document.body.scrollTop) > 300
+        ? $(".joe_action_item.scroll").addClass("active")
+        : $(".joe_action_item.scroll").removeClass("active");
+    handleScroll();
+    $(document).on("scroll", () => {
+      clearTimeout(_debounce);
+      _debounce = setTimeout(handleScroll, 80);
+    });
+    $(".joe_action_item.scroll").on("click", () =>
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    );
+  },
+  /* 激活侧边栏人生倒计时功能 */
+  initTimeCount() {
+    if (!$(".joe_aside__item.timelife").length) return;
+    let timelife = [
+      {
+        title: "今日已经过去",
+        endTitle: "小时",
+        num: 0,
+        percent: "0%",
+      },
+      {
+        title: "这周已经过去",
+        endTitle: "天",
+        num: 0,
+        percent: "0%",
+      },
+      {
+        title: "本月已经过去",
+        endTitle: "天",
+        num: 0,
+        percent: "0%",
+      },
+      {
+        title: "今年已经过去",
+        endTitle: "个月",
+        num: 0,
+        percent: "0%",
+      },
+    ];
     {
-      if ($(".joe_aside__item.timelife").length) {
-        let timelife = [
-          {
-            title: "今日已经过去",
-            endTitle: "小时",
-            num: 0,
-            percent: "0%",
-          },
-          {
-            title: "这周已经过去",
-            endTitle: "天",
-            num: 0,
-            percent: "0%",
-          },
-          {
-            title: "本月已经过去",
-            endTitle: "天",
-            num: 0,
-            percent: "0%",
-          },
-          {
-            title: "今年已经过去",
-            endTitle: "个月",
-            num: 0,
-            percent: "0%",
-          },
-        ];
-        {
-          let nowDate = +new Date();
-          let todayStartDate = new Date(
-            new Date().toLocaleDateString()
-          ).getTime();
-          let todayPassHours = (nowDate - todayStartDate) / 1000 / 60 / 60;
-          let todayPassHoursPercent = (todayPassHours / 24) * 100;
-          timelife[0].num = parseInt(todayPassHours);
-          timelife[0].percent = parseInt(todayPassHoursPercent) + "%";
-        }
-        {
-          let weeks = {
-            0: 7,
-            1: 1,
-            2: 2,
-            3: 3,
-            4: 4,
-            5: 5,
-            6: 6,
-          };
-          let weekDay = weeks[new Date().getDay()];
-          let weekDayPassPercent = (weekDay / 7) * 100;
-          timelife[1].num = parseInt(weekDay);
-          timelife[1].percent = parseInt(weekDayPassPercent) + "%";
-        }
-        {
-          let year = new Date().getFullYear();
-          let date = new Date().getDate();
-          let month = new Date().getMonth() + 1;
-          let monthAll = new Date(year, month, 0).getDate();
-          let monthPassPercent = (date / monthAll) * 100;
-          timelife[2].num = date;
-          timelife[2].percent = parseInt(monthPassPercent) + "%";
-        }
-        {
-          let month = new Date().getMonth() + 1;
-          let yearPass = (month / 12) * 100;
-          timelife[3].num = month;
-          timelife[3].percent = parseInt(yearPass) + "%";
-        }
-        let htmlStr = "";
-        timelife.forEach((item, index) => {
-          htmlStr += `
+      let nowDate = +new Date();
+      let todayStartDate = new Date(new Date().toLocaleDateString()).getTime();
+      let todayPassHours = (nowDate - todayStartDate) / 1000 / 60 / 60;
+      let todayPassHoursPercent = (todayPassHours / 24) * 100;
+      timelife[0].num = parseInt(todayPassHours);
+      timelife[0].percent = parseInt(todayPassHoursPercent) + "%";
+    }
+    {
+      let weeks = {
+        0: 7,
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+      };
+      let weekDay = weeks[new Date().getDay()];
+      let weekDayPassPercent = (weekDay / 7) * 100;
+      timelife[1].num = parseInt(weekDay);
+      timelife[1].percent = parseInt(weekDayPassPercent) + "%";
+    }
+    {
+      let year = new Date().getFullYear();
+      let date = new Date().getDate();
+      let month = new Date().getMonth() + 1;
+      let monthAll = new Date(year, month, 0).getDate();
+      let monthPassPercent = (date / monthAll) * 100;
+      timelife[2].num = date;
+      timelife[2].percent = parseInt(monthPassPercent) + "%";
+    }
+    {
+      let month = new Date().getMonth() + 1;
+      let yearPass = (month / 12) * 100;
+      timelife[3].num = month;
+      timelife[3].percent = parseInt(yearPass) + "%";
+    }
+    let htmlStr = "";
+    timelife.forEach((item, index) => {
+      htmlStr += `
 						<div class="item">
 							<div class="title">
 								${item.title}
@@ -293,277 +341,292 @@
 								<div class="progress-percentage">${item.percent}</div>
 							</div>
 						</div>`;
-        });
-        $(".joe_aside__item.timelife .joe_aside__item-contain").html(htmlStr);
-      }
-    }
-
-    /* 激活侧边栏天气功能 */
-    {
-      if ($(".joe_aside__item.weather").length) {
-        const key = $(".joe_aside__item.weather").attr("data-key");
-        const style = $(".joe_aside__item.weather").attr("data-style");
-        const aqiColor = {
-          1: "FFFFFF",
-          2: "4A4A4A",
-          3: "FFFFFF",
-        };
-        window.WIDGET = {
-          CONFIG: {
-            layout: 2,
-            width: "220",
-            height: "270",
-            background: style,
-            dataColor: aqiColor[style],
-            language: "zh",
-            key,
+    });
+    $(".joe_aside__item.timelife .joe_aside__item-contain").html(htmlStr);
+  },
+  /* 激活侧边栏天气功能 */
+  initWeather() {
+    if (!$(".joe_aside__item.weather").length) return;
+    const key = $(".joe_aside__item.weather").attr("data-key");
+    const style = $(".joe_aside__item.weather").attr("data-style");
+    const aqiColor = {
+      1: "FFFFFF",
+      2: "4A4A4A",
+      3: "FFFFFF",
+    };
+    window.WIDGET = {
+      CONFIG: {
+        layout: 2,
+        width: "220",
+        height: "270",
+        background: style,
+        dataColor: aqiColor[style],
+        language: "zh",
+        key,
+      },
+    };
+    $.getScript(
+      "https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"
+    );
+  },
+  /* 文章/日志页图片预览功能 */
+  initGallery() {
+    const $allImgs = $(
+      ".joe_detail__article img:not(img.owo_image), .joe_journal_block img"
+    );
+    if (!$allImgs.length) return;
+    $allImgs.each(function () {
+      $(this).wrap(
+        $(
+          `<span style="display: block;" data-fancybox="Joe" href="${$(
+            this
+          ).attr("src")}"></span>`
+        )
+      );
+    });
+  },
+  /* 设置文章/日志页的链接为新窗口打开 */
+  initExternalLink() {
+    const $allLink = $(
+      ".page-post .joe_detail__article a[href], .joe_journal_body a[href]"
+    );
+    if (!$allLink.length) return;
+    $allLink.each(function () {
+      $(this).attr({
+        target: "_blank",
+        rel: "noopener noreferrer nofollow",
+      });
+    });
+  },
+  /* 初始化3D标签云 */
+  init3dTag() {
+    if (!ThemeConfig.show_tag_cloud) return;
+    const entries = [];
+    const colors = [
+      "#F8D800",
+      "#0396FF",
+      "#EA5455",
+      "#7367F0",
+      "#32CCBC",
+      "#F6416C",
+      "#28C76F",
+      "#9F44D3",
+      "#F55555",
+      "#736EFE",
+      "#E96D71",
+      "#DE4313",
+      "#D939CD",
+      "#4C83FF",
+      "#F072B6",
+      "#C346C2",
+      "#5961F9",
+      "#FD6585",
+      "#465EFB",
+      "#FFC600",
+      "#FA742B",
+      "#5151E5",
+      "#BB4E75",
+      "#FF52E5",
+      "#49C628",
+      "#00EAFF",
+      "#F067B4",
+      "#F067B4",
+      "#ff9a9e",
+      "#00f2fe",
+      "#4facfe",
+      "#f093fb",
+      "#6fa3ef",
+      "#bc99c4",
+      "#46c47c",
+      "#f9bb3c",
+      "#e8583d",
+      "#f68e5f",
+    ];
+    const random = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    $(".tags-cloud-list li").each((i, item) => {
+      entries.push({
+        label: $(item).attr("data-label"),
+        url: $(item).attr("data-url"),
+        target: "_blank",
+        fontColor: colors[random(0, colors.length - 1)],
+        fontSize: 15,
+      });
+    });
+    $("#tags-3d").svg3DTagCloud({
+      entries,
+      width: 250,
+      height: 250,
+      radius: "65%",
+      radiusMin: 75,
+      bgDraw: false,
+      fov: 800,
+      speed: 0.5,
+      fontWeight: 500,
+    });
+    $(".tags-cloud-list").remove();
+  },
+  /* 激活Live2d人物 */
+  initLive2d() {
+    if (!ThemeConfig.enable_live2d) return;
+    $.getScript(
+      "https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js",
+      () => {
+        L2Dwidget.init({
+          model: {
+            jsonPath: Joe.LIVE2D,
+            scale: 1,
           },
-        };
-        $.getScript(
-          "https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"
-        );
-      }
-    }
-
-    /* 3d云标签 */
-    {
-      if ($(".joe_aside__item.tags").length) {
-        const entries = [];
-        const colors = [
-          "#F8D800",
-          "#0396FF",
-          "#EA5455",
-          "#7367F0",
-          "#32CCBC",
-          "#F6416C",
-          "#28C76F",
-          "#9F44D3",
-          "#F55555",
-          "#736EFE",
-          "#E96D71",
-          "#DE4313",
-          "#D939CD",
-          "#4C83FF",
-          "#F072B6",
-          "#C346C2",
-          "#5961F9",
-          "#FD6585",
-          "#465EFB",
-          "#FFC600",
-          "#FA742B",
-          "#5151E5",
-          "#BB4E75",
-          "#FF52E5",
-          "#49C628",
-          "#00EAFF",
-          "#F067B4",
-          "#F067B4",
-          "#ff9a9e",
-          "#00f2fe",
-          "#4facfe",
-          "#f093fb",
-          "#6fa3ef",
-          "#bc99c4",
-          "#46c47c",
-          "#f9bb3c",
-          "#e8583d",
-          "#f68e5f",
-        ];
-        const random = (min, max) => {
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-        };
-        $(".joe_aside__item-contain .list li").each((i, item) => {
-          entries.push({
-            label: $(item).attr("data-label"),
-            url: $(item).attr("data-url"),
-            target: "_blank",
-            fontColor: colors[random(0, colors.length - 1)],
-            fontSize: 15,
-          });
-        });
-        $(".joe_aside__item-contain .tag").svg3DTagCloud({
-          entries,
-          width: 220,
-          height: 220,
-          radius: "65%",
-          radiusMin: 75,
-          bgDraw: false,
-          fov: 800,
-          speed: 0.5,
-          fontWeight: 500,
+          mobile: {
+            show: false,
+          },
+          display: {
+            position: "right",
+            width: 160,
+            height: 200,
+            hOffset: 70,
+            vOffset: 0,
+          },
         });
       }
-    }
-
-    /* 激活Live2d人物 */
-    {
-      if (Joe.LIVE2D !== "off" && Joe.LIVE2D) {
-        $.getScript(
-          "https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js",
-          () => {
-            L2Dwidget.init({
-              model: {
-                jsonPath: Joe.LIVE2D,
-                scale: 1,
-              },
-              mobile: {
-                show: false,
-              },
-              display: {
-                position: "right",
-                width: 160,
-                height: 200,
-                hOffset: 70,
-                vOffset: 0,
-              },
-            });
-          }
-        );
+    );
+  },
+  /* 首页离屏提示 */
+  offscreenTip() {
+    if (!ThemeConfig.enable_offscreen_tip) return;
+    const OriginTitile = document.title;
+    let timer = null;
+    document.addEventListener("visibilitychange", function () {
+      if (
+        location.href.indexOf(ThemeConfig.blog_url) > 0 ||
+        location.pathname !== "/"
+      )
+        return;
+      if (document.hidden) {
+        document.title =
+          ThemeConfig.offscreen_title_leave || "歪，你去哪里了？";
+        clearTimeout(timer);
+      } else {
+        document.title =
+          ThemeConfig.offscreen_title_back || "(つェ⊂)咦，又回来了!";
+        timer = setTimeout(function () {
+          document.title = OriginTitile;
+        }, 2000);
       }
-    }
-
-    /* 首页离屏提示 */
-    {
-      if (ThemeConfig.enable_offscreen_tip) {
-        var OriginTitile = document.title,
-          titleTime;
-        document.addEventListener("visibilitychange", function () {
-          if (
-            location.href.indexOf(ThemeConfig.blog_url) > 0 ||
-            location.pathname !== "/"
-          )
-            return;
-          if (document.hidden) {
-            document.title =
-              ThemeConfig.offscreen_title_leave || "歪，你去哪里了？";
-            clearTimeout(titleTime);
-          } else {
-            document.title =
-              ThemeConfig.offscreen_title_back || "(つェ⊂)咦，又回来了!";
-            titleTime = setTimeout(function () {
-              document.title = OriginTitile;
-            }, 2000);
-          }
-        });
-      }
-    }
-
-    /* 小屏幕伸缩侧边栏 */
-    {
-      $(".joe_header__above-slideicon").on("click", function () {
-        /* 关闭搜索框 */
-        $(".joe_header__searchout").removeClass("active");
-        /* 处理开启关闭状态 */
-        if ($(".joe_header__slideout").hasClass("active")) {
-          $("body").css("overflow", "");
-          $(".joe_header__mask").removeClass("active slideout");
-          $(".joe_header__slideout").removeClass("active");
-        } else {
-          $("body").css("overflow", "hidden");
-          $(".joe_header__mask").addClass("active slideout");
-          $(".joe_header__slideout").addClass("active");
-        }
-      });
-    }
-
-    /* 小屏幕搜索框 */
-    {
-      $(".joe_header__above-searchicon").on("click", function () {
-        /* 关闭侧边栏 */
+    });
+  },
+  /* 小屏幕伸缩侧边栏 */
+  drawerMobile() {
+    $(".joe_header__above-slideicon").on("click", function () {
+      /* 关闭搜索框 */
+      $(".joe_header__searchout").removeClass("active");
+      /* 处理开启关闭状态 */
+      if ($(".joe_header__slideout").hasClass("active")) {
+        $("body").css("overflow", "");
+        $(".joe_header__mask").removeClass("active slideout");
         $(".joe_header__slideout").removeClass("active");
-        /* 处理开启关闭状态 */
-        if ($(".joe_header__searchout").hasClass("active")) {
-          $("body").css("overflow", "");
-          $(".joe_header__mask").removeClass("active slideout");
-          $(".joe_header__searchout").removeClass("active");
-        } else {
-          $("body").css("overflow", "hidden");
-          $(".joe_header__mask").addClass("active");
-          $(".joe_header__searchout").addClass("active");
-        }
-      });
-    }
-
-    /* 点击遮罩层关闭 */
-    {
-      $(".joe_header__mask").on("click", function () {
+      } else {
+        $("body").css("overflow", "hidden");
+        $(".joe_header__mask").addClass("active slideout");
+        $(".joe_header__slideout").addClass("active");
+      }
+    });
+  },
+  /* 小屏幕搜索框 */
+  searchMobile() {
+    $(".joe_header__above-searchicon").on("click", function () {
+      /* 关闭侧边栏 */
+      $(".joe_header__slideout").removeClass("active");
+      /* 处理开启关闭状态 */
+      if ($(".joe_header__searchout").hasClass("active")) {
         $("body").css("overflow", "");
         $(".joe_header__mask").removeClass("active slideout");
         $(".joe_header__searchout").removeClass("active");
-        $(".joe_header__slideout").removeClass("active");
-      });
-    }
-
-    /* 移动端侧边栏菜单手风琴 */
-    {
-      $(".joe_header__slideout-menu .current")
-        .parents(".panel-body")
-        .show()
-        .siblings(".panel")
-        .addClass("in");
-      $(".joe_header__slideout-menu .panel").on("click", function () {
-        const panelBox = $(this).parent().parent();
-        /* 清除全部内容 */
-        panelBox.find(".panel").not($(this)).removeClass("in");
-        panelBox
-          .find(".panel-body")
-          .not($(this).siblings(".panel-body"))
-          .stop()
-          .hide("fast");
-        /* 激活当前的内容 */
-        $(this).toggleClass("in").siblings(".panel-body").stop().toggle("fast");
-      });
-    }
-
-    /* 初始化网站运行时间 */
-    {
-      const getRunTime = () => {
-        const birthDay = new Date(ThemeConfig.birthday);
-        const today = +new Date();
-        const timePast = today - birthDay.getTime();
-        let day = timePast / (1000 * 24 * 60 * 60);
-        let dayPast = Math.floor(day);
-        let hour = (day - dayPast) * 24;
-        let hourPast = Math.floor(hour);
-        let minute = (hour - hourPast) * 60;
-        let minutePast = Math.floor(minute);
-        let second = (minute - minutePast) * 60;
-        let secondPast = Math.floor(second);
-        day = String(dayPast).padStart(2, 0);
-        hour = String(hourPast).padStart(2, 0);
-        minute = String(minutePast).padStart(2, 0);
-        second = String(secondPast).padStart(2, 0);
-        $(".joe_run__day").html(day);
-        $(".joe_run__hour").html(hour);
-        $(".joe_run__minute").html(minute);
-        $(".joe_run__second").html(second);
-      };
-      if (
-        ThemeConfig.birthday &&
-        /(\d{4})\/(\d{1,2})\/(\d{1,2}) (\d{1,2})\:(\d{1,2})\:(\d{1,2})/.test(
-          ThemeConfig.birthday
-        )
-      ) {
-        getRunTime();
-        setInterval(getRunTime, 1000);
+      } else {
+        $("body").css("overflow", "hidden");
+        $(".joe_header__mask").addClass("active");
+        $(".joe_header__searchout").addClass("active");
       }
-    }
-
-    /* 初始化表情功能 */
-    {
-      if ($(".joe_owo__contain").length && $(".joe_owo__target").length) {
-        $.ajax({
-          url: window.Joe.THEME_URL + "assets/json/joe.owo.json",
-          dataType: "json",
-          success(res) {
-            let barStr = "";
-            let scrollStr = "";
-            for (let key in res) {
-              const item = res[key];
-              barStr += `<div class="item" data-type="${key}">${key}</div>`;
-              scrollStr += `
+    });
+  },
+  /* 点击遮罩层关闭 */
+  maskClose() {
+    $(".joe_header__mask").on("click", function () {
+      $("body").css("overflow", "");
+      $(".joe_header__mask").removeClass("active slideout");
+      $(".joe_header__searchout").removeClass("active");
+      $(".joe_header__slideout").removeClass("active");
+    });
+  },
+  /* 移动端侧边栏菜单手风琴 */
+  sideMenuMobile() {
+    $(".joe_header__slideout-menu .current")
+      .parents(".panel-body")
+      .show()
+      .siblings(".panel")
+      .addClass("in");
+    $(".joe_header__slideout-menu .panel").on("click", function () {
+      const panelBox = $(this).parent().parent();
+      /* 清除全部内容 */
+      panelBox.find(".panel").not($(this)).removeClass("in");
+      panelBox
+        .find(".panel-body")
+        .not($(this).siblings(".panel-body"))
+        .stop()
+        .hide("fast");
+      /* 激活当前的内容 */
+      $(this).toggleClass("in").siblings(".panel-body").stop().toggle("fast");
+    });
+  },
+  /* 初始化网站运行时间 */
+  initRuntime() {
+    if (
+      !ThemeConfig.birthday ||
+      !/(\d{4})\/(\d{1,2})\/(\d{1,2}) (\d{1,2})\:(\d{1,2})\:(\d{1,2})/.test(
+        ThemeConfig.birthday
+      )
+    )
+      return;
+    const getRunTime = () => {
+      const birthDay = new Date(ThemeConfig.birthday);
+      const today = +new Date();
+      const timePast = today - birthDay.getTime();
+      let day = timePast / (1000 * 24 * 60 * 60);
+      let dayPast = Math.floor(day);
+      let hour = (day - dayPast) * 24;
+      let hourPast = Math.floor(hour);
+      let minute = (hour - hourPast) * 60;
+      let minutePast = Math.floor(minute);
+      let second = (minute - minutePast) * 60;
+      let secondPast = Math.floor(second);
+      day = String(dayPast).padStart(2, 0);
+      hour = String(hourPast).padStart(2, 0);
+      minute = String(minutePast).padStart(2, 0);
+      second = String(secondPast).padStart(2, 0);
+      $(".joe_run__day").html(day);
+      $(".joe_run__hour").html(hour);
+      $(".joe_run__minute").html(minute);
+      $(".joe_run__second").html(second);
+    };
+    getRunTime();
+    setInterval(getRunTime, 1000);
+  },
+  /* 初始化表情功能 */
+  initEmoji() {
+    if (!$(".joe_owo__contain").length && !$(".joe_owo__target").length) return;
+    $.ajax({
+      url: window.Joe.THEME_URL + "assets/json/joe.owo.json",
+      dataType: "json",
+      success(res) {
+        let barStr = "";
+        let scrollStr = "";
+        for (let key in res) {
+          const item = res[key];
+          barStr += `<div class="item" data-type="${key}">${key}</div>`;
+          scrollStr += `
                             <ul class="scroll" data-type="${key}">
 								${item
                   .map(
@@ -579,75 +642,108 @@
                   .join("")}
                             </ul>
                         `;
-            }
-            $(".joe_owo__contain").html(`
+        }
+        $(".joe_owo__contain").html(`
                         <div class="seat">OωO</div>
                         <div class="box">
                             ${scrollStr}
                             <div class="bar">${barStr}</div>
                         </div>
                     `);
-            $(document).on("click", function () {
-              $(".joe_owo__contain .box").stop().slideUp("fast");
-            });
-            $(".joe_owo__contain .seat").on("click", function (e) {
-              e.stopPropagation();
-              $(this).siblings(".box").stop().slideToggle("fast");
-            });
-            $(".joe_owo__contain .box .bar .item").on("click", function (e) {
-              e.stopPropagation();
-              $(this).addClass("active").siblings().removeClass("active");
-              const scrollIndx =
-                '.joe_owo__contain .box .scroll[data-type="' +
-                $(this).attr("data-type") +
-                '"]';
-              $(scrollIndx).show().siblings(".scroll").hide();
-            });
-            $(".joe_owo__contain .scroll .item").on("click", function () {
-              const text = $(this).attr("data-text");
-              $(".joe_owo__target").insertContent(text);
-            });
-            $(".joe_owo__contain .box .bar .item").first().click();
-          },
+        $(document).on("click", function () {
+          $(".joe_owo__contain .box").stop().slideUp("fast");
+        });
+        $(".joe_owo__contain .seat").on("click", function (e) {
+          e.stopPropagation();
+          $(this).siblings(".box").stop().slideToggle("fast");
+        });
+        $(".joe_owo__contain .box .bar .item").on("click", function (e) {
+          e.stopPropagation();
+          $(this).addClass("active").siblings().removeClass("active");
+          const scrollIndx =
+            '.joe_owo__contain .box .scroll[data-type="' +
+            $(this).attr("data-type") +
+            '"]';
+          $(scrollIndx).show().siblings(".scroll").hide();
+        });
+        $(".joe_owo__contain .scroll .item").on("click", function () {
+          const text = $(this).attr("data-text");
+          $(".joe_owo__target").insertContent(text);
+        });
+        $(".joe_owo__contain .box .bar .item").first().click();
+      },
+    });
+  },
+  /* 头部滚动 */
+  initHeadScroll() {
+    if (window.Joe.IS_MOBILE) return;
+    let flag = true;
+    const handleHeader = (diffY) => {
+      if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
+        if (flag) return;
+        $(".joe_header").addClass("active");
+        $(".joe_aside .joe_aside__item:last-child").css(
+          "top",
+          $(".joe_header").height() - 60 + 15
+        );
+        flag = true;
+      } else {
+        if (!flag) return;
+        $(".joe_header").removeClass("active");
+        $(".joe_aside .joe_aside__item:last-child").css(
+          "top",
+          $(".joe_header").height() + 15
+        );
+        flag = false;
+      }
+    };
+    let Y = window.pageYOffset;
+    handleHeader(Y);
+    let _last = Date.now();
+    document.addEventListener("scroll", () => {
+      let _now = Date.now();
+      if (_now - _last > 15) {
+        handleHeader(Y - window.pageYOffset);
+        Y = window.pageYOffset;
+      }
+      _last = _now;
+    });
+  },
+  /* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
+  scrollToHash() {
+    const scroll = new URLSearchParams(location.search).get("scroll");
+    if (scroll) {
+      const height = $(".joe_header").height();
+      let elementEL = null;
+      if ($("#" + scroll).length > 0) {
+        elementEL = $("#" + scroll);
+      } else {
+        elementEL = $("." + scroll);
+      }
+      if (elementEL && elementEL.length > 0) {
+        const top = elementEL.offset().top - height - 15;
+        window.scrollTo({
+          top,
+          behavior: "smooth",
         });
       }
     }
+  },
+  /* 初始化pjax */
+  // initPjax() {},
+};
 
-    /* 头部滚动 */
-    {
-      if (!window.Joe.IS_MOBILE) {
-        let flag = true;
-        const handleHeader = (diffY) => {
-          if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
-            if (flag) return;
-            $(".joe_header").addClass("active");
-            $(".joe_aside .joe_aside__item:last-child").css(
-              "top",
-              $(".joe_header").height() - 60 + 15
-            );
-            flag = true;
-          } else {
-            if (!flag) return;
-            $(".joe_header").removeClass("active");
-            $(".joe_aside .joe_aside__item:last-child").css(
-              "top",
-              $(".joe_header").height() + 15
-            );
-            flag = false;
-          }
-        };
-        let Y = window.pageYOffset;
-        handleHeader(Y);
-        let _last = Date.now();
-        document.addEventListener("scroll", () => {
-          let _now = Date.now();
-          if (_now - _last > 15) {
-            handleHeader(Y - window.pageYOffset);
-            Y = window.pageYOffset;
-          }
-          _last = _now;
-        });
-      }
-    }
-  });
-})();
+var omits = ["init3dTag"];
+document.addEventListener("DOMContentLoaded", function () {
+  Object.keys(commonContext).forEach(
+    (c) => !omits.includes(c) && commonContext[c]()
+  );
+});
+
+window.addEventListener("load", function () {
+  if (omits.length === 1) {
+    commonContext[omits[0]]();
+  } else {
+    omits.forEach((c) => commonContext[c]());
+  }
+});
