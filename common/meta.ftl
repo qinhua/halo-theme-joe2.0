@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta name="renderer" content="webkit">
+ <#--  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:">  -->
 <meta name="format-detection" content="email=no">
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -10,8 +11,8 @@
 <meta name="author" content="${user.nickname!}">
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <meta name="site" content="${blog_url!}">
-<!-- OG: 2.9.2 -->
-<meta property="og:image" content="${blog_favicon!}">
+<!-- OG -->
+<meta property="og:image" content="${options.blog_favicon!}">
 <meta property="og:description" content="${meta_description!}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
