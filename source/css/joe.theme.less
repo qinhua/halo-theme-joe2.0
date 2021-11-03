@@ -1,8 +1,13 @@
+// 全局CSS变量
 html {
-  /* --theme: #409eff; */
+  --font-default: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
+  /* --theme: #fb6c28; */
   --theme_reverse: #000;
   --background: #fff;
   --sub-background: #f5f5f5;
+  --sib-background: #fff;
+  --glass-background: rgba(255, 255, 255, 0.65);
   --main: #303133;
   --routine: #606266;
   --title: #333;
@@ -15,6 +20,7 @@ html {
   --classE: #dcdcdc;
   --classF: #333;
   --classG: #dcdcdc;
+  --classH: #e9f2ff;
   --quote: #50bfff;
   --code: #409eff;
   --code-background: #ecf5ff;
@@ -23,7 +29,7 @@ html {
   --radius-wrap: 8px;
   --radius-inner: 4px;
   --radius-img: 5px;
-  --box-shadow: 0px 0px 10px -5px #dedede;
+  --box-shadow: 0 0px 10px -5px #dedede;
   --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   --shadow-code: #bdbdbd;
   --block-shadow: 1px 2px 10px 0 #afafaf;
@@ -43,13 +49,14 @@ html {
   --shadow-notice: inset 0 0 15px #d1dae8;
   --animation-notice: twinkle 1s ease infinite alternate;
   background: var(--background);
-  // background: linear-gradient(rgb(67, 22, 219) 0%, rgb(144, 118, 231) 100%);
 
   &[data-mode="dark"] {
-    /* --theme: #54b5db; */
+    /* --theme: #9999ff; */
     --theme_reverse: #fff;
     --background: #232323;
     --sub-background: #303030;
+    --sib-background: #303030;
+    --glass-background: rgba(0, 0, 0, 0.65);
     --main: #999;
     --routine: #888;
     --title: #ddd;
@@ -62,6 +69,7 @@ html {
     --classE: #585858;
     --classF: #bdbdbd;
     --classG: #303030;
+    --classH: #454545;
     --quote: #276b92;
     --code: #efa141;
     --code-background: #353535;
@@ -89,9 +97,18 @@ html {
     --animation-notice: twinkle-night 1s ease infinite alternate;
     background: var(--background);
 
+    // 暗黑模式下需要修改的样式
     body:after {
       background: #2b2b2b;
-      z-index: -500;
+      z-index: -200;
+    }
+
+    img {
+      filter: brightness(0.9);
+    }
+
+    .motto_day_words {
+      filter: invert(1);
     }
 
     .joe_header {
@@ -101,10 +118,6 @@ html {
           display: block;
         }
       }
-    }
-
-    .joe_detail__article-video .episodes .box .item:not(.active) {
-      background: var(--classC);
     }
 
     .joe_detail__article {
@@ -125,13 +138,20 @@ html {
       }
     }
 
-    /* music player */
+    .joe_detail__article-video .episodes .box .item:not(.active) {
+      background: var(--classC);
+    }
+
     .aplayer {
       background: var(--classD);
 
       .aplayer-list li {
         color: var(--main);
         border-color: var(--classC);
+        &.aplayer-list-light,
+        &:hover {
+          background: #232324 !important;
+        }
       }
 
       .aplayer-info {
@@ -141,6 +161,12 @@ html {
       .aplayer-music {
         color: var(--classF);
         border-color: var(--classC);
+      }
+
+      .aplayer-time {
+        .aplayer-icon:hover path {
+          fill: var(--classF) !important;
+        }
       }
 
       .aplayer-lrc {
@@ -173,6 +199,10 @@ html {
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#cc000000", GradientType=0);
         }
       }
+    }
+
+    .joe_detail__friends {
+      filter: brightness(0.8);
     }
   }
 }

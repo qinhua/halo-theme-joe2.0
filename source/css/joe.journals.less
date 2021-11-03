@@ -1,11 +1,11 @@
 .joe {
   &_journals__list {
-    padding: 20px 0;
+    padding: 10px 0 20px;
   }
   &_journal {
     &__item {
       position: relative;
-      padding: 0px 0 30px 40px;
+      padding: 0 0 30px 40px;
       &:before {
         position: absolute;
         left: 12px;
@@ -104,7 +104,6 @@
           margin: 2px;
           padding: 0 8px;
           text-indent: 0;
-          user-select: none;
           vertical-align: baseline;
           word-break: break-word;
           background: var(--code-background);
@@ -151,7 +150,7 @@
             position: relative;
             margin: 0;
             padding: 30px 0 0;
-            user-select: none;
+            // user-select: none;
             font-size: 14px;
             overflow: hidden;
             text-shadow: none;
@@ -185,7 +184,7 @@
             code[class*="language-"] {
               display: block;
               overflow: auto;
-              user-select: none;
+              // user-select: none;
               padding: 12px 12px 12px 18px;
               text-shadow: none;
               .token.operator {
@@ -256,7 +255,7 @@
           }
         }
 
-        img:not([class]) {
+        img {
           display: block;
           max-width: 100% !important;
           cursor: zoom-in;
@@ -268,6 +267,10 @@
             transform: translateY(-5px);
             box-shadow: 0 34px 20px -24px rgba(136, 161, 206, 0.3);
           }
+        }
+
+        video {
+          max-width: 100% !important;
         }
 
         .owo_image {
@@ -291,18 +294,20 @@
     }
     &_operate_item {
       margin-right: 8px;
-      font-size: 14px;
+      font-size: 0;
       user-select: none;
       color: var(--routine);
       i {
         display: inline-block;
         cursor: pointer;
-        margin-right: 3px;
-        vertical-align: text-top;
+        margin-right: 4px;
+        vertical-align: sup;
         transition: all 0.2s;
       }
       em {
+        font-size: 14px;
         font-style: normal;
+        font-family: var(--font-default);
       }
       &.like,
       &.comment {
