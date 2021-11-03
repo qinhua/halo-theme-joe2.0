@@ -2,7 +2,7 @@
 
 <p align="center">
   <a class="logo" href="https://github.com/qinhua/halo-theme-joe2.0">
-    <img src="./halo-theme-joe2.0.png" height="86" alt="halo-theme-joe2.0">
+    <img src="./logo.png" height="86" alt="halo-theme-joe2.0">
   </a>
 </p>
 
@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/Halo-1.4.11-blue" alt="Halo"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/FreeMarker-2.3.1-yellow" alt="Release"/>
+    <img src="https://img.shields.io/badge/FreeMarker-2.3.3-yellow" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
     <img src="https://img.shields.io/badge/Release-1.0.0-green" alt="Release"/>
@@ -23,7 +23,7 @@
   </a>
 </p>
 
-> Joe2.0 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，此次在原版主题上做了大量修改和适配，由原版的 php 模板调整为 freemarker， 移除了 Halo 上暂不支持的一些特性，也增加了一些特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
+> Joe2.0 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于之前已经兄弟移植过，现在就叫 Joe2.0 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的一些特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
 
 <br>
 
@@ -33,12 +33,13 @@
 
 **部分截图** 👇
 
-![showcase](./showcase.png)
 ![screenshot](./screenshot.png)
+
+<!-- ![showcase](./showcase.png) -->
 
 <br>
 
-## 主题安装
+## 🌈 主题安装
 
 1. 访问 https://github.com/qinhua/halo-theme-joe2.0 获取仓库地址；
 
@@ -46,9 +47,15 @@
 
 3. 等待提示安装完成即可。
 
+**⚠️ 注意：**
+
+- 安装主题后请务必到 `后台管理 - 博客设置 - 高级选项` 中开启 `API服务` 并配置 `Access key` 为 `joe2.0`，不然页面部分 `content接口` 会请求失败。
+
+- 主题升级后配置项变化可能报错，导致页面渲染不出来，只需要进入当前主题的设置界面执行一下保存操作来更新旧的配置，然后在访问页面即可。
+
 <br>
 
-## 主题配置
+## 🔧 主题配置
 
 > 此次修改对外暴露了大量的设置项，主要是为了最大程度方便用户对博客进行配置，详细设置项请参见主题根目录下的 `settings.yaml` 文件。
 
@@ -56,9 +63,10 @@
 
 <br>
 
-## 主题功能
+## ⭐️ 主题功能
 
-> 此次在功能上做了大量移植，在保证不破坏主题风格的情况下，加入了主流主题常见的配置项，也融入了一些自己的思考 🤔。
+> 此次在功能上做了大量移植，在尽量不破坏原主题风格的情况下，加入了 `halo` 主题常见的配置项，也融入了一些自己的改进 🤔。
+> 具体功能请在 `后台 -> 外观 -> 主题 -> 设置` 中进行配置，配置项已按不同场景分类，便于快速查找。
 
 - 白天/黑夜模式
 - 自定义主题色
@@ -67,12 +75,11 @@
 - 留言页面
 - 日志页面定制
 - 文章分享
-- Toc 目录
+- Toc 目录<可通过文章设置单独控制>
 - 代码高亮 + 行号 + 复制 + 折叠
 - 文章和日志页 点赞 + 评论
 - 文章页 a 标签新页面打开
 - 文章页复制加版权文字
-<!-- - 全站 Pjax -->
 - 网易歌单
 - 博主可选头像框
 - 博主等级展示
@@ -87,59 +94,74 @@
 - 3D 标签云
 - 看板娘
 - 图库页面定制
+- 自定义邮件模板
 - 社交账号配置
 - 二维码打赏
-- 广告配置
+- 广告配置（侧边栏 + 文章页）
 - 自定义 JS/CSS
-- 自定义 favicon，支持视频
+- 自定义 favicon（支持视频、动图）
 - 站点运行时间
+- 清洁模式（备案模式）
 - 整站变灰（RIP 模式）
 
 <br>
 
-## 改进点
+## ✨ 改进点
 
 - meta 标签优化
-- 高亮当前 Tab
+- ftl 模板格式化
+- 导航栏优化
 - SEO 优化
 - 样式优化
   - 使用 Less 替换了 Scss
-  - 降低了部分颜色的鲜艳度
+  - 降低了部分配色的鲜艳度
 - 代码风格
-  - prettier
+  - Eslint + Prettier
 - JS 和 CSS 兼容性处理
   - JS 使用 babel 转换
   - CSS 引入 autoprefixer
   - 移除部分页面 Grid 布局
+- 代码优化
+  - 优化 z-index 属性
+  - 滚动优化
 - 页面性能优化
   - 按需引入
+  - 图片懒加载
   - DNS 预解析
+  - Gzip
 - 加载状态优化
   - 加载条
+  - 预载图
+  - 空白状态
+- 404 页面
 - 去除无用配置
 - 项目目录调整
 - 部分缺陷修复
-- 统一提取当前主题配置
+- 解析当前主题配置项
 
 <br>
 
-## TODO
+## 📃 TODO
 
-> 目前仍有部分功能不支持，有些是没时间做，有些是后台暂时不支持，会继续迭代的。
+> 目前仍有部分功能不完善，暂时没时间做，后面继续迭代。
 
 - 博客总访问量
-- 评论组件定制化
-- 评论参数简化
+- 归档页统计图标
+- 评论组件定制化（皮肤、参数简化、头像保存等）
 - 动态背景
-- 首页 Splash 大屏
-- 相册多种布局切换
-- 递归菜单
+- 全站 Pjax
+- 欢迎页面
+- 视频播放插件
+- 相册页优化
 - 多种布局切换
+- 展示动画优化
 - 外链页面评论模块
 - 自定义模板引擎
-- 博客备份
+- 文章评论后可见
+- 博客自动备份
+- 国际化
 
-## 开发指南
+## 📚 开发指南
 
 > 1、推荐使用 **VSCode** 开发，首先安装 **EasyLess** 插件来转换并压缩 less 文件，保存时会自动生成 `*.min.css` 文件，配置如下：
 
@@ -178,7 +200,15 @@
 - 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 文件
   <br>
 
-## 注意点
+## 🔍 代码提交规范
+
+建议全局安装 `commitizen`，使用它来规范我们的 `commit`，后面可以用于生成 `changlog`。
+
+**1、初始化一个空的 `changlog` 文件**
+
+`commitizen init cz-conventional-changelog --save --save-exact`
+
+## 🤔 注意点
 
 > 主要是一些使用过程中暴露出来的问题
 
@@ -196,11 +226,11 @@
 
 #### 2、如果一个菜单有子菜单，如何禁止父菜单跳转？
 
-- 通过 `管理后台-外观-菜单`，设置相关菜单的地址为 `#`，保存即可；
+- 通过 `管理后台-外观-菜单`，设置相关菜单的地址为 `#`，保存即可，子菜单同理；
 
 - 最后，重新进入你的博客即可看到效果。
 
-**tips: 为了适配和展示效果，不建议添加过多菜单。**
+**tips: 为了适配和展示效果，不建议添加过多菜单。目前最多可展示 3 级。**
 
 #### 3、子菜单如何设置新页面打开？
 
@@ -208,7 +238,7 @@
 
 <br>
 
-## 小建议
+## 😈 小建议
 
 #### 1、建议大家为站点资源开启防盗链
 
@@ -229,6 +259,10 @@ location /upload/ {
 }
 ```
 
-## 页面性能报告
+#### 2、可以使用 [webp_server_go](https://github.com/webp-sh/webp_server_go) 这个工具对全站图片进行 webp 化，提高加载速度，具体使用请参考 [如何无痛切换网站图片格式到 webp](https://bbchin.com/archives/towebp)。
+
+<br>
+
+## 📈 页面性能报告
 
 > 数据来自 Chrome 浏览器中的 Lighthouse

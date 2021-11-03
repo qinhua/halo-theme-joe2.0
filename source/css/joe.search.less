@@ -1,0 +1,30 @@
+/* 搜索页的样式 */
+.joe_archive {
+  padding: 0 15px;
+  background: var(--background);
+  border-radius: var(--radius-wrap);
+  box-shadow: var(--box-shadow);
+  &__title {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    line-height: 45px;
+    color: var(--main);
+    border-bottom: 1px solid var(--classC);
+    &-icon {
+      margin-right: 5px;
+      vertical-align: bottom;
+      font-size: 18px;
+      color: var(--theme);
+    }
+    &-title {
+      display: flex;
+      align-items: center;
+      .muted {
+        margin: 0 5px;
+        font-weight: bold;
+        color: var(--theme);
+      }
+    }
+  }
+}

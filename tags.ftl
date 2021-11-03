@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<#import "common/header.ftl" as headInfo>
+<#import "template/macro/header.ftl" as headInfo>
 <@headInfo.head title="所有标签" type="tags"/>
-<#import "common/tail.ftl" as tailInfo>
+<#import "template/macro/tail.ftl" as tailInfo>
 <body>
     <div id="Joe">
-        <#include "common/navbar.ftl">
+        <#include "template/common/navbar.ftl">
         <div class="joe_container joe_main_container page-tags">
             <div class="joe_main">
                 <div class="joe_index">
@@ -16,14 +16,14 @@
                         </ul>
                     </div>
                     <div class="joe_index__hot">
-                        <ul class="joe_index__hot-list" style="padding-bottom: 10px;">
+                        <ul class="joe_index__hot-list animated fadeIn" style="padding-bottom: 10px;">
                             <@tagTag method="list">
                                 <#list tags as tag>
                                 <li class="item">
                                     <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                                         <figure class="inner">
                                             <span class="views">${tag.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.jpeg" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
+                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="${RES_BASE_URL!}/source/img/lazyload.gif" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
                                             <figcaption class="title">${tag.name!}</figcaption>
                                         </figure>
                                     </a>
@@ -34,9 +34,9 @@
                     </div>
                 </div>
             </div>
-            <#include "common/aside.ftl">
+            <#include "template/common/aside.ftl">
         </div>
-         <#include "common/footer.ftl">
+         <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="tags"/> 
 </body>

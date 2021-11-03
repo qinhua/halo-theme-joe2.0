@@ -11,7 +11,8 @@
 <meta name="keywords" content="${meta_keywords!}">
 <meta name="description" content="${meta_description!}">
 <meta name="author" content="${user.nickname!}">
-<meta name="site" content="${blog_url!}"><link rel="shortcut icon" size="32x32" href="${blog_favicon!}">
+<meta name="site" content="${blog_url!}">
+<link rel="shortcut icon" size="32x32" href="${options.blog_favicon!}">
 <style>
   html, body {
     width: 100%;
@@ -20,7 +21,7 @@
   }
   .joe_page_404 {
       position: absolute;
-      z-index: 100;
+      z-index: 10;
       top: 0;
       left: 0;
       right: 0;
@@ -101,7 +102,7 @@
 <body>
     <div class="joe_page_404">
       <div class="error">
-        <img src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/404.svg" alt="404">
+        <img src="${RES_BASE_URL!}/source/svg/404.svg" alt="404">
         <h3 class="title">“未找到您要的资源”</h3>
         <a href="/" class="error_link">回到主页</a>
       </div>

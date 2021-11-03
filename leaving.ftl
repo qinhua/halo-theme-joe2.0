@@ -1,4 +1,12 @@
 
+<style>
+  .joe_comment {
+    padding-top: 26px;
+  }
+  .joe_comment_box > h2 {
+    display: none;
+  }
+</style>
 <ul class="joe_detail__leaving-list">
   <li class="item">
       <div class="user">

@@ -18,7 +18,7 @@
     min-height: 70px;
     background: #fff;
     box-sizing: border-box;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,.12), 0px 2px 2px 0px rgba(0,0,0,.24);
+    box-shadow: 0 0px 2px 0px rgba(0,0,0,.12), 0px 2px 2px 0px rgba(0,0,0,.24);
     color: #212121;
     text-overflow: ellipsis;
     overflow: hidden;

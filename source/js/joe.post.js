@@ -9,7 +9,7 @@ const postContext = {
       contentSelector: ".joe_detail__article",
       ignoreSelector: ".js-toc-ignore",
       headingSelector: "h1, h2, h3, h4, h5",
-      collapseDepth: ThemeConfig.tocDepth || 0,
+      collapseDepth: ThemeConfig.toc_depth || 0,
       hasInnerContainers: false,
       headingsOffset: -80, // 目录高亮的偏移值，和scrollSmoothOffset有关联
       scrollSmoothOffset: -70, // 滚动的偏移值
@@ -21,30 +21,51 @@ const postContext = {
     // toc 菜单收起/展开
     if (!$("#js-toc").children().length) {
       $("#js-toc").html('<div class="toc-nodata">暂无目录</div>');
+      $(".toc-container").addClass("hide"); // 无目录时默认折叠
     }
     $(".toc-container").show();
     $(".toc-expander i").on("click", function () {
       $(this).parents(".toc-container").toggleClass("hide");
     });
   },
+  /* 阅读进度条 */
+  initProgress() {
+    if (!ThemeConfig.enable_progress_bar) return;
+    $(window).off("scroll");
+    const progress_bar = $(".joe_progress_bar");
+    let win_h, body_h, sHeight;
+    const updateProgress = (p) => progress_bar.css("width", p * 100 + "%");
+    $(window).on("scroll", function () {
+      win_h = $(window).height();
+      body_h = $("body").height();
+      sHeight = body_h - win_h;
+      window.requestAnimationFrame(function () {
+        const perc = Math.max(0, Math.min(1, $(window).scrollTop() / sHeight));
+        updateProgress(perc);
+      });
+    });
+  },
   /* 文章复制 + 版权文字 */
   initCopy() {
-    if (!ThemeConfig.enable_copy || !$(".joe_post").length) return;
-    const curl = $(".joe_detail").attr("data-curl");
-    $(".joe_post .joe_detail").on("copy", function (e) {
+    if (!ThemeConfig.enable_copy) return;
+    const curl = $(".joe_detail").attr("data-curl") || location.href;
+    $(".joe_detail__article").on("copy", function (e) {
       const body_element = document.body;
       const selection = window.getSelection();
-      const appendLink = `作者：${ThemeConfig.author}<br>
-          链接：${curl}<br>
+      const appendLink = ThemeConfig.enable_copy_right_text
+        ? ThemeConfig.copy_right_text ||
+          `\r\n\r\n====================================<br>
+          作者：${ThemeConfig.author}<br>
           来源：${ThemeConfig.blog_title}<br>
-          著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。`;
-      // const appendLink = ThemeConfig.copy_right_text;
+          链接：${curl}<br>
+          版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+        : "";
       if (window.clipboardData) {
-        const copytext = selection + "\r\n\r\n" + appendLink;
+        const copytext = selection + appendLink;
         window.clipboardData.setData("Text", copytext);
         return false;
       } else {
-        const copytext = selection + "<br><br>" + appendLink;
+        const copytext = selection + appendLink;
         const newdiv = document.createElement("div");
         newdiv.style.position = "absolute";
         newdiv.style.left = "-99999px";
@@ -78,25 +99,7 @@ const postContext = {
           expander.parent("pre").toggleClass("close");
         });
         $item.prepend(expander);
-
-        // 自动折叠长代码，只针对文章页生效
-        if (
-          ThemeConfig.fold_long_code &&
-          location.pathname.includes("archives")
-        ) {
-          if ($item.height() > (ThemeConfig.long_code_height || 800)) {
-            const $title = $item
-              .siblings(".toolbar")
-              .find(".toolbar-item span")
-              .eq(0);
-            $title.append(
-              `<em class="autofold-tip">\<内容过长，已自动折叠\></em>`
-            );
-            $item.addClass("close");
-          }
-        }
       }
-
       // 代码复制
       if (ThemeConfig.enable_code_copy) {
         const text = $(item).find("code[class*='language-']").text();
@@ -104,11 +107,30 @@ const postContext = {
           `<span class="copy-button"><i class="joe-font joe-icon-copy" title="复制代码"></i></span>`
         );
         new ClipboardJS(span[0], {
-          text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
+          // text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
+          text: () => text,
         }).on("success", () => Qmsg.success("复制成功！"));
         $(item).addClass("copyable").append(span);
       }
     });
+  },
+  /*自动折叠长代码*/
+  foldCode() {
+    if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
+      $("pre[class*='language-']").each(function (index, item) {
+        const $item = $(item);
+        if ($item.height() > 200) {
+          const $title = $item
+            .siblings(".toolbar")
+            .find(".toolbar-item span")
+            .eq(0);
+          $title.append(
+            `<em class="autofold-tip">\<内容过长，已自动折叠\></em>`
+          );
+          $item.addClass("close");
+        }
+      });
+    }
   },
   /* 侧边栏切换 */
   initAside() {
@@ -127,7 +149,7 @@ const postContext = {
     });
   },
   /* 初始化文章分享 */
-  initPostShare() {
+  initShare() {
     if (!ThemeConfig.enable_share) return;
     if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
       new ClipboardJS($(".icon-share-link")[0], {
@@ -213,7 +235,8 @@ const postContext = {
         },
       });
     });
-  } /* 文章视频模块 */,
+  },
+  /* 文章视频模块 */
   initVideo() {
     if ($(".joe_detail__article-video").length) {
       const player = $(".joe_detail__article-video .play iframe").attr(
@@ -243,7 +266,7 @@ const postContext = {
       });
     }
   },
-  /* 密码保护文章，输入密码访问 */
+  /* TODO:密码保护文章，输入密码访问 */
   // initArticleProtect() {
   //   const cid = $(".joe_detail").attr("data-cid");
   //   let isSubmit = false;
@@ -285,18 +308,20 @@ const postContext = {
   // },
 };
 
-var omits = ["initToc"];
-document.addEventListener("DOMContentLoaded", function () {
-  Object.keys(postContext).forEach(
-    (c) => !omits.includes(c) && postContext[c]()
-  );
-});
+!(function () {
+  const omits = ["initToc", "foldCode"];
+  document.addEventListener("DOMContentLoaded", function () {
+    Object.keys(postContext).forEach(
+      (c) => !omits.includes(c) && postContext[c]()
+    );
+  });
 
-window.addEventListener("load", function () {
-  if (omits.length === 1) {
-    postContext[omits[0]]();
-  } else {
-    omits.forEach((c) => postContext[c]());
-  }
-  commonContext.scrollToHash();
-});
+  window.addEventListener("load", function () {
+    if (omits.length === 1) {
+      postContext[omits[0]]();
+    } else {
+      omits.forEach((c) => postContext[c]());
+    }
+    // commonContext.scrollToHash();
+  });
+})();
