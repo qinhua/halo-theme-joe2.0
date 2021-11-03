@@ -3,46 +3,44 @@ const leavingContext = {
   /* 获取留言板数据 */
   getData() {
     const sheetId = $(".joe_detail__title").attr("data-sheetid");
-    $.ajax({
-      url: `/api/content/sheets/${sheetId}/comments/top_view`,
-      type: "GET",
-      dataType: "json",
-      success(res) {
-        if (res.status === 200 && res.data) {
-          const resD = res.data;
-          if (resD.total) {
-            const str = resD.content.reduce((sum, item) => {
-              return (sum += `<li class="item">
-              <div class="user">
-                  <img class="avatar lazyload" src="${
-                    ThemeConfig.lazyload_avatar
-                  }" data-src="${
-                item.authorUrl || item.avatar
-              }" alt="用户头像" />
-                  <div class="nickname">${item.author}</div>
-                  <div class="date">${new Date(
-                    item.createTime
-                  ).toLocaleDateString()}</div>
-              </div>
-              <div class="wrapper">
-                  <div class="content">${item.content}</div>
-              </div>
-          </li>`);
-            }, "");
-            $(".joe_detail__leaving-list").html(str);
-            leavingContext.randomColor();
-            $(".joe_detail__leaving-list").show();
-            $(".joe_detail__leaving-none").hide();
-          } else {
-            $(".joe_detail__leaving-list").hide();
-            $(".joe_detail__leaving-none").show();
-          }
+    Utils.request(`/api/content/sheets/${sheetId}/comments/top_view`, "GET")
+      .then((res) => {
+        const $leavingList = $(".joe_detail__leaving-list");
+        const $leavingNone = $(".joe_detail__leaving-none");
+        if (res.total) {
+          const str = res.content.reduce((sum, item) => {
+            return (sum += `<li class="item">
+            <div class="user">
+                <img class="avatar lazyload" src="${
+                  ThemeConfig.lazyload_avatar
+                }" data-src="${
+              item.authorUrl || item.avatar
+            }" alt="用户头像" onerror="this.src='${
+              ThemeConfig.comment_avatar_error
+            }'"/>
+                <div class="nickname">${item.author}</div>
+                <div class="date">${new Date(
+                  item.createTime
+                ).toLocaleDateString()}</div>
+            </div>
+            <div class="wrapper">
+                <div class="content">${item.content}</div>
+            </div>
+        </li>`);
+          }, "");
+          $leavingList.html(str);
+          leavingContext.randomColor();
+          $leavingList.show();
+          $leavingNone.hide();
         } else {
-          $(".joe_detail__leaving-list").hide();
-          $(".joe_detail__leaving-none").show();
+          $leavingList.hide();
+          $leavingNone.show();
         }
-      },
-    });
+      })
+      .catch((err) => {
+        $leavingList.hide();
+        $leavingNone.show();
+      });
   },
   /* 随机样式 */
   randomColor() {

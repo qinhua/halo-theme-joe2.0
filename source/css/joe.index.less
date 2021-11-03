@@ -1,9 +1,6 @@
 /* 首页样式 */
 .joe_index {
-  background: var(--background);
-  border-radius: var(--radius-wrap);
-  box-shadow: var(--box-shadow);
-
+  overflow-y: hidden;
   &__banner {
     padding: 15px 15px 5px;
     background: var(--background);
@@ -11,25 +8,19 @@
     .swiper-container {
       min-width: 0;
       flex: 1;
-      height: 335px;
+      height: 326px;
       --swiper-theme-color: #fff;
       border-radius: var(--radius-inner);
 
       .item {
         display: block;
-        height: 335px;
+        height: 326px;
 
         .thumbnail {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: opacity 0.35s;
-
-          &.lazyload,
-          &.lazyloading {
-            object-fit: scale-down;
-          }
-
           &:hover {
             opacity: 0.85;
           }
@@ -212,88 +203,6 @@
     }
   }
 
-  &__hot {
-    padding: 0 15px;
-    &.categories {
-      padding-bottom: 10px;
-    }
-    &-list {
-      display: grid;
-      padding-top: 12px;
-      grid-template-columns: repeat(4, 1fr);
-      column-gap: 15px;
-      &.hotlist {
-        .item {
-          margin-bottom: 0;
-        }
-      }
-
-      .item {
-        overflow: hidden;
-        margin-bottom: 10px;
-        border: 1px solid var(--classC);
-        overflow: hidden;
-        border-radius: 4px;
-
-        .link {
-          display: block;
-
-          .inner {
-            position: relative;
-
-            &:hover {
-              .image {
-                opacity: 0.85;
-              }
-
-              .title {
-                background: var(--classC);
-              }
-            }
-
-            .image {
-              width: 100%;
-              height: 120px;
-              object-fit: cover;
-              transition: opacity 0.35s;
-              border-radius: var(--radius-inner) var(--radius-inner) 0 0;
-            }
-
-            .title {
-              font-size: 13px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              text-align: center;
-              padding: 0 8px;
-              line-height: 32px;
-              color: var(--minor);
-              background: var(--classD);
-              border-radius: 0 0 var(--radius-inner) var(--radius-inner);
-            }
-
-            .views {
-              display: flex;
-              align-items: center;
-              position: absolute;
-              z-index: 1;
-              top: 5px;
-              right: 5px;
-              background-image: linear-gradient(to right, #fc712a, #f84c39);
-              background-color: #f84c39;
-              color: #fff;
-              font-size: 12px;
-              height: 18px;
-              padding: 0 8px;
-              border-radius: 2px;
-              white-space: nowrap;
-            }
-          }
-        }
-      }
-    }
-  }
-
   &__article {
     padding: 0 15px;
   }
@@ -332,70 +241,9 @@
     }
   }
 
-  &__title {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--classC);
-
-    &-title {
-      position: relative;
-      display: flex;
-      align-items: center;
-      color: var(--theme);
-      font-weight: 500;
-      height: 44px;
-      line-height: 44px;
-      &.pl-15 {
-        padding-left: 15px;
-      }
-      .item {
-        cursor: pointer;
-        margin-right: 16px;
-        user-select: none;
-        transition: color 0.35s;
-
-        &.active {
-          color: var(--theme);
-        }
-      }
-
-      .line {
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        height: 2px;
-        border-radius: 1px;
-        background: var(--theme);
-        transition: left 0.35s, width 0.35s;
-      }
+  .joe_list {
+    &__item {
+      background: var(--background);
     }
-
-    &-notice {
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-      height: 40px;
-
-      svg {
-        margin-right: 3px;
-        vertical-align: bottom;
-      }
-      a {
-        color: var(--minor);
-        line-height: 20px;
-        max-width: 300px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        transition: color 0.35s;
-        &:hover {
-          color: var(--theme);
-        }
-      }
-    }
-  }
-
-  &__list {
-    overflow: hidden;
   }
 }

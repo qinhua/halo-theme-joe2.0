@@ -16,8 +16,11 @@
         <span class="fui-cross"></span>
     </div>
 </div>
-<script src="${theme_base!}/plugins/live2d/js/takagi-tips.min.js"></script>
-<script src="${theme_base!}/plugins/live2d/js/live2d.min.js"></script> 
+<#if settings.live2d_takagiDraggable?? && settings.live2d_takagiDraggable!='disable'>
+<script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</#if>
+<script src="${RES_BASE_URL}/plugins/live2d/js/takagi-tips.min.js"></script>
+<script src="${RES_BASE_URL}/plugins/live2d/js/live2d.min.js"></script> 
 <script>
     var options = {
         modelAPI: "${((settings.live2d_modelAPI!'')?length>0)?string((settings.live2d_modelAPI!''), '//live2d.fghrsh.net/api/')}",
@@ -37,9 +40,9 @@
         modelRandMode: "${((settings.live2d_modelRandMode!'')?length>0)?string((settings.live2d_modelRandMode!''), 'switch')}",
         modelTexturesRandMode: "${((settings.live2d_modelTexturesRandMode!'')?length>0)?string((settings.live2d_modelTexturesRandMode!''), 'rand')}",
         showHitokoto: ${(settings.live2d_showHitokoto!true)?string('true','false')},
-        showF12Status: ${(settings.live2d_showF12Status!true)?string('true','false')},
+        showF12Status: ${(settings.live2d_showF12Status!false)?string('true','false')},
         showF12Message: ${(settings.live2d_showF12Message!false)?string('true','false')},
-        showF12OpenMsg: ${(settings.live2d_showF12OpenMsg!true)?string('true','false')},
+        showF12OpenMsg: ${(settings.live2d_showF12OpenMsg!false)?string('true','false')},
         showCopyMessage: ${(settings.live2d_showCopyMessage!true)?string('true','false')},
         showWelcomeMessage: ${(settings.live2d_showWelcomeMessage!true)?string('true','false')},
         takagiSize: "${((settings.live2d_takagiSize!'')?length>0)?string((settings.live2d_takagiSize!''), '280x250')}",

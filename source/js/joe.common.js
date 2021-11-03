@@ -1,81 +1,52 @@
 /**通用逻辑 */
-const encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
-const decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
+window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
+window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
 const commonContext = {
   /* 初始化昼夜模式 */
   initMode() {
     const $html = $("html");
     const $icon_light = $(".mode-light");
     const $icon_dark = $(".mode-dark");
-    let local_theme = "";
-    // 1.固定模式
-    if (ThemeConfig.static_theme) {
-      $html.attr("data-mode", ThemeConfig.static_theme);
-    } else {
-      // 2.自动切换
-      if (ThemeConfig.enable_auto_switch_theme) {
-        local_theme = sessionStorage.getItem("data-mode");
-        localStorage.removeItem("data-mode");
-        if (local_theme) {
-          $html.attr("data-mode", local_theme);
-          if (local_theme === "light") {
-            $icon_light.removeClass("active");
-            $icon_dark.addClass("active");
-          } else {
-            $icon_light.addClass("active");
-            $icon_dark.removeClass("active");
-          }
-        } else {
-          const light_scope = ThemeConfig.dark_time_scope.split("~");
-          const now = new Date();
-          const today = now.toLocaleString().split(" ")[0];
-          const theme =
-            now >= new Date(today + " " + light_scope[0]) &&
-            now <= new Date(today + " " + light_scope[1])
-              ? "light"
-              : "dark";
-          if (theme === "light") {
-            $icon_light.removeClass("active");
-            $icon_dark.addClass("active");
-          } else {
-            $icon_light.addClass("active");
-            $icon_dark.removeClass("active");
-          }
-          $html.attr("data-mode", theme);
-          sessionStorage.setItem("data-mode", theme);
-        }
-      } else {
-        const theme = localStorage.getItem("data-mode") || "light";
-        $(".mode-" + (theme === "light" ? "dark" : "light")).addClass("active");
-        $html.attr("data-mode", theme);
-      }
-    }
-    // 3.手动切换
+    let local_theme = localStorage.getItem("data-mode");
+
+    // 图标状态
+    $icon_light[`${local_theme === "light" ? "remove" : "add"}Class`]("active");
+    $icon_dark[`${local_theme === "light" ? "add" : "remove"}Class`]("active");
+
+    // 手动切换
     $(".joe_action_item.mode").on("click", function () {
-      const curSource = ThemeConfig.enable_auto_switch_theme
-        ? sessionStorage
-        : localStorage;
-      local_theme = curSource.getItem("data-mode");
+      local_theme = localStorage.getItem("data-mode");
       let theme = "";
       if (local_theme) {
-        if (local_theme === "light") {
-          theme = "dark";
-          $icon_dark.removeClass("active");
-          $icon_light.addClass("active");
-        } else {
-          theme = "light";
-          $icon_light.removeClass("active");
-          $icon_dark.addClass("active");
-        }
+        theme = local_theme === "light" ? "dark" : "light";
+        $icon_light[`${local_theme === "light" ? "add" : "remove"}Class`](
+          "active"
+        );
+        $icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
+          "active"
+        );
       } else {
         theme = "dark";
         $icon_light.removeClass("active");
         $icon_dark.addClass("active");
       }
       $html.attr("data-mode", theme);
-      curSource.setItem("data-mode", theme);
+      localStorage.setItem("data-mode", theme);
+      localStorage.setItem("data-mode-timestamp", Date.now());
       commonContext.initCommentTheme();
     });
+  },
+  /* 加载条 */
+  loadingBar: {
+    show() {
+      if (!ThemeConfig.enable_loading_bar) return;
+      NProgress.configure({ easing: "ease", speed: 500, showSpinner: false });
+      NProgress.start();
+    },
+    hide() {
+      if (!ThemeConfig.enable_loading_bar) return;
+      NProgress.done(true);
+    },
   },
   /* 导航条高亮 */
   initNavbar() {
@@ -96,7 +67,7 @@ const commonContext = {
   /* 初始化评论主题 */
   initCommentTheme() {
     const comments = document.getElementsByTagName("halo-comment");
-    const curMode = $("html").attr("data-mode");
+    const curMode = localStorage.getItem("data-mode");
     // 黑夜模式下
     for (let i = 0; i < comments.length; i++) {
       const shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
@@ -184,18 +155,19 @@ const commonContext = {
       },
     });
   },
+  /* 加载鼠标特效 */
+  loadMouseEffect() {
+    if (Joe.isMobile || ThemeConfig.cursor_effect === "off") return;
+    $.getScript(
+      `${ThemeConfig.RES_BASE_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
+    );
+  },
   /* 动态背景 */
   initDynamicBg() {
-    if (
-      !Joe.IS_MOBILE &&
-      Joe.DYNAMIC_BACKGROUND !== "off" &&
-      Joe.DYNAMIC_BACKGROUND &&
-      !Joe.WALLPAPER_BACKGROUND_PC
-    ) {
-      $.getScript(
-        window.Joe.THEME_URL + `assets/backdrop/${Joe.DYNAMIC_BACKGROUND}`
-      );
-    }
+    if (!ThemeConfig.enable_splash) return;
+    // $.getScript(
+    //   window.Joe.THEME_URL + `assets/backdrop/${Joe.DYNAMIC_BACKGROUND}`
+    // );
   },
   /* 自定义favicon */
   setFavicon() {
@@ -209,12 +181,13 @@ const commonContext = {
   },
   /* 搜索框弹窗 */
   searchDialog() {
+    const $result = $(".joe_header__above-search .result");
     $(".joe_header__above-search .input").on("click", function (e) {
       e.stopPropagation();
-      $(".joe_header__above-search .result").addClass("active");
+      $result.addClass("active");
     });
     $(document).on("click", function () {
-      $(".joe_header__above-search .result").removeClass("active");
+      $result.removeClass("active");
     });
   },
   /* 激活全局下拉框功能 */
@@ -241,17 +214,19 @@ const commonContext = {
   },
   /* 激活全局返回顶部功能 */
   back2Top() {
+    if (!ThemeConfig.enable_back2top) return;
     let _debounce = null;
+    const $el = $(".joe_action_item.back2top");
     const handleScroll = () =>
       (document.documentElement.scrollTop || document.body.scrollTop) > 300
-        ? $(".joe_action_item.scroll").addClass("active")
-        : $(".joe_action_item.scroll").removeClass("active");
+        ? $el.addClass("active")
+        : $el.removeClass("active");
     handleScroll();
     $(document).on("scroll", () => {
       clearTimeout(_debounce);
       _debounce = setTimeout(handleScroll, 80);
     });
-    $(".joe_action_item.scroll").on("click", () =>
+    $el.on("click", () =>
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -346,27 +321,31 @@ const commonContext = {
   },
   /* 激活侧边栏天气功能 */
   initWeather() {
-    if (!$(".joe_aside__item.weather").length) return;
-    const key = $(".joe_aside__item.weather").attr("data-key");
-    const style = $(".joe_aside__item.weather").attr("data-style");
-    const aqiColor = {
-      1: "FFFFFF",
-      2: "4A4A4A",
-      3: "FFFFFF",
-    };
+    if (!ThemeConfig.enable_weather || !ThemeConfig.weather_key) return;
     window.WIDGET = {
       CONFIG: {
-        layout: 2,
-        width: "220",
-        height: "270",
-        background: style,
-        dataColor: aqiColor[style],
-        language: "zh",
-        key,
+        modules: "120",
+        background: "5",
+        tmpColor: "FFFFFF",
+        tmpSize: "12",
+        cityColor: "FFFFFF",
+        citySize: "12",
+        aqiColor: "FFFFFF",
+        aqiSize: "12",
+        weatherIconSize: "12",
+        alertIconSize: "12",
+        padding: "5px 5px 4px 5px",
+        shadow: "0",
+        language: "auto",
+        borderRadius: "4",
+        fixed: "true",
+        vertical: "top",
+        horizontal: "left",
+        key: ThemeConfig.weather_key,
       },
     };
     $.getScript(
-      "https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"
+      "https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
     );
   },
   /* 文章/日志页图片预览功能 */
@@ -582,16 +561,16 @@ const commonContext = {
     });
   },
   /* 初始化网站运行时间 */
-  initRuntime() {
-    if (
-      !ThemeConfig.birthday ||
-      !/(\d{4})\/(\d{1,2})\/(\d{1,2}) (\d{1,2})\:(\d{1,2})\:(\d{1,2})/.test(
-        ThemeConfig.birthday
-      )
-    )
-      return;
+  initBirthday() {
+    if (!ThemeConfig.enable_birthday) return;
+    const birthDay = new Date(
+      +$(".site_life").attr("data-birthday").replace(/,/g, "")
+    );
+    const $day = $(".joe_run__day");
+    const $hour = $(".joe_run__hour");
+    const $minute = $(".joe_run__minute");
+    const $second = $(".joe_run__second");
     const getRunTime = () => {
-      const birthDay = new Date(ThemeConfig.birthday);
       const today = +new Date();
       const timePast = today - birthDay.getTime();
       let day = timePast / (1000 * 24 * 60 * 60);
@@ -606,10 +585,10 @@ const commonContext = {
       hour = String(hourPast).padStart(2, 0);
       minute = String(minutePast).padStart(2, 0);
       second = String(secondPast).padStart(2, 0);
-      $(".joe_run__day").html(day);
-      $(".joe_run__hour").html(hour);
-      $(".joe_run__minute").html(minute);
-      $(".joe_run__second").html(second);
+      $day.html(day);
+      $hour.html(hour);
+      $minute.html(minute);
+      $second.html(second);
     };
     getRunTime();
     setInterval(getRunTime, 1000);
@@ -676,7 +655,7 @@ const commonContext = {
   },
   /* 头部滚动 */
   initHeadScroll() {
-    if (window.Joe.IS_MOBILE) return;
+    if (window.IS_MOBILE) return;
     let flag = true;
     const handleHeader = (diffY) => {
       if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
@@ -731,19 +710,56 @@ const commonContext = {
   },
   /* 初始化pjax */
   // initPjax() {},
+
+  /* 页面加载耗时（控制台） */
+  showLoadedTime() {
+    if (!ThemeConfig.show_loaded_time) return;
+    const consume_time = performance.now();
+    consume_time &&
+      console.log(
+        "%c页面加载耗时：" +
+          Math.round(consume_time) +
+          ` ms | Theme By ${ThemeConfig.author}`,
+        "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px"
+      );
+  },
+  /* 清理工作 */
+  clean() {
+    // 移除无用标签
+    $("#compatiable-checker").remove();
+    $("#theme-config-getter").remove();
+    $("#metas-getter").remove();
+  },
 };
 
-var omits = ["init3dTag"];
-document.addEventListener("DOMContentLoaded", function () {
-  Object.keys(commonContext).forEach(
-    (c) => !omits.includes(c) && commonContext[c]()
-  );
-});
+!(function () {
+  const omits = [
+    "loadingBar",
+    "init3dTag",
+    "initLive2d",
+    "initEmoji",
+    "showLoadedTime",
+    "clean",
+  ];
+  document.addEventListener("DOMContentLoaded", function () {
+    commonContext.loadingBar.show();
+    Object.keys(commonContext).forEach(
+      (c) => !omits.includes(c) && commonContext[c]()
+    );
+  });
 
-window.addEventListener("load", function () {
-  if (omits.length === 1) {
-    commonContext[omits[0]]();
-  } else {
-    omits.forEach((c) => commonContext[c]());
-  }
-});
+  window.addEventListener("load", function () {
+    // if (omits.length === 1) {
+    //   commonContext[omits[0]]();
+    // } else {
+    //   omits.forEach((c) => commonContext[c]());
+    // }
+    commonContext.init3dTag();
+    commonContext.initBirthday();
+    commonContext.loadingBar.hide();
+    commonContext.showLoadedTime();
+    commonContext.clean();
+  });
+})();
+
+window.commonContext = commonContext;

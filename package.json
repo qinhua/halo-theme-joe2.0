@@ -3,8 +3,27 @@
   "version": "1.0.0",
   "description": "A halo theme joe2.0",
   "main": "index.js",
+  "author": "BabyChin",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "config/validate-commit-msg.js"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged && npm run build"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": "eslint --ext .js",
+    "**/*.less": "eslint --ext .less"
   },
   "repository": {
     "type": "git",
@@ -15,7 +34,6 @@
     "halo-theme",
     "joe2.0"
   ],
-  "author": "BabyChin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/qinhua/halo-theme-joe2.0/issues"
@@ -26,6 +44,11 @@
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.6",
     "babel-loader": "^8.2.2",
+    "compression-webpack-plugin": "^9.0.0",
+    "conventional-changelog": "^3.1.24",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.5",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
   }
