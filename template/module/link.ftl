@@ -12,19 +12,19 @@
   <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.theme.min.css?v=${theme.version!}">
   <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.global.min.css?v=${theme.version!}">
   <#if type == 'index' && settings.enable_banner == true>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@5.4.5/css/swiper.min.css">
+    <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/swiper/swiper.min.css">
   </#if>
   <#if type == 'post' || type == 'journals'>
-    <link rel="preload stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/prism/prism.css?v=${theme.version!}">
-    <link rel="preload stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/lib/prism/themes/prism-${settings.code_theme!'dark'}.css?v=${theme.version!}">
+    <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/prism/prism.css?v=${theme.version!}">
+    <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/prism/themes/prism-${settings.code_theme!'dark'}.css?v=${theme.version!}">
   </#if>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typecho-joe-next@6.0.0/plugin/qmsg/qmsg.css">
-  <link rel="preload stylesheet" as="style" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+  <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.css">
+  <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/animate/animate.min.css">
   <#if settings.enable_mathjax==true && (type == 'post' || type == 'journals')>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
   </#if>
   <#if settings.cursor_skin?? && settings.cursor_skin!='off'>
-    <link rel="stylesheet" href="${RES_BASE_URL}/source/css/min/joe.cursor.min.css?v=${theme.version!}">
+    <link rel="stylesheet" href="${RES_BASE_URL}/source/cursor/style/min/${settings.cursor_skin!}.min.css?v=${theme.version!}">
   </#if>
   <#if type == 'index'>
     <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.index.min.css?v=${theme.version!}">
@@ -45,9 +45,9 @@
     <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.search.min.css?v=${theme.version!}">
   </#if>
   <#if type == 'photo'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.css">
+    <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/justifiedGallery/justifiedGallery.css">
     <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.photos.min.css?v=${theme.version!}">
   </#if>
   <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.responsive.min.css?v=${theme.version!}">
-  <link rel="stylesheet" href="${RES_BASE_URL}/source/css/min/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/fancybox/jquery.fancybox.min.css">
 </#macro>

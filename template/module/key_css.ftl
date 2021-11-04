@@ -30,8 +30,9 @@
           <#assign fontFormat="xxx">
         </#if>
         src: url(${settings.custom_font}) format("${fontFormat}");
+      <#elseif settings.web_font?? && settings.web_font!='off'>
+        src: url(${RES_BASE_URL + "/source/font/" + settings.web_font}) format("${settings.web_font?split('.')[1]}");
       <#else>
-        src: url(${RES_BASE_URL+"/source/font/slate.woff2"}) format("woff2");
       </#if>
     }
     html body {

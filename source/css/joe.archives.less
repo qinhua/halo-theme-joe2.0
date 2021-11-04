@@ -6,6 +6,7 @@
     line-height: 40px;
     color: var(--main);
     border-bottom: 1px solid var(--classC);
+
     i {
       margin-right: 3px;
       vertical-align: bottom;
@@ -30,8 +31,7 @@
           justify-content: space-between;
           background: var(--background);
           box-shadow: var(--box-shadow);
-          border-radius: var(--radius-inner) var(--radius-wrap)
-            var(--radius-wrap) var(--radius-inner);
+          border-radius: var(--radius-inner) var(--radius-wrap) var(--radius-wrap) var(--radius-inner);
           padding: 15px 15px 12px;
 
           .count {
@@ -183,8 +183,10 @@
 
   &__category {
     margin-bottom: 20px;
+
     .joe_category-list {
       overflow: hidden;
+
       .item {
         float: left;
         border-radius: 3px;
@@ -197,7 +199,8 @@
         white-space: nowrap;
         color: var(--routine);
         background: var(--classH);
-        transition: background 0.2s;
+        // transition: background 0.2s;
+
         a {
           display: block;
           padding: 0 6px;
@@ -205,8 +208,10 @@
           line-height: 24px;
           color: var(--routine);
         }
+
         &:hover {
           background: var(--theme);
+
           a {
             color: var(--classD);
           }
@@ -275,10 +280,12 @@
             .joe-font {
               transform: rotate(180deg);
             }
-            + .panel-body {
+
+            +.panel-body {
               opacity: 1;
             }
           }
+
           &::before {
             content: "";
             position: absolute;
