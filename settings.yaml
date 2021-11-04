@@ -168,17 +168,38 @@ theme:
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
       description: "在返回到当前标签时，通过title展示的文字"
+    web_font:
+      name: web_font
+      label: 网站字体
+      type: select
+      default: "off"
+      description: "配置网站的字体，暂时提供了1种供选择，也可以在 ‘自定义’ 一栏中自定义字体来源，如果两边同时配置，优先使用自定义配置中的字体（请注意：中文字体并不能保证所有文字展示正确，请慎用！！！）"
+      options:
+        - value: "off"
+          label: 默认
+        - value: "joe_slate.woff2"
+          label: "Joe Slate"
     cursor_skin:
       name: cursor_skin
       label: 鼠标皮肤
       type: select
       default: "off"
-      description: "配置鼠标光标的皮肤"
+      description: "配置鼠标光标的皮肤（部分皮肤在暗黑模式下可能不明显），更多皮肤请前往 https://zhutix.com/tag/cursors/"
       options:
         - value: "off"
           label: 无（默认）
-        - value: sakura
-          label: sakura
+        - value: simple_cursor
+          label: 简洁卡通
+        - value: simple_sunset_light
+          label: 简单日落(浅色)
+        - value: simple_sunset_dark
+          label: 简单日落(暗黑)
+        - value: crystallize
+          label: 简约水晶
+        - value: emoji_zip
+          label: 魔力表情
+        - value: black_cat
+          label: 小黑猫
     cursor_effect:
       name: cursor_effect
       label: 鼠标特效
@@ -212,6 +233,18 @@ theme:
           label: 上升气泡（移动）
         - value: cursor11
           label: 雪花雨（移动）
+    bg_particle_rain:
+      name: bg_particle_rain
+      label: 开启全屏粒子雨
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否开启全屏粒子雨特效，该特效比较耗性能，请谨慎使用"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_back2top:
       name: enable_back2top
       label: 开启返回顶部
@@ -240,11 +273,13 @@ theme:
       name: loading_bar_height
       label: 加载条高度
       type: text
-      placeholder: "加载条高度，默认2px"
+      default: "3px"
+      placeholder: "加载条高度，默认3px"
     loading_bar_color:
       name: loading_bar_color
       label: 加载条颜色
       type: text
+      default: ""
       placeholder: "加载条背景色，默认跟随主题色"
 
 # 导航条
@@ -288,7 +323,7 @@ navbar:
       description: "导航栏博客LOGO的圆角值，像素或百分比，默认4px"
     enable_navbar_icon:
       name: enable_navbar_icon
-      label: 开启导航栏菜单图标
+      label: 开启菜单图标
       type: switch
       data-type: bool
       default: true
@@ -994,33 +1029,46 @@ home:
       description: "是否展示首页的精品分类，可自定义封面图片（175*90）"
       options:
         - value: true
-          label: 开启
+          label: 是
         - value: false
-          label: 关闭
+          label: 否
+    enabel_category_celcius:
+      name: enabel_category_celcius
+      label: 展示热度标签
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示首页的精品分类图片上的温度℃"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     hot_cover1:
       name: hot_cover1
       label: 分类图1
       type: attachment
+      default: ""
       placeholder: "请填入图片地址"
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover1.jpg"
+      description: "对于首页的分类图封面，会优先取这里配置的，取不到再去取后台管理中配置的，都没有则展示默认封面"
     hot_cover2:
       name: hot_cover2
       label: 分类图2
       type: attachment
+      default: ""
       placeholder: "请填入图片地址"
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover2.jpg"
     hot_cover3:
       name: hot_cover3
       label: 分类图3
       type: attachment
+      default: ""
       placeholder: "请填入图片地址"
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover3.jpg"
     hot_cover4:
       name: hot_cover4
       label: 分类图4
       type: attachment
+      default: ""
       placeholder: "请填入图片地址"
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/hot_cover4.jpg"
 
 # 归档页
 archive:
@@ -1308,7 +1356,7 @@ post:
       type: switch
       data-type: bool
       default: false
-      description: "自动折叠文章页中内容很长的代码块，提高浏览效率（必须先开启“代码折叠”选项，否则无效）"
+      description: "自动折叠文章页中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
       options:
         - value: true
           label: 开启
@@ -1482,11 +1530,13 @@ post:
       name: qrcode_zfb
       label: "支付宝二维码"
       type: attachment
+      default: ""
       placeholder: "打赏用的支付宝收款二维码链接，不填不显示"
     qrcode_wx:
       name: qrcode_wx
       label: "微信二维码"
       type: attachment
+      default: ""
       placeholder: "打赏用的微信收款二维码链接，不填不显示"
 
 # 日志页
@@ -1582,41 +1632,41 @@ photos:
       type: switch
       data-type: bool
       default: true
-      description: "是否开启图片展示动画"
+      description: "是否开启图片展示出来时的动画效果"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
-    photo_lazyload_img:
-      name: photo_lazyload_img
-      label: 预载图
-      type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.gif"
-      description: "图片加载出来之前展示的图片"
-    photos_layout:
-      name: photos_layout
-      label: 相册布局风格
-      type: radio
-      default: grid
-      description: "设置相册页默认布局，也可在前台切换"
-      options:
-        - value: grid
-          label: 网格布局
-        - value: waterfall
-          label: 瀑布流布局
+    # photo_lazyload_img:
+    #   name: photo_lazyload_img
+    #   label: 预载图
+    #   type: attachment
+    #   default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.gif"
+    #   description: "图片加载出来之前展示的图片"
+    # photos_layout:
+    #   name: photos_layout
+    #   label: 相册布局风格
+    #   type: radio
+    #   default: grid
+    #   description: "设置相册页默认布局，也可在前台切换"
+    #   options:
+    #     - value: grid
+    #       label: 网格布局
+    #     - value: waterfall
+    #       label: 瀑布流布局
     photos_page_size:
       name: photos_page_size
       label: 分页大小
       type: text
-      default: "3"
+      default: "10"
       placeholder: '列表分页大小，默认10条（请填数字）'
     photos_gap:
       name: photos_gap
       label: 图片间距
       type: text
-      default: "8"
-      placeholder: 请输入
+      default: "10"
+      placeholder: 请输入图片间距值，默认10（请填数字）
 
 # 社交
 social:
@@ -2212,9 +2262,9 @@ custom:
       description: "覆盖博客默认的favicon图标，尺寸64*64，格式jpg、png等"
     custom_font:
       name: custom_font
-      label: "自定义博客字体"
+      label: "自定义网站字体"
       type: attachment
-      description: "修改网站使用的字体，请填入字体文件的链接（建议 woff/woff2 格式字体，最好是CDN链接)"
+      description: "修改网站使用的字体，请填入字体文件的链接（考虑兼容，建议 woff/woff2 格式字体，最好放CDN链接)"
     iconfont:
       name: iconfont
       label: "字体图标链接"

@@ -5,6 +5,7 @@
     border-radius: var(--radius-wrap);
     box-shadow: var(--box-shadow);
     padding: 60px 15px 15px;
+
     &-title {
       position: absolute;
       top: 15px;
@@ -18,6 +19,7 @@
       padding: 0 12px;
       border-radius: 2px 2px 2px 0;
       user-select: none;
+
       &::after {
         content: "";
         position: absolute;
@@ -30,14 +32,17 @@
       }
     }
   }
+
   &__type {
     margin-bottom: 15px;
+
     &-list {
       display: grid;
       gap: 15px;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       border-top: 1px solid var(--classC);
       padding-top: 15px;
+
       .item {
         user-select: none;
         white-space: nowrap;
@@ -54,17 +59,20 @@
         text-align: center;
         transition: color 0.35s, background 0.35s, box-shadow 0.35s,
           transform 0.35s;
+
         &.active {
           transform: translateY(-2px);
           color: #fff;
           background: var(--theme);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
         }
+
         &:hover {
           transform: translateY(-2px);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
         }
       }
+
       .error {
         text-align: center;
         color: var(--routine);
@@ -72,6 +80,7 @@
       }
     }
   }
+
   &__list {
     &-item {
       display: grid;
@@ -79,10 +88,12 @@
       grid-template-columns: repeat(5, 1fr);
       border-top: 1px solid var(--classC);
       padding-top: 15px;
+
       .item {
         position: relative;
         border-radius: var(--radius-inner);
         overflow: hidden;
+
         .year {
           position: absolute;
           top: 8px;
@@ -95,14 +106,17 @@
           color: #fff;
           z-index: 3;
         }
+
         .thumb {
           position: relative;
           height: 260px;
+
           .pic {
             width: 100%;
             height: 100%;
             object-fit: cover;
           }
+
           &::before {
             content: "";
             position: absolute;
@@ -114,6 +128,7 @@
             transition: background 0.3s ease-out;
             z-index: 2;
           }
+
           &::after {
             content: "";
             position: absolute;
@@ -123,22 +138,24 @@
             height: 50px;
             margin: -25px 0 0 -25px;
             opacity: 0;
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAA1VBMVEUcHBwAAAD8/PwpKSn///////+SkpL6+vrMzMx6enrj4+Pf39+4uLhkZGRhYWFTU1P///9DQ0P////////////////+/v5bW1v39/fz8/P////////a2tpoaGj////19fXY2Nizs7Oqqqr///+VlZU8PDz///////////////////+9vb3///+xsbH///////////////////////////+Ojo7////////v7+/s7Oz////////////q6url5eXc3Nzc3NzJycnCwsKgoKCLi4v////////8X/FsAAAARnRSTlNmAPtq77qS9r2F1NGsfHt2k3BWHQsG+3ny69rWy35f7sinopeUbiHcxr2wr6qmpaF9LxoWmJAyH+jig3tj3dnOzLmzmo4z4F1A4QAAAdxJREFUSMellmlX6jAQhod0X1gKlLKDILjgLuj17veq7///SaLgoZm02OjzsTlPTyaZmQyVFBrDmtU1Wy2za9WGDXWdK42rHiR6V/d7leszAE4QrgaRYUSDVRg4AM6uc5XbS0CMbYNSGPZYAJe32UrdhHCrpFB1Bcx6hhJPAT+hTBIfmMZcaVoQB5TLgYDVlJXmMdoe7cFr47iZVuITdCq0l0oHJ3FKmWLEDdUZYbpT6hAefYgnUH9XbkycUwHOYd5slQv4VAgfFxvlDqJcTCkL3L0pp3CpIC5OX5V7iGpRpSowXys/0CeZp7/9xSDb6eP7WunBVn615mFikIqNbokacNjaf2zoTFTFcDCnIQKSecA7vzziBPhJNYTsR9jRWvDdhaiRhUOSGCDN74gkDmHREcr8o8S3RL5NHJGJmaxMINOR1iOYBPACBKMvR9pSlQUYgit8Y6oSsI2p4YfMaCc8fH7IPPyRxw9ZvUqbnzG/SjVhykgxnqkJk5GWzi6Mx8y0VJP/DzYId5ad/GqJrbZCkltic6WQ/wnHn0R5hfy5dlF61mtK+q1Pv8Hqt3G9xyIZYfmVJ0n/4dN/XrfES8Cv5GzKB5ax/qjw9YGEjz32Zuyx2djz+eFKf4R7ATsDgJd2KvNDAAAAAElFTkSuQmCC)
-              no-repeat;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAA1VBMVEUcHBwAAAD8/PwpKSn///////+SkpL6+vrMzMx6enrj4+Pf39+4uLhkZGRhYWFTU1P///9DQ0P////////////////+/v5bW1v39/fz8/P////////a2tpoaGj////19fXY2Nizs7Oqqqr///+VlZU8PDz///////////////////+9vb3///+xsbH///////////////////////////+Ojo7////////v7+/s7Oz////////////q6url5eXc3Nzc3NzJycnCwsKgoKCLi4v////////8X/FsAAAARnRSTlNmAPtq77qS9r2F1NGsfHt2k3BWHQsG+3ny69rWy35f7sinopeUbiHcxr2wr6qmpaF9LxoWmJAyH+jig3tj3dnOzLmzmo4z4F1A4QAAAdxJREFUSMellmlX6jAQhod0X1gKlLKDILjgLuj17veq7///SaLgoZm02OjzsTlPTyaZmQyVFBrDmtU1Wy2za9WGDXWdK42rHiR6V/d7leszAE4QrgaRYUSDVRg4AM6uc5XbS0CMbYNSGPZYAJe32UrdhHCrpFB1Bcx6hhJPAT+hTBIfmMZcaVoQB5TLgYDVlJXmMdoe7cFr47iZVuITdCq0l0oHJ3FKmWLEDdUZYbpT6hAefYgnUH9XbkycUwHOYd5slQv4VAgfFxvlDqJcTCkL3L0pp3CpIC5OX5V7iGpRpSowXys/0CeZp7/9xSDb6eP7WunBVn615mFikIqNbokacNjaf2zoTFTFcDCnIQKSecA7vzziBPhJNYTsR9jRWvDdhaiRhUOSGCDN74gkDmHREcr8o8S3RL5NHJGJmaxMINOR1iOYBPACBKMvR9pSlQUYgit8Y6oSsI2p4YfMaCc8fH7IPPyRxw9ZvUqbnzG/SjVhykgxnqkJk5GWzi6Mx8y0VJP/DzYId5ad/GqJrbZCkltic6WQ/wnHn0R5hfy5dlF61mtK+q1Pv8Hqt3G9xyIZYfmVJ0n/4dN/XrfES8Cv5GzKB5ax/qjw9YGEjz32Zuyx2djz+eFKf4R7ATsDgJd2KvNDAAAAAElFTkSuQmCC) no-repeat;
             transform: scale(2);
             transition: transform 0.25s ease-out, opacity 0.25s ease-out;
             z-index: 3;
           }
+
           &:hover {
             &::before {
               background: rgba(0, 0, 0, 0.5);
             }
+
             &::after {
               opacity: 0.8;
               transform: scale(1);
             }
           }
         }
+
         .title {
           white-space: nowrap;
           overflow: hidden;
@@ -152,16 +169,19 @@
           font-size: 12px;
         }
       }
+
       .error {
         text-align: center;
         color: var(--minor);
       }
+
       &:empty {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 180px;
+
         &::after {
           content: "";
           display: block;
@@ -173,12 +193,14 @@
         }
       }
     }
+
     &-search {
       position: absolute;
       top: 15px;
       right: 15px;
       display: flex;
       align-items: center;
+
       .input {
         width: 180px;
         height: 30px;
@@ -188,6 +210,7 @@
         border: 1px solid var(--theme);
         font-size: 12px;
       }
+
       .button {
         height: 30px;
         border: none;
@@ -198,11 +221,13 @@
       }
     }
   }
+
   &__pagination {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-top: 15px;
+
     &-item {
       user-select: none;
       cursor: pointer;
@@ -214,32 +239,40 @@
       color: var(--main);
       border-radius: 2px;
       transition: background 0.35s, color 0.35s;
+
       &:first-child {
         margin-left: 0;
       }
+
       svg {
         fill: var(--routine);
         transition: fill 0.35s;
       }
+
       .next {
         transform: rotate(180deg);
       }
+
       &.active,
       &:hover {
         color: #fff;
         background: var(--theme);
+
         svg {
           fill: #fff;
         }
       }
     }
   }
+
   &__detail {
     margin-bottom: 15px;
+
     &-info {
       display: flex;
       border-top: 1px solid var(--classC);
       padding-top: 15px;
+
       .thumbnail {
         flex-shrink: 0;
         position: relative;
@@ -248,11 +281,13 @@
         margin-right: 15px;
         border-radius: var(--radius-inner);
         overflow: hidden;
+
         .pic {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
+
         .year {
           position: absolute;
           top: 8px;
@@ -266,8 +301,10 @@
           z-index: 3;
         }
       }
+
       .description {
         overflow: hidden;
+
         dt {
           font-size: 22px;
           color: var(--main);
@@ -277,6 +314,7 @@
           white-space: nowrap;
           margin-bottom: 10px;
         }
+
         dd {
           margin-bottom: 5px;
           word-break: break-all;
@@ -289,14 +327,17 @@
           text-overflow: ellipsis;
           line-height: 22px;
           max-height: 44px;
+
           .muted {
             color: var(--minor);
           }
+
           .text {
             color: var(--routine);
           }
         }
       }
+
       .error {
         color: var(--minor);
         margin: 0 auto;
@@ -304,25 +345,31 @@
       }
     }
   }
+
   &__player {
     margin-bottom: 15px;
+
     &-play {
       width: 100%;
       height: 500px;
       background: #000;
     }
   }
+
   &__source {
     margin-bottom: 15px;
+
     &:last-child {
       margin-bottom: 0;
     }
+
     &-list {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 15px;
       border-top: 1px solid var(--classC);
       padding-top: 15px;
+
       .item {
         height: 30px;
         line-height: 30px;
@@ -338,12 +385,14 @@
         transition: transform 0.35s, box-shadow 0.35s, background 0.35s,
           color 0.35s;
         padding: 0 10px;
+
         &.active {
           transform: translateY(-2px);
           color: #fff;
           background: var(--theme);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
         }
+
         &:hover {
           transform: translateY(-2px);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);

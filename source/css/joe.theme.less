@@ -11,6 +11,7 @@ html {
   --main: #303133;
   --routine: #606266;
   --title: #333;
+  --sib: #f2f6fc;
   --minor: #909399;
   --seat: #c0c4cc;
   --classA: #dcdfe6;
@@ -41,11 +42,9 @@ html {
   --background-notice: #fbf5f1;
   --background-journal: #fff;
   --background-journal-block: #f5f5f5;
-  --background-journal-gradient: linear-gradient(
-    0deg,
-    #d4d4d4,
-    transparent 80%
-  );
+  --background-journal-gradient: linear-gradient(0deg,
+      #d4d4d4,
+      transparent 80%);
   --shadow-notice: inset 0 0 15px #d1dae8;
   --animation-notice: twinkle 1s ease infinite alternate;
   background: var(--background);
@@ -60,6 +59,7 @@ html {
     --main: #999;
     --routine: #888;
     --title: #ddd;
+    --sib: #3a3a3a;
     --minor: #777;
     --seat: #666;
     --classA: #515253;
@@ -88,11 +88,9 @@ html {
     --background-notice: #303030;
     --background-journal: #383838;
     --background-journal-block: #232323;
-    --background-journal-gradient: linear-gradient(
-      0deg,
-      #151515,
-      transparent 80%
-    );
+    --background-journal-gradient: linear-gradient(0deg,
+        #151515,
+        transparent 80%);
     --shadow-notice: inset 0 0 15px #4a4c4e;
     --animation-notice: twinkle-night 1s ease infinite alternate;
     background: var(--background);
@@ -113,6 +111,7 @@ html {
 
     .joe_header {
       box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+
       .joe_header__above-logo {
         svg {
           display: block;
@@ -148,6 +147,7 @@ html {
       .aplayer-list li {
         color: var(--main);
         border-color: var(--classC);
+
         &.aplayer-list-light,
         &:hover {
           background: #232324 !important;
@@ -172,30 +172,22 @@ html {
       .aplayer-lrc {
         &:before {
           height: 5px;
-          background: -webkit-linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.3) 0,
-            rgba(0, 0, 0, 0)
-          );
-          background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.3) 0,
-            rgba(0, 0, 0, 0)
-          );
+          background: -webkit-linear-gradient(180deg,
+              rgba(0, 0, 0, 0.3) 0,
+              rgba(0, 0, 0, 0));
+          background: linear-gradient(180deg,
+              rgba(0, 0, 0, 0.3) 0,
+              rgba(0, 0, 0, 0));
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cc000000", endColorstr="#00000000", GradientType=0);
         }
 
         &:after {
-          background: -webkit-linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 0,
-            rgba(0, 0, 0, 0.3)
-          );
-          background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 0,
-            rgba(0, 0, 0, 0.3)
-          );
+          background: -webkit-linear-gradient(180deg,
+              rgba(0, 0, 0, 0) 0,
+              rgba(0, 0, 0, 0.3));
+          background: linear-gradient(180deg,
+              rgba(0, 0, 0, 0) 0,
+              rgba(0, 0, 0, 0.3));
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#cc000000", GradientType=0);
         }
       }

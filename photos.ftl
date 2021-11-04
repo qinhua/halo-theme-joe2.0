@@ -25,10 +25,10 @@
                     </@photoTag>
                   </ul>
                 </nav>
-                <div class="joe_photos__layout-switch">
+                <#--  <div class="joe_photos__layout-switch">
                   <i class="joe-font joe-icon-grid${(settings.photos_layout=='grid')?string(' active','')}" title="网格布局" data-type="grid"></i>
                   <i class="joe-font joe-icon-waterfall${(settings.photos_layout=='waterfall')?string(' active','')}" title="瀑布流布局" data-type="waterfall"></i>
-                </div>
+                </div>  -->
             </div>
             <#include "template/module/gallery.ftl">
             <#--  <@paginationTag method="photos" page="${photos.number}" total="${photos.totalPages}" display="3">

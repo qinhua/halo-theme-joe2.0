@@ -17,17 +17,14 @@
                         </div>
                     </div>
                     <#if posts.content?size &gt;0>
+                      <#assign lazy_img=settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'>
                       <ul class="joe_archive__list joe_list" data-wow="off">
                         <#list posts.content as post>
                           <li class="joe_list__item wow default">
                               <div class="line"></div>
                               <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-                                  <#if post.thumbnail!=''>
-                                    <#assign thumbnail=post.thumbnail>
-                                  <#else>
-                                    <#assign thumbnail=settings.passage_thumbnail>
-                                  </#if>
-                                  <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'}" data-src="${thumbnail!}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
+                                  <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail,settings.passage_thumbnail)>
+                                  <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
                                   <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
                                   <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                       <path d="M903.93 107.306H115.787c-51.213 0-93.204 42.505-93.204 93.72V825.29c0 51.724 41.99 93.717 93.717 93.717h788.144c51.72 0 93.717-41.993 93.717-93.717V201.025c-.512-51.214-43.017-93.719-94.23-93.719zm-788.144 64.527h788.657c16.385 0 29.704 13.316 29.704 29.704v390.229L760.54 402.285c-12.805-13.828-30.217-21.508-48.14-19.971-17.924 1.02-34.821 10.754-46.602 26.114l-172.582 239.16-87.06-85.52c-12.29-11.783-27.654-17.924-44.039-17.924-16.39.508-31.755 7.676-43.53 20.48L86.595 821.705V202.05c-1.025-17.416 12.804-30.73 29.191-30.217zm788.145 683.674H141.906l222.255-245.82 87.06 86.037c12.8 12.807 30.212 18.95 47.115 17.417 17.41-1.538 33.797-11.266 45.063-26.118l172.584-238.647 216.111 236.088 2.051-1.54V825.8c.509 16.39-13.315 29.706-30.214 29.706zm0 0"/>

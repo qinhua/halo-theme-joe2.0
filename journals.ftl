@@ -13,7 +13,7 @@
                     <h1 class="joe_detail__title txt-shadow">${title}</h1>                    
                     <div class="joe_detail__count">
                         <div class="joe_detail__count-information">
-                            <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" alt="${user.nickname!}">
+                            <img width="35" height="35" class="avatar lazyload" data-src="${user.avatar!}" src="${settings.lazyload_avatar!}" alt="${user.nickname!}">
                             <div class="meta">
                                 <div class="author">
                                     <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>

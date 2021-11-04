@@ -13,7 +13,6 @@ const photosContext = {
   },
   /* 初始化 */
   initList() {
-    const $el = $(".page-photos");
     const $domList = $(".joe_photos__gallery");
     const $domEmpty = $(".joe_empty");
     const $domLoad = $(".joe_load");
@@ -25,7 +24,7 @@ const photosContext = {
     let isLoading = false;
     let isFirst = true;
     let listData = [];
-    let curLayout = ThemeConfig.photos_layout;
+    let curLayout = ThemeConfig.photos_layout || "grid";
 
     // 渲染Grid布局
     const renderGrid = (data) => {
@@ -35,10 +34,9 @@ const photosContext = {
             `<a class="item animated wow" data-wow-diration="0.3s" data-wow-delay="0.${index}s" data-fancybox="gallery" href="${
               item.url
             }">
-        <img width="100%" height="100%" class="lazyload" rsrc="${
-          ThemeConfig.photo_lazyload_img ||
-          ThemeConfig.RES_BASE_URL + "/source/img/lazyload.gif"
-        }" src="${item.thumbnail}" alt="${item.name}"/>
+        <img width="100%" height="100%" class="lazyloadx" src="${
+          item.thumbnail
+        }" alt="${item.name}"/>
         <span class="team" style="background-color:${Utils.getRandomColor(
           0.2,
           0.5
@@ -86,6 +84,7 @@ const photosContext = {
     // 渲染Waterfall布局
     let $masonry_instance;
     const renderWaterfall = (data) => {
+      if (!Masonry || !imagesLoaded) return;
       if (data) {
         data.forEach((item, index) => {
           const $item =
@@ -98,7 +97,10 @@ const photosContext = {
         ThemeConfig.photo_lazyload_img ||
         ThemeConfig.RES_BASE_URL + "/source/img/lazyload.gif"
       }" src="${item.thumbnail}" alt="${item.name}"/>
-      <span class="team">${item.team}</span>
+      <span class="team" style="background-color:${Utils.getRandomColor(
+        0.2,
+        0.5
+      )}">${item.team}</span>
       <p class="tit">${item.name}</p>
       <div class="info">
         <p class="animated fadeInRightBig"><i class="joe-font joe-icon-paizhao"></i><span>${
@@ -145,7 +147,7 @@ const photosContext = {
     };
 
     /* 渲染列表 */
-    const renderList = (data, layout) => {
+    const renderList = (data) => {
       curLayout === "grid" ? renderGrid(data) : renderWaterfall(data);
       isFirst && photosContext.initEffect(curLayout);
     };
@@ -156,7 +158,6 @@ const photosContext = {
         isLoading = true;
         const params = { ...queryData, ...(param || {}) };
         params.team === "" ? delete params.team : null;
-        console.log(curLayout);
         Utils.request("/api/content/photos", "GET", params)
           .then((res) => {
             const resD = res.content || [];
@@ -218,7 +219,7 @@ const photosContext = {
           $(".joe_container").height()
         ) {
           if (isLoading) return;
-          console.log("需要加载了");
+          // console.log("需要加载了");
           queryData.page++;
           getData({
             team: $(".joe_photos__filter li.active").attr("data-filter"),

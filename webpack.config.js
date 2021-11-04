@@ -16,7 +16,7 @@ module.exports = {
     // video: resolve("/source/js/joe.video.js"),
     short: resolve("/source/js/joe.short.js"),
     // pjax: resolve("/source/js/pjax.js"),
-    utils: resolve("/source/utils/index.js"),
+    utils: resolve("/source/utils/joe.utils.js"),
   },
   mode: "production",
   module: {

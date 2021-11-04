@@ -19,13 +19,15 @@
                     <div class="joe_index__hot categories">
                       <@categoryTag method="list">
                         <#if categories?size &gt;0>
+                          <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
                           <ul class="joe_index__hot-list animated fadeIn">
                             <#list categories as category>
                             <li class="item">
                               <a class="link" href="${category.fullPath!}" title="${category.name!}">
                                 <figure class="inner">
                                     <span class="views">${category.postCount!} ℃</span>
-                                    <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/2${category_index}/175/90" src="${RES_BASE_URL!}/source/img/lazyload.gif" alt="${category.name!}">
+                                    <#assign thumbnail=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, 'https://picsum.photos/id/2${category_index}/175/90') >
+                                    <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" alt="${category.name!}">
                                     <figcaption class="title">${category.name!}</figcaption>
                                 </figure>
                               </a>

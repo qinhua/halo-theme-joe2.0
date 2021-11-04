@@ -11,21 +11,18 @@
         </div>
         <ul class="joe_index__hot-list hotlist">
             <@categoryTag method="list">
-            <#assign lazyimg=RES_BASE_URL+'/source/img/lazyload.gif'>
+            <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
             <#list categories?sort_by("postCount")?reverse as category>
                 <#if category_index < 4>
                 <li class="item animated fadeIn">
                     <a class="link" href="${category.fullPath!}" title="${category.name!}">
                         <figure class="inner">
-                            <span class="views">${category.postCount!} ℃</span>
+                            <#if settings.enabel_category_celcius!true><span class="views">${category.postCount!} ℃</span></#if>
                             <#escape x as x!"">
-                              <#assign cover=settings['hot_cover'+(category_index+1)]>
+                              <#assign cur_cover_url=settings['hot_cover'+(category_index+1)]>
+                              <#assign cover=(cur_cover_url?? && cur_cover_url!='')?then(cur_cover_url, (category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, RES_BASE_URL+'/source/img/hot_cover${category_index+1}.jpg')) >
+                              <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${category.name!}">
                             </#escape>
-                            <#if cover?? && cover!=''>
-                              <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${lazyimg}" onerror="this.src='${settings.fallback_img!}'" alt="${category.name!}">
-                            <#else>
-                              <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/100${category_index}/175/90" src="${lazyimg}" onerror="this.src='${settings.fallback_img!}'" alt="${category.name!}">
-                            </#if>
                             <figcaption class="title">${category.name!}</figcaption>
                         </figure>
                     </a>
