@@ -24,9 +24,9 @@
                                   <span class="title">${link.name!}</span>
                                   <div class="content">
                                     <div class="desc" title="${link.description!}">${link.description!}</div>
-                                    <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default,RES_BASE_URL+'/source/img/icon_qiye.png')>
+                                    <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default, RES_BASE_URL+'/source/img/icon_qiye.png')>
                                     <#assign logo=(link.logo?? && link.logo!='')?then(link.logo,logo_default)>
-                                    <img width="40" height="40" class="avatar lazyload" src="${logo_default}" data-src="${logo!}" onerror="this.src=${logo_default}" alt="${link.name!}">
+                                    <img width="40" height="40" class="avatar owo_image lazyload" data-src="${logo!}" src="${RES_BASE_URL+'/source/svg/spinner-preloader.svg'}" onerror="this.src=${logo_default}" alt="${link.name!}">
                                   </div>
                                 </a>
                               </li>

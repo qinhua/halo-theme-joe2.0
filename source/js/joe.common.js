@@ -348,8 +348,9 @@ const commonContext = {
       "https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
     );
   },
-  /* 文章/日志页图片预览功能 */
+  /* 全局图片预览功能（文章、日志页等） */
   initGallery() {
+    // 只对符合条件的图片开启预览功能
     const $allImgs = $(
       ".joe_detail__article img:not(img.owo_image), .joe_journal_block img"
     );

@@ -61,8 +61,10 @@
 </script>
 
 <script type="text/javascript">
-  !ThemeConfig.isProd && console.log('主题配置：', ThemeConfig);
-  console.log(ThemeConfig.RES_BASE_URL);
+  if(!ThemeConfig.isProd) {
+    console.log('%cJoe2.0主题配置：', "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 6px 12px; border-radius: 0 12px 0 12px", ThemeConfig);
+    console.log('资源根路径：',ThemeConfig.RES_BASE_URL);
+  }
   // 读取主题模式
   var initThemeMode = function() {
     var curMode='';

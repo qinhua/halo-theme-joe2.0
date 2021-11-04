@@ -16,6 +16,7 @@
                         </ul>
                     </div>
                     <div class="joe_index__hot">
+                        <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
                         <ul class="joe_index__hot-list animated fadeIn" style="padding-bottom: 10px;">
                             <@tagTag method="list">
                                 <#list tags as tag>
@@ -23,7 +24,8 @@
                                     <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                                         <figure class="inner">
                                             <span class="views">${tag.postCount!} ℃</span>
-                                            <img width="100%" height="120" class="image lazyload" data-src="https://picsum.photos/id/1${tag_index}/175/90" src="${RES_BASE_URL!}/source/img/lazyload.gif" data-src="https://unsplash.it/175/90" alt="${tag.name!}">
+                                            <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail, 'https://picsum.photos/id/1${tag_index}/175/90') >
+                                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" alt="${tag.name!}">
                                             <figcaption class="title">${tag.name!}</figcaption>
                                         </figure>
                                     </a>

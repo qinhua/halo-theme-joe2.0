@@ -1,8 +1,8 @@
 <section class="joe_aside__item author">
-        <img width="100%" height="120" class="image lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${settings.author_bg!RES_BASE_URL+'/source/img/author_bg.jpg'}" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="博主栏壁纸">
+        <img width="100%" height="120" class="image lazyload" data-src="${settings.author_bg!RES_BASE_URL+'/source/img/author_bg.jpg'}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="博主栏壁纸">
         <div class="user">
             <div class="avatar_wrapper ${settings.avatar_type!}">
-              <img class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+              <img class="avatar lazyload" data-src="${user.avatar!}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
               <#if settings.avatar_frame?? && settings.avatar_frame!="0">
                 <img class="avatar_frame ${settings.avatar_frame}" src="${RES_BASE_URL!}/source/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
               </#if>

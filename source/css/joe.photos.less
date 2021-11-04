@@ -6,6 +6,7 @@
     box-shadow: var(--box-shadow);
     padding: 60px 15px 15px;
     margin-bottom: 15px;
+
     &-title {
       position: absolute;
       top: 15px;
@@ -19,6 +20,7 @@
       padding: 0 12px;
       border-radius: 2px 2px 2px 0;
       user-select: none;
+
       &::before {
         content: "";
         position: absolute;
@@ -29,16 +31,19 @@
         border-color: var(--theme) transparent transparent;
         transform: rotate(90deg);
       }
+
       .joe-font {
         vertical-align: bottom;
       }
     }
+
     &-list {
       display: grid;
       gap: 10px;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       border-top: 1px solid var(--classC);
       padding-top: 15px;
+
       .item {
         user-select: none;
         white-space: nowrap;
@@ -55,17 +60,20 @@
         text-align: center;
         transition: color 0.35s, background 0.35s, box-shadow 0.35s,
           transform 0.35s;
+
         &.active {
           transform: translateY(-2px);
           color: #fff;
           background: var(--theme);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
         }
+
         &:hover {
           transform: translateY(-2px);
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
         }
       }
+
       .error {
         text-align: center;
         color: var(--routine);
@@ -86,12 +94,14 @@
       min-height: 50px;
       background: var(--background);
       border-radius: var(--radius-wrap);
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 1s ease !important;
       }
+
       .tit {
         position: absolute;
         z-index: 1;
@@ -106,6 +116,7 @@
         text-overflow: ellipsis;
         background: linear-gradient(0deg, #151515, transparent 80%);
       }
+
       .team {
         position: absolute;
         z-index: 1;
@@ -120,6 +131,7 @@
         text-overflow: ellipsis;
         background: #5299a5;
       }
+
       .info {
         opacity: 0;
         position: absolute;
@@ -131,31 +143,38 @@
         z-index: 4;
         color: #fff;
         transition: opacity 0.35s;
+
         p {
           display: none;
           margin-bottom: 5px;
           animation-duration: 0.3s;
+
           &:nth-child(2) {
             animation-delay: 0.2s;
           }
+
           &:nth-child(3) {
             animation-delay: 0.3s;
           }
+
           i {
             position: relative;
             top: 2px;
             float: left;
             margin-right: 5px;
           }
+
           .joe-icon-shijian {
             top: 0;
           }
+
           span {
             overflow: hidden;
             display: block;
           }
         }
       }
+
       &::before {
         content: "";
         position: absolute;
@@ -167,6 +186,7 @@
         background: rgba(0, 0, 0, 0);
         transition: background 0.35s;
       }
+
       &::after {
         opacity: 0;
         content: "";
@@ -183,20 +203,25 @@
         transform: scale(2);
         transition: transform 0.35s, opacity 0.35s;
       }
+
       &:hover {
         img {
           transform: scale(1.2);
         }
+
         &::before {
           backdrop-filter: blur(1px);
           background: rgba(0, 0, 0, 0.5);
         }
+
         &::after {
           transform: scale(1);
           opacity: 1;
         }
+
         .info {
           opacity: 1;
+
           p {
             display: block;
           }
@@ -207,12 +232,14 @@
     .masonry-item {
       width: 30%;
     }
+
     &:empty {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 180px;
+
       &::after {
         content: "";
         display: block;
@@ -229,12 +256,14 @@
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(4, 1fr);
+
     .item {
       position: relative;
       display: block;
       overflow: hidden;
       background: var(--background);
       border-radius: var(--radius-wrap);
+
       img {
         width: 100%;
         height: 100%;
@@ -242,6 +271,7 @@
         object-fit: cover;
         transition: transform 1s;
       }
+
       .tit {
         position: absolute;
         z-index: 1;
@@ -256,6 +286,7 @@
         text-overflow: ellipsis;
         background: linear-gradient(0deg, #151515, transparent 80%);
       }
+
       .team {
         position: absolute;
         z-index: 1;
@@ -270,6 +301,7 @@
         text-overflow: ellipsis;
         background: #5299a5;
       }
+
       .info {
         opacity: 0;
         position: absolute;
@@ -281,31 +313,38 @@
         z-index: 4;
         color: #fff;
         transition: opacity 0.35s;
+
         p {
           display: none;
           margin-bottom: 5px;
           animation-duration: 0.3s;
+
           &:nth-child(2) {
             animation-delay: 0.2s;
           }
+
           &:nth-child(3) {
             animation-delay: 0.3s;
           }
+
           i {
             position: relative;
             top: 2px;
             float: left;
             margin-right: 5px;
           }
+
           .joe-icon-shijian {
             top: 0;
           }
+
           span {
             overflow: hidden;
             display: block;
           }
         }
       }
+
       &::before {
         content: "";
         position: absolute;
@@ -317,6 +356,7 @@
         background: rgba(0, 0, 0, 0);
         transition: background 0.35s;
       }
+
       &::after {
         opacity: 0;
         content: "";
@@ -333,32 +373,39 @@
         transform: scale(2);
         transition: transform 0.35s, opacity 0.35s;
       }
+
       &:hover {
         img {
           transform: scale(1.2);
         }
+
         &::before {
           backdrop-filter: blur(1px);
           background: rgba(0, 0, 0, 0.5);
         }
+
         &::after {
           transform: scale(1);
           opacity: 1;
         }
+
         .info {
           opacity: 1;
+
           p {
             display: block;
           }
         }
       }
     }
+
     &:empty {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 180px;
+
       &::after {
         content: "";
         display: block;
@@ -369,8 +416,10 @@
         background-size: 100% 100%;
       }
     }
+
     &.waterfall {
       position: relative;
+
       .item {
         img {
           height: auto;
@@ -383,18 +432,21 @@
     display: block;
     position: relative;
     top: 12px;
+
     ul {
       list-style: none;
       padding: 0;
       margin: 0 0 20px 0;
       font-size: 14px;
       letter-spacing: 0.05em;
+
       li {
         position: relative;
         display: inline-block;
         vertical-align: bottom;
         margin: 0 20px 12px 0;
         font-size: 0;
+
         &:after {
           position: absolute;
           bottom: -4px;
@@ -410,17 +462,21 @@
           transform-origin: 50% 0;
           transition: transform 0.35s;
         }
+
         &:hover:after {
           width: 100%;
           transform: scale(1);
         }
+
         a {
           display: block;
           font-size: 14px;
           color: var(--main);
         }
+
         &.active {
           font-weight: bold;
+
           &:after {
             width: 100%;
             transform: scale(1);
@@ -434,6 +490,7 @@
     position: absolute;
     right: 20px;
     top: 20px;
+
     i {
       cursor: pointer;
       float: left;
@@ -441,6 +498,7 @@
       font-size: 18px;
       color: var(--classA);
       transition: color 0.2s;
+
       &:hover,
       &.active {
         color: var(--theme);
@@ -453,6 +511,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-top: 15px;
+
     &-item {
       user-select: none;
       cursor: pointer;
@@ -464,20 +523,25 @@
       color: var(--main);
       border-radius: 2px;
       transition: background 0.35s, color 0.35s;
+
       &:first-child {
         margin-left: 0;
       }
+
       svg {
         fill: var(--routine);
         transition: fill 0.35s;
       }
+
       .next {
         transform: rotate(180deg);
       }
+
       &.active,
       &:hover {
         color: #fff;
         background: var(--theme);
+
         svg {
           fill: #fff;
         }

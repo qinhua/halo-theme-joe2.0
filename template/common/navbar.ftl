@@ -7,7 +7,7 @@
             <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
             <#if settings.show_logo>
               <a title="${blog_title!}" class="joe_header__above-logo" href="${logo_link}">
-                  <img class="lazyload" style="border-radius:${settings.logo_radius!'2px'}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${blog_logo!}" alt="${blog_title!}">
+                <img class="lazyload" style="border-radius:${settings.logo_radius!'2px'}" data-src="${blog_logo!}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="${blog_title!}">
               </a>
             </#if>
             <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}">

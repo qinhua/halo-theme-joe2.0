@@ -2,23 +2,29 @@
 .joe_bread {
   margin: 20px auto 0;
   padding: 15px 15px 0;
+
   &__bread {
     display: flex;
     align-items: center;
+
     .line {
       color: var(--seat);
       padding: 0 8px;
     }
+
     .item {
       color: var(--minor);
       white-space: nowrap;
+
       .link {
         color: var(--routine);
         transition: color 0.35s;
+
         &:hover {
           color: var(--theme);
         }
       }
+
       .icon {
         width: 15px;
         height: 15px;
@@ -27,6 +33,7 @@
         fill: var(--routine);
         margin-right: 2px;
       }
+
       &:first-child {
         display: flex;
         align-items: center;
@@ -37,11 +44,14 @@
 
 .joe_post {
   position: relative;
+
   &__pagination {
     display: flex;
     justify-content: space-between;
+
     &-item {
       margin-bottom: 15px;
+
       a {
         display: block;
         height: 32px;
@@ -52,11 +62,13 @@
         background: var(--theme);
         font-size: 12px;
         box-shadow: var(--box-shadow);
+
         &:hover {
           animation: pulse 1s;
           box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
         }
       }
+
       &.next {
         margin-left: auto;
       }
@@ -79,20 +91,24 @@
   border-radius: var(--radius-wrap) 0 0 var(--radius-wrap);
   box-shadow: var(--box-shadow-toc);
   transition: top 0.3s;
+
   .toc-expander {
     position: absolute;
     top: 0;
     right: 0;
     padding: 5px;
+
     .joe-font {
       display: none;
       cursor: pointer;
       font-size: 18px;
       color: var(--classF);
+
       &:hover {
         color: var(--theme);
       }
     }
+
     .joe-icon-expand-in {
       display: block;
     }
@@ -101,9 +117,11 @@
   .toc {
     user-select: none;
     overflow-y: auto;
-    > .toc-list {
+
+    >.toc-list {
       position: relative;
       overflow: hidden;
+
       li {
         list-style: none;
       }
@@ -120,6 +138,7 @@
     margin: 0;
     padding-left: 20px;
     font-size: 14px;
+
     .toc-list {
       font-size: 13px;
     }
@@ -128,6 +147,7 @@
   .toc-link {
     height: 100%;
     color: var(--routine);
+
     &::before {
       position: absolute;
       display: inline-block;
@@ -140,9 +160,11 @@
       margin-top: -4px;
       background: var(--classC);
     }
+
     &.is-active-link {
       font-weight: 700;
       color: var(--theme);
+
       &::before {
         background: var(--theme);
       }
@@ -173,14 +195,17 @@
     height: 30px;
     min-height: auto;
     padding: 0;
+
     .toc-expander {
       .joe-icon-expand-in {
         display: none;
       }
+
       .joe-icon-expand-out {
         display: block;
       }
     }
+
     .toc-list {
       display: none;
     }
@@ -198,10 +223,12 @@
     font-size: 20px;
     color: #eee;
     transition: all 0.2s;
+
     &:hover {
       color: #f16520;
       transform: scale(1.2);
     }
+
     &:active {
       color: #f16520;
     }
@@ -216,6 +243,7 @@
   user-select: none;
   font-size: 14px;
   color: var(--routine);
+
   &:hover {
     color: var(--theme);
   }

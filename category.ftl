@@ -17,17 +17,14 @@
                         </div>
                     </div>
                     <#if posts.content?size &gt;0>
-                      <#list posts.content as post>
-                        <ul class="joe_archive__list joe_list animated fadeIn">
+                      <#assign lazy_img=settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'>
+                      <ul class="joe_archive__list joe_list animated fadeIn">
+                        <#list posts.content as post>
                           <li class="joe_list__item default">
                               <div class="line"></div>
                               <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-                                  <#if post.thumbnail!=''>
-                                    <#assign thumbnail=post.thumbnail>
-                                  <#else>
-                                    <#assign thumbnail=settings.passage_thumbnail>
-                                  </#if>
-                                  <img width="100%" height="100%" class="lazyload" src="${settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'}" data-src="${thumbnail!}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
+                                  <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail, settings.passage_thumbnail)>
+                                  <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
                                   <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
                                   <i class="joe-font joe-icon-picture"></i>
                               </a>
@@ -44,8 +41,8 @@
                                   </div>
                               </div>
                           </li>
-                        </ul>
-                      </#list>
+                        </#list>
+                      </ul>
                     <#else>
                       <#include "template/macro/empty.ftl">
                       <@empty type="category" text="未找到相关文章..."/>

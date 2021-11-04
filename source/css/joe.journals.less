@@ -2,10 +2,12 @@
   &_journals__list {
     padding: 10px 0 20px;
   }
+
   &_journal {
     &__item {
       position: relative;
       padding: 0 0 30px 40px;
+
       &:before {
         position: absolute;
         left: 12px;
@@ -16,12 +18,14 @@
         height: 150%;
         border-left: 1px dashed var(--classG);
       }
+
       &:hover {
         .joe_journal_block {
           box-shadow: 3px 8px 15px 0 var(--box-shadow-journal);
         }
       }
     }
+
     &_date {
       position: relative;
       left: -36px;
@@ -31,13 +35,16 @@
       font-size: 14px;
       color: var(--routine);
       background: var(--background);
+
       i {
         margin-right: 8px;
       }
+
       em {
         font-style: normal;
       }
     }
+
     &_block {
       position: relative;
       z-index: 2;
@@ -53,6 +60,7 @@
       box-shadow: 1px 1px 5px 0 var(--box-shadow-journal);
       transition: box-shadow 0.2s;
     }
+
     &_body {
       position: relative;
       max-height: 300px;
@@ -61,15 +69,19 @@
       background: var(--background-journal-block);
       border-radius: 0 6px 6px 6px;
       transition: height 0.2s;
+
       &.open {
         max-height: unset;
+
         .journal_content_expander {
           background: none;
+
           i {
             transform: rotate(180deg);
           }
         }
       }
+
       .content-wrp {
         a:not([class]) {
           display: inline-block;
@@ -115,6 +127,7 @@
           overflow: hidden;
           box-shadow: 1px 1px 5px 0 var(--shadow-code);
           border-radius: var(--radius-inner);
+
           .toolbar {
             opacity: 1;
             left: 0;
@@ -123,9 +136,11 @@
             height: 30px;
             line-height: 30px;
             text-align: center;
+
             .toolbar-item {
               opacity: 1;
               user-select: none;
+
               span {
                 font-weight: bold;
                 font-size: 12px;
@@ -133,14 +148,17 @@
                 background: none;
                 border: none;
                 box-shadow: none;
+
                 &:hover {
                   color: #999;
                 }
               }
+
               &:last-child {
                 display: none;
               }
             }
+
             .autofold-tip {
               padding-left: 5px;
             }
@@ -187,10 +205,12 @@
               // user-select: none;
               padding: 12px 12px 12px 18px;
               text-shadow: none;
+
               .token.operator {
                 background: none;
               }
             }
+
             .line-numbers-rows {
               left: 0;
               top: 0;
@@ -198,6 +218,7 @@
               padding-top: 12px;
               border: none;
             }
+
             .code-expander {
               cursor: pointer;
               position: absolute;
@@ -208,6 +229,7 @@
               font-size: 14px;
               color: #999;
               transition: transform 0.2s;
+
               &:hover {
                 filter: brightness(1.2);
               }
@@ -232,9 +254,11 @@
 
             &.close {
               height: 30px;
+
               .code-expander {
                 transform: rotate(90deg);
               }
+
               &:after {
                 visibility: hidden;
               }
@@ -248,6 +272,7 @@
 
             &.copyable {
               user-select: auto;
+
               code {
                 user-select: auto;
               }
@@ -279,24 +304,30 @@
         }
       }
     }
+
     &_footer {
       padding: 12px 0 2px;
+
       .footer-wrap.open {
         .joe_journal_comment {
           display: block;
           padding-top: 12px;
         }
+
         .journal_comment_expander i {
           vertical-align: text-bottom;
           transform: rotate(180deg);
         }
       }
     }
+
     &_operate_item {
       margin-right: 8px;
       font-size: 0;
       user-select: none;
       color: var(--routine);
+      transition: color 0.2s;
+
       i {
         display: inline-block;
         cursor: pointer;
@@ -304,19 +335,47 @@
         vertical-align: sup;
         transition: all 0.2s;
       }
+
       em {
         font-size: 14px;
         font-style: normal;
         font-family: var(--font-default);
       }
+
       &.like,
       &.comment {
         margin-left: 10px;
         margin-right: 0;
+
         i:hover {
           transform: scale(1.1);
+          color: var(--classF);
         }
       }
+
+      .journal-unlike {
+        cursor: default;
+        display: none;
+        color: #f15c43;
+
+        &:hover {
+          transform: scale(1);
+          color: #f15c43 !important;
+        }
+      }
+
+      &.journal_comment_expander {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        float: right;
+        margin-right: 0;
+
+        &:hover {
+          color: var(--classF);
+        }
+      }
+
       &.journal_content_expander {
         pointer-events: none;
         display: none;
@@ -328,29 +387,24 @@
         padding-top: 10px;
         text-align: right;
         background: var(--background-journal-gradient);
+
         i {
           pointer-events: auto;
           font-size: 20px;
         }
       }
-      &.journal_comment_expander {
-        cursor: pointer;
-        float: right;
-        margin-right: 0;
-      }
-      .joe-icon-xihuan-fill {
-        display: none;
-        color: #f15c43;
-      }
     }
+
     &_comment {
       display: none;
     }
   }
 }
+
 .joe_pagination {
   padding: 0 0 20px 0;
 }
+
 .page-journals .joe_detail {
   overflow-y: hidden;
 }

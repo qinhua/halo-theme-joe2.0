@@ -2,7 +2,7 @@
 
 <p align="center">
   <a class="logo" href="https://github.com/qinhua/halo-theme-joe2.0">
-    <img src="./logo.png" height="86" alt="halo-theme-joe2.0">
+    <img src="https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/logo.png" height="80" alt="halo-theme-joe2.0">
   </a>
 </p>
 
@@ -10,48 +10,53 @@
 
 <p align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/Halo-1.4.11-blue" alt="Halo"/>
+    <img src="https://img.shields.io/badge/Halo-1.4.11-p" alt="Halo"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/FreeMarker-2.3.3-yellow" alt="Release"/>
+    <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
     <img src="https://img.shields.io/badge/Release-1.0.0-green" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green" alt="License"/>
+    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
   </a>
 </p>
 
-> Joe2.0 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于之前已经兄弟移植过，现在就叫 Joe2.0 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的一些特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
+> `Joe2.0` 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于 [社区](https://bbs.halo.run/) 之前有兄弟移植过，这次就叫 `Joe2.0` 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，希望大家喜欢 ❤️ <br>
+> 🌸 同时也要在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
 
 <br>
 
-#### [线上 Demo](https://bbchin.com)
+#### 👀 [预览主题](https://bbchin.com)
 
 <br>
 
-**部分截图** 👇
+**首页截图** 👇
 
-![screenshot](./screenshot.png)
+![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/screenshot.png)
 
-<!-- ![showcase](./showcase.png) -->
+<!-- ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_dark.png)
+![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_light.png) -->
 
 <br>
 
 ## 🌈 主题安装
 
-1. 访问 https://github.com/qinhua/halo-theme-joe2.0 获取仓库地址；
+1. 复制主题仓库地址 `https://github.com/qinhua/halo-theme-joe2.0.git`
 
-2. 进入博客后台-外观-主题-安装-在线安装，填入仓库地址进行安装，如果出错也可以选择本地安装，将下载的主题压缩包直接传上去；
+2. 进入博客后台管理 `外观-主题-安装-在线安装`，贴入仓库地址进行安装。
+   如果在线安装失败，可以选择本地安装，到主题 [Release](https://github.com/qinhua/halo-theme-joe2.0/releases) 页面下载指定版本主题包，并以附件形式传上去；
 
 3. 等待提示安装完成即可。
 
-**⚠️ 注意：**
+### ⚠️ 注意：
 
-- 安装主题后请务必到 `后台管理 - 博客设置 - 高级选项` 中开启 `API服务` 并配置 `Access key` 为 `joe2.0`，不然页面部分 `content接口` 会请求失败。
+- 安装主题后请务必到 `后台管理 - 博客设置 - 高级选项` 中开启 `API服务` 并配置 `Access key` 为 `joe2.0`，不然部分用到 `Content API` 的页面会请求失败，导致报错。
 
-- 主题升级后配置项变化可能报错，导致页面渲染不出来，只需要进入当前主题的设置界面执行一下保存操作来更新旧的配置，然后在访问页面即可。
+- 主题升级后配置项变化较大时可能报错，导致页面渲染不出来。只需要进入当前主题的设置界面执行一下保存操作来更新旧的配置，然后再访问页面即可。
+
+- 刷新时记得打开控制台进行强刷，避免潜在缓存的影响。
 
 <br>
 
@@ -59,7 +64,7 @@
 
 > 此次修改对外暴露了大量的设置项，主要是为了最大程度方便用户对博客进行配置，详细设置项请参见主题根目录下的 `settings.yaml` 文件。
 
-<!-- ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0/image/config1.png) -->
+![主题配置](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_config.png)
 
 <br>
 
@@ -68,11 +73,13 @@
 > 此次在功能上做了大量移植，在尽量不破坏原主题风格的情况下，加入了 `halo` 主题常见的配置项，也融入了一些自己的改进 🤔。
 > 具体功能请在 `后台 -> 外观 -> 主题 -> 设置` 中进行配置，配置项已按不同场景分类，便于快速查找。
 
-- 白天/黑夜模式
-- 自定义主题色
+- 浅色/暗黑模式
 - 三级导航
+- 自定义主题色
+- 自定义字体
 - 轮播图
 - 留言页面
+- 归档页定制(按年/月统计)
 - 日志页面定制
 - 文章分享
 - Toc 目录<可通过文章设置单独控制>
@@ -149,6 +156,7 @@
 - 归档页统计图标
 - 评论组件定制化（皮肤、参数简化、头像保存等）
 - 动态背景
+- 国际化
 - 全站 Pjax
 - 欢迎页面
 - 视频播放插件
@@ -159,7 +167,8 @@
 - 自定义模板引擎
 - 文章评论后可见
 - 博客自动备份
-- 国际化
+
+<br>
 
 ## 📚 开发指南
 
@@ -197,16 +206,17 @@
 
 - 安装 `nodejs`;
 - 主题目录下执行 `npm i` 安装依赖;
-- 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 文件
-  <br>
+- 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 文件。
 
-## 🔍 代码提交规范
+<br>
+
+<!-- ## 🔍 代码提交规范
 
 建议全局安装 `commitizen`，使用它来规范我们的 `commit`，后面可以用于生成 `changlog`。
 
 **1、初始化一个空的 `changlog` 文件**
 
-`commitizen init cz-conventional-changelog --save --save-exact`
+`commitizen init cz-conventional-changelog --save --save-exact` -->
 
 ## 🤔 注意点
 
@@ -214,7 +224,9 @@
 
 #### 1、如何自定义导航条图标？
 
-- 首先通过 [iconfont](https://www.iconfont.cn/) 获取自己的图标链接，也可以用 [fontawesome](http://www.fontawesome.com.cn/) 的字体，注意要使用 font-class 类型，最后这种地址：//at.alicdn.com/t/font_2788564_1f1rnuqwnzj.css
+> 主题自身已经引入了部分 `iconfont` 图标，你可以直接用。[全在这里](https://bbchin.com/iconfont-joe2.0/)
+
+- 首先通过 [iconfont](https://www.iconfont.cn/) 获取自己的图标链接，也可以用 [fontawesome](http://www.fontawesome.com.cn/) 的字体，注意要使用 `font-class` 类型，最后这种地址：//at.alicdn.com/t/font_2788564_1f1rnuqwnzj.css
 
 - 通过 `管理后台-外观-主题-Joe2.0-设置-自定义`，将图标地址贴入 `字体图标链接` 中并保存；
 
@@ -236,15 +248,23 @@
 
 - 通过 `管理后台-外观-菜单`，设置菜单的打开方式为 `新页面`，保存即可。
 
+#### 4、如何配置邮件服务？
+
+Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。请参见 [《Halo 博客配置邮件通知服务》](https://www.yuque.com/docs/share/ccd93bac-6265-44a1-b2ec-c1e8fc101cdb)
+
+#### 5、Freemarker 相关小技巧
+
+主要是本人在开发主题过程中积累的一些 `Freemarker` 技能，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
+
 <br>
 
 ## 😈 小建议
 
 #### 1、建议大家为站点资源开启防盗链
 
-- 很简单，直接在 nginx 里配一下就可以，如下配置：
+- 很简单，直接在 nginx 里配一下就可以，不过记得添加白名单，配置如下：
 
-```text
+```nginx
 # 资源防盗链（指定目录or指定文件类型）
 # location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
 location /upload/ {
@@ -252,10 +272,10 @@ location /upload/ {
   # 域名白名单，去掉则阻止所有非本站请求
   alid_referers none blocked server_names *.bbchin.com 127.0.0.1 localhost ~\.google\. ~\.baidu\. ~\.qq\.;
   if ($invalid_referer) {
-    rewrite ^/ https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/robber.jpg;
+    rewrite ^/ https://cdn.jsdelivr.net/gh/qinhua/cdn_assets/img/robber.jpg;
     # return 403;
   }
-  proxy_pass http://127.0.0.1:8090; // 资源来源
+  proxy_pass http://127.0.0.1:8090; // 代理来源
 }
 ```
 
@@ -263,6 +283,28 @@ location /upload/ {
 
 <br>
 
-## 📈 页面性能报告
+<!-- ## 📈 页面性能报告
 
-> 数据来自 Chrome 浏览器中的 Lighthouse
+> 数据来自 `Chrome` 浏览器中的 `Lighthouse` 工具 -->
+
+## 🏭 贡献
+
+如果你想帮助完善 `Joe2.0` 主题，请：
+
+- 点 `star`
+- 提 `issues`
+- 修 `bugs`
+- 推 `pr`
+
+欢迎在 `issue` 中提出好的建议。
+
+<br>
+
+## 🙆‍♂️ 感谢
+
+在此感谢以下项目提供的支持：
+
+- [Halo](https://halo.run)
+- [Typecho Themes Joe](https://github.com/HaoOuBa/Joe)
+- [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura)
+- [halo-theme-sagari](https://github.com/cetr/halo-theme-sagiri)
