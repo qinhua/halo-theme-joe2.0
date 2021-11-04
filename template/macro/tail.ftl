@@ -112,10 +112,10 @@
     <canvas id="canvas-rain" width="1920" height="1080"></canvas>
     <script src="${RES_BASE_URL}/source/effect/bg/canvas-rain.js"></script>
   </#if>
-  <#if settings.enable_music_player!false>
+  <#--  <#if settings.enable_music_player!false>  -->
     <!-- 音乐播放器 -->
-    <div id="global-aplayer"></div>
-  </#if>
+    <#--  <div id="global-aplayer"></div>  -->
+  <#--  </#if>  -->
   <#if settings.enable_live2d>
     <!-- live2d -->
     <#include "../../plugins/live2d/ftl/live2d.ftl">
