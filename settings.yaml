@@ -25,18 +25,7 @@ genernal:
       type: textarea
       placeholder: 请输入公告信息
       description: "网站公告信息，将展示在页面右侧，尽量简洁明了（不填不展示该模块，也可单独开关）"
-    # enable_theme_comment_plugin:
-    #   name: enable_theme_comment_plugin
-    #   label: 使用评论
-    #   type: switch
-    #   data-type: bool
-    #   default: true
-    #   options:
-    #     - value: true
-    #       label: 开启
-    #     - value: false
-    #       label: 关闭
-      baidu_statistic:
+    baidu_statistic:
       name: baidu_statistic
       label: 百度统计
       type: textarea
@@ -190,10 +179,10 @@ theme:
           label: 无（默认）
         - value: simple_cursor
           label: 简洁卡通
-        - value: simple_sunset_light
-          label: 简单日落(浅色)
-        - value: simple_sunset_dark
-          label: 简单日落(暗黑)
+        # - value: simple_sunset_light
+        #   label: 简单日落(浅色)
+        # - value: simple_sunset_dark
+        #   label: 简单日落(暗黑)
         - value: crystallize
           label: 简约水晶
         - value: emoji_zip
@@ -2232,15 +2221,14 @@ comment:
       label: 缺省头像
       type: text
       placeholder: 请输入
-      # default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/error_avatar.jpg"
-      default: "https://cdn.jsdelivr.net/gh/LIlGG/cdn@1.0.1/img/Sakura/images/Transparent_Akkarin.th.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/error_avatar.jpg"
       description: "当评论头像加载不出来时展示的默认头像"
     comment_avatar_loading:
       name: comment_avatar_loading
       label: 头像加载图
       type: text
       placeholder: 请输入
-      default: "https://cdn.jsdelivr.net/gh/LIlGG/cdn@1.0.0/img/svg/loader/trans.ajax-spinner-preloader.svg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/spinner-preloader.svg"
       description: "头像加载时展示的loading图片"
     comment_empty_text:
       name: comment_empty_text
