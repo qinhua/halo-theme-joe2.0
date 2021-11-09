@@ -74,7 +74,6 @@
     <script src="${RES_BASE_URL!}/source/lib/prism/prism.js"></script>
     <script src="${RES_BASE_URL}/source/lib/jquery-qrcode/jquery.qrcode.min.js"></script>
   </#if>
-
   <#--  相册  -->
   <#if type == 'photos'>
     <script src="${RES_BASE_URL}/source/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
@@ -112,7 +111,7 @@
     <canvas id="canvas-rain" width="1920" height="1080"></canvas>
     <script src="${RES_BASE_URL}/source/effect/bg/canvas-rain.js"></script>
   </#if>
-  <#--  <#if settings.enable_music_player!false>  -->
+  <#--  <#if settings.enable_global_music_player!false>  -->
     <!-- 音乐播放器 -->
     <#--  <div id="global-aplayer"></div>  -->
   <#--  </#if>  -->

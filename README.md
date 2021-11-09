@@ -34,7 +34,7 @@
 
 **首页截图** 👇
 
-![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/screenshot.png)
+![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/display.png)
 
 <!-- ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_dark.png)
 ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_light.png) -->
@@ -252,7 +252,11 @@
 
 Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。请参见 [《Halo 博客配置邮件通知服务》](https://www.yuque.com/docs/share/ccd93bac-6265-44a1-b2ec-c1e8fc101cdb)
 
-#### 5、Freemarker 相关小技巧
+#### 5、如何查看博客后台日志？
+
+有时博客访问不了，想查看后台日志，可以进入 `后台管理-系统-小工具-实时日志` 查看，生成环境可能需要先开启彩蛋（连续点击 `Halo Dashboard` 10 次触发），更多请参见 [Halo 隐藏功能](https://halo.run/archives/use-hidden-features)。
+
+#### 6、Freemarker 相关小技巧
 
 主要是本人在开发主题过程中积累的一些 `Freemarker` 技能，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 

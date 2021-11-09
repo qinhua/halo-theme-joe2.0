@@ -23,7 +23,7 @@
                           <li class="joe_list__item wow default">
                               <div class="line"></div>
                               <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-                                  <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail,settings.passage_thumbnail)>
+                                  <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail,settings.post_thumbnail)>
                                   <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
                                   <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
                                   <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
