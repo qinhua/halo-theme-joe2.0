@@ -7,7 +7,12 @@
   "scripts": {
     "build": "webpack",
     "prepare": "husky install",
-    "lint": "eslint --fix --ext .js --ext .less source/js/*.js source/css/*.less"
+    "lint:staged": "lint-staged",
+    "lint": "stylelint source/css/*.less && eslint --fix source/js/*.js"
+  },
+  "lint-staged": {
+    "source/css/*.less": "stylelint source/css/*.less",
+    "source/js/*.js": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -34,6 +39,8 @@
     "eslint": "^8.2.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.5",
+    "stylelint": "^14.0.1",
+    "stylelint-config-standard": "^23.0.0",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
   }
