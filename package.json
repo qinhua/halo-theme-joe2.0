@@ -6,22 +6,8 @@
   "author": "BabyChin",
   "scripts": {
     "build": "webpack",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged && npm run build"
-    },
-    "lint-staged": {
-      "source/css/*.less": [
-        "eslint --fix",
-        "git add"
-      ],
-      "source/js/*.js": [
-        "eslint --fix",
-        "git add"
-      ]
-    }
+    "prepare": "husky install",
+    "lint": "eslint --fix --ext .js --ext .less source/js/*.js source/css/*.less"
   },
   "repository": {
     "type": "git",
@@ -30,6 +16,7 @@
   "keywords": [
     "halo",
     "halo-theme",
+    "halo-theme-joe2.0",
     "joe2.0"
   ],
   "license": "ISC",
@@ -41,8 +28,10 @@
     "@babel/core": "^7.15.5",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "compression-webpack-plugin": "^9.0.0",
+    "eslint": "^8.2.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.5",
     "webpack": "^5.53.0",
