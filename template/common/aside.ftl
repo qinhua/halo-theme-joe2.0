@@ -1,5 +1,4 @@
 <#if settings.enable_aside>
-  <#import "../macro/newest.ftl" as np>
   <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
   <aside class="joe_aside">
       <#if settings.show_blogger!true>
@@ -41,6 +40,7 @@
       </#if>
 
       <#if settings.show_newest_post!true>
+        <#import "../macro/newest.ftl" as np>
         <@np.newest/>
       </#if>
 

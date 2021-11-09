@@ -361,6 +361,20 @@ html {
     }
   }
 
+  @media (max-width: 1000px) {
+    .joe {
+      &_header {
+        &__above {
+          &-nav {
+            .item .joe-font {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: 992px) {
     .toc-container {
       display: none !important;
@@ -497,6 +511,7 @@ html {
 
         &__above {
           .joe_container {
+            height: 55px;
             justify-content: space-between;
           }
 

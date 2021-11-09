@@ -1,5 +1,5 @@
 <#macro live2d>
-<link rel="stylesheet" type="text/css" href="${theme_base!}/plugins/live2d/css/takagi.min.css"/>
+<link rel="stylesheet" type="text/css" href="${RES_BASE_URL}/plugins/live2d/css/takagi.min.css"/>
 <#if settings.live2d_style??>
     ${settings.live2d_style!}
 </#if>

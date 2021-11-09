@@ -8,22 +8,20 @@
     "build": "webpack",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
-  "config": {
-    "ghooks": {
-      "commit-msg": "config/validate-commit-msg.js"
-    },
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint-staged && npm run build"
+    },
+    "lint-staged": {
+      "source/css/*.less": [
+        "eslint --fix",
+        "git add"
+      ],
+      "source/js/*.js": [
+        "eslint --fix",
+        "git add"
+      ]
     }
-  },
-  "lint-staged": {
-    "**/*.js": "eslint --ext .js",
-    "**/*.less": "eslint --ext .less"
   },
   "repository": {
     "type": "git",
@@ -45,8 +43,6 @@
     "@babel/preset-env": "^7.15.6",
     "babel-loader": "^8.2.2",
     "compression-webpack-plugin": "^9.0.0",
-    "conventional-changelog": "^3.1.24",
-    "cz-conventional-changelog": "^3.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.5",
     "webpack": "^5.53.0",

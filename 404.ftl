@@ -13,6 +13,7 @@
 <meta name="author" content="${user.nickname!}">
 <meta name="site" content="${blog_url!}">
 <link rel="shortcut icon" size="32x32" href="${options.blog_favicon!}">
+<#include "template/config.ftl">
 <style>
   html, body {
     width: 100%;

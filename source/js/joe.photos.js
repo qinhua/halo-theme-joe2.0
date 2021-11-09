@@ -23,6 +23,7 @@ const photosContext = {
     };
     let isLoading = false;
     let isFirst = true;
+    let isEnd = false;
     let listData = [];
     let curLayout = ThemeConfig.photos_layout || "grid";
 
@@ -178,6 +179,7 @@ const photosContext = {
                 $domEmpty.addClass("hide");
                 // return Qmsg.warning("没有更多内容了");
               } else {
+                isEnd = true;
                 $domLoad.hide();
               }
             }
@@ -198,6 +200,7 @@ const photosContext = {
     const reset = (param) => {
       $domList.empty();
       isFirst = true;
+      isEnd = false;
       isLoading = false;
       queryData.page = 0;
       getData(param);
@@ -209,16 +212,12 @@ const photosContext = {
     window.addEventListener(
       "scroll",
       Utils.throttle(function () {
-        // console.log(
-        //   $(window).scrollTop(),
-        //   $(window).height(),
-        //   $("body").height()
-        // );
         if (
           $(window).scrollTop() + $(window).height() >=
           $(".joe_container").height()
         ) {
           if (isLoading) return;
+          if (isEnd) return;
           // console.log("需要加载了");
           queryData.page++;
           getData({
