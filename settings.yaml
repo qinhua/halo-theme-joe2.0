@@ -179,10 +179,10 @@ theme:
           label: 无（默认）
         - value: simple_cursor
           label: 简洁卡通
-        # - value: simple_sunset_light
-        #   label: 简单日落(浅色)
-        # - value: simple_sunset_dark
-        #   label: 简单日落(暗黑)
+        - value: simple_sunset_light
+          label: 简单日落(浅色)
+        - value: simple_sunset_dark
+          label: 简单日落(暗黑)
         - value: crystallize
           label: 简约水晶
         - value: emoji_zip
@@ -281,7 +281,7 @@ navbar:
       type: switch
       data-type: bool
       default: true
-      description: "开启后，当页面滚动时，导航条总是固定在可视区域顶部"
+      description: "开启后，当页面滚动时，导航条始终固定在可视区域顶部，默认只在向上滚动时显示"
       options:
         - value: true
           label: 是
@@ -380,7 +380,7 @@ footer:
       type: switch
       data-type: bool
       default: false
-      description: "实时展示博客运行时长（为减少性能消耗，默认关闭）"
+      description: "实时展示博客运行时长（默认关闭以节省性能）"
       options:
         - value: true
           label: 是
@@ -459,7 +459,8 @@ blogger:
       name: lazyload_avatar
       label: 头像预载图
       type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_avatar.jpg"
+      # default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_avatar.jpg"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/spinner-preloader.svg"
       description: "头像加载出来之前展示的图片"
     default_avatar:
       name: default_avatar
@@ -730,7 +731,6 @@ aside:
       label: 二维码描述
       type: textarea
       placeholder: "请输入二维码描述（仅在二维码url不为空时生效）"
-
     enable_qrcode:
       name: enable_qrcode
       label: 展示二维码
@@ -824,16 +824,47 @@ home:
   items: 
     enable_index_list_ajax:
       name: enable_index_list_ajax
-      label: 异步加载列表数据
+      label: 异步加载文章列表
       type: switch
       data-type: bool
       default: true
-      description: "是否使用Ajax加载列表数据以优化用户体验，默认为后端渲染"
+      description: "是否使用Ajax加载文章列表数据以优化用户体验，默认为后端渲染"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
+    enable_post_thumbnail:
+      name: enable_post_thumbnail
+      label: 开启文章缩略图
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示首页文章列表的缩略图"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    lazyload_thumbnail:
+      name: lazyload_thumbnail
+      label: 文章预载图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload.gif"
+      description: "文章配图加载出来之前展示的图片，体积尽可能的小"
+    post_thumbnail:
+      name: post_thumbnail
+      label: 文章默认缩略图
+      width: 100%
+      type: attachment
+      default: https://picsum.photos/id/1027/210/140
+      description: "文章无配图时生效，可使用占位图服务（210*140） https://source.unsplash.com、https://picsum.photos"
+    fallback_img:
+      name: fallback_img
+      label: 文章错误缺省图
+      type: attachment
+      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=18&fontfamily=2
+      description: "文章图片加载出错时生效，可使用占位图服务（210*140） http://placeholder.idcd.com"
     enable_index_list_effect:
       name: enable_index_list_effect
       label: 开启文章列表动画效果
@@ -1191,25 +1222,6 @@ post:
       placeholder: "请输入"
       default: ""
       description: "浏览进度条的背景色，接受任何合法的颜色值（为空将使用默认背景色）"
-    lazyload_thumbnail:
-      name: lazyload_thumbnail
-      label: 预载图
-      type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_thumbnail.jpg"
-      description: "配图加载出来之前展示的图片，体积尽可能的小"
-    passage_thumbnail:
-      name: passage_thumbnail
-      label: 文章默认缩略图
-      width: 100%
-      type: attachment
-      default: https://picsum.photos/id/1027/210/140
-      description: "文章无配图时生效，可使用占位图服务（210*140） https://source.unsplash.com、https://picsum.photos"
-    fallback_img:
-      name: fallback_img
-      label: 错误缺省图
-      type: attachment
-      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=18&fontfamily=2
-      description: "图片加载出错时生效，可使用占位图服务（210*140） http://placeholder.idcd.com"
     enable_toc:
       name: enable_toc
       label: 文章TOC目录
@@ -2373,7 +2385,7 @@ others:
       type: switch
       data-type: bool
       default: true
-      description: "启用后，文章页打开时会自动检测百度收录情况，并显示状态文字"
+      description: "启用后，文章页打开时会自动检测百度收录情况，并显示状态文字（目前相关api为M酷自己搭建的服务，不能保证稳定性）"
       options:
         - value: true
           label: 开启
@@ -2382,7 +2394,7 @@ others:
     baidu_token:
       name: baidu_token
       label: 百度推送Token
-      # default: "TZLa5Xk302pBBySo"
+      default: ""
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit"
     # enable_pjax:

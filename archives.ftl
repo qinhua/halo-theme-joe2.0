@@ -40,7 +40,7 @@
                       </#if>
                       <div class="joe_archives__timeline${(settings.enable_archive_effect==true)?string(' animated fadeIn','')}">
                         <#assign metric='${settings.archive_timeline_metric!"month"}'>
-                        <div class="joe_archives-title"><i class="joe-font joe-icon-timeline"></i>时间轴（${(metric=='year')?string('年','月')}）</div>
+                        <div class="joe_archives-title"><i class="joe-font joe-icon-timeline"></i>时间轴<em>（${(metric=='year')?then('年','月')}）</em></div>
                         <ul class="joe_archives-timelist animated fadeIn">
                           <@postTag method="archive" type="${metric}">
                             <#list archives as archive>

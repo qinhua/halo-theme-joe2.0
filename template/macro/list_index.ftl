@@ -4,12 +4,14 @@
     <#list posts.content as post>
       <li class="joe_list__item default animated wow" data-wow-delay="0.2s">
         <div class="line"></div>
-        <a href="${post.fullPath}" class="thumbnail" title="${post.title}" target="_blank" rel="noopener noreferrer">
-          <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail, settings.passage_thumbnail)>
-          <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title}">
-          <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
-          <i class="joe-font joe-icon-picture"></i>
-        </a>
+        <#if settings.enable_post_thumbnail!true>
+          <a href="${post.fullPath}" class="thumbnail" title="${post.title}" target="_blank" rel="noopener noreferrer">
+            <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail, settings.post_thumbnail)>
+            <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title}">
+            <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
+            <i class="joe-font joe-icon-picture"></i>
+          </a>
+        </#if>
         <div class="information">
           <a href="${post.fullPath}" class="title" title="${post.title}" target="_blank" rel="noopener noreferrer">
             <#if post.topped==true>

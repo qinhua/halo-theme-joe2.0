@@ -135,7 +135,7 @@ const commonContext = {
   },
   /* 音乐播放器 */
   initMusic() {
-    if (!ThemeConfig.enabel_music_player) return;
+    if (!ThemeConfig.enable_global_music_player) return;
     $.ajax({
       url: `https://api.i-meto.com/meting/api?server=netease&type=playlist&id=${ThemeConfig.music_id}`,
       type: "GET",

@@ -12,7 +12,7 @@
             </div>
             <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">
               ${user.nickname!}
-              <#if settings.show_level>
+              <#if settings.show_level!true>
                 <@postTag method="count">
                   <#if count gte 1 && count lt 20><#assign level=1></#if>
                   <#if count gte 20 && count lt 50><#assign level=2></#if>
