@@ -100,7 +100,7 @@ const commonContext = {
 								type: "POST",
 								dataType: "json",
 								data: {
-									site: ThemeConfig.HOST,
+									site: ThemeConfig.blog_url,
 									token: ThemeConfig.baidu_token,
 									urls: window.location.href,
 								},

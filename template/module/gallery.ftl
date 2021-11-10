@@ -4,4 +4,4 @@
   <#include "photos_waterfall.ftl">
 </#if>  -->
 <#include "../macro/empty.ftl">
-<@empty type="photos" text="该分类下暂无图片"/>
+<@empty type="photos" text="该分类下暂无图片" isAsync="true"/>

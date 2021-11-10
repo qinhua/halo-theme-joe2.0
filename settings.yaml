@@ -133,30 +133,6 @@ theme:
       default: "1320px"
       placeholder: "请输入"
       description: "限制内容区域的宽度，像素或百分比，默认1320px"
-    enable_offscreen_tip:
-      name: enable_offscreen_tip
-      label: 开启离屏提示
-      type: switch
-      data-type: bool
-      default: false
-      description: "在切换到其它站点或后台时，通过页面title提示"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    offscreen_title_leave:
-      name: offscreen_title_leave
-      label: "离屏文案（离开）"
-      default: "歪，你去哪里了？"
-      placeholder: "请输入"
-      description: "在切换到其它站点标签或后台时，页面title展示的文字"
-    offscreen_title_back:
-      name: offscreen_title_back
-      label: "离屏文案（回来）"
-      default: "(つェ⊂)咦，又回来了!"
-      placeholder: "请输入"
-      description: "在返回到当前标签时，通过title展示的文字"
     web_font:
       name: web_font
       label: 网站字体
@@ -222,18 +198,55 @@ theme:
           label: 上升气泡（移动）
         - value: cursor11
           label: 雪花雨（移动）
-    bg_particle_rain:
-      name: bg_particle_rain
-      label: 开启全屏粒子雨
+    backdrop:
+      name: backdrop
+      label: 背景特效
+      type: select
+      default: "off"
+      description: "配置页面背景的特效，其中部分效果为顶层特效，会展示在页面最顶层，还有一部分仅在暗黑模式下生效。特效会消耗一定系统性能，请谨慎配置（为了保证显示效果，尽量不要同时开启背景图和背景特效）"
+      options:
+        - value: "off"
+          label: 无（默认）
+        - value: universe
+          label: 宇宙空间（仅暗黑）
+        - value: rain
+          label: 粒子雨（顶层+仅暗黑）
+        - value: plexus
+          label: 自动吸附的线段
+        - value: petals
+          label: 飘落的花瓣（顶层）
+        - value: rainbow
+          label: 四色彩虹
+        - value: silk
+          label: 变化的彩带
+        - value: silk_static
+          label: 固定的彩带
+        - value: balloon
+          label: 上升的气球
+    enable_offscreen_tip:
+      name: enable_offscreen_tip
+      label: 开启离屏提示
       type: switch
       data-type: bool
       default: false
-      description: "是否开启全屏粒子雨特效，该特效比较耗性能，请谨慎使用"
+      description: "在切换到其它站点或后台时，通过页面title提示"
       options:
         - value: true
           label: 开启
         - value: false
           label: 关闭
+    offscreen_title_leave:
+      name: offscreen_title_leave
+      label: "离屏文案（离开）"
+      default: "歪，你去哪里了？"
+      placeholder: "请输入"
+      description: "在切换到其它站点标签或后台时，页面title展示的文字"
+    offscreen_title_back:
+      name: offscreen_title_back
+      label: "离屏文案（回来）"
+      default: "(つェ⊂)咦，又回来了!"
+      placeholder: "请输入"
+      description: "在返回到当前标签时，通过title展示的文字"
     enable_back2top:
       name: enable_back2top
       label: 开启返回顶部
@@ -1228,6 +1241,7 @@ post:
       type: switch
       data-type: bool
       default: true
+      description: "可通过后台配置文章元属性 enable_toc 来启用/关闭单个文章的 Toc 目录，参见 theme.yaml 中的 postMetaField"
       options:
         - value: true
           label: 开启
@@ -1238,7 +1252,7 @@ post:
       label: TOC目录默认展开层级
       default: "0"
       placeholder: "请填写默认展开层级（只能是数字）"
-      description: "TOC目录自动展开的标题层级，默认为0，不展开子目录（仅对有多级目录的文章生效）"
+      description: "TOC目录自动展开的标题层级，默认为0，不展开子目录（仅对有多级目录的文章生效），可通过后台配置文章元属性 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField"
     enable_comment:
       name: enable_comment
       label: 文章评论
@@ -1375,7 +1389,7 @@ post:
       type: select
       data-type: string
       default: "one-dark"
-      description: "来自prism-themes的主题，见https://github.com/PrismJS/prism-themes"
+      description: "设置代码块主题，可通过后台元数据为每篇文章设置单独的代码主题，主题来自 prism-themes，见https://github.com/PrismJS/prism-themes"
       options:
         - value: "one-dark"
           label: "one-dark"
@@ -1517,7 +1531,7 @@ post:
         - value: false
           label: 关闭
     enable_donate:
-      name: passage_enable_donate
+      name: enable_donate
       label: 开启打赏
       type: switch
       data-type: bool
@@ -1722,9 +1736,16 @@ social:
       defaut: ""
       # default: "https://weibo.com/duider"
       placeholder: "微博主页地址"
+    custome_social_channel:
+      name: custome_social_channel
+      label: 自定义社交渠道
+      type: textarea
+      defaut: ""
+      placeholder: "请按描述文字规定的格式输入"
+      description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
     qq_group:
       name: qq_group
-      label: QQ交流群
+      label: QQ交流群「首页」
       type: textarea
       default: ""
       placeholder: "请填入QQ交流群链接"

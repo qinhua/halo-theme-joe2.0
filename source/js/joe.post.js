@@ -2,17 +2,17 @@
 const postContext = {
 	/* 文章目录 */
 	initToc() {
-		if (!ThemeConfig.enable_toc || !$(".toc-container").length) return;
+		if (PageAttrs.metas.enable_toc === "false" || !ThemeConfig.enable_toc || !$(".toc-container").length) return;
 		if (document.body.clientWidth <= 1200) return;
 		tocbot.init({
 			tocSelector: "#js-toc",
 			contentSelector: ".joe_detail__article",
 			ignoreSelector: ".js-toc-ignore",
 			headingSelector: "h1, h2, h3, h4, h5",
-			collapseDepth: ThemeConfig.toc_depth || 0,
+			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
 			hasInnerContainers: false,
 			headingsOffset: -80, // 目录高亮的偏移值，和scrollSmoothOffset有关联
-			scrollSmoothOffset: -70, // 滚动的偏移值
+			scrollSmoothOffset: -70, // 滚动的偏移值（这里和导航条固定也有关联）
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
 			positionFixedClass: "is-position-fixed", // 固定类名称
 			fixedSidebarOffset: "auto",
@@ -47,7 +47,7 @@ const postContext = {
 	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
-		if (!ThemeConfig.enable_copy) return;
+		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy) return;
 		const curl = $(".joe_detail").attr("data-curl") || location.href;
 		$(".joe_detail__article").on("copy", function (e) {
 			const body_element = document.body;
@@ -150,7 +150,7 @@ const postContext = {
 	},
 	/* 初始化文章分享 */
 	initShare() {
-		if (!ThemeConfig.enable_share) return;
+		if (PageAttrs.metas.enable_share === "false" || !ThemeConfig.enable_share) return;
 		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
 			new ClipboardJS($(".icon-share-link")[0], {
 				text: () => location.href,
@@ -171,7 +171,7 @@ const postContext = {
 	},
 	/* 文章点赞 */
 	initLike() {
-		if (!ThemeConfig.enable_like || !$(".joe_detail__agree").length) return;
+		if (PageAttrs.metas.enable_like==="false" || !ThemeConfig.enable_like || !$(".joe_detail__agree").length) return;
 		const cid = $(".joe_detail").attr("data-cid");
 		const clikes = +($(".joe_detail").attr("data-clikes") || 0);
 		let agreeArr = localStorage.getItem(encryption("agree"))
