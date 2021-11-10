@@ -15,8 +15,7 @@
       "stylelint --fix --custom-syntax postcss-less"
     ],
     "source/js/*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "repository": {
