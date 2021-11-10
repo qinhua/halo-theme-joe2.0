@@ -21,10 +21,10 @@
           <a class="abstract" href="${post.fullPath}" title="文章摘要" target="_blank" rel="noopener noreferrer">${post.summary!}</a>
           <div class="meta">
           <ul class="items">
-              <li>${post.createTime?string('yyyy-MM-dd')}</li>
-              <li>${post.visits!0} 阅读</li>
-              <li>${post.commentCount!0} 评论</li>
-              <li>${post.likes!0} 点赞</li>
+            <li>${post.createTime?string('yyyy-MM-dd')}</li>
+            <li>${post.visits!0} 阅读</li>
+            <li>${post.commentCount!0} 评论</li>
+            <li>${post.likes!0} 点赞</li>
           </ul>
             <#list post.categories as pcate>
               <#if pcate_index==0>

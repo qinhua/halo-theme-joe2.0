@@ -1,6 +1,6 @@
 {
   "name": "halo-theme-joe2.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A halo theme joe2.0",
   "main": "index.js",
   "author": "BabyChin",
@@ -8,11 +8,17 @@
     "build": "webpack",
     "prepare": "husky install",
     "lint:staged": "lint-staged",
-    "lint": "stylelint source/css/*.less && eslint --fix source/js/*.js"
+    "lint": "stylelint --custom-syntax postcss-less --fix source/css/*.less && eslint --fix source/js/*.js"
   },
   "lint-staged": {
-    "source/css/*.less": "stylelint source/css/*.less",
-    "source/js/*.js": "eslint --fix"
+    "source/css/*.less": [
+      "stylelint --fix --custom-syntax postcss-less",
+      "git add"
+    ],
+    "source/js/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -39,8 +45,9 @@
     "eslint": "^8.2.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.5",
+    "postcss-less": "^5.0.0",
     "stylelint": "^14.0.1",
-    "stylelint-config-standard": "^23.0.0",
+    "stylelint-config-recommended": "^6.0.0",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
   }

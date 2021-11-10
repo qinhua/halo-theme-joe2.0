@@ -1,5 +1,4 @@
 <script id="compatiable-checker">
-  // 兼容性检查
   function detectIE() {
     var n = window.navigator.userAgent, e = n.indexOf("MSIE ");
     if (e > 0) {
@@ -39,11 +38,10 @@
   ThemeConfig['blog_title'] = '${blog_title}';
   ThemeConfig['blog_url'] = '${blog_url}';
   ThemeConfig['author'] = '${user.nickname}';
-  ThemeConfig['HOST'] = '${blog_url}';
-  ThemeConfig['BASE_URL'] = '${blog_url}';
+  ThemeConfig['BASE_URL'] = 'https://bbchin.com';
+  ThemeConfig['RES_BASE_URL'] = ThemeConfig.isProd ? '${RES_BASE_URL}' : '${theme_base!}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!10}';
   ThemeConfig['AccessKey'] = '${options.api_access_key!"joe2.0"}';
-  ThemeConfig['RES_BASE_URL'] = ThemeConfig.isProd ? '${RES_BASE_URL}' : '${theme_base!}';
   // ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
 </script>
 

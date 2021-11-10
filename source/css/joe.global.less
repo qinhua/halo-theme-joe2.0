@@ -20,6 +20,8 @@ body {
 }
 
 #Joe {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -110,7 +112,6 @@ body {
     z-index: 5;
     border-top: 3px solid var(--theme);
     transform-origin: top;
-    // background: var(--background);
     background: var(--sib-background);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 0 0 var(--radius-inner) var(--radius-inner);
@@ -1145,7 +1146,6 @@ body {
       }
 
       .item {
-        overflow: hidden;
         margin-bottom: 10px;
         border: 1px solid var(--classC);
         overflow: hidden;
@@ -1171,9 +1171,8 @@ body {
               width: 100%;
               height: 120px;
               object-fit: cover;
-              transition: opacity 0.35s;
               border-radius: var(--radius-inner) var(--radius-inner) 0 0;
-              transition: transform 0.3s;
+              transition: opacity 0.35s, transform 0.3s;
               will-change: transform;
             }
 
@@ -1563,6 +1562,12 @@ body {
           font-size: 0;
           color: var(--minor);
           transition: transform 0.2s;
+
+          img {
+            display: inline-block;
+            height: 22px;
+            border-radius: 3px;
+          }
 
           &:hover {
             transform: scale(1);
@@ -3453,7 +3458,6 @@ body {
       color: var(--routine);
       user-select: none;
       text-shadow: var(--text-shadow);
-      font-family: consolas;
     }
   }
 
@@ -4110,9 +4114,9 @@ body {
     color: var(--routine);
 
     &-tags {
-      flex-shrink: 0;
-      flex: 1;
       display: flex;
+      // flex-shrink: 0;
+      flex: 1;
       align-items: center;
       overflow-x: auto;
 
@@ -4294,7 +4298,6 @@ body {
       display: block;
       width: 30px;
       height: 30px;
-      font-size: 30px;
       font-size: 30px;
       color: #f16520;
       border-radius: 50%;
@@ -5350,84 +5353,70 @@ body {
   }
 }
 
-#canvas-rain {
+.canvas-backdrop {
   pointer-events: none;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 90;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+
+  &.above {
+    z-index: 90;
+  }
 }
 
 .profile-color-modes-illu-frame {
   opacity: 0;
+  animation: profile-color-modes-illu-anim-frame-show 0s forwards,
+    profile-color-modes-illu-anim-frame-hide 0s forwards;
 }
 
 .profile-color-modes-illu-red {
   stroke: #da3633;
+  animation-delay: 0.4s;
+  animation-duration: 0.1s;
 }
 
 .profile-color-modes-illu-orange {
   stroke: #f0883e;
+  animation-delay: 0.5s;
+  animation-duration: 0.1s;
 }
 
 .profile-color-modes-illu-purple {
   stroke: #8957e5;
+  animation-delay: 0.6s;
+  animation-duration: 0.1s;
 }
 
 .profile-color-modes-illu-green {
   stroke: #3fb950;
+  animation-delay: 0.8s;
+  animation-duration: 0.2s;
+  animation-timing-function: cubic-bezier(0.47, 2.92, 0.84, -1.5);
 }
 
 .profile-color-modes-illu-blue {
   stroke: #388bfd;
+  animation-delay: 0.7s;
+  animation-duration: 0.1s;
 }
 
 .profile-color-modes-illu-group {
   animation: profile-color-modes-illu-anim 0.2s cubic-bezier(0.72, 0.08, 1, 0.68) backwards;
 }
 
-.profile-color-modes-illu-frame {
-  animation: profile-color-modes-illu-anim-frame-show 0s forwards,
-    profile-color-modes-illu-anim-frame-hide 0s forwards;
-}
-
 .profile-color-modes-illu-frame:first-child {
   opacity: 1;
   animation: profile-color-modes-illu-anim-frame-hide 0s forwards;
+  animation-delay: 1.8s;
 }
 
 .profile-color-modes-illu-frame:nth-child(8) {
   animation: profile-color-modes-illu-anim-frame-show 0s forwards;
-}
-
-.profile-color-modes-illu-red {
-  animation-delay: 0.4s;
-  animation-duration: 0.1s;
-}
-
-.profile-color-modes-illu-orange {
-  animation-delay: 0.5s;
-  animation-duration: 0.1s;
-}
-
-.profile-color-modes-illu-purple {
-  animation-delay: 0.6s;
-  animation-duration: 0.1s;
-}
-
-.profile-color-modes-illu-blue {
-  animation-delay: 0.7s;
-  animation-duration: 0.1s;
-}
-
-.profile-color-modes-illu-green {
-  animation-delay: 0.8s;
-  animation-duration: 0.2s;
-  animation-timing-function: cubic-bezier(0.47, 2.92, 0.84, -1.5);
-}
-
-.profile-color-modes-illu-frame:first-child {
-  animation-delay: 1.8s;
+  animation-delay: 3.56s;
 }
 
 .profile-color-modes-illu-frame:nth-child(2) {
@@ -5452,10 +5441,6 @@ body {
 
 .profile-color-modes-illu-frame:nth-child(7) {
   animation-delay: 3.44s, 3.56s;
-}
-
-.profile-color-modes-illu-frame:nth-child(8) {
-  animation-delay: 3.56s;
 }
 
 .profile-color-modes-illu-frame:nth-child(9),

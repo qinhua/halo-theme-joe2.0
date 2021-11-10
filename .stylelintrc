@@ -1,8 +1,10 @@
 {
-  "extends": ["stylelint-config-standard"],
+  "extends": "stylelint-config-recommended",
   "overrides": [{
     "files": ["source/css/*.less"],
     "rules": {
+      "no-descending-specificity": null,
+      "no-invalid-double-slash-comments": null,
       "block-closing-brace-empty-line-before": null,
       "block-closing-brace-newline-after": null,
       "block-closing-brace-newline-before": null,
