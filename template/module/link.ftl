@@ -16,7 +16,7 @@
   </#if>
   <#if type == 'post' || type == 'journals'>
     <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/prism/prism.css?v=${theme.version!}">
-    <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/prism/themes/prism-${(metas.code_theme?? && metas.code_theme!='')?then(metas.code_theme,settings.code_theme)}.css?v=${theme.version!}">
+    <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme!='')?then(metas.code_theme,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
   <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.css">
   <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/lib/animate/animate.min.css">
