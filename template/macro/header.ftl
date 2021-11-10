@@ -1,5 +1,5 @@
 <#macro head title type>
-<head>
+  <head>
     <title>${title!} - ${blog_title!}</title>
     <#include "../config.ftl">
     <#include "../module/meta.ftl">
@@ -47,5 +47,5 @@
       ${settings.baidu_statistic!}
     </#if>
     <@global.head />
-</head>
+  </head>
 </#macro>

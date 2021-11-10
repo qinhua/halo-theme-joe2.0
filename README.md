@@ -23,7 +23,7 @@
   </a>
 </p>
 
-> `Joe2.0` 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于 [社区](https://bbs.halo.run/) 之前有兄弟移植过，这次就叫 `Joe2.0` 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，希望大家喜欢 ❤️ <br>
+> `Joe2.0` 为 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于 [社区](https://bbs.halo.run/) 之前有兄弟移植过，这次就叫 Joe2.0 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，希望大家喜欢 ❤️ <br>
 > 🌸 同时也要在此感谢原作者 [Joe](https://github.com/HaoOuBa)。
 
 <br>
@@ -36,8 +36,8 @@
 
 ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/display.png)
 
-<!-- ![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_dark.png)
-![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_light.png) -->
+<!-- ![暗黑模式](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_dark.png)
+![浅色模式](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_light.png) -->
 
 <br>
 
@@ -45,7 +45,7 @@
 
 1. 复制主题仓库地址 `https://github.com/qinhua/halo-theme-joe2.0.git`
 
-2. 进入博客后台管理 `外观-主题-安装-在线安装`，贴入仓库地址进行安装。
+2. 进入博客后台管理 `外观-主题-安装-在线安装`，贴入仓库地址进行安装（建议直接使用最新版本 ）。
    如果在线安装失败，可以选择本地安装，到主题 [Release](https://github.com/qinhua/halo-theme-joe2.0/releases) 页面下载指定版本主题包，并以附件形式传上去；
 
 3. 等待提示安装完成即可。
@@ -75,10 +75,11 @@
 
 - 浅色/暗黑模式
 - 三级导航
+- 轮播图
 - 自定义主题色
 - 自定义字体
-- 轮播图
-- 留言页面
+- 自定义背景图
+- 自定义社交渠道
 - 归档页定制(按年/月统计)
 - 日志页面定制
 - 文章分享
@@ -87,7 +88,8 @@
 - 文章和日志页 点赞 + 评论
 - 文章页 a 标签新页面打开
 - 文章页复制加版权文字
-- 网易歌单
+- 留言页面
+- 网易歌单(api 好像不稳定)
 - 博主可选头像框
 - 博主等级展示
 - 全局预载图自定义
@@ -109,7 +111,7 @@
 - 自定义 favicon（支持视频、动图）
 - 站点运行时间
 - 清洁模式（备案模式）
-- 整站变灰（RIP 模式）
+- 灰色模式（RIP 模式）
 
 <br>
 
@@ -118,19 +120,20 @@
 - meta 标签优化
 - ftl 模板格式化
 - 导航栏优化
+- 页脚调整
 - SEO 优化
 - 样式优化
-  - 使用 Less 替换了 Scss
-  - 降低了部分配色的鲜艳度
-- 代码风格
-  - Eslint + Prettier
-- JS 和 CSS 兼容性处理
-  - JS 使用 babel 转换
-  - CSS 引入 autoprefixer
-  - 移除部分页面 Grid 布局
-- 代码优化
+  - 使用 Less
+  - 根据主题模式调整了部分配色
   - 优化 z-index 属性
   - 滚动优化
+- 代码优化
+- 代码风格
+  - Eslint + Stylelint
+- JS 和 CSS 兼容性处理
+  - JS 使用 Babel 转换
+  - CSS 引入 autoprefixer
+  - 移除部分页面 Grid 布局
 - 页面性能优化
   - 按需引入
   - 图片懒加载
@@ -139,12 +142,14 @@
 - 加载状态优化
   - 加载条
   - 预载图
+  - 错误图
   - 空白状态
 - 404 页面
 - 去除无用配置
 - 项目目录调整
+  - 简化目录
 - 部分缺陷修复
-- 解析当前主题配置项
+- 解析主题配置项
 
 <br>
 
@@ -210,17 +215,15 @@
 
 <br>
 
-<!-- ## 🔍 代码提交规范
+## 🔍 代码提交规范
 
-建议全局安装 `commitizen`，使用它来规范我们的 `commit`，后面可以用于生成 `changlog`。
+项目默认配置了 `husky` 和 `lint-staged`，在 `commit` 阶段通过 `eslint` 和 `stylelint` 对代码进行自动格式化，然后打包，保证最终提交代码的规范性。
 
-**1、初始化一个空的 `changlog` 文件**
-
-`commitizen init cz-conventional-changelog --save --save-exact` -->
+<br>
 
 ## 🤔 注意点
 
-> 主要是一些使用过程中暴露出来的问题
+> 主要是一些开发及使用过程中暴露出来的问题
 
 #### 1、如何自定义导航条图标？
 
@@ -252,11 +255,23 @@
 
 Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。请参见 [《Halo 博客配置邮件通知服务》](https://www.yuque.com/docs/share/ccd93bac-6265-44a1-b2ec-c1e8fc101cdb)
 
-#### 5、如何查看博客后台日志？
+#### 5、如何配置留言页？
+
+目前模板中的留言页面是自定义页面，所以需要你进入 `后台管理-页面` ，点击 `新建页面` 添加留言页，然后把模板目录中的 leaving.ftl 的内容复制进去保存，然后进入 `外观-菜单` 添加刚才自定义的留言页，保存后刷新前台页面即可。
+
+#### 6、如何通过元数据为文章详情页进行单独的功能配置？
+
+- 很多时候，我们希望能够单独控制文章详情页的功能，如分享、打赏、复制、点赞、评论、目录等。主题目前已经为文章详情页暴露了常用的元数据配置，具体大家可以查看 `theme.yaml` 文件中的 `postMetaField` 字段。
+
+- 如果我们想通过这些元数据来单独控制页面功能，可以到 `后台管理-文章-所有文章` 中找到要修改的文章，然后点击设置，再点击底部保存按钮旁的 `高级`，即可在弹框中对元数据进行配置，字段格式和主题配置是一致的，布尔值填 true 或 false，都是字符串形式。
+
+![文章详情页元数据配置](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/metas.png)
+
+#### 7、如何查看博客后台日志？
 
 有时博客访问不了，想查看后台日志，可以进入 `后台管理-系统-小工具-实时日志` 查看，生成环境可能需要先开启彩蛋（连续点击 `Halo Dashboard` 10 次触发），更多请参见 [Halo 隐藏功能](https://halo.run/archives/use-hidden-features)。
 
-#### 6、Freemarker 相关小技巧
+#### 8、Freemarker 相关小技巧
 
 主要是本人在开发主题过程中积累的一些 `Freemarker` 技能，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 
@@ -264,9 +279,9 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 
 ## 😈 小建议
 
-#### 1、建议大家为站点资源开启防盗链
+#### 1、大家可以为站点资源开启防盗链
 
-- 很简单，直接在 nginx 里配一下就可以，不过记得添加白名单，配置如下：
+- 很简单，直接在 `nginx` 里配一下就可以，不过记得添加白名单，配置如下：
 
 ```nginx
 # 资源防盗链（指定目录or指定文件类型）
@@ -283,7 +298,7 @@ location /upload/ {
 }
 ```
 
-#### 2、可以使用 [webp_server_go](https://github.com/webp-sh/webp_server_go) 这个工具对全站图片进行 webp 化，提高加载速度，具体使用请参考 [如何无痛切换网站图片格式到 webp](https://bbchin.com/archives/towebp)。
+#### 2、可以使用 [webp_server_go](https://github.com/webp-sh/webp_server_go) 这个工具对全站图片进行 `webp` 化，提高加载速度，具体使用请参考 [如何无痛切换网站图片格式到 webp](https://bbchin.com/archives/towebp)。
 
 <br>
 
@@ -296,11 +311,9 @@ location /upload/ {
 如果你想帮助完善 `Joe2.0` 主题，请：
 
 - 点 `star`
-- 提 `issues`
+- 提 `issue`
 - 修 `bugs`
 - 推 `pr`
-
-欢迎在 `issue` 中提出好的建议。
 
 <br>
 
@@ -310,5 +323,6 @@ location /upload/ {
 
 - [Halo](https://halo.run)
 - [Typecho Themes Joe](https://github.com/HaoOuBa/Joe)
+- [halo-live2d](https://github.com/LIlGG/halo-live2d)
 - [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura)
 - [halo-theme-sagari](https://github.com/cetr/halo-theme-sagiri)
