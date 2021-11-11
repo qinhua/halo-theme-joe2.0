@@ -162,6 +162,13 @@ const commonContext = {
 			`${ThemeConfig.RES_BASE_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
 		);
 	},
+	/* 加载背景特效 */
+	loadBackdropEffect() {
+		if (Joe.isMobile || ThemeConfig.backdrop === "off") return;
+		$.getScript(
+			`${ThemeConfig.RES_BASE_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
+		);
+	},
 	/* 动态背景 */
 	initDynamicBg() {
 		if (!ThemeConfig.enable_splash) return;

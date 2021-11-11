@@ -52,7 +52,7 @@
       </div>
     </div>
   </#if>
-  <#assign enable_donate = metas.enable_donate!'false'>
+  <#assign enable_donate = metas.enable_donate!'true'>
   <#if enable_donate=='true' && settings.enable_donate==true>
     <#include "donate.ftl">
   </#if>

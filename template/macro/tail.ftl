@@ -106,10 +106,6 @@
   <#-- ===== 引入页面级js end ===== -->
 
   <#-- ===== 引入脚本 start ===== -->
-  <#if settings.backdrop?? && settings.backdrop!='off'>
-    <#--  背景特效  -->
-    <script src="${RES_BASE_URL}/source/effect/backdrop/${settings.backdrop!}.js"></script>
-  </#if>
   <#--  <#if settings.enable_global_music_player!false>  -->
     <#--  <!-- 音乐播放器 -->
     <#--  <div id="global-aplayer"></div>  -->

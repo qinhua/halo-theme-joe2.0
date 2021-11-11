@@ -10,11 +10,6 @@ html {
   @media (max-width: 1400px) {
     .joe {
 
-      // &_header__above-nav {
-      //   max-width: 1000px;
-      //   overflow-x: auto;
-      //   overflow-y: hidden;
-      // }
       &_vplayer {
         height: 450px;
       }
@@ -664,6 +659,7 @@ html {
 
                   &:nth-child(1) {
                     display: block;
+                    flex: 1;
                   }
 
                   &:nth-child(2) {
@@ -1408,6 +1404,12 @@ html {
         }
       }
 
+      &_post {
+        &__pagination {
+          padding: 0 10px;
+        }
+      }
+
       &_photos {
         &__type {
           margin-bottom: 0;
@@ -1472,7 +1474,9 @@ html {
                 justify-content: center;
 
                 span:nth-child(4),
-                span:nth-child(5) {
+                span:nth-child(5),
+                span:nth-child(8),
+                span:nth-child(9) {
                   display: none;
                 }
               }
@@ -1511,7 +1515,7 @@ html {
         }
 
         &__article {
-          padding: 0;
+          padding: 10px 0;
           font-size: 14px;
 
           pre[class*="language-"] {
