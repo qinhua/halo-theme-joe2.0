@@ -29,7 +29,7 @@
                 </div>
               </div>
             </div>
-            <ul class="joe_journals__list">
+            <ul class="joe_journals__list${settings.enable_journal_effect?then(' effects','')}">
               <#list journals.content as journal>
                 <li class="joe_journal__item animated wow" data-wow-delay="0.2s" data-cid="${journal.id}" data-clikes="${journal.likes}">
                   <p class="joe_journal_date"><i class="joe-font joe-icon-feather"></i>

@@ -1,6 +1,14 @@
 .joe {
   &_journals__list {
     padding: 10px 0 20px;
+
+    &.effect {
+      &_journal {
+        &__item {
+          visibility: hidden;
+        }
+      }
+    }
   }
 
   &_journal {
@@ -222,7 +230,7 @@
             .code-expander {
               cursor: pointer;
               position: absolute;
-              right: 40px;
+              right: 10px;
               top: 5px;
               z-index: 2;
               user-select: none;
@@ -275,6 +283,10 @@
 
               code {
                 user-select: auto;
+              }
+          
+              .code-expander {
+                right: 40px;
               }
             }
           }

@@ -4,7 +4,7 @@
       <li class="item" data-type="created">推荐文章</li>
       <#--  <li class="line"></li>  -->
     </ul>
-    <#if settings.qq_group??>
+    <#if settings.qq_group?? && settings.qq_group!=''>
       <div class="joe_index__title-notice">
         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
           <path d="M656.261 347.208a188.652 188.652 0 1 0 0 324.05v-324.05z" fill="var(--theme)"></path>

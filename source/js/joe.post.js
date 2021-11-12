@@ -1,5 +1,6 @@
 /**文章页逻辑 */
 const postContext = {
+	// status: $(".joe_detail").attr("data-status"),
 	/* 文章目录 */
 	initToc() {
 		if (PageAttrs.metas.enable_toc === "false" || !ThemeConfig.enable_toc || !$(".toc-container").length) return;

@@ -189,7 +189,6 @@ const photosContext = {
 					.catch((err) => {
 						$domList.hide();
 						$domEmpty.removeClass("hide");
-						Qmsg.error(err);
 						isLoading = false;
 						reject(err);
 					});
