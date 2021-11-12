@@ -5,7 +5,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="${options.blog_favicon!}">
   <#include "key_css.ftl">
   <link rel="preload stylesheet" as="style" href="${RES_BASE_URL}/source/css/min/joe.normalize.min.css?v=${theme.version!}"> 
-  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_8hyfv6s7l1b.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_k8xb6gsb0q.css">
   <#if settings.iconfont??>
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>

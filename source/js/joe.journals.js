@@ -164,7 +164,6 @@ const journalContext = {
 				"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
 			);
 			new ClipboardJS(span[0], {
-				// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
 				text: () => text,
 			}).on("success", () => Qmsg.success("复制成功！"));
 			$(item).addClass("copyable").append(span);

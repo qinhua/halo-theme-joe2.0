@@ -14,28 +14,6 @@ genernal:
     #       label: 是
     #     - value: false
     #       label: 否
-    icp:
-      name: icp
-      label: ICP备案号
-      type: text
-      placeholder: "请填写ICP备案号"
-    site_notice:
-      name: site_notice
-      label: 网站公告
-      type: textarea
-      placeholder: 请输入公告信息
-      description: "网站公告信息，将展示在页面右侧，尽量简洁明了（不填不展示该模块，也可单独开关）"
-    baidu_statistic:
-      name: baidu_statistic
-      label: 百度统计
-      type: textarea
-      placeholder: 请输入百度统计代码
-      description: "支持百度或其他平台统计代码，将插入head标签中（后台管理中也可设置，只需设置一处即可）"
-
-# 主题
-theme:
-  label: 主题相关
-  items:
     # i18n:
     #   name: i18n
     #   label: 主题语言
@@ -48,16 +26,48 @@ theme:
     #       label: 中文
     #     - value: en
     #       label: 英文
+    access_key:
+      name: access_key
+      label: AccessKey <必填>
+      type: text
+      default: "joe2.0"
+      placeholder: "请务必与后台中的Key一致"
+      description: "Access Key 用于页面中 Content API 的校验，不填会导致接口报错，默认为 joe2.0，但可以自己定义，请不要填写中文或特殊字符（请务必同时配置此处的 Access Key 和后台管理中的 Access Key，并保持一致）"
+    icp:
+      name: icp
+      label: ICP备案号
+      type: text
+      placeholder: "请填写ICP备案号"
+      description: "ICP备案号将展示在页脚中"
+    site_notice:
+      name: site_notice
+      label: 网站公告
+      type: textarea
+      placeholder: 请输入公告信息
+      description: "网站公告信息，将展示在页面右侧，尽量简洁明了（不填不展示该模块，也可单独开关）"
+    baidu_statistic:
+      name: baidu_statistic
+      label: 统计代码
+      type: textarea
+      placeholder: 请输入统计代码
+      description: "支持百度或其他平台统计代码（请自行生成），将插入head标签中（后台管理中也可设置，只需设置一处即可）"
+
+# 主题
+theme:
+  label: 主题相关
+  items:
     static_mode:
       name: static_mode
-      label: 固定的主题模式
+      label: 主题模式
       type: radio
-      default: light
-      description: "为博客设置固定的主题模式（浅色/暗黑，默认浅色）"
+      default: "off"
+      description: "为博客设置主题模式（用户/浅色/暗黑），默认为用户模式，仅在用户模式下页面才有主题切换按钮"
       options:
-        - value: light
+        - value: "off"
+          label: 用户模式
+        - value: "light"
           label: 浅色模式
-        - value: dark
+        - value: "dark"
           label: 暗黑模式
     enable_auto_switch_mode:
       name: enable_auto_switch_mode
@@ -65,7 +75,7 @@ theme:
       type: switch
       data-type: bool
       default: false
-      description: "在特定时间自动切换浅色/暗黑模式，可配置时间范围（该模式会忽略固定模式的设置，并且不展示模式切换按钮）"
+      description: "在特定时间自动切换浅色/暗黑模式，可配置时间范围（注意：该模式会忽略固定模式的设置，且页面不展示主题切换按钮）"
       options:
         - value: true
           label: 是
@@ -387,6 +397,20 @@ footer:
           label: 是
         - value: false
           label: 否
+    footer_source:
+      name: footer_source
+      label: 页脚来源
+      type: radio
+      data-type: text
+      default: theme
+      description: "设置页脚内容具体来自哪里，默认使用主题页脚，也可同时使用主题和后台配置的页脚。如果使用后台自定义页脚，建议复制主题的页脚 html 结构进行修改，然后粘贴到后台的页脚配置内（主题无法保证自定义页脚的样式及适配，请视具体情况设置）"
+      options:
+        - value: both
+          label: "主题页脚 + 后台页脚"
+        - value: theme
+          label: "主题页脚"
+        - value: backend
+          label: "后台页脚"
     enable_birthday:
       name: enable_birthday
       label: "展示博客运行时间"
@@ -1316,7 +1340,7 @@ post:
       label: 复制时追加版权信息
       type: switch
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 开启
@@ -1463,6 +1487,18 @@ post:
           label: "xonokai"
         - value: "z-touch"
           label: "z-touch"
+    enable_single_code_select:
+      name: enable_single_code_select
+      label: 点击单行代码自动全选
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启后，当点击当行代码块时，会自动全选内容"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_mathjax:
       name: enable_mathjax
       label: "开启 mathjax 数学公式"
@@ -1749,7 +1785,7 @@ social:
       type: textarea
       default: ""
       placeholder: "请填入QQ交流群链接"
-      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi）"
+      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可，不填则不展示。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi）"
     qq_group_text:
       name: qq_group_text
       label: QQ交流群文案
@@ -2183,7 +2219,7 @@ comment:
       type: text
       default: "https://sdn.geekzu.org/avatar"
       placeholder: 请输入
-      description: "用于修改全站评论的头像源地址（优先取主题中的配置，取不到时才从后台配置项取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）"
+      description: "用于修改全站评论的头像源地址（优先取主题中的配置，取不到时才从后台配置项取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到后台管理中设置。"
       #  comment_plugin:
       #     name: comment_plugin
       #     label: "评论组件js链接"
@@ -2285,7 +2321,7 @@ custom:
       name: custom_font
       label: "自定义网站字体"
       type: attachment
-      description: "修改网站使用的字体，请填入字体文件的链接（考虑兼容，建议 woff/woff2 格式字体，最好放CDN链接)"
+      description: "修改网站使用的字体，请填入字体文件的链接（考虑兼容，建议 woff/woff2 格式字体，最好放CDN链接，另外主题无法保证使用自定义字体后的页面样式)"
     iconfont:
       name: iconfont
       label: "字体图标链接"
@@ -2321,7 +2357,7 @@ custom:
       label: "外部JS链接（body）"
       type: text
       placeholder: 请输入
-      description: "填入外部JS链接，无需script标签，将插入body标签尾部（可用于添加百度统计代码等）"
+      description: "填入外部JS链接，无需script标签，将插入body标签尾部（可用于添加插件等）"
     custom_js_body:
       name: custom_js_body
       label: "自定义JS（body）"
@@ -2405,7 +2441,7 @@ others:
       label: 检查百度收录情况
       type: switch
       data-type: bool
-      default: true
+      default: false
       description: "启用后，文章页打开时会自动检测百度收录情况，并显示状态文字（目前相关api为M酷自己搭建的服务，不能保证稳定性）"
       options:
         - value: true
@@ -2436,7 +2472,7 @@ others:
       type: switch
       data-type: bool
       default: true
-      description: "开启后将使用jsDelivr提供的CDN服务加载静态资源（注意本地开发时要关掉）"
+      description: "开启后将使用jsDelivr提供的CDN服务加载静态资源，开发环境下强制从本地加载（注意：如果你在后台修改了模板中的样式等文件，需要关掉这里才会读取最新的文件）"
       options:
         - value: true
           label: 开启

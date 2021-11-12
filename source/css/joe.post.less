@@ -45,6 +45,43 @@
 .joe_post {
   position: relative;
 
+
+  .joe_detail {
+    position: relative;
+  }
+
+  .post-status {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 5px 8px;
+    line-height: 1.2;
+    user-select: none;
+    background: var(--classD);
+    border-radius: 6px;
+
+    i {
+      margin-right: 3px;
+      vertical-align: text-bottom;
+      font-size: 16px;
+    }
+
+    &.s_draft {
+      color: #ffe24c;
+      background: var(--classI);
+    }
+
+    &.s_intimate {
+      color: #ef44b9;
+      background: var(--classJ);
+    }
+
+    &.s_recycle {
+      color: #c50a00;
+    }
+
+  }
+
   &__pagination {
     display: flex;
     justify-content: space-between;

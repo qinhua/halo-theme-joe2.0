@@ -2,8 +2,9 @@
 window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
 const commonContext = {
-	/* 初始化昼夜模式 */
+	/* 初始化主题模式（仅用户模式） */
 	initMode() {
+		if (ThemeConfig.static_mode !== "off") return;
 		const $html = $("html");
 		const $icon_light = $(".mode-light");
 		const $icon_dark = $(".mode-dark");
@@ -32,7 +33,6 @@ const commonContext = {
 			}
 			$html.attr("data-mode", theme);
 			localStorage.setItem("data-mode", theme);
-			localStorage.setItem("data-mode-timestamp", Date.now());
 			commonContext.initCommentTheme();
 		});
 	},
@@ -737,6 +737,7 @@ const commonContext = {
 		$("#compatiable-checker").remove();
 		$("#theme-config-getter").remove();
 		$("#metas-getter").remove();
+		$("#theme-config-getter").remove();
 	},
 };
 

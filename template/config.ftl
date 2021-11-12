@@ -1,4 +1,5 @@
 <script id="compatiable-checker">
+  // 兼容性检查
   function detectIE() {
     var n = window.navigator.userAgent, e = n.indexOf("MSIE ");
     if (e > 0) {
@@ -14,7 +15,8 @@
   detectIE() && (alert('当前站点不支持IE浏览器或您开启了兼容模式，请使用其他浏览器访问或关闭兼容模式。'), (location.href = 'https://www.baidu.com'));
 </script>
 
-<#global RES_BASE_URL = settings.enable_cdn ? then("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)/>
+<#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then('production', 'development')>
+<#global RES_BASE_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)>
 <script id="theme-config-getter" type="text/javascript">
   // 获取主题配置
   var ThemeConfig = {};
@@ -34,34 +36,33 @@
       ThemeConfig[field] = value;
     </#if>
   </#list>
-  ThemeConfig['isProd'] = location.host.indexOf('localhost') < 0 && location.host.indexOf('127.0.0.1') < 0;
-  ThemeConfig['blog_title'] = '${blog_title}';
-  ThemeConfig['blog_url'] = '${blog_url}';
-  ThemeConfig['author'] = '${user.nickname}';
+  ThemeConfig['mode'] = '${mode!}';
+  ThemeConfig['blog_title'] = '${blog_title!}';
+  ThemeConfig['blog_url'] = '${blog_url!}';
+  ThemeConfig['author'] = '${user.nickname!}';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
-  ThemeConfig['RES_BASE_URL'] = ThemeConfig.isProd ? '${RES_BASE_URL}' : '${theme_base!}';
+  ThemeConfig['RES_BASE_URL'] = '${RES_BASE_URL}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!10}';
-  ThemeConfig['AccessKey'] = '${options.api_access_key!"joe2.0"}';
-  // ThemeConfig['comment_plugin']='${options.comment_internal_plugin_js}'
+  // ThemeConfig['comment_plugin'] = '${options.comment_internal_plugin_js!}'
 </script>
 
 <script id="metas-getter" type="text/javascript">
   // 获取当前页面元数据
-  window.PageAttrs = {
-    "metas": {
-			<#if metas??>
-				<#list metas?keys as key>
-					"${key}": "${metas['${key}']}",
-				</#list>
-			</#if>
-    }
-  };
+  window.PageAttrs = {
+    "metas": {
+      <#if metas??>
+        <#list metas?keys as key>
+          "${key}": "${metas['${key}']}",
+        </#list>
+      </#if>
+    }
+  };
 </script>
 
-<script type="text/javascript">
+<script id="theme-config-getter" type="text/javascript">
   if(!ThemeConfig.isProd) {
     console.log('%cJoe2.0主题配置：', "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 6px 12px; border-radius: 0 12px 0 12px", ThemeConfig);
-    console.log('资源根路径：',ThemeConfig.RES_BASE_URL);
+    console.log('资源根路径：', ThemeConfig.RES_BASE_URL);
   }
   // 读取主题模式
   var initThemeMode = function() {
@@ -71,14 +72,18 @@
       var now = new Date();
       var today = now.toLocaleString().split(" ")[0];
       var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
+      localStorage.removeItem("data-mode");
     } else {
-      // 固定模式下一天之内的时间都从本地取主题模式
-      var localMode = localStorage.getItem("data-mode") || "";
-      var timestamp = +localStorage.getItem("data-mode-timestamp") || "1970-01-01";
-      curMode = localMode ? (new Date().toDateString() === new Date(timestamp).toDateString() ? localStorage.getItem("data-mode") : ThemeConfig.static_mode) : ThemeConfig.static_mode;
+      if (ThemeConfig.static_mode === "off") {
+        // 用户模式下会从本地取主题模式，默认为浅色
+        curMode = localStorage.getItem("data-mode") || "light";
+        localStorage.setItem("data-mode", curMode);
+      } else {
+        // 非用户模式下直接取后台配置的模式
+        curMode = ThemeConfig.static_mode;
+        localStorage.removeItem("data-mode");
+      }
     }
-    localStorage.setItem("data-mode", curMode);
-    localStorage.setItem("data-mode-timestamp", Date.now());
     document.querySelector("html").setAttribute("data-mode", curMode);
   }
   initThemeMode();
@@ -86,4 +91,5 @@
     BASE_API: "",
     isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent)
   }
+  var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
 </script>
