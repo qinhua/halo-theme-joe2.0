@@ -44,14 +44,13 @@ const homeContext = {
 		let queryData = {
 			page: 0,
 			size: pageSize,
-			sort: "createTime,desc",
+			// sort: "createTime,desc", // 默认为创建时间倒叙，置顶优先
 		};
 
 		// 初始化Dom
 		const initDom = () => {
 			$domList.html("").show();
-			$domLoad.show();
-			$domEmpty.addClass("hide");
+			$domLoad.removeAttr("loading").html("查看更多").show();
 			const activeItem = $(
 				".joe_index__title-title .item[data-type=\"" + queryData.type + "\"]"
 			);
@@ -73,29 +72,28 @@ const homeContext = {
 						const resD = res.content;
 						if (resD.length === 0) {
 							$domLoad.hide();
-							$domLoading.hide();
 							if (queryData.page === 0) {
 								$domList.hide();
 								$domEmpty.removeClass("hide");
 							}
 						} else {
 							resD.forEach((itm) => $domList.append(getListNode(itm)));
-							$domLoad.removeAttr("loading").html("查看更多");
-							$domLoading.hide();
-							$domEmpty.addClass("hide");
 							if (res.isLast) {
 								$domLoad.hide();
-								$domEmpty.addClass("hide");
 								// return Qmsg.warning("没有更多内容了");
 							}
 						}
+						$domLoading.hide();
 						$domLoad.removeAttr("loading").html("查看更多");
 						reslove(resD.length ? resD.length - 1 : 0);
 					})
 					.catch((err) => {
+						if ($(".joe_list__item").length === 0) {
+							$domList.hide();
+							$domEmpty.removeClass("hide");
+						}
 						$domLoading.hide();
-						$domList.hide();
-						$domEmpty.removeClass("hide");
+						$domLoad.removeAttr("loading").html("查看更多");
 						reject(err);
 					});
 			});

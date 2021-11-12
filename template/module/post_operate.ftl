@@ -5,7 +5,7 @@
     </#list>
   </div>
   <#assign enable_share = metas.enable_share!'true'>
-  <#if enable_share=='true' && settings.enable_share==true>
+  <#if enable_share=='true' && settings.enable_share==true && post.status!='DRAFT'>
     <div class="joe_detail__operate-share">
       <i class="joe-font joe-icon-share"></i>
       <div class="share-icon-list">
@@ -53,7 +53,7 @@
     </div>
   </#if>
   <#assign enable_donate = metas.enable_donate!'true'>
-  <#if enable_donate=='true' && settings.enable_donate==true>
+  <#if enable_donate=='true' && settings.enable_donate==true && post.status!='DRAFT'>
     <#include "donate.ftl">
   </#if>
 </div>

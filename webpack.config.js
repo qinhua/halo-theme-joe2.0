@@ -1,5 +1,6 @@
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const resolve = (name) => path.resolve(__dirname, name);
 
@@ -33,6 +34,9 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new CleanWebpackPlugin({
+			cleanOnceBeforeBuildPatterns: [path.join(process.cwd(), "source/js/min")],
+		}),
 		new CompressionPlugin({
 			filename: "[path][base].gz",
 			algorithm: "gzip",
