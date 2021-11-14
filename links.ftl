@@ -24,9 +24,9 @@
                           <span class="title">${link.name!}</span>
                           <div class="content">
                             <div class="desc" title="${link.description!}">${link.description!}</div>
-                            <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default, RES_BASE_URL+'/source/img/icon_qiye.png')>
+                            <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default, BASE_RES_URL+'/source/img/icon_qiye.png')>
                             <#assign logo=(link.logo?? && link.logo!='')?then(link.logo,logo_default)>
-                            <img width="40" height="40" class="avatar owo_image lazyload" data-src="${logo!}" src="${RES_BASE_URL+'/source/svg/spinner-preloader.svg'}" onerror="this.src=${logo_default}" alt="${link.name!}">
+                            <img width="40" height="40" class="avatar owo_image lazyload" data-src="${logo!}" src="${BASE_RES_URL+'/source/svg/spinner-preloader.svg'}" onerror="this.src='${logo_default}'" alt="${link.name!}">
                           </div>
                         </a>
                       </li>
@@ -34,7 +34,7 @@
                     </#list>           
                   </ul>
                 <#else>
-                  <div class="joe_nodata">暂无友链</div>
+                  <div class="joe_nodata">${settings.links_empty_text!}</div>
                 </#if>
               </@linkTag>
             </article>
@@ -42,9 +42,10 @@
               <h5>申请格式</h5>
               <div class="link-requirement">
                 <p>
-                  <joe-message type="info" content="博客名称 + 博客地址 + 博客Logo + 博客介绍，在留言栏目里留言即可。"></joe-message>
+                  <joe-message type="info" content='<em style="font-style:normal;font-weight:bold;">< 博客名称 + 博客地址 + 博客Logo + 博客介绍 ></em><br>补充一下：logo 链接可直接使用短链接形式，如：<br>- 博客地址/logo<br>- 博客地址/avatar<br>(大家在留言栏目里留言即可)'></joe-message>
                 </p>
-                <blockquote class="joe_link__demo">博客名称：${blog_title!}<br>博客地址：<a href="${blog_url!}">${blog_url!}</a><br>博客介绍：${meta_description!}<br>博客Logo： <a href="${blog_logo!}">${blog_logo!}</a></blockquote>
+                <#assign logo_url = blog_url + '/logo'>
+                <blockquote class="joe_link__demo">博客名称：${blog_title!}<br>博客地址：<a href="${blog_url!}">${blog_url!}</a><br>博客Logo：<a href="${logo_url!!}">${logo_url!}</a><br>博客介绍：${meta_description!'这是一个非常牛逼的博客'}</blockquote>
               </div>
             </article>
           </div>
@@ -53,7 +54,9 @@
             <@global.comment target=links type="links" />
           </div>  -->
         </div>
-        <#include "template/common/aside.ftl">
+        <#if settings.enable_links_aside!false>
+          <#include "template/common/aside.ftl">
+        </#if>
       </div>
       <#include "template/common/footer.ftl">
     </div>

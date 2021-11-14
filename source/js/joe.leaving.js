@@ -48,32 +48,32 @@ const leavingContext = {
 		const colors = [
 			"#dcc10c",
 			"#299bec",
-			"#EA5455",
-			"#7367F0",
-			"#32CCBC",
-			"#F6416C",
-			"#28C76F",
-			"#9F44D3",
-			"#F55555",
-			"#736EFE",
-			"#E96D71",
-			"#DE4313",
-			"#D939CD",
-			"#4C83FF",
-			"#F072B6",
-			"#C346C2",
-			"#5961F9",
-			"#FD6585",
-			"#465EFB",
-			"#FFC600",
-			"#FA742B",
-			"#5151E5",
-			"#BB4E75",
+			"#ea5455",
+			"#7367f0",
+			"#32ccbb",
+			"#f6416c",
+			"#28c76f",
+			"#9f44d3",
+			"#f55555",
+			"#736efe",
+			"#e96d71",
+			"#de4313",
+			"#d939cd",
+			"#4c83ff",
+			"#f072b6",
+			"#c346c2",
+			"#5961f9",
+			"#fd6585",
+			"#465efb",
+			"#ffc600",
+			"#fa742b",
+			"#5151e5",
+			"#bb4e75",
 			"#e255cd",
 			"#63c549",
-			"#0ECDDE",
-			"#F067B4",
-			"#F067B4",
+			"#0ecdde",
+			"#f067b4",
+			"#f067b4",
 			"#ff9a9e",
 			"#1dd5de",
 			"#4facfe",
@@ -87,8 +87,9 @@ const leavingContext = {
 		];
 		const random = (min, max) =>
 			Math.floor(Math.random() * (max - min + 1)) + min;
-		const maxWidth = $(".joe_detail__leaving-list").width();
-		const maxHeight = $(".joe_detail__leaving-list").height();
+		const $el = $(".joe_detail__leaving-list");
+		const maxWidth = $el.width();
+		const maxHeight = $el.height();
 		const radius1 = [
 			"20px 300px",
 			"20px 400px",
@@ -137,6 +138,7 @@ const leavingContext = {
 		});
 	},
 };
+
 document.addEventListener("DOMContentLoaded", () => {
 	leavingContext.getData();
 });

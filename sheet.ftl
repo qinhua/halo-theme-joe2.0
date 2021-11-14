@@ -35,7 +35,7 @@
               <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>
             </div>
             <#--  <#if sheet.thumbnail?? && sheet.thumbnail!=''>
-              <img class="lazyload" data-src="${sheet.thumbnail}" src="${RES_BASE_URL!}/source/img/lazyload.gif" alt="封面"/>
+              <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>
             </#if>  -->
             <article class="joe_detail__article animated fadeIn${settings.enable_code_line_number?string(' line-numbers', '')}">
               ${sheet.formatContent!}

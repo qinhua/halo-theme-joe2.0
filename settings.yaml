@@ -496,7 +496,6 @@ blogger:
       name: lazyload_avatar
       label: 头像预载图
       type: attachment
-      # default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazy_avatar.jpg"
       default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/spinner-preloader.svg"
       description: "头像加载出来之前展示的图片"
     default_avatar:
@@ -510,11 +509,13 @@ blogger:
       label: 博主栏背景图
       type: attachment
       # default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/author_bg.jpg"
+      default: ""
       description: "用于博主信息的背景图"
     avatar_type:
       name: avatar_type
       label: 头像外形
       type: radio
+      data-type: text
       default: circle
       options:
         - value: circle
@@ -1240,6 +1241,12 @@ post:
           label: 开启
         - value: false
           label: 关闭
+    passage_tips_content:
+      name: passage_tips_content
+      label: 温馨提示文案
+      type: text
+      default: ""
+      description: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
     enable_progress_bar:
       name: enable_progress_bar
       label: 启用文章浏览进度条
@@ -1593,7 +1600,7 @@ post:
 # 日志页
 journals:
   label: 日志页
-  items: 
+  items:
     journals_title:
       name: journals_title
       label: 日志页标题
@@ -1613,6 +1620,29 @@ journals:
       data-type: bool
       default: true
       description: "是否开启日志缓入效果"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_journals_aside:
+      name: enable_journals_aside
+      label: 展示侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "日志页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_journal_add:
+      name: enable_journal_add
+      label: 展示新增日志按钮
+      type: switch
+      data-type: bool
+      default: false
       options:
         - value: true
           label: 是
@@ -1642,24 +1672,6 @@ journals:
           label: 是
         - value: false
           label: 否
-
-# 友链页
-links:
-  label: 友链页
-  items: 
-    links_title:
-      name: links_title
-      label: 友链页标题
-      default: "友情链接"
-      placeholder: "请输入"
-      description: "修改友链页顶部展示的标题"
-    links_logo_default:
-      name: links_logo_default
-      label: 友链默认图标
-      type: attachment
-      default: ""
-      placeholder: "请输入"
-      description: "修改友链的默认图标，仅在图标加载出错时生效"
 
 # 相册页
 photos:
@@ -1718,6 +1730,42 @@ photos:
       type: text
       default: "10"
       placeholder: 请输入图片间距值，默认10（请填数字）
+
+# 友链页
+links:
+  label: 友链页
+  items: 
+    links_title:
+      name: links_title
+      label: 友链页标题
+      default: "友情链接"
+      placeholder: "请输入"
+      description: "修改友链页顶部展示的标题"
+    links_empty_text:
+      name: links_empty_text
+      label: 空白状态文案
+      default: "暂无友链"
+      placeholder: "请输入"
+      description: "修改无数据时展示的文案"
+    links_logo_default:
+      name: links_logo_default
+      label: 友链默认图标
+      type: attachment
+      default: ""
+      placeholder: "请输入"
+      description: "修改友链的默认图标，仅在图标加载出错时生效"
+    enable_links_aside:
+      name: enable_links_aside
+      label: 展示侧边栏
+      type: switch
+      data-type: bool
+      default: false
+      description: "友链页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
 
 # 社交
 social:

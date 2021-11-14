@@ -1,5 +1,5 @@
 <#macro live2d>
-  <link rel="stylesheet" type="text/css" href="${RES_BASE_URL}/plugins/live2d/css/takagi.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${BASE_RES_URL}/plugins/live2d/css/takagi.min.css"/>
   <#if settings.live2d_style??>
     ${settings.live2d_style!}
   </#if>
@@ -17,10 +17,10 @@
     </div>
   </div>
   <#if settings.live2d_takagiDraggable?? && settings.live2d_takagiDraggable!='disable'>
-    <script src="${RES_BASE_URL}/source/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="${BASE_RES_URL}/source/lib/jquery-ui/jquery-ui.min.js"></script>
   </#if>
-  <script src="${RES_BASE_URL}/plugins/live2d/js/takagi-tips.min.js"></script>
-  <script src="${RES_BASE_URL}/plugins/live2d/js/live2d.min.js"></script> 
+  <script src="${BASE_RES_URL}/plugins/live2d/js/takagi-tips.min.js"></script>
+  <script src="${BASE_RES_URL}/plugins/live2d/js/live2d.min.js"></script> 
   <script>
     var options = {
       modelAPI: "${((settings.live2d_modelAPI!'')?length>0)?string((settings.live2d_modelAPI!''), '//live2d.fghrsh.net/api/')}",
@@ -58,7 +58,7 @@
       l2dVersion: "${((settings.live2d_l2dVersion!'')?length>0)?string((settings.live2d_l2dVersion!''), '1.0.0')}",
       l2dVerDate: "${((settings.live2d_l2dVerDate!'')?length>0)?string((settings.live2d_l2dVerDate!''), '2020.07.01')}",
       homePageUrl: "${((blog_url!'')?length>0)?string((blog_url!''), 'auto')}",
-      aboutPageUrl: "${((settings.live2d_aboutPageUrl!'')?length>0)?string((settings.live2d_aboutPageUrl!''), 'https://lixingyong.com/s/halo-live2d')}",
+      aboutPageUrl: "${((settings.live2d_aboutPageUrl!'')?length>0)?string((settings.live2d_aboutPageUrl!''), 'https://github.com/LIlGG/halo-live2d')}",
       screenshotCaptureName: "${((settings.live2d_screenshotCaptureName!'')?length>0)?string((settings.live2d_screenshotCaptureName!''), 'live2d.png')}"
     }
     initModel("", options);

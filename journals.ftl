@@ -10,7 +10,10 @@
       <div class="joe_container joe_main_container page-journals">
         <div class="joe_main">
           <div class="joe_detail">
-            <h1 class="joe_detail__title txt-shadow">${title}</h1>                  
+            <h1 class="joe_detail__title txt-shadow">${title}</h1>
+            <#if settings.enable_journal_add!false>
+              <a class="joe_journal_add" href="${blog_url+'/admin/index.html#/sheets/journals'}" target="_blank" rel="nofollow"><i class="joe-font joe-icon-edit"></i></a>
+            </#if>                
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
                 <img width="35" height="35" class="avatar lazyload" data-src="${user.avatar!}" src="${settings.lazyload_avatar!}" alt="${user.nickname!}">
@@ -32,7 +35,8 @@
             <ul class="joe_journals__list${settings.enable_journal_effect?then(' effects','')}">
               <#list journals.content as journal>
                 <li class="joe_journal__item animated wow" data-wow-delay="0.2s" data-cid="${journal.id}" data-clikes="${journal.likes}">
-                  <p class="joe_journal_date"><i class="joe-font joe-icon-feather"></i>
+                  <p class="joe_journal_date">
+                    <i class="joe-font joe-icon-feather"></i>
                     <#--  <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>  -->
                     <@global.timeline datetime=journal.createTime />
                   </p>
@@ -108,7 +112,9 @@
             </@paginationTag>   
           </div>
         </div>
-        <#include "template/common/aside.ftl">
+        <#if settings.enable_journals_aside!true>
+          <#include "template/common/aside.ftl">
+        </#if>
       </div>
       <#include "template/common/footer.ftl">
     </div>

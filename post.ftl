@@ -58,8 +58,12 @@
                     <span class="text">温馨提示：</span>
                   </div>
                   <div class="content">
-                    本文最后更新于${post.createTime?string('yyyy-MM-dd')}，若内容或图片失效，请留言反馈。
-                    部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
+                    <#if settings.passage_tips_content?? && settings.passage_tips_content!=''>
+                      ${settings.passage_tips_content}
+                    <#else>
+                      本文最后更新于${post.createTime?string('yyyy-MM-dd')}，若内容或图片失效，请留言反馈。
+                      部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
+                    </#if>
                   </div>
                 </div>
               </#if>

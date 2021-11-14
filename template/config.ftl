@@ -16,7 +16,8 @@
 </script>
 
 <#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then('production', 'development')>
-<#global RES_BASE_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)>
+<#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)>
+<#global EMPTY_IMG = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
 <script id="theme-config-getter" type="text/javascript">
   // 获取主题配置
   var ThemeConfig = {};
@@ -41,7 +42,7 @@
   ThemeConfig['blog_url'] = '${blog_url!}';
   ThemeConfig['author'] = '${user.nickname!}';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
-  ThemeConfig['RES_BASE_URL'] = '${RES_BASE_URL}';
+  ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!10}';
   // ThemeConfig['comment_plugin'] = '${options.comment_internal_plugin_js!}'
 </script>
@@ -60,9 +61,9 @@
 </script>
 
 <script id="theme-config-getter" type="text/javascript">
-  if(!ThemeConfig.isProd) {
+  if (ThemeConfig.mode === "development") {
     console.log('%cJoe2.0主题配置：', "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 6px 12px; border-radius: 0 12px 0 12px", ThemeConfig);
-    console.log('资源根路径：', ThemeConfig.RES_BASE_URL);
+    console.log('资源根路径：', ThemeConfig.BASE_RES_URL);
   }
   // 读取主题模式
   var initThemeMode = function() {

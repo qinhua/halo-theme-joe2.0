@@ -1,5 +1,5 @@
 <#if settings.enable_aside>
-  <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
+  <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
   <aside class="joe_aside">
     <#if settings.show_blogger!true>
       <#include "../module/blogger.ftl">

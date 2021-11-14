@@ -56,7 +56,9 @@
 
   Tip：如果你后台管理中之前已经配置了其它的 `Access Key`（内容不是 `joe2.0`），那么需要你到本主题设置中的 `基本设置` 配置一下 `AccessKey<必填>`，和你后台中的一致即可（切记一致才行，且不要填写中文或特殊字符）。
 
-- 主题升级后配置项变化较大时可能报错，导致页面渲染不出来。只需要进入当前主题的设置界面执行一下保存操作来更新旧的配置，然后再访问页面即可，有时可能需要先切换到其它主题后再切回来才能看到最新的效果。
+- 主题升级后配置项变化较大时可能报错，导致页面渲染不出来。只需要进入当前主题的设置界面执行一下保存操作来更新旧的配置，然后再访问页面即可
+
+- 有时主题已经更新成功了，但是页面还是加载的旧版本的文件，可能是由于 `主题激活状态不正常` 导致的。此时只需要先切换到其他主题再切回来即可。或者可以试着重启下后台试试。
 
 - 刷新时记得打开控制台进行强刷，避免潜在缓存的影响，`CDN缓存` 也要及时清除。
 
@@ -229,7 +231,11 @@
 
 #### 1、如何自定义导航条图标？
 
-> 主题自身已经引入了部分 `iconfont` 图标，你可以直接用。[全在这里](https://bbchin.com/iconfont-joe2.0/)
+> 主题自身已经引入了部分 `iconfont` 图标，你可以直接用（[全在这里](https://bbchin.com/iconfont-joe2.0/)），如果想在这个基础上增加图标，可联系我加入该项目的图标组。`iconfont` 使用方式如下：
+
+```html
+<i class="joe-font joe-icon-xxx"></i>
+```
 
 - 首先通过 [iconfont](https://www.iconfont.cn/) 获取自己的图标链接，也可以用 [fontawesome](http://www.fontawesome.com.cn/) 的字体，注意要使用 `font-class` 类型，最后这种地址：//at.alicdn.com/t/font_2788564_1f1rnuqwnzj.css
 
@@ -271,11 +277,11 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 <link
   rel="preload stylesheet"
   as="style"
-  href="${RES_BASE_URL}/source/css/min/joe.index.min.css?v=${theme.version!}"
+  href="${BASE_RES_URL}/source/css/min/joe.index.min.css?v=${theme.version!}"
 />
 ```
 
-把其中的 `${RES_BASE_URL}` 修改为主题自身路径 `${theme_base!}` 即可。
+把其中的 `${BASE_RES_URL}` 修改为主题自身路径 `${theme_base!}` 即可。
 
 #### 7、如何通过元数据为文章详情页进行单独的功能配置？
 

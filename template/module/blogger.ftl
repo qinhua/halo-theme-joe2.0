@@ -1,13 +1,13 @@
 <section class="joe_aside__item author">
-  <img width="100%" height="120" class="image lazyload" data-src="${settings.author_bg!RES_BASE_URL+'/source/img/author_bg.jpg'}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="博主栏壁纸">
+  <img width="100%" height="120" class="image lazyload" data-src="${(settings.author_bg!='')?then(settings.author_bg,BASE_RES_URL+'/source/img/author_bg.jpg')}" src="${EMPTY_IMG!}" onerror="this.src='${EMPTY_IMG!}'" alt="博主栏壁纸">
   <div class="user">
     <div class="avatar_wrapper ${settings.avatar_type!}">
-      <img class="avatar lazyload" data-src="${user.avatar!}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+      <img class="avatar lazyload" data-src="${(user.avatar?? && user.avatar!='')?then(user.avatar,default_avatar)}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <#if settings.avatar_frame?? && settings.avatar_frame!="0">
-        <img class="avatar_frame ${settings.avatar_frame}" src="${RES_BASE_URL!}/source/frame/${settings.avatar_frame!}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="挂架"/>
+        <img class="avatar_frame ${settings.avatar_frame}" src="${BASE_RES_URL!}/source/frame/${settings.avatar_frame!}.png" onerror="this.src='${EMPTY_IMG!}'" alt="挂架"/>
       </#if>
       <#if settings.avatar_widget?? && settings.avatar_widget!="0">
-        <img class="avatar_widget ${settings.avatar_widget}" src="${RES_BASE_URL!}/source/widget/${settings.avatar_widget!}.gif" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="相框"/>
+        <img class="avatar_widget ${settings.avatar_widget}" src="${BASE_RES_URL!}/source/widget/${settings.avatar_widget!}.gif" onerror="this.src='${EMPTY_IMG!}'" alt="相框"/>
       </#if>
     </div>
     <a class="link" href="${blog_url!}" target="_blank" rel="noopener noreferrer nofollow">
@@ -20,7 +20,7 @@
           <#if count gte 100 && count lt 300><#assign level=4></#if>
           <#if count gte 300 && count lt 500><#assign level=5></#if>
           <#if count gte 500><#assign level=6></#if>
-          <img class="level" src="${RES_BASE_URL!}/source/img/lv${level}.png" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" alt="等级"/>
+          <img class="level" src="${BASE_RES_URL!}/source/img/lv${level}.png" onerror="this.src='${EMPTY_IMG!}'" alt="等级"/>
         </@postTag>
       </#if>
     </a>
@@ -68,6 +68,6 @@
   </#if>
   <#if settings.enable_strips>
     <canvas id="canvas-strips" width="300" height="340"></canvas>
-    <script src="${RES_BASE_URL}/source/effect/bg/strips.js"></script>
+    <script src="${BASE_RES_URL}/source/effect/bg/strips.js"></script>
   </#if>
 </section>
