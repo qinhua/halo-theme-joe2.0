@@ -31,7 +31,7 @@
       </#if>
       src: url(${settings.custom_font}) format("${fontFormat}");
     <#elseif settings.web_font?? && settings.web_font!='off'>
-      src: url(${RES_BASE_URL + "/source/font/" + settings.web_font}) format("${settings.web_font?split('.')[1]}");
+      src: url(${BASE_RES_URL + "/source/font/" + settings.web_font}) format("${settings.web_font?split('.')[1]}");
     <#else>
     </#if>
   }

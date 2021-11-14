@@ -3544,12 +3544,11 @@ body {
   &__article {
     padding: 10px 20px;
     font-size: 15px;
-    user-select: none;
     word-break: break-word;
     color: var(--routine);
 
     &.copyable {
-      user-select: auto;
+      user-select: auto !important;
 
       code:not([class]) {
         user-select: auto;
@@ -4172,10 +4171,10 @@ body {
 
     &-tags {
       display: flex;
-      // flex-shrink: 0;
       flex: 1;
       align-items: center;
       overflow-x: auto;
+      margin-right: 5px;
 
       &::-webkit-scrollbar {
         display: none;

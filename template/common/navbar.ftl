@@ -1,4 +1,4 @@
-<#import "../macro/searchpart.ftl" as sp>
+<#import "../macro/search_part.ftl" as sp>
 <header class="joe_header${settings.enable_glass_blur?then(' glass','')}">
   <#assign logo_link=(settings.logo_link?? && settings.logo_link!='')?then((settings.logo_link=='#')?then('javascript:;',settings.logo_link), blog_url)>
   <#--  web菜单  -->
@@ -7,7 +7,7 @@
       <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
       <#if settings.show_logo>
         <a title="${blog_title!}" class="joe_header__above-logo" href="${logo_link}">
-          <img class="lazyload" style="border-radius:${settings.logo_radius!'2px'}" data-src="${blog_logo!}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="${blog_title!}">
+          <img style="border-radius:${settings.logo_radius!}" src="${(blog_logo?? && blog_logo!='')?then(blog_logo,'https://halo.run/logo')}" onerror="this.src='https:\/\/halo.run\/logo'" alt="${blog_title!}">
         </a>
       </#if>
       <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}">
@@ -69,9 +69,9 @@
 
   <#--  mobile菜单  -->
   <div class="joe_header__slideout">
-    <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!RES_BASE_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
+    <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
     <div class="joe_header__slideout-author">
-      <img width="50" height="50" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+      <img width="50" height="50" class="avatar lazyload" data-src="${(user.avatar?? && user.avatar!='')?then(user.avatar,default_avatar)}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <div class="info">
         <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
         <p class="motto joe_motto">${user.description!}</p>

@@ -120,7 +120,7 @@ const postContext = {
 		if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
 			$("pre[class*='language-']").each(function (index, item) {
 				const $item = $(item);
-				if ($item.height() > 200) {
+				if ($item.height() > ThemeConfig.long_code_height) {
 					const $title = $item
 						.siblings(".toolbar")
 						.find(".toolbar-item span")
