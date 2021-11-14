@@ -1,4 +1,22 @@
 .joe {
+
+  &_journal_add {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--main);
+
+    &:hover {
+      color: var(--theme);
+    }
+
+    i {
+      font-size: 20px;
+    }
+  }
+
   &_journals__list {
     padding: 10px 0 20px;
 
@@ -284,7 +302,7 @@
               code {
                 user-select: auto;
               }
-          
+
               .code-expander {
                 right: 40px;
               }
@@ -417,6 +435,9 @@
   padding: 0 0 20px 0;
 }
 
-.page-journals .joe_detail {
-  overflow-y: hidden;
+.page-journals {
+  .joe_detail {
+    position: relative;
+    overflow-y: hidden;
+  }
 }

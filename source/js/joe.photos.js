@@ -96,7 +96,7 @@ const photosContext = {
             }">
       <img width="100%" height="100%" class="lazyload" rsrc="${
 	ThemeConfig.photo_lazyload_img ||
-        ThemeConfig.RES_BASE_URL + "/source/img/lazyload.gif"
+        ThemeConfig.BASE_RES_URL + "/source/img/lazyload.gif"
 }" src="${item.thumbnail}" alt="${item.name}"/>
       <span class="team" style="background-color:${Utils.getRandomColor(
 		0.2,

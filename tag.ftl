@@ -17,7 +17,7 @@
               </div>
             </div>
             <#if posts.content?size &gt;0>
-              <#assign lazy_img=settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'>
+              <#assign lazy_img=settings.lazyload_thumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
               <ul class="joe_archive__list joe_list" data-wow="off">
                 <#list posts.content as post>
                   <li class="joe_list__item wow default">

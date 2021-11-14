@@ -1,5 +1,5 @@
 <div class="email-page" style="background:#fff;">
-  <style>@media screen and (max-width:400px){.email-title{padding:14px 20px!important;}.email-title .icon{display:none;}}</style>
+  <style>@media screen and (max-width:400px){.email-content{width:94%!important;}.email-title{padding:12px 14px!important;font-size:15px!important;}.email-title .icon{display:none;}.email-text{padding:20px 20px 0!important;}.email-text pre{margin:10px 0!important;}.email-footer{padding:10px!important;}}</style>
   <div class="email-content" style="width:90%;max-width:660px;margin:20px auto 30px;line-height:1.5;text-align:left;overflow:hidden;border-radius:8px;box-shadow:0 2px 12px 0 rgba(0,0,0,0.1);">
     <div style="overflow:hidden;">
       <h1 class="email-title" style="position:relative;margin:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding:14px 52px 14px 20px;line-height:1.6;font-size:16px;font-weight:normal;color:#fff;background:webkit-linear-gradient(-45deg,rgba(9,69,138,0.2),rgba(255,241,68,0.7),rgba(233,131,71,0.79),rgba(227,54,54,0.86),rgba(9,69,138,0.2));background:linear-gradient(-45deg,rgba(9,69,138,0.2),rgba(255,241,68,0.7),rgba(233,131,71,0.79),rgba(227,54,54,0.86),rgba(9,69,138,0.2));background-size:400% 400%;background-position:50% 100%;">
@@ -13,7 +13,7 @@
         <p style="margin:0 0 16px;padding:0;line-height:24px;font-size:13px;color:#6e6e6e;">
           <a href="${pageFullPath!}" target="_blank" style="color:#5caaef;text-decoration:none;">点击查看完整内容</a>
         </p>
-      </pre>
+      </div>
       <div class="email-footer" style="padding:10px 20px;border-top:1px solid #eee;">
         <p style="margin:0;padding:0;line-height:24px;font-size:13px;color:#999;">* 注意：此邮件由 <a href="${blog_url!}" target="_blank" style="color:#fa7e5b;text-decoration:none;">${blog_title!'xxx'}</a> 自动发出，请勿回复。</p>
       </div>

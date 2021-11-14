@@ -105,7 +105,7 @@
   <body>
     <div class="joe_page_404">
       <div class="error">
-        <img src="${RES_BASE_URL!}/source/svg/404.svg" alt="404">
+        <img src="${BASE_RES_URL!}/source/svg/404.svg" alt="404">
         <h3 class="title">“未找到您要的资源”</h3>
         <a href="/" class="error_link">回到主页</a>
       </div>

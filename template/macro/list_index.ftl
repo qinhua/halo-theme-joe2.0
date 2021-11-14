@@ -1,6 +1,6 @@
 <#macro list_index>
   <ul class="joe_list">
-    <#assign lazy_img=settings.lazyload_thumbnail!RES_BASE_URL+'/source/img/lazyload.gif'>
+    <#assign lazy_img=settings.lazyload_thumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
     <#list posts.content as post>
       <li class="joe_list__item default animated wow" data-wow-delay="0.2s">
         <div class="line"></div>

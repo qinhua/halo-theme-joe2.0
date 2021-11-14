@@ -563,6 +563,10 @@ html {
               height: 300px;
             }
           }
+
+          &-empty {
+            height: 300px;
+          }
         }
 
         &__hot {
@@ -1108,6 +1112,18 @@ html {
     }
   }
 
+  @media (max-width: 650px) {
+    .joe {
+      &_index {
+        &__banner {
+          &-empty {
+            height: 240px;
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: 500px) {
     .joe {
       &_vplayer {
@@ -1222,6 +1238,11 @@ html {
             .item {
               height: 100px;
             }
+          }
+
+          &-empty {
+            height: 200px;
+            border-radius: 0;
           }
         }
 
@@ -1859,6 +1880,18 @@ html {
 
       .link-requirement {
         padding-left: 6px;
+      }
+    }
+  }
+
+  @media (max-width: 375px) {
+    .joe {
+      &_index {
+        &__banner {
+          &-empty {
+            height: 170px;
+          }
+        }
       }
     }
   }

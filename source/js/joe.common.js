@@ -159,14 +159,14 @@ const commonContext = {
 	loadMouseEffect() {
 		if (Joe.isMobile || ThemeConfig.cursor_effect === "off") return;
 		$.getScript(
-			`${ThemeConfig.RES_BASE_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
+			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
 		);
 	},
 	/* 加载背景特效 */
 	loadBackdropEffect() {
 		if (Joe.isMobile || ThemeConfig.backdrop === "off") return;
 		$.getScript(
-			`${ThemeConfig.RES_BASE_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
+			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
 		);
 	},
 	/* 动态背景 */
@@ -328,7 +328,7 @@ const commonContext = {
 	},
 	/* 激活侧边栏天气功能 */
 	initWeather() {
-		if (!ThemeConfig.enable_weather || !ThemeConfig.weather_key) return;
+		if (!ThemeConfig.enable_weather || !ThemeConfig.weather_key || !$("#he-plugin-simple").length) return;
 		window.WIDGET = {
 			CONFIG: {
 				modules: "120",
@@ -387,7 +387,7 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
-		if (!ThemeConfig.show_tag_cloud) return;
+		if (!ThemeConfig.show_tag_cloud || !$(".tags-cloud-list").length) return;
 		const entries = [];
 		const colors = [
 			"#F8D800",
@@ -601,69 +601,9 @@ const commonContext = {
 		getRunTime();
 		setInterval(getRunTime, 1000);
 	},
-	/* 初始化表情功能 */
-	initEmoji() {
-		if (!$(".joe_owo__contain").length && !$(".joe_owo__target").length) return;
-		$.ajax({
-			url: window.Joe.THEME_URL + "assets/json/joe.owo.json",
-			dataType: "json",
-			success(res) {
-				let barStr = "";
-				let scrollStr = "";
-				for (let key in res) {
-					const item = res[key];
-					barStr += `<div class="item" data-type="${key}">${key}</div>`;
-					scrollStr += `
-                            <ul class="scroll" data-type="${key}">
-								${item
-		.map(
-			(_) =>
-				`<li class="item" data-text="${_.data}">${
-					key === "颜文字"
-						? `${_.icon}`
-						: `<img src="${window.Joe.THEME_URL + _.icon}" alt="${
-							_.data
-						}"/>`
-				}</li>`
-		)
-		.join("")}
-                            </ul>
-                        `;
-				}
-				$(".joe_owo__contain").html(`
-                        <div class="seat">OωO</div>
-                        <div class="box">
-                            ${scrollStr}
-                            <div class="bar">${barStr}</div>
-                        </div>
-                    `);
-				$(document).on("click", function () {
-					$(".joe_owo__contain .box").stop().slideUp("fast");
-				});
-				$(".joe_owo__contain .seat").on("click", function (e) {
-					e.stopPropagation();
-					$(this).siblings(".box").stop().slideToggle("fast");
-				});
-				$(".joe_owo__contain .box .bar .item").on("click", function (e) {
-					e.stopPropagation();
-					$(this).addClass("active").siblings().removeClass("active");
-					const scrollIndx =
-            ".joe_owo__contain .box .scroll[data-type=\"" +
-            $(this).attr("data-type") +
-            "\"]";
-					$(scrollIndx).show().siblings(".scroll").hide();
-				});
-				$(".joe_owo__contain .scroll .item").on("click", function () {
-					const text = $(this).attr("data-text");
-					$(".joe_owo__target").insertContent(text);
-				});
-				$(".joe_owo__contain .box .bar .item").first().click();
-			},
-		});
-	},
 	/* 头部滚动 */
 	initHeadScroll() {
-		if (window.IS_MOBILE) return;
+		if (Joe.isMobile) return;
 		let flag = true;
 		const handleHeader = (diffY) => {
 			if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
@@ -746,7 +686,6 @@ const commonContext = {
 		"loadingBar",
 		"init3dTag",
 		"initLive2d",
-		"initEmoji",
 		"showLoadedTime",
 		"clean",
 	];

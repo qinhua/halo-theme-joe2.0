@@ -7,7 +7,7 @@
     <@link type="${type}"/>
     <#if settings.enable_loading_bar!true>
       <!-- 加载条 -->
-      <link rel="stylesheet" href="${RES_BASE_URL}/source/lib/nprogress/nprogress.min.css">
+      <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.css">
       <style>
           #nprogress .bar {
             background: var(--theme);
@@ -20,9 +20,9 @@
             display: none;
           }
       </style>
-      <script src="${RES_BASE_URL}/source/lib/nprogress/nprogress.min.js"></script>
+      <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
     </#if>
-    <script src="${RES_BASE_URL}/source/lib/jquery@3.5.1/jquery.min.js"></script>
+    <script src="${BASE_RES_URL}/source/lib/jquery@3.5.1/jquery.min.js"></script>
     <#--  ===== 自定义区域 ===== -->
     <#if settings.external_css??>
       <!-- 自定义外部css -->

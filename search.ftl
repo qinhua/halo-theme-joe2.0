@@ -11,13 +11,17 @@
           <div class="joe_archive">
             <div class="joe_archive__title">
               <div class="joe_archive__title-title">
-                  <i class="joe-font joe-icon-feather joe_archive__title-icon"></i>搜索
-                  <span class="muted ellipsis">${keyword!}</span>
-                  <span>的结果如下：</span>
+                  <i class="joe-font joe-icon-feather joe_archive__title-icon"></i>
+                  <#if keyword?? && keyword?replace(' ','')!=''>
+                    搜索<span class="muted ellipsis">${keyword}</span>
+                    <span>的结果如下：</span>
+                  <#else>
+                    <span>相关搜索结果如下：</span>
+                  </#if>
               </div>
             </div>
             <#if posts.content?size &gt;0>
-              <#assign lazy_img=RES_BASE_URL+'/source/img/lazyload.gif'>
+              <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
               <ul class="joe_archive__list joe_list" data-wow="off">
                 <#list posts.content as post>
                   <li class="joe_list__item wow default">
