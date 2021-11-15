@@ -1,7 +1,7 @@
 
 <#--  社交账号模板  -->
 <#if settings.github?? || settings.zhihu?? || settings.juejin?? || settings.bilibili?? || settings.qq?? || settings.weibo?? || settings.email?? || settings.custome_social_channel??>
-  <ul class="social-account">
+  <div class="social-account">
     <#if settings.github??>
       <style type="text/css">
         html[data-mode='dark'] .social-account .github {
@@ -52,5 +52,5 @@
         </a>
       </#if>
     </#if>
-  </ul>
+  </div>
 </#if>
