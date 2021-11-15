@@ -6,9 +6,9 @@ const homeContext = {
 			ThemeConfig.enable_banner &&
       $(".joe_index__banner .swiper-container").length !== 0
 		) {
-			new Swiper(".swiper-container", {
+			const config = {
 				direction: ThemeConfig.banner_direction,
-				loop: ThemeConfig.banner_loop,
+				loop: ThemeConfig.enable_banner_loop,
 				keyboard: false,
 				mousewheel: false,
 				grabCursor: ThemeConfig.enable_banner_handle,
@@ -20,14 +20,19 @@ const homeContext = {
 					}
 					: false,
 				observer: true,
-				pagination: {
-					el: ".swiper-pagination",
-				},
-				navigation: {
+			};
+			ThemeConfig.enable_banner_handle &&	ThemeConfig.enable_banner_switch_button
+				? (config.navigation = {
 					nextEl: ".swiper-button-next",
 					prevEl: ".swiper-button-prev",
-				},
-			});
+				})
+				: null;
+			ThemeConfig.enable_banner_pagination
+				? (config.pagination = {
+					el: ".swiper-pagination",
+				})
+				: null;
+			new Swiper(".swiper-container", config);
 		}
 	},
 	/* 初始化首页列表 */

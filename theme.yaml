@@ -7,7 +7,7 @@ description: Halo主题 Joe2.0
 logo: https://bbchin.com/logo
 website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
-version: 1.0.3
+version: 1.0.4
 require: 1.4.11
 # 文章页 meta 变量
 postMetaField:
@@ -19,7 +19,6 @@ postMetaField:
   - enable_like
   - enable_comment
   - code_theme
-  # - comment_before_read
 
 # 自定义页 meta 变量
 sheetMetaField:

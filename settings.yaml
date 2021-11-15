@@ -694,6 +694,40 @@ carousel:
       type: switch
       data-type: bool
       default: true
+      description: "如果关闭，将隐藏切换按钮且不能通过鼠标和键盘进行切换"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_banner_title:
+      name: enable_banner_title
+      label: 展示标题
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_banner_switch_button:
+      name: enable_banner_switch_button
+      label: 展示左右切换按钮
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_banner_pagination:
+      name: enable_banner_pagination
+      label: 展示分页器
+      type: switch
+      data-type: bool
+      default: true
       options:
         - value: true
           label: 开启
@@ -711,7 +745,7 @@ carousel:
       label: 图片预载图
       type: attachment
       default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/lazyload_h.gif"
-      description: "banner图片加载出来之前展示的图片，体积尽可能的小"
+      description: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
     
 # 侧边栏
 aside:
@@ -848,8 +882,8 @@ aside:
       label: 展示标签云
       type: switch
       data-type: bool
-      default: true
-      description: ""
+      default: false
+      description: "在右侧展示标签云，默认关闭以节省性能"
       options:
         - value: true
           label: 开启
@@ -2478,7 +2512,7 @@ others:
       type: switch
       data-type: bool
       default: false
-      description: "启用后，全局评论、留言和广告位将会屏蔽（通常在网站备案期间开启）"
+      description: "启用后，全局评论、留言、特效和广告位将会屏蔽（通常在网站备案期间开启）"
       options:
         - value: true
           label: 开启
