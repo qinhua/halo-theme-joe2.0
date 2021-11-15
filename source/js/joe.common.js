@@ -157,24 +157,17 @@ const commonContext = {
 	},
 	/* 加载鼠标特效 */
 	loadMouseEffect() {
-		if (Joe.isMobile || ThemeConfig.cursor_effect === "off") return;
+		if (ThemeConfig.enable_clean_mode || Joe.isMobile || ThemeConfig.cursor_effect === "off") return;
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
 		);
 	},
 	/* 加载背景特效 */
 	loadBackdropEffect() {
-		if (Joe.isMobile || ThemeConfig.backdrop === "off") return;
+		if (ThemeConfig.enable_clean_mode || Joe.isMobile || ThemeConfig.backdrop === "off") return;
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
 		);
-	},
-	/* 动态背景 */
-	initDynamicBg() {
-		if (!ThemeConfig.enable_splash) return;
-		// $.getScript(
-		//   window.Joe.THEME_URL + `assets/backdrop/${Joe.DYNAMIC_BACKGROUND}`
-		// );
 	},
 	/* 自定义favicon */
 	setFavicon() {

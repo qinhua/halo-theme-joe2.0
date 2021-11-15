@@ -20,10 +20,10 @@
   </#if>
   <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.css">
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/animate/animate.min.css">
-  <#if settings.enable_mathjax==true && (type == 'post' || type == 'journals')>
+  <#if settings.enable_mathjax == true && (type == 'post' || type == 'journals')>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
   </#if>
-  <#if settings.cursor_skin?? && settings.cursor_skin!='off'>
+  <#if settings.enable_clean_mode != true && settings.cursor_skin?? && settings.cursor_skin != 'off'>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/cursor/style/min/${settings.cursor_skin!}.min.css?v=${theme.version!}">
   </#if>
   <#if type == 'index'>

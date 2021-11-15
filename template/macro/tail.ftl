@@ -47,7 +47,7 @@
     <#--  tagcloud  -->
     <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.2.3/3dtag/3dtag.min.js"></script>
   </#if>
-  <#if settings.enable_music_player && settings.music_id?? && settings.music_id!=''>
+  <#if settings.enable_music_player==true && settings.music_id?? && settings.music_id!=''>
     <!-- music player -->
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.css"> 
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
@@ -59,10 +59,6 @@
   <#if type == 'post' || type == 'journals'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
-  <#--  <#if settings.enable_pjax!false>
-      <script src="${BASE_RES_URL}/source/lib/jquery-pjax/jquery.pjax.min.js"></script>
-      <script src="${BASE_RES_URL}/source/js/min/pjax.js?v=${theme.version!}"></script>
-  </#if>   -->
   <#if settings.favicon??>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
@@ -103,6 +99,10 @@
     <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.pkgd.js"></script>
     <script src="${BASE_RES_URL}/source/js/min/joe.leaving.min.js?v=${theme.version!}"></script>
   </#if>
+  <#--  <#if settings.enable_pjax!false>
+      <script src="${BASE_RES_URL}/source/lib/jquery-pjax/jquery.pjax.min.js"></script>
+      <script src="${BASE_RES_URL}/source/js/min/pjax.js?v=${theme.version!}"></script>
+  </#if>   -->
   <#-- ===== 引入页面级js end ===== -->
 
   <#-- ===== 引入脚本 start ===== -->

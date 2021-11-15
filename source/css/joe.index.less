@@ -14,7 +14,13 @@
       border-radius: var(--radius-inner);
       --swiper-theme-color: #fff;
 
+      .swiper-slide {
+        transform: translate3d(0, 0, 0);
+        overflow: hidden;
+      }
+
       .item {
+        transform: translate3d(0, 0, 0);
         display: block;
         height: 326px;
 
@@ -203,8 +209,9 @@
 
     &-empty {
       height: 350px;
-      overflow:hidden;
+      overflow: hidden;
       border-radius: var(--radius-inner);
+
       img {
         display: block;
         width: 100%;

@@ -51,7 +51,6 @@ const postContext = {
 		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy) return;
 		const curl = $(".joe_detail").attr("data-curl") || location.href;
 		$(".joe_detail__article").on("copy", function (e) {
-			const body_element = document.body;
 			const selection = window.getSelection();
 			const appendLink = ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
@@ -66,8 +65,9 @@ const postContext = {
 				window.clipboardData.setData("Text", copytext);
 				return false;
 			} else {
+				const body_element = document.body;
 				const copytext = selection + appendLink;
-				const newdiv = document.createElement("div");
+				const newdiv = document.createElement("pre");
 				newdiv.style.position = "absolute";
 				newdiv.style.left = "-99999px";
 				body_element.appendChild(newdiv);
