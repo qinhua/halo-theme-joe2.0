@@ -37,6 +37,8 @@
       ThemeConfig[field] = value;
     </#if>
   </#list>
+  ThemeConfig['name'] = '${options.theme!"Joe2.0"}';
+  ThemeConfig['version'] = '${theme.version!}';
   ThemeConfig['mode'] = '${mode!}';
   ThemeConfig['blog_title'] = '${blog_title!}';
   ThemeConfig['blog_url'] = '${blog_url!}';
@@ -62,35 +64,34 @@
 
 <script id="theme-config-getter" type="text/javascript">
   if (ThemeConfig.mode === "development") {
-    console.log('%cJoe2.0主题配置：', "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 6px 12px; border-radius: 0 12px 0 12px", ThemeConfig);
-    console.log('资源根路径：', ThemeConfig.BASE_RES_URL);
+    console.log("Joe2.0主题配置：", ThemeConfig);
+    console.log("资源根路径：", ThemeConfig.BASE_RES_URL);
   }
   // 读取主题模式
   var initThemeMode = function() {
     var curMode='';
-    if (ThemeConfig.enable_auto_switch_mode) {
+    if (ThemeConfig.theme_mode === "auto") {
       var light_scope = ThemeConfig.light_time_scope.split("~");
       var now = new Date();
       var today = now.toLocaleString().split(" ")[0];
       var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
       localStorage.removeItem("data-mode");
+    } else if (ThemeConfig.theme_mode === "user") {
+      // 用户模式下会从本地取主题模式，默认为浅色
+      curMode = localStorage.getItem("data-mode") || "light";
+      localStorage.setItem("data-mode", curMode);
     } else {
-      if (ThemeConfig.static_mode === "off") {
-        // 用户模式下会从本地取主题模式，默认为浅色
-        curMode = localStorage.getItem("data-mode") || "light";
-        localStorage.setItem("data-mode", curMode);
-      } else {
-        // 非用户模式下直接取后台配置的模式
-        curMode = ThemeConfig.static_mode;
-        localStorage.removeItem("data-mode");
-      }
+      // 非用户模式下直接取后台配置的模式
+      curMode = ThemeConfig.theme_mode;
+      localStorage.removeItem("data-mode");
     }
     document.querySelector("html").setAttribute("data-mode", curMode);
   }
   initThemeMode();
   window.Joe = {
-    BASE_API: "",
-    isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent)
+    isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
+    BASE_API: ""
   }
   var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
+  ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.author + " | 版本 V" + ThemeConfig.version + " (使用 window.ThemeConfig 获取所有配置)", "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>

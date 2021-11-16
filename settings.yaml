@@ -56,38 +56,28 @@ genernal:
 theme:
   label: 主题相关
   items:
-    static_mode:
-      name: static_mode
+    theme_mode:
+      name: theme_mode
       label: 主题模式
       type: radio
-      default: "off"
-      description: "为博客设置主题模式（用户/浅色/暗黑），默认为用户模式，仅在用户模式下页面才有主题切换按钮"
+      default: "user"
+      description: "设置博客的主题模式（用户/自动/浅色/暗黑），默认为用户模式，仅在用户模式下页面才有主题切换按钮，自动模式下根据时间自动切换"
       options:
-        - value: "off"
+        - value: "user"
           label: 用户模式
+        - value: "auto"
+          label: 自动模式
         - value: "light"
           label: 浅色模式
         - value: "dark"
           label: 暗黑模式
-    enable_auto_switch_mode:
-      name: enable_auto_switch_mode
-      label: 自动切换主题模式
-      type: switch
-      data-type: bool
-      default: false
-      description: "在特定时间自动切换浅色/暗黑模式，可配置时间范围（注意：该模式会忽略固定模式的设置，且页面不展示主题切换按钮）"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
     light_time_scope:
       name: light_time_scope
       label: 浅色模式生效时间范围
       type: text
       default: "5:00~19:00"
       placeholder: "输入格式如：5:00~19:00"
-      description: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式，仅在“自动切换”开启情况下生效"
+      description: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式（仅在主题模式为 “自动模式” 下生效）"
     mode_color_light:
       name: mode_color_light
       label: 主题色（浅色）
@@ -316,7 +306,7 @@ navbar:
       type: switch
       data-type: bool
       default: true
-      description: "导航条是否展示博客LOGO"
+      description: "导航条是否展示博客LOGO，LOGO图标请到 '后台管理设置-博客设置-常规设置' 中配置"
       options:
         - value: true
           label: 展示
@@ -1418,6 +1408,18 @@ post:
           label: 开启
         - value: false
           label: 关闭
+    enable_code_title:
+      name: enable_code_title
+      label: 代码标题
+      type: switch
+      data-type: bool
+      default: true
+      description: "开启代码块的标题"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_code_expander:
       name: enable_code_expander
       label: 代码折叠
@@ -1819,6 +1821,14 @@ social:
       defaut: ""
       # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
+      placeholder: "邮箱地址"
+    gitee:
+      name: gitee
+      label: Gitee
+      type: text
+      defaut: ""
+      # default: "https://gitee.com/duider"
+      placeholder: "gitee主页地址"
     zhihu:
       name: zhihu
       label: 知乎
@@ -2560,13 +2570,25 @@ others:
           label: 开启
         - value: false
           label: 关闭
+    enable_console_theme:
+      name: enable_console_theme
+      label: 控制台输出主题信息
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否在控制台输出主题相关信息"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     show_loaded_time:
       name: show_loaded_time
-      label: 展示页面加载耗时
+      label: 控制台输出页面加载耗时
       type: switch
       data-type: bool
       default: false
-      description: "是否在控制台展示页面加载耗时日志"
+      description: "是否在控制台输出当前页面加载耗时"
       options:
         - value: true
           label: 开启
