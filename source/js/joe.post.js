@@ -99,7 +99,7 @@ const postContext = {
 					$auto_fold && $auto_fold.remove();
 					expander.parent("pre").toggleClass("close");
 				});
-				$item.prepend(expander);
+				$item.addClass("code-expander").prepend(expander);
 			}
 			// 代码复制
 			if (ThemeConfig.enable_code_copy) {
@@ -111,7 +111,7 @@ const postContext = {
 					// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
 					text: () => text,
 				}).on("success", () => Qmsg.success("复制成功！"));
-				$(item).addClass("copyable").append(span);
+				$(item).addClass("code-copy").append(span);
 			}
 		});
 	},

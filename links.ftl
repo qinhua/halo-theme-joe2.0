@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <#assign title=settings.links_title!'友情链接'>
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="${title}" type="links"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
@@ -58,6 +58,7 @@
           <#include "template/common/aside.ftl">
         </#if>
       </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="links"/> 

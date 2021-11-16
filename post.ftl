@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="${post.title!}" type="post"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <#include "template/common/post_bread.ftl">
+      <#include "template/module/post_bread.ftl">
       <div class="joe_container joe_main_container page-post">
         <div class="joe_main joe_post">
           <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
             <#include "template/module/post_status.ftl">
-            <#list categories as category>
-              <#if category_index==1>
-                <div class="joe_detail__category">
-                  <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
-                </div>
-              </#if>
-            </#list>
+            <#if post.status=='PUBLISHED'>
+              <#list post.categories as category>
+                <#if category_index==0>
+                  <div class="joe_detail__category">
+                    <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
+                  </div>
+                </#if>
+              </#list>
+            </#if>
             <h1 class="joe_detail__title${settings.enable_title_shadow?string(' txt-shadow', '')}">${post.title!}</h1>
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
@@ -69,7 +71,7 @@
               </#if>
             </div>
             <#assign enable_copy = metas.enable_copy!'true'>
-            <article class="joe_detail__article animated fadeIn${settings.enable_code_line_number?then(' line-numbers', '')}${(enable_copy=='true' && settings.enable_copy==true)?then(' copyable', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+            <article class="joe_detail__article animated fadeIn${settings.enable_code_line_number?then(' line-numbers', '')}${(enable_copy=='true' && settings.enable_copy==true)?then(' copyable', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}${settings.enable_code_title?then('',' no-code-title')}">
               ${post.formatContent!}
             </article>
             <#assign enable_toc = metas.enable_toc!'true'>
@@ -132,6 +134,7 @@
           <#include "template/common/aside.ftl">
         </#if>
       </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <#if settings.enable_progress_bar!true>

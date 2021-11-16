@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="首页" type="index"/>
   <#import "template/macro/hotcategory.ftl" as hp>
   <#import "template/macro/tail.ftl" as tailInfo>
@@ -60,6 +60,7 @@
         </div>
         <#include "template/common/aside.ftl">
       </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="index"/> 
