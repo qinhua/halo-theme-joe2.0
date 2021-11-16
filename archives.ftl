@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <#assign title=settings.archive_title!'文章归档'>
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="${title}" type="archives"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
@@ -65,6 +65,7 @@
           </div>
         </div>
       </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="archives"/> 

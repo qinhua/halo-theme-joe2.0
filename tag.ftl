@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="${tag.name!}" type="tag"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
@@ -89,6 +89,7 @@
         </div>
         <#--  <#include "template/common/aside.ftl">  -->
       </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="tag"/> 

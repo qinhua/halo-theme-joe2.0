@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <#assign title=settings.photos_title!'我的图库'>
-  <#import "template/macro/header.ftl" as headInfo>
+  <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="${title}" type="photo"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body> 
@@ -67,7 +67,8 @@
             </#if>    
           </@paginationTag>                  -->
         </div>
-      </div> 
+      </div>
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="photos"/>  

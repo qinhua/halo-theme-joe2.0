@@ -157,7 +157,7 @@ const journalContext = {
 				$auto_fold && $auto_fold.remove();
 				expander.parent("pre").toggleClass("close");
 			});
-			$item.prepend(expander);
+			$item.addClass("code-expander").prepend(expander);
 			// 代码复制
 			const text = $(item).find("code[class*='language-']").text();
 			const span = $(
@@ -166,7 +166,7 @@ const journalContext = {
 			new ClipboardJS(span[0], {
 				text: () => text,
 			}).on("success", () => Qmsg.success("复制成功！"));
-			$(item).addClass("copyable").append(span);
+			$(item).addClass("code-copy").append(span);
 		});
 	},
 	/* 日志块超长折叠 */
@@ -180,17 +180,17 @@ const journalContext = {
 		});
 	},
 	/* 日志发布时间格式化 */
-	formatTime() {
-		const $allJournalTime = $(".joe_journal-posttime");
-		$allJournalTime.each(function () {
-			const $this = $(this);
-			$this.html(Utils.timeAgo($this.text()));
-		});
-	},
+	// formatTime() {
+	// 	const $allJournalTime = $(".joe_journal-posttime");
+	// 	$allJournalTime.each(function () {
+	// 		const $this = $(this);
+	// 		$this.html(Utils.timeAgo($this.text()));
+	// 	});
+	// },
 };
 
 !(function () {
-	const omits = ["formatTime", "foldBlock"];
+	const omits = ["foldBlock"];
 	document.addEventListener("DOMContentLoaded", function () {
 		Object.keys(journalContext).forEach(
 			(c) => !omits.includes(c) && journalContext[c]()

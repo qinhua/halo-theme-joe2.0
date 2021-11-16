@@ -4,7 +4,7 @@ window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
 	initMode() {
-		if (ThemeConfig.static_mode !== "off") return;
+		if (ThemeConfig.theme_mode !== "user") return;
 		const $html = $("html");
 		const $icon_light = $(".mode-light");
 		const $icon_dark = $(".mode-dark");
@@ -46,6 +46,7 @@ const commonContext = {
 		hide() {
 			if (!ThemeConfig.enable_loading_bar) return;
 			NProgress.done(true);
+			document.querySelector("html").removeAttribute("class");
 		},
 	},
 	/* 导航条高亮 */
@@ -157,14 +158,24 @@ const commonContext = {
 	},
 	/* 加载鼠标特效 */
 	loadMouseEffect() {
-		if (ThemeConfig.enable_clean_mode || Joe.isMobile || ThemeConfig.cursor_effect === "off") return;
+		if (
+			ThemeConfig.enable_clean_mode ||
+      Joe.isMobile ||
+      ThemeConfig.cursor_effect === "off"
+		)
+			return;
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
 		);
 	},
 	/* 加载背景特效 */
 	loadBackdropEffect() {
-		if (ThemeConfig.enable_clean_mode || Joe.isMobile || ThemeConfig.backdrop === "off") return;
+		if (
+			ThemeConfig.enable_clean_mode ||
+      Joe.isMobile ||
+      ThemeConfig.backdrop === "off"
+		)
+			return;
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
 		);
@@ -321,7 +332,12 @@ const commonContext = {
 	},
 	/* 激活侧边栏天气功能 */
 	initWeather() {
-		if (!ThemeConfig.enable_weather || !ThemeConfig.weather_key || !$("#he-plugin-simple").length) return;
+		if (
+			!ThemeConfig.enable_weather ||
+      !ThemeConfig.weather_key ||
+      !$("#he-plugin-simple").length
+		)
+			return;
 		window.WIDGET = {
 			CONFIG: {
 				modules: "120",
@@ -660,8 +676,8 @@ const commonContext = {
       console.log(
       	"%c页面加载耗时：" +
           Math.round(consume_time) +
-          ` ms | Theme By ${ThemeConfig.author}`,
-      	"color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px"
+          " ms",
+      	"padding: 6px 8px;color:#fff;background:linear-gradient(270deg, #4edb21, #f15206);border-radius: 3px;"
       );
 	},
 	/* 清理工作 */
