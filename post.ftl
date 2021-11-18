@@ -13,8 +13,17 @@
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
             <#include "template/module/post_status.ftl">
             <#if post.status=='PUBLISHED'>
+              <#--  <@categoryTag method="listByPostId" postId="${post.id?c}">
+                <#list categories as category>
+                  <#if category_index == 0>
+                    <div class="joe_detail__category">
+                      <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
+                    </div>
+                  </#if>
+                </#list>
+              </@categoryTag>  -->
               <#list post.categories as category>
-                <#if category_index==0>
+                <#if category_index == 0>
                   <div class="joe_detail__category">
                     <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
                   </div>
@@ -63,8 +72,7 @@
                     <#if settings.passage_tips_content?? && settings.passage_tips_content!=''>
                       ${settings.passage_tips_content}
                     <#else>
-                      本文最后更新于${post.createTime?string('yyyy-MM-dd')}，若内容或图片失效，请留言反馈。
-                      部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
+                      本文最后更新于 ${post.updateTime?string('yyyy-MM-dd')}，若内容或图片失效，请留言反馈。部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
                     </#if>
                   </div>
                 </div>

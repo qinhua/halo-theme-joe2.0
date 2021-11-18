@@ -1,6 +1,6 @@
 <#macro head title type>
   <head>
-    <title>${title!} - ${blog_title!}</title>
+    <title>${(type == 'index')?then(blog_title!, title! + '-' + blog_title!)}</title>
     <#include "../config.ftl">
     <#include "../module/meta.ftl">
     <#include "../module/link.ftl">
