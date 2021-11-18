@@ -1,9 +1,9 @@
 <#macro tail type>
   <#-- ===== 引入脚本 start ===== -->
-  <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script> 
-  <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.js"></script> 
+  <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
+  <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.js"></script>
+  <script src="${BASE_RES_URL}/source/lib/l-marked/marked.min.js"></script>
   <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
-
   <#if type == 'index' && settings.enable_banner == true>
     <!-- banner -->
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
@@ -29,9 +29,9 @@
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
-  <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>
-  <script src="${BASE_RES_URL!}/source/lib/joe.extend.min.js?v=${theme.version!}"></script>
-  <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>
+  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>  -->
+  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.extend.min.js?v=${theme.version!}"></script>  -->
+  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>  -->
   <#if type == 'post' || type == 'journals'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
@@ -43,7 +43,6 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
   </#if>
   <#if type == 'post' || type == 'journals'>
-    <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
     <script src="${BASE_RES_URL}/source/lib/jquery-qrcode/jquery.qrcode.min.js"></script>
   </#if>
   <#--  相册  -->
@@ -70,6 +69,9 @@
   </#if>
   <#if type == 'photos'>
     <script src="${BASE_RES_URL}/source/js/min/joe.photos.min.js?v=${theme.version!}"></script>
+  </#if>
+  <#if type == 'post' || type == 'journals'>
+    <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
   </#if>
   <#if type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.pkgd.js"></script>

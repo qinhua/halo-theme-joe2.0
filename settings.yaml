@@ -77,7 +77,7 @@ theme:
       type: text
       default: "5:00~19:00"
       placeholder: "输入格式如：5:00~19:00"
-      description: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式（仅在主题模式为 “自动模式” 下生效）"
+      description: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式（仅在主题模式为 “自动模式” 下生效），请严格按照规定格式设置"
     mode_color_light:
       name: mode_color_light
       label: 主题色（浅色）
@@ -493,7 +493,7 @@ blogger:
       label: 默认头像
       type: attachment
       default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_avatar.jpg"
-      description: "用于头像加载出错时显示的图片"
+      description: "用于头像加载出错时显示的图片（主题优先使用后台配置的头像，取不到或出错才会用这里设置的（这里是有默认值的）"
     author_bg:
       name: author_bg
       label: 博主栏背景图
@@ -1536,7 +1536,7 @@ post:
       type: switch
       data-type: bool
       default: false
-      description: "开启后，当点击当行代码块时，会自动全选内容"
+      description: "开启后，当点击单行/行内代码时，会自动全选内容"
       options:
         - value: true
           label: 开启
@@ -2575,7 +2575,7 @@ others:
       label: 控制台输出主题信息
       type: switch
       data-type: bool
-      default: true
+      default: false
       description: "是否在控制台输出主题相关信息"
       options:
         - value: true

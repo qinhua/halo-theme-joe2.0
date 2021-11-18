@@ -1,0 +1,31 @@
+.emotion-item {
+  margin: 4px 0 -8px;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+
+  .img {
+    width: 32px;
+    height: 864px;
+    max-width: 32px;
+    background: top/32px no-repeat;
+    background-image: none;
+    -webkit-animation: im-emotion-step 1.08s steps(27) infinite;
+    animation: im-emotion-step 1.08s steps(27) infinite;
+    -webkit-animation-duration: 1.08s;
+    animation-duration: 1.08s;
+    -webkit-animation-timing-function: steps(27);
+    animation-timing-function: steps(27);
+  }
+
+  @media (max-width: 860px) {
+    transform: scale(0.6);
+    margin-bottom: -10px;
+  }
+}
+
+img[data-icon] {
+  height: 1.4em;
+  max-height: 1.4em;
+}

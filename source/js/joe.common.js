@@ -1,6 +1,20 @@
 /**通用逻辑 */
 window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
+// const marker=(elm)=>{
+// 	return `<a href="${elm.href}" title="${elm.innerHTML}" target="_blank" rel="noopener noreferrer nofollow">${elm.innerHTML}</a>`;
+// };
+// const renderer = {
+// 	image(href, title) {
+// 		return `
+//       <img src="${href}" title="${title}" class="lazyload comment_inline_img" onerror="handleAvatarError(this)">`;
+// 	},
+// 	link(href, title, text) {
+// 		return `<a href="${href}" title="${text}" target="_blank" rel="noopener noreferrer nofollow">${text}</a>`;
+// 	},
+// };
+// marked.use({ renderer });
+
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
 	initMode() {
@@ -68,7 +82,7 @@ const commonContext = {
 	/* 初始化评论主题 */
 	initCommentTheme() {
 		const comments = document.getElementsByTagName("halo-comment");
-		const curMode = localStorage.getItem("data-mode");
+		const curMode = document.querySelector("html").getAttribute("data-mode");
 		// 黑夜模式下
 		for (let i = 0; i < comments.length; i++) {
 			const shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
@@ -464,6 +478,7 @@ const commonContext = {
 			fontWeight: 500,
 		});
 		$(".tags-cloud-list").remove();
+		$("#tags-3d .empty").remove();
 	},
 	/* 激活Live2d人物 */
 	initLive2d() {
@@ -665,18 +680,49 @@ const commonContext = {
 			}
 		}
 	},
+	/* 禁用浏览器空格滚动页面 */
+	cancelSpaceScroll(e) {
+		document.body.onkeydown = function (e) {
+			e = e || window.event;
+			const elm = e.target || e.srcElement;
+			const key = e.keyCode || e.charCode;
+			if (key === 32) {
+				if (
+					["text", "input", "textarea", "halo-comment"].includes(
+						elm.tagName.toLowerCase()
+					)
+				) {
+					return;
+				}
+				if (window.event) {
+					e.returnValue = false;
+				} else {
+					e.preventDefault();
+				}
+			}
+		};
+	},
+	/* 渲染最新回复中的 emoji */
+	renderReplyEmoji() {
+		const $replys = $(".aside-reply-content");
+		$replys.each((_index, item) => {
+			// 获取转换后的marked
+			const markedHtml = marked(item.innerHTML);
+			// 处理其中的表情包
+			const emoji = Utils.renderedEmojiHtml(markedHtml);
+			// 将回车转换为br
+			item.innerHTML = Utils.return2Br(emoji);
+		});
+	},
 	/* 初始化pjax */
 	// initPjax() {},
-
 	/* 页面加载耗时（控制台） */
 	showLoadedTime() {
 		if (!ThemeConfig.show_loaded_time) return;
 		const consume_time = performance.now();
 		consume_time &&
       console.log(
-      	"%c页面加载耗时：" +
-          Math.round(consume_time) +
-          " ms",
+      	"%c页面加载耗时：" + Math.round(consume_time) + " ms",
       	"padding: 6px 8px;color:#fff;background:linear-gradient(270deg, #4edb21, #f15206);border-radius: 3px;"
       );
 	},
@@ -687,6 +733,8 @@ const commonContext = {
 		$("#theme-config-getter").remove();
 		$("#metas-getter").remove();
 		$("#theme-config-getter").remove();
+		// 重置操作
+		commonContext.loadingBar.hide();
 	},
 };
 
@@ -706,16 +754,11 @@ const commonContext = {
 	});
 
 	window.addEventListener("load", function () {
-		// if (omits.length === 1) {
-		//   commonContext[omits[0]]();
-		// } else {
-		//   omits.forEach((c) => commonContext[c]());
-		// }
-		commonContext.init3dTag();
-		commonContext.initBirthday();
-		commonContext.loadingBar.hide();
-		commonContext.showLoadedTime();
-		commonContext.clean();
+		if (omits.length === 1) {
+		  commonContext[omits[0]]();
+		} else {
+		  omits.forEach((c) => c!=="loadingBar" && commonContext[c]());
+		}
 	});
 })();
 

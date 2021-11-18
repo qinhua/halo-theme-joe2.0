@@ -69,7 +69,7 @@
                     </div>
                   </div>
                   <div class="reply">
-                    <a class="link" href="${comment.post.fullPath}/#${comment.id}">${comment.content} </a>
+                    <a class="link aside-reply-content" href="${comment.post.fullPath}/#${comment.id}">${comment.content!}</a>
                   </div>
                 </li>
               </#list>
@@ -97,7 +97,9 @@
                   </#if>
                 </#list>
               </ul>
-              <div id="tags-3d"></div>
+              <div id="tags-3d">
+                <div class="empty">加载中…</div>
+              </div>
             <#else>
               <div class="empty">暂无标签</div>
             </#if>   
