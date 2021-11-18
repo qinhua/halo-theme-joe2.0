@@ -114,7 +114,7 @@
 - 自定义 JS/CSS
 - 自定义 favicon（支持视频、动图）
 - 站点运行时间
-- 清洁模式（备案模式）
+- 绿色模式（备案模式）
 - 灰色模式（RIP 模式）
 
 <br>
@@ -154,6 +154,12 @@
   - 简化目录
 - 部分缺陷修复
 - 解析主题配置项
+
+<br>
+
+## 📈 状态
+
+![项目状态](https://repobeats.axiom.co/api/embed/8b5c2035344e9f8915682b868dfb13b33a6c0df9.svg "Repobeats analytics image")
 
 <br>
 

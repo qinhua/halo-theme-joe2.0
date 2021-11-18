@@ -1,8 +1,10 @@
 <div class="joe_detail__operate">
   <div class="joe_detail__operate-tags">
-    <#list tags as tag>
-      <a href="${tag.fullPath!}">${tag.name!}</a>
-    </#list>
+    <@tagTag method="listByPostId" postId="${post.id?c}">
+      <#list tags as tag>
+        <a href="${tag.fullPath!}">${tag.name!}</a>
+      </#list>
+    </@tagTag>
   </div>
   <#assign enable_share = metas.enable_share!'true'>
   <#if enable_share=='true' && settings.enable_share==true && post.status!='DRAFT'>

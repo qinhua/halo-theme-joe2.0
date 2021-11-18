@@ -3,7 +3,12 @@ const postContext = {
 	// status: $(".joe_detail").attr("data-status"),
 	/* 文章目录 */
 	initToc() {
-		if (PageAttrs.metas.enable_toc === "false" || !ThemeConfig.enable_toc || !$(".toc-container").length) return;
+		if (
+			PageAttrs.metas.enable_toc === "false" ||
+      !ThemeConfig.enable_toc ||
+      !$(".toc-container").length
+		)
+			return;
 		if (document.body.clientWidth <= 1200) return;
 		tocbot.init({
 			tocSelector: "#js-toc",
@@ -48,7 +53,8 @@ const postContext = {
 	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
-		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy) return;
+		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy)
+			return;
 		const curl = $(".joe_detail").attr("data-curl") || location.href;
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
@@ -83,35 +89,48 @@ const postContext = {
 	initCode() {
 		if (
 			(!ThemeConfig.enable_code_expander && !ThemeConfig.enable_code_copy) ||
-      !$("pre[class*='language-']").length
+      !$(".joe_detail__article pre").length
 		)
 			return;
-		$("pre[class*='language-']").each(function (index, item) {
-			// 代码折叠
-			if (ThemeConfig.enable_code_expander) {
-				const $item = $(item);
-				const expander = $(
-					"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
-				);
-				expander.on("click", function () {
-					const $parent = expander.parent("pre");
-					const $auto_fold = $parent.siblings(".toolbar").find(".autofold-tip");
-					$auto_fold && $auto_fold.remove();
-					expander.parent("pre").toggleClass("close");
-				});
-				$item.addClass("code-expander").prepend(expander);
-			}
-			// 代码复制
-			if (ThemeConfig.enable_code_copy) {
-				const text = $(item).find("code[class*='language-']").text();
-				const span = $(
-					"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
-				);
-				new ClipboardJS(span[0], {
-					// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
-					text: () => text,
-				}).on("success", () => Qmsg.success("复制成功！"));
-				$(item).addClass("code-copy").append(span);
+		$(".joe_detail__article pre").each(function (index, item) {
+			const $codes = $(item).find("code");
+			if ($codes.length > 0) {
+				// 添加默认代码类型为纯文本
+				const $curCode = $codes.eq(0);
+				if (
+					!$curCode.attr("class") ||
+          $curCode.attr("class").indexOf("language-") === -1
+				) {
+					$($curCode[0]).addClass("language-text");
+				}
+				// 代码折叠
+				if (ThemeConfig.enable_code_expander) {
+					const $item = $(item);
+					const expander = $(
+						"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
+					);
+					expander.on("click", function () {
+						const $parent = expander.parent("pre");
+						const $auto_fold = $parent
+							.siblings(".toolbar")
+							.find(".autofold-tip");
+						$auto_fold && $auto_fold.remove();
+						expander.parent("pre").toggleClass("close");
+					});
+					$item.addClass("code-expander").prepend(expander);
+				}
+				// 代码复制
+				if (ThemeConfig.enable_code_copy) {
+					const text = $(item).find("code[class*='language-']").text();
+					const span = $(
+						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
+					);
+					new ClipboardJS(span[0], {
+						// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
+						text: () => text,
+					}).on("success", () => Qmsg.success("复制成功！"));
+					$(item).addClass("code-copy").append(span);
+				}
 			}
 		});
 	},
@@ -125,9 +144,7 @@ const postContext = {
 						.siblings(".toolbar")
 						.find(".toolbar-item span")
 						.eq(0);
-					$title.append(
-						"<em class=\"autofold-tip\">\<内容过长，已自动折叠\></em>"
-					);
+					$title.append("<em class=\"autofold-tip\"><内容过长，已自动折叠></em>");
 					$item.addClass("close");
 				}
 			});
@@ -151,7 +168,8 @@ const postContext = {
 	},
 	/* 初始化文章分享 */
 	initShare() {
-		if (PageAttrs.metas.enable_share === "false" || !ThemeConfig.enable_share) return;
+		if (PageAttrs.metas.enable_share === "false" || !ThemeConfig.enable_share)
+			return;
 		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
 			new ClipboardJS($(".icon-share-link")[0], {
 				text: () => location.href,
@@ -172,7 +190,12 @@ const postContext = {
 	},
 	/* 文章点赞 */
 	initLike() {
-		if (PageAttrs.metas.enable_like==="false" || !ThemeConfig.enable_like || !$(".joe_detail__agree").length) return;
+		if (
+			PageAttrs.metas.enable_like === "false" ||
+      !ThemeConfig.enable_like ||
+      !$(".joe_detail__agree").length
+		)
+			return;
 		const cid = $(".joe_detail").attr("data-cid");
 		const clikes = +($(".joe_detail").attr("data-clikes") || 0);
 		let agreeArr = localStorage.getItem(encryption("agree"))
@@ -323,6 +346,5 @@ const postContext = {
 		} else {
 			omits.forEach((c) => postContext[c]());
 		}
-		// commonContext.scrollToHash();
 	});
 })();

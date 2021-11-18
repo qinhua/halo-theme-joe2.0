@@ -805,6 +805,9 @@ body {
         display: flex;
         flex-wrap: wrap;
         margin: 0 -5px -5px;
+        max-height: 250px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
 
         .item {
           padding: 5px;
@@ -1493,8 +1496,8 @@ body {
           font-weight: 500;
 
           .level {
-            width: 22px;
-            margin-left: -4px;
+            height: 22px;
+            margin-left: 2px;
           }
         }
 
@@ -2048,8 +2051,8 @@ body {
 
         &:last-child {
           margin-bottom: 0;
-          border-bottom-color: transparent;
           padding-bottom: 0;
+          border-bottom-color: transparent;
         }
 
         .user {
@@ -2090,9 +2093,9 @@ body {
 
         .reply {
           position: relative;
+          padding: 5px 10px;
           background: var(--classD);
           border-radius: 6px;
-          padding: 5px 10px;
 
           &::before {
             content: "";
@@ -2108,7 +2111,7 @@ body {
 
           .link {
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             /*! autoprefixer: off */
             -webkit-box-orient: vertical;
             /* autoprefixer: on */
@@ -2130,7 +2133,44 @@ body {
               height: 18px;
               vertical-align: -5px;
             }
+
+            a {
+              color: var(--theme);
+            }
           }
+        }
+
+
+        .emotion-item {
+          margin: 4px 0 -8px;
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          overflow: hidden;
+
+          .img {
+            width: 32px;
+            height: 864px;
+            max-width: 32px;
+            background: top/32px no-repeat;
+            background-image: none;
+            -webkit-animation: im-emotion-step 1.08s steps(27) infinite;
+            animation: im-emotion-step 1.08s steps(27) infinite;
+            -webkit-animation-duration: 1.08s;
+            animation-duration: 1.08s;
+            -webkit-animation-timing-function: steps(27);
+            animation-timing-function: steps(27);
+          }
+
+          @media (max-width: 860px) {
+            transform: scale(0.6);
+            margin-bottom: -10px;
+          }
+        }
+
+        img[data-icon]{
+          height: 1.4em;
+          max-height: 1.4em;
         }
       }
     }
@@ -3473,7 +3513,7 @@ body {
 
           .line {
             color: var(--seat);
-            margin: 0 7px;
+            margin: 0 5px;
             vertical-align: middle;
           }
         }
@@ -3730,6 +3770,7 @@ body {
       color: var(--code);
       margin: 2px;
       padding: 0 8px;
+      white-space: normal;
       text-indent: 0;
       user-select: none;
       vertical-align: baseline;
@@ -3787,6 +3828,7 @@ body {
         user-select: none;
         font-size: 14px;
         overflow: hidden;
+        white-space: normal;
         text-shadow: none;
         transition: height 0.2s;
         border-radius: var(--radius-inner);
@@ -4782,7 +4824,7 @@ body {
       height: 32px;
       color: var(--main);
       padding: 0 15px;
-      background: var(--background);
+      background: var(--sub-background);
       border-radius: 2px;
       transition: background 0.35s, color 0.35s;
       user-select: none;
@@ -5503,6 +5545,18 @@ body {
 }
 
 // 动画
+@keyframes im-emotion-step {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  to {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+}
+
 @keyframes wobble-bottom {
   16.65% {
     transform: skew(-12deg);
