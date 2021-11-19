@@ -1,7 +1,7 @@
 <div class="joe_container joe_bread">
   <ul class="joe_bread__bread">
     <li class="item">
-      <i class="joe-font joe-icon-shouye"></i>&nbsp;
+      <i class="joe-font joe-icon-shouye"></i>
       <a href="${blog_url!}" class="link" title="首页">首页</a>
     </li>
     <#list post.categories as category>

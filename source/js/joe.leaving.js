@@ -9,13 +9,17 @@ const leavingContext = {
 				const $leavingNone = $(".joe_detail__leaving-none");
 				if (res.total) {
 					const str = res.content.reduce((sum, item) => {
+						if(item.content.trim()) {
+							// 渲染留言中的 emoji
+							const markedHtml = marked(item.content).replace(/bili\//g, "bili/hd/ic_emoji_");
+							const emoji = Utils.renderedEmojiHtml(markedHtml);
+							item.content = Utils.return2Br(emoji);
+						}
 						return (sum += `<li class="item">
             <div class="user">
                 <img class="avatar lazyload" src="${
 							ThemeConfig.lazyload_avatar
-							}" data-src="${
-								item.authorUrl || item.avatar
-							}" alt="用户头像" onerror="this.src='${
+							}" data-src="${item.avatar}" alt="用户头像" onerror="this.src='${
 								ThemeConfig.comment_avatar_error
 							}'"/>
                 <div class="nickname">${item.author}</div>
@@ -24,7 +28,7 @@ const leavingContext = {
 							).toLocaleDateString()}</div>
             </div>
             <div class="wrapper">
-                <div class="content">${item.content}</div>
+                <div class="content leaving-content">${item.content}</div>
             </div>
         </li>`);
 					}, "");
