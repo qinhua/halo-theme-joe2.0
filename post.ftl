@@ -33,7 +33,7 @@
             <h1 class="joe_detail__title${settings.enable_title_shadow?string(' txt-shadow', '')}">${post.title!}</h1>
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
-                <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${user.avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="${user.nickname!}">
+                <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="this.src='${settings.default_avatar!}'" alt="${user.nickname!}">
                 <div class="meta">
                   <div class="author">
                     <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
@@ -142,12 +142,12 @@
           <#include "template/common/aside.ftl">
         </#if>
       </div>
+      <#if settings.enable_progress_bar!true>
+        <div class="joe_progress_bar" ${(settings.progress_bar_bgc?? && settings.progress_bar_bgc!='')?then('style="background:${settings.progress_bar_bgc}"','')}></div>
+      </#if>
       <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
-    <#if settings.enable_progress_bar!true>
-      <div class="joe_progress_bar" ${(settings.progress_bar_bgc?? && settings.progress_bar_bgc!='')?then('style="background:${settings.progress_bar_bgc}"','')}></div>
-    </#if>
     <@tailInfo.tail type="post"/>
   </body>
 </html>

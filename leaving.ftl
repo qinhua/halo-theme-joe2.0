@@ -1,11 +1,4 @@
-<style>
-  .joe_comment {
-    padding-top: 26px;
-  }
-  .joe_comment_box > h2 {
-    display: none;
-  }
-</style>
+<#--  复制以下内容到后台管理中新建自定义留言页面，然后添加菜单即可（注释部分不需要复制）  -->
 <ul class="joe_detail__leaving-list">
   <#--  <li class="item">
     <div class="user">

@@ -28,7 +28,13 @@
           <path d="M349.053 488.452L601.907 670.56l-28.725 39.887L320.307 528.34z" fill="#FFF" />
         </svg>
         <span>作品采用：</span>
-        <span class="text">《<a class="link" href="//creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener noreferrer nofollow">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a>》许可协议授权</span>
+        <span class="text">
+        <#if settings.passage_rights_content?? && settings.passage_rights_content!=''>
+        ${settings.passage_rights_content}
+        <#else>
+        《<a class="link" href="//creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener noreferrer nofollow">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a>》许可协议授权
+        </#if>
+        </span>
       </div>
     </div>
   </div>

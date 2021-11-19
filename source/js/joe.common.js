@@ -1,19 +1,6 @@
 /**通用逻辑 */
 window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
-// const marker=(elm)=>{
-// 	return `<a href="${elm.href}" title="${elm.innerHTML}" target="_blank" rel="noopener noreferrer nofollow">${elm.innerHTML}</a>`;
-// };
-// const renderer = {
-// 	image(href, title) {
-// 		return `
-//       <img src="${href}" title="${title}" class="lazyload comment_inline_img" onerror="handleAvatarError(this)">`;
-// 	},
-// 	link(href, title, text) {
-// 		return `<a href="${href}" title="${text}" target="_blank" rel="noopener noreferrer nofollow">${text}</a>`;
-// 	},
-// };
-// marked.use({ renderer });
 
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
@@ -702,12 +689,12 @@ const commonContext = {
 			}
 		};
 	},
-	/* 渲染最新回复中的 emoji */
+	/* 渲染最新评论中的 emoji */
 	renderReplyEmoji() {
 		const $replys = $(".aside-reply-content");
 		$replys.each((_index, item) => {
 			// 获取转换后的marked
-			const markedHtml = marked(item.innerHTML);
+			const markedHtml = marked(item.innerHTML).replace(/bili\//g, "bili/hd/ic_emoji_");
 			// 处理其中的表情包
 			const emoji = Utils.renderedEmojiHtml(markedHtml);
 			// 将回车转换为br

@@ -7,60 +7,419 @@ class Emoji {
 		this.description = description;
 		this.category = category;
 		this.style = style;
+		this.extension = ["tieba"].includes(category) ? "gif" : "png";
 	}
 }
 
+const hahaEmoji = [
+	new Emoji("kuxiao", "哭笑", "haha"),
+	new Emoji("heng", "哼", "haha"),
+	new Emoji("guzhang", "鼓掌", "haha"),
+	new Emoji("haha", "哈哈", "haha"),
+	new Emoji("aini", "爱你", "haha"),
+	new Emoji("bazhang", "巴掌", "haha"),
+	new Emoji("beishang", "悲伤", "haha"),
+	new Emoji("han", "汗", "haha"),
+	new Emoji("deyi", "得意", "haha"),
+	new Emoji("ok", "ok", "haha"),
+	new Emoji("touxiao", "偷笑", "haha"),
+	new Emoji("wabikong", "挖鼻孔", "haha"),
+	new Emoji("weiqu", "委屈", "haha"),
+	new Emoji("weixiao", "微笑", "haha"),
+	new Emoji("huaixiao", "坏笑", "haha"),
+	new Emoji("woshou", "握手", "haha"),
+	new Emoji("wulian", "捂脸", "haha"),
+	new Emoji("xiaku", "吓哭", "haha"),
+	new Emoji("xiaoku", "笑哭", "haha"),
+	new Emoji("xixi", "嘻嘻", "haha"),
+	new Emoji("qinqin", "亲亲", "haha"),
+	new Emoji("qiwang", "期望", "haha"),
+	new Emoji("chanzui", "馋嘴", "haha"),
+	new Emoji("huaxin", "花心", "haha"),
+	new Emoji("hufen", "互粉", "haha"),
+	new Emoji("keai", "可爱", "haha"),
+	new Emoji("kelian", "可怜", "haha"),
+	new Emoji("bishi", "鄙视", "haha"),
+	new Emoji("bizui", "闭嘴", "haha"),
+	new Emoji("yep", "耶", "haha"),
+	new Emoji("zan", "赞", "haha"),
+	new Emoji("yihuo", "疑惑", "haha"),
+	new Emoji("yinxiao", "阴笑", "haha"),
+	new Emoji("yiwen", "疑问", "haha"),
+	new Emoji("bujiandan", "不简单", "haha"),
+	new Emoji("bye", "拜拜", "haha"),
+	new Emoji("chigua", "吃瓜", "haha"),
+	new Emoji("chijing", "吃惊", "haha"),
+	new Emoji("chuitou", "锤头", "haha"),
+	new Emoji("dahaqian", "打哈欠", "haha"),
+	new Emoji("fahuo", "发火", "haha"),
+	new Emoji("bang", "棒", "haha"),
+	new Emoji("gou", "狗", "haha"),
+	new Emoji("guolai", "过来", "haha"),
+	new Emoji("haixiu", "害羞", "haha"),
+	new Emoji("hashiiqi", "哈士奇", "haha"),
+	new Emoji("heixian", "黑线", "haha"),
+	new Emoji("kouzhao", "口罩", "haha"),
+	new Emoji("kulou", "骷髅", "haha"),
+	new Emoji("kun", "困", "haha"),
+	new Emoji("landelini", "懒得理你", "haha"),
+	new Emoji("mao", "猫", "haha"),
+	new Emoji("outu", "呕吐", "haha"),
+	new Emoji("qian", "钱", "haha"),
+	new Emoji("quantou", "拳头", "haha"),
+	new Emoji("shaoerbuyi", "少儿不宜", "haha"),
+	new Emoji("shayan", "傻眼", "haha"),
+	new Emoji("shengbing", "生病", "haha"),
+	new Emoji("tushetou", "吐舌头", "haha"),
+	new Emoji("shuijiao", "睡觉", "haha"),
+	new Emoji("sikao", "思考", "haha"),
+	new Emoji("shiwang", "失望", "haha"),
+	new Emoji("taikaixin", "太开心", "haha"),
+	new Emoji("tear", "流泪", "haha"),
+	new Emoji("tianping", "舔屏", "haha"),
+	new Emoji("xu", "嘘", "haha"),
+	new Emoji("youhengheng", "右哼哼", "haha"),
+	new Emoji("yun", "晕", "haha"),
+	new Emoji("zhouma", "咒骂", "haha"),
+	new Emoji("zhuakuang", "抓狂", "haha"),
+	new Emoji("zuohengheng", "左哼哼", "haha"),
+	new Emoji("zuoyi", "作揖", "haha"),
+];
+
 const bilibiliEmoji = [
-	new Emoji("baiyan", "白眼", "bilibili", {"animation-duration": "1800ms", "animation-timing-function": "steps(45)", "transform": "translateY(-1408px)", "height": "1440px"}),
-	new Emoji("fadai", "发呆", "bilibili", {"animation-duration": "1080ms", "animation-timing-function": "steps(27)", "transform": "translateY(-832px)", "height": "864px"}),
-	new Emoji("koubi", "抠鼻", "bilibili", {"animation-duration": "1200ms", "animation-timing-function": "steps(30)", "transform": "translateY(-928px)", "height": "960px"}),
-	new Emoji("qinqin", "亲亲", "bilibili", {"animation-duration": "280ms", "animation-timing-function": "steps(7)", "transform": "translateY(-192px)", "height": "224px"}),
-	new Emoji("weiqu", "委屈", "bilibili", {"animation-duration": "800ms", "animation-timing-function": "steps(20)", "transform": "translateY(-608px)", "height": "640px"}),
-	new Emoji("bishi", "鄙视", "bilibili", {"animation-duration": "360ms", "animation-timing-function": "steps(9)", "transform": "translateY(-256px)", "height": "288px"}),
-	new Emoji("fanu", "发怒", "bilibili", {"animation-duration": "1320ms", "animation-timing-function": "steps(33)", "transform": "translateY(-1024px)", "height": "1056px"}),
-	new Emoji("kun", "困", "bilibili", {"animation-duration": "1760ms", "animation-timing-function": "steps(44)", "transform": "translateY(-1376px)", "height": "1408px"}),
-	new Emoji("se", "色", "bilibili", {"animation-duration": "400ms", "animation-timing-function": "steps(10)", "transform": "translateY(-288px)", "height": "320px"}),
-	new Emoji("weixiao", "微笑", "bilibili", {"animation-duration": "800ms", "animation-timing-function": "steps(20)", "transform": "translateY(-608px)", "height": "640px"}),
-	new Emoji("bizui", "闭嘴", "bilibili", {"animation-duration": "1240ms", "animation-timing-function": "steps(31)", "transform": "translateY(-960px)", "height": "992px"}),
-	new Emoji("ganga", "尴尬", "bilibili", {"animation-duration": "1520ms", "animation-timing-function": "steps(38)", "transform": "translateY(-1184px)", "height": "1216px"}),
-	new Emoji("lengmo", "冷漠", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("shengbing", "生病", "bilibili", {"animation-duration": "1400ms", "animation-timing-function": "steps(35)", "transform": "translateY(-1088px)", "height": "1120px"}),
-	new Emoji("wunai", "无奈", "bilibili", {"animation-duration": "920ms", "animation-timing-function": "steps(23)", "transform": "translateY(-704px)", "height": "736px"}),
-	new Emoji("chan", "馋", "bilibili", {"animation-duration": "1600ms", "animation-timing-function": "steps(40)", "transform": "translateY(-1248px)", "height": "1280px"}),
-	new Emoji("guilian", "鬼脸", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("liubixue", "流鼻血", "bilibili", {"animation-duration": "1400ms", "animation-timing-function": "steps(35)", "transform": "translateY(-1088px)", "height": "1120px"}),
-	new Emoji("shengqi", "生气", "bilibili", {"animation-duration": "440ms", "animation-timing-function": "steps(11)", "transform": "translateY(-320px)", "height": "352px"}),
-	new Emoji("xiaoku", "笑哭", "bilibili", {"animation-duration": "600ms", "animation-timing-function": "steps(15)", "transform": "translateY(-448px)", "height": "480px"}),
-	new Emoji("daku", "大哭", "bilibili", {"animation-duration": "320ms", "animation-timing-function": "steps(8)", "transform": "translateY(-224px)", "height": "256px"}),
-	new Emoji("guzhang", "鼓掌", "bilibili", {"animation-duration": "680ms", "animation-timing-function": "steps(17)", "transform": "translateY(-512px)", "height": "544px"}),
-	new Emoji("liuhan", "流汗", "bilibili", {"animation-duration": "1080ms", "animation-timing-function": "steps(27)", "transform": "translateY(-832px)", "height": "864px"}),
-	new Emoji("shuizhao", "睡着", "bilibili", {"animation-duration": "960ms", "animation-timing-function": "steps(24)", "transform": "translateY(-736px)", "height": "768px"}),
-	new Emoji("xieyanxiao", "斜眼笑", "bilibili", {"animation-duration": "320ms", "animation-timing-function": "steps(8)", "transform": "translateY(-224px)", "height": "256px"}),
-	new Emoji("dalao", "大佬", "bilibili", {"animation-duration": "1320ms", "animation-timing-function": "steps(33)", "transform": "translateY(-1024px)", "height": "1056px"}),
-	new Emoji("haixiu", "害羞", "bilibili", {"animation-duration": "1240ms", "animation-timing-function": "steps(31)", "transform": "translateY(-960px))", "height": "992px"}),
-	new Emoji("liulei", "流泪", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("sikao", "思考", "bilibili", {"animation-duration": "1440ms", "animation-timing-function": "steps(36)", "transform": "translateY(-1120px)", "height": "1152px"}),
-	new Emoji("yiwen", "疑问", "bilibili", {"animation-duration": "840ms", "animation-timing-function": "steps(21)", "transform": "translateY(-640px)", "height": "672px"}),
-	new Emoji("dalian", "打脸", "bilibili", {"animation-duration": "1480ms", "animation-timing-function": "steps(37)", "transform": "translateY(-1152px)", "height": "1184px"}),
-	new Emoji("heirenwenhao", "黑人问号", "bilibili", {"animation-duration": "1040ms", "animation-timing-function": "steps(26)", "transform": "translateY(-800px)", "height": "832px"}),
-	new Emoji("miantian", "腼腆", "bilibili", {"animation-duration": "1120ms", "animation-timing-function": "steps(28)", "transform": "translateY(-864px)", "height": "896px"}),
-	new Emoji("tiaokan", "调侃", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("yun", "晕", "bilibili", {"animation-duration": "480ms", "animation-timing-function": "steps(12)", "transform": "translateY(-352px)", "height": "384px"}),
-	new Emoji("dianzan", "点赞", "bilibili", {"animation-duration": "800ms", "animation-timing-function": "steps(20)", "transform": "translateY(-608px)", "height": "640px"}),
-	new Emoji("huaixiao", "坏笑", "bilibili", {"animation-duration": "1240ms", "animation-timing-function": "steps(31)", "transform": "translateY(-960px)", "height": "992px"}),
-	new Emoji("mudengkoudai", "目瞪口呆", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("tiaopi", "调皮", "bilibili", {"animation-duration": "2000ms", "animation-timing-function": "steps(50)", "transform": "translateY(-1568px)", "height": "1600px"}),
-	new Emoji("zaijian", "再见", "bilibili", {"animation-duration": "960ms", "animation-timing-function": "steps(24)", "transform": "translateY(-736px)", "height": "768px"}),
-	new Emoji("doge", "狗头", "bilibili", {"animation-duration": "800ms", "animation-timing-function": "steps(20)", "transform": "translateY(-608px)", "height": "640px"}),
-	new Emoji("jingxia", "惊吓", "bilibili", {"animation-duration": "1280ms", "animation-timing-function": "steps(32)", "transform": "translateY(-992px)", "height": "1024px"}),
-	new Emoji("nanguo", "难过", "bilibili", {"animation-duration": "1120ms", "animation-timing-function": "steps(28)", "transform": "translateY(-864px)", "height": "896px"}),
-	new Emoji("touxiao", "偷笑", "bilibili", {"animation-duration": "240ms", "animation-timing-function": "steps(6)", "transform": "translateY(-160px)", "height": "192px"}),
-	new Emoji("zhoumei", "皱眉", "bilibili", {"animation-duration": "40ms", "animation-timing-function": "steps(1)", "transform": "translateY(-0px)", "height": "32px"}),
-	new Emoji("facai", "发财", "bilibili", {"animation-duration": "1200ms", "animation-timing-function": "steps(30)", "transform": "translateY(-928px)", "height": "960px"}),
-	new Emoji("keai", "可爱", "bilibili", {"animation-duration": "680ms", "animation-timing-function": "steps(17)", "transform": "translateY(-512px)", "height": "544px"}),
-	new Emoji("outu", "呕吐", "bilibili", {"animation-duration": "1680ms", "animation-timing-function": "steps(42)", "transform": "translateY(-1312px)", "height": "1344px"}),
-	new Emoji("tuxue", "吐血", "bilibili", {"animation-duration": "320ms", "animation-timing-function": "steps(8)", "transform": "translateY(-224px)", "height": "256px"}),
-	new Emoji("zhuakuang", "抓狂", "bilibili", {"animation-duration": "760ms", "animation-timing-function": "steps(19)", "transform": "translateY(-576px)", "height": "608px"}),
+	new Emoji("baiyan", "白眼", "bilibili", {
+		"animation-duration": "1800ms",
+		"animation-timing-function": "steps(45)",
+		transform: "translateY(-1408px)",
+		height: "1440px",
+	}),
+	new Emoji("fadai", "发呆", "bilibili", {
+		"animation-duration": "1080ms",
+		"animation-timing-function": "steps(27)",
+		transform: "translateY(-832px)",
+		height: "864px",
+	}),
+	new Emoji("koubi", "抠鼻", "bilibili", {
+		"animation-duration": "1200ms",
+		"animation-timing-function": "steps(30)",
+		transform: "translateY(-928px)",
+		height: "960px",
+	}),
+	new Emoji("qinqin", "亲亲", "bilibili", {
+		"animation-duration": "280ms",
+		"animation-timing-function": "steps(7)",
+		transform: "translateY(-192px)",
+		height: "224px",
+	}),
+	new Emoji("weiqu", "委屈", "bilibili", {
+		"animation-duration": "800ms",
+		"animation-timing-function": "steps(20)",
+		transform: "translateY(-608px)",
+		height: "640px",
+	}),
+	new Emoji("bishi", "鄙视", "bilibili", {
+		"animation-duration": "360ms",
+		"animation-timing-function": "steps(9)",
+		transform: "translateY(-256px)",
+		height: "288px",
+	}),
+	new Emoji("fanu", "发怒", "bilibili", {
+		"animation-duration": "1320ms",
+		"animation-timing-function": "steps(33)",
+		transform: "translateY(-1024px)",
+		height: "1056px",
+	}),
+	new Emoji("kun", "困", "bilibili", {
+		"animation-duration": "1760ms",
+		"animation-timing-function": "steps(44)",
+		transform: "translateY(-1376px)",
+		height: "1408px",
+	}),
+	new Emoji("se", "色", "bilibili", {
+		"animation-duration": "400ms",
+		"animation-timing-function": "steps(10)",
+		transform: "translateY(-288px)",
+		height: "320px",
+	}),
+	new Emoji("weixiao", "微笑", "bilibili", {
+		"animation-duration": "800ms",
+		"animation-timing-function": "steps(20)",
+		transform: "translateY(-608px)",
+		height: "640px",
+	}),
+	new Emoji("bizui", "闭嘴", "bilibili", {
+		"animation-duration": "1240ms",
+		"animation-timing-function": "steps(31)",
+		transform: "translateY(-960px)",
+		height: "992px",
+	}),
+	new Emoji("ganga", "尴尬", "bilibili", {
+		"animation-duration": "1520ms",
+		"animation-timing-function": "steps(38)",
+		transform: "translateY(-1184px)",
+		height: "1216px",
+	}),
+	new Emoji("lengmo", "冷漠", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("shengbing", "生病", "bilibili", {
+		"animation-duration": "1400ms",
+		"animation-timing-function": "steps(35)",
+		transform: "translateY(-1088px)",
+		height: "1120px",
+	}),
+	new Emoji("wunai", "无奈", "bilibili", {
+		"animation-duration": "920ms",
+		"animation-timing-function": "steps(23)",
+		transform: "translateY(-704px)",
+		height: "736px",
+	}),
+	new Emoji("chan", "馋", "bilibili", {
+		"animation-duration": "1600ms",
+		"animation-timing-function": "steps(40)",
+		transform: "translateY(-1248px)",
+		height: "1280px",
+	}),
+	new Emoji("guilian", "鬼脸", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("liubixue", "流鼻血", "bilibili", {
+		"animation-duration": "1400ms",
+		"animation-timing-function": "steps(35)",
+		transform: "translateY(-1088px)",
+		height: "1120px",
+	}),
+	new Emoji("shengqi", "生气", "bilibili", {
+		"animation-duration": "440ms",
+		"animation-timing-function": "steps(11)",
+		transform: "translateY(-320px)",
+		height: "352px",
+	}),
+	new Emoji("xiaoku", "笑哭", "bilibili", {
+		"animation-duration": "600ms",
+		"animation-timing-function": "steps(15)",
+		transform: "translateY(-448px)",
+		height: "480px",
+	}),
+	new Emoji("daku", "大哭", "bilibili", {
+		"animation-duration": "320ms",
+		"animation-timing-function": "steps(8)",
+		transform: "translateY(-224px)",
+		height: "256px",
+	}),
+	new Emoji("guzhang", "鼓掌", "bilibili", {
+		"animation-duration": "680ms",
+		"animation-timing-function": "steps(17)",
+		transform: "translateY(-512px)",
+		height: "544px",
+	}),
+	new Emoji("liuhan", "流汗", "bilibili", {
+		"animation-duration": "1080ms",
+		"animation-timing-function": "steps(27)",
+		transform: "translateY(-832px)",
+		height: "864px",
+	}),
+	new Emoji("shuizhao", "睡着", "bilibili", {
+		"animation-duration": "960ms",
+		"animation-timing-function": "steps(24)",
+		transform: "translateY(-736px)",
+		height: "768px",
+	}),
+	new Emoji("xieyanxiao", "斜眼笑", "bilibili", {
+		"animation-duration": "320ms",
+		"animation-timing-function": "steps(8)",
+		transform: "translateY(-224px)",
+		height: "256px",
+	}),
+	new Emoji("dalao", "大佬", "bilibili", {
+		"animation-duration": "1320ms",
+		"animation-timing-function": "steps(33)",
+		transform: "translateY(-1024px)",
+		height: "1056px",
+	}),
+	new Emoji("haixiu", "害羞", "bilibili", {
+		"animation-duration": "1240ms",
+		"animation-timing-function": "steps(31)",
+		transform: "translateY(-960px))",
+		height: "992px",
+	}),
+	new Emoji("liulei", "流泪", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("sikao", "思考", "bilibili", {
+		"animation-duration": "1440ms",
+		"animation-timing-function": "steps(36)",
+		transform: "translateY(-1120px)",
+		height: "1152px",
+	}),
+	new Emoji("yiwen", "疑问", "bilibili", {
+		"animation-duration": "840ms",
+		"animation-timing-function": "steps(21)",
+		transform: "translateY(-640px)",
+		height: "672px",
+	}),
+	new Emoji("dalian", "打脸", "bilibili", {
+		"animation-duration": "1480ms",
+		"animation-timing-function": "steps(37)",
+		transform: "translateY(-1152px)",
+		height: "1184px",
+	}),
+	new Emoji("heirenwenhao", "黑人问号", "bilibili", {
+		"animation-duration": "1040ms",
+		"animation-timing-function": "steps(26)",
+		transform: "translateY(-800px)",
+		height: "832px",
+	}),
+	new Emoji("miantian", "腼腆", "bilibili", {
+		"animation-duration": "1120ms",
+		"animation-timing-function": "steps(28)",
+		transform: "translateY(-864px)",
+		height: "896px",
+	}),
+	new Emoji("tiaokan", "调侃", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("yun", "晕", "bilibili", {
+		"animation-duration": "480ms",
+		"animation-timing-function": "steps(12)",
+		transform: "translateY(-352px)",
+		height: "384px",
+	}),
+	new Emoji("dianzan", "点赞", "bilibili", {
+		"animation-duration": "800ms",
+		"animation-timing-function": "steps(20)",
+		transform: "translateY(-608px)",
+		height: "640px",
+	}),
+	new Emoji("huaixiao", "坏笑", "bilibili", {
+		"animation-duration": "1240ms",
+		"animation-timing-function": "steps(31)",
+		transform: "translateY(-960px)",
+		height: "992px",
+	}),
+	new Emoji("mudengkoudai", "目瞪口呆", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("tiaopi", "调皮", "bilibili", {
+		"animation-duration": "2000ms",
+		"animation-timing-function": "steps(50)",
+		transform: "translateY(-1568px)",
+		height: "1600px",
+	}),
+	new Emoji("zaijian", "再见", "bilibili", {
+		"animation-duration": "960ms",
+		"animation-timing-function": "steps(24)",
+		transform: "translateY(-736px)",
+		height: "768px",
+	}),
+	new Emoji("doge", "狗头", "bilibili", {
+		"animation-duration": "800ms",
+		"animation-timing-function": "steps(20)",
+		transform: "translateY(-608px)",
+		height: "640px",
+	}),
+	new Emoji("jingxia", "惊吓", "bilibili", {
+		"animation-duration": "1280ms",
+		"animation-timing-function": "steps(32)",
+		transform: "translateY(-992px)",
+		height: "1024px",
+	}),
+	new Emoji("nanguo", "难过", "bilibili", {
+		"animation-duration": "1120ms",
+		"animation-timing-function": "steps(28)",
+		transform: "translateY(-864px)",
+		height: "896px",
+	}),
+	new Emoji("touxiao", "偷笑", "bilibili", {
+		"animation-duration": "240ms",
+		"animation-timing-function": "steps(6)",
+		transform: "translateY(-160px)",
+		height: "192px",
+	}),
+	new Emoji("zhoumei", "皱眉", "bilibili", {
+		"animation-duration": "40ms",
+		"animation-timing-function": "steps(1)",
+		transform: "translateY(-0px)",
+		height: "32px",
+	}),
+	new Emoji("facai", "发财", "bilibili", {
+		"animation-duration": "1200ms",
+		"animation-timing-function": "steps(30)",
+		transform: "translateY(-928px)",
+		height: "960px",
+	}),
+	new Emoji("keai", "可爱", "bilibili", {
+		"animation-duration": "680ms",
+		"animation-timing-function": "steps(17)",
+		transform: "translateY(-512px)",
+		height: "544px",
+	}),
+	new Emoji("outu", "呕吐", "bilibili", {
+		"animation-duration": "1680ms",
+		"animation-timing-function": "steps(42)",
+		transform: "translateY(-1312px)",
+		height: "1344px",
+	}),
+	new Emoji("tuxue", "吐血", "bilibili", {
+		"animation-duration": "320ms",
+		"animation-timing-function": "steps(8)",
+		transform: "translateY(-224px)",
+		height: "256px",
+	}),
+	new Emoji("zhuakuang", "抓狂", "bilibili", {
+		"animation-duration": "760ms",
+		"animation-timing-function": "steps(19)",
+		transform: "translateY(-576px)",
+		height: "608px",
+	}),
+];
+
+const tiebaEmoji = [
+	new Emoji("tongue", "吐舌", "tieba"),
+	new Emoji("theblackline", "尴尬", "tieba"),
+	new Emoji("tear", "大哭", "tieba"),
+	new Emoji("surprised", "惊哭", "tieba"),
+	new Emoji("surprised2", "惊讶", "tieba"),
+	new Emoji("spray", "喷", "tieba"),
+	new Emoji("spit", "呕吐", "tieba"),
+	new Emoji("smilingeyes", "笑眼", "tieba"),
+	new Emoji("shui", "睡觉", "tieba"),
+	new Emoji("shame", "羞辱", "tieba"),
+	new Emoji("se", "色", "tieba"),
+	new Emoji("rmb", "钱", "tieba"),
+	new Emoji("reluctantly", "勉强", "tieba"),
+	new Emoji("rbq", "观望", "tieba"),
+	new Emoji("niconiconi", "爱你", "tieba"),
+	new Emoji("naive", "天真", "tieba"),
+	new Emoji("ku", "酷", "tieba"),
+	new Emoji("huaji", "滑稽", "tieba"),
+	new Emoji("hu", "呼", "tieba"),
+	new Emoji("han", "汗", "tieba"),
+	new Emoji("haha", "哈哈", "tieba"),
+	new Emoji("good", "棒", "tieba"),
+	new Emoji("doubt", "疑惑", "tieba"),
+	new Emoji("britan", "茶", "tieba"),
+	new Emoji("bbd", "棒棒哒", "tieba"),
+	new Emoji("awesome", "强", "tieba"),
+	new Emoji("anger", "愤怒", "tieba"),
+	new Emoji("aa", "啊啊", "tieba"),
+	new Emoji("happy", "高兴", "tieba"),
+	new Emoji("grievance", "郁闷", "tieba"),
 ];
 
 const menheraEmoji = [
@@ -109,42 +468,7 @@ const menheraEmoji = [
 	new Emoji("(苦笑)", "(苦笑)", "menhera"),
 ];
 
-const tiebaEmoji = [
-	new Emoji("tongue", "吐舌", "tieba"),
-	new Emoji("theblackline", "尴尬", "tieba"),
-	new Emoji("tear", "大哭", "tieba"),
-	new Emoji("surprised", "惊哭", "tieba"),
-	new Emoji("surprised2", "惊讶", "tieba"),
-	new Emoji("spray", "喷", "tieba"),
-	new Emoji("spit", "呕吐", "tieba"),
-	new Emoji("smilingeyes", "笑眼", "tieba"),
-	new Emoji("shui", "睡", "tieba"),
-	new Emoji("shame", "羞辱", "tieba"),
-	new Emoji("se", "色", "tieba"),
-	new Emoji("rmb", "钱", "tieba"),
-	new Emoji("reluctantly", "勉强", "tieba"),
-	new Emoji("rbq", "观望", "tieba"),
-	new Emoji("niconiconit", "niconiconit", "tieba"),
-	new Emoji("niconiconi", "niconiconi", "tieba"),
-	new Emoji("niconiconi_t", "niconiconi-t", "tieba"),
-	new Emoji("naive", "naive", "tieba"),
-	new Emoji("ku", "ku", "tieba"),
-	new Emoji("huaji", "huaji", "tieba"),
-	new Emoji("hu", "hu", "tieba"),
-	new Emoji("han", "han", "tieba"),
-	new Emoji("haha", "haha", "tieba"),
-	new Emoji("good", "good", "tieba"),
-	new Emoji("doubt", "doubt", "tieba"),
-	new Emoji("britan", "britan", "tieba"),
-	new Emoji("bbd", "bbd", "tieba"),
-	new Emoji("awesome", "awesome", "tieba"),
-	new Emoji("anger", "anger", "tieba"),
-	new Emoji("aa", "aa", "tieba"),
-	new Emoji("Happy", "Happy", "tieba"),
-	new Emoji("Grievance", "Grievance", "tieba"),
-];
-
-const emojiData = [...bilibiliEmoji, ...menheraEmoji, ...tiebaEmoji];
+const emojiData = [...hahaEmoji, ...bilibiliEmoji, ...tiebaEmoji, ...menheraEmoji];
 
 var Utils = {
 	_version: "1.0.0",
@@ -268,11 +592,11 @@ var Utils = {
 					}
 				},
 				error(err) {
-					const errMsg = err
-						? err.responseJSON
-							? err.responseJSON.message
-							: "出错了！"
-						: "出错了！";
+					const errMsg = err ?
+						err.responseJSON ?
+							err.responseJSON.message :
+							"出错了！" :
+						"出错了！";
 					Qmsg.error(errMsg);
 					reject(errMsg);
 				},
@@ -545,7 +869,7 @@ var Utils = {
    * @param {*} prefix 需要删除的 class，可以仅为前缀
    */
 	removeClassByPrefix(el, prefix) {
-		var classes = el.className.split(" ").filter(function (c) {
+		const classes = el.className.split(" ").filter(function (c) {
 			return c.lastIndexOf(prefix, 0) !== 0;
 		});
 
@@ -557,22 +881,23 @@ var Utils = {
 	renderedEmojiHtml(html) {
 		const parser = new DOMParser();
 		const doc = Utils.removeNotEmoji(parser.parseFromString(html, "text/html"));
-		const emotions = doc.getElementsByClassName("emotion-item");
-		for (let i = 0; i < emotions.length; i++) {
-			const emojiName = emotions[i].getAttribute("data-icon");
-			for (let j = 0; j < emojiData.length; j++) {
-				if (emojiData[j]["name"] === emojiName) {
-					const emoji = emojiData[j];
-					const img = emotions[i].getElementsByClassName("img")[0];
-					let dataStyle = "";
-					Object.keys(emoji.style).forEach(function(item) {
-						dataStyle += item + ":" + emoji.style[item] + ";";
-					});
-					img.style.cssText = dataStyle;
-					break;
-				}
-			}
-		}
+		// const emotions = doc.getElementsByClassName("emoji-animate");
+		// for (let i = 0; i < emotions.length; i++) {
+		// 	const emojiName = emotions[i].getAttribute("data-icon");
+		// 	for (let j = 0; j < emojiData.length; j++) {
+		// 		const emoji = emojiData[j];
+		// 		if (emoji.style && emoji.name === emojiName) {
+		// 			const emoji = emojiData[j];
+		// 			const img = emotions[i].getElementsByClassName("img")[0];
+		// 			let dataStyle = "";
+		// 			Object.keys(emoji.style).forEach(function (item) {
+		// 				dataStyle += item + ":" + emoji.style[item] + ";";
+		// 			});
+		// 			img.style.cssText = dataStyle;
+		// 			break;
+		// 		}
+		// 	}
+		// }
 		return doc.body.innerHTML;
 	},
 	trimTailBr(str) {
@@ -586,37 +911,36 @@ var Utils = {
 	},
 	/**
    * 判断需要渲染的 HTML 是否属于表情包，如果不属于，则去除此 HTML，仅保留文字
-   * issue#17 https://github.com/LIlGG/halo-comment-joe2.0/issues/17
    */
 	removeNotEmoji(doc) {
-		let smilies = doc.getElementsByClassName("smilies");
+		const smilies = doc.getElementsByClassName("emoji-img");
 		let skip = true;
-  
+
 		for (let i = 0; i < smilies.length; i++) {
-			let name = smilies[i].dataset.icon;
-  
-			if (!Utils.findEmoji("tieba", name)) {
+			const name = smilies[i].dataset.icon;
+
+			if (!Utils.findEmoji("tieba", name) && !Utils.findEmoji("haha", name)) {
 				skip = false;
 				break;
 			}
 		}
-  
+
 		if (skip) {
 			return doc;
 		}
-  
-		var firstNode = smilies[0];
-		var name = firstNode.dataset.icon;
-  
-		if (!Utils.findEmoji("tieba", name)) {
-			removeNode(firstNode);
+
+		const firstNode = smilies[0];
+		const name = firstNode.dataset.icon;
+
+		if (!Utils.findEmoji("tieba", name) && !Utils.findEmoji("haha", name)) {
+			Utils.removeNode(firstNode);
 		}
-  
+
 		return Utils.removeNotEmoji(doc);
 	},
 	removeNode(node) {
-		let alt = node.getAttribute("alt");
-		let textNode = document.createTextNode(alt);
+		const alt = node.getAttribute("alt");
+		const textNode = document.createTextNode(alt);
 		node.parentNode.replaceChild(textNode, node);
 	},
 	/**

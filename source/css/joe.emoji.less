@@ -1,31 +1,46 @@
-.emotion-item {
-  margin: 4px 0 -8px;
+.emoji-item {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  margin: 0 2px;
+  padding: 0;
+  width: 24px;
+  height: 24px;
   overflow: hidden;
 
-  .img {
-    width: 32px;
-    height: 864px;
-    max-width: 32px;
-    background: top/32px no-repeat;
-    background-image: none;
-    -webkit-animation: im-emotion-step 1.08s steps(27) infinite;
-    animation: im-emotion-step 1.08s steps(27) infinite;
-    -webkit-animation-duration: 1.08s;
-    animation-duration: 1.08s;
-    -webkit-animation-timing-function: steps(27);
-    animation-timing-function: steps(27);
+  @media (max-width: 860px) {
+    transform: scale(0.8);
   }
 
-  @media (max-width: 860px) {
-    transform: scale(0.6);
-    margin-bottom: -10px;
+  img {
+    // position: relative;
+    // top: -3px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 0;
   }
 }
 
-img[data-icon] {
-  height: 1.4em;
-  max-height: 1.4em;
+.emoji-animate {
+  position: relative;
+
+  .img {
+    cursor: default;
+    width: 24px;
+    height: 24px;
+
+    &:hover {
+      transform: translateY(0);
+    }
+  }
+}
+
+.emoji-img {
+  position: relative;
+  cursor: default;
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    transform: translateY(0);
+  }
 }
