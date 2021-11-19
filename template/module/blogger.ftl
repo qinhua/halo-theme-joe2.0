@@ -2,7 +2,7 @@
   <img width="100%" height="120" class="image lazyload" data-src="${(settings.author_bg!='')?then(settings.author_bg,BASE_RES_URL+'/source/img/author_bg.jpg')}" src="${EMPTY_IMG!}" onerror="this.src='${EMPTY_IMG!}'" alt="博主栏壁纸">
   <div class="user">
     <div class="avatar_wrapper ${settings.avatar_type!}">
-      <img class="avatar lazyload" data-src="${(user.avatar?? && user.avatar!='')?then(user.avatar,default_avatar)}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+      <img class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <#if settings.avatar_frame?? && settings.avatar_frame!="0">
         <img class="avatar_frame ${settings.avatar_frame}" src="${BASE_RES_URL!}/source/frame/${settings.avatar_frame!}.png" onerror="this.src='${EMPTY_IMG!}'" alt="挂架"/>
       </#if>

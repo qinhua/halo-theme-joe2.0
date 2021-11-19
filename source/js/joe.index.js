@@ -21,7 +21,8 @@ const homeContext = {
 					: false,
 				observer: true,
 			};
-			ThemeConfig.enable_banner_handle &&	ThemeConfig.enable_banner_switch_button
+			ThemeConfig.enable_banner_handle &&
+      ThemeConfig.enable_banner_switch_button
 				? (config.navigation = {
 					nextEl: ".swiper-button-next",
 					prevEl: ".swiper-button-prev",
@@ -41,7 +42,7 @@ const homeContext = {
 		const pageSize = ThemeConfig.post_index_page_size;
 		const $el = $(".joe_index__list");
 		const $domHeader = $(".joe_header");
-		const $navItems = $(".joe_index__title-title .item");
+		// const $navItems = $(".joe_index__title-title .item");
 		const $domList = $el.find(".joe_list");
 		const $domEmpty = $el.find(".joe_empty");
 		const $domLoad = $(".joe_load");
@@ -163,16 +164,16 @@ const homeContext = {
 		};
 
 		// 切换文章类型
-		$navItems.on("click", function () {
-			// if ($(this).attr("data-type") === queryData.type) return;
-			queryData = {
-				page: 0,
-				size: pageSize,
-				sort: "createTime",
-			};
-			initDom();
-			getDate();
-		});
+		// $navItems.on("click", function () {
+		// 	// if ($(this).attr("data-type") === queryData.type) return;
+		// 	queryData = {
+		// 		page: 0,
+		// 		size: pageSize,
+		// 		sort: "createTime",
+		// 	};
+		// 	initDom();
+		// 	getDate();
+		// });
 
 		// 加载更多
 		$domLoad.on("click", async function () {

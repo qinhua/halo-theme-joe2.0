@@ -73,6 +73,85 @@ body {
       padding: 10px 0;
     }
   }
+
+  .page-leaving {
+    .joe_comment {
+      padding-top: 26px;
+
+      >h2 {
+        display: none;
+      }
+    }
+  }
+
+  .newreply,
+  .joe_detail__leaving-list {
+
+    .emoji-item {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+
+      @media (max-width: 860px) {
+        transform: scale(0.8);
+      }
+
+      img {
+        // position: relative;
+        // top: -3px;
+        display: block;
+        width: 24px;
+        height: 24px;
+        border: 0;
+      }
+    }
+
+    .emoji-animate {
+      position: relative;
+
+      .img {
+        cursor: default;
+        width: 24px;
+        height: 24px;
+
+        &:hover {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    .emoji-img {
+      position: relative;
+      cursor: default;
+      width: 20px;
+      height: 20px;
+
+      &:hover {
+        transform: translateY(0);
+      }
+    }
+
+  }
+
+  .newreply {
+    .emoji-animate {
+      top: 5px;
+
+      .img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .emoji-img {
+      top: -3px;
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 .joe_container {
@@ -1038,7 +1117,7 @@ body {
       }
 
       .item {
-        cursor: pointer;
+        // cursor: pointer;
         margin-right: 16px;
         user-select: none;
         transition: color 0.35s;
@@ -2139,39 +2218,6 @@ body {
             }
           }
         }
-
-
-        .emotion-item {
-          margin: 4px 0 -8px;
-          display: inline-block;
-          width: 32px;
-          height: 32px;
-          overflow: hidden;
-
-          .img {
-            width: 32px;
-            height: 864px;
-            max-width: 32px;
-            background: top/32px no-repeat;
-            background-image: none;
-            -webkit-animation: im-emotion-step 1.08s steps(27) infinite;
-            animation: im-emotion-step 1.08s steps(27) infinite;
-            -webkit-animation-duration: 1.08s;
-            animation-duration: 1.08s;
-            -webkit-animation-timing-function: steps(27);
-            animation-timing-function: steps(27);
-          }
-
-          @media (max-width: 860px) {
-            transform: scale(0.6);
-            margin-bottom: -10px;
-          }
-        }
-
-        img[data-icon]{
-          height: 1.4em;
-          max-height: 1.4em;
-        }
       }
     }
 
@@ -2584,7 +2630,7 @@ body {
 
 .joe_progress_bar {
   position: fixed;
-  z-index: 100;
+  z-index: 80;
   width: 0;
   height: 4px;
   bottom: 0;

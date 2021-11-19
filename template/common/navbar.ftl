@@ -66,7 +66,7 @@
   <div class="joe_header__slideout">
     <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
     <div class="joe_header__slideout-author">
-      <img width="50" height="50" class="avatar lazyload" data-src="${(user.avatar?? && user.avatar!='')?then(user.avatar,default_avatar)}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+      <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <div class="info">
         <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
         <p class="motto joe_motto">${user.description!}</p>

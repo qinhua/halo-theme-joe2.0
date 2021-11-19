@@ -2,7 +2,7 @@
   <#-- ===== 引入脚本 start ===== -->
   <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
   <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.js"></script>
-  <script src="${BASE_RES_URL}/source/lib/l-marked/marked.min.js"></script>
+  <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
   <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
   <#if type == 'index' && settings.enable_banner == true>
     <!-- banner -->
