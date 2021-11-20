@@ -42,7 +42,7 @@
               <h5>申请格式</h5>
               <div class="link-requirement">
                 <p>
-                  <joe-message type="info" content='<em style="font-style:normal;font-weight:bold;">< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>补充：如果是 Halo 博客，logo 链接可使用如下形式：<br>- 博客地址/logo<br>- 博客地址/avatar<br>(大家在留言栏目里留言即可)'></joe-message>
+                  <joe-message type="info" content='<em style="font-style:normal;font-weight:bold;">< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>补充：Halo 博客用户可直接用短链接形式：<br>- 博客地址/logo<br>- 博客地址/avatar<br>(大家在留言栏目里留言即可)'></joe-message>
                 </p>
                 <#assign logo_url = blog_url + '/logo'>
                 <blockquote class="joe_link__demo">博客名称：${blog_title!}<br>博客地址：<a href="${blog_url!}">${blog_url!}</a><br>博客Logo：<a href="${logo_url!!}">${logo_url!}</a><br>博客简介：${meta_description!'这是一个非常牛逼的博客'}</blockquote>

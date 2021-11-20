@@ -135,9 +135,7 @@ const homeContext = {
 	post.topped
 		? "<span class=\"badge\" style=\"display: inline-block\">置顶</span>"
 		: ""
-}
-                  ${post.title}
-                </a>
+}${post.title}</a>
             <a class="abstract" href="${
 	post.fullPath
 }" title="文章摘要" target="_blank" rel="noopener noreferrer">${
