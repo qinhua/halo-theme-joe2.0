@@ -468,7 +468,12 @@ const menheraEmoji = [
 	new Emoji("(苦笑)", "(苦笑)", "menhera"),
 ];
 
-const emojiData = [...hahaEmoji, ...bilibiliEmoji, ...tiebaEmoji, ...menheraEmoji];
+const emojiData = [
+	...hahaEmoji,
+	...bilibiliEmoji,
+	...tiebaEmoji,
+	...menheraEmoji,
+];
 
 var Utils = {
 	_version: "1.0.0",
@@ -951,9 +956,8 @@ var Utils = {
    */
 	findEmoji(type, name) {
 		return (
-			emojiData.filter(
-				(item) => item.category === type && item.name === name
-			).length > 0
+			emojiData.filter((item) => item.category === type && item.name === name)
+				.length > 0
 		);
 	},
 	return2Br(str) {
@@ -961,7 +965,7 @@ var Utils = {
 		str = Utils.trimTailBr(str);
 		str = Utils.limitBr(str);
 		return str.replace(/\r?\n/g, "<br />");
-	}
+	},
 };
 
 window.Utils = Utils;

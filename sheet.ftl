@@ -32,7 +32,7 @@
                   </div>
                 </div>
               </div>
-              <#--  <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>  -->
+              <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>
             </div>
             <#--  <#if sheet.thumbnail?? && sheet.thumbnail!=''>
               <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>

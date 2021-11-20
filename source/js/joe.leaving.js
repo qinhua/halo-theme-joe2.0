@@ -11,15 +11,16 @@ const leavingContext = {
 					const str = res.content.reduce((sum, item) => {
 						if(item.content.trim()) {
 							// 渲染留言中的 emoji
-							const markedHtml = marked(item.content).replace(/bili\//g, "bili/hd/ic_emoji_");
+							const markedHtml = marked(item.content).replace(/<img\ssrc[^>]*>/gm,"[图片内容]").replace(/bili\//g, "bili/hd/ic_emoji_");
 							const emoji = Utils.renderedEmojiHtml(markedHtml);
 							item.content = Utils.return2Br(emoji);
 						}
+						const avatar = `${ThemeConfig.gravatar_source || ThemeConfig.gravatar_source_url}/${item.gravatarMd5}?s=256&d=${ThemeConfig.gravatar_type}`;
 						return (sum += `<li class="item">
             <div class="user">
                 <img class="avatar lazyload" src="${
 							ThemeConfig.lazyload_avatar
-							}" data-src="${item.avatar}" alt="用户头像" onerror="this.src='${
+							}" data-src="${avatar}" alt="用户头像" onerror="this.src='${
 								ThemeConfig.comment_avatar_error
 							}'"/>
                 <div class="nickname">${item.author}</div>

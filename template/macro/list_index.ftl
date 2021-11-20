@@ -14,10 +14,7 @@
         </#if>
         <div class="information">
           <a href="${post.fullPath}" class="title" title="${post.title}" target="_blank" rel="noopener noreferrer">
-            <#if post.topped==true>
-              <span class="badge" style="display: inline-block">置顶</span>
-            </#if>
-            ${post.title}
+            <#if post.topped==true><span class="badge" style="display: inline-block">置顶</span></#if>${post.title}
           </a>
           <a class="abstract" href="${post.fullPath}" title="文章摘要" target="_blank" rel="noopener noreferrer">${post.summary!}</a>
           <div class="meta">
