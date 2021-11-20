@@ -694,7 +694,7 @@ const commonContext = {
 		const $replys = $(".aside-reply-content");
 		$replys.each((_index, item) => {
 			// 获取转换后的marked
-			const markedHtml = marked(item.innerHTML).replace(/bili\//g, "bili/hd/ic_emoji_");
+			const markedHtml = marked(item.innerHTML).replace(/<img\ssrc[^>]*>/gm,"<i class=\"joe-font joe-icon-tupian\"></i>").replace(/bili\//g, "bili/hd/ic_emoji_");
 			// 处理其中的表情包
 			const emoji = Utils.renderedEmojiHtml(markedHtml);
 			// 将回车转换为br

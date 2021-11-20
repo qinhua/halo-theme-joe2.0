@@ -2318,8 +2318,8 @@ comment:
       label: 评论头像源
       type: text
       default: "https://sdn.geekzu.org/avatar"
-      placeholder: 请输入
-      description: "用于修改全站评论的头像源地址（优先取主题中的配置，取不到时才从后台配置项取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到后台管理中设置。"
+      placeholder: 请输入源地址，末尾不需要斜杠
+      description: "用于修改全站评论的头像源地址（优先取主题中配置的源，取不到时才从后台管理中取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到 “后台管理-系统-博客设置-评论设置” 中配置"
     enable_comment_autoload:
       name: enable_comment_autoload
       label: 自动加载评论

@@ -43,11 +43,12 @@
   ThemeConfig['mode'] = '${mode!}';
   ThemeConfig['blog_title'] = '${blog_title!}';
   ThemeConfig['blog_url'] = '${blog_url!}';
-  ThemeConfig['author'] = '${user.nickname!}';
+  ThemeConfig['author'] = 'M酷';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!10}';
-  // ThemeConfig['comment_plugin'] = '${options.comment_internal_plugin_js!}'
+  ThemeConfig['gravatar_source_url'] = '${options.gravatar_source!}';
+  ThemeConfig['gravatar_type'] = '${options.comment_gravatar_default!"mm"}';
 </script>
 
 <script id="metas-getter" type="text/javascript">
@@ -94,5 +95,5 @@
     BASE_API: ""
   }
   var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
-  ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.author + " | 版本 V" + ThemeConfig.version + " (使用 window.ThemeConfig 获取所有配置)", "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
+  ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.author + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>
