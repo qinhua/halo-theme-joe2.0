@@ -3,10 +3,10 @@ const leavingContext = {
 	/* 获取留言板数据 */
 	getData() {
 		const sheetId = $(".joe_detail__title").attr("data-sheetid");
+		const $leavingList = $(".joe_detail__leaving-list");
+		const $leavingNone = $(".joe_detail__leaving-none");
 		Utils.request(`/api/content/sheets/${sheetId}/comments/top_view`, "GET")
 			.then((res) => {
-				const $leavingList = $(".joe_detail__leaving-list");
-				const $leavingNone = $(".joe_detail__leaving-none");
 				if (res.total) {
 					const str = res.content.reduce((sum, item) => {
 						if(item.content.trim()) {
