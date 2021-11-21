@@ -56,7 +56,7 @@
                     </li>
                   </#if>
                 </#list>
-                <#if pagination.hasNext && (pagination.rainbowPages?size &gt;0)>
+                <#if pagination.hasNext && (pagination.rainbowPages?size &gt; 0)>
                   <li class="next">
                     <a href="${pagination.nextPageFullPath!}">
                       <i class="joe-font joe-icon-next"></i>

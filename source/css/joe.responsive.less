@@ -356,6 +356,29 @@ html {
     }
   }
 
+  @media (max-width: 1130px) {
+    .joe {
+      &_list {
+        &__item {
+          &.default {
+            .meta {
+              .categories {
+                li {
+                  display: none;
+
+                  &:nth-child(1) {
+                    display: flex;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+
   @media (max-width: 1000px) {
     .joe {
       &_header {
@@ -408,6 +431,33 @@ html {
         }
       }
 
+      &_index {
+        &__hot {
+          &-list {
+            .item .link .inner .image {
+              height: 95px;
+            }
+          }
+        }
+
+        &__banner {
+          &-recommend {
+            .item {
+              height: 135px;
+              margin: 0 !important;
+            }
+          }
+
+          .swiper-container {
+            height: 340px;
+
+            .item {
+              height: 340px;
+            }
+          }
+        }
+      }
+
       &_detail {
         &__article {
           &-video {
@@ -433,33 +483,6 @@ html {
               img {
                 height: 90px;
               }
-            }
-          }
-        }
-      }
-
-      &_index {
-        &__hot {
-          &-list {
-            .item .link .inner .image {
-              height: 95px;
-            }
-          }
-        }
-
-        &__banner {
-          &-recommend {
-            .item {
-              height: 135px;
-              margin: 0 !important;
-            }
-          }
-
-          .swiper-container {
-            height: 340px;
-
-            .item {
-              height: 340px;
             }
           }
         }
@@ -656,23 +679,19 @@ html {
 
             .meta {
               .items {
-                width: 100%;
-
                 li {
                   display: none;
 
                   &:nth-child(1) {
                     display: block;
-                    flex: 1;
                   }
 
                   &:nth-child(2) {
                     display: block;
-                    margin-left: auto;
-                  }
 
-                  &::after {
-                    display: none;
+                    &::after {
+                      display: none;
+                    }
                   }
                 }
               }
@@ -758,10 +777,6 @@ html {
 
               .item {
                 justify-content: center;
-                // span:nth-child(2),
-                // span:nth-child(3) {
-                //   display: none;
-                // }
               }
             }
           }
@@ -1337,21 +1352,19 @@ html {
 
             .meta {
               .items {
-                width: 100%;
 
                 li {
                   display: none;
 
                   &:nth-child(1) {
                     display: block;
+
+                    &::after {
+                      display: none;
+                    }
                   }
 
                   &:nth-child(2) {
-                    display: block;
-                    margin-left: auto;
-                  }
-
-                  &::after {
                     display: none;
                   }
                 }

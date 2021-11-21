@@ -7,7 +7,7 @@
     </div>
     <div class="joe_aside__item-contain">
       <@postTag method="latest" top="${settings.newest_page_size!5}">
-        <#if posts?size &gt;0>
+        <#if posts?size &gt; 0>
           <ul class="list">       
             <#list posts?sort_by("editTime")?reverse as post>
               <li class="item">

@@ -1,7 +1,7 @@
 <#macro tail type>
   <#-- ===== 引入脚本 start ===== -->
   <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
-  <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.js"></script>
+  <script src="${BASE_RES_URL!}/source/lib/qmsg/qmsg.js"></script>
   <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
   <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
   <#if type == 'index' && settings.enable_banner == true>
@@ -19,9 +19,9 @@
   </#if>
   <script src="${BASE_RES_URL!}/source/lib/lazysizes/lazysizes.min.js"></script>
   <script src="${BASE_RES_URL!}/source/lib/fancybox/jquery.fancybox.min.js"></script>
-  <#if settings.show_tag_cloud!true>
+  <#if settings.show_tag_cloud==true && settings.tag_cloud_type=='3d'>
     <#--  tagcloud  -->
-    <script src="${BASE_RES_URL!}/source/lib/typecho-joe-next@6.2.3/3dtag/3dtag.min.js"></script>
+    <script src="${BASE_RES_URL!}/source/lib/3dtag/3dtag.min.js"></script>
   </#if>
   <#if settings.enable_music_player==true && settings.music_id?? && settings.music_id!=''>
     <!-- music player -->
@@ -29,18 +29,18 @@
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
-  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>  -->
+  <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>
+  <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>
   <#--  <script src="${BASE_RES_URL!}/source/lib/joe.extend.min.js?v=${theme.version!}"></script>  -->
-  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>  -->
   <#if type == 'post' || type == 'journals'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
-  </#if>
-  <#if settings.favicon??>
-    <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
   <#if settings.enable_mathjax!false>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+  </#if>
+  <#if settings.favicon??>
+    <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
   <#if type == 'post' || type == 'journals'>
     <script src="${BASE_RES_URL}/source/lib/jquery-qrcode/jquery.qrcode.min.js"></script>

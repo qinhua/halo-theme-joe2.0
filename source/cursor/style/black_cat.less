@@ -1,20 +1,54 @@
+@default: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/normal.cur), auto;
+@pointer: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/ayuda.cur), auto;
+@active: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/work.cur), auto;
+
 body {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/normal.cur), auto;
+  cursor: @default;
 }
 
 a {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/ayuda.cur), auto;
+  cursor: @pointer;
 }
 
 a:active {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/work.cur), alias;
+  cursor: @active;
 }
 
 p {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/texto.cur), auto;
+  cursor: @default;
 }
 
-// 一些需要自定义光标的元素
-.highlight-wrap code {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/black_cat/texto.cur), auto;
+.joe_index__banner {
+  .swiper-slide .item {
+    cursor: @default !important;
+
+    &.clickable {
+      cursor: @pointer !important;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    cursor: @pointer;
+  }
+}
+
+.joe_header {
+  .joe_header__above {
+    .joe_header__above-nav .item {
+      cursor: @pointer !important;
+    }
+
+    .submit {
+      cursor: @pointer;
+    }
+  }
+}
+
+.joe_action .joe_action_item {
+  cursor: @pointer;
+}
+
+.joe_load {
+  cursor: @pointer;
 }

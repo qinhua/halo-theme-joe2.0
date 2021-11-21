@@ -1,19 +1,54 @@
+@default: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x1.cur), auto;
+@pointer: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x2.cur), auto;
+@active: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x2.cur), auto;
+
 body {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x1.cur), auto;
+  cursor: @default;
 }
 
 a {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x2.cur), auto;
+  cursor: @pointer;
 }
 
 a:active {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x2.cur), alias;
+  cursor: @active;
 }
 
 p {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x1.cur), auto;
+  cursor: @default;
 }
 
-.joe_header__above-nav .item {
-  cursor: url(//cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/cursor/simple_cursor/x2.cur), auto !important;
+.joe_index__banner {
+  .swiper-slide .item {
+    cursor: @default !important;
+
+    &.clickable {
+      cursor: @pointer !important;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    cursor: @pointer;
+  }
+}
+
+.joe_header {
+  .joe_header__above {
+    .joe_header__above-nav .item {
+      cursor: @pointer !important;
+    }
+
+    .submit {
+      cursor: @pointer;
+    }
+  }
+}
+
+.joe_action .joe_action_item {
+  cursor: @pointer;
+}
+
+.joe_load {
+  cursor: @pointer;
 }
