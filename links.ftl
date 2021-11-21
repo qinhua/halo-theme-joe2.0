@@ -14,7 +14,7 @@
             <article class="joe_detail__article animated fadeIn">
               <h5>友链列表</h5>
               <@linkTag method="list">
-                <#if links?size &gt;0>
+                <#if links?size &gt; 0>
                   <#assign colors=["#F8D800", "#0396FF", "#EA5455", "#7367F0", "#32CCBC", "#F6416C", "#32B76E", "#9F44D3", "#F55555", "#736EFE", "#E96D71", "#DE4313", "#D939CD", "#4C83FF", "#F072B6", "#C346C2", "#5961F9", "#FD6585", "#5569E8", "#FFC600", "#FA742B", "#5151E5", "#BB4E75", "#FF52E5", "#4DA037", "#15D1E2", "#F067B4", "#F067B4", "#ff9a9e", "#00f2fe", "#4facfe", "#f093fb", "#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c", "#e8583d", "#f68e5f"]>
                   <#assign nextRandom = .now?string["HHmmssSSS"]?number>
                   <ul class="joe_detail__friends">

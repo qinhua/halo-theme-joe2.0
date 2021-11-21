@@ -5,12 +5,14 @@
         <#list settings.bannerData?split('=====') as banners>
           <#assign banner = banners?split('-|||-')>
           <div class="swiper-slide">
-            <#assign cur_link = (banner[2]?? && banner[2]!='')?then(banner[2]?replace('\n',''),'')>
+            <#assign cur_title = (banner[0]?? && banner[0]?trim!='')?then(banner[0]?replace('\n','')?replace('\r','')?trim,'')>
+            <#assign cur_img = (banner[1]?? && banner[1]!='')?then(banner[1]?replace('\n','')?replace('\r','')?trim,'')>
+            <#assign cur_link = (banner[2]?? && banner[2]!='')?then(banner[2]?replace('\n','')?replace('\r','')?trim,'')>
             <#assign clickable = cur_link!='' && cur_link!='#'>
-            <a class="item" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
-              <img width="100%" height="100%" class="thumbnail lazyload" data-src="${banner[1]!}" src="${settings.banner_lazyload_img}" alt="${banner[0]!}">
-              <#if settings.enable_banner_title==true && banner[0]?? && banner[0]!=''>
-                <div class="title">${banner[0]}</div>
+            <a class="item${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
+              <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" alt="${cur_title!'banner'}">
+              <#if settings.enable_banner_title==true && cur_title!=''>
+                <div class="title">${(cur_title?index_of('欢迎使用Joe2.0主题')!=-1)?then('欢迎使用Joe2.0主题 V'+theme.version!,cur_title)}</div>
               </#if>
               <i class="joe-font joe-icon-zhifeiji"></i>
             </a>

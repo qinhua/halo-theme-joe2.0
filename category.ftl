@@ -16,31 +16,11 @@
                 <span>相关的文章</span>
               </div>
             </div>
-            <#if posts.content?size &gt;0>
-              <#assign lazy_img=settings.lazyload_thumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
+            <#if posts.content?size &gt; 0>
+              <#include "template/macro/post_item.ftl">
               <ul class="joe_archive__list joe_list animated fadeIn">
                 <#list posts.content as post>
-                  <li class="joe_list__item default">
-                    <div class="line"></div>
-                    <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-                      <#assign thumbnail=(post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail, settings.post_thumbnail)>
-                      <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
-                      <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
-                      <i class="joe-font joe-icon-picture"></i>
-                    </a>
-                    <div class="information">
-                      <a href="${post.fullPath!}" class="title" title="${post.title!}" target="_blank" rel="noopener noreferrer">${post.title!}</a>
-                      <a class="abstract" href="${post.fullPath!}" title="文章摘要" target="_blank" rel="noopener noreferrer">${post.summary!}</a>
-                      <div class="meta">
-                        <ul class="items">
-                          <li>${post.createTime?string('yyyy-MM-dd')}</li>
-                          <li>${post.visits!0} 阅读</li>
-                          <li>${post.commentCount!0} 评论</li>
-                          <li>${post.likes!0} 点赞</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
+                  <@post_item post=post type="category"/>
                 </#list>
               </ul>
             <#else>
@@ -73,7 +53,7 @@
                     </li>
                   </#if>
                 </#list>
-                <#if pagination.hasNext && (pagination.rainbowPages?size &gt;0)>
+                <#if pagination.hasNext && (pagination.rainbowPages?size &gt; 0)>
                   <li class="next">
                     <a href="${pagination.nextPageFullPath!}">
                       <i class="joe-font joe-icon-next"></i>
