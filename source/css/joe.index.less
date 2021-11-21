@@ -20,9 +20,14 @@
       }
 
       .item {
+        cursor: default;
         transform: translate3d(0, 0, 0);
         display: block;
         height: 326px;
+
+        &.clickable {
+          cursor: pointer;
+        }
 
         .thumbnail {
           width: 100%;

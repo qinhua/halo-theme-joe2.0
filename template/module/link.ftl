@@ -18,7 +18,7 @@
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.css?v=${theme.version!}">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme!='')?then(metas.code_theme,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
-  <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/typecho-joe-next@6.0.0/qmsg/qmsg.css">
+  <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/qmsg/qmsg.css">
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/animate/animate.min.css">
   <#if settings.enable_mathjax == true && (type == 'post' || type == 'journals')>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">

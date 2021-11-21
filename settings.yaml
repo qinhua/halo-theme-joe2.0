@@ -643,8 +643,8 @@ carousel:
       name: bannerData
       label: 轮播图数据
       type: textarea
-      default: ""
-      description: "配置首页的轮播图数据，多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开，【示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式配置，否则可能导致网站崩溃）"
+      default: "欢迎使用Joe2.0主题-|||-https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
+      description: "配置首页的轮播图数据【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
     banner_direction:
       name: banner_direction
       label: 轮播方向
@@ -879,6 +879,25 @@ aside:
           label: 开启
         - value: false
           label: 关闭
+    tag_cloud_type:
+      name: tag_cloud_type
+      label: 标签云类型
+      type: radio
+      data-type: text
+      default: 3d
+      description: "设置标签云的展示形式，默认为 “3D标签云”，标签太多或卡顿时建议限制展示的标签数量使用列表形式"
+      options:
+        - value: 3d
+          label: 3D标签云
+        - value: list
+          label: 标签列表
+    tag_cloud_max:
+      name: tag_cloud_max
+      label: 标签云最大数量
+      type: text
+      default: "15"
+      placeholder: "请输入数字"
+      description: "设置标签云展示的最大数量，超过会显示 “更多” 按钮"
 
 # 首页
 home:

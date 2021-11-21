@@ -17,7 +17,7 @@
             </div>
             <div class="joe_index__hot categories">
               <@categoryTag method="list">
-                <#if categories?size &gt;0>
+                <#if categories?size &gt; 0>
                   <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
                   <ul class="joe_index__hot-list animated fadeIn">
                     <#list categories as category>

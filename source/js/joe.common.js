@@ -397,7 +397,7 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
-		if (!ThemeConfig.show_tag_cloud || !$(".tags-cloud-list").length) return;
+		if (!ThemeConfig.show_tag_cloud || ThemeConfig.tag_cloud_type!== "3d" || !$(".tags-cloud-list").length) return;
 		const entries = [];
 		const colors = [
 			"#F8D800",
@@ -444,13 +444,13 @@ const commonContext = {
 			max = Math.floor(max);
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		};
-		$(".tags-cloud-list li").each((i, item) => {
+		$(".tags-cloud-list a").each((i, item) => {
 			entries.push({
 				label: $(item).attr("data-label"),
 				url: $(item).attr("data-url"),
 				target: "_blank",
 				fontColor: colors[random(0, colors.length - 1)],
-				fontSize: 15,
+				fontSize: 16,
 			});
 		});
 		$("#tags-3d").svg3DTagCloud({

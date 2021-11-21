@@ -52,7 +52,7 @@
     <#if settings.custome_social_channel??>
       <#assign channel=settings.custome_social_channel?split('\n')>
       <#if channel[0]?? && channel[0]!='' && channel[1]?? && channel[1]!='' && channel[2]?? && channel[2]!=''>
-        <a class="email" href="${channel[2]}" target="_blank" title="${channel[0]}" rel="noopener noreferrer nofollow">
+        <a class="custom_channel" href="${channel[2]}" target="_blank" title="${channel[0]}" rel="noopener noreferrer nofollow">
           <img src="${channel[1]}" alt="${channel[0]}"/>
         </a>
       </#if>

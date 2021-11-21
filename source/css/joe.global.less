@@ -369,7 +369,7 @@ body {
             transform: scaleX(0.7);
           }
 
-          .m-icon  {
+          .m-icon {
             transform: translateY(-2px);
           }
 
@@ -868,7 +868,7 @@ body {
 
       .title {
         color: var(--routine);
-        padding: 15px 0 10px;
+        padding: 14px 0 10px;
         font-size: 14px;
         display: flex;
         align-items: center;
@@ -886,10 +886,11 @@ body {
         margin: 0 -5px -5px;
         max-height: 250px;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
 
         .item {
-          padding: 5px;
+          padding: 4px;
 
           a {
             display: block;
@@ -906,18 +907,19 @@ body {
   }
 
   &__slideout {
+    visibility: hidden;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 78%;
     z-index: 10;
-    background: var(--classD);
-    transform: translate3d(-100%, 0, 0);
-    visibility: hidden;
-    transition: transform 0.35s, visibility 0.35s;
+    width: 78%;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 135px 15px 15px;
+    background: var(--classD);
+    transition: transform 0.35s, visibility 0.35s;
+    transform: translate3d(-100%, 0, 0);
 
     &::-webkit-scrollbar {
       display: none;
@@ -1713,6 +1715,20 @@ body {
           justify-content: space-between;
           line-height: 20px;
 
+          &:hover {
+            .link {
+              color: var(--theme);
+
+              &:after {
+                width: 100%;
+              }
+            }
+
+            .joe-font {
+              color: var(--theme)
+            }
+          }
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -1750,14 +1766,6 @@ body {
               background: var(--theme);
               transition: all 0.35s;
             }
-
-            &:hover {
-              color: var(--theme);
-
-              &:after {
-                width: 100%;
-              }
-            }
           }
 
           .joe-font {
@@ -1785,38 +1793,41 @@ body {
         animation: var(--animation-notice);
       }
 
-      .notice_description {
+      .notice_content {
+        white-space: pre-wrap;
+        word-break: break-word;
         font-size: 14px;
         color: var(--routine);
-      }
 
-      a[href*="http"] {
-        position: relative;
-        color: var(--theme);
-        max-width: 85%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 1px;
-          background: var(--theme);
-          transition: all 0.35s;
-        }
-
-        &:hover {
+        a[href*="http"] {
+          position: relative;
           color: var(--theme);
+          max-width: 85%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
 
           &::after {
-            width: 100%;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--theme);
+            transition: all 0.35s;
+          }
+
+          &:hover {
+            color: var(--theme);
+
+            &::after {
+              width: 100%;
+            }
           }
         }
       }
+
     }
 
     &.qrcode {
@@ -2248,20 +2259,17 @@ body {
       margin-bottom: 15px;
       background: var(--background);
 
-      .empty {
-        text-align: center;
-        color: var(--routine);
-      }
-
       .tags-cloud-list {
+        font-size: 0;
+
         a {
           display: inline-block;
-          width: 32%;
-          padding: 5px 5px;
-          font-size: 13px !important;
+          width: 30%;
+          margin: 4px;
+          padding: 5px;
+          font-size: 13px;
           line-height: 1.2;
           color: var(--minor);
-          border: 1px solid var(--classE);
           text-decoration: none;
           overflow: hidden;
           -o-text-overflow: ellipsis;
@@ -2269,10 +2277,11 @@ body {
           white-space: nowrap;
           text-align: center;
           background: var(--background-tag);
+          border: 1px solid var(--classE);
           border-radius: 3px;
 
           &:hover {
-            color: var(--routine);
+            color: var(--theme);
           }
         }
       }
@@ -2285,6 +2294,11 @@ body {
         i {
           vertical-align: text-top;
         }
+      }
+
+      .empty {
+        text-align: center;
+        color: var(--routine);
       }
     }
   }
@@ -2375,6 +2389,7 @@ body {
     .meta {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-top: auto;
       color: var(--minor);
       font-size: 13px;
@@ -2382,7 +2397,7 @@ body {
       .items {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
 
         li {
           &::after {
@@ -2397,20 +2412,26 @@ body {
         }
       }
 
-      .last {
-        margin-left: auto;
+      .categories {
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
-        .icon {
-          margin-right: 3px;
-        }
+        .pcate {
+          margin-left: 5px;
+          display: flex;
+          align-items: center;
 
-        .link {
-          color: var(--minor);
+          .icon {
+            margin-right: 3px;
+          }
 
-          &:hover {
-            color: var(--theme);
+          .link {
+            color: var(--minor);
+
+            &:hover {
+              color: var(--theme);
+            }
           }
         }
       }
@@ -4533,6 +4554,7 @@ body {
         }
 
         .link {
+          word-break: break-all;
           color: var(--minor);
 
           &:hover {
