@@ -17,16 +17,17 @@
             </div>
             <div class="joe_index__hot categories">
               <@categoryTag method="list">
-                <#if categories?size &gt; 0>
+                <#if categories?size gt 0>
                   <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
+                  <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api!=''>
                   <ul class="joe_index__hot-list animated fadeIn">
                     <#list categories as category>
                       <li class="item">
                         <a class="link" href="${category.fullPath!}" title="${category.name!}">
                           <figure class="inner">
                             <span class="views">${category.postCount!} ℃</span>
-                            <#assign thumbnail=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, 'https://picsum.photos/id/2${category_index}/175/90') >
-                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" alt="${category.name!}">
+                            <#assign thumbnail=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + category.id,'https://picsum.photos/id/2${category_index}/175/90')) >
+                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
                             <figcaption class="title">${category.name!}</figcaption>
                           </figure>
                         </a>

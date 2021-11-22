@@ -32,6 +32,189 @@ body {
     margin-top: 20px;
   }
 
+  // ==== 代码块样式 start
+  code:not([class]) {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--code);
+    margin: 2px;
+    padding: 0 8px;
+    white-space: normal;
+    text-indent: 0;
+    user-select: none;
+    vertical-align: baseline;
+    word-break: break-word;
+    background: var(--code-background);
+    border-radius: var(--radius-inner);
+  }
+
+  .code-toolbar {
+    margin: 20px 0;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px 0 var(--shadow-code);
+    border-radius: 8px;
+
+    .toolbar {
+      opacity: 1;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+
+      .toolbar-item {
+        opacity: 1;
+        user-select: none;
+
+        span {
+          font-weight: bold;
+          font-size: 12px;
+          color: #999;
+          background: none;
+          border: none;
+          box-shadow: none;
+
+          &:hover {
+            color: #999;
+          }
+        }
+
+        &:last-child {
+          display: none;
+        }
+      }
+
+      .autofold-tip {
+        padding-left: 5px;
+      }
+    }
+
+    pre[class*="language-"] {
+      position: relative;
+      margin: 0;
+      padding: 30px 0 0;
+      user-select: none;
+      font-size: 14px;
+      overflow: hidden;
+      white-space: pre;
+      text-shadow: none;
+      transition: height 0.2s;
+      border-radius: var(--radius-inner);
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 9px;
+        left: 15px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #fc625d;
+        box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+        z-index: 1;
+      }
+
+      code[class*="language-"] {
+        display: block;
+        overflow: auto;
+        user-select: none;
+        padding: 12px 12px 12px 18px;
+        text-shadow: none;
+
+        .token.operator {
+          background: none;
+        }
+      }
+
+      .line-numbers-rows {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        padding-top: 12px;
+        border: none;
+      }
+
+      .code-expander {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        z-index: 2;
+        user-select: none;
+        font-size: 14px;
+        color: #999;
+        transition: transform 0.2s;
+
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 3px;
+        right: 10px;
+        z-index: 5;
+        font-weight: bold;
+        font-size: 14px;
+        color: #999;
+        cursor: pointer;
+        user-select: none;
+        transition: opacity color 0.35s;
+
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+
+      &.close {
+        height: 30px;
+
+        .code-expander {
+          transform: rotate(90deg);
+        }
+
+        &:after {
+          visibility: hidden;
+        }
+      }
+
+      &.line-numbers {
+        code {
+          padding: 12px 12px 12px 54px;
+        }
+      }
+
+      &.code-hr {
+        &:after {
+          position: absolute;
+          top: 30px;
+          z-index: 1;
+          content: "";
+          width: 100%;
+          height: 1px;
+          background: #d8d8d8;
+          mix-blend-mode: overlay;
+        }
+      }
+
+      &.code-copy {
+        user-select: auto;
+
+        code {
+          user-select: auto;
+        }
+
+        .code-expander {
+          right: 40px;
+        }
+      }
+    }
+  }
+
+  // 代码块样式 end ====
+
   .aplayer {
     min-height: 90px;
 
@@ -3828,184 +4011,6 @@ body {
         transform: scaleX(0.25);
         opacity: 0;
         transition: transform 0.35s, opacity 0.35s;
-      }
-    }
-
-    code:not([class]) {
-      display: inline-block;
-      font-size: 13px;
-      color: var(--code);
-      margin: 2px;
-      padding: 0 8px;
-      white-space: normal;
-      text-indent: 0;
-      user-select: none;
-      vertical-align: baseline;
-      word-break: break-word;
-      background: var(--code-background);
-      border-radius: var(--radius-inner);
-    }
-
-    .code-toolbar {
-      margin: 20px 0;
-      overflow: hidden;
-      box-shadow: 1px 1px 5px 0 var(--shadow-code);
-      border-radius: var(--radius-inner);
-
-      .toolbar {
-        opacity: 1;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-
-        .toolbar-item {
-          opacity: 1;
-          user-select: none;
-
-          span {
-            font-weight: bold;
-            font-size: 12px;
-            color: #999;
-            background: none;
-            border: none;
-            box-shadow: none;
-
-            &:hover {
-              color: #999;
-            }
-          }
-
-          &:last-child {
-            display: none;
-          }
-        }
-
-        .autofold-tip {
-          padding-left: 5px;
-        }
-      }
-
-      pre[class*="language-"] {
-        position: relative;
-        margin: 0;
-        padding: 30px 0 0;
-        user-select: none;
-        font-size: 14px;
-        overflow: hidden;
-        white-space: pre;
-        text-shadow: none;
-        transition: height 0.2s;
-        border-radius: var(--radius-inner);
-
-        &:before {
-          content: "";
-          position: absolute;
-          top: 9px;
-          left: 15px;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: #fc625d;
-          box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
-          z-index: 1;
-        }
-
-        &:after {
-          position: absolute;
-          top: 30px;
-          z-index: 1;
-          content: "";
-          width: 100%;
-          height: 1px;
-          background: #d8d8d8;
-          mix-blend-mode: overlay;
-        }
-
-        code[class*="language-"] {
-          display: block;
-          overflow: auto;
-          user-select: none;
-          padding: 12px 12px 12px 18px;
-          text-shadow: none;
-
-          .token.operator {
-            background: none;
-          }
-        }
-
-        .line-numbers-rows {
-          left: 0;
-          top: 0;
-          bottom: 0;
-          padding-top: 12px;
-          border: none;
-        }
-
-        .code-expander {
-          cursor: pointer;
-          position: absolute;
-          right: 10px;
-          top: 5px;
-          z-index: 2;
-          user-select: none;
-          font-size: 14px;
-          color: #999;
-          transition: transform 0.2s;
-
-          &:hover {
-            filter: brightness(1.2);
-          }
-        }
-
-        .copy-button {
-          position: absolute;
-          top: 3px;
-          right: 10px;
-          z-index: 5;
-          font-weight: bold;
-          font-size: 14px;
-          color: #999;
-          cursor: pointer;
-          user-select: none;
-          transition: opacity color 0.35s;
-
-          &:hover {
-            filter: brightness(1.2);
-          }
-        }
-
-        &.close {
-          height: 30px;
-
-          .code-expander {
-            transform: rotate(90deg);
-          }
-
-          &:after {
-            visibility: hidden;
-          }
-        }
-
-        &.line-numbers {
-          code {
-            padding: 12px 12px 12px 54px;
-          }
-        }
-
-        &.code-copy {
-          user-select: auto;
-
-          code {
-            user-select: auto;
-          }
-
-          .code-expander {
-            right: 40px;
-          }
-        }
       }
     }
 

@@ -4,32 +4,34 @@
     <div class="line"></div>
     <#if settings.enable_post_thumbnail!true>
       <#assign thumbnail = post.thumbnail!?trim>
+      <#assign random_img_ok = settings.enable_random_img_api==true && settings.random_img_api?trim!=''>
+      <#assign default_img_url = (random_img_ok == true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?') != -1)?then('&', '?')) + '_r=' + post.id, settings.post_thumbnail)>
       <#if thumbnail == ''>
-        <#if post.categories?size &gt; 0>
+        <#if post.categories?size gt 0>
           <#assign thumbnail = post.categories[0].thumbnail!?trim>
           <#if thumbnail == ''>
-            <#if post.tags?size &gt; 0>
+            <#if post.tags?size gt 0>
               <#assign thumbnail = post.tags[0].thumbnail!?trim>
               <#if thumbnail == ''>
-                <#assign thumbnail = settings.post_thumbnail>
+                <#assign thumbnail = default_img_url>
               </#if>
             <#else>
-              <#assign thumbnail = settings.post_thumbnail>
+              <#assign thumbnail = default_img_url>
             </#if>
           </#if>
         <#else>
-          <#if post.tags?size &gt; 0>
+          <#if post.tags?size gt 0>
             <#assign thumbnail = post.tags[0].thumbnail!?trim>
             <#if thumbnail == ''>
-              <#assign thumbnail = settings.post_thumbnail>
+              <#assign thumbnail = default_img_url>
             </#if>
           <#else>
-            <#assign thumbnail = settings.post_thumbnail>
+            <#assign thumbnail = default_img_url>
           </#if>
         </#if>
       </#if>
       <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-        <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_img!}'" alt="${post.title!}">
+        <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${post.title!}">
         <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
         <i class="joe-font joe-icon-picture"></i>
       </a>
@@ -46,7 +48,7 @@
           <li>${post.commentCount!0} 评论</li>
           <li>${post.likes!0} 点赞</li>
         </ul>
-        <#if post.categories?size &gt; 0>
+        <#if post.categories?size gt 0>
           <ul class="categories">
             <#list post.categories as pcate>
               <li class="pcate">

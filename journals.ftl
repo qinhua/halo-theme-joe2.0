@@ -57,7 +57,7 @@
                           </#if>
                           <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
                             <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em>${journal.commentCount!0}</em></span>
-                            <#if journal.commentCount &gt; 0>
+                            <#if journal.commentCount gt 0>
                               <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
                             </#if>
                           </#if>
@@ -100,7 +100,7 @@
                       </li>
                     </#if>
                   </#list>
-                  <#if pagination.hasNext && (pagination.rainbowPages?size &gt; 0)>
+                  <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
                     <li class="next">
                       <a href="${pagination.nextPageFullPath!}">
                         <i class="joe-font joe-icon-next"></i>

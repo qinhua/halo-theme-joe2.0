@@ -143,44 +143,45 @@ const journalContext = {
 	//   });
 	// },
 	/* 初始化代码区域，高亮 + 折叠 + 复制 */
-	initCode() {
-		if (!$(".joe_journals__list pre").length) return;
-		$(".joe_journals__list pre").each(function (index, item) {
-			const $codes = $(item).find("code");
-			if ($codes.length > 0) {
-				// 添加默认代码类型为纯文本
-				const $curCode = $codes.eq(0);
-				if (
-					!$curCode.attr("class") ||
-          $curCode.attr("class").indexOf("language-") === -1
-				) {
-					$($curCode[0]).addClass("language-text");
-				}
-				// 代码折叠
-				const $item = $(item);
-				const expander = $(
-					"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
-				);
-				expander.on("click", function () {
-					const $parent = expander.parent("pre");
-					const $auto_fold = $parent.siblings(".toolbar").find(".autofold-tip");
-					$auto_fold && $auto_fold.remove();
-					expander.parent("pre").toggleClass("close");
-				});
-				$item.addClass("code-expander").prepend(expander);
-				// 代码复制
-				const text = $(item).find("code[class*='language-']").text();
-				const span = $(
-					"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
-				);
-				new ClipboardJS(span[0], {
-					text: () => text,
-				}).on("success", () => Qmsg.success("复制成功！"));
-				$(item).addClass("code-copy").append(span);
-			}
-		});
-	},
-	/* 日志块超长折叠 */
+	// initCode() {
+	// 	const $codeElms=$(".joe_journals__list pre");
+	// 	if (!$codeElms.length) return;
+	// 	$codeElms.each(function (_index, item) {
+	// 		const $codes = $(item).find("code");
+	// 		if ($codes.length > 0) {
+	// 			// 添加默认代码类型为纯文本
+	// 			const $curCode = $codes.eq(0);
+	// 			if (
+	// 				!$curCode.attr("class") ||
+	//         $curCode.attr("class").indexOf("language-") === -1
+	// 			) {
+	// 				$($curCode[0]).addClass("language-text");
+	// 			}
+	// 			// 代码折叠
+	// 			const $item = $(item);
+	// 			const expander = $(
+	// 				"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
+	// 			);
+	// 			expander.on("click", function () {
+	// 				const $parent = expander.parent("pre");
+	// 				const $auto_fold = $parent.siblings(".toolbar").find(".autofold-tip");
+	// 				$auto_fold && $auto_fold.remove();
+	// 				expander.parent("pre").toggleClass("close");
+	// 			});
+	// 			$item.addClass("code-expander").prepend(expander);
+	// 			// 代码复制
+	// 			const text = $(item).find("code[class*='language-']").text();
+	// 			const span = $(
+	// 				"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
+	// 			);
+	// 			new ClipboardJS(span[0], {
+	// 				text: () => text,
+	// 			}).on("success", () => Qmsg.success("复制成功！"));
+	// 			$(item).addClass("code-copy").append(span);
+	// 		}
+	// 	});
+	// },
+	/* 日志块折叠 */
 	foldBlock() {
 		const $allBlocks = $(".joe_journal_body .content-wrp");
 		$allBlocks.each(function () {

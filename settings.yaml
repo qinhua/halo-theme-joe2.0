@@ -138,12 +138,14 @@ theme:
       label: 网站字体
       type: select
       default: "off"
-      description: "配置网站的字体，暂时提供了1种供选择，也可以在 ‘自定义’ 一栏中自定义字体来源，如果两边同时配置，优先使用自定义配置中的字体（请注意：中文字体并不能保证所有文字展示正确，请慎用！！！）"
+      description: "配置网站的字体，暂时提供 2 种供选择，也可以在 “自定义” 一栏中自定义字体来源，如果两边同时配置，优先使用自定义配置中的字体（请注意：中文字体并不能保证所有文字展示正确，请慎用！！！）"
       options:
         - value: "off"
           label: 默认
         - value: "joe_slate.woff2"
           label: "Joe Slate"
+        - value: "joe_future.woff2"
+          label: "Joe Future"
     cursor_skin:
       name: cursor_skin
       label: 鼠标皮肤
@@ -155,6 +157,8 @@ theme:
           label: 无（默认）
         - value: simple_cursor
           label: 简洁卡通
+        - value: simple_cursor_blue
+          label: 简洁卡通-蓝
         - value: simple_sunset_light
           label: 简单日落(浅色)
         - value: simple_sunset_dark
@@ -940,12 +944,30 @@ home:
       type: attachment
       default: https://picsum.photos/id/1027/210/140
       description: "文章无配图时生效，可使用占位图服务（210*140） https://source.unsplash.com、https://picsum.photos"
-    fallback_img:
-      name: fallback_img
+    fallback_thumbnail:
+      name: fallback_thumbnail
       label: 文章错误缺省图
       type: attachment
-      default: http://placeholder.idcd.com/?w=600&h=300&text=MBlog&bgcolor=%23F5F5F5&fontcolor=%23DEDEDE&fontsize=18&fontfamily=2
-      description: "文章图片加载出错时生效，可使用占位图服务（210*140） http://placeholder.idcd.com"
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_thumbnail.png"
+      description: "文章图片加载出错时生效，可使用占位图服务（210*140）"
+    enable_random_img_api:
+      name: enable_random_img_api
+      label: 启用随机图
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否启用随机图API（必须先配置 API），开启后将使用随机图填充没有设置封面的 “文章|分类|标签”，未开启时使用主题内置的封面图"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    random_img_api:
+      name: random_img_api
+      label: 随机图 API
+      type: text
+      default: "https://tu.ltyuanfang.cn/api/fengjing.php"
+      description: "自定义随机图API，用于填充没有设置封面的 “文章|分类|标签，为空则使用默认随机图 API，免费 API 不会一直可用，请知悉"
     enable_index_list_effect:
       name: enable_index_list_effect
       label: 开启文章列表动画效果
@@ -1404,164 +1426,6 @@ post:
       placeholder: 请输入版权文案
       default: ""
       description: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
-    enable_code_copy:
-      name: enable_code_copy
-      label: 代码复制
-      type: switch
-      data-type: bool
-      default: true
-      description: 开启代码块复制按钮
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_code_line_number:
-      name: enable_code_line_number
-      label: 代码行号
-      type: switch
-      data-type: bool
-      default: false
-      description: "开启代码块行号功能"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_code_title:
-      name: enable_code_title
-      label: 代码标题
-      type: switch
-      data-type: bool
-      default: true
-      description: "开启代码块的标题"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_code_expander:
-      name: enable_code_expander
-      label: 代码折叠
-      type: switch
-      data-type: bool
-      default: false
-      description: "开启代码块折叠功能"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    fold_long_code:
-      name: fold_long_code
-      label: 自动折叠长代码块
-      type: switch
-      data-type: bool
-      default: false
-      description: "自动折叠文章页中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    long_code_height:
-      name: long_code_height
-      label: 自动折叠的高度
-      default: "800"
-      placeholder: "请输入数字"
-      description: "触发长代码块自动折叠的高度（单位px），只填数字即可（默认800），填0将折叠所有代码块"
-    code_theme:
-      name: code_theme
-      label: 代码主题
-      type: select
-      data-type: string
-      default: "one-dark"
-      description: "设置代码块主题，可通过后台元数据为每篇文章设置单独的代码主题，主题来自 prism-themes，见https://github.com/PrismJS/prism-themes"
-      options:
-        - value: "one-dark"
-          label: "one-dark"
-        - value: "one-light"
-          label: "one-light"
-        - value: "a11y-dark"
-          label: "a11y-dark"
-        - value: "atom-dark"
-          label: "atom-dark"
-        - value: "base16-ateliersulphurpool.light"
-          label: "base16-ateliersulphurpool.light"
-        - value: "cb"
-          label: "cb"
-        - value: "coldark-cold"
-          label: "coldark-cold"
-        - value: "coldark-dark"
-          label: "coldark-dark"
-        - value: "coy-without-shadows"
-          label: "coy-without-shadows"
-        - value: "darcula"
-          label: "darcula"
-        - value: "dracula"
-          label: "dracula"
-        - value: "duotone-dark"
-          label: "duotone-dark"
-        - value: "duotone-earth"
-          label: "duotone-earth"
-        - value: "duotone-forest"
-          label: "duotone-forest"
-        - value: "duotone-light"
-          label: "duotone-light"
-        - value: "duotone-sea"
-          label: "duotone-sea"
-        - value: "duotone-space"
-          label: "duotone-space"
-        - value: "ghcolors"
-          label: "ghcolors"
-        - value: "gruvbox-dark"
-          label: "gruvbox-dark"
-        - value: "gruvbox-light"
-          label: "gruvbox-light"
-        - value: "holi-theme"
-          label: "holi-theme"
-        - value: "hopscotch"
-          label: "hopscotch"
-        - value: "lucario"
-          label: "lucario"
-        - value: "material-dark"
-          label: "material-dark"
-        - value: "material-light"
-          label: "material-light"
-        - value: "material-oceanic"
-          label: "material-oceanic"
-        - value: "night-owl"
-          label: "night-owl"
-        - value: "nord"
-          label: "nord"
-        - value: "pojoaque"
-          label: "pojoaque"
-        - value: "shades-of-purple"
-          label: "shades-of-purple"
-        - value: "solarized-dark-atom"
-          label: "solarized-dark-atom"
-        - value: "synthwave84"
-          label: "synthwave84"
-        - value: "vs"
-          label: "vs"
-        - value: "vsc-dark-plus"
-          label: "vsc-dark-plus"
-        - value: "xonokai"
-          label: "xonokai"
-        - value: "z-touch"
-          label: "z-touch"
-    enable_single_code_select:
-      name: enable_single_code_select
-      label: 点击单行代码自动全选
-      type: switch
-      data-type: bool
-      default: false
-      description: "开启后，当点击单行/行内代码时，会自动全选内容"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
     enable_mathjax:
       name: enable_mathjax
       label: "开启 mathjax 数学公式"
@@ -1830,6 +1694,181 @@ links:
         - value: false
           label: 否
 
+# 代码块
+code_block:
+  label: 代码块
+  items:
+    enable_code_copy:
+      name: enable_code_copy
+      label: 代码复制
+      type: switch
+      data-type: bool
+      default: true
+      description: 开启代码块复制按钮
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_line_number:
+      name: enable_code_line_number
+      label: 代码行号
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启代码块行号功能"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_title:
+      name: enable_code_title
+      label: 代码标题
+      type: switch
+      data-type: bool
+      default: true
+      description: "开启代码块的标题"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_hr:
+      name: enable_code_hr
+      label: 标题分隔线
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示标题和内容之间的分割线，不展示时会更加简洁"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_expander:
+      name: enable_code_expander
+      label: 代码折叠
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启代码块折叠功能"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    fold_long_code:
+      name: fold_long_code
+      label: 自动折叠长代码块
+      type: switch
+      data-type: bool
+      default: false
+      description: "自动折叠文章页中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    long_code_height:
+      name: long_code_height
+      label: 自动折叠的高度
+      default: "800"
+      placeholder: "请输入数字"
+      description: "触发长代码块自动折叠的高度（单位px），只填数字即可（默认800），填0将折叠所有代码块"
+    code_theme:
+      name: code_theme
+      label: 代码主题
+      type: select
+      data-type: string
+      default: "one-dark"
+      description: "设置代码块主题，可通过后台元数据为每篇文章设置单独的代码主题，主题来自 prism-themes，见https://github.com/PrismJS/prism-themes"
+      options:
+        - value: "one-dark"
+          label: "one-dark"
+        - value: "one-light"
+          label: "one-light"
+        - value: "a11y-dark"
+          label: "a11y-dark"
+        - value: "atom-dark"
+          label: "atom-dark"
+        - value: "base16-ateliersulphurpool.light"
+          label: "base16-ateliersulphurpool.light"
+        - value: "cb"
+          label: "cb"
+        - value: "coldark-cold"
+          label: "coldark-cold"
+        - value: "coldark-dark"
+          label: "coldark-dark"
+        - value: "coy-without-shadows"
+          label: "coy-without-shadows"
+        - value: "darcula"
+          label: "darcula"
+        - value: "dracula"
+          label: "dracula"
+        - value: "duotone-dark"
+          label: "duotone-dark"
+        - value: "duotone-earth"
+          label: "duotone-earth"
+        - value: "duotone-forest"
+          label: "duotone-forest"
+        - value: "duotone-light"
+          label: "duotone-light"
+        - value: "duotone-sea"
+          label: "duotone-sea"
+        - value: "duotone-space"
+          label: "duotone-space"
+        - value: "ghcolors"
+          label: "ghcolors"
+        - value: "gruvbox-dark"
+          label: "gruvbox-dark"
+        - value: "gruvbox-light"
+          label: "gruvbox-light"
+        - value: "holi-theme"
+          label: "holi-theme"
+        - value: "hopscotch"
+          label: "hopscotch"
+        - value: "lucario"
+          label: "lucario"
+        - value: "material-dark"
+          label: "material-dark"
+        - value: "material-light"
+          label: "material-light"
+        - value: "material-oceanic"
+          label: "material-oceanic"
+        - value: "night-owl"
+          label: "night-owl"
+        - value: "nord"
+          label: "nord"
+        - value: "pojoaque"
+          label: "pojoaque"
+        - value: "shades-of-purple"
+          label: "shades-of-purple"
+        - value: "solarized-dark-atom"
+          label: "solarized-dark-atom"
+        - value: "synthwave84"
+          label: "synthwave84"
+        - value: "vs"
+          label: "vs"
+        - value: "vsc-dark-plus"
+          label: "vsc-dark-plus"
+        - value: "xonokai"
+          label: "xonokai"
+        - value: "z-touch"
+          label: "z-touch"
+    enable_single_code_select:
+      name: enable_single_code_select
+      label: 点击单行代码自动全选
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启后，当点击单行/行内代码时，会自动全选内容"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+
 # 社交
 social:
   label: 社交
@@ -1904,14 +1943,14 @@ social:
       type: textarea
       default: ""
       placeholder: "请填入QQ交流群链接"
-      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可，不填则不展示。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=mhzagDdMgh6diRn3ym9RITl3a9jW0T60&jump_from=webapi）"
+      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可，不填则不展示。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=JJ3FVO1i_plWJohono16N5z7XI_dqEpK&jump_from=webapi）"
     qq_group_text:
       name: qq_group_text
       label: QQ交流群文案
       type: textarea
       default: "欢迎加入QQ交流群"
       placeholder: "请输入"
-      description: "QQ交流群按钮展示的文案，对应首页 ‘推荐文章’ 右侧的 ‘欢迎加入QQ交流群’"
+      description: "QQ交流群按钮展示的文案，对应首页 “推荐文章” 右侧的 “欢迎加入QQ交流群”"
 
 # 看板娘
 live2d:
@@ -2273,8 +2312,8 @@ live2d:
 # music_player:
 #   label: 音乐播放器
 #   items:
-#     music_enabled:
-#       name: music_enabled
+#     enable_global_music_player:
+#       name: enable_global_music_player
 #       label: 开启背景音乐
 #       type: switch
 #       data-type: bool
@@ -2284,8 +2323,8 @@ live2d:
 #           label: 开启
 #         - value: false
 #           label: 关闭
-#     auto_play:
-#       name: auto_play
+#     music_auto_play:
+#       name: music_auto_play
 #       label: 自动播放
 #       default: false
 #       type: switch
@@ -2295,6 +2334,29 @@ live2d:
 #           label: 开启
 #         - value: false
 #           label: 关闭
+#     music_loop_play:
+#       name: music_loop_play
+#       label: 循环播放
+#       default: false
+#       type: switch
+#       data-type: bool
+#       options:
+#         - value: true
+#           label: 开启
+#         - value: false
+#           label: 关闭
+#     music_player_theme:
+#       name: music_player_theme
+#       label: 播放器主题色
+#       type: text
+#       default: "#1989fa"
+#       placeholder: "请输入有效的颜色值"
+#     music_player_volume:
+#       name: music_player_volume
+#       label: 默认音量
+#       type: text
+#       default: "0.7"
+#       placeholder: "请输入 0~1 的数字"
 #     music_source:
 #       name: music_source
 #       label: 音乐播放器播放源
@@ -2311,17 +2373,41 @@ live2d:
 #           label: 虾米音乐
 #         - value: baidu
 #           label: 百度音乐
-#     list_id:
-#       name: list_id
-#       label: 音乐播放器歌单ID
+#     music_api:
+#       name: music_api
+#       label: 音乐api
 #       type: text
-#       placeholder: '歌单ID'
-#       placeholder: '默认为网易云音乐热歌榜'
-#     sort_by:
-#       name: sort_by
-#       label: 歌单排序方式
-#       default: 'list'
+#       default: "https://api.i-meto.com/meting/api"
+#       # default: "https://api.mizore.cn/meting/api.php"
+#       placeholder: "请输入音乐服务 api 地址"
+#       description: "默认为网易云音乐热歌榜"
+#     music_list_id:
+#       name: music_list_id
+#       label: 播放器歌单ID
+#       type: text
+#       placeholder: "请输入歌单ID"
+#       description: "默认为网易云音乐热歌榜"
+#     music_player_type:
+#       name: music_player_type
+#       label: 播放器类型
 #       type: select
+#       default: "playlist"
+#       options:
+#         - value: song
+#           label: 歌曲
+#         - value: playlist
+#           label: 播放列表
+#         - value: album
+#           label: 相册
+#         - value: search
+#           label: 搜索
+#         - value: artist
+#           label: 艺术家
+#     music_sort_by:
+#       name: music_sort_by
+#       label: 排序方式
+#       type: select
+#       default: "list"
 #       options:
 #         - value: random
 #           label: 随机
