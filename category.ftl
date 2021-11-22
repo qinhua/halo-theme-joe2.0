@@ -16,7 +16,7 @@
                 <span>相关的文章</span>
               </div>
             </div>
-            <#if posts.content?size &gt; 0>
+            <#if posts.content?size gt 0>
               <#include "template/macro/post_item.ftl">
               <ul class="joe_archive__list joe_list animated fadeIn">
                 <#list posts.content as post>
@@ -53,7 +53,7 @@
                     </li>
                   </#if>
                 </#list>
-                <#if pagination.hasNext && (pagination.rainbowPages?size &gt; 0)>
+                <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
                   <li class="next">
                     <a href="${pagination.nextPageFullPath!}">
                       <i class="joe-font joe-icon-next"></i>

@@ -17,6 +17,7 @@
             </div>
             <div class="joe_index__hot">
               <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
+              <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api?trim!=''>
               <ul class="joe_index__hot-list animated fadeIn" style="padding-bottom: 10px;">
                 <@tagTag method="list">
                   <#list tags as tag>
@@ -24,8 +25,8 @@
                       <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                         <figure class="inner">
                           <span class="views">${tag.postCount!} ℃</span>
-                          <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail, 'https://picsum.photos/id/1${tag_index}/175/90') >
-                          <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" alt="${tag.name!}">
+                          <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/175/90')) >
+                          <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
                           <figcaption class="title">${tag.name!}</figcaption>
                         </figure>
                       </a>

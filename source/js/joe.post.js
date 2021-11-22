@@ -51,6 +51,22 @@ const postContext = {
 			});
 		});
 	},
+	/* 侧边栏切换 */
+	initAside() {
+		if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
+			return;
+		$(".aside-expander").on("click", function () {
+			const $this = $(this);
+			if ($this.hasClass("active")) {
+				$this.removeClass("active");
+				$this.html("隐藏侧边栏");
+			} else {
+				$this.addClass("active");
+				$this.html("显示侧边栏");
+			}
+			$(".joe_aside").toggleClass("hide");
+		});
+	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
 		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy)
@@ -83,87 +99,6 @@ const postContext = {
 					body_element.removeChild(newdiv);
 				}, 0);
 			}
-		});
-	},
-	/* 初始化代码区域，高亮 + 折叠 + 复制 */
-	initCode() {
-		if (
-			(!ThemeConfig.enable_code_expander && !ThemeConfig.enable_code_copy) ||
-      !$(".joe_detail__article pre").length
-		)
-			return;
-		$(".joe_detail__article pre").each(function (index, item) {
-			const $codes = $(item).find("code");
-			if ($codes.length > 0) {
-				// 添加默认代码类型为纯文本
-				const $curCode = $codes.eq(0);
-				if (
-					!$curCode.attr("class") ||
-          $curCode.attr("class").indexOf("language-") === -1
-				) {
-					$($curCode[0]).addClass("language-text");
-				}
-				// 代码折叠
-				if (ThemeConfig.enable_code_expander) {
-					const $item = $(item);
-					const expander = $(
-						"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
-					);
-					expander.on("click", function () {
-						const $parent = expander.parent("pre");
-						const $auto_fold = $parent
-							.siblings(".toolbar")
-							.find(".autofold-tip");
-						$auto_fold && $auto_fold.remove();
-						expander.parent("pre").toggleClass("close");
-					});
-					$item.addClass("code-expander").prepend(expander);
-				}
-				// 代码复制
-				if (ThemeConfig.enable_code_copy) {
-					const text = $(item).find("code[class*='language-']").text();
-					const span = $(
-						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
-					);
-					new ClipboardJS(span[0], {
-						// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
-						text: () => text,
-					}).on("success", () => Qmsg.success("复制成功！"));
-					$(item).addClass("code-copy").append(span);
-				}
-			}
-		});
-	},
-	/*自动折叠长代码*/
-	foldCode() {
-		if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
-			$("pre[class*='language-']").each(function (index, item) {
-				const $item = $(item);
-				if ($item.height() > ThemeConfig.long_code_height) {
-					const $title = $item
-						.siblings(".toolbar")
-						.find(".toolbar-item span")
-						.eq(0);
-					$title.append("<em class=\"autofold-tip\"><内容过长，已自动折叠></em>");
-					$item.addClass("close");
-				}
-			});
-		}
-	},
-	/* 侧边栏切换 */
-	initAside() {
-		if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
-			return;
-		$(".aside-expander").on("click", function () {
-			const $this = $(this);
-			if ($this.hasClass("active")) {
-				$this.removeClass("active");
-				$this.html("隐藏侧边栏");
-			} else {
-				$this.addClass("active");
-				$this.html("显示侧边栏");
-			}
-			$(".joe_aside").toggleClass("hide");
 		});
 	},
 	/* 初始化文章分享 */
@@ -333,7 +268,7 @@ const postContext = {
 };
 
 !(function () {
-	const omits = ["initToc", "foldCode"];
+	const omits = ["initToc"];
 	document.addEventListener("DOMContentLoaded", function () {
 		Object.keys(postContext).forEach(
 			(c) => !omits.includes(c) && postContext[c]()
