@@ -32,7 +32,7 @@
   <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>
   <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>
   <#--  <script src="${BASE_RES_URL!}/source/lib/joe.extend.min.js?v=${theme.version!}"></script>  -->
-  <#if type == 'post' || type == 'journals'>
+  <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
   <#if settings.enable_mathjax!false>
@@ -70,7 +70,7 @@
   <#if type == 'photos'>
     <script src="${BASE_RES_URL}/source/js/min/joe.photos.min.js?v=${theme.version!}"></script>
   </#if>
-  <#if type == 'post' || type == 'journals'>
+  <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
   </#if>
   <#if type == 'sheet'>
@@ -84,10 +84,10 @@
   <#-- ===== 引入页面级js end ===== -->
 
   <#-- ===== 引入脚本 start ===== -->
-  <#--  <#if settings.enable_global_music_player!false>  -->
+  <#if settings.enable_global_music_player!false>
     <#--  <!-- 音乐播放器 -->
-    <#--  <div id="global-aplayer"></div>  -->
-  <#--  </#if>  -->
+    <div id="global-aplayer"></div>
+  </#if>
   <#if settings.enable_live2d>
     <!-- live2d -->
     <#include "../../plugins/live2d/ftl/live2d.ftl">

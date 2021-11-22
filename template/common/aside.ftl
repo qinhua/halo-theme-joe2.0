@@ -58,7 +58,7 @@
           <span class="text">最新回复</span>
         </div>
         <@commentTag method="latest" top='${settings.newreply_page_size!5}'>
-          <#if comments.content?size &gt; 0>
+          <#if comments.content?size gt 0>
             <ul class="joe_aside__item-contain">
               <#list comments.content as comment>
                 <li class="item">

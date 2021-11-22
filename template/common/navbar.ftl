@@ -7,7 +7,7 @@
       <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
       <#if settings.show_logo>
         <a title="${blog_title!}" class="joe_header__above-logo" href="${logo_link}">
-          <img style="border-radius:${settings.logo_radius!}" src="${(blog_logo?? && blog_logo!='')?then(blog_logo,'https://halo.run/logo')}" onerror="this.src='https:\/\/halo.run\/logo'" alt="${blog_title!}">
+          <img style="border-radius:${settings.logo_radius!}" src="${LOGO}" onerror="this.src='${DEFAULT_LOGO}'" alt="${blog_title!}">
         </a>
       </#if>
       <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}">

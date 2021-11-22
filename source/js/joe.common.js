@@ -76,6 +76,72 @@ const commonContext = {
 			$(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
 		}
 	},
+	/* 初始化代码区域，高亮 + 折叠 + 复制 */
+	initCode() {
+		const $codeElms = $(
+			".joe_detail__article pre, .joe_journals__list pre .page-sheet pre"
+		);
+		if (!$codeElms.length) return;
+		$codeElms.each(function (_index, item) {
+			const $item = $(item);
+			const $codes = $item.find("code");
+			if ($codes.length > 0) {
+				// 添加默认代码类型为纯文本
+				const $curCode = $codes.eq(0);
+				if (
+					!$curCode.attr("class") ||
+          $curCode.attr("class").indexOf("language-") === -1
+				) {
+					$($curCode[0]).addClass("language-text");
+				}
+				ThemeConfig.enable_code_hr ? $(item).addClass("code-hr") : null;
+				// 代码折叠
+				if (ThemeConfig.enable_code_expander) {
+					const expander = $(
+						"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
+					);
+					expander.on("click", function () {
+						const $parent = expander.parent("pre");
+						const $auto_fold = $parent
+							.siblings(".toolbar")
+							.find(".autofold-tip");
+						$auto_fold && $auto_fold.remove();
+						expander.parent("pre").toggleClass("close");
+					});
+					$item.addClass("code-expander").prepend(expander);
+				}
+				// 代码复制
+				if (ThemeConfig.enable_code_copy) {
+					const text = $item.find("code[class*='language-']").text();
+					const span = $(
+						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
+					);
+					new ClipboardJS(span[0], {
+						// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
+						text: () => text,
+					}).on("success", () => Qmsg.success("复制成功！"));
+					$item.addClass("code-copy").append(span);
+				}
+			}
+		});
+	},
+	/*自动折叠长代码 <仅针对文章页>*/
+	foldCode() {
+		if (!$(".page-post").length) return;
+		if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
+			$(".page-post pre[class*='language-']").each(function (_index, item) {
+				const $item = $(item);
+				if ($item.height() > ThemeConfig.long_code_height) {
+					const $title = $item
+						.siblings(".toolbar")
+						.find(".toolbar-item span")
+						.eq(0);
+					$title.append("<em class=\"autofold-tip\"><内容过长，已自动折叠></em>");
+					$item.addClass("close");
+				}
+			});
+		}
+	},
 	/* 获取页面百度收录情况 */
 	initBaidu() {
 		if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
@@ -139,16 +205,18 @@ const commonContext = {
 	initMusic() {
 		if (!ThemeConfig.enable_global_music_player) return;
 		$.ajax({
-			url: `https://api.i-meto.com/meting/api?server=netease&type=playlist&id=${ThemeConfig.music_id}`,
+			url: `${ThemeConfig.music_api}?server=${ThemeConfig.music_source}&type=${ThemeConfig.music_player_type}&id=${ThemeConfig.music_list_id}`,
 			type: "GET",
 			dataType: "json",
 			success(res) {
 				new APlayer({
 					container: document.getElementById("global-aplayer"),
 					fixed: true,
-					lrcType: 3,
-					theme: "#1989fa",
-					autoplay: true,
+					lrcType: 0,
+					theme: ThemeConfig.music_player_theme,
+					autoplay: ThemeConfig.music_auto_play,
+					volume: ThemeConfig.music_player_volume,
+					loop: ThemeConfig.music_loop_play,
 					audio: res,
 				});
 			},
@@ -397,7 +465,12 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
-		if (!ThemeConfig.show_tag_cloud || ThemeConfig.tag_cloud_type!== "3d" || !$(".tags-cloud-list").length) return;
+		if (
+			!ThemeConfig.show_tag_cloud ||
+      ThemeConfig.tag_cloud_type !== "3d" ||
+      !$(".tags-cloud-list").length
+		)
+			return;
 		const entries = [];
 		const colors = [
 			"#F8D800",
@@ -694,7 +767,12 @@ const commonContext = {
 		const $replys = $(".aside-reply-content");
 		$replys.each((_index, item) => {
 			// 获取转换后的marked
-			const markedHtml = marked(item.innerHTML).replace(/<img\ssrc[^>]*>/gm,"<i class=\"joe-font joe-icon-tupian\"></i>").replace(/bili\//g, "bili/hd/ic_emoji_");
+			const markedHtml = marked(item.innerHTML)
+				.replace(
+					/<img\ssrc[^>]*>/gm,
+					"<i class=\"joe-font joe-icon-tupian\"></i>"
+				)
+				.replace(/bili\//g, "bili/hd/ic_emoji_");
 			// 处理其中的表情包
 			const emoji = Utils.renderedEmojiHtml(markedHtml);
 			// 将回车转换为br
@@ -730,6 +808,7 @@ const commonContext = {
 		"loadingBar",
 		"init3dTag",
 		"initLive2d",
+		"foldCode",
 		"showLoadedTime",
 		"clean",
 	];
@@ -742,9 +821,9 @@ const commonContext = {
 
 	window.addEventListener("load", function () {
 		if (omits.length === 1) {
-		  commonContext[omits[0]]();
+			commonContext[omits[0]]();
 		} else {
-		  omits.forEach((c) => c!=="loadingBar" && commonContext[c]());
+			omits.forEach((c) => c !== "loadingBar" && commonContext[c]());
 		}
 	});
 })();
