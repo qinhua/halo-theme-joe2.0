@@ -1,3 +1,6 @@
+<#assign source_type = settings.banner_source>
+<#assign limit = (settings.banner_amount_limit!=0)?then(settings.banner_amount_limit,10)>
+<#if source_type == 'manual'>
 <div class="joe_index__banner">
   <#if settings.bannerData?? && settings.bannerData!=''>
     <div class="swiper-container">  
@@ -35,3 +38,49 @@
     </div>
   </#if>
 </div>
+<#elseif source_type == 'newest'>
+  <#--  <@postTag method="latest" top="5">
+      <ul class="list">       
+        <#list posts?sort_by("editTime")?reverse as post>
+          <a href="${post.fullPath!}">${post.title!}</a>
+        </#list>
+      </ul>
+  </@postTag>  -->
+<#else>
+</#if>
+<#--  最新文章  -->
+<#--  <@postTag method="latest" top="${limit}">
+  <#if posts?size gt 0>
+    <ul class="list">       
+      <#list posts?sort_by("editTime")?reverse as post>
+        <a href="${post.fullPath!}">${post.title!}</a>
+      </#list>
+    </ul>
+  <#else>
+    <#include "empty.ftl">
+    <@empty type="newest" showImg="false"/>
+  </#if>
+</@postTag>  -->
+<#--  置顶文章  -->
+<#--  <@postTag method="latest" top="${limit}">
+  <#list posts?sort_by("priority") as post>
+    <a href="${post.fullPath!}">${post.title!}</a>
+  </#list>
+</@postTag>  -->
+<#--  置顶分类文章  -->
+<#--  置顶标签文章  -->
+<#--  根据分类获取  -->
+<#--  <@postTag method="listByCategoryId" top="${settings.banner_specify_keyword?c}">
+    <span>分类 ${category.name!} 下的文章：</span>
+    <#list posts as post>
+        <a href="${post.fullPath!}">${post.title!}</a>
+    </#list>
+</@postTag>  -->
+<#--  根据标签获取  -->
+<#--  <@postTag method="listByTagId" tagId="${settings.banner_specify_keyword?c}">
+    <span>标签 ${tag.name!} 下的文章：</span>
+    <#list posts as post>
+        <a href="${post.fullPath!}">${post.title!}</a>
+    </#list>
+</@postTag>  -->
+<#--  置顶文章  -->
