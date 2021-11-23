@@ -30,7 +30,7 @@
       <#if settings.enable_day_words>
         <img class="motto_day_words" height="14" src="https://v2.jinrishici.com/one.svg?font-size=146&spacing=2&color=grey"/>
       <#else>
-        <p class="motto joe_motto">${user.description!}</p>
+        <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>
       </#if>
     </#if>
   </div>

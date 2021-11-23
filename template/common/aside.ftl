@@ -11,7 +11,7 @@
           <span class="text">公告信息</span>
         </div>
         <div class="joe_aside__item-contain">
-          <pre class="notice_content">${settings.site_notice!}</pre>
+          <div class="notice_content">${settings.site_notice!}</div>
         </div>
       </section>
     </#if>

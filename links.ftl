@@ -11,32 +11,26 @@
         <div class="joe_main">
           <div class="joe_detail">
             <h1 class="joe_detail__title txt-shadow">${title}</h1>
+            <#include "template/macro/links_item.ftl">
+            <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default, BASE_RES_URL+'/source/img/icon_qiye.png')>
+            <#assign colors=["#F8D800", "#0396FF", "#EA5455", "#7367F0", "#32CCBC", "#F6416C", "#32B76E", "#9F44D3", "#F55555", "#736EFE", "#E96D71", "#DE4313", "#D939CD", "#4C83FF", "#F072B6", "#C346C2", "#5961F9", "#FD6585", "#5569E8", "#FFC600", "#FA742B", "#5151E5", "#BB4E75", "#FF52E5", "#4DA037", "#15D1E2", "#F067B4", "#F067B4", "#ff9a9e", "#00f2fe", "#4facfe", "#f093fb", "#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c", "#e8583d", "#f68e5f"]>
             <article class="joe_detail__article animated fadeIn">
-              <h5>友链列表</h5>
-              <@linkTag method="list">
-                <#if links?size gt 0>
-                  <#assign colors=["#F8D800", "#0396FF", "#EA5455", "#7367F0", "#32CCBC", "#F6416C", "#32B76E", "#9F44D3", "#F55555", "#736EFE", "#E96D71", "#DE4313", "#D939CD", "#4C83FF", "#F072B6", "#C346C2", "#5961F9", "#FD6585", "#5569E8", "#FFC600", "#FA742B", "#5151E5", "#BB4E75", "#FF52E5", "#4DA037", "#15D1E2", "#F067B4", "#F067B4", "#ff9a9e", "#00f2fe", "#4facfe", "#f093fb", "#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c", "#e8583d", "#f68e5f"]>
+              <h5>友链列表<@linkTag method="count"><span class="totals">${count!0} 条</span></@linkTag></h5>
+              <#if settings.links_type == 'group'>
+                <@linkTag method="listTeams">
+                  <#list teams?reverse as team>
+                    <div class="links-group">
+                      <h1>${team.team!}</h1>
+                      <@links_item links=team.links />
+                    </div>
+                  </#list>
+                </@linkTag>
+              <#else>
+                <@linkTag method="${(settings.links_type == 'list')?then('list', 'listByRandom')}">
                   <#assign nextRandom = .now?string["HHmmssSSS"]?number>
-                  <ul class="joe_detail__friends">
-                    <#list links as link>
-                      <li class="joe_detail__friends-item">
-                        <a class="contain" href="${link.url!}" target="_blank" style="background:${colors[nextRandom % colors?size]}" rel="noopener noreferrer">
-                          <span class="title">${link.name!}</span>
-                          <div class="content">
-                            <div class="desc" title="${link.description!}">${link.description!}</div>
-                            <#assign logo_default=(settings.links_logo_default?? && settings.links_logo_default!='')?then(settings.links_logo_default, BASE_RES_URL+'/source/img/icon_qiye.png')>
-                            <#assign logo=(link.logo?? && link.logo!='')?then(link.logo,logo_default)>
-                            <img width="40" height="40" class="avatar owo_image lazyload" data-src="${logo!}" src="${BASE_RES_URL+'/source/svg/spinner-preloader.svg'}" onerror="this.src='${logo_default}'" alt="${link.name!}">
-                          </div>
-                        </a>
-                      </li>
-                      <#assign nextRandom = nextRandom * 10 % 38>
-                    </#list>           
-                  </ul>
-                <#else>
-                  <div class="joe_nodata">${settings.links_empty_text!}</div>
-                </#if>
-              </@linkTag>
+                  <@links_item links=links />
+                </@linkTag>
+              </#if>
             </article>
             <article class="joe_detail__article animated fadeIn">
               <h5>申请格式</h5>

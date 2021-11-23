@@ -37,7 +37,7 @@
             <#--  <#if sheet.thumbnail?? && sheet.thumbnail!=''>
               <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>
             </#if>  -->
-            <article class="joe_detail__article animated fadeIn${settings.enable_code_line_number?string(' line-numbers', '')}">
+            <article class="joe_detail__article animated fadeIn${settings.enable_single_code_select?then(' single_code_select','')}">
               ${sheet.formatContent!}
             </article>
             <#--  <#import "template/common/post_copyright.ftl" as pc>  -->

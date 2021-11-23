@@ -597,11 +597,11 @@ var Utils = {
 					}
 				},
 				error(err) {
-					const errMsg = err ?
-						err.responseJSON ?
-							err.responseJSON.message :
-							"出错了！" :
-						"出错了！";
+					const errMsg = err
+						? err.responseJSON
+							? err.responseJSON.message
+							: "出错了！"
+						: "出错了！";
 					Qmsg.error(errMsg);
 					reject(errMsg);
 				},
@@ -628,6 +628,10 @@ var Utils = {
 				fn.apply(context, args);
 			}
 		};
+	},
+	/* sleep */
+	sleep(ms = 250) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	},
 	/**
    * 存储数据到浏览器的 cookie 内
@@ -758,7 +762,7 @@ var Utils = {
    */
 	_loadRes(type, url, callback) {
 		var dom,
-			fn = callback || function () {};
+			fn = callback || function () { };
 		switch (type) {
 		case "script":
 			dom = document.createElement(type);
@@ -867,7 +871,6 @@ var Utils = {
 
 		return idx;
 	},
-
 	/**
    * 删除元素的 class，可根据前缀来删除
    * @param {*} el 需要删除的 dom 元素
