@@ -643,12 +643,51 @@ carousel:
           label: 开启
         - value: false
           label: 关闭
+    banner_source:
+      name: banner_source
+      label: 数据来源
+      type: select
+      data-type: text
+      default: manual
+      description: "主题提供了 5 种数据来源，默认手动配置（需要自己在下面配置轮播数据），其它几种会自动去获取数据，但是请注意相应文章数据及封面要规范，否则可能不美观或展示异常"
+      options:
+        - value: manual
+          label: 手动配置
+        - value: newest
+          label: 最新文章
+        - value: topped
+          label: 置顶文章
+        - value: topped_category
+          label: 置顶分类文章
+        - value: topped_tag
+          label: 置顶标签文章
+        - value: specify_post
+          label: 特定关键词文章
+        - value: specify_category
+          label: 特定分类文章
+        - value: specify_tag
+          label: 特定标签文章
+    banner_amount_limit:
+      name: banner_amount_limit
+      label: 最大个数
+      type: text
+      data-type: long
+      default: 5
+      placeholder: "请输入从 0 至 10 的整数"
+      description: "设置非手动配置模式下的最大轮播图个数，默认为 5，系统限制最大 10，填 0 相当于 10"
+    banner_specify_keyword:
+      name: banner_specify_keyword
+      label: 特定关键词
+      type: text
+      default: ""
+      placeholder: "请输入"
+      description: "当数据源为 “特定关键词/分类/标签文章” 时，需要在这里设置【关键词/分类名/标签名】进行匹配，为空的话默认取 “最新文章” 数据"
     bannerData:
       name: bannerData
-      label: 轮播图数据
+      label: 手动配置数据
       type: textarea
       default: "欢迎使用Joe2.0主题-|||-https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
-      description: "配置首页的轮播图数据【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
+      description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
     banner_direction:
       name: banner_direction
       label: 轮播方向
@@ -751,7 +790,7 @@ aside:
       type: switch
       data-type: bool
       default: true
-      description: "是否展示整个侧边栏"
+      description: "是否展示整个侧边栏（全局）"
       options:
         - value: true
           label: 是
@@ -1414,6 +1453,7 @@ post:
       type: switch
       data-type: bool
       default: false
+      description: "目前仅对文章页生效"
       options:
         - value: true
           label: 开启
@@ -1668,6 +1708,20 @@ links:
       default: "友情链接"
       placeholder: "请输入"
       description: "修改友链页顶部展示的标题"
+    links_type:
+      name: links_type
+      label: 友链展示方式
+      type: radio
+      data-type: text
+      default: list
+      description: "配置友链的展示方式，默认按列表顺序倒序展示，可在后台管理中配置排序值"
+      options:
+        - value: list
+          label: 列表
+        - value: random-list
+          label: 随机
+        - value: group
+          label: 分组
     links_empty_text:
       name: links_empty_text
       label: 空白状态文案
@@ -1764,7 +1818,7 @@ code_block:
       type: switch
       data-type: bool
       default: false
-      description: "自动折叠文章页中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
+      description: "自动折叠 <文章页> 中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
       options:
         - value: true
           label: 开启

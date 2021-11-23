@@ -13,15 +13,6 @@
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
             <#include "template/module/post_status.ftl">
             <#if post.status=='PUBLISHED'>
-              <#--  <@categoryTag method="listByPostId" postId="${post.id?c}">
-                <#list categories as category>
-                  <#if category_index == 0>
-                    <div class="joe_detail__category">
-                      <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
-                    </div>
-                  </#if>
-                </#list>
-              </@categoryTag>  -->
               <#list post.categories as category>
                 <#if category_index == 0>
                   <div class="joe_detail__category">
@@ -79,7 +70,7 @@
               </#if>
             </div>
             <#assign enable_copy = metas.enable_copy!'true'>
-            <article class="joe_detail__article animated fadeIn${settings.enable_code_line_number?then(' line-numbers', '')}${(enable_copy=='true' && settings.enable_copy==true)?then(' copyable', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}${settings.enable_code_title?then('',' no-code-title')}">
+            <article class="joe_detail__article animated fadeIn${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
               ${post.formatContent!}
             </article>
             <#assign enable_toc = metas.enable_toc!'true'>

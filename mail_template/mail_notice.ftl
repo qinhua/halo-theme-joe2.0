@@ -10,7 +10,7 @@
       <div class="email-text" style="padding:20px 28px 10px;background:#fff;">
         <p style="margin:0 0 5px;padding:0;line-height:24px;font-size:13px;color:#6e6e6e;"><span style="font-weight:bold;color:#fa7e5b;">${user.nickname!'博主'}，</span> 您好!</p>
         <p style="margin:0;padding:0;line-height:24px;font-size:13px;color:#6e6e6e;">访客<span style="color:#fa7e5b;"> ${author!'xxx'} </span>在<a href="${pageFullPath!'xxx'}" target="_blank" style="color:#fa7e5b;text-decoration:none;">《${pageTitle!'xxx'}》</a>评论说：
-        <pre style="margin:12px 0;padding:18px 20px;word-break:break-word;color:#6e6e6e;font-size:13px;background:#f8f8f8;background:repeating-linear-gradient(145deg, #f2f6fc, #f2f6fc 15px, #fff 0, #fff 25px);">${content!}</pre>
+        <div style="margin:12px 0;padding:18px 20px;white-space:pre-line;word-break:break-all;color:#6e6e6e;font-size:13px;background:#f8f8f8;background:repeating-linear-gradient(145deg, #f2f6fc, #f2f6fc 15px, #fff 0, #fff 25px);">${content!}</div>
         <p style="margin:0 0 16px;padding:0;line-height:24px;font-size:13px;color:#6e6e6e;">
           <a href="${pageFullPath!}" target="_blank" style="color:#5caaef;text-decoration:none;">点击查看完整内容</a>
         </p>

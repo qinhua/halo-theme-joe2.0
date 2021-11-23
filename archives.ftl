@@ -42,7 +42,7 @@
                 <#assign metric='${settings.archive_timeline_metric!"month"}'>
                 <div class="joe_archives-title"><i class="joe-font joe-icon-timeline"></i>时间轴<em>（${(metric=='year')?then('年','月')}）</em></div>
                   <ul class="joe_archives-timelist animated fadeIn">
-                    <@postTag method="archive" type="${metric}">
+                    <@postTag method="${'archive' + metric?capitalize}">
                       <#list archives as archive>
                         <li class="item">
                           <div class="wrapper">

@@ -51,9 +51,12 @@
     </#if>
     <#if settings.custome_social_channel??>
       <#assign channel=settings.custome_social_channel?split('\n')>
-      <#if channel[0]?? && channel[0]!='' && channel[1]?? && channel[1]!='' && channel[2]?? && channel[2]!=''>
-        <a class="custom_channel" href="${channel[2]}" target="_blank" title="${channel[0]}" rel="noopener noreferrer nofollow">
-          <img src="${channel[1]}" alt="${channel[0]}"/>
+      <#assign channel_name=(channel[0]?? && channel[0]!='')?then(channel[0]?trim!'','')>
+      <#assign channel_logo=(channel[1]?? && channel[1]!='')?then(channel[1]?trim!'','')>
+      <#assign channel_link=(channel[2]?? && channel[2]!='')?then(channel[2]?trim!'','')>
+      <#if channel_name!='' && channel_logo!='' && channel_link!=''>
+        <a class="custom_channel" href="${channel_link}" target="_blank" title="${channel_name}" rel="noopener noreferrer nofollow">
+          <img src="${channel_logo}" alt="${channel_name}"/>
         </a>
       </#if>
     </#if>

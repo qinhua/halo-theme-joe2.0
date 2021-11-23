@@ -10,7 +10,10 @@
       <div class="joe_container joe_main_container page-photos"> 
         <div class="joe_main">
           <div class="joe_photos__type"> 
-            <div class="joe_photos__type-title"><i class="joe-font joe-icon-tupian"></i>&nbsp;${title}</div>
+            <div class="joe_photos__type-title">
+              <i class="joe-font joe-icon-tupian"></i>&nbsp;${title}
+              <#--  <@linkTag method="count">（${count!0} 张）</@linkTag>  -->
+            </div>
             <nav class="joe_photos__filter">
               <ul>
                 <li class="active" data-filter="">

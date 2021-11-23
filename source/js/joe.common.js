@@ -76,10 +76,11 @@ const commonContext = {
 			$(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
 		}
 	},
-	/* 初始化代码区域，高亮 + 折叠 + 复制 */
+	/* 初始化代码区域，高亮 + 行号 + 折叠 + 复制 */
 	initCode() {
+		// const isPost = $(".page-post").length > 0;
 		const $codeElms = $(
-			".joe_detail__article pre, .joe_journals__list pre .page-sheet pre"
+			".joe_detail__article pre, .joe_journals__list pre, .page-sheet pre"
 		);
 		if (!$codeElms.length) return;
 		$codeElms.each(function (_index, item) {
@@ -94,7 +95,9 @@ const commonContext = {
 				) {
 					$($curCode[0]).addClass("language-text");
 				}
-				ThemeConfig.enable_code_hr ? $(item).addClass("code-hr") : null;
+				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
+				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
+				ThemeConfig.enable_code_line_number ? $item.addClass("line-numbers") : null;
 				// 代码折叠
 				if (ThemeConfig.enable_code_expander) {
 					const expander = $(
@@ -108,7 +111,7 @@ const commonContext = {
 						$auto_fold && $auto_fold.remove();
 						expander.parent("pre").toggleClass("close");
 					});
-					$item.addClass("code-expander").prepend(expander);
+					$item.addClass("c_expander").prepend(expander);
 				}
 				// 代码复制
 				if (ThemeConfig.enable_code_copy) {
@@ -120,7 +123,7 @@ const commonContext = {
 						// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
 						text: () => text,
 					}).on("success", () => Qmsg.success("复制成功！"));
-					$item.addClass("code-copy").append(span);
+					$item.addClass("c_copy").append(span);
 				}
 			}
 		});
@@ -437,7 +440,7 @@ const commonContext = {
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
-			".joe_detail__article img:not(img.owo_image), .joe_journal_block img"
+			".joe_detail__article img:not(img.owo_image), .joe_journal_block img:not([class]), .page-sheet img:not([class])"
 		);
 		if (!$allImgs.length) return;
 		$allImgs.each(function () {
@@ -741,7 +744,7 @@ const commonContext = {
 		}
 	},
 	/* 禁用浏览器空格滚动页面 */
-	cancelSpaceScroll(e) {
+	cancelSpaceScroll() {
 		document.body.onkeydown = function (e) {
 			e = e || window.event;
 			const elm = e.target || e.srcElement;

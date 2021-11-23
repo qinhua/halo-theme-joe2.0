@@ -23,7 +23,7 @@
                   </div>
                   <div class="item">
                     <#--  <span class="text">${journals.total!0} 条动态</span>  -->
-                    <span class="text">${user.description!}</span>
+                    <span class="text">${user.description!'一句话介绍自己吧！'}</span>
                     <#if settings.check_baidu_collect!false>
                       <span class="line">/</span>
                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>

@@ -69,7 +69,11 @@
       <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <div class="info">
         <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
-        <p class="motto joe_motto">${user.description!}</p>
+        <#if settings.motto??>
+          <p class="motto joe_motto">${settings.motto!}</p>
+        <#else>
+          <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>
+        </#if>
       </div>
     </div>
     <ul class="joe_header__slideout-count">
