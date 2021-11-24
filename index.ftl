@@ -2,12 +2,12 @@
 <html lang="zh-CN">
   <#import "template/common/header.ftl" as headInfo>
   <@headInfo.head title="首页" type="index"/>
-  <#import "template/macro/hotcategory.ftl" as hp>
+  <#import "template/macro/hot_category.ftl" as hp>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-index">
+      <div class="joe_container joe_main_container page-index${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_index">
             <#if settings.enable_banner!true>
@@ -16,7 +16,7 @@
             <#if settings.enable_hot_category!true>
               <@hp.hot_category/>
             </#if>
-            <#include "template/module/article.ftl"> 
+            <#include "template/module/article.ftl">
           </div>
           <#if settings.enable_index_list_ajax==false>
             <@paginationTag method="index" page="${posts.number}" total="${posts.totalPages}" display="3">

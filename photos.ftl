@@ -7,7 +7,7 @@
   <body> 
     <div id="Joe"> 
       <#include "template/common/navbar.ftl"> 
-      <div class="joe_container joe_main_container page-photos"> 
+      <div class="joe_container joe_main_container page-photos${(settings.aside_position=='left')?then(' revert','')}"> 
         <div class="joe_main">
           <div class="joe_photos__type"> 
             <div class="joe_photos__type-title">
@@ -68,8 +68,11 @@
                 </#if>
               </ul>
             </#if>    
-          </@paginationTag>                  -->
+          </@paginationTag>   -->
         </div>
+        <#if settings.enable_photos_aside!true>
+          <#include "template/common/aside.ftl">
+        </#if>
       </div>
       <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">

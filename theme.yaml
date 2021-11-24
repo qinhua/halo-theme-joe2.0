@@ -8,9 +8,10 @@ logo: https://bbchin.com/logo
 website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
 version: 1.0.6
-require: 1.4.11
+require: ^1.4.11
 # 文章页 meta 变量
 postMetaField:
+  - enable_aside
   - enable_toc
   - toc_depth
   - enable_copy
@@ -22,4 +23,6 @@ postMetaField:
 
 # 自定义页 meta 变量
 sheetMetaField:
-  - show_thumbnail
+  - enable_aside
+  - enable_comment
+  # - show_thumbnail

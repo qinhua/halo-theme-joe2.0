@@ -96,8 +96,6 @@ body {
 
   .page-leaving {
     .joe_comment {
-      padding-top: 26px;
-
       >h2 {
         display: none;
       }
@@ -174,9 +172,19 @@ body {
 
 .joe_container {
   display: flex;
+  flex-direction: row;
   width: 100%;
   margin: 0 auto 30px;
   padding: 0 15px;
+
+  &.revert {
+    flex-direction: row-reverse;
+
+    .joe_aside {
+      margin-left: 0;
+      margin-right: 15px;
+    }
+  }
 
   img {
     max-width: 100%;
@@ -268,7 +276,7 @@ body {
 
       code[class*="language-"] {
         display: block;
-        overflow: auto;
+        overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         user-select: none;
         padding: 0 12px 12px 18px;
@@ -1527,6 +1535,13 @@ body {
     display: none;
   }
 
+  &.pos_left {
+    #he-plugin-simple {
+      right: auto !important;
+      left: 4px;
+    }
+  }
+
   &__item {
     position: relative;
     width: 280px;
@@ -1601,6 +1616,11 @@ body {
         .s-sticker-cond img {
           position: relative;
           top: -2px;
+        }
+
+        &.he_left {
+          right: auto;
+          left: 4px;
         }
 
         >div:last-child {
@@ -3665,11 +3685,45 @@ body {
 }
 
 .joe_detail {
+  position: relative;
   background: var(--background);
   border-radius: var(--radius-wrap);
   padding: 20px;
   box-shadow: var(--box-shadow);
   margin-bottom: 15px;
+
+  .post-status {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 0 8px;
+    height: 26px;
+    line-height: 26px;
+    user-select: none;
+    background: var(--classD);
+    border-radius: 4px;
+
+    i {
+      margin-right: 3px;
+      vertical-align: middle;
+      font-size: 16px;
+    }
+
+    &.s_draft {
+      color: #ffe24c;
+      background: var(--classI);
+    }
+
+    &.s_intimate {
+      color: #ef44b9;
+      background: var(--classJ);
+    }
+
+    &.s_recycle {
+      color: #c50a00;
+    }
+
+  }
 
   &__category {
     display: flex;
@@ -4812,6 +4866,11 @@ body {
 
             .owo_image {
               max-height: 24px;
+            }
+
+            pre code {
+              white-space: pre-line;
+              word-break: break-all;
             }
           }
         }
