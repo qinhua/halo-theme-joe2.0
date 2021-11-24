@@ -786,11 +786,119 @@ aside:
   items:
     enable_aside:
       name: enable_aside
-      label: 开启侧边栏
+      label: 开启全局侧边栏
       type: switch
       data-type: bool
       default: true
-      description: "是否展示整个侧边栏（全局）"
+      description: "是否启用侧边栏（全局），关闭后所有页面都没有侧边栏（优先级高于页面元数据）"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    aside_position:
+      name: aside_position
+      label: 侧边栏位置
+      type: radio
+      data-type: text
+      default: right
+      description: "侧边栏展示位置，左边或右边"
+      options:
+        - value: left
+          label: 左侧
+        - value: right
+          label: 右侧
+    enable_archives_aside:
+      name: enable_archives_aside
+      label: 归档页侧边栏
+      type: switch
+      data-type: bool
+      default: false
+      description: "归档页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_post_aside:
+      name: enable_post_aside
+      label: 文章详情页侧边栏
+      type: switch
+      data-type: bool
+      default: false
+      description: "文章页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_journals_aside:
+      name: enable_journals_aside
+      label: 日志页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "日志页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_photos_aside:
+      name: enable_photos_aside
+      label: 相册页侧边栏
+      type: switch
+      data-type: bool
+      default: false
+      description: "相册页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_links_aside:
+      name: enable_links_aside
+      label: 友链页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "友链页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_categories_aside:
+      name: enable_categories_aside
+      label: 分类页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "分类页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_tags_aside:
+      name: enable_tags_aside
+      label: 标签页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "标签页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_sheet_aside:
+      name: enable_sheet_aside
+      label: 自定义页侧边栏
+      type: switch
+      data-type: bool
+      default: false
+      description: "自定义页面右侧是否展示侧边栏，默认关闭。开启后，所有自定义页面都会展示侧边栏（若部分页面不想展示，可以配置对应页面的元数据 enable_aside 为 false ）"
       options:
         - value: true
           label: 是
@@ -908,6 +1016,8 @@ aside:
     newreply_page_size:
       name: newreply_page_size
       label: 最新评论条数
+      type: text
+      data-type: long
       default: 5
       description: "右侧最新评论展示条数，填写数字即可，默认展示最新的5条评论（需开启最新评论）"
     show_tag_cloud:
@@ -1199,7 +1309,7 @@ home:
       label: 展示热度标签
       type: switch
       data-type: bool
-      default: true
+      default: false
       description: "是否展示首页的精品分类图片上的温度℃"
       options:
         - value: true
@@ -1298,18 +1408,6 @@ archive:
 post:
   label: 文章页
   items:
-    enable_post_aside:
-      name: enable_post_aside
-      label: 展示侧边栏
-      type: switch
-      data-type: bool
-      default: false
-      description: "文章页右侧是否展示侧边栏"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
     enable_aside_expander:
       name: enable_aside_expander
       label: 展示侧边栏切换按钮
@@ -1468,11 +1566,23 @@ post:
       description: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
     enable_mathjax:
       name: enable_mathjax
-      label: "开启 mathjax 数学公式"
+      label: "开启 mathjax 支持"
       type: switch
       data-type: bool
       default: false
-      description: "markdown中使用```math```包裹公式即可"
+      description: "markdown中使用```math```包裹公式即可，目前仅对文章详情页生效"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_mermaid:
+      name: enable_mermaid
+      label: "开启 mermaid 支持"
+      type: switch
+      data-type: bool
+      default: false
+      description: "markdown中使用```mermaid```包裹即可"
       options:
         - value: true
           label: 开启
@@ -1592,24 +1702,24 @@ journals:
           label: 是
         - value: false
           label: 否
-    enable_journals_aside:
-      name: enable_journals_aside
-      label: 展示侧边栏
-      type: switch
-      data-type: bool
-      default: true
-      description: "日志页右侧是否展示侧边栏"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
     enable_journal_add:
       name: enable_journal_add
       label: 展示新增日志按钮
       type: switch
       data-type: bool
       default: false
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_like_journal:
+      name: enable_like_journal
+      label: 开启日志点赞
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否开启对单条日志的点赞功能"
       options:
         - value: true
           label: 是
@@ -1639,6 +1749,14 @@ journals:
           label: 是
         - value: false
           label: 否
+    journal_block_height:
+      name: journal_block_height
+      label: 日志块内容最大高度
+      type: text
+      data-type: long
+      default: 300
+      placeholder: "请输入数字"
+      description: "设置日志块内容区域的最大高度（单位像素），超过此高度则显示折叠/展开按钮，默认值为 300，最小值为 100（若输入的值小于 100 则按 100 处理）"
 
 # 相册页
 photos:
@@ -1722,6 +1840,12 @@ links:
           label: 随机
         - value: group
           label: 分组
+    links_omit:
+      name: links_omit
+      label: 不展示的分组
+      default: ""
+      placeholder: "请输入分组名，多个以逗号分隔"
+      description: "如果你不想展示某个分组，可以在这里填入分组名进行过滤（仅在分组模式下可用，且不再展示友链总数）"
     links_empty_text:
       name: links_empty_text
       label: 空白状态文案
@@ -1735,18 +1859,6 @@ links:
       default: ""
       placeholder: "请输入"
       description: "修改友链的默认图标，仅在图标加载出错时生效"
-    enable_links_aside:
-      name: enable_links_aside
-      label: 展示侧边栏
-      type: switch
-      data-type: bool
-      default: false
-      description: "友链页右侧是否展示侧边栏"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
 
 # 代码块
 code_block:
@@ -1827,9 +1939,11 @@ code_block:
     long_code_height:
       name: long_code_height
       label: 自动折叠的高度
-      default: "800"
+      type: text
+      data-type: long
+      default: 800
       placeholder: "请输入数字"
-      description: "触发长代码块自动折叠的高度（单位px），只填数字即可（默认800），填0将折叠所有代码块"
+      description: "触发长代码块自动折叠的高度（单位px），只填数字即可（默认800），填 0 将折叠所有代码块"
     code_theme:
       name: code_theme
       label: 代码主题

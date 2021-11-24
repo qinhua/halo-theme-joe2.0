@@ -32,12 +32,12 @@ const photosContext = {
 			if (data) {
 				const htmlArr = data.reduce((result, item, index) => {
 					return result.concat([
-						`<a class="item animated wow" data-wow-diration="0.3s" data-wow-delay="0.${index}s" data-fancybox="gallery" href="${
+						`<a class="item animated wow" data-wow-diration="0.3s" data-wow-delay="0.${index}s" href="${
 							item.url
-						}">
+						}" data-fancybox="gallery" data-caption="${item.name || ""}">
         <img width="100%" height="100%" class="lazyloadx" src="${
 	item.thumbnail
-}" alt="${item.name}"/>
+}" alt="${item.name || ""}"/>
         <span class="team" style="background-color:${Utils.getRandomColor(
 		0.2,
 		0.5
@@ -91,13 +91,13 @@ const photosContext = {
 					const $item =
             $(`<a class="item masonry-item animated wow" style="margin-bottom:${
             	ThemeConfig.photos_gap || "10"
-            }px" data-wow-diration="0.3s" data-wow-delay="0.${index}s" data-fancybox="gallery" href="${
+            }px" data-wow-diration="0.3s" data-wow-delay="0.${index}s" href="${
             	item.url
-            }">
+            }" data-fancybox="gallery" data-caption="${item.name || ""}">
       <img width="100%" height="100%" class="lazyload" rsrc="${
 	ThemeConfig.photo_lazyload_img ||
         ThemeConfig.BASE_RES_URL + "/source/img/lazyload.gif"
-}" src="${item.thumbnail}" alt="${item.name}"/>
+}" src="${item.thumbnail}" alt="${item.name || ""}"/>
       <span class="team" style="background-color:${Utils.getRandomColor(
 		0.2,
 		0.5

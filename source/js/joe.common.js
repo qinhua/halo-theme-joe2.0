@@ -97,7 +97,9 @@ const commonContext = {
 				}
 				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
-				ThemeConfig.enable_code_line_number ? $item.addClass("line-numbers") : null;
+				ThemeConfig.enable_code_line_number
+					? $item.addClass("line-numbers")
+					: null;
 				// 代码折叠
 				if (ThemeConfig.enable_code_expander) {
 					const expander = $(
@@ -139,7 +141,7 @@ const commonContext = {
 						.siblings(".toolbar")
 						.find(".toolbar-item span")
 						.eq(0);
-					$title.append("<em class=\"autofold-tip\"><内容过长，已自动折叠></em>");
+					$title.append("<em class=\"autofold-tip\"><已自动折叠></em>");
 					$item.addClass("close");
 				}
 			});
@@ -440,15 +442,16 @@ const commonContext = {
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
-			".joe_detail__article img:not(img.owo_image), .joe_journal_block img:not([class]), .page-sheet img:not([class])"
+			".joe_detail__article img:not(img.owo_image), .page-sheet img:not([class])"
 		);
 		if (!$allImgs.length) return;
 		$allImgs.each(function () {
-			$(this).wrap(
+			const $this = $(this);
+			$this.wrap(
 				$(
-					`<span style="display: block;" data-fancybox="Joe" href="${$(
-						this
-					).attr("src")}"></span>`
+					`<span style="display: block;" data-fancybox="Joe" href="${$this.attr(
+						"src"
+					)}"></span>`
 				)
 			);
 		});
@@ -785,7 +788,7 @@ const commonContext = {
 	/* 初始化pjax */
 	// initPjax() {},
 	/* 页面加载耗时（控制台） */
-	showLoadedTime() {
+	showLoadTime() {
 		if (!ThemeConfig.show_loaded_time) return;
 		const consume_time = performance.now();
 		consume_time &&
@@ -812,7 +815,7 @@ const commonContext = {
 		"init3dTag",
 		"initLive2d",
 		"foldCode",
-		"showLoadedTime",
+		"showLoadTime",
 		"clean",
 	];
 	document.addEventListener("DOMContentLoaded", function () {

@@ -1,6 +1,6 @@
 <#macro comment target type>
   <div class="joe_comment_box">
-    <h2>评论</h2>
+    <#if type=='post'><h2>评论</h2></#if>
     <#--  <#if options.comment_internal_plugin_js??>  -->
     <#--  <script src="${options.comment_internal_plugin_js}"></script>  -->
     <#--  <#else>  -->

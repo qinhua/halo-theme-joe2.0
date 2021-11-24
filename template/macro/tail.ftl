@@ -39,6 +39,9 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
   </#if>
+  <#if settings.enable_mermaid!false>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.4/dist/mermaid.min.js"></script>
+  </#if>
   <#if settings.favicon??>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
