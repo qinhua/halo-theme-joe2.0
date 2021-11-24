@@ -7,7 +7,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-journals">
+      <div class="joe_container joe_main_container page-journals${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_detail">
             <h1 class="joe_detail__title txt-shadow">${title}</h1>
@@ -23,7 +23,7 @@
                   </div>
                   <div class="item">
                     <#--  <span class="text">${journals.total!0} 条动态</span>  -->
-                    <span class="text">${user.description!'一句话介绍自己吧！'}</span>
+                    <span class="text">${(settings.motto?? && settings.motto!='')?then(settings.motto, user.description!'一句话介绍自己吧！')}</span>
                     <#if settings.check_baidu_collect!false>
                       <span class="line">/</span>
                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
@@ -41,7 +41,7 @@
                     <@global.timeline datetime=journal.createTime />
                   </p>
                   <div class="joe_journal_block">
-                    <div class="joe_journal_body">
+                    <div class="joe_journal_body" style="max-height:${settings.journal_block_height!300}px">
                       <div class="content-wrp">${journal.content!}</div>
                       <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
                     </div>

@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-categories">
+      <div class="joe_container joe_main_container page-categories${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_index">
             <div class="joe_index__title">
@@ -42,7 +42,9 @@
             </div>
           </div>
         </div>
-        <#include "template/common/aside.ftl">
+        <#if settings.enable_categories_aside!true>
+          <#include "template/common/aside.ftl">
+        </#if>
       </div>
       <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">

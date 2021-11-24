@@ -147,7 +147,7 @@ const journalContext = {
 		const $allBlocks = $(".joe_journal_body .content-wrp");
 		$allBlocks.each(function () {
 			const $this = $(this);
-			if ($this[0].getBoundingClientRect().height > 270) {
+			if ($this[0].getBoundingClientRect().height > ThemeConfig.journal_block_height) {
 				$this.siblings(".journal_content_expander").show();
 			}
 		});

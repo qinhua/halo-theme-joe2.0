@@ -1,6 +1,6 @@
 <#if settings.enable_aside>
   <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
-  <aside class="joe_aside">
+  <aside class="joe_aside${(settings.aside_position=='left')?then(' pos_left','')}">
     <#if settings.show_blogger!true>
       <#include "../module/blogger.ftl">
     </#if>

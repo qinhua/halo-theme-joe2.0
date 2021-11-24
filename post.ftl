@@ -7,11 +7,12 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <#include "template/module/post_bread.ftl">
-      <div class="joe_container joe_main_container page-post">
+      <div class="joe_container joe_main_container page-post${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main joe_post">
           <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
-            <#include "template/module/post_status.ftl">
+            <#include "template/macro/post_status.ftl">
+            <@post_status status=post.status />
             <#if post.status=='PUBLISHED'>
               <#list post.categories as category>
                 <#if category_index == 0>
@@ -113,7 +114,6 @@
                   <span>博主关闭了当前页面的评论</span>
                 </div>
               <#else>
-                <#--  <@global.comment target=post type="post" />  -->
                 <#include "template/macro/comment.ftl">
                 <@comment target=post type="post"/>
               </#if>
@@ -129,7 +129,8 @@
             </div>
           </#if>
         </div>
-        <#if settings.enable_post_aside!false>
+        <#assign enable_aside = metas.enable_aside!'false'>
+        <#if enable_aside=='true' || settings.enable_post_aside!false>
           <#include "template/common/aside.ftl">
         </#if>
       </div>
