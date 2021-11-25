@@ -7,22 +7,24 @@ description: Halo主题 Joe2.0
 logo: https://bbchin.com/logo
 website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
+cover: https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp
 version: 1.0.6
 require: ^1.4.11
 # 文章页 meta 变量
 postMetaField:
   - enable_aside
+  - enable_comment
   - enable_toc
   - toc_depth
   - enable_copy
   - enable_donate
   - enable_share
   - enable_like
-  - enable_comment
   - code_theme
 
 # 自定义页 meta 变量
 sheetMetaField:
   - enable_aside
+  - enable_page_meta
   - enable_comment
   # - show_thumbnail

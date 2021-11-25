@@ -1,35 +1,11 @@
-<#macro post_item post type="index">
+<#macro post_item post index type="index">
   <#assign lazy_img=settings.lazyload_thumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
-  <li class="joe_list__item default${(type=='index')?then(' animated wow','')}"${(type=='index')?then(' data-wow-delay="0.2s"','')}>
+  <li class="joe_list__item default${(type=='index')?then(' animated wow','')}"${(type=='index')?then(' data-wow-delay="0.' + index + 's"', '')}>
     <div class="line"></div>
     <#if settings.enable_post_thumbnail!true>
-      <#assign thumbnail = post.thumbnail!?trim>
-      <#assign random_img_ok = settings.enable_random_img_api==true && settings.random_img_api?trim!=''>
-      <#assign default_img_url = (random_img_ok == true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?') != -1)?then('&', '?')) + '_r=' + post.id, settings.post_thumbnail)>
-      <#if thumbnail == ''>
-        <#if post.categories?size gt 0>
-          <#assign thumbnail = post.categories[0].thumbnail!?trim>
-          <#if thumbnail == ''>
-            <#if post.tags?size gt 0>
-              <#assign thumbnail = post.tags[0].thumbnail!?trim>
-              <#if thumbnail == ''>
-                <#assign thumbnail = default_img_url>
-              </#if>
-            <#else>
-              <#assign thumbnail = default_img_url>
-            </#if>
-          </#if>
-        <#else>
-          <#if post.tags?size gt 0>
-            <#assign thumbnail = post.tags[0].thumbnail!?trim>
-            <#if thumbnail == ''>
-              <#assign thumbnail = default_img_url>
-            </#if>
-          <#else>
-            <#assign thumbnail = default_img_url>
-          </#if>
-        </#if>
-      </#if>
+      <#import "post_thumbnail.ftl" as tbn>
+      <@tbn.post_thumbnail post=post />
+      <#assign thumbnail = tbn.thumbnail>
       <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
         <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${post.title!}">
         <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>

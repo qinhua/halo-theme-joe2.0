@@ -2,7 +2,8 @@
   <#if links?size gt 0>
     <#assign nextRandom = .now?string["HHmmssSSS"]?number>
     <ul class="joe_detail__friends">
-      <#list links?reverse  as link>
+      <#assign final_links = settings.links_type?starts_with('random-')?then(links, links?sort_by('priority'))>
+      <#list final_links as link>
         <li class="joe_detail__friends-item">
           <a class="contain" href="${link.url!}" target="_blank" style="background:${colors[nextRandom % colors?size]}" rel="noopener noreferrer">
             <span class="title">${link.name!}</span>

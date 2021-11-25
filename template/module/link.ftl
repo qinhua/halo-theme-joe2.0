@@ -11,6 +11,8 @@
   </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.theme.min.css?v=${theme.version!}">
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.global.min.css?v=${theme.version!}">
+  <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/qmsg/qmsg.css">
+  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/animate/animate.min.css">
   <#if type == 'index' && settings.enable_banner == true>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/swiper/swiper.min.css">
   </#if>
@@ -18,20 +20,9 @@
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.css?v=${theme.version!}">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme!='')?then(metas.code_theme,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
-  <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/qmsg/qmsg.css">
-  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/animate/animate.min.css">
-  <#if settings.enable_mathjax == true && (type == 'post' || type == 'journals')>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
-  </#if>
-  <#if settings.enable_clean_mode != true && settings.cursor_skin?? && settings.cursor_skin != 'off'>
-    <link rel="stylesheet" href="${BASE_RES_URL}/source/cursor/style/min/${settings.cursor_skin!}.min.css?v=${theme.version!}">
-  </#if>
   <#if type == 'index'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.index.min.css?v=${theme.version!}">
   </#if>
-  <#--  <#if type == 'links'>
-    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.links.min.css?v=${theme.version!}">
-  </#if>  -->
   <#if type == 'post'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.post.min.css?v=${theme.version!}">
   </#if>
@@ -48,6 +39,15 @@
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/justifiedGallery/justifiedGallery.css">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.photos.min.css?v=${theme.version!}">
   </#if>
+  <#--  <#if type == 'links'>
+    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.links.min.css?v=${theme.version!}">
+  </#if>  -->
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.responsive.min.css?v=${theme.version!}">
   <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/fancybox/jquery.fancybox.min.css">
+  <#if settings.enable_mathjax == true && (type == 'post' || type == 'journals')>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+  </#if>
+  <#if settings.enable_clean_mode != true && settings.cursor_skin?? && settings.cursor_skin != 'off'>
+    <link rel="stylesheet" href="${BASE_RES_URL}/source/cursor/style/min/${settings.cursor_skin!}.min.css?v=${theme.version!}">
+  </#if>
 </#macro>

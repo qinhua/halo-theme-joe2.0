@@ -1,3 +1,4 @@
+<#macro article posts>
 <div class="joe_index__article">
   <div class="joe_index__title">
     <ul class="joe_index__title-title">
@@ -17,10 +18,11 @@
   <div class="joe_index__list">
     <#if settings.enable_index_list_ajax==false>
       <#include "../macro/list_index.ftl">
-      <@list_index/>
+      <@list_index />
     <#else>
       <#include "../macro/list_index_async.ftl">
-      <@list_index_async/>
+      <@list_index_async />
     </#if>
   </div>
 </div>
+</#macro>

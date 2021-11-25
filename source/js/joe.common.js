@@ -806,6 +806,8 @@ const commonContext = {
 		$("#theme-config-getter").remove();
 		// 重置操作
 		commonContext.loadingBar.hide();
+		// 解决代码块加载时无样式问题
+		$(".code-toolbar").length && $(".code-toolbar").addClass("visible");
 	},
 };
 

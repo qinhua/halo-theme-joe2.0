@@ -1,5 +1,4 @@
 .joe {
-
   &_journal_add {
     position: absolute;
     top: 14px;
@@ -19,6 +18,10 @@
 
   &_journals__list {
     padding: 10px 0 20px;
+
+    &.hidden {
+      visibility: hidden;
+    }
 
     &.effect {
       &_journal {
@@ -134,7 +137,7 @@
             transition: transform 0.35s, opacity 0.35s;
           }
         }
-        
+
         img {
           display: inline-block;
           max-width: 100% !important;

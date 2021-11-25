@@ -15,7 +15,7 @@ const photosContext = {
 	initList() {
 		const $domList = $(".joe_photos__gallery");
 		const $domEmpty = $(".joe_empty");
-		const $domLoad = $(".joe_load");
+		const $domLoading = $(".joe_loading");
 		const queryData = {
 			page: 0,
 			size: ThemeConfig.photos_page_size,
@@ -157,13 +157,13 @@ const photosContext = {
 		const getData = (param) => {
 			return new Promise((resolve, reject) => {
 				isLoading = true;
+				$domLoading.show();
 				const params = { ...queryData, ...(param || {}) };
 				params.team === "" ? delete params.team : null;
 				Utils.request("/api/content/photos", "GET", params)
 					.then((res) => {
 						const resD = res.content || [];
 						if (resD.length === 0) {
-							$domLoad.hide();
 							if (params.page === 0) {
 								$domList.hide();
 								$domEmpty.removeClass("hide");
@@ -173,21 +173,19 @@ const photosContext = {
 							$domEmpty.addClass("hide");
 							$domList.show();
 							if (!res.isLast) {
-								setTimeout(() => {
-									$domLoad.removeAttr("loading").html("加载更多").show();
-								}, 500);
 								$domEmpty.addClass("hide");
 								// return Qmsg.warning("没有更多内容了");
 							} else {
 								isEnd = true;
-								$domLoad.hide();
 							}
 						}
+						$domLoading.hide();
+						$domList.show();
 						listData = params.page > 0 ? listData.concat(resD) : resD;
 						resolve(resD);
 					})
 					.catch((err) => {
-						$domList.hide();
+						$domLoading.hide();
 						$domEmpty.removeClass("hide");
 						isLoading = false;
 						reject(err);
@@ -197,7 +195,7 @@ const photosContext = {
 
 		// 重置列表
 		const reset = (param) => {
-			$domList.empty();
+			$domList.empty().hide();
 			isFirst = true;
 			isEnd = false;
 			isLoading = false;
@@ -215,8 +213,7 @@ const photosContext = {
 					$(window).scrollTop() + $(window).height() >=
           $(".joe_container").height()
 				) {
-					if (isLoading) return;
-					if (isEnd) return;
+					if (isLoading || isEnd) return;
 					// console.log("需要加载了");
 					queryData.page++;
 					getData({
@@ -227,7 +224,7 @@ const photosContext = {
 		);
 
 		// 加载更多
-		$domLoad.on("click", function () {
+		$domLoading.on("click", function () {
 			if ($(this).attr("loading")) return;
 			queryData.page++;
 			getData({
