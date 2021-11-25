@@ -1,9 +1,10 @@
-
 <#macro list_index_async>
   <ul class="joe_list"></ul>
   <ul class="joe_list__loading">
     <li class="item">
-      <div class="thumbnail"></div>
+      <#if settings.enable_post_thumbnail!true>
+        <div class="thumbnail"></div>
+      </#if>
       <div class="information">
         <div class="title"></div>
         <div class="abstract">
@@ -13,7 +14,9 @@
       </div>
     </li>
     <li class="item">
-      <div class="thumbnail"></div>
+      <#if settings.enable_post_thumbnail!true>
+        <div class="thumbnail"></div>
+      </#if>
       <div class="information">
         <div class="title"></div>
         <div class="abstract">

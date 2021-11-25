@@ -12,30 +12,33 @@
             <#include "template/macro/post_status.ftl">
             <@post_status status=sheet.status />
             <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id}">${sheet.title}</h1>
-            <div class="joe_detail__count">
-              <div class="joe_detail__count-information">
-                <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" alt="${user.nickname!}">
-                <div class="meta">
-                  <div class="author">
-                      <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
-                  </div>
-                  <div class="item">
-                    <span class="text">${sheet.updateTime?string('yyyy-MM-dd')}</span>
-                    <span class="line">/</span>
-                    <span class="text">${sheet.commentCount} 评论</span>
-                    <span class="line">/</span>
-                    <span class="text" >${sheet.visits} 阅读</span>
-                    <span class="line">/</span>
-                    <span class="text" >${sheet.wordCount!0} 字</span>
-                    <#if settings.check_baidu_collect!false>
+            <#assign enable_page_meta = metas.enable_page_meta!'true'>
+            <#if enable_page_meta=='true'>
+              <div class="joe_detail__count">
+                <div class="joe_detail__count-information">
+                  <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" alt="${user.nickname!}">
+                  <div class="meta">
+                    <div class="author">
+                        <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
+                    </div>
+                    <div class="item">
+                      <span class="text">${sheet.updateTime?string('yyyy-MM-dd')}</span>
                       <span class="line">/</span>
-                      <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
-                    </#if>
+                      <span class="text">${sheet.commentCount} 评论</span>
+                      <span class="line">/</span>
+                      <span class="text" >${sheet.visits} 阅读</span>
+                      <span class="line">/</span>
+                      <span class="text" >${sheet.wordCount!0} 字</span>
+                      <#if settings.check_baidu_collect!false>
+                        <span class="line">/</span>
+                        <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                      </#if>
+                    </div>
                   </div>
                 </div>
+                <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>
               </div>
-              <time class="joe_detail__count-created" datetime="${sheet.createTime?string('MM/dd')}">${sheet.createTime?string('MM/dd')}</time>
-            </div>
+            </#if>
             <#--  <#if sheet.thumbnail?? && sheet.thumbnail!=''>
               <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>
             </#if>  -->

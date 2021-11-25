@@ -17,10 +17,10 @@
             <#assign omits=settings.links_omit?trim!''>
             <article class="joe_detail__article animated fadeIn">
               <h5>友链列表<#if omits == ''><@linkTag method="count"><span class="totals">${count!0} 条</span></@linkTag></#if></h5>
-              <#if settings.links_type == 'group'>
-                <@linkTag method="listTeams">
+              <#if settings.links_type?ends_with('group')>
+                <@linkTag method="${(settings.links_type == 'group')?then('listTeams', 'listTeamsByRandom')}">
                     <#assign flag = 0>
-                    <#list teams?reverse as team>
+                    <#list teams as team>
                       <#if omits?index_of(team.team) == -1>
                         <div class="links-group">
                           <h1>${team.team!}</h1>

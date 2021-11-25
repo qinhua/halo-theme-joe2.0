@@ -83,7 +83,8 @@ const homeContext = {
 		if (!ThemeConfig.enable_index_list_ajax) return;
 		const pageSize = ThemeConfig.post_index_page_size;
 		const $el = $(".joe_index__list");
-		const $domHeader = $(".joe_header");
+		// const $domHeader = $(".joe_header").height();
+		const $headerHeight = ThemeConfig.enable_fixed_header || Joe.isMobile ? $(".joe_header").height() : 0;
 		// const $navItems = $(".joe_index__title-title .item");
 		const $domList = $el.find(".joe_list");
 		const $domEmpty = $el.find(".joe_empty");
@@ -125,7 +126,7 @@ const homeContext = {
 								$domEmpty.removeClass("hide");
 							}
 						} else {
-							resD.forEach((itm) => $domList.append(getListNode(itm)));
+							resD.forEach((itm,idx) => $domList.append(getListNode(itm,idx)));
 							if (res.isLast) {
 								$domLoad.hide();
 								// return Qmsg.warning("没有更多内容了");
@@ -148,10 +149,10 @@ const homeContext = {
 		};
 
 		// 渲染Dom节点
-		const getListNode = (post) => {
+		const getListNode = (post,index) => {
 			const thumbnail = homeContext.getThumbnail(post);
 
-			return `<li class="joe_list__item default animated wow" data-wow-delay="0.2s">
+			return `<li class="joe_list__item default animated wow" data-wow-delay="0.${index}s">
             <div class="line"></div>
             ${
 	ThemeConfig.enable_post_thumbnail
@@ -224,17 +225,17 @@ const homeContext = {
 		// 加载更多
 		$domLoad.on("click", async function () {
 			if ($(this).attr("loading")) return;
+			const lastItemTop=$domList.find(".joe_list__item:last").offset().top;
 			queryData.page++;
-			let length = await getDate();
-			length = $domList.find(".joe_list__item").length - length;
-			const offset =
-        $domList.find(`.joe_list__item:nth-child(${length}`).offset().top -
-        $domHeader.height();
-			window.scrollTo({
-				top: offset - 15,
-				behavior: "smooth",
-			});
+			await getDate();
+			setTimeout(() => {
+				window.scrollTo({
+					top: lastItemTop - $headerHeight,
+					behavior: "smooth",
+				});
+			},250);
 		});
+
 		getDate();
 	},
 	/* 激活列表特效 */
@@ -252,7 +253,7 @@ const homeContext = {
 };
 
 !(function () {
-	const omits = ["getThumbnail","getDefaultThumbnail"];
+	const omits = ["getThumbnail", "getDefaultThumbnail"];
 	document.addEventListener("DOMContentLoaded", function () {
 		Object.keys(homeContext).forEach(
 			(c) => !omits.includes(c) && homeContext[c]()
