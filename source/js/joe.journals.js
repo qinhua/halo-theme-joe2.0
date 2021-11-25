@@ -3,9 +3,11 @@ const journalContext = {
 	/* 激活列表特效 */
 	initEffect() {
 		if (!ThemeConfig.enable_journal_effect) return;
+		$(".joe_loading").remove();
+		$(".joe_journals__list").removeClass("hidden");
 		new WOW({
 			boxClass: "wow",
-			animateClass: "fadeIn",
+			animateClass: ThemeConfig.journal_list_effect_class || "fadeIn",
 			offset: 0,
 			mobile: true,
 			live: true,
@@ -147,7 +149,10 @@ const journalContext = {
 		const $allBlocks = $(".joe_journal_body .content-wrp");
 		$allBlocks.each(function () {
 			const $this = $(this);
-			if ($this[0].getBoundingClientRect().height > ThemeConfig.journal_block_height) {
+			if (
+				$this[0].getBoundingClientRect().height >
+        ThemeConfig.journal_block_height
+			) {
 				$this.siblings(".journal_content_expander").show();
 			}
 		});

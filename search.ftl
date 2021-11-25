@@ -24,7 +24,7 @@
               <#include "template/macro/post_item.ftl">
               <ul class="joe_archive__list joe_list" data-wow="off">
                 <#list posts.content as post>
-                  <@post_item post=post type="search"/>
+                  <@post_item post=post index=post_index type="search"/>
                 </#list>
               </ul>
             <#else>

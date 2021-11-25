@@ -39,7 +39,7 @@
       </section>
     </#if>
     <#if settings.show_newest_post!true>
-      <#import "../macro/newest.ftl" as np>
+      <#import "../macro/latest.ftl" as np>
       <@np.newest/>
     </#if>
     <#if settings.show_lifetime!true>

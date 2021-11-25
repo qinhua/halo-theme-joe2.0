@@ -20,7 +20,7 @@
               <#include "template/macro/post_item.ftl">
               <ul class="joe_archive__list joe_list animated fadeIn">
                 <#list posts.content as post>
-                  <@post_item post=post type="category"/>
+                  <@post_item post=post index=post_index type="category"/>
                 </#list>
               </ul>
             <#else>

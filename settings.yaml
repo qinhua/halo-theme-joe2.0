@@ -59,17 +59,18 @@ theme:
     theme_mode:
       name: theme_mode
       label: 主题模式
-      type: radio
-      default: "user"
+      type: select
+      data-type: text
+      default: user
       description: "设置博客的主题模式（用户/自动/浅色/暗黑），默认为用户模式，仅在用户模式下页面才有主题切换按钮，自动模式下根据时间自动切换"
       options:
-        - value: "user"
+        - value: user
           label: 用户模式
-        - value: "auto"
+        - value: auto
           label: 自动模式
-        - value: "light"
+        - value: light
           label: 浅色模式
-        - value: "dark"
+        - value: dark
           label: 暗黑模式
     light_time_scope:
       name: light_time_scope
@@ -634,7 +635,7 @@ carousel:
   items:
     enable_banner:
       name: enable_banner
-      label: 展示轮播图
+      label: 启用轮播图
       type: switch
       data-type: bool
       default: true
@@ -649,24 +650,37 @@ carousel:
       type: select
       data-type: text
       default: manual
-      description: "主题提供了 5 种数据来源，默认手动配置（需要自己在下面配置轮播数据），其它几种会自动去获取数据，但是请注意相应文章数据及封面要规范，否则可能不美观或展示异常"
+      description: "主题提供了 5 种数据来源，默认手动配置（需要自己在下面配置轮播数据），其它几种会自动去获取数据，但是请注意相应文章数据及封面要规范，否则可能不美观或展示异常（文章封面取值逻辑和首页列表一致【文章封面 > 分类封面 > 标签封面 > 随机图(若开启) > 默认封面】，当获取的数据为空时，则默认展示 “欢迎使用Joe2.0主题”）"
       options:
         - value: manual
           label: 手动配置
-        - value: newest
+        - value: latest
           label: 最新文章
         - value: topped
           label: 置顶文章
-        - value: topped_category
-          label: 置顶分类文章
-        - value: topped_tag
-          label: 置顶标签文章
-        - value: specify_post
-          label: 特定关键词文章
+        # - value: topped_category
+        #   label: 置顶分类文章
+        # - value: topped_tag
+        #   label: 置顶标签文章
+        # - value: specify_post
+        #   label: 特定关键词文章
         - value: specify_category
           label: 特定分类文章
         - value: specify_tag
           label: 特定标签文章
+    banner_specify_keyword:
+      name: banner_specify_keyword
+      label: 特定关键词
+      type: text
+      default: ""
+      placeholder: "请输入"
+      description: "当数据源为 “特定关键词/分类/标签” 文章时，需要在这里设置【关键词/分类别名/标签别名】进行匹配，相关别名请到 “后台管理-文章” 菜单下获取。（别名或内容为空时展示 “欢迎使用Joe2.0主题”） "
+    bannerData:
+      name: bannerData
+      label: 手动配置数据
+      type: textarea
+      default: "欢迎使用Joe2.0主题-|||-https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
+      description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效（注意：主题内默认配置了演示数据）。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
     banner_amount_limit:
       name: banner_amount_limit
       label: 最大个数
@@ -674,20 +688,7 @@ carousel:
       data-type: long
       default: 5
       placeholder: "请输入从 0 至 10 的整数"
-      description: "设置非手动配置模式下的最大轮播图个数，默认为 5，系统限制最大 10，填 0 相当于 10"
-    banner_specify_keyword:
-      name: banner_specify_keyword
-      label: 特定关键词
-      type: text
-      default: ""
-      placeholder: "请输入"
-      description: "当数据源为 “特定关键词/分类/标签文章” 时，需要在这里设置【关键词/分类名/标签名】进行匹配，为空的话默认取 “最新文章” 数据"
-    bannerData:
-      name: bannerData
-      label: 手动配置数据
-      type: textarea
-      default: "欢迎使用Joe2.0主题-|||-https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
-      description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
+      description: "设置轮播图展示的最大个数，默认为 5，主题内最大限制为 10，填 0 相当于 10（对手动配置模式同样生效）"
     banner_direction:
       name: banner_direction
       label: 轮播方向
@@ -786,7 +787,7 @@ aside:
   items:
     enable_aside:
       name: enable_aside
-      label: 开启全局侧边栏
+      label: 启用全局侧边栏
       type: switch
       data-type: bool
       default: true
@@ -1062,7 +1063,7 @@ home:
       type: switch
       data-type: bool
       default: true
-      description: "是否使用Ajax加载文章列表数据以优化用户体验，默认为后端渲染"
+      description: "是否使用Ajax加载文章列表数据以优化用户体验，关闭则使用后端渲染（分页大小请到 “后台管理-系统-博客设置-文章设置” 中配置）"
       options:
         - value: true
           label: 是
@@ -1133,11 +1134,13 @@ home:
       name: index_list_effect_class
       label: 动画效果类名
       type: select
-      default: fadeIn
-      description: "首页列表动画效果类名，来自animate.css，默认fadeIn"
+      default: fadeInUp
+      description: "首页列表动画效果类名，来自 animate.css，默认 fadeInUp"
       options:
         - value: "fadeIn"
           label: "fadeIn"
+        - value: "fadeInUp"
+          label: "fadeInUp"
         - value: "fadeInDown"
           label: "fadeInDown"
         - value: "fadeInDownBig"
@@ -1150,8 +1153,6 @@ home:
           label: "fadeInRight"
         - value: "fadeInRightBig"
           label: "fadeInRightBig"
-        - value: "fadeInUp"
-          label: "fadeInUp"
         - value: "fadeInUpBig"
           label: "fadeInUpBig"
         - value: "fadeOut"
@@ -1692,16 +1693,173 @@ journals:
       description: "修改无数据时展示的文案"
     enable_journal_effect:
       name: enable_journal_effect
-      label: 开启缓入效果
+      label: 开启缓入动画
       type: switch
       data-type: bool
       default: true
-      description: "是否开启日志缓入效果"
+      description: "是否开启日志块缓入动画"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
+    journal_list_effect_class:
+      name: index_list_effect_class
+      label: 动画效果类名
+      type: select
+      default: fadeInUp
+      description: "日志页列表动画效果类名，来自 animate.css，默认 fadeInUp"
+      options:
+        - value: "fadeIn"
+          label: "fadeIn"
+        - value: "fadeInUp"
+          label: "fadeInUp"
+        - value: "fadeInDown"
+          label: "fadeInDown"
+        - value: "fadeInDownBig"
+          label: "fadeInDownBig"
+        - value: "fadeInLeft"
+          label: "fadeInLeft"
+        - value: "fadeInLeftBig"
+          label: "fadeInLeftBig"
+        - value: "fadeInRight"
+          label: "fadeInRight"
+        - value: "fadeInRightBig"
+          label: "fadeInRightBig"
+        - value: "fadeInUpBig"
+          label: "fadeInUpBig"
+        - value: "fadeOut"
+          label: "fadeOut"
+        - value: "fadeOutDown"
+          label: "fadeOutDown"
+        - value: "fadeOutDownBig"
+          label: "fadeOutDownBig"
+        - value: "fadeOutLeft"
+          label: "fadeOutLeft"
+        - value: "fadeOutLeftBig"
+          label: "fadeOutLeftBig"
+        - value: "fadeOutRight"
+          label: "fadeOutRight"
+        - value: "fadeOutRightBig"
+          label: "fadeOutRightBig"
+        - value: "fadeOutUp"
+          label: "fadeOutUp"
+        - value: "fadeOutUpBig"
+          label: "fadeOutUpBig"
+        - value: "bounce"
+          label: "bounce"
+        - value: "flash"
+          label: "flash"
+        - value: "pulse"
+          label: "pulse"
+        - value: "rubberBand"
+          label: "rubberBand"
+        - value: "headShake"
+          label: "headShake"
+        - value: "swing"
+          label: "swing"
+        - value: "tada"
+          label: "tada"
+        - value: "wobble"
+          label: "wobble"
+        - value: "jello"
+          label: "jello"
+        - value: "heartBeat"
+          label: "heartBeat"
+        - value: "bounceIn"
+          label: "bounceIn"
+        - value: "bounceInDown"
+          label: "bounceInDown"
+        - value: "bounceInLeft"
+          label: "bounceInLeft"
+        - value: "bounceInRight"
+          label: "bounceInRight"
+        - value: "bounceInUp"
+          label: "bounceInUp"
+        - value: "bounceOut"
+          label: "bounceOut"
+        - value: "bounceOutDown"
+          label: "bounceOutDown"
+        - value: "bounceOutLeft"
+          label: "bounceOutLeft"
+        - value: "bounceOutRight"
+          label: "bounceOutRight"
+        - value: "bounceOutUp"
+          label: "bounceOutUp"
+        - value: "flip"
+          label: "flip"
+        - value: "flipInX"
+          label: "flipInX"
+        - value: "flipInY"
+          label: "flipInY"
+        - value: "flipOutX"
+          label: "flipOutX"
+        - value: "flipOutY"
+          label: "flipOutY"
+        - value: "rotateIn"
+          label: "rotateIn"
+        - value: "rotateInDownLeft"
+          label: "rotateInDownLeft"
+        - value: "rotateInDownRight"
+          label: "rotateInDownRight"
+        - value: "rotateInUpLeft"
+          label: "rotateInUpLeft"
+        - value: "rotateInUpRight"
+          label: "rotateInUpRight"
+        - value: "rotateOut"
+          label: "rotateOut"
+        - value: "rotateOutDownLeft"
+          label: "rotateOutDownLeft"
+        - value: "rotateOutDownRight"
+          label: "rotateOutDownRight"
+        - value: "rotateOutUpLeft"
+          label: "rotateOutUpLeft"
+        - value: "rotateOutUpRight"
+          label: "rotateOutUpRight"
+        - value: "hinge"
+          label: "hinge"
+        - value: "jackInTheBox"
+          label: "jackInTheBox"
+        - value: "rollIn"
+          label: "rollIn"
+        - value: "rollOut"
+          label: "rollOut"
+        - value: "zoomIn"
+          label: "zoomIn"
+        - value: "zoomInDown"
+          label: "zoomInDown"
+        - value: "zoomInLeft"
+          label: "zoomInLeft"
+        - value: "zoomInRight"
+          label: "zoomInRight"
+        - value: "zoomInUp"
+          label: "zoomInUp"
+        - value: "zoomOut"
+          label: "zoomOut"
+        - value: "zoomOutDown"
+          label: "zoomOutDown"
+        - value: "zoomOutLeft"
+          label: "zoomOutLeft"
+        - value: "zoomOutRight"
+          label: "zoomOutRight"
+        - value: "zoomOutUp"
+          label: "zoomOutUp"
+        - value: "slideInDown"
+          label: "slideInDown"
+        - value: "slideInLeft"
+          label: "slideInLeft"
+        - value: "slideInRight"
+          label: "slideInRight"
+        - value: "slideInUp"
+          label: "slideInUp"
+        - value: "slideOutDown"
+          label: "slideOutDown"
+        - value: "slideOutLeft"
+          label: "slideOutLeft"
+        - value: "slideOutRight"
+          label: "slideOutRight"
+        - value: "slideOutUp"
+          label: "slideOutUp"
     enable_journal_add:
       name: enable_journal_add
       label: 展示新增日志按钮
@@ -1829,17 +1987,19 @@ links:
     links_type:
       name: links_type
       label: 友链展示方式
-      type: radio
+      type: select
       data-type: text
       default: list
-      description: "配置友链的展示方式，默认按列表顺序倒序展示，可在后台管理中配置排序值"
+      description: "配置友链的展示方式，默认按列表顺序展示，可在后台管理中配置排序值（分组暂不支持排序）"
       options:
         - value: list
           label: 列表
         - value: random-list
-          label: 随机
+          label: 列表随机
         - value: group
           label: 分组
+        - value: random-group
+          label: 分组随机
     links_omit:
       name: links_omit
       label: 不展示的分组
