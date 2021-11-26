@@ -48,7 +48,8 @@
   ThemeConfig['author'] = 'M酷';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
-  ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!10}';
+  ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!15}';
+  ThemeConfig['post_index_sort'] = '${options.post_index_sort!}';
   ThemeConfig['gravatar_source_url'] = '${options.gravatar_source!}';
   ThemeConfig['gravatar_type'] = '${options.comment_gravatar_default!"mm"}';
 </script>

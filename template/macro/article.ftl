@@ -1,9 +1,14 @@
 <#macro article posts>
 <div class="joe_index__article">
   <div class="joe_index__title">
-    <ul class="joe_index__title-title">
-      <li class="item" data-type="created">推荐文章</li>
-      <#--  <li class="line"></li>  -->
+    <ul class="joe_index__title-title${(settings.enable_index_list_ajax!=true)?then(' default','')}">
+      <li class="item active" data-type="1">最新文章</li>
+      <#if settings.enable_index_list_ajax!true>
+        <li class="item" data-type="2">热门文章</li>
+        <li class="item" data-type="3">最近更新</li>
+        <li class="item" data-type="4">最多点赞</li>
+        <li class="line"></li>
+      </#if>
     </ul>
     <#if settings.qq_group?? && settings.qq_group!=''>
       <div class="joe_index__title-notice">
