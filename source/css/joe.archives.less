@@ -204,6 +204,7 @@
         white-space: nowrap;
         color: var(--routine);
         background: var(--classH);
+        border: 1px solid var(--classA);
         // transition: background 0.2s;
 
         a {
@@ -212,13 +213,23 @@
           height: 24px;
           line-height: 24px;
           color: var(--routine);
+
+          span {
+            padding-left: 5px;
+            color: var(--theme);
+          }
         }
 
         &:hover {
           background: var(--theme);
+          border-color: var(--theme);
 
           a {
             color: var(--classD);
+
+            span {
+              color: var(--classD);
+            }
           }
         }
       }

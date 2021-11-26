@@ -57,7 +57,7 @@
               </#if>    
             </@paginationTag>
           <#else>
-            <div class="joe_load">查看更多</div>
+            <div class="joe_load" loading="true">加载中...</div>
           </#if>
         </div>
         <#include "template/common/aside.ftl">

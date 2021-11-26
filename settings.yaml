@@ -658,6 +658,10 @@ carousel:
           label: 最新文章
         - value: topped
           label: 置顶文章
+        - value: visits
+          label: 阅读量排行文章
+        - value: likes
+          label: 点赞排行文章
         # - value: topped_category
         #   label: 置顶分类文章
         # - value: topped_tag
@@ -716,7 +720,7 @@ carousel:
       label: 循环播放
       type: switch
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 开启
@@ -1063,12 +1067,44 @@ home:
       type: switch
       data-type: bool
       default: true
-      description: "是否使用Ajax加载文章列表数据以优化用户体验，关闭则使用后端渲染（分页大小请到 “后台管理-系统-博客设置-文章设置” 中配置）"
+      description: "是否使用Ajax加载文章列表数据以优化用户体验（此模式下会忽略后台管理中的排序设置，直接在前台切换排序 [最新文章、热门文章、最近更新、最多点赞]），关闭则使用后端渲染。（默认都是置顶优先+倒序排列，分页大小和排序请到 “后台管理-系统-博客设置-文章设置” 中配置）"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
+    # post_index_sort:
+    #   name: post_index_sort
+    #   label: 文章排序指标
+    #   type: select
+    #   data-type: text
+    #   default: "topPriority,createTime"
+    #   description: "设置首页文章列表的排序方式，默认为 “创建时间+置顶优先”。（后台管理中的相关设置会被忽略）"
+    #   options:
+    #     - value: "topPriority,createTime"
+    #       label: 创建时间+置顶优先
+    #     - value: "createTime"
+    #       label: 创建时间
+    #     - value: "updateTime"
+    #       label: 更新时间
+    #     - value: "topPriority"
+    #       label: 置顶优先
+    #     - value: "visits"
+    #       label: 阅读量
+    #     - value: "likes"
+    #       label: 点赞量
+    # enable_post_index_reverse:
+    #   name: enable_post_index_reverse
+    #   label: 倒序排列
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "是否以相应的指标倒序排列"
+    #   options:
+    #     - value: true
+    #       label: 是
+    #     - value: false
+    #       label: 否
     enable_post_thumbnail:
       name: enable_post_thumbnail
       label: 开启文章缩略图

@@ -912,7 +912,8 @@ var Utils = {
 		return str.replace(/((\s|&nbsp;)*\r?\n)+$/g, "");
 	},
 	limitBr(str) {
-		return str.replace(/((\s|&nbsp;)*\r?\n){3,}/g, "\r\n\r\n");
+		// return str.replace(/((\s|&nbsp;)*\r?\n){3,}/g, "\r\n\r\n");
+		return str.replace(/((\s|&nbsp;)*\r?\n){3,}/g, "");
 	},
 	trimHeadBr(str) {
 		return str.replace(/^((\s|&nbsp;)*\r?\n)+/g, "");
@@ -967,7 +968,8 @@ var Utils = {
 		str = Utils.trimHeadBr(str);
 		str = Utils.trimTailBr(str);
 		str = Utils.limitBr(str);
-		return str.replace(/\r?\n/g, "<br />");
+		// return str.replace(/\r?\n/g, "<br />");
+		return str;
 	},
 };
 

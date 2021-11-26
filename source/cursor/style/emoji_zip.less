@@ -18,6 +18,22 @@ p {
   cursor: @default;
 }
 
+.joe_index {
+  &__title {
+    &-title {
+      .item {
+        cursor: @pointer;
+      }
+
+      &.default {
+        .item {
+          cursor: @default;
+        }
+      }
+    }
+  }
+}
+
 .joe_index__banner {
   .swiper-slide .item {
     cursor: @default !important;

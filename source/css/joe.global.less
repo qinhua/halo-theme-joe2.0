@@ -397,6 +397,7 @@ body {
       }
     }
   }
+
   // 代码块样式 end ====
 
 }
@@ -1351,14 +1352,11 @@ body {
       height: 44px;
       line-height: 44px;
 
-      &.pl-15 {
-        padding-left: 15px;
-      }
-
       .item {
-        // cursor: pointer;
+        cursor: pointer;
         margin-right: 16px;
         user-select: none;
+        color: var(--routine);
         transition: color 0.35s;
 
         &.active {
@@ -1371,9 +1369,20 @@ body {
         bottom: -1px;
         left: 0;
         height: 2px;
-        border-radius: 1px;
+        content: '';
         background: var(--theme);
+        border-radius: 1px;
         transition: left 0.35s, width 0.35s;
+      }
+
+      &.default {
+        .item {
+          cursor: default;
+        }
+      }
+
+      &.pl-15 {
+        padding-left: 15px;
       }
     }
 
