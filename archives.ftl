@@ -23,14 +23,14 @@
                       <#list categories as category>
                         <#if category.slug=='default' && category.name=='默认分类'>
                           <li class="item">
-                            <a class="link" href="${category.fullPath!}" title="${category.name!}">${category.name!}</a>
+                            <a class="link" href="${category.fullPath!}" title="${category.name!}">${category.name!}<@postTag method="listByCategorySlug" categorySlug="default"><span>${posts?size}</@postTag><span></a>
                           </li>
                         </#if>
                       </#list>
                       <#list categories as category>
                         <#if category.slug!='default'>
                           <li class="item">
-                            <a class="link" href="${category.fullPath!}" title="${category.name!}">${category.name!}</a>
+                            <a class="link" href="${category.fullPath!}" title="${category.name!}">${category.name!}<@postTag method="listByCategoryId" categoryId="${category.id}"><span>${posts?size}</@postTag><span></a>
                           </li>
                         </#if>
                       </#list>

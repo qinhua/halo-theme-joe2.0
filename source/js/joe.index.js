@@ -73,7 +73,9 @@ const homeContext = {
 			ThemeConfig.enable_random_img_api &&
       ThemeConfig.random_img_api.trim()
 		) {
-			return `${ThemeConfig.random_img_api}${ThemeConfig.random_img_api.includes("?")?"&":"?"}_r=${postId}`;
+			return `${ThemeConfig.random_img_api}${
+				ThemeConfig.random_img_api.includes("?") ? "&" : "?"
+			}_r=${postId}`;
 		} else {
 			return ThemeConfig.post_thumbnail;
 		}
@@ -81,41 +83,52 @@ const homeContext = {
 	/* 初始化首页列表 */
 	initList() {
 		if (!ThemeConfig.enable_index_list_ajax) return;
+		const MapTypes = {
+			1: "createTime",
+			2: "visits",
+			3: "updateTime",
+			4: "likes",
+		};
 		const pageSize = ThemeConfig.post_index_page_size;
 		const $el = $(".joe_index__list");
-		// const $domHeader = $(".joe_header").height();
-		const $headerHeight = ThemeConfig.enable_fixed_header || Joe.isMobile ? $(".joe_header").height() : 0;
-		// const $navItems = $(".joe_index__title-title .item");
+		const $headerHeight =
+      ThemeConfig.enable_fixed_header || Joe.isMobile
+      	? $(".joe_header").height()
+      	: 0;
+		const $navItems = $(".joe_index__title-title .item");
+		const $navLine = $(".joe_index__title-title .line");
 		const $domList = $el.find(".joe_list");
 		const $domEmpty = $el.find(".joe_empty");
 		const $domLoad = $(".joe_load");
 		const $domLoading = $el.find(".joe_list__loading");
+		$navLine.attr("style", `width:${$navItems.eq(0).width()}px;`);
 		let queryData = {
 			page: 0,
 			size: pageSize,
-			// sort: "topPriority,createTime,desc", // 默认为创建时间倒序，置顶优先
+			sort: `topPriority,${ThemeConfig.post_index_sort},desc`, // 默认为置顶优先+创建时间+倒序
 		};
 
 		// 初始化Dom
-		// const initDom = () => {
-		// 	$domList.html("").show();
-		// 	$domLoad.removeAttr("loading").html("查看更多").show();
-		// 	const activeItem = $(
-		// 		".joe_index__title-title .item[data-type=\"" + queryData.type + "\"]"
-		// 	);
-		// 	let activeLine = $(".joe_index__title-title .line");
-		// 	activeItem.addClass("active").siblings().removeClass("active");
-		// 	activeLine.css({
-		// 		left: activeItem.position().left,
-		// 		width: activeItem.width(),
-		// 	});
-		// };
+		const initDom = async (sort) => {
+			$domList.html("").show();
+			$domLoad.removeAttr("loading").html("查看更多").show();
+			const activeItem = $(
+				`.joe_index__title-title .item[data-type="${sort}"]`
+			);
+			const activeLine = $(".joe_index__title-title .line");
+			activeItem.addClass("active").siblings().removeClass("active");
+			activeLine.css({
+				left: activeItem.position().left,
+				width: activeItem.width(),
+			});
+		};
 
 		// 获取数据
-		const getDate = () => {
+		const getDate = async () => {
+			$domLoad.attr("loading", true).html("加载中...");
+			$domLoading.show();
+			await Utils.sleep(200);
 			return new Promise((reslove, reject) => {
-				$domLoad.attr("loading", true).html("加载中...");
-				$domLoading.show();
 				Utils.request("/api/content/posts", "GET", queryData)
 					.then((res) => {
 						const resD = res.content;
@@ -126,7 +139,9 @@ const homeContext = {
 								$domEmpty.removeClass("hide");
 							}
 						} else {
-							resD.forEach((itm,idx) => $domList.append(getListNode(itm,idx)));
+							resD.forEach((itm, idx) =>
+								$domList.append(getListNode(itm, idx))
+							);
 							if (res.isLast) {
 								$domLoad.hide();
 								// return Qmsg.warning("没有更多内容了");
@@ -149,7 +164,7 @@ const homeContext = {
 		};
 
 		// 渲染Dom节点
-		const getListNode = (post,index) => {
+		const getListNode = (post, index) => {
 			const thumbnail = homeContext.getThumbnail(post);
 
 			return `<li class="joe_list__item default animated wow" data-wow-delay="0.${index}s">
@@ -211,21 +226,24 @@ const homeContext = {
 		};
 
 		// 切换文章类型
-		// $navItems.on("click", function () {
-		// 	// if ($(this).attr("data-type") === queryData.type) return;
-		// 	queryData = {
-		// 		page: 0,
-		// 		size: pageSize,
-		// 		sort: "createTime",
-		// 	};
-		// 	initDom();
-		// 	getDate();
-		// });
+		$navItems.on("click", function () {
+			if (!ThemeConfig.enable_index_list_ajax) return;
+			const typeId = $(this).attr("data-type");
+			const typeName = MapTypes[typeId];
+			if (queryData.sort.includes(typeName)) return;
+			queryData = {
+				page: 0,
+				size: pageSize,
+				sort: `topPriority,${typeName},desc`,
+			};
+			initDom(typeId);
+			getDate();
+		});
 
 		// 加载更多
 		$domLoad.on("click", async function () {
 			if ($(this).attr("loading")) return;
-			const lastItemTop=$domList.find(".joe_list__item:last").offset().top;
+			const lastItemTop = $domList.find(".joe_list__item:last").offset().top;
 			queryData.page++;
 			await getDate();
 			setTimeout(() => {
@@ -233,7 +251,7 @@ const homeContext = {
 					top: lastItemTop - $headerHeight,
 					behavior: "smooth",
 				});
-			},250);
+			}, 250);
 		});
 
 		getDate();
