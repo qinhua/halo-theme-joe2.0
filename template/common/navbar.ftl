@@ -68,7 +68,7 @@
     <div class="joe_header__slideout-author">
       <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
       <div class="info">
-        <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}</a>
+        <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}<#compress><#include "../module/level.ftl"></#compress></a>
         <#if settings.motto??>
           <p class="motto joe_motto">${settings.motto!}</p>
         <#else>

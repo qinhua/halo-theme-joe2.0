@@ -5,23 +5,6 @@
     <#include "../module/meta.ftl">
     <#include "../module/link.ftl">
     <@link type="${type}"/>
-    <#if settings.enable_loading_bar!true>
-      <!-- 加载条 -->
-      <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.css">
-      <style>
-          #nprogress .bar {
-            background: var(--theme);
-          }
-          #nprogress .bar {
-            height: ${settings.loading_bar_height!};
-            background: ${settings.loading_bar_color!};
-          }
-          #nprogress .peg {
-            display: none;
-          }
-      </style>
-      <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
-    </#if>
     <script src="${BASE_RES_URL}/source/lib/jquery@3.5.1/jquery.min.js"></script>
     <#--  ===== 自定义区域 ===== -->
     <#if settings.external_css??>

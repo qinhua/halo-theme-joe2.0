@@ -40,7 +40,8 @@
                     <span class="text" >${post.visits} 阅读</span>  
                     <span class="line">/</span>
                     <span class="text">${post.wordCount!0} 字</span>
-                    <#if settings.check_baidu_collect==true && post.status=='PUBLISHED'>
+                    <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
+                    <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
                       <span class="line">/</span>
                       <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                     </#if>
@@ -70,11 +71,12 @@
                 </div>
               </#if>
             </div>
-            <#assign enable_copy = metas.enable_copy!'true'>
-            <article class="joe_detail__article animated fadeIn${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+            <#assign enable_copy = (metas?? && metas.enable_copy?? && metas.enable_copy?trim!='')?then(metas.enable_copy?trim,'true')>
+            <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,'center')>
+            <article class="joe_detail__article animated fadeIn ${(img_align!(settings.post_img_align!'center'))+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
               ${post.formatContent!}
             </article>
-            <#assign enable_toc = metas.enable_toc!'true'>
+            <#assign enable_toc = (metas?? && metas.enable_toc?? && metas.enable_toc?trim!='')?then(metas.enable_toc?trim,'true')>
             <#if enable_toc == 'true' && settings.enable_toc == true>
               <div class="toc-container animated slideInRight">
                 <div class="toc-expander">
@@ -84,7 +86,7 @@
                 <div id="js-toc" class="toc"></div>
               </div>
             </#if>
-            <#assign enable_like = metas.enable_like!'true'>
+            <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>
             <#if enable_like=='true' && settings.enable_like==true && post.status!='DRAFT'>
               <#include "template/module/favorite.ftl">
             </#if>
@@ -103,7 +105,7 @@
               <li class="joe_post__pagination-item next"><a href="${nextPost.fullPath!}" title="${nextPost.title!}">下一篇</a></li>
             </#if>
           </ul>
-          <#assign enable_comment = metas.enable_comment!'true'>
+          <#assign enable_comment = (metas?? && metas.enable_comment?? && metas.enable_comment?trim!='')?then(metas.enable_comment?trim,'true')>
           <#if settings.enable_clean_mode!=true && settings.enable_comment==true && post.status!='DRAFT'>
             <div class="joe_comment">
               <#if post.disallowComment == true || enable_comment == 'false'>
@@ -129,8 +131,8 @@
             </div>
           </#if>
         </div>
-        <#assign enable_aside = metas.enable_aside!'false'>
-        <#if enable_aside=='true' || settings.enable_post_aside!false>
+        <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'false')>
+        <#if enable_aside == 'true' || settings.enable_post_aside == true>
           <#include "template/common/aside.ftl">
         </#if>
       </div>

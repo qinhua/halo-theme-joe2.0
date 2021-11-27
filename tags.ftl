@@ -27,7 +27,7 @@
                           <span class="views">${tag.postCount!} ℃</span>
                           <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/175/90')) >
                           <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
-                          <figcaption class="title">${tag.name!}<@postTag method="listByTagId" tagId="${tag.id}"><span>（${posts?size}</@postTag>）<span></figcaption>
+                          <figcaption class="title">${tag.name!}<@postTag method="listByTagId" tagId="${tag.id}"><span>（${posts?size}）</span></@postTag></figcaption>
                         </figure>
                       </a>
                     </li>

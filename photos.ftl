@@ -21,8 +21,8 @@
                 </li>
                 <@photoTag method="listTeams">
                   <#list teams as item>
-                    <li data-filter="${item.team}">
-                      <a href="javascript:;">${((item.team)?length>0)?then((item.team),'默认')}</a>
+                    <li data-filter="${item.team?trim}">
+                      <a href="javascript:;">${((item.team)?length>0)?then(item.team?trim,'默认')}</a>
                     </li>
                   </#list>
                 </@photoTag>

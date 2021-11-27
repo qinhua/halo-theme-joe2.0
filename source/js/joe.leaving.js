@@ -3,19 +3,28 @@ const leavingContext = {
 	/* 获取留言板数据 */
 	getData() {
 		const sheetId = $(".joe_detail__title").attr("data-sheetid");
-		const $leavingList = $(".joe_detail__leaving-list");
-		const $leavingNone = $(".joe_detail__leaving-none");
-		Utils.request(`/api/content/sheets/${sheetId}/comments/top_view`, "GET")
+		const $leavingList = $(".joe_leaving-list");
+		const $leavingNone = $(".joe_leaving-none");
+		const $leavingLoading = $(".joe_loading");
+		Utils.request(`/api/content/sheets/${sheetId}/comments/top_view`, "GET", {
+			page: 0,
+			// size: ThemeConfig.leaving_card_max,
+			sort: "createTime,desc",
+		})
 			.then((res) => {
 				if (res.total) {
 					const str = res.content.reduce((sum, item) => {
-						if(item.content.trim()) {
+						if (item.content.trim()) {
 							// 渲染留言中的 emoji
-							const markedHtml = marked(item.content).replace(/<img\ssrc[^>]*>/gm,"[图片内容]").replace(/bili\//g, "bili/hd/ic_emoji_");
+							const markedHtml = marked(item.content)
+								.replace(/<img\ssrc[^>]*>/gm, "[图片内容]")
+								.replace(/bili\//g, "bili/hd/ic_emoji_");
 							const emoji = Utils.renderedEmojiHtml(markedHtml);
 							item.content = Utils.return2Br(emoji);
 						}
-						const avatar = `${ThemeConfig.gravatar_source || ThemeConfig.gravatar_source_url}/${item.gravatarMd5}?s=256&d=${ThemeConfig.gravatar_type}`;
+						const avatar = `${
+							ThemeConfig.gravatar_source || ThemeConfig.gravatar_source_url
+						}/${item.gravatarMd5}?s=256&d=${ThemeConfig.gravatar_type}`;
 						return (sum += `<li class="item">
             <div class="user">
                 <img class="avatar lazyload" src="${
@@ -35,17 +44,35 @@ const leavingContext = {
 					}, "");
 					$leavingList.html(str);
 					leavingContext.randomColor();
-					$leavingList.show();
-					$leavingNone.hide();
 				} else {
 					$leavingList.hide();
 					$leavingNone.show();
 				}
+				$leavingLoading && $leavingLoading.hide();
 			})
-			.catch((err) => {
+			.catch((_err) => {
+				$leavingLoading && $leavingLoading.hide();
 				$leavingList.hide();
 				$leavingNone.show();
 			});
+	},
+	// /* 设置标题 */
+	// setTitleText() {
+	// 	if (
+	// 		!ThemeConfig.leaving_title ||
+	//     ThemeConfig.leaving_title.trim() === "留言板"
+	// 	)
+	// 		return;
+	// 	$(".joe_detail__title").text(ThemeConfig.leaving_title);
+	// },
+	/* 设置无数据文案 */
+	setEmptyText() {
+		if (
+			!ThemeConfig.leaving_empty_text ||
+      ThemeConfig.leaving_empty_text.trim() === "暂无留言，期待第一个脚印。"
+		)
+			return;
+		$(".joe_leaving-none").text(ThemeConfig.leaving_empty_text);
 	},
 	/* 随机样式 */
 	randomColor() {
@@ -92,7 +119,7 @@ const leavingContext = {
 		];
 		const random = (min, max) =>
 			Math.floor(Math.random() * (max - min + 1)) + min;
-		const $el = $(".joe_detail__leaving-list");
+		const $el = $(".joe_leaving-list");
 		const maxWidth = $el.width();
 		const maxHeight = $el.height();
 		const radius1 = [
@@ -117,7 +144,7 @@ const leavingContext = {
 			"400px 40px",
 			"500px 40px",
 		];
-		$(".joe_detail__leaving-list .item").each((index, item) => {
+		$(".joe_leaving-list .item").each((index, item) => {
 			const zIndex = random(1, 99);
 			const background = colors[random(0, colors.length - 1)];
 			const width = Math.ceil($(item).width());
@@ -145,5 +172,7 @@ const leavingContext = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+	// leavingContext.setTitleText();
+	leavingContext.setEmptyText();
 	leavingContext.getData();
 });

@@ -6,7 +6,7 @@
       </#list>
     </@tagTag>
   </div>
-  <#assign enable_share = metas.enable_share!'true'>
+  <#assign enable_share = (metas?? && metas.enable_share?? && metas.enable_share?trim!='')?then(metas.enable_share?trim,'true')>
   <#if enable_share=='true' && settings.enable_share==true && post.status!='DRAFT'>
     <div class="joe_detail__operate-share">
       <i class="joe-font joe-icon-share"></i>
@@ -54,7 +54,7 @@
       </div>
     </div>
   </#if>
-  <#assign enable_donate = metas.enable_donate!'true'>
+  <#assign enable_donate = (metas?? && metas.enable_donate?? && metas.enable_donate?trim!='')?then(metas.enable_donate?trim,'true')>
   <#if enable_donate=='true' && settings.enable_donate==true && post.status!='DRAFT'>
     <#include "donate.ftl">
   </#if>

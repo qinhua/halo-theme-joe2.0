@@ -442,7 +442,7 @@ const commonContext = {
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
-			".joe_detail__article img:not(img.owo_image), .page-sheet img:not([class])"
+			".joe_detail__article img:not(img.owo_image), .page-journals img:not([class]), .page-sheet img:not([class])"
 		);
 		if (!$allImgs.length) return;
 		$allImgs.each(function () {
@@ -661,8 +661,14 @@ const commonContext = {
 	/* 初始化网站运行时间 */
 	initBirthday() {
 		if (!ThemeConfig.enable_birthday) return;
+		if(!/^\d+$/g.test(ThemeConfig.birthday)||!/^\d+$/g.test(ThemeConfig.birthday)){
+			console.error("“自定义博客起始时间” 格式错误，请检查！");
+			return;
+		}
 		const birthDay = new Date(
-			+$(".site_life").attr("data-birthday").replace(/,/g, "")
+			/^\d+$/g.test(ThemeConfig.birthday)
+				? +ThemeConfig.birthday
+				: ThemeConfig.birthday
 		);
 		const $day = $(".joe_run__day");
 		const $hour = $(".joe_run__hour");
@@ -726,25 +732,41 @@ const commonContext = {
 			_last = _now;
 		});
 	},
-	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-	scrollToHash() {
-		const scroll = new URLSearchParams(location.search).get("scroll");
-		if (scroll) {
-			const height = $(".joe_header").height();
-			let elementEL = null;
-			if ($("#" + scroll).length > 0) {
-				elementEL = $("#" + scroll);
-			} else {
-				elementEL = $("." + scroll);
-			}
-			if (elementEL && elementEL.length > 0) {
-				const top = elementEL.offset().top - height - 15;
-				window.scrollTo({
-					top,
-					behavior: "smooth",
-				});
-			}
+	/* 渲染数学公式 */
+	initMathjax() {
+		const enable_mathjax =
+      PageAttrs.metas.enable_mathjax &&
+      PageAttrs.metas.enable_mathjax.trim() != ""
+      	? PageAttrs.metas.enable_mathjax.trim()
+      	: ThemeConfig.enable_mathjax;
+		if (/^true$/.test(enable_mathjax) && window.katex) {
+			renderMathInElement(document.body, {
+				delimiters: [
+					{ left: "$$", right: "$$", display: true },
+					{ left: "$", right: "$", display: false },
+					{ left: "\\(", right: "\\)", display: false },
+					{ left: "\\[", right: "\\]", display: true },
+				],
+				throwOnError: false,
+			});
 		}
+	},
+	/* 渲染最新评论中的 emoji */
+	renderReplyEmoji() {
+		const $replys = $(".aside-reply-content");
+		$replys.each((_index, item) => {
+			// 获取转换后的marked
+			const markedHtml = marked(item.innerHTML)
+				.replace(
+					/<img\ssrc[^>]*>/gm,
+					"<i class=\"joe-font joe-icon-tupian\"></i>"
+				)
+				.replace(/bili\//g, "bili/hd/ic_emoji_");
+			// 处理其中的表情包
+			const emoji = Utils.renderedEmojiHtml(markedHtml);
+			// 将回车转换为br
+			item.innerHTML = Utils.return2Br(emoji);
+		});
 	},
 	/* 禁用浏览器空格滚动页面 */
 	cancelSpaceScroll() {
@@ -768,22 +790,25 @@ const commonContext = {
 			}
 		};
 	},
-	/* 渲染最新评论中的 emoji */
-	renderReplyEmoji() {
-		const $replys = $(".aside-reply-content");
-		$replys.each((_index, item) => {
-			// 获取转换后的marked
-			const markedHtml = marked(item.innerHTML)
-				.replace(
-					/<img\ssrc[^>]*>/gm,
-					"<i class=\"joe-font joe-icon-tupian\"></i>"
-				)
-				.replace(/bili\//g, "bili/hd/ic_emoji_");
-			// 处理其中的表情包
-			const emoji = Utils.renderedEmojiHtml(markedHtml);
-			// 将回车转换为br
-			item.innerHTML = Utils.return2Br(emoji);
-		});
+	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
+	scrollToHash() {
+		const scroll = new URLSearchParams(location.search).get("scroll");
+		if (scroll) {
+			const height = $(".joe_header").height();
+			let elementEL = null;
+			if ($("#" + scroll).length > 0) {
+				elementEL = $("#" + scroll);
+			} else {
+				elementEL = $("." + scroll);
+			}
+			if (elementEL && elementEL.length > 0) {
+				const top = elementEL.offset().top - height - 15;
+				window.scrollTo({
+					top,
+					behavior: "smooth",
+				});
+			}
+		}
 	},
 	/* 初始化pjax */
 	// initPjax() {},

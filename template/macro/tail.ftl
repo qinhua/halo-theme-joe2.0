@@ -35,12 +35,15 @@
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
-  <#if settings.enable_mathjax!false>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+  <#assign enable_mathjax = (metas?? && metas.enable_mathjax?? && metas.enable_mathjax?trim!='')?then(metas.enable_mathjax?trim,settings.enable_mermaid?then('true','false'))>
+  <#if enable_mathjax == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
+    <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.css">
+    <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.js"></script>
+    <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/contrib/auto-render.min.js"></script>
   </#if>
-  <#if settings.enable_mermaid!false>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.4/dist/mermaid.min.js"></script>
+  <#assign enable_mermaid = (metas?? && metas.enable_mermaid?? && metas.enable_mermaid?trim!='')?then(metas.enable_mermaid?trim,settings.enable_mermaid?then('true','false'))>
+  <#if enable_mermaid == 'true'>
+    <script src="${BASE_RES_URL}/source/lib/mermaid@8.4.4/mermaid.min.js"></script>
   </#if>
   <#if settings.favicon??>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>

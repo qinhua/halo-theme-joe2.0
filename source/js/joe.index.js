@@ -105,7 +105,7 @@ const homeContext = {
 		let queryData = {
 			page: 0,
 			size: pageSize,
-			sort: `topPriority,${ThemeConfig.post_index_sort},desc`, // 默认为置顶优先+创建时间+倒序
+			sort: "topPriority,createTime,desc", // 默认为置顶优先+创建时间+倒序
 		};
 
 		// 初始化Dom
