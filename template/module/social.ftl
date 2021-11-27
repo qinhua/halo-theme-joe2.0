@@ -1,6 +1,6 @@
 
 <#--  社交账号模板  -->
-<#if settings.github?? || settings.zhihu?? || settings.juejin?? || settings.bilibili?? || settings.qq?? || settings.weibo?? || settings.email?? || settings.custome_social_channel??>
+<#if settings.github?? || settings.gitee?? || settings.zhihu?? || settings.telegram?? || settings.juejin?? || settings.bilibili?? || settings.qq?? || settings.weibo?? || settings.email?? || settings.custome_social_channel??>
   <div class="social-account">
     <#if settings.github??>
       <style type="text/css">
@@ -21,6 +21,11 @@
     <#if settings.zhihu??>
       <a class="zhihu" href="${settings.zhihu!}" target="_blank" title="知乎" rel="noopener noreferrer nofollow">
         <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="23" height="22"><path d="M564.7 230.1V803h60l25.2 71.4L756.3 803h131.5V230.1H564.7z m247.7 497h-59.9l-75.1 50.4-17.8-50.4h-18V308.3h170.7v418.8zM526.1 486.9H393.3c2.1-44.9 4.3-104.3 6.6-172.9h130.9l-0.1-8.1c0-0.6-0.2-14.7-2.3-29.1-2.1-15-6.6-34.9-21-34.9H287.8c4.4-20.6 15.7-69.7 29.4-93.8l6.4-11.2-12.9-0.7c-0.8 0-19.6-0.9-41.4 10.6-35.7 19-51.7 56.4-58.7 84.4-18.4 73.1-44.6 123.9-55.7 145.6-3.3 6.4-5.3 10.2-6.2 12.8-1.8 4.9-0.8 9.8 2.8 13 10.5 9.5 38.2-2.9 38.5-3 0.6-0.3 1.3-0.6 2.2-1 13.9-6.3 55.1-25 69.8-84.5h56.7c0.7 32.2 3.1 138.4 2.9 172.9h-141l-2.1 1.5c-23.1 16.9-30.5 63.2-30.8 65.2l-1.4 9.2h167c-12.3 78.3-26.5 113.4-34 127.4-3.7 7-7.3 14-10.7 20.8-21.3 42.2-43.4 85.8-126.3 153.6-3.6 2.8-7 8-4.8 13.7 2.4 6.3 9.3 9.1 24.6 9.1 5.4 0 11.8-0.3 19.4-1 49.9-4.4 100.8-18 135.1-87.6 17-35.1 31.7-71.7 43.9-108.9L497 850l5-12c0.8-1.9 19-46.3 5.1-95.9l-0.5-1.8-108.1-123-22 16.6c6.4-26.1 10.6-49.9 12.5-71.1h158.7v-8c0-40.1-18.5-63.9-19.2-64.9l-2.4-3z" fill="#0066ff"></path></svg>
+      </a>
+    </#if>
+    <#if settings.telegram??>
+      <a class="telegram" href="${settings.telegram!}" target="_blank" title="Telegram" rel="noopener noreferrer nofollow">
+        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M679.428571 746.857143l84-396q5.142857-25.142857-6-36t-29.428571-4L234.285714 501.142857q-16.571429 6.285714-22.571428 14.285714t-1.428572 15.142858 18.285715 11.142857l126.285714 39.428571 293.142857-184.571428q12-8 18.285714-3.428572 4 2.857143-2.285714 8.571429l-237.142857 214.285714-9.142857 130.285714q13.142857 0 25.714285-12.571428l61.714286-59.428572 128 94.285715q36.571429 20.571429 46.285714-21.714286z m344.571429-234.857143q0 104-40.571429 198.857143t-109.142857 163.428571-163.428571 109.142857-198.857143 40.571429-198.857143-40.571429-163.428571-109.142857-109.142857-163.428571T0 512t40.571429-198.857143 109.142857-163.428571T313.142857 40.571429 512 0t198.857143 40.571429 163.428571 109.142857 109.142857 163.428571 40.571429 198.857143z" fill="#1296db"></path></svg>
       </a>
     </#if>
     <#if settings.juejin??>
@@ -51,9 +56,9 @@
     </#if>
     <#if settings.custome_social_channel??>
       <#assign channel=settings.custome_social_channel?split('\n')>
-      <#assign channel_name=(channel[0]?? && channel[0]!='')?then(channel[0]?trim!'','')>
-      <#assign channel_logo=(channel[1]?? && channel[1]!='')?then(channel[1]?trim!'','')>
-      <#assign channel_link=(channel[2]?? && channel[2]!='')?then(channel[2]?trim!'','')>
+      <#assign channel_name=(channel[0]?? && channel[0]?trim!='')?then(channel[0]?trim,'')>
+      <#assign channel_logo=(channel[1]?? && channel[1]?trim!='')?then(channel[1]?trim,'')>
+      <#assign channel_link=(channel[2]?? && channel[2]?trim!='')?then(channel[2]?trim,'')>
       <#if channel_name!='' && channel_logo!='' && channel_link!=''>
         <a class="custom_channel" href="${channel_link}" target="_blank" title="${channel_name}" rel="noopener noreferrer nofollow">
           <img src="${channel_logo}" alt="${channel_name}"/>
