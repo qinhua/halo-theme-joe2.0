@@ -14,17 +14,25 @@ require: ^1.4.11
 postMetaField:
   - enable_aside
   - enable_comment
+  - enable_collect_check
   - enable_toc
   - toc_depth
+  - img_align
   - enable_copy
   - enable_donate
   - enable_share
   - enable_like
   - code_theme
+  - enable_mathjax
+  - enable_mermaid
 
 # 自定义页 meta 变量
 sheetMetaField:
   - enable_aside
   - enable_page_meta
+  - enable_collect_check
   - enable_comment
+  - enable_mathjax
+  - enable_mermaid
+  - img_align
   # - show_thumbnail

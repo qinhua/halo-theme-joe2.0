@@ -29,12 +29,14 @@ assignees: ""
 
 **PC 端 (请提供以下信息):**
 
+- Halo 版本：[e.g. 1.4.11]
 - 操作系统：[e.g. iOS]
 - 浏览器：[e.g. chrome, safari]
 - 版本：[e.g. 22]
 
 **移动端 (请提供以下信息):**
 
+- Halo 版本：[e.g. 1.4.11]
 - 设备型号：[e.g. iPhone6]
 - 操作系统：[e.g. iOS8.1]
 - 浏览器：[e.g. stock browser, safari]

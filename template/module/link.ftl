@@ -4,6 +4,20 @@
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link rel="apple-touch-icon" sizes="180x180" href="${options.blog_favicon!}">
   <#include "key_css.ftl">
+  <#if settings.enable_loading_bar!true>
+      <!-- 加载条 -->
+      <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.css">
+      <style>
+          #nprogress .bar {
+            height: ${settings.loading_bar_height!};
+            background: var(--loading-bar);
+          }
+          #nprogress .peg {
+            display: none;
+          }
+      </style>
+      <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
+    </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.normalize.min.css?v=${theme.version!}"> 
   <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_31wnn7gieq3.css">
   <#if settings.iconfont??>
@@ -18,7 +32,7 @@
   </#if>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.css?v=${theme.version!}">
-    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme!='')?then(metas.code_theme,settings.code_theme)}.css?v=${theme.version!}">
+    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme?trim!='')?then(metas.code_theme?trim,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
   <#if type == 'index'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.index.min.css?v=${theme.version!}">
@@ -44,9 +58,6 @@
   </#if>  -->
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.responsive.min.css?v=${theme.version!}">
   <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/fancybox/jquery.fancybox.min.css">
-  <#if settings.enable_mathjax == true && (type == 'post' || type == 'journals')>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
-  </#if>
   <#if settings.enable_clean_mode != true && settings.cursor_skin?? && settings.cursor_skin != 'off'>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/cursor/style/min/${settings.cursor_skin!}.min.css?v=${theme.version!}">
   </#if>
