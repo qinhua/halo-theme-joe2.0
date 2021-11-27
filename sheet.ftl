@@ -12,7 +12,7 @@
             <#include "template/macro/post_status.ftl">
             <@post_status status=sheet.status />
             <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id}">${sheet.title}</h1>
-            <#assign enable_page_meta = metas.enable_page_meta!'true'>
+            <#assign enable_page_meta = (metas?? && metas.enable_page_meta?? && metas.enable_page_meta?trim!='')?then(metas.enable_page_meta?trim,'true')>
             <#if enable_page_meta=='true'>
               <div class="joe_detail__count">
                 <div class="joe_detail__count-information">
@@ -29,7 +29,8 @@
                       <span class="text" >${sheet.visits} 阅读</span>
                       <span class="line">/</span>
                       <span class="text" >${sheet.wordCount!0} 字</span>
-                      <#if settings.check_baidu_collect!false>
+                      <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
+                      <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
                         <span class="line">/</span>
                         <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
                       </#if>
@@ -42,13 +43,14 @@
             <#--  <#if sheet.thumbnail?? && sheet.thumbnail!=''>
               <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>
             </#if>  -->
-            <article class="joe_detail__article animated fadeIn${settings.enable_single_code_select?then(' single_code_select','')}">
+            <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,'center')>
+            <article class="joe_detail__article animated fadeIn ${(img_align!(settings.post_img_align!'center'))+'-img'}${settings.enable_single_code_select?then(' single_code_select','')}">
               ${sheet.formatContent!}
             </article>
             <#--  <#import "template/common/post_copyright.ftl" as pc>  -->
             <#--  <@pc.post_copyright post_url="${sheet.fullPath}"/>  -->
           </div>
-          <#assign enable_comment = metas.enable_comment!'true'>
+          <#assign enable_comment = (metas?? && metas.enable_comment?? && metas.enable_comment?trim!='')?then(metas.enable_comment?trim,'true')>
           <#if settings.enable_clean_mode!=true && settings.enable_comment==true && sheet.status!='DRAFT'>
             <div class="joe_comment">
               <#if sheet.disallowComment == true || enable_comment == 'false'>
@@ -74,7 +76,7 @@
             </div>
           </#if>
         </div>
-        <#assign enable_aside = metas.enable_aside!'true'>
+        <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'true')>
         <#if settings.enable_sheet_aside == true && enable_aside == 'true'>
           <#include "template/common/aside.ftl">
         </#if>

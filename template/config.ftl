@@ -44,6 +44,7 @@
   ThemeConfig['name'] = '${options.theme!"Joe2.0"}';
   ThemeConfig['version'] = '${theme.version!}';
   ThemeConfig['mode'] = '${mode!}';
+  ThemeConfig['birthday'] = '${(settings.custom_birthday?? && settings.custom_birthday?trim != "")?then(settings.custom_birthday?trim, options.birthday?replace(",",""))}';
   ThemeConfig['blog_title'] = '${blog_title?js_string!}';
   ThemeConfig['blog_url'] = '${blog_url!}';
   ThemeConfig['author'] = 'M酷';
@@ -56,7 +57,7 @@
 </script>
 
 <script id="metas-getter" type="text/javascript">
-  // 获取当前页面元数据
+  // 获取当前页面元数据，这里不要做解析
   window.PageAttrs = {
     "metas": {
       <#if metas??>

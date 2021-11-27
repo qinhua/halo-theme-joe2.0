@@ -211,20 +211,6 @@ const postContext = {
 			$(".joe_detail__article-video .episodes .item").first().click();
 		}
 	},
-	/* 渲染数学公式 */
-	initMathjax() {
-		if (ThemeConfig.enable_mathjax && window.katex) {
-			renderMathInElement(document.body, {
-				delimiters: [
-					{ left: "$$", right: "$$", display: true },
-					{ left: "$", right: "$", display: false },
-					{ left: "\\(", right: "\\)", display: false },
-					{ left: "\\[", right: "\\]", display: true },
-				],
-				throwOnError: false,
-			});
-		}
-	},
 	/* TODO:密码保护文章，输入密码访问 */
 	// initArticleProtect() {
 	//   const cid = $(".joe_detail").attr("data-cid");

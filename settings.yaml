@@ -264,6 +264,20 @@ theme:
           label: 开启
         - value: false
           label: 关闭
+    scrollbar_width:
+      name: scrollbar_width
+      label: 滚动条宽度
+      type: text
+      default: "8px"
+      placeholder: "请输入宽度，单位px"
+      description: "设置全局滚动条的宽度，默认为 8px，填 0 相当于不显示"
+    scrollbar_color:
+      name: scrollbar_color
+      label: 滚动条颜色
+      type: text
+      default: ""
+      placeholder: "请输入有效的颜色值"
+      description: "设置全局滚动条背景色，默认跟随系统色。如需分别设置浅色/暗黑模式下的颜色，请严格按照 【浅色模式颜色|深色模式颜色】 这种格式，用 “|” 隔开"
     enable_loading_bar:
       name: enable_loading_bar
       label: 开启页面加载条
@@ -281,13 +295,15 @@ theme:
       label: 加载条高度
       type: text
       default: "3px"
-      placeholder: "加载条高度，默认3px"
+      placeholder: "请输入高度，单位px"
+      description: "设置全局加载条的高度，默认为 3px，填 0 相当于不显示"
     loading_bar_color:
       name: loading_bar_color
       label: 加载条颜色
       type: text
       default: ""
-      placeholder: "加载条背景色，默认跟随主题色"
+      placeholder: "请输入有效的颜色值"
+      description: "设置全局加载条背景色，默认跟随主题色。如需分别设置浅色/暗黑模式下的颜色，请严格按照 【浅色模式颜色|深色模式颜色】 这种格式，用 “|” 隔开"
 
 # 导航条
 navbar:
@@ -383,7 +399,7 @@ footer:
   items:
     enable_footer:
       name: enable_footer
-      label: 展示页脚
+      label: 启用页脚
       type: switch
       data-type: bool
       default: true
@@ -395,29 +411,35 @@ footer:
     footer_source:
       name: footer_source
       label: 页脚来源
-      type: radio
+      type: select
       data-type: text
       default: theme
-      description: "设置页脚内容具体来自哪里，默认使用主题页脚，也可同时使用主题和后台配置的页脚。如果使用后台自定义页脚，建议复制主题的页脚 html 结构进行修改，然后粘贴到后台的页脚配置内（主题无法保证自定义页脚的样式及适配，请视具体情况设置）"
+      description: "设置页脚内容具体来自哪里，默认使用主题页脚，也可同时使用主题和后台配置的页脚。如果使用后台自定义页脚，建议复制主题的页脚 html 结构进行修改（/template/common/footer.ftl），然后粘贴到后台的页脚配置内（主题无法保证自定义页脚的样式及适配，请视具体情况设置）"
       options:
-        - value: both
-          label: "主题页脚 + 后台页脚"
         - value: theme
           label: "主题页脚"
         - value: backend
           label: "后台页脚"
+        - value: both
+          label: "主题页脚 + 后台页脚"
     enable_birthday:
       name: enable_birthday
       label: "展示博客运行时间"
       type: switch
       data-type: bool
       default: false
-      description: "实时展示博客运行时长（默认关闭以节省性能）"
+      description: "实时展示博客运行时长，以博客实际的安装时间为基准计算（默认关闭以节省性能）"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
+    custom_birthday:
+      name: custom_birthday
+      label: "自定义博客起始时间"
+      type: text
+      default: ""
+      description: "自定义博客的起始时间/安装时间，作为计算博客运行时间的参照值，请严格按照示例格式填写，否则将导致报错（示例：2021/11/11 6:30）"
     enable_rss:
       name: enable_rss
       label: 展示RSS
@@ -503,8 +525,7 @@ blogger:
       name: author_bg
       label: 博主栏背景图
       type: attachment
-      # default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/author_bg.jpg"
-      default: ""
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/author_bg.jpg"
       description: "用于博主信息的背景图"
     avatar_type:
       name: avatar_type
@@ -650,7 +671,7 @@ carousel:
       type: select
       data-type: text
       default: manual
-      description: "主题提供了 5 种数据来源，默认手动配置（需要自己在下面配置轮播数据），其它几种会自动去获取数据，但是请注意相应文章数据及封面要规范，否则可能不美观或展示异常（文章封面取值逻辑和首页列表一致【文章封面 > 分类封面 > 标签封面 > 随机图(若开启) > 默认封面】，当获取的数据为空时，则默认展示 “欢迎使用Joe2.0主题”）"
+      description: "主题提供了 7 种数据来源，默认手动配置（需要自己在下面配置轮播数据），其它几种会自动去获取数据，但是请注意相应文章数据及封面要规范，否则可能不美观或展示异常（文章封面取值逻辑和首页列表一致【文章封面 > 分类封面 > 标签封面 > 随机图(若开启) > 默认封面】，当获取的数据为空时，则默认展示 “欢迎使用Joe2.0主题”）"
       options:
         - value: manual
           label: 手动配置
@@ -1459,7 +1480,7 @@ post:
           label: 否
     enable_title_shadow:
       name: enable_title_shadow
-      label: 显示标题阴影
+      label: 开启标题阴影
       type: switch
       data-type: bool
       default: true
@@ -1483,10 +1504,23 @@ post:
     passage_tips_content:
       name: passage_tips_content
       label: 温馨提示文案
-      type: text
+      type: textarea
       default: ""
       placeholder: "请输入"
       description: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
+    post_img_align:
+      name: post_img_align
+      label: 图片对齐方式
+      type: select
+      data-type: text
+      default: center
+      options:
+        - value: left
+          label: 左对齐
+        - value: center
+          label: 居中
+        - value: right
+          label: 右对齐
     enable_progress_bar:
       name: enable_progress_bar
       label: 启用文章浏览进度条
@@ -1603,11 +1637,11 @@ post:
       description: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
     enable_mathjax:
       name: enable_mathjax
-      label: "开启 mathjax 支持"
+      label: "开启 Mathjax 支持"
       type: switch
       data-type: bool
       default: false
-      description: "markdown中使用```math```包裹公式即可，目前仅对文章详情页生效"
+      description: "markdown中使用```math```包裹公式即可"
       options:
         - value: true
           label: 开启
@@ -1615,7 +1649,7 @@ post:
           label: 关闭
     enable_mermaid:
       name: enable_mermaid
-      label: "开启 mermaid 支持"
+      label: "开启 Mermaid 支持"
       type: switch
       data-type: bool
       default: false
@@ -2009,6 +2043,30 @@ photos:
       type: text
       default: "10"
       placeholder: 请输入图片间距值，默认10（请填数字）
+
+#留言页
+leaving:
+  label: 留言页
+  items: 
+    # leaving_title:
+    #   name: leaving_title
+    #   label: 留言页标题
+    #   default: "留言板"
+    #   placeholder: "请输入"
+    #   description: "修改留言页顶部展示的标题"
+    # leaving_card_max:
+    #   name: leaving_card_max
+    #   label: 卡片最大数量
+    #   type: text
+    #   data-type: long
+    #   default: 20
+    #   description: "配置顶部卡片墙中展示的最大卡片量（默认为当前分页数 10）"
+    leaving_empty_text:
+      name: leaving_empty_text
+      label: 空白状态文案
+      default: "暂无留言，期待第一个脚印。"
+      placeholder: "请输入"
+      description: "修改无数据时展示的文案"
 
 # 友链页
 links:
