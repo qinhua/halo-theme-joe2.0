@@ -2324,6 +2324,12 @@ social:
       defaut: ""
       # default: "https://www.zhihu.com"
       placeholder: "知乎主页地址"
+    telegram:
+      name: telegram
+      label: Telegram
+      type: text
+      defaut: ""
+      placeholder: "Telegram主页地址"
     juejin:
       name: juejin
       label: 掘金
