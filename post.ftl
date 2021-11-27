@@ -13,14 +13,12 @@
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id}" data-clikes="${post.likes}" data-curl="${post.fullPath}">
             <#include "template/macro/post_status.ftl">
             <@post_status status=post.status />
-            <#if post.status=='PUBLISHED'>
-              <#list post.categories as category>
-                <#if category_index == 0>
-                  <div class="joe_detail__category">
-                    <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
-                  </div>
-                </#if>
-              </#list>
+            <#if post.status=='PUBLISHED' && post.categories?size gt 0>
+              <div class="joe_detail__category">
+                <#list post.categories as category>
+                  <a href="${category.fullPath}" class="item item-0" title="${category.name!}">${category.name!}</a>
+                </#list>
+              </div>
             </#if>
             <h1 class="joe_detail__title${settings.enable_title_shadow?string(' txt-shadow', '')}">${post.title!}</h1>
             <div class="joe_detail__count">
