@@ -7,7 +7,7 @@ description: Halo主题 Joe2.0
 logo: https://bbchin.com/logo
 website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
-cover: https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.webp
+cover: https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg
 version: 1.0.6
 require: ^1.4.11
 # 文章页 meta 变量
