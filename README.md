@@ -10,13 +10,13 @@
 
 <p align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/Halo-1.4.11-p" alt="Halo"/>
+    <img src="https://img.shields.io/badge/Halo-1.4.11+-p" alt="Halo"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
     <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/Release-1.0.0-green" alt="Release"/>
+    <img src="https://img.shields.io/badge/Release-1.0.6-green" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
@@ -24,7 +24,7 @@
 </p>
 
 > `Joe2.0` 是 [Typecho Themes Joe](https://github.com/HaoOuBa/Joe) 主题的 Halo 版，由于 [社区](https://bbs.halo.run/) 之前有兄弟移植过，这次就叫 Joe2.0 吧，此次在原版主题上做了不少修改和适配，由原版的 php 模板调整为 freemarker， 移除了平台无关的特性，同时增加了一些平台特定的配置，保持灵活性的同时最大限度的移植了原版功能，希望大家喜欢 ❤️ <br>
-> 🌸 同时也要在此感谢原作者 [Joe](https://github.com/HaoOuBa)，欢迎大家加入 Joe2.0 交流群 850501175。
+> 🌸 同时也要在此感谢原作者 [Joe](https://github.com/HaoOuBa)，欢迎大家加入 [Joe2.0 交流群：850501175](https://qm.qq.com/cgi-bin/qm/qr?k=JJ3FVO1i_plWJohono16N5z7XI_dqEpK&jump_from=webapi)
 
 <br>
 
@@ -34,7 +34,7 @@
 
 **主题效果图** 👇
 
-![screenshot](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/mockup.jpg)
+![mockup](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/mockup.jpg)
 
 <!-- ![暗黑模式](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_dark.png)
 ![浅色模式](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/shot_light.png) -->
@@ -118,6 +118,7 @@ Tip：如果你后台管理中之前已经配置了其它的 `Access Key`（内�
 - 社交账号配置
 - 二维码打赏
 - 广告配置 <侧边栏 + 文章页>
+- 页面元数据控制
 - 自定义 JS/CSS
 - 自定义 favicon <支持视频、动图>
 - 站点运行时间
@@ -175,9 +176,9 @@ Tip：如果你后台管理中之前已经配置了其它的 `Access Key`（内�
 
 > 目前仍有部分功能不完善，暂时没时间做，后面继续迭代。
 
-- 博客总访问量
-- 归档页统计图标
-- 评论组件定制化（皮肤、参数简化、头像保存等）
+- 总访问量
+- 统计页面
+- 评论组件升级（头像保存等）
 - 动态背景
 - 国际化
 - 全站 Pjax
@@ -185,7 +186,7 @@ Tip：如果你后台管理中之前已经配置了其它的 `Access Key`（内�
 - 视频播放插件
 - 相册页优化
 - 多种布局切换
-- 展示动画优化
+- 页面动画效果优化
 - 外链页面评论模块
 - 自定义模板引擎
 - 文章评论后可见
