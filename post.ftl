@@ -70,8 +70,8 @@
               </#if>
             </div>
             <#assign enable_copy = (metas?? && metas.enable_copy?? && metas.enable_copy?trim!='')?then(metas.enable_copy?trim,'true')>
-            <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,'center')>
-            <article class="joe_detail__article animated fadeIn ${(img_align!(settings.post_img_align!'center'))+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+            <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
+            <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${settings.enable_single_code_select?then(' single_code_select','')}">
               ${post.formatContent!}
             </article>
             <#assign enable_toc = (metas?? && metas.enable_toc?? && metas.enable_toc?trim!='')?then(metas.enable_toc?trim,'true')>
