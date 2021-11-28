@@ -241,7 +241,8 @@ const homeContext = {
 		});
 
 		// 加载更多
-		$domLoad.on("click", async function () {
+		$domLoad.on("click", async function (e) {
+			e.stopPropagation();
 			if ($(this).attr("loading")) return;
 			const lastItemTop = $domList.find(".joe_list__item:last").offset().top;
 			queryData.page++;
