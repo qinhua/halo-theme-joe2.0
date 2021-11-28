@@ -150,7 +150,7 @@ const journalContext = {
 		$allBlocks.each(function () {
 			const $this = $(this);
 			if (
-				$this[0].getBoundingClientRect().height >
+				$this[0].getBoundingClientRect().height >=
         ThemeConfig.journal_block_height
 			) {
 				$this.siblings(".journal_content_expander").show();
