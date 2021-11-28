@@ -546,31 +546,6 @@ const commonContext = {
 		$(".tags-cloud-list").remove();
 		$("#tags-3d .empty").remove();
 	},
-	/* 激活Live2d人物 */
-	initLive2d() {
-		if (!ThemeConfig.enable_live2d) return;
-		$.getScript(
-			"https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js",
-			() => {
-				L2Dwidget.init({
-					model: {
-						jsonPath: Joe.LIVE2D,
-						scale: 1,
-					},
-					mobile: {
-						show: false,
-					},
-					display: {
-						position: "right",
-						width: 160,
-						height: 200,
-						hOffset: 70,
-						vOffset: 0,
-					},
-				});
-			}
-		);
-	},
 	/* 首页离屏提示 */
 	offscreenTip() {
 		if (!ThemeConfig.enable_offscreen_tip) return;
@@ -661,8 +636,8 @@ const commonContext = {
 	/* 初始化网站运行时间 */
 	initBirthday() {
 		if (!ThemeConfig.enable_birthday) return;
-		if(!/^\d+$/g.test(ThemeConfig.birthday)||!/^\d+$/g.test(ThemeConfig.birthday)){
-			console.error("“自定义博客起始时间” 格式错误，请检查！");
+		if(!/^\d+$/.test(ThemeConfig.birthday) && !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(ThemeConfig.birthday)){
+			Qmsg.error("“自定义博客起始时间” 格式错误，请检查！");
 			return;
 		}
 		const birthDay = new Date(
@@ -840,7 +815,6 @@ const commonContext = {
 	const omits = [
 		"loadingBar",
 		"init3dTag",
-		"initLive2d",
 		"foldCode",
 		"showLoadTime",
 		"clean",
