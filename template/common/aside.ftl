@@ -7,7 +7,8 @@
     <#if settings.enable_notice && settings.site_notice??>
       <section class="joe_aside__item notice">
         <div class="joe_aside__item-title">
-          <i class="joe-font joe-icon-speaker"></i>
+          <#--  <i class="joe-font joe-icon-speaker"></i>  -->
+          <#include "../module/speaker.ftl">
           <span class="text">公告信息</span>
         </div>
         <div class="joe_aside__item-contain">

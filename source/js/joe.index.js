@@ -39,13 +39,13 @@ const homeContext = {
 	/* 获取文章封面 */
 	getThumbnail(post) {
 		// 取值逻辑（文章封面 > 分类封面 > 标签封面 > 随机图(若开启) > 默认封面）
-		let thumbnail = post.thumbnail.trim() || "";
+		let thumbnail = post.thumbnail || "";
 		if (!thumbnail) {
 			if (post.categories.length) {
-				thumbnail = post.categories[0].thumbnail.trim();
+				thumbnail = post.categories[0].thumbnail;
 				if (!thumbnail) {
 					if (post.tags.length) {
-						thumbnail = post.tags[0].thumbnail.trim();
+						thumbnail = post.tags[0].thumbnail;
 						if (!thumbnail) {
 							thumbnail = homeContext.getDefaultThumbnail(post.id);
 						}
@@ -55,7 +55,7 @@ const homeContext = {
 				}
 			} else {
 				if (post.tags.length) {
-					thumbnail = post.tags[0].thumbnail.trim();
+					thumbnail = post.tags[0].thumbnail;
 					if (!thumbnail) {
 						thumbnail = homeContext.getDefaultThumbnail(post.id);
 					}

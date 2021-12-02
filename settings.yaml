@@ -700,7 +700,7 @@ carousel:
       type: text
       default: ""
       placeholder: "请输入"
-      description: "当数据源为 “特定关键词/分类/标签” 文章时，需要在这里设置【关键词/分类别名/标签别名】进行匹配，相关别名请到 “后台管理-文章” 菜单下获取。（别名或内容为空时展示 “欢迎使用Joe2.0主题”） "
+      description: "当数据源为 “特定关键词/分类/标签” 文章时，需要在这里设置【关键词/分类别名/标签别名】进行匹配，相关别名请到 “后台管理-文章” 菜单下获取。（填写错误的别名可能导致网站无法渲染，别名或内容为空时展示 “欢迎使用Joe2.0主题”） "
     bannerData:
       name: bannerData
       label: 手动配置数据
@@ -3082,18 +3082,18 @@ others:
       default: ""
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit"
-    # enable_pjax:
-    #   name: enable_pjax
-    #   label: 全局Pjax
-    #   type: switch
-    #   data-type: bool
-    #   default: false
-    #   description: "开启音乐播放器后，建议开启pjax以优化用户体验"
-    #   options:
-    #     - value: true
-    #       label: 开启
-    #     - value: false
-    #       label: 关闭
+    enable_pjax:
+      name: enable_pjax
+      label: 全局Pjax
+      type: switch
+      data-type: bool
+      default: false
+      description: "启用全局 pjax 以优化用户体验（开启音乐播放器后建议开启）"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_cdn:
       name: enable_cdn
       label: 使用CDN加载静态资源

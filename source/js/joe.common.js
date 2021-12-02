@@ -230,40 +230,6 @@ const commonContext = {
 			},
 		});
 	},
-	/* 加载鼠标特效 */
-	loadMouseEffect() {
-		if (
-			ThemeConfig.enable_clean_mode ||
-      Joe.isMobile ||
-      ThemeConfig.cursor_effect === "off"
-		)
-			return;
-		$.getScript(
-			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
-		);
-	},
-	/* 加载背景特效 */
-	loadBackdropEffect() {
-		if (
-			ThemeConfig.enable_clean_mode ||
-      Joe.isMobile ||
-      ThemeConfig.backdrop === "off"
-		)
-			return;
-		$.getScript(
-			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
-		);
-	},
-	/* 自定义favicon */
-	setFavicon() {
-		if (!ThemeConfig.favicon) return;
-		const favicon = new Favico();
-		const image = new Image();
-		image.onload = function () {
-			favicon.image(image);
-		};
-		image.src = ThemeConfig.favicon;
-	},
 	/* 搜索框弹窗 */
 	searchDialog() {
 		const $result = $(".joe_header__above-search .result");
@@ -546,6 +512,40 @@ const commonContext = {
 		$(".tags-cloud-list").remove();
 		$("#tags-3d .empty").remove();
 	},
+	/* 加载鼠标特效 */
+	loadMouseEffect() {
+		if (
+			ThemeConfig.enable_clean_mode ||
+      Joe.isMobile ||
+      ThemeConfig.cursor_effect === "off"
+		)
+			return;
+		$.getScript(
+			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
+		);
+	},
+	/* 加载背景特效 */
+	loadBackdropEffect() {
+		if (
+			ThemeConfig.enable_clean_mode ||
+      Joe.isMobile ||
+      ThemeConfig.backdrop === "off"
+		)
+			return;
+		$.getScript(
+			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
+		);
+	},
+	/* 自定义favicon */
+	setFavicon() {
+		if (!ThemeConfig.favicon) return;
+		const favicon = new Favico();
+		const image = new Image();
+		image.onload = function () {
+			favicon.image(image);
+		};
+		image.src = ThemeConfig.favicon;
+	},
 	/* 首页离屏提示 */
 	offscreenTip() {
 		if (!ThemeConfig.enable_offscreen_tip) return;
@@ -576,14 +576,17 @@ const commonContext = {
 			/* 关闭搜索框 */
 			$(".joe_header__searchout").removeClass("active");
 			/* 处理开启关闭状态 */
-			if ($(".joe_header__slideout").hasClass("active")) {
-				$("body").css("overflow", "");
-				$(".joe_header__mask").removeClass("active slideout");
-				$(".joe_header__slideout").removeClass("active");
+			const $body = $("body");
+			const $mask = $(".joe_header__mask");
+			const $slide_out = $(".joe_header__slideout");
+			if ($slide_out.hasClass("active")) {
+				$body.removeClass("disable-scroll");
+				$mask.removeClass("active slideout");
+				$slide_out.removeClass("active");
 			} else {
-				$("body").css("overflow", "hidden");
-				$(".joe_header__mask").addClass("active slideout");
-				$(".joe_header__slideout").addClass("active");
+				$body.addClass("disable-scroll");
+				$mask.addClass("active slideout");
+				$slide_out.addClass("active");
 			}
 		});
 	},
@@ -593,14 +596,17 @@ const commonContext = {
 			/* 关闭侧边栏 */
 			$(".joe_header__slideout").removeClass("active");
 			/* 处理开启关闭状态 */
-			if ($(".joe_header__searchout").hasClass("active")) {
-				$("body").css("overflow", "");
-				$(".joe_header__mask").removeClass("active slideout");
-				$(".joe_header__searchout").removeClass("active");
+			const $body = $("body");
+			const $mask = $(".joe_header__mask");
+			const $search_out = $(".joe_header__searchout");
+			if ($search_out.hasClass("active")) {
+				$body.removeClass("disable-scroll");
+				$mask.removeClass("active slideout");
+				$search_out.removeClass("active");
 			} else {
-				$("body").css("overflow", "hidden");
-				$(".joe_header__mask").addClass("active");
-				$(".joe_header__searchout").addClass("active");
+				$body.addClass("disable-scroll");
+				$mask.addClass("active");
+				$search_out.addClass("active");
 			}
 		});
 	},
@@ -636,7 +642,12 @@ const commonContext = {
 	/* 初始化网站运行时间 */
 	initBirthday() {
 		if (!ThemeConfig.enable_birthday) return;
-		if(!/^\d+$/.test(ThemeConfig.birthday) && !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(ThemeConfig.birthday)){
+		if (
+			!/^\d+$/.test(ThemeConfig.birthday) &&
+      !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(
+      	ThemeConfig.birthday
+      )
+		) {
 			Qmsg.error("“自定义博客起始时间” 格式错误，请检查！");
 			return;
 		}
@@ -814,8 +825,15 @@ const commonContext = {
 !(function () {
 	const omits = [
 		"loadingBar",
+		"initHeadScroll",
+		"initGallery",
+		"initExternalLink",
 		"init3dTag",
 		"foldCode",
+		"initBaidu",
+		"loadMouseEffect",
+		"loadBackdropEffect",
+		"setFavicon",
 		"showLoadTime",
 		"clean",
 	];
