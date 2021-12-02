@@ -58,7 +58,7 @@
 
 ```
 “API has been disabled by blogger currently” —— 后台管理中未开启API服务
-“API access key is mismatch 主题中的 AccessKey” —— 和后台管理中的不一致
+“API access key is mismatch” —— 主题中的 AccessKey 和后台管理中的不一致
 ```
 
 Tip：如果你后台管理中之前已经配置了其它的 `Access Key`（内容不是 `joe2.0`），那么需要你到本主题设置中的 `基本设置` 同步一下 `AccessKey<必填>`，和你后台中的一致即可（切记一致才行，且不要填写中文或特殊字符）。
