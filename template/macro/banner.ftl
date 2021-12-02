@@ -3,7 +3,7 @@
   <#assign source_type = settings.banner_source>
   <#assign limit = (settings.banner_amount_limit!=0)?then(settings.banner_amount_limit,10)>
   <#assign keyword = settings.banner_specify_keyword?trim!>
-  <#assign is_empty = true>
+  <#assign is_empty = false>
 
   <#--  关键字或数据为空时显示欢迎图  -->
   <div class="joe_index__banner">
@@ -94,7 +94,7 @@
             <@postTag method="listByCategorySlug" categorySlug="${keyword}">
               <#if posts?size gt 0>
                 <#list posts as post>
-                  <@bitem.banner_item post=post index=post_index max=limit/>
+                  <@bitem.banner_item post=post index=post_index max=limit />
                 </#list>
               <#else>
                 <#assign is_empty = true>
@@ -111,7 +111,7 @@
             <@postTag method="listByTagSlug" tagSlug="${keyword}">
               <#if posts?size gt 0>
                 <#list posts as post>
-                  <@bitem.banner_item post=post index=post_index />
+                  <@bitem.banner_item post=post index=post_index max=limit />
                 </#list>
               <#else>
                 <#assign is_empty = true>
@@ -124,10 +124,10 @@
           </#if>
         </#if>
       </div>
-      <#if settings.enable_banner_pagination == true && is_empty == true>
+      <#if settings.enable_banner_pagination == true && is_empty != true>
         <div class="swiper-pagination"></div>
       </#if>
-      <#if settings.enable_banner_handle == true && settings.enable_banner_switch_button == true && is_empty == true>
+      <#if settings.enable_banner_handle == true && settings.enable_banner_switch_button == true && is_empty != true>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </#if>

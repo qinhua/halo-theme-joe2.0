@@ -618,9 +618,9 @@ html {
         }
 
         &__title {
-          &-notice {
-            display: none;
-          }
+          // &-notice {
+          //   display: none;
+          // }
 
           &-title {
             .item {
@@ -1008,85 +1008,6 @@ html {
 
             &:nth-child(3) .item {
               width: calc(100% / 2);
-            }
-          }
-        }
-      }
-
-      &_comment {
-        position: relative;
-
-        &__title {
-          font-size: 18px;
-          line-height: 32px;
-          text-align: left;
-        }
-
-        &__respond-type {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-
-          .item:first-child {
-            border-bottom-left-radius: var(--radius-inner);
-          }
-
-          .item:last-child {
-            border-bottom-right-radius: var(--radius-inner);
-          }
-        }
-
-        &__respond-form {
-          .head {
-            display: block;
-            border-bottom: none;
-
-            .list {
-              border-bottom: 1px solid var(--classB);
-
-              &:nth-child(2) {
-
-                &::before,
-                &::after {
-                  display: none;
-                }
-              }
-            }
-          }
-
-          .body .text {
-            height: 140px;
-          }
-        }
-
-        .comment-list__item-contain .term .avatar {
-          width: 34px;
-          height: 34px;
-          margin-right: 10px;
-        }
-
-        .comment-list__item-contain .term .content .user .agent {
-          display: none;
-        }
-
-        .comment-list__item-children {
-          padding-left: 0;
-        }
-
-        .comment-list__item .joe_comment__respond {
-          margin-left: 0;
-
-          &-type {
-            position: static;
-
-            .item {
-              &:first-child {
-                border-bottom-left-radius: 0;
-              }
-
-              &:last-child {
-                border-bottom-right-radius: 0;
-              }
             }
           }
         }
@@ -1759,86 +1680,6 @@ html {
         }
       }
 
-      &_comment {
-        position: relative;
-        border-radius: 0;
-
-        &__title {
-          font-size: 18px;
-          line-height: 32px;
-          text-align: left;
-        }
-
-        &__respond-type {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-
-          .item:first-child {
-            border-bottom-left-radius: var(--radius-inner);
-          }
-
-          .item:last-child {
-            border-bottom-right-radius: var(--radius-inner);
-          }
-        }
-
-        &__respond-form {
-          .head {
-            display: block;
-            border-bottom: none;
-
-            .list {
-              border-bottom: 1px solid var(--classB);
-
-              &:nth-child(2) {
-
-                &::before,
-                &::after {
-                  display: none;
-                }
-              }
-            }
-          }
-
-          .body .text {
-            height: 140px;
-          }
-        }
-
-        .comment-list__item-contain .term .avatar {
-          width: 34px;
-          height: 34px;
-          margin-right: 10px;
-        }
-
-        .comment-list__item-contain .term .content .user .agent {
-          display: none;
-        }
-
-        .comment-list__item-children {
-          padding-left: 0;
-        }
-
-        .comment-list__item .joe_comment__respond {
-          margin-left: 0;
-
-          &-type {
-            position: static;
-
-            .item {
-              &:first-child {
-                border-bottom-left-radius: 0;
-              }
-
-              &:last-child {
-                border-bottom-right-radius: 0;
-              }
-            }
-          }
-        }
-      }
-
       &_census {
         &__basic {
           &-item {
@@ -1909,6 +1750,17 @@ html {
         padding-left: 6px;
       }
     }
+
+    .joe_comment {
+      padding: 15px;
+      .joe_comment_box {
+        h2 {
+          padding: 20px 0;
+          font-size: 16px;
+        }
+      }
+    }
+    
   }
 
   @media (max-width: 375px) {

@@ -71,13 +71,14 @@ const postContext = {
 	initCopy() {
 		if (PageAttrs.metas.enable_copy === "false" || !ThemeConfig.enable_copy)
 			return;
-		const curl = $(".joe_detail").attr("data-curl") || location.href;
+		const curl = location.href;
+		const author = $(".joe_detail").attr("data-author");
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
 			const appendLink = ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
           `\r\n\r\n====================================<br>
-          作者：${ThemeConfig.author}<br>
+          作者：${author}<br>
           来源：${ThemeConfig.blog_title}<br>
           链接：${curl}<br>
           版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
