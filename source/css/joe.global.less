@@ -2566,6 +2566,12 @@ body {
       }
     }
   }
+
+  .speaker-anim-icon {
+    position: relative;
+    top: -2px;
+    margin-right: 6px;
+  }
 }
 
 .joe_list {
@@ -2659,10 +2665,10 @@ body {
       font-size: 13px;
 
       .items {
-        flex: 1;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        flex-shrink: 0;
 
         li {
           &::after {
@@ -5168,7 +5174,7 @@ body {
 
 .joe_comment_box {
   h2 {
-    padding: 20px 0;
+    padding: 28px 0;
     text-align: center;
     font-size: 18px;
     color: var(--routine);
@@ -5179,7 +5185,7 @@ body {
   background: var(--background);
   border-radius: var(--radius-wrap);
   box-shadow: var(--box-shadow);
-  padding: 15px;
+  padding: 20px;
 
   &__title {
     font-weight: 500;

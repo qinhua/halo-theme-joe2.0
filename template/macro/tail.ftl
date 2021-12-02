@@ -45,7 +45,7 @@
   <#if enable_mermaid == 'true'>
     <script src="${BASE_RES_URL}/source/lib/mermaid@8.4.4/mermaid.min.js"></script>
   </#if>
-  <#if settings.favicon??>
+  <#if settings.favicon?? && settings.favicon?trim!=''>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
   <#if type == 'post' || type == 'journals'>
@@ -84,8 +84,8 @@
     <script src="${BASE_RES_URL}/source/js/min/joe.leaving.min.js?v=${theme.version!}"></script>
   </#if>
   <#--  <#if settings.enable_pjax!false>
-      <script src="${BASE_RES_URL}/source/lib/jquery-pjax/jquery.pjax.min.js"></script>
-      <script src="${BASE_RES_URL}/source/js/min/pjax.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/lib/jquery-pjax/jquery.pjax.min.js"></script>
+    <script src="${BASE_RES_URL}/source/js/min/pjax.min.js?v=${theme.version!}"></script>
   </#if>   -->
   <#-- ===== 引入页面级js end ===== -->
 
