@@ -408,7 +408,7 @@ const commonContext = {
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
-			".joe_detail__article img:not(img.owo_image), .page-journals img:not([class]), .page-sheet img:not([class])"
+			".joe_detail__article img:not([class], .page-journals img:not([class]), .page-sheet img:not([class])"
 		);
 		if (!$allImgs.length) return;
 		$allImgs.each(function () {
