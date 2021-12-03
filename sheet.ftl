@@ -44,7 +44,7 @@
               <img class="lazyload" data-src="${sheet.thumbnail}" src="${BASE_RES_URL!}/source/img/lazyload.gif" alt="封面"/>
             </#if>  -->
             <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
-            <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${settings.enable_single_code_select?then(' single_code_select','')}">
+            <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${settings.enable_code_line_number?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
               ${sheet.formatContent!}
             </article>
             <#--  <#import "template/common/post_copyright.ftl" as pc>  -->

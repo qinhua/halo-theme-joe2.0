@@ -80,7 +80,7 @@ const commonContext = {
 	initCode() {
 		// const isPost = $(".page-post").length > 0;
 		const $codeElms = $(
-			".joe_detail__article pre, .joe_journals__list pre, .page-sheet pre"
+			".page-post pre, .page-journals pre, .page-sheet pre"
 		);
 		if (!$codeElms.length) return;
 		$codeElms.each(function (_index, item) {
@@ -88,18 +88,18 @@ const commonContext = {
 			const $codes = $item.find("code");
 			if ($codes.length > 0) {
 				// 添加默认代码类型为纯文本
-				const $curCode = $codes.eq(0);
-				if (
-					!$curCode.attr("class") ||
-          $curCode.attr("class").indexOf("language-") === -1
-				) {
-					$($curCode[0]).addClass("language-text");
-				}
+				// const $curCode = $codes.eq(0);
+				// if (
+				// 	!$curCode.attr("class") ||
+				//   $curCode.attr("class").indexOf("language-") === -1
+				// ) {
+				// 	$($curCode[0]).addClass("language-text");
+				// }
 				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
-				ThemeConfig.enable_code_line_number
-					? $item.addClass("line-numbers")
-					: null;
+				// ThemeConfig.enable_code_line_number
+				// 	? $item.addClass("line-numbers")
+				// 	: null;
 				// 代码折叠
 				if (ThemeConfig.enable_code_expander) {
 					const expander = $(
@@ -576,7 +576,7 @@ const commonContext = {
 			/* 关闭搜索框 */
 			$(".joe_header__searchout").removeClass("active");
 			/* 处理开启关闭状态 */
-			const $body = $("body");
+			const $body = $("html");
 			const $mask = $(".joe_header__mask");
 			const $slide_out = $(".joe_header__slideout");
 			if ($slide_out.hasClass("active")) {
@@ -596,7 +596,7 @@ const commonContext = {
 			/* 关闭侧边栏 */
 			$(".joe_header__slideout").removeClass("active");
 			/* 处理开启关闭状态 */
-			const $body = $("body");
+			const $body = $("html");
 			const $mask = $(".joe_header__mask");
 			const $search_out = $(".joe_header__searchout");
 			if ($search_out.hasClass("active")) {
@@ -613,11 +613,11 @@ const commonContext = {
 	/* 点击遮罩层关闭 */
 	maskClose() {
 		$(".joe_header__mask").on("click", function () {
-			$("body").removeClass("disable-scroll");
+			$("html").removeClass("disable-scroll");
 			$(".joe_header__mask").removeClass("active slideout");
 			$(".joe_header__searchout").removeClass("active");
 			$(".joe_header__slideout").removeClass("active");
-		});
+		}).on("touchmove",e => e.preventDefault);
 	},
 	/* 移动端侧边栏菜单手风琴 */
 	sideMenuMobile() {

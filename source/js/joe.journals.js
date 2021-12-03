@@ -117,34 +117,31 @@ const journalContext = {
 	// initCopy() {
 	// 	const curl = location.href;
 	// 	const author = $(".joe_detail").attr("data-author") || "";
-	//   $(".page-journals .joe_detail").on("copy", function (e) {
-	//     const selection = window.getSelection();
-	//     const appendLink = ThemeConfig.enable_copy_right_text
-	//       ? ThemeConfig.copy_right_text ||
-	//         `\r\n\r\n====================================<br>
-	//         作者：${author}<br>
-	//         来源：${ThemeConfig.blog_title}<br>
-	//         链接：${curl}<br>
-	//         版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
-	//       : "";
-	//     if (window.clipboardData) {
-	//       const copytext = selection + appendLink;
-	//       window.clipboardData.setData("Text", copytext);
-	//       return false;
-	//     } else {
-	//       const body_element = document.body;
-	//       const copytext = selection + appendLink;
-	//       const newdiv = document.createElement("pre");
-	//       newdiv.style.position = "absolute";
-	//       newdiv.style.left = "-99999px";
-	//       body_element.appendChild(newdiv);
-	//       newdiv.innerHTML = copytext;
-	//       selection.selectAllChildren(newdiv);
-	//       setTimeout(function () {
-	//         body_element.removeChild(newdiv);
-	//       }, 0);
-	//     }
-	//   });
+	// 	$(".page-journals .joe_detail").on("copy", function (e) {
+	// 		const selection = window.getSelection();
+	// 		const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
+	// 		const appendLink = ThemeConfig.enable_copy_right_text
+	// 			? ThemeConfig.copy_right_text ||
+	//         `\r\n\r\n====================================<br>作者：${author}<br>来源：${ThemeConfig.blog_title}<br>链接：${curl}<br>版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+	// 			: "";
+	// 		if (window.clipboardData) {
+	// 			const copytext = selectionText + appendLink;
+	// 			window.clipboardData.setData("Text", copytext);
+	// 			return false;
+	// 		} else {
+	// 			const body_element = document.body;
+	// 			const copytext = selectionText + appendLink;
+	// 			const newdiv = document.createElement("pre");
+	// 			newdiv.style.position = "absolute";
+	// 			newdiv.style.left = "-99999px";
+	// 			body_element.appendChild(newdiv);
+	// 			newdiv.innerHTML = copytext;
+	// 			selection.selectAllChildren(newdiv);
+	// 			setTimeout(function () {
+	// 				body_element.removeChild(newdiv);
+	// 			}, 0);
+	// 		}
+	// 	});
 	// },
 	/* 日志块折叠 */
 	foldBlock() {

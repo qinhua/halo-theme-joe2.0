@@ -43,7 +43,7 @@
                     <@global.timeline datetime=journal.createTime />
                   </p>
                   <div class="joe_journal_block">
-                    <div class="joe_journal_body" style="max-height:${settings.journal_block_height!300}px">
+                    <div class="joe_journal_body${settings.enable_code_line_number?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">
                       <div class="content-wrp">${journal.content!}</div>
                       <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
                     </div>
