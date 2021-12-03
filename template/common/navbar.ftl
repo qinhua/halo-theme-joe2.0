@@ -64,86 +64,88 @@
 
   <#--  mobile菜单  -->
   <div class="joe_header__slideout">
-    <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
-    <div class="joe_header__slideout-author">
-      <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
-      <div class="info">
-        <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}<#compress><#include "../module/level.ftl"></#compress></a>
-        <#if settings.motto??>
-          <p class="motto joe_motto">${settings.motto!}</p>
-        <#else>
-          <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>
-        </#if>
+    <div class="joe_header__slideout-wrap">
+      <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
+      <div class="joe_header__slideout-author">
+        <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+        <div class="info">
+          <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}<#compress><#include "../module/level.ftl"></#compress></a>
+          <#if settings.motto??>
+            <p class="motto joe_motto">${settings.motto!}</p>
+          <#else>
+            <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>
+          </#if>
+        </div>
       </div>
+      <ul class="joe_header__slideout-count">
+        <li class="item">
+          <i class="joe-font joe-icon-riji"></i>
+          <@postTag method="count"><span>累计撰写 <strong>${count!"0"}</strong> 篇文章</span></@postTag>
+        </li>
+        <li class="item">
+          <i class="joe-font joe-icon-remen"></i>
+          <@tagTag method="count"><span>累计创建 <strong>${count!"0"}</strong> 个标签</span></@tagTag>
+        </li>
+        <li class="item">
+          <i class="joe-font joe-icon-message"></i>
+          <@commentTag method="count"><span>累计收到 <strong>${count!"0"}</strong> 条评论</span></@commentTag>
+        </li>
+      </ul>
+      <ul class="joe_header__slideout-menu panel-box">
+        <#--  <li>
+          <a class="link" href="/" title="首页"><span>首页</span></a>
+        </li>  -->
+        <li>
+          <a class="link panel" href="#" rel="nofollow">
+          <span>栏目</span>
+          <i class="joe-font joe-icon-arrow-right"></i>
+          </a>
+          <ul class="slides panel-body panel-box panel-side-menu">
+            <@menuTag method="tree">
+              <#list menus?sort_by('priority') as menu>
+                <#if menu.children?? && menu.children?size gt 0>
+                  <li>
+                    <div class="link panel">
+                      <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                      <i class="joe-font joe-icon-arrow-right"></i>
+                    </div>
+                    <ul class="slides panel-body">
+                      <#if menu.children?? && menu.children?size gt 0>
+                        <#list menu.children as child>
+                          <#if child.children?? && child.children?size gt 0>
+                            <li>
+                              <div class="link panel">
+                                <a href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                                <i class="joe-font joe-icon-arrow-right"></i>
+                              </div>
+                              <ul class="slides panel-body">
+                                <#list child.children as child1>
+                                  <li>
+                                    <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
+                                  </li>
+                                </#list>
+                              </ul>
+                            </li>
+                          <#else>
+                            <li>
+                              <a class="link" href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                            </li>
+                          </#if> 
+                        </#list>
+                      </#if> 
+                    </ul>
+                  </li>
+                <#else>
+                  <li>
+                    <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                  </li>
+                </#if>
+              </#list>
+            </@menuTag>
+          </ul>
+        </li>
+      </ul>
     </div>
-    <ul class="joe_header__slideout-count">
-      <li class="item">
-        <i class="joe-font joe-icon-riji"></i>
-        <@postTag method="count"><span>累计撰写 <strong>${count!"0"}</strong> 篇文章</span></@postTag>
-      </li>
-      <li class="item">
-        <i class="joe-font joe-icon-remen"></i>
-        <@tagTag method="count"><span>累计创建 <strong>${count!"0"}</strong> 个标签</span></@tagTag>
-      </li>
-      <li class="item">
-        <i class="joe-font joe-icon-message"></i>
-        <@commentTag method="count"><span>累计收到 <strong>${count!"0"}</strong> 条评论</span></@commentTag>
-      </li>
-    </ul>
-    <ul class="joe_header__slideout-menu panel-box">
-      <#--  <li>
-        <a class="link" href="/" title="首页"><span>首页</span></a>
-      </li>  -->
-      <li>
-        <a class="link panel" href="#" rel="nofollow">
-        <span>栏目</span>
-        <i class="joe-font joe-icon-arrow-right"></i>
-        </a>
-        <ul class="slides panel-body panel-box panel-side-menu">
-          <@menuTag method="tree">
-            <#list menus?sort_by('priority') as menu>
-              <#if menu.children?? && menu.children?size gt 0>
-                <li>
-                  <div class="link panel">
-                    <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                    <i class="joe-font joe-icon-arrow-right"></i>
-                  </div>
-                  <ul class="slides panel-body">
-                    <#if menu.children?? && menu.children?size gt 0>
-                      <#list menu.children as child>
-                        <#if child.children?? && child.children?size gt 0>
-                          <li>
-                            <div class="link panel">
-                              <a href="${child.url!}" title="${child.name!}">${child.name!}</a>
-                              <i class="joe-font joe-icon-arrow-right"></i>
-                            </div>
-                            <ul class="slides panel-body">
-                              <#list child.children as child1>
-                                <li>
-                                  <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
-                                </li>
-                              </#list>
-                            </ul>
-                          </li>
-                        <#else>
-                          <li>
-                            <a class="link" href="${child.url!}" title="${child.name!}">${child.name!}</a>
-                          </li>
-                        </#if> 
-                      </#list>
-                    </#if> 
-                  </ul>
-                </li>
-              <#else>
-                <li>
-                  <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                </li>
-              </#if>
-            </#list>
-          </@menuTag>
-        </ul>
-      </li>
-    </ul>
   </div>
 
   <#--  mobile搜索  -->
