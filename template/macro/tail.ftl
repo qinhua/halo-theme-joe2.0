@@ -12,6 +12,9 @@
   <#if type == 'index' && settings.enable_banner == true>
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
   </#if>
+  <#if type == 'post' || type == 'journals' || type == 'sheet'>
+    <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
+  </#if>
   <#if type == 'post' && settings.enable_toc == true>
     <script src="${BASE_RES_URL!}/source/lib/tocbot/tocbot.min.js"></script>
   </#if>
@@ -72,9 +75,6 @@
   </#if>
   <#if type == 'photos'>
     <script src="${BASE_RES_URL}/source/js/min/joe.photos.min.js?v=${theme.version!}"></script>
-  </#if>
-  <#if type == 'post' || type == 'journals' || type == 'sheet'>
-    <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
   </#if>
   <#if type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.min.js"></script>

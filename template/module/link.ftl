@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/swiper/swiper.min.css">
   </#if>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
-    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.css?v=${theme.version!}">
+    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.min.css?v=${theme.version!}">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme?trim!='')?then(metas.code_theme?trim,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
   <#if type == 'index'>

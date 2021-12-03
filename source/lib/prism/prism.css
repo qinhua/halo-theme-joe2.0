@@ -208,6 +208,10 @@ div.code-toolbar > .toolbar > .toolbar-item {
 	display: inline-block;
 }
 
+div.code-toolbar > .toolbar > .toolbar-item:first-child span::before {
+  content: attr(data-rel);
+}
+
 div.code-toolbar > .toolbar > .toolbar-item > a {
 	cursor: pointer;
 }
