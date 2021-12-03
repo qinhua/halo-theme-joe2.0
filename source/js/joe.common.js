@@ -613,7 +613,7 @@ const commonContext = {
 	/* 点击遮罩层关闭 */
 	maskClose() {
 		$(".joe_header__mask").on("click", function () {
-			$("body").css("overflow", "");
+			$("body").removeClass("disable-scroll");
 			$(".joe_header__mask").removeClass("active slideout");
 			$(".joe_header__searchout").removeClass("active");
 			$(".joe_header__slideout").removeClass("active");
