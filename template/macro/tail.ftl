@@ -5,7 +5,7 @@
   </#if>
   <script src="${BASE_RES_URL!}/source/lib/lazysizes/lazysizes.min.js"></script>
   <script src="${BASE_RES_URL!}/source/lib/qmsg/qmsg.js"></script>
-  <#if (type == 'index' && settings.show_newreply == true) || type == 'sheet'>
+  <#if settings.show_newreply == true || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
   </#if>
   <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
