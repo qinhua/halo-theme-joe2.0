@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <#assign title=settings.photos_title!'我的图库'>
   <#import "template/common/header.ftl" as headInfo>
-  <@headInfo.head title="${title}" type="photo"/>
+  <@headInfo.head title="${title}" type="photos"/>
   <#import "template/macro/tail.ftl" as tailInfo>
   <body> 
     <div id="Joe"> 

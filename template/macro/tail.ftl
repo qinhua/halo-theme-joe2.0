@@ -1,37 +1,35 @@
 <#macro tail type>
   <#-- ===== 引入脚本 start ===== -->
-  <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
+  <#if (type == 'index' && settings.enable_index_list_effect == true) || ( type == 'journals' && settings.enable_journal_effect == true) || ( type == 'photos' && settings.enable_photos_effect == true)>
+    <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
+  </#if>
+  <script src="${BASE_RES_URL!}/source/lib/lazysizes/lazysizes.min.js"></script>
   <script src="${BASE_RES_URL!}/source/lib/qmsg/qmsg.js"></script>
-  <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
+  <#if (type == 'index' && settings.show_newreply == true) || type == 'sheet'>
+    <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
+  </#if>
   <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
   <#if type == 'index' && settings.enable_banner == true>
-    <!-- banner -->
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
   </#if>
   <#if type == 'post' && settings.enable_toc == true>
-    <!-- tocbot -->
     <script src="${BASE_RES_URL!}/source/lib/tocbot/tocbot.min.js"></script>
   </#if>
-  <#if settings.enable_clean_mode!=true>
-    <#--  comment  -->
+  <#if settings.enable_clean_mode != true && ( type == 'post' || type == 'journals' || type == 'sheet')>
     <script src="${BASE_RES_URL!}/source/lib/vue@2.6.10/vue.min.js"></script>
     <script src="${BASE_RES_URL!}/source/lib/halo-comment/halo-comment.min.js?v=${theme.version!}"></script>
   </#if>
-  <script src="${BASE_RES_URL!}/source/lib/lazysizes/lazysizes.min.js"></script>
   <script src="${BASE_RES_URL!}/source/lib/fancybox/jquery.fancybox.min.js"></script>
-  <#if settings.show_tag_cloud==true && settings.tag_cloud_type=='3d'>
-    <#--  tagcloud  -->
+  <#if settings.show_tag_cloud == true && settings.tag_cloud_type == '3d'>
     <script src="${BASE_RES_URL!}/source/lib/3dtag/3dtag.min.js"></script>
   </#if>
-  <#if settings.enable_music_player==true && settings.music_id?? && settings.music_id!=''>
-    <!-- music player -->
+  <#if settings.enable_aside == true && settings.enable_music_player == true && settings.music_id?? && settings.music_id?trim!= ''>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.css"> 
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
-  <script src="${BASE_RES_URL!}/source/lib/joe.scroll.min.js?v=${theme.version!}"></script>
-  <script src="${BASE_RES_URL!}/source/lib/joe.smooth.min.js?v=${theme.version!}"></script>
-  <#--  <script src="${BASE_RES_URL!}/source/lib/joe.extend.min.js?v=${theme.version!}"></script>  -->
+  <script src="${BASE_RES_URL!}/source/lib/smooth-scroll/smooth-scroll.min.js"></script>
+  <#--  <script src="${BASE_RES_URL}/source/js/min/joe.custom.min.js?v=${theme.version!}"></script>  -->
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
@@ -42,20 +40,20 @@
     <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/contrib/auto-render.min.js"></script>
   </#if>
   <#assign enable_mermaid = (metas?? && metas.enable_mermaid?? && metas.enable_mermaid?trim!='')?then(metas.enable_mermaid?trim,settings.enable_mermaid?then('true','false'))>
-  <#if enable_mermaid == 'true'>
+  <#if enable_mermaid == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
     <script src="${BASE_RES_URL}/source/lib/mermaid@8.4.4/mermaid.min.js"></script>
   </#if>
   <#if settings.favicon?? && settings.favicon?trim!=''>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
   </#if>
-  <#if type == 'post' || type == 'journals'>
+  <#if type == 'post'>
     <script src="${BASE_RES_URL}/source/lib/jquery-qrcode/jquery.qrcode.min.js"></script>
   </#if>
   <#--  相册  -->
   <#if type == 'photos'>
-    <script src="${BASE_RES_URL}/source/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
-    <#--  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>  -->
-    <#--  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>  -->
+    <script src="${BASE_RES_URL}/source/lib/justifiedGallery/justifiedGallery.min.js"></script>
+    <#--  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.min.js"></script>  -->
+    <#--  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.min.js"></script>  -->
   </#if>
 
   <#-- ===== 引入页面级js start ===== -->
@@ -66,7 +64,6 @@
   <#if type == 'archives'>
     <script src="${BASE_RES_URL}/source/js/min/joe.archives.min.js?v=${theme.version!}"></script>
   </#if>
-  <script src="${BASE_RES_URL}/source/js/min/joe.short.min.js?v=${theme.version!}"></script>
   <#if type == 'post'>
     <script src="${BASE_RES_URL}/source/js/min/joe.post.min.js?v=${theme.version!}"></script>
   </#if>
@@ -80,7 +77,7 @@
     <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
   </#if>
   <#if type == 'sheet'>
-    <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.pkgd.js"></script>
+    <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.min.js"></script>
     <script src="${BASE_RES_URL}/source/js/min/joe.leaving.min.js?v=${theme.version!}"></script>
   </#if>
   <#--  <#if settings.enable_pjax!false>
