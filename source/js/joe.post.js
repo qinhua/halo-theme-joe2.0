@@ -75,21 +75,18 @@ const postContext = {
 		const author = $(".joe_detail").attr("data-author");
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
+			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
 			const appendLink = ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
-          `\r\n\r\n====================================<br>
-          作者：${author}<br>
-          来源：${ThemeConfig.blog_title}<br>
-          链接：${curl}<br>
-          版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+          `\r\n\r\n====================================<br>作者：${author}<br>来源：${ThemeConfig.blog_title}<br>链接：${curl}<br>版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "";
 			if (window.clipboardData) {
-				const copytext = selection + appendLink;
+				const copytext = selectionText + appendLink;
 				window.clipboardData.setData("Text", copytext);
 				return false;
 			} else {
 				const body_element = document.body;
-				const copytext = selection + appendLink;
+				const copytext = selectionText + appendLink;
 				const newdiv = document.createElement("pre");
 				newdiv.style.position = "absolute";
 				newdiv.style.left = "-99999px";
