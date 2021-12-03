@@ -50,7 +50,7 @@
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.search.min.css?v=${theme.version!}">
   </#if>
   <#if type == 'photos'>
-    <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/justifiedGallery/justifiedGallery.css">
+    <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/justifiedGallery/justifiedGallery.min.css">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.photos.min.css?v=${theme.version!}">
   </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.responsive.min.css?v=${theme.version!}">
