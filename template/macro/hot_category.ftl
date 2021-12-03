@@ -1,8 +1,8 @@
 <#macro hot_category>
   <div class="joe_index__hot">
     <div class="joe_index__title">
-      <ul class="joe_index__title-title">
-        <li class="item" data-type="created">精品分类</li>
+      <ul class="joe_index__title-title default">
+        <li class="item active" data-type="created">精品分类</li>
         <#--  <li class="line"></li>  -->
       </ul>
       <div class="joe_index__title-notice">

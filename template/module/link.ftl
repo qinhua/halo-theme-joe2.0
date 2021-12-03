@@ -49,13 +49,10 @@
   <#if type == 'search' || type == 'tag' || type == 'category'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.search.min.css?v=${theme.version!}">
   </#if>
-  <#if type == 'photo'>
+  <#if type == 'photos'>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/justifiedGallery/justifiedGallery.css">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.photos.min.css?v=${theme.version!}">
   </#if>
-  <#--  <#if type == 'links'>
-    <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.links.min.css?v=${theme.version!}">
-  </#if>  -->
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.responsive.min.css?v=${theme.version!}">
   <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/fancybox/jquery.fancybox.min.css">
   <#if settings.enable_clean_mode != true && settings.cursor_skin?? && settings.cursor_skin != 'off'>

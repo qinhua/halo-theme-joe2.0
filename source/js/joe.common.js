@@ -275,7 +275,7 @@ const commonContext = {
 		handleScroll();
 		$(document).on("scroll", () => {
 			clearTimeout(_debounce);
-			_debounce = setTimeout(handleScroll, 80);
+			_debounce = setTimeout(handleScroll, 100);
 		});
 		$el.on("click", () =>
 			window.scrollTo({
