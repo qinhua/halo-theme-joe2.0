@@ -2,9 +2,9 @@
 const journalContext = {
 	/* 激活列表特效 */
 	initEffect() {
-		if (!ThemeConfig.enable_journal_effect) return;
 		$(".joe_loading").remove();
 		$(".joe_journals__list").removeClass("hidden");
+		if (!ThemeConfig.enable_journal_effect) return;
 		new WOW({
 			boxClass: "wow",
 			animateClass: ThemeConfig.journal_list_effect_class || "fadeIn",

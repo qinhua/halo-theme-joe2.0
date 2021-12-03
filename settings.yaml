@@ -35,10 +35,18 @@ genernal:
       description: "Access Key 用于页面中 Content API 的校验，不填会导致接口报错，默认为 joe2.0，但可以自己定义，请不要填写中文或特殊字符（请务必同时配置此处的 Access Key 和后台管理中的 Access Key，并保持一致）"
     icp:
       name: icp
-      label: ICP备案号
+      label: ICP 备案号
       type: text
-      placeholder: "请填写ICP备案号"
-      description: "ICP备案号将展示在页脚中"
+      default: ""
+      placeholder: "请填写 ICP 备案号信息"
+      description: "ICP 备案信息将展示在页脚中，不填不展示（示例：鄂ICP备20001234号-1）"
+    police:
+      name: police
+      label: 公网安备号
+      type: text
+      default: ""
+      placeholder: "请填写公网安备号信息"
+      description: "公网安备信息将展示在页脚中，不填不展示（示例：鄂公网安备42011102001234号）"
     site_notice:
       name: site_notice
       label: 网站公告
@@ -441,9 +449,43 @@ footer:
       default: ""
       placeholder: "示例：2021/11/11 06:30"
       description: "自定义博客的起始时间/安装时间，作为计算博客运行时间的参照值，请严格按照示例格式填写，否则将导致报错（示例：2021/11/11 06:30）"
+    enable_icp:
+      name: enable_icp
+      label: 展示 ICP
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_police:
+      name: enable_police
+      label: 展示公网安备
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_powerby:
+      name: enable_powerby
+      label: 展示 PowerBy
+      type: switch
+      data-type: bool
+      default: true
+      description: "为了尊重作者的权益，建议展示"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     enable_rss:
       name: enable_rss
-      label: 展示RSS
+      label: 展示 RSS
       type: switch
       data-type: bool
       default: true
@@ -1642,7 +1684,7 @@ post:
       type: switch
       data-type: bool
       default: false
-      description: "markdown中使用```math```包裹公式即可"
+      description: "markdown中使用```math```包裹即可"
       options:
         - value: true
           label: 开启

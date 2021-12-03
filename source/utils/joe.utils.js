@@ -762,7 +762,7 @@ var Utils = {
    */
 	_loadRes(type, url, callback) {
 		var dom,
-			fn = callback || function () { };
+			fn = callback || function () {};
 		switch (type) {
 		case "script":
 			dom = document.createElement(type);
@@ -822,54 +822,6 @@ var Utils = {
       	return new Array(7 - h.length).join("0") + h;
       })((((Math.random() * (max - min) + min) * 0x1000000) << 0).toString(16))
 		);
-	},
-
-	/**
-   * 关键帧搜索
-   * @param {*} keyframesIndex 关键帧索引
-   * @param {*} milliseconds 秒
-   */
-	getNearestKeyframe(keyframesIndex, milliseconds) {
-		var keyframeIdx = this._search(keyframesIndex.times, milliseconds);
-
-		return {
-			index: keyframeIdx,
-			milliseconds: table.times[keyframeIdx],
-			fileposition: table.filepositions[keyframeIdx],
-		};
-	},
-
-	/**
-   * 字节搜索方式
-   * @param {Array} list 需要搜索的字节数组
-   * @param {Number} value 当前所处秒
-   */
-	_search(list, value) {
-		var idx = 0;
-
-		var last = list.length - 1;
-		var mid = 0;
-		var lbound = 0;
-		var ubound = last;
-
-		if (value < list[0]) {
-			idx = 0;
-			lbound = ubound + 1;
-		}
-
-		while (lbound <= ubound) {
-			mid = lbound + Math.floor((ubound - lbound) / 2);
-			if (mid === last || (value >= list[mid] && value < list[mid + 1])) {
-				idx = mid;
-				break;
-			} else if (list[mid] < value) {
-				lbound = mid + 1;
-			} else {
-				ubound = mid - 1;
-			}
-		}
-
-		return idx;
 	},
 	/**
    * 删除元素的 class，可根据前缀来删除
