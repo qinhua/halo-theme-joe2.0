@@ -424,6 +424,8 @@ location / {
 
 ![页面性能报告](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/performance.png)
 
+<br>
+
 ### 🏭 贡献
 
 > 如果你想帮助完善 `Joe2.0` 主题，请：
