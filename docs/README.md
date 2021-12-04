@@ -10,7 +10,7 @@
 
 <p align="center">Joe 主题 Halo 移植版</p>
 
-<p align="center">
+<p class="badge-row" align="center">
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/Halo-1.4.11+-p" alt="Halo"/>
   </a>
