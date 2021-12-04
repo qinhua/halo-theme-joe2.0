@@ -506,193 +506,6 @@ footer:
         - value: false
           label: 否
 
-# 博主信息
-blogger:
-  label: 博主信息
-  items:
-    show_blogger:
-      name: show_blogger
-      label: 展示博主信息
-      type: switch
-      data-type: bool
-      default: true
-      description: "不展示的情况下，下面配置均无效"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-    show_level:
-      name: show_level
-      label: 展示博主等级
-      type: switch
-      data-type: bool
-      default: true
-      description: "博主等级基于文章数和评论数计算得到"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-    enable_day_words:
-      name: enable_day_words
-      label: 开启每日一句
-      type: switch
-      data-type: bool
-      default: true
-      description: "将覆盖博客描述，资源来自 https://www.jinrishici.com"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    motto:
-      name: motto
-      label: 个人独白
-      type: text
-      placeholder: "请输入"
-      description: "将覆盖每日一句，若为空则展示每日一句或博客描述"
-    lazyload_avatar:
-      name: lazyload_avatar
-      label: 头像预载图
-      type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/spinner-preloader.svg"
-      description: "头像加载出来之前展示的图片"
-    default_avatar:
-      name: default_avatar
-      label: 默认头像
-      type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_avatar.jpg"
-      description: "用于头像未设置或加载出错时显示的图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
-    author_bg:
-      name: author_bg
-      label: 博主栏背景图
-      type: attachment
-      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/author_bg.jpg"
-      description: "用于博主信息的背景图"
-    avatar_type:
-      name: avatar_type
-      label: 头像外形
-      type: radio
-      data-type: text
-      default: circle
-      options:
-        - value: circle
-          label: "圆形"
-        - value: round
-          label: "圆角矩形"
-    enable_social:
-      name: enable_social
-      label: 展示社交账号
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否展示社交账号"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-    enable_weather:
-      name: enable_weather
-      label: 展示天气
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否展示简约版天气信息，必须配置正确的appKey后才可生效"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-    weather_key:
-      name: weather_key
-      label: 天气插件appKey
-      type: text
-      # default: "97f45ce35ed54aa4a2d8d6d21b5bb235"
-      placeholder: 请输入
-      description: "用于初始化天气插件，请通过 https://widget.qweather.com/create-simple 生成自己的插件，然后复制其中的key值填到这里"
-    avatar_frame:
-      name: avatar_frame
-      label: 头像框
-      type: select
-      default: "0"
-      description: "作用于博主头像的相框"
-      options:
-        - value: "0"
-          label: 无
-        - value: "rainbow-girl"
-          label: "彩虹之女"
-        - value: "honor-light"
-          label: "荣誉之光"
-        - value: "bird-girl"
-          label: "彩雀之女"
-        - value: "purple-crystal"
-          label: "紫水晶"
-        - value: "flower-ring"
-          label: "清新花环"
-        - value: "lantern-cloud"
-          label: "灯笼祥云"
-        - value: "ease-cloud"
-          label: "福气祥云"
-        - value: "festival-luck"
-          label: "节日福旺"
-        - value: "happy-mouse"
-          label: "快乐小鼠"
-        - value: "two-mouse"
-          label: "两只小鼠"
-        - value: "bull-puff"
-          label: "牛气大发"
-        - value: "christmas-knot"
-          label: "圣诞彩结"
-        - value: "christmas-ring"
-          label: "圣诞花环"
-        - value: "santa-claus"
-          label: "圣诞老人"
-        - value: "cactus"
-          label: "仙人掌"
-    avatar_widget:
-      name: avatar_widget
-      label: 头像挂件
-      type: select
-      default: "0"
-      description: "作用于博主头像的挂件"
-      options:
-        - value: "0"
-          label: 无
-        # - value: "sakura"
-        #   label: 樱花
-        # - value: "mechanic"
-        #   label: 机械
-        # - value: "heart"
-        #   label: 爱心
-        - value: "angel"
-          label: 天使
-        - value: "meteor"
-          label: 流星
-        - value: "rain"
-          label: 下雨
-        - value: "wing"
-          label: 天使之翼
-        - value: "rotate-heart"
-          label: 旋转的心
-        - value: "sun-flower"
-          label: 向日葵
-        - value: "swirl-heart"
-          label: 上升的心
-    enable_strips:
-      name: enable_strips
-      label: 展示彩带动画
-      type: switch
-      data-type: bool
-      default: true
-      description: "鼠标悬浮时是否展示彩带动画"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-
 # 轮播图
 carousel:
   label: 轮播图
@@ -1120,6 +933,193 @@ aside:
       default: "15"
       placeholder: "请输入数字"
       description: "设置标签云展示的最大数量，超过会显示 “更多” 按钮"
+
+# 博主信息
+blogger:
+  label: 博主信息
+  items:
+    show_blogger:
+      name: show_blogger
+      label: 展示博主信息
+      type: switch
+      data-type: bool
+      default: true
+      description: "不展示的情况下，下面配置均无效"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    show_level:
+      name: show_level
+      label: 展示博主等级
+      type: switch
+      data-type: bool
+      default: true
+      description: "博主等级基于文章数和评论数计算得到"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_day_words:
+      name: enable_day_words
+      label: 开启每日一句
+      type: switch
+      data-type: bool
+      default: true
+      description: "将覆盖博客描述，资源来自 https://www.jinrishici.com"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    motto:
+      name: motto
+      label: 个人独白
+      type: text
+      placeholder: "请输入"
+      description: "将覆盖每日一句，若为空则展示每日一句或博客描述"
+    lazyload_avatar:
+      name: lazyload_avatar
+      label: 头像预载图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/svg/spinner-preloader.svg"
+      description: "头像加载出来之前展示的图片"
+    default_avatar:
+      name: default_avatar
+      label: 默认头像
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_avatar.jpg"
+      description: "用于头像未设置或加载出错时显示的图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
+    author_bg:
+      name: author_bg
+      label: 博主栏背景图
+      type: attachment
+      default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/author_bg.jpg"
+      description: "用于博主信息的背景图"
+    avatar_type:
+      name: avatar_type
+      label: 头像外形
+      type: radio
+      data-type: text
+      default: circle
+      options:
+        - value: circle
+          label: "圆形"
+        - value: round
+          label: "圆角矩形"
+    enable_social:
+      name: enable_social
+      label: 展示社交账号
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示社交账号"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_weather:
+      name: enable_weather
+      label: 展示天气
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示简约版天气信息，必须配置正确的appKey后才可生效"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    weather_key:
+      name: weather_key
+      label: 天气插件appKey
+      type: text
+      # default: "97f45ce35ed54aa4a2d8d6d21b5bb235"
+      placeholder: 请输入
+      description: "用于初始化天气插件，请通过 https://widget.qweather.com/create-simple 生成自己的插件，然后复制其中的key值填到这里"
+    avatar_frame:
+      name: avatar_frame
+      label: 头像框
+      type: select
+      default: "0"
+      description: "作用于博主头像的相框"
+      options:
+        - value: "0"
+          label: 无
+        - value: "rainbow-girl"
+          label: "彩虹之女"
+        - value: "honor-light"
+          label: "荣誉之光"
+        - value: "bird-girl"
+          label: "彩雀之女"
+        - value: "purple-crystal"
+          label: "紫水晶"
+        - value: "flower-ring"
+          label: "清新花环"
+        - value: "lantern-cloud"
+          label: "灯笼祥云"
+        - value: "ease-cloud"
+          label: "福气祥云"
+        - value: "festival-luck"
+          label: "节日福旺"
+        - value: "happy-mouse"
+          label: "快乐小鼠"
+        - value: "two-mouse"
+          label: "两只小鼠"
+        - value: "bull-puff"
+          label: "牛气大发"
+        - value: "christmas-knot"
+          label: "圣诞彩结"
+        - value: "christmas-ring"
+          label: "圣诞花环"
+        - value: "santa-claus"
+          label: "圣诞老人"
+        - value: "cactus"
+          label: "仙人掌"
+    avatar_widget:
+      name: avatar_widget
+      label: 头像挂件
+      type: select
+      default: "0"
+      description: "作用于博主头像的挂件"
+      options:
+        - value: "0"
+          label: 无
+        # - value: "sakura"
+        #   label: 樱花
+        # - value: "mechanic"
+        #   label: 机械
+        # - value: "heart"
+        #   label: 爱心
+        - value: "angel"
+          label: 天使
+        - value: "meteor"
+          label: 流星
+        - value: "rain"
+          label: 下雨
+        - value: "wing"
+          label: 天使之翼
+        - value: "rotate-heart"
+          label: 旋转的心
+        - value: "sun-flower"
+          label: 向日葵
+        - value: "swirl-heart"
+          label: 上升的心
+    enable_strips:
+      name: enable_strips
+      label: 展示彩带动画
+      type: switch
+      data-type: bool
+      default: true
+      description: "鼠标悬浮时是否展示彩带动画"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
 
 # 首页
 home:
