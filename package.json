@@ -5,8 +5,10 @@
   "main": "index.js",
   "author": "BabyChin",
   "scripts": {
-    "build": "webpack && node source/utils/update-version.js",
     "prepare": "husky install",
+    "docs": "docsify serve docs",
+    "docs:build": "docsify build docs",
+    "build": "webpack && node source/utils/update-version.js",
     "lint:staged": "lint-staged",
     "lint": "stylelint --custom-syntax postcss-less --fix source/css/*.less && eslint --fix source/js/*.js"
   },
@@ -24,9 +26,10 @@
   },
   "keywords": [
     "halo",
+    "joe2.0",
+    "halo-blog",
     "halo-theme",
-    "halo-theme-joe2.0",
-    "joe2.0"
+    "halo-theme-joe2.0"
   ],
   "license": "ISC",
   "bugs": {
