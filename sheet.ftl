@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <#import "template/common/header.ftl" as headInfo>
-  <@headInfo.head title="${sheet.title}" type="sheet"/>
+  <@headInfo.head title="${sheet.title}" type="sheet" id=sheet.id />
   <#import "template/macro/tail.ftl" as tailInfo>
   <body>
     <div id="Joe">

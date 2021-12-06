@@ -481,6 +481,9 @@ html {
             }
           }
         }
+        &-wrapper {
+          padding: 0;
+        }
 
         &__leaving {
           &-list {
@@ -822,11 +825,23 @@ html {
         }
 
         &__article {
-          padding: 10px;
+          padding: 10px 0;
           font-size: 14px;
 
           pre[class*="language-"] {
             font-size: 13px;
+          }
+
+
+          iframe {
+            width: 100%;
+            min-height: 220px;
+            min-width: initial;
+          }
+
+          video {
+            width: 100%;
+            min-width: initial;
           }
 
           &-video {

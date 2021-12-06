@@ -483,6 +483,24 @@ footer:
           label: 是
         - value: false
           label: 否
+    driven_by:
+      name: driven_by
+      label: 网站由xxx云提供云服务
+      type: select
+      data-type: text
+      default: none
+      description: "配置本站点由xxx云提供云服务"
+      options:
+        - value: none
+          label: 不展示(默认)
+        - value: aliyun
+          label: 阿里云
+        - value: tencent
+          label: 腾讯云
+        - value: upyun
+          label: 又拍云
+        - value: qiniu
+          label: 七牛云
     enable_rss:
       name: enable_rss
       label: 展示 RSS
@@ -1549,7 +1567,7 @@ post:
       label: 温馨提示文案
       type: textarea
       default: ""
-      placeholder: "请输入"
+      placeholder: "请输入文案内容"
       description: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
     post_img_align:
       name: post_img_align
@@ -1557,6 +1575,7 @@ post:
       type: select
       data-type: text
       default: center
+      description: "设置文章内容区域图片的对齐方式（默认为 “居中”，也可通过页面元数据 img_align 配置）"
       options:
         - value: left
           label: 左对齐
@@ -1564,6 +1583,13 @@ post:
           label: 居中
         - value: right
           label: 右对齐
+    img_max_width:
+      name: img_max_width
+      label: 图片最大宽度
+      type: text
+      default: "100%"
+      placeholder: "请输入宽度值"
+      description: "设置文章内容区域图片的最大宽度，接受一切有效的宽度值，需带单位（默认为 100%，也可通过页面元数据 img_max_width 配置）"
     enable_progress_bar:
       name: enable_progress_bar
       label: 启用文章浏览进度条
@@ -1598,9 +1624,10 @@ post:
     toc_depth:
       name: toc_depth
       label: TOC目录默认展开层级
+      type: text
       default: "0"
-      placeholder: "请填写默认展开层级（只能是数字）"
-      description: "TOC目录自动展开的标题层级，默认为0，不展开子目录（仅对有多级目录的文章生效），可通过后台配置文章元属性 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField"
+      placeholder: "请填写标题层级（只能是数字）"
+      description: "TOC目录自动展开的标题层级（0~5级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录（可通过后台配置文章元数据 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField）"
     enable_comment:
       name: enable_comment
       label: 文章评论
@@ -3124,18 +3151,18 @@ others:
       default: ""
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit"
-    enable_pjax:
-      name: enable_pjax
-      label: 全局Pjax
-      type: switch
-      data-type: bool
-      default: false
-      description: "启用全局 pjax 以优化用户体验（开启音乐播放器后建议开启）"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
+    # enable_pjax:
+    #   name: enable_pjax
+    #   label: 全局Pjax
+    #   type: switch
+    #   data-type: bool
+    #   default: false
+    #   description: "启用全局 pjax 以优化用户体验（开启音乐播放器后建议开启）"
+    #   options:
+    #     - value: true
+    #       label: 开启
+    #     - value: false
+    #       label: 关闭
     enable_cdn:
       name: enable_cdn
       label: 使用CDN加载静态资源

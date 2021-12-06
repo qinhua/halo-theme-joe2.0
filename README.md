@@ -366,7 +366,12 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 - Windows/Linux: `Shift + Alt + h`
 - maxOS: `Shift + Command + h`
 
-#### 13、Freemarker 相关技巧
+#### 13、如何判断不同的自定义页面
+
+有时候我们可能想在某一个自定义页面内部加入一些资源，单纯靠页面类型 `sheet` 无法进行区分。此时可以先进入 `后台管理系统`，并打开浏览器控制台，切换到 `network-Fetch/XHR` 这一栏，然后进入 `页面-所有页面-自定义页面`，此时控制面板中会出现相应的请求，查看数据获取页面对于的 `id`，这样我们就可以在模板中使用这个 `id` 区分不同的自定义页面了（可在 `sheet.ftl` 文件中通过 `sheet.id` 获取）。
+![自定义页面id](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/sheet_id.png)
+
+#### 14、Freemarker 相关技巧
 
 主要是本人在开发主题过程中收集的一些 `Freemarker` 知识，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 

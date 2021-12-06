@@ -17,8 +17,8 @@ const postContext = {
 			headingSelector: "h1, h2, h3, h4, h5",
 			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
 			hasInnerContainers: false,
-			headingsOffset: -80, // 目录高亮的偏移值，和scrollSmoothOffset有关联
-			scrollSmoothOffset: -70, // 滚动的偏移值（这里和导航条固定也有关联）
+			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
+			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
 			positionFixedClass: "is-position-fixed", // 固定类名称
 			fixedSidebarOffset: "auto",
