@@ -18,6 +18,7 @@ postMetaField:
   - enable_toc
   - toc_depth
   - img_align
+  - img_max_width
   - enable_copy
   - enable_donate
   - enable_share

@@ -17,8 +17,8 @@
 
 <#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then('production', 'development')>
 <#--  <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)>  -->
-<#--  <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@dev", theme_base)>  -->
 <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master", theme_base)>
+<#--  <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@dev", theme_base)>  -->
 <#global DEFAULT_LOGO = BASE_RES_URL + "/source/img/logo.png">
 <#global LOGO = (blog_logo?? && blog_logo != "")?then(blog_logo, DEFAULT_LOGO)>
 <#global USER_AVATAR = (user.avatar?? && user.avatar != '' && user.avatar?index_of("gravatar.com") == -1)?then(user.avatar, settings.default_avatar)>
@@ -48,7 +48,7 @@
   ThemeConfig['birthday'] = '${(settings.custom_birthday?? && settings.custom_birthday?trim != "")?then(settings.custom_birthday?trim, options.birthday?replace(",",""))}';
   ThemeConfig['blog_title'] = '${blog_title?js_string!}';
   ThemeConfig['blog_url'] = '${blog_url!}';
-  ThemeConfig['author'] = 'M酷';
+  ThemeConfig['developer'] = 'M酷';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!15}';
@@ -77,7 +77,7 @@
   }
   // 读取主题模式
   var initThemeMode = function() {
-    var curMode='';
+    var curMode = "";
     if (ThemeConfig.theme_mode === "auto") {
       var light_scope = ThemeConfig.light_time_scope.split("~");
       var now = new Date();
@@ -85,7 +85,7 @@
       var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
       localStorage.removeItem("data-mode");
     } else if (ThemeConfig.theme_mode === "user") {
-      // 用户模式下会从本地取主题模式，默认为浅色
+      // 用户模式下优先从本地取主题模式，默认为浅色
       curMode = localStorage.getItem("data-mode") || "light";
       localStorage.setItem("data-mode", curMode);
     } else {
@@ -101,5 +101,5 @@
     BASE_API: ""
   }
   var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
-  ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.author + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
+  ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.developer + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>
