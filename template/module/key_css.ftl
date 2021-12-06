@@ -45,10 +45,12 @@
     <#assign lbar_light_color = lbar_colors[0]?trim>
     <#assign lbar_dark_color = (lbar_colors[1]?? && lbar_colors[1]?trim != "")?then(lbar_colors[1]?trim, lbar_light_color)>
   </#if>
+  <#assign img_max_width = (metas?? && metas.img_max_width?? && metas.img_max_width?trim != "")?then(metas.img_max_width?trim, settings.img_max_width!"100%")>
   html body {
     --theme: ${settings.mode_color_light!"#fb6c28"};
     --scroll-bar: ${sbar_light_color!"#c0c4cc"};
     --loading-bar: ${lbar_light_color!"var(--theme)"};
+    --img-max-width: ${img_max_width};
     font-family: "Joe Font", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
   }
   html[data-mode='dark'] body {

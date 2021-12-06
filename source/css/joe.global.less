@@ -471,6 +471,10 @@ body {
   height: 60px;
   transition: top 0.4s;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  // &.fixed {
+  //   position: fixed;
+  //   width: 100%;
+  // }
 
   &.active {
     top: -60px;
@@ -3924,7 +3928,7 @@ body {
   }
 
   &__overdue {
-    padding-top: 15px;
+    padding-top: 5px;
 
     &-wrapper {
       padding: 15px;
@@ -3959,7 +3963,7 @@ body {
   }
 
   &__article {
-    padding: 10px 20px;
+    padding: 10px 0;
     font-size: 15px;
     word-break: break-word;
     color: var(--routine);
@@ -4125,8 +4129,6 @@ body {
     blockquote {
       line-height: 26px;
       margin-bottom: 18px;
-      // background: #ecf8ff;
-      // color: #50bfff;
       padding: 8px 15px;
       color: var(--routine);
       background: var(--classD);
@@ -4171,7 +4173,7 @@ body {
 
     img {
       display: inline-block;
-      max-width: 100% !important;
+      max-width: var(--img-max-width) !important;
       cursor: zoom-in;
       margin: 5px 0;
       border-radius: var(--radius-img);
@@ -4183,8 +4185,24 @@ body {
       }
     }
 
+    iframe {
+      display: block;
+      margin: 0 auto;
+      min-width: 700px;
+      min-height: 400px;
+      max-width: 100%;
+      overflow: hidden;
+      border: none;
+      border-radius: var(--radius-img);
+    }
+
     video {
+      display: block;
+      margin: 0 auto;
+      min-width: 700px;
       max-width: 100% !important;
+      overflow: hidden;
+      border-radius: var(--radius-img);
     }
 
     .mermaid {
@@ -5006,10 +5024,6 @@ body {
     }
 
     .item {
-      p {
-        padding: 4px 0;
-      }
-
       a {
         margin: 0 5px;
       }
@@ -5022,8 +5036,48 @@ body {
       &:hover {
         color: var(--theme);
       }
+    }
 
-      &.police {
+    .site_powered {
+      padding: 2px 0 !important;
+
+      .a-powered {
+        font-weight: 600;
+        color: #007cff;
+      }
+
+      .a-theme {
+        font-weight: 600;
+        color: var(--theme);
+      }
+    }
+
+    .site_driven {
+      a {
+        margin: 0 3px;
+      }
+
+      img {
+        height: 18px;
+      }
+    }
+
+    .site_life {
+      padding-top: 2px;
+      font-size: 12px;
+
+      >i {
+        margin-right: 3px;
+        font-size: 14px;
+        color: #5dad16;
+        vertical-align: bottom;
+      }
+    }
+
+    .site_police {
+      padding-top: 5px;
+
+      a {
         margin-left: 0;
         font-size: 12px;
 
@@ -5040,48 +5094,10 @@ body {
       }
     }
 
-    .site_powered {
-      margin-bottom: 4px;
-      padding: 2px 0 !important;
-
-      .a-powered {
-        font-weight: 600;
-        color: #007cff;
-      }
-
-      .a-theme {
-        font-weight: 600;
-        color: var(--theme);
-      }
-    }
-
-    .site_life {
-      font-size: 12px;
-
-      >i {
-        margin-right: 3px;
-        font-size: 14px;
-        vertical-align: bottom;
-      }
-    }
-
     .rss {
       i {
         font-size: 14px;
         color: #f18651;
-      }
-    }
-  }
-
-  .footer-sponsor {
-    text-align: center;
-
-    a {
-      font-size: 14px;
-      color: var(--minor);
-
-      img {
-        height: 14px;
       }
     }
   }
