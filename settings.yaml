@@ -506,7 +506,7 @@ footer:
       label: 展示 RSS
       type: switch
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 是
@@ -517,7 +517,7 @@ footer:
       label: 展示站点地图
       type: switch
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 是
