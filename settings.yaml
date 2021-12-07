@@ -422,7 +422,7 @@ footer:
       type: select
       data-type: text
       default: theme
-      description: "设置页脚内容具体来自哪里，默认使用主题页脚，也可同时使用主题和后台配置的页脚。如果使用后台自定义页脚，建议复制主题的页脚 html 结构进行修改（/template/common/footer.ftl），然后粘贴到后台的页脚配置内（主题无法保证自定义页脚的样式及适配，请视具体情况设置）"
+      description: "设置页脚内容具体来自哪里，默认使用主题页脚，也可同时使用主题和后台配置的页脚。如果使用后台自定义页脚，建议复制主题的页脚 html 结构进行修改（/template/common/footer.ftl），然后粘贴到后台的页脚配置内（主题无法保证自定义页脚的样式及适配，请视具体情况设置，必要的时候请自行修改样式）"
       options:
         - value: theme
           label: "主题页脚"
@@ -465,7 +465,7 @@ footer:
       label: 展示公网安备
       type: switch
       data-type: bool
-      default: true
+      default: false
       options:
         - value: true
           label: 是
