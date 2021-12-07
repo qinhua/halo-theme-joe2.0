@@ -24,6 +24,28 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 
 	customElements.define(
+		"joe-pdf",
+		class JoePdf extends HTMLElement {
+			constructor() {
+				super();
+				this.options = {
+					src: this.getAttribute("src") || "",
+					width: this.getAttribute("width") || "100%",
+					height: this.getAttribute("height") || "500px",
+				};
+				this.render();
+			}
+			render() {
+				if (!this.options.src) return (this.innerHTML = "pdf地址未填写！");
+				this.innerHTML = `
+				<div class="joe_pdf">
+          <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${this.options.src}" style="width:${this.options.width};height:${this.options.height}"></iframe>
+        </div>`;
+			}
+		}
+	);
+
+	customElements.define(
 		"joe-mp3",
 		class JoeMp3 extends HTMLElement {
 			constructor() {
@@ -577,8 +599,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			constructor() {
 				super();
 				this.options = {
-					src: this.getAttribute("src"),
-					player: this.getAttribute("player"),
+					src: this.getAttribute("src") || "",
+					player:
+            this.getAttribute("player") ||
+            "https://78.al/usr/themes/Joe/library/player.php?url=",
+					width: this.getAttribute("width") || "100%",
+					height: this.getAttribute("height") || "500px",
 				};
 				this.render();
 			}
@@ -586,8 +612,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (this.options.src)
 					this.innerHTML = `<iframe allowfullscreen="true" class="joe_vplayer" src="${
 						this.options.player + this.options.src
+					}" style="width:${this.options.width};height:${
+						this.options.height
 					}"></iframe>`;
-				else this.innerHTML = "播放地址未填写！";
+				else this.innerHTML = "视频地址未填写！";
 			}
 		}
 	);
@@ -597,16 +625,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeBilibili extends HTMLElement {
 			constructor() {
 				super();
-				this.bvid = this.getAttribute("bvid");
-				this.page = Object.is(Number(this.getAttribute("page")), NaN)
-					? 1
-					: this.getAttribute("page");
+				this.options = {
+					bvid: this.getAttribute("bvid"),
+					page: +(this.getAttribute("page") || "1"),
+					width: this.getAttribute("width") || "100%",
+					height: this.getAttribute("height") || "500px",
+				};
 				this.render();
 			}
 			render() {
-				if (this.bvid)
-					this.innerHTML = `<iframe allowfullscreen="true" class="joe_vplayer" src="//player.bilibili.com/player.html?bvid=${this.bvid}&page=${this.page}"></iframe>`;
-				else this.innerHTML = "Bvid未填写！";
+				if (this.options.bvid)
+					this.innerHTML = `<iframe allowfullscreen="true" class="joe_vplayer" src="//player.bilibili.com/player.html?bvid=${this.options.bvid}&page=${this.options.page}" style="width:${this.options.width};height:${this.options.height}"></iframe>`;
+				else this.innerHTML = "bvid未填写！";
 			}
 		}
 	);
