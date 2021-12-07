@@ -14,39 +14,49 @@
         <@menuTag method="tree">
           <#list menus?sort_by('priority') as menu>
             <#if menu.children?? && menu.children?size gt 0>
-              <div class="joe_dropdown" trigger="hover" placement="60px">
-                <div class="joe_dropdown__link">
-                  <#if menu.url!='#'>
-                    <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
-                  <#else>
-                    <a class="item" style="cursor:default;" href="javascript:;" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
-                  </#if>
-                  <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
+              <#if menu.name?default('')?starts_with('#hide') != true>
+                <div class="joe_dropdown" trigger="hover" placement="60px">
+                  <div class="joe_dropdown__link">
+                    <#if menu.url!='#'>
+                      <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
+                    <#else>
+                      <a class="item" style="cursor:default;" href="javascript:;" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
+                    </#if>
+                    <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
+                  </div>
+                  <nav class="joe_dropdown__menu">
+                    <#list menu.children?sort_by('priority') as child>
+                      <#if child.children?? && child.children?size gt 0>
+                        <#if child.name?default('')?starts_with('#hide') != true>
+                          <li class="joe_nav_sub-li">
+                            <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if settings.enable_navbar_icon==true && child.icon?? && child.icon!=''><i class="m-icon ${child.icon}"></i></#if>${child.name!}</a>
+                            <ol class="joe_nav_sub">
+                              <#list child.children?sort_by('priority') as child1>
+                                <#if child1.name?default('')?starts_with('#hide') != true>
+                                  <li>
+                                    <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if settings.enable_navbar_icon==true && child1.icon?? && child1.icon!=''><i class="m-icon ${child1.icon}"></i></#if>${child1.name!}</a>
+                                  </li>
+                                </#if>
+                              </#list>
+                            </ol>
+                          </li>
+                        </#if>
+                      <#else>
+                        <#if child.name?default('')?starts_with('#hide') != true>
+                          <li>
+                            <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if settings.enable_navbar_icon==true && child.icon?? && child.icon!=''><i class="m-icon ${child.icon}"></i></#if>${child.name!}</a>
+                          </li>
+                        </#if>
+                      </#if>
+                    </#list>
+                  </nav>
                 </div>
-                <nav class="joe_dropdown__menu">
-                  <#list menu.children as child>
-                    <#if child.children?? && child.children?size gt 0>
-                      <li class="joe_nav_sub-li">
-                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if settings.enable_navbar_icon==true && child.icon?? && child.icon!=''><i class="m-icon ${child.icon}"></i></#if>${child.name!}</a>
-                        <ol class="joe_nav_sub">
-                          <#list child.children as child1>
-                            <li>
-                              <a class="item" href="${child1.url!}" target="${child1.target!}" title="${child1.name!}"><#if settings.enable_navbar_icon==true && child1.icon?? && child1.icon!=''><i class="m-icon ${child1.icon}"></i></#if>${child1.name!}</a>
-                            </li>
-                          </#list>
-                        </ol>
-                      </li>
-                    <#else> 
-                      <li>
-                        <a class="item" href="${child.url!}" target="${child.target!}" title="${child.name!}"><#if settings.enable_navbar_icon==true && child.icon?? && child.icon!=''><i class="m-icon ${child.icon}"></i></#if>${child.name!}</a>
-                      </li>
-                    </#if> 
-                  </#list>
-                </nav>
-              </div>
+              </#if>
             <#else>
-              <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
-            </#if> 
+              <#if menu.name?default('')?starts_with('#hide') != true>
+                <a class="item" href="${menu.url!}" target="${menu.target!}" title="${menu.name!}"><#if settings.enable_navbar_icon==true && menu.icon?? && menu.icon!=''><i class="m-icon ${menu.icon}"></i></#if>${menu.name!}</a>
+              </#if>
+            </#if>
           </#list>
         </@menuTag>
       </nav>
@@ -104,41 +114,51 @@
             <@menuTag method="tree">
               <#list menus?sort_by('priority') as menu>
                 <#if menu.children?? && menu.children?size gt 0>
-                  <li>
-                    <div class="link panel">
-                      <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                      <i class="joe-font joe-icon-arrow-right"></i>
-                    </div>
-                    <ul class="slides panel-body">
-                      <#if menu.children?? && menu.children?size gt 0>
-                        <#list menu.children as child>
-                          <#if child.children?? && child.children?size gt 0>
-                            <li>
-                              <div class="link panel">
-                                <a href="${child.url!}" title="${child.name!}">${child.name!}</a>
-                                <i class="joe-font joe-icon-arrow-right"></i>
-                              </div>
-                              <ul class="slides panel-body">
-                                <#list child.children as child1>
-                                  <li>
-                                    <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
-                                  </li>
-                                </#list>
-                              </ul>
-                            </li>
-                          <#else>
-                            <li>
-                              <a class="link" href="${child.url!}" title="${child.name!}">${child.name!}</a>
-                            </li>
-                          </#if> 
-                        </#list>
-                      </#if> 
-                    </ul>
-                  </li>
+                  <#if menu.name?default('')?starts_with('#hide') != true>
+                    <li>
+                      <div class="link panel">
+                        <a href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                        <i class="joe-font joe-icon-arrow-right"></i>
+                      </div>
+                      <ul class="slides panel-body">
+                        <#if menu.children?? && menu.children?size gt 0>
+                          <#list menu.children?sort_by('priority') as child>
+                            <#if child.children?? && child.children?size gt 0>
+                              <#if child.name?default('')?starts_with('#hide') != true>
+                                <li>
+                                  <div class="link panel">
+                                    <a href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                                    <i class="joe-font joe-icon-arrow-right"></i>
+                                  </div>
+                                  <ul class="slides panel-body">
+                                    <#list child.children?sort_by('priority') as child1>
+                                      <#if child1.name?default('')?starts_with('#hide') != true>
+                                        <li>
+                                          <a class="link" href="${child1.url!}" title="${child1.name!}">${child1.name!}</a>
+                                        </li>
+                                      </#if>
+                                    </#list>
+                                  </ul>
+                                </li>
+                              </#if>
+                            <#else>
+                              <#if child.name?default('')?starts_with('#hide') != true>
+                                <li>
+                                  <a class="link" href="${child.url!}" title="${child.name!}">${child.name!}</a>
+                                </li>
+                              </#if>
+                            </#if>
+                          </#list>
+                        </#if> 
+                      </ul>
+                    </li>
+                  </#if>
                 <#else>
-                  <li>
-                    <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
-                  </li>
+                  <#if menu.name?default('')?starts_with('#hide') != true> 
+                    <li>
+                      <a class="link" href="${menu.url!}" title="${menu.name!}">${menu.name!}</a>
+                    </li>
+                  </#if>
                 </#if>
               </#list>
             </@menuTag>
