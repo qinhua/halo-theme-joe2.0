@@ -360,7 +360,7 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 
 ![文章详情页元数据配置](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/metas.png)
 
-#### 12、如何支持数学公式和 Mermaid
+#### 12、如何支持数学公式和 Mermaid？
 
 > 主题已经提供了对 `数学公式` 和 `Mermaid` 图形的支持，只是默认为关闭状态，需要手动打开，其中数学公式使用 `Katex` 进行渲染。
 
@@ -397,26 +397,61 @@ class Class10 {
 ```
 ````
 
-#### 13、如何判断不同的自定义页面
+#### 13、文章中如何插入视频？
+
+> 主题已集成 `dpplayer`，只需要在编辑文章时使用 `joe-dplayer` 标签插入视频地址即可（建议 MP4 格式，其它格式未必支持），它接受如下属性：
+
+- `src`：视频地址（必传）
+- `width`：阅读器宽度，默认为 `100%`
+- `height`：阅读器高度，默认 `500px`
+
+```html
+<joe-dplayer src="https://xxx.mp4"></joe-dplyer>
+```
+
+如果你想嵌入 `B站视频`，可以使用 `joe-bilibili` 标签，它接受如下属性（相关参数可以从视频地址中获取）。
+
+- `bvid`：视频的 `id`（必传）
+- `page`：视频的 `page`，即分页
+- `width`：阅读器宽度，默认为 `100%`
+- `height`：阅读器高度，默认 `500px`
+
+```html
+<joe-bilibili bvid="BV12h411k7vr"></joe-bilibili>
+```
+
+#### 14、文章中如何预览 `PDF` 文件？
+
+> 主题已集成 `PDF.js`，可以渲染 `pdf` 文件，只需要在编辑文章时使用 `joe-pdf` 标签插入即可，它接受如下属性：
+
+- `src`：PDF 文件地址（必传）
+- `width`：阅读器宽度，默认为 `100%`
+- `height`：阅读器高度，默认 `500px`
+
+```html
+<joe-pdf src="https://xxx.pdf" width="100%" height="500px"></joe-pdf>
+```
+
+#### 15、如何区分不同的自定义页面？
 
 有时候我们可能想在某一个自定义页面内部加入一些资源，单纯靠页面类型 `sheet` 无法进行区分。此时可以先进入 `后台管理系统`，并打开浏览器控制台，切换到 `network-Fetch/XHR` 这一栏，然后进入 `页面-所有页面-自定义页面`，此时控制面板中会出现相应的请求，查看数据获取页面对于的 `id`，这样我们就可以在模板中使用这个 `id` 区分不同的自定义页面了（可在 `sheet.ftl` 文件中通过 `sheet.id` 获取）。
 
 ![自定义页面id](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/sheet_id.png)
 
-#### 14、如何查看博客后台日志？
+#### 16、如何查看博客后台日志？
 
 - 有时博客访问不了，想查看后台日志，可以进入 `后台管理-系统-小工具-实时日志` 查看，生成环境可能需要先开启彩蛋（连续点击 `Halo Dashboard` 10 次触发），更多请参见 [Halo 隐藏功能](https://halo.run/archives/use-hidden-features)；
 
 - 也可以登录服务器，直接执行命令 `journalctl -n 20 -u halo`，其中 20 是显示的日志行数。
 
-#### 15、登录页如何显示找回密码按钮？
+#### 17、登录页如何显示找回密码按钮？
 
 有时候登录后台管理系统忘了密码，想找回密码，但是界面默认没有找回密码的按钮，需要用快捷键触打开。
 
 - Windows/Linux: `Shift + Alt + h`
 - maxOS: `Shift + Command + h`
 
-#### 16、Freemarker 相关技巧
+#### 18、FreeMarker 相关技巧
 
 主要是本人在开发主题过程中收集的一些 `Freemarker` 知识，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 
