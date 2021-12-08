@@ -1,4 +1,5 @@
 /**文章页逻辑 */
+let tmpDom = null;
 const postContext = {
 	// status: $(".joe_detail").attr("data-status"),
 	/* 文章目录 */
@@ -192,6 +193,80 @@ const postContext = {
 				},
 			});
 		});
+	},
+	/* 初始化评论可见 */
+	initReadLimit() {
+		let $hideMark = $(".page-post joe-hide");
+		const $content = $(".page-post .joe_detail__article");
+		const cid = $(".joe_detail").attr("data-cid");
+		console.log($hideMark.length);
+		// 多个joe_hide标记时移除前面的标记，只处理最后一个
+		if ($hideMark.length > 1) {
+			$hideMark.eq(0).parent().remove();
+			$hideMark = $hideMark.eq($hideMark.length - 1);
+		}
+		$content.attr("data-partial", "true");
+		// 隐藏相关DOM
+		const hideDom = () => {
+			const $hideDom = $hideMark.parent().nextAll();
+			console.log($hideDom);
+			tmpDom = $hideDom;
+			$hideDom.remove();
+			console.log(tmpDom);
+		};
+		// 检查本地的 partialedIds
+		const checkPartialedIds = (postId) => {
+			const localIds = localStorage.getItem("partialedIds");
+			if (localIds && localIds.includes(postId)) {
+				console.log("已经评论过了");
+				$(".page-post joe-hide").parent().remove(); //移除所有 joe-hide 组件
+				return true;
+			} else {
+				console.log("没有评论记录");
+				return false;
+			}
+		};
+		!checkPartialedIds(cid) && hideDom();
+
+		// 重新渲染内容
+		const rerenderContent = () => {
+			// 代码块
+			// TOC
+			console.log("重新渲染内容");
+		};
+
+		// 更新当前评论状态
+		const updateState = () => {
+			const localIds = localStorage.getItem("partialedIds");
+			tmpDom.replaceAll($hideMark.parent());
+			localStorage.setItem(
+				"partialedIds",
+				localIds ? localIds + "," + cid : cid
+			);
+			tmpDom = null;
+			rerenderContent();
+		};
+
+		setTimeout(() => {
+			if ($content.attr("data-partial")) {
+				!checkPartialedIds(cid) && updateState(cid);
+			} else {
+				return;
+			}
+		}, 3000);
+
+		// 监听评论成功事件
+		const commentNode = document.getElementsByTagName("halo-comment")[0];
+		// console.log(commentNode);
+		commentNode.addEventListener("post-success", (data) => {
+			console.log(data, "评论成功");
+			if ($content.attr("data-partial")) {
+				!checkPartialedIds(cid) && updateState(cid);
+			} else {
+				return;
+			}
+		});
+		$content.addClass("show");
 	},
 	/* 文章视频模块 */
 	initVideo() {

@@ -13,7 +13,7 @@
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
   </#if>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
-    <script src="${BASE_RES_URL!}/source/lib/prism/prism.js"></script>
+    <script src="${BASE_RES_URL!}/source/lib/prism/prism.min.js"></script>
   </#if>
   <#if type == 'post' && settings.enable_toc == true>
     <script src="${BASE_RES_URL!}/source/lib/tocbot/tocbot.min.js"></script>

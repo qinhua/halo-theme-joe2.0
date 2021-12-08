@@ -266,12 +266,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 			render() {
 				this.innerHTML =
-          "<span class=\"joe_hide\">此处内容作者设置了 <i class=\"joe_hide__button\">回复</i> 可见</span>";
+          "<span class=\"joe_hide\">此处内容仅 <i class=\"joe_hide__button\">评论</i> 后可见</span>";
 				this.$button = this.querySelector(".joe_hide__button");
 				const $comment = document.querySelector(".joe_comment");
 				const $header = document.querySelector(".joe_header");
 				if (!$comment || !$header) return;
 				this.$button.addEventListener("click", () => {
+					if(!document.getElementsByTagName("halo-comment").length) {
+						Qmsg.warning("评论功能不可用！");
+						return;
+					}
 					const top = $comment.offsetTop - $header.offsetHeight - 15;
 					window.scrollTo({ top, behavior: "smooth" });
 				});

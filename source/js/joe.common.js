@@ -373,6 +373,7 @@ const commonContext = {
 	/* 激活侧边栏天气功能 */
 	initWeather() {
 		if (
+			Joe.isMobile ||
 			!ThemeConfig.enable_weather ||
       !ThemeConfig.weather_key ||
       !$("#he-plugin-simple").length
@@ -817,8 +818,6 @@ const commonContext = {
 		$("#theme-config-getter").remove();
 		// 重置操作
 		commonContext.loadingBar.hide();
-		// 解决代码块加载时无样式问题
-		$(".code-toolbar").length && $(".code-toolbar").addClass("visible");
 	},
 };
 

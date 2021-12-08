@@ -1,6 +1,10 @@
 {
   "extends": "stylelint-config-recommended",
   "overrides": [{
+    "ignoreFiles": [
+      "source/lib/**/*.css",
+      "source/css/min.css"
+    ],
     "files": ["source/css/*.less"],
     "rules": {
       "no-descending-specificity": null,
