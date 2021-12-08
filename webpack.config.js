@@ -15,6 +15,7 @@ module.exports = {
 		photos: resolve("/source/js/joe.photos.js"),
 		custom: resolve("/source/js/joe.custom.js"),
 		utils: resolve("/source/utils/joe.utils.js"),
+		// prism: resolve("/source/lib/prism/prism.js"),
 		// census: resolve("/source/js/joe.census.js"),
 		// pjax: resolve("/source/js/pjax.js"),
 	},

@@ -70385,7 +70385,7 @@ class XRef {
     if (!recoveryMode) {
       trailerDict = this.readXRef();
     } else {
-      (0, _util.warn)("Indexing all PDF objects");
+      // (0, _util.warn)("Indexing all PDF objects");
       trailerDict = this.indexObjects();
     }
 
