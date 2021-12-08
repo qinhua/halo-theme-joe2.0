@@ -1,5 +1,5 @@
-/* PrismJS 1.24.1
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+cpp+dart+docker+ftl+go+graphql+http+java+json+latex+less+markup-templating+mongodb+nginx+python+jsx+tsx+scss+sql+typescript+yaml&plugins=line-numbers+show-language+toolbar+copy-to-clipboard */
+/* PrismJS 1.25.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+aspnet+bash+basic+batch+c+csharp+cpp+dart+django+docker+ejs+ftl+git+glsl+go+graphql+groovy+haml+haskell+http+java+jq+js-extras+json+kotlin+latex+less+lua+makefile+markup-templating+matlab+mermaid+mongodb+nginx+objectivec+php+powershell+pug+python+r+jsx+tsx+regex+ruby+rust+sass+scss+sql+stylus+swift+typescript+typoscript+unrealscript+vim+visual-basic+wasm+yaml&plugins=line-numbers+show-language+toolbar+copy-to-clipboard */
 /**
  * prism.js default theme for JavaScript, CSS and HTML
  * Based on dabblet (http://dabblet.com)
@@ -10,8 +10,8 @@ code[class*="language-"],
 pre[class*="language-"] {
 	color: black;
 	background: none;
-	text-shadow: 0 1px white;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	/* text-shadow: 0 1px white; */
+	/* font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; */
 	font-size: 1em;
 	text-align: left;
 	white-space: pre;
@@ -28,6 +28,13 @@ pre[class*="language-"] {
 	-moz-hyphens: none;
 	-ms-hyphens: none;
 	hyphens: none;
+}
+
+pre code {
+  display: block;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
@@ -188,6 +195,7 @@ div.code-toolbar {
 
 div.code-toolbar > .toolbar {
 	position: absolute;
+	z-index: 10;
 	top: .3em;
 	right: .2em;
 	transition: opacity 0.3s ease-in-out;
@@ -224,9 +232,10 @@ div.code-toolbar > .toolbar > .toolbar-item > button {
 	line-height: normal;
 	overflow: visible;
 	padding: 0;
-	-webkit-user-select: none; /* for button */
+	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	user-select: none;
 }
 
 div.code-toolbar > .toolbar > .toolbar-item > a,

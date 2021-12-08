@@ -89,13 +89,13 @@
               <#if enable_like=='true' && settings.enable_like==true && post.status!='DRAFT'>
                 <#include "template/module/favorite.ftl">
               </#if>
-              <#include "template/module/post_operate.ftl">
-              <#import "template/macro/post_copyright.ftl" as pc>
-              <@pc.post_copyright post_url="${post.fullPath}"/>
-              <#if settings.enable_clean_mode!=true && settings.enable_post_ads == true && post.status!='DRAFT'>
-                <#include "template/ads/ads_post.ftl">
-              </#if>
             </div>
+            <#include "template/module/post_operate.ftl">
+            <#import "template/macro/post_copyright.ftl" as pc>
+            <@pc.post_copyright post_url="${post.fullPath}"/>
+            <#if settings.enable_clean_mode!=true && settings.enable_post_ads == true && post.status!='DRAFT'>
+              <#include "template/ads/ads_post.ftl">
+            </#if>
           </div>
           <ul class="joe_post__pagination">
             <#if prevPost??>

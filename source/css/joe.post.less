@@ -77,7 +77,11 @@
 .joe_detail-wrapper {
   padding: 0 10px 0;
   article {
-    padding-top: 15px;
+    visibility: hidden;
+    padding: 15px 0 30px;
+    &.show {
+      visibility: visible;
+    }
   }
 }
 
@@ -124,7 +128,7 @@
     max-height: calc(100vh - 150px);
     overflow-y: auto;
 
-    >.toc-list {
+    > .toc-list {
       position: relative;
       overflow: hidden;
 
