@@ -659,6 +659,10 @@ body {
             padding: 0 15px;
             transition: color 0.35s, background 0.35s;
 
+            &::after {
+              display: none;
+            }
+
             &:hover,
             &.current {
               color: var(--theme);
@@ -669,6 +673,19 @@ body {
 
         .item:hover:after {
           display: none;
+        }
+
+        &.active {
+          .joe_dropdown__link {
+            a,
+            i {
+              color: var(--theme) !important;
+
+              &::after {
+                display: none;
+              }
+            }
+          }
         }
       }
 
