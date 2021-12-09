@@ -271,7 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				const $comment = document.querySelector(".joe_comment");
 				const $header = document.querySelector(".joe_header");
 				if (!$comment || !$header) return;
-				this.$button.addEventListener("click", () => {
+				this.$button.addEventListener("click", (e) => {
+					e.stopPropagation();
 					if(!document.getElementsByTagName("halo-comment").length) {
 						Qmsg.warning("评论功能不可用！");
 						return;
@@ -579,7 +580,8 @@ document.addEventListener("DOMContentLoaded", () => {
 						item.classList.add("active");
 						wrapper.style.maxHeight = "none";
 					}
-					head.addEventListener("click", () => {
+					head.addEventListener("click", (e) => {
+						e.stopPropagation();
 						wrapper.style.maxHeight = content.offsetHeight + "px";
 						let timer = setTimeout(() => {
 							if (item.classList.contains("active")) {
@@ -681,7 +683,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.querySelectorAll(".joe_tabs__head-item").forEach((item, index) => {
 					const label = item.getAttribute("label");
 					item.innerHTML = label;
-					item.addEventListener("click", () => {
+					item.addEventListener("click", (e) => {
+						e.stopPropagation();
 						this.querySelectorAll(".joe_tabs__head-item").forEach((_item) =>
 							_item.classList.remove("active")
 						);

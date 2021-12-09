@@ -873,8 +873,8 @@ aside:
       label: 歌单ID
       type: text
       placeholder: "网易歌单ID，不填则不展示播放器"
-    show_newest_post:
-      name: show_newest_post
+    enable_newest_post:
+      name: enable_newest_post
       label: 展示最新文章
       type: switch
       data-type: bool
@@ -890,8 +890,8 @@ aside:
       label: 最新文章条数
       default: 5
       description: "右侧最新文章展示条数，填写数字即可，默认展示最新的5篇文章（需开启最新文章）"
-    show_lifetime:
-      name: show_lifetime
+    enable_lifetime:
+      name: enable_lifetime
       label: 展示人生倒计时
       type: switch
       data-type: bool
@@ -920,8 +920,8 @@ aside:
       data-type: long
       default: 5
       description: "右侧最新评论展示条数，填写数字即可，默认展示最新的5条评论（需开启最新评论）"
-    show_tag_cloud:
-      name: show_tag_cloud
+    enable_tag_cloud:
+      name: enable_tag_cloud
       label: 展示标签云
       type: switch
       data-type: bool
@@ -1210,7 +1210,7 @@ home:
       label: 文章默认缩略图
       width: 100%
       type: attachment
-      default: https://picsum.photos/id/1027/210/140
+      default: "https://picsum.photos/id/1081/210/140"
       description: "文章无配图时生效，可使用占位图服务（210*140） https://source.unsplash.com、https://picsum.photos"
     fallback_thumbnail:
       name: fallback_thumbnail

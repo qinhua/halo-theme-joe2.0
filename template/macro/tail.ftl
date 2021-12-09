@@ -23,9 +23,6 @@
     <script src="${BASE_RES_URL!}/source/lib/halo-comment/halo-comment.min.js?v=${theme.version!}"></script>
   </#if>
   <script src="${BASE_RES_URL!}/source/lib/fancybox/jquery.fancybox.min.js"></script>
-  <#if settings.show_tag_cloud == true && settings.tag_cloud_type == '3d'>
-    <script src="${BASE_RES_URL!}/source/lib/3dtag/3dtag.min.js"></script>
-  </#if>
   <#if settings.enable_aside == true && settings.enable_music_player == true && settings.music_id?? && settings.music_id?trim!= ''>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.css"> 
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
