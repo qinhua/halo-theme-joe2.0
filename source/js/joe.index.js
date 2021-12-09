@@ -226,7 +226,8 @@ const homeContext = {
 		};
 
 		// 切换文章类型
-		$navItems.on("click", function () {
+		$navItems.on("click", function (e) {
+			e.stopPropagation();
 			if (!ThemeConfig.enable_index_list_ajax) return;
 			const typeId = $(this).attr("data-type");
 			const typeName = MapTypes[typeId];

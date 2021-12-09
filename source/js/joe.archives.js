@@ -2,7 +2,8 @@
 const archivesContext = {
 	/* 内容折叠/展开 */
 	initExpander() {
-		$(".joe_archives-timelist .panel").on("click", function () {
+		$(".joe_archives-timelist .panel").on("click", function (e) {
+			e.stopPropagation();
 			const $this = $(this);
 			const $titleHeight = $this.outerHeight();
 			const $conHeight = $this.next(".panel-body").outerHeight();

@@ -38,7 +38,8 @@ const journalContext = {
 					$iconUnlike.hide();
 				}
 				$likeNum.html(clikes);
-				$iconLike.on("click", function () {
+				$iconLike.on("click", function (e) {
+					e.stopPropagation();
 					let _loading = false;
 					if (_loading) return;
 					_loading = true;
@@ -93,7 +94,8 @@ const journalContext = {
 	initComment() {
 		if (ThemeConfig.enable_clean_mode || !ThemeConfig.enable_comment_journal)
 			return;
-		$(".journal_comment_expander,.journal-comment").on("click", function () {
+		$(".journal_comment_expander,.journal-comment").on("click", function (e) {
+			e.stopPropagation();
 			const $this = $(this);
 			const $parent = $this.parents(".footer-wrap");
 			const compComment = $parent.find("halo-comment")[0]._wrapper.$refs.inner;
@@ -109,7 +111,8 @@ const journalContext = {
 	},
 	/* 内容折叠/展开 */
 	initExpander() {
-		$(".journal_content_expander i").on("click", function () {
+		$(".journal_content_expander i").on("click", function (e) {
+			e.stopPropagation();
 			$(this).parents(".joe_journal_body").toggleClass("open");
 		});
 	},
