@@ -224,7 +224,8 @@ const photosContext = {
 		);
 
 		// 加载更多
-		$domLoading.on("click", function () {
+		$domLoading.on("click", function (e) {
+			e.stopPropagation();
 			if ($(this).attr("loading")) return;
 			queryData.page++;
 			getData({
@@ -233,7 +234,8 @@ const photosContext = {
 		});
 
 		// 分组过滤
-		$(".joe_photos__filter li").on("click", function () {
+		$(".joe_photos__filter li").on("click", function (e) {
+			e.stopPropagation();
 			const $this = $(this);
 			if ($this.hasClass("active")) return;
 			$this.addClass("active").siblings("li").removeClass("active");
@@ -241,7 +243,8 @@ const photosContext = {
 		});
 
 		// 布局切换
-		$(".joe_photos__layout-switch i").on("click", function () {
+		$(".joe_photos__layout-switch i").on("click", function (e) {
+			e.stopPropagation();
 			const $this = $(this);
 			if ($this.hasClass("active")) return;
 			curLayout = $this.attr("data-type");

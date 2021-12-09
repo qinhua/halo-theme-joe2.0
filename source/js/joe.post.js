@@ -1,72 +1,84 @@
 /**文章页逻辑 */
 let tmpDom = null;
 const postContext = {
-	// status: $(".joe_detail").attr("data-status"),
-	/* 文章目录 */
-	initToc() {
-		if (
-			PageAttrs.metas.enable_toc === "false" ||
-      !ThemeConfig.enable_toc ||
-      !$(".toc-container").length
-		)
-			return;
-		if (document.body.clientWidth <= 1200) return;
-		tocbot.init({
-			tocSelector: "#js-toc",
-			contentSelector: ".joe_detail__article",
-			ignoreSelector: ".js-toc-ignore",
-			headingSelector: "h1, h2, h3, h4, h5",
-			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
-			hasInnerContainers: false,
-			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
-			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
-			positionFixedSelector: ".toc-container", // 固定类添加的容器
-			positionFixedClass: "is-position-fixed", // 固定类名称
-			fixedSidebarOffset: "auto",
-			// scrollEndCallback: function (e) {},
-		});
-		// toc 菜单收起/展开
-		if (!$("#js-toc").children().length) {
-			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
-			$(".toc-container").addClass("hide"); // 无目录时默认折叠
-		}
-		$(".toc-container").show();
-		$(".toc-expander i").on("click", function () {
-			$(this).parents(".toc-container").toggleClass("hide");
-		});
-	},
-	/* 阅读进度条 */
-	initProgress() {
-		if (!ThemeConfig.enable_progress_bar) return;
-		$(window).off("scroll");
-		const progress_bar = $(".joe_progress_bar");
-		let win_h, body_h, sHeight;
-		const updateProgress = (p) => progress_bar.css("width", p * 100 + "%");
-		$(window).on("scroll", function () {
-			win_h = $(window).height();
-			body_h = $("body").height();
-			sHeight = body_h - win_h;
-			window.requestAnimationFrame(function () {
-				const perc = Math.max(0, Math.min(1, $(window).scrollTop() / sHeight));
-				updateProgress(perc);
-			});
-		});
-	},
-	/* 侧边栏切换 */
-	initAside() {
-		if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
-			return;
-		$(".aside-expander").on("click", function () {
-			const $this = $(this);
-			if ($this.hasClass("active")) {
-				$this.removeClass("active");
-				$this.html("隐藏侧边栏");
-			} else {
-				$this.addClass("active");
-				$this.html("显示侧边栏");
+	/* 初始化评论后可见 */
+	initReadLimit() {
+		const $content = $(".page-post .joe_detail__article");
+		let $hideMark = $("joe-hide");
+
+		if ($hideMark.length) {
+			const cid = $(".joe_detail").attr("data-cid");
+			// 1、有多个joe-hide标记时移除前面的标记，只处理最后一个
+			if ($hideMark.length > 1) {
+				const $lastOne = $hideMark.eq($hideMark.length - 1);
+				$lastOne.addClass("marker");
+				$hideMark = $lastOne;
+				$("joe-hide:not(.marker)").parent().remove();
 			}
-			$(".joe_aside").toggleClass("hide");
-		});
+
+			// 2、设置data-partial属性
+			$content.attr("data-partial", "true");
+
+			// 暂存并移除相关DOM
+			const hideDom = () => {
+				const $hideDom = $hideMark.parent().nextAll();
+				tmpDom = $hideDom;
+				$hideDom.remove();
+
+				// 监听评论成功事件（区分首次和后续提交）
+				const commentNode = document.getElementsByTagName("halo-comment")[0];
+				commentNode.addEventListener("post-success", (_data) => {
+					// console.log(_data, "评论成功");
+					// 检查是否已经评论过该文章
+					checkPartialIds(cid, updateState);
+				});
+			};
+
+			// 检查本地的 partialIds
+			const checkPartialIds = (postId, cb) => {
+				const localIds = localStorage.getItem("partialIds");
+				if (localIds && localIds.includes(postId)) {
+					// console.log("已经评论过了");
+					$("joe-hide").parent().remove(); // 移除内容中所有 joe-hide 组件
+				} else {
+					// console.log("没有评论记录");
+					cb && cb(postId);
+				}
+			};
+
+			// 重新渲染内容
+			const rerenderContent = () => {
+				// console.log("重新渲染内容");
+				// 代码块
+				commonContext.initCode(true);
+				// 图片预览
+				commonContext.initGallery();
+				// TOC
+				tocbot.refresh();
+			};
+
+			// 更新当前评论状态
+			const updateState = () => {
+				const localIds = localStorage.getItem("partialIds");
+				const offsetTop = $hideMark.offset().top;
+				tmpDom.replaceAll($hideMark.parent());
+				localStorage.setItem(
+					"partialIds",
+					localIds ? localIds + "," + cid : cid
+				);
+				tmpDom = null;
+				rerenderContent();
+
+				// 滚动到原位置
+				window.scrollTo({ top: offsetTop - 150, behavior: "smooth" });
+			};
+
+			// 3.检查本地的partialIds
+			checkPartialIds(cid, hideDom);
+		}
+
+		// 显示文章内容
+		$content.addClass("show");
 	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
@@ -146,7 +158,8 @@ const postContext = {
 		}
 		$likeNum.html(clikes);
 		let _loading = false;
-		$iconLike.on("click", function () {
+		$iconLike.on("click", function (e) {
+			e.stopPropagation();
 			if (_loading) return;
 			_loading = true;
 			agreeArr = localStorage.getItem(encryption("agree"))
@@ -194,79 +207,74 @@ const postContext = {
 			});
 		});
 	},
-	/* 初始化评论可见 */
-	initReadLimit() {
-		let $hideMark = $(".page-post joe-hide");
-		const $content = $(".page-post .joe_detail__article");
-		const cid = $(".joe_detail").attr("data-cid");
-		console.log($hideMark.length);
-		// 多个joe_hide标记时移除前面的标记，只处理最后一个
-		if ($hideMark.length > 1) {
-			$hideMark.eq(0).parent().remove();
-			$hideMark = $hideMark.eq($hideMark.length - 1);
-		}
-		$content.attr("data-partial", "true");
-		// 隐藏相关DOM
-		const hideDom = () => {
-			const $hideDom = $hideMark.parent().nextAll();
-			console.log($hideDom);
-			tmpDom = $hideDom;
-			$hideDom.remove();
-			console.log(tmpDom);
-		};
-		// 检查本地的 partialedIds
-		const checkPartialedIds = (postId) => {
-			const localIds = localStorage.getItem("partialedIds");
-			if (localIds && localIds.includes(postId)) {
-				console.log("已经评论过了");
-				$(".page-post joe-hide").parent().remove(); //移除所有 joe-hide 组件
-				return true;
-			} else {
-				console.log("没有评论记录");
-				return false;
-			}
-		};
-		!checkPartialedIds(cid) && hideDom();
-
-		// 重新渲染内容
-		const rerenderContent = () => {
-			// 代码块
-			// TOC
-			console.log("重新渲染内容");
-		};
-
-		// 更新当前评论状态
-		const updateState = () => {
-			const localIds = localStorage.getItem("partialedIds");
-			tmpDom.replaceAll($hideMark.parent());
-			localStorage.setItem(
-				"partialedIds",
-				localIds ? localIds + "," + cid : cid
-			);
-			tmpDom = null;
-			rerenderContent();
-		};
-
-		setTimeout(() => {
-			if ($content.attr("data-partial")) {
-				!checkPartialedIds(cid) && updateState(cid);
-			} else {
-				return;
-			}
-		}, 3000);
-
-		// 监听评论成功事件
-		const commentNode = document.getElementsByTagName("halo-comment")[0];
-		// console.log(commentNode);
-		commentNode.addEventListener("post-success", (data) => {
-			console.log(data, "评论成功");
-			if ($content.attr("data-partial")) {
-				!checkPartialedIds(cid) && updateState(cid);
-			} else {
-				return;
-			}
+	/* 文章目录 */
+	initToc() {
+		if (
+			PageAttrs.metas.enable_toc === "false" ||
+      !ThemeConfig.enable_toc ||
+      !$(".toc-container").length
+		)
+			return;
+		if (document.body.clientWidth <= 1200) return;
+		tocbot.init({
+			tocSelector: "#js-toc",
+			contentSelector: ".joe_detail__article",
+			ignoreSelector: ".js-toc-ignore",
+			headingSelector: "h1, h2, h3, h4, h5",
+			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
+			hasInnerContainers: false,
+			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
+			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
+			positionFixedSelector: ".toc-container", // 固定类添加的容器
+			positionFixedClass: "is-position-fixed", // 固定类名称
+			fixedSidebarOffset: "auto",
+			// scrollEndCallback: function (e) {},
 		});
-		$content.addClass("show");
+		// toc 菜单收起/展开
+		if (!$("#js-toc").children().length) {
+			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
+			$(".toc-container").addClass("hide"); // 无目录时默认折叠
+		}
+		$(".toc-container").show();
+		$(".toc-expander i").on("click", function (e) {
+			e.stopPropagation();
+			$(this).parents(".toc-container").toggleClass("hide");
+		});
+	},
+	/* 阅读进度条 */
+	initProgress() {
+		if (!ThemeConfig.enable_progress_bar) return;
+		$(window).off("scroll");
+		const progress_bar = $(".joe_progress_bar");
+		let win_h, body_h, sHeight;
+		const updateProgress = (p) => progress_bar.css("width", p * 100 + "%");
+		$(window).on("scroll", function (e) {
+			e.stopPropagation();
+			win_h = $(window).height();
+			body_h = $("body").height();
+			sHeight = body_h - win_h;
+			window.requestAnimationFrame(function () {
+				const perc = Math.max(0, Math.min(1, $(window).scrollTop() / sHeight));
+				updateProgress(perc);
+			});
+		});
+	},
+	/* 侧边栏切换 */
+	initAside() {
+		if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
+			return;
+		$(".aside-expander").on("click", function (e) {
+			e.stopPropagation();
+			const $this = $(this);
+			if ($this.hasClass("active")) {
+				$this.removeClass("active");
+				$this.html("隐藏侧边栏");
+			} else {
+				$this.addClass("active");
+				$this.html("显示侧边栏");
+			}
+			$(".joe_aside").toggleClass("hide");
+		});
 	},
 	/* 文章视频模块 */
 	initVideo() {
@@ -274,7 +282,8 @@ const postContext = {
 			const player = $(".joe_detail__article-video .play iframe").attr(
 				"data-player"
 			);
-			$(".joe_detail__article-video .episodes .item").on("click", function () {
+			$(".joe_detail__article-video .episodes .item").on("click", function (e) {
+				e.stopPropagation();
 				$(this).addClass("active").siblings().removeClass("active");
 				const url = $(this).attr("data-src");
 				$(".joe_detail__article-video .play iframe").attr({
@@ -327,18 +336,16 @@ const postContext = {
 };
 
 !(function () {
-	const omits = ["initToc"];
+	// const omits = [""];
 	document.addEventListener("DOMContentLoaded", function () {
-		Object.keys(postContext).forEach(
-			(c) => !omits.includes(c) && postContext[c]()
-		);
+		Object.keys(postContext).forEach((c) => postContext[c]());
 	});
 
-	window.addEventListener("load", function () {
-		if (omits.length === 1) {
-			postContext[omits[0]]();
-		} else {
-			omits.forEach((c) => postContext[c]());
-		}
-	});
+	// window.addEventListener("load", function () {
+	// 	if (omits.length === 1) {
+	// 		postContext[omits[0]]();
+	// 	} else {
+	// 		omits.forEach((c) => postContext[c]());
+	// 	}
+	// });
 })();

@@ -4456,16 +4456,16 @@ body {
       user-select: none;
 
       .icon {
+        cursor: pointer;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 42px;
         height: 42px;
-        border-radius: 50%;
-        background: #f56c6c;
-        cursor: pointer;
         margin-bottom: 8px;
+        background: #f56c6c;
+        border-radius: 50%;
 
         &.active {
           animation: box_shadow 1s;
@@ -4483,6 +4483,16 @@ body {
           &.active {
             transform: scale(1);
             opacity: 1;
+          }
+        }
+
+        .icon-like {
+          border-radius: 50%;
+          box-shadow: var(--box-shadow);
+
+          &:hover {
+            animation: box_shadow 1s infinite;
+            box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
           }
         }
       }

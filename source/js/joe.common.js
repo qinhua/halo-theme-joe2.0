@@ -16,7 +16,8 @@ const commonContext = {
 		$icon_dark[`${local_theme === "light" ? "add" : "remove"}Class`]("active");
 
 		// 手动切换
-		$(".joe_action_item.mode").on("click", function () {
+		$(".joe_action_item.mode").on("click", function (e) {
+			e.stopPropagation();
 			local_theme = localStorage.getItem("data-mode");
 			let theme = "";
 			if (local_theme) {
@@ -77,17 +78,33 @@ const commonContext = {
 		}
 	},
 	/* 初始化代码区域，高亮 + 行号 + 折叠 + 复制 */
-	initCode() {
+	initCode(isRefresh) {
 		// const isPost = $(".page-post").length > 0;
-		const $codeElms = $(
-			".page-post pre, .page-journals pre, .page-sheet pre"
-		);
+		const $codeElms = $(".page-post pre, .page-journals pre, .page-sheet pre");
 		if (!$codeElms.length) return;
+
 		$codeElms.each(function (_index, item) {
 			const $item = $(item);
 			const $codes = $item.find("code");
 			if ($codes.length > 0) {
-				// 添加默认代码类型为纯文本
+				if (isRefresh) {
+					// 更新时重新绑定事件
+					$item
+						.find(".code-expander")
+						.off("click")
+						.on("click", function (e) {
+							e.stopPropagation();
+							const $this = $(this);
+							const $auto_fold = $this
+								.parent("pre")
+								.siblings(".toolbar")
+								.find(".autofold-tip");
+							$auto_fold && $auto_fold.remove();
+							$this.parent("pre").toggleClass("close");
+						});
+					return;
+				}
+				// 添加默认代码类型为纯文本（已在prism源码中处理）
 				// const $curCode = $codes.eq(0);
 				// if (
 				// 	!$curCode.attr("class") ||
@@ -102,18 +119,21 @@ const commonContext = {
 				// 	: null;
 				// 代码折叠
 				if (ThemeConfig.enable_code_expander) {
-					const expander = $(
-						"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
-					);
-					expander.on("click", function () {
-						const $parent = expander.parent("pre");
-						const $auto_fold = $parent
+					$item
+						.prepend(
+							"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
+						)
+						.addClass("c_expander");
+					$item.find(".code-expander").on("click", function (e) {
+						e.stopPropagation();
+						const $this = $(this);
+						const $auto_fold = $this
+							.parent("pre")
 							.siblings(".toolbar")
 							.find(".autofold-tip");
 						$auto_fold && $auto_fold.remove();
-						expander.parent("pre").toggleClass("close");
+						$this.parent("pre").toggleClass("close");
 					});
-					$item.addClass("c_expander").prepend(expander);
 				}
 				// 代码复制
 				if (ThemeConfig.enable_code_copy) {
@@ -230,39 +250,6 @@ const commonContext = {
 			},
 		});
 	},
-	/* 搜索框弹窗 */
-	searchDialog() {
-		const $result = $(".joe_header__above-search .result");
-		$(".joe_header__above-search .input").on("click", function (e) {
-			e.stopPropagation();
-			$result.addClass("active");
-		});
-		$(document).on("click", function () {
-			$result.removeClass("active");
-		});
-	},
-	/* 激活全局下拉框功能 */
-	initDropMenu() {
-		$(".joe_dropdown").each(function (index, item) {
-			const menu = $(this).find(".joe_dropdown__menu");
-			const trigger = $(item).attr("trigger") || "click";
-			const placement = $(item).attr("placement") || $(this).height() || 0;
-			menu.css("top", placement);
-			if (trigger === "hover") {
-				$(this).hover(
-					() => $(this).addClass("active"),
-					() => $(this).removeClass("active")
-				);
-			} else {
-				$(this).on("click", function (e) {
-					$(this).toggleClass("active");
-					$(document).one("click", () => $(this).removeClass("active"));
-					e.stopPropagation();
-				});
-				menu.on("click", (e) => e.stopPropagation());
-			}
-		});
-	},
 	/* 激活全局返回顶部功能 */
 	back2Top() {
 		if (!ThemeConfig.enable_back2top) return;
@@ -277,16 +264,17 @@ const commonContext = {
 			clearTimeout(_debounce);
 			_debounce = setTimeout(handleScroll, 100);
 		});
-		$el.on("click", () =>
+		$el.on("click", function (e) {
+			e.stopPropagation();
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",
-			})
-		);
+			});
+		});
 	},
 	/* 激活侧边栏人生倒计时功能 */
 	initTimeCount() {
-		if (!$(".joe_aside__item.timelife").length) return;
+		if (Joe.isMobile || !$(".joe_aside__item.timelife").length) return;
 		let timelife = [
 			{
 				title: "今日已经过去",
@@ -374,7 +362,7 @@ const commonContext = {
 	initWeather() {
 		if (
 			Joe.isMobile ||
-			!ThemeConfig.enable_weather ||
+      !ThemeConfig.enable_weather ||
       !ThemeConfig.weather_key ||
       !$("#he-plugin-simple").length
 		)
@@ -439,141 +427,124 @@ const commonContext = {
 	/* 初始化3D标签云 */
 	init3dTag() {
 		if (
-			!ThemeConfig.show_tag_cloud ||
+			Joe.isMobile ||
+      !ThemeConfig.enable_tag_cloud ||
       ThemeConfig.tag_cloud_type !== "3d" ||
       !$(".tags-cloud-list").length
 		)
 			return;
-		const entries = [];
-		const colors = [
-			"#F8D800",
-			"#0396FF",
-			"#EA5455",
-			"#7367F0",
-			"#32CCBC",
-			"#F6416C",
-			"#28C76F",
-			"#9F44D3",
-			"#F55555",
-			"#736EFE",
-			"#E96D71",
-			"#DE4313",
-			"#D939CD",
-			"#4C83FF",
-			"#F072B6",
-			"#C346C2",
-			"#5961F9",
-			"#FD6585",
-			"#465EFB",
-			"#FFC600",
-			"#FA742B",
-			"#5151E5",
-			"#BB4E75",
-			"#FF52E5",
-			"#49C628",
-			"#00EAFF",
-			"#F067B4",
-			"#F067B4",
-			"#ff9a9e",
-			"#00f2fe",
-			"#4facfe",
-			"#f093fb",
-			"#6fa3ef",
-			"#bc99c4",
-			"#46c47c",
-			"#f9bb3c",
-			"#e8583d",
-			"#f68e5f",
-		];
-		const random = (min, max) => {
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		};
-		$(".tags-cloud-list a").each((i, item) => {
-			entries.push({
-				label: $(item).attr("data-label"),
-				url: $(item).attr("data-url"),
-				target: "_blank",
-				fontColor: colors[random(0, colors.length - 1)],
-				fontSize: 16,
-			});
-		});
-		$("#tags-3d").svg3DTagCloud({
-			entries,
-			width: 250,
-			height: 250,
-			radius: "65%",
-			radiusMin: 75,
-			bgDraw: false,
-			fov: 800,
-			speed: 0.5,
-			fontWeight: 500,
-		});
-		$(".tags-cloud-list").remove();
-		$("#tags-3d .empty").remove();
-	},
-	/* 加载鼠标特效 */
-	loadMouseEffect() {
-		if (
-			ThemeConfig.enable_clean_mode ||
-      Joe.isMobile ||
-      ThemeConfig.cursor_effect === "off"
-		)
-			return;
 		$.getScript(
-			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
+			`${ThemeConfig.BASE_RES_URL}/source/lib/3dtag/3dtag.min.js`,
+			(_res) => {
+				const entries = [];
+				const colors = [
+					"#F8D800",
+					"#0396FF",
+					"#EA5455",
+					"#7367F0",
+					"#32CCBC",
+					"#F6416C",
+					"#28C76F",
+					"#9F44D3",
+					"#F55555",
+					"#736EFE",
+					"#E96D71",
+					"#DE4313",
+					"#D939CD",
+					"#4C83FF",
+					"#F072B6",
+					"#C346C2",
+					"#5961F9",
+					"#FD6585",
+					"#465EFB",
+					"#FFC600",
+					"#FA742B",
+					"#5151E5",
+					"#BB4E75",
+					"#FF52E5",
+					"#49C628",
+					"#00EAFF",
+					"#F067B4",
+					"#F067B4",
+					"#ff9a9e",
+					"#00f2fe",
+					"#4facfe",
+					"#f093fb",
+					"#6fa3ef",
+					"#bc99c4",
+					"#46c47c",
+					"#f9bb3c",
+					"#e8583d",
+					"#f68e5f",
+				];
+				const random = (min, max) => {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				};
+				$(".tags-cloud-list a").each((i, item) => {
+					entries.push({
+						label: $(item).attr("data-label"),
+						url: $(item).attr("data-url"),
+						target: "_blank",
+						fontColor: colors[random(0, colors.length - 1)],
+						fontSize: 16,
+					});
+				});
+				$("#tags-3d").svg3DTagCloud({
+					entries,
+					width: 250,
+					height: 250,
+					radius: "65%",
+					radiusMin: 75,
+					bgDraw: false,
+					fov: 800,
+					speed: 0.5,
+					fontWeight: 500,
+				});
+				$(".tags-cloud-list").remove();
+				$("#tags-3d .empty").remove();
+			}
 		);
 	},
-	/* 加载背景特效 */
-	loadBackdropEffect() {
-		if (
-			ThemeConfig.enable_clean_mode ||
-      Joe.isMobile ||
-      ThemeConfig.backdrop === "off"
-		)
-			return;
-		$.getScript(
-			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
-		);
+	/* 搜索框弹窗 */
+	searchDialog() {
+		const $result = $(".joe_header__above-search .result");
+		$(".joe_header__above-search .input").on("click", function (e) {
+			e.stopPropagation();
+			$result.addClass("active");
+		});
+		$(document).on("click", function () {
+			$result.removeClass("active");
+		});
 	},
-	/* 自定义favicon */
-	setFavicon() {
-		if (!ThemeConfig.favicon) return;
-		const favicon = new Favico();
-		const image = new Image();
-		image.onload = function () {
-			favicon.image(image);
-		};
-		image.src = ThemeConfig.favicon;
-	},
-	/* 首页离屏提示 */
-	offscreenTip() {
-		if (!ThemeConfig.enable_offscreen_tip) return;
-		const OriginTitile = document.title;
-		let timer = null;
-		document.addEventListener("visibilitychange", function () {
-			if (
-				location.href.indexOf(ThemeConfig.blog_url) > 0 ||
-        location.pathname !== "/"
-			)
-				return;
-			if (document.hidden) {
-				document.title =
-          ThemeConfig.offscreen_title_leave || "歪，你去哪里了？";
-				clearTimeout(timer);
+	/* 激活全局下拉框功能 */
+	initDropMenu() {
+		$(".joe_dropdown").each(function (index, item) {
+			const menu = $(this).find(".joe_dropdown__menu");
+			const trigger = $(item).attr("trigger") || "click";
+			const placement = $(item).attr("placement") || $(this).height() || 0;
+			menu.css("top", placement);
+			if (trigger === "hover") {
+				$(this).hover(
+					() => $(this).addClass("active"),
+					() => $(this).removeClass("active")
+				);
 			} else {
-				document.title =
-          ThemeConfig.offscreen_title_back || "(つェ⊂)咦，又回来了!";
-				timer = setTimeout(function () {
-					document.title = OriginTitile;
-				}, 2000);
+				$(this).on("click", function (e) {
+					e.stopPropagation();
+					$(this).toggleClass("active");
+					$(document).one("click", () => $(this).removeClass("active"));
+					e.stopPropagation();
+				});
+				menu.on("click", (e) => e.stopPropagation());
 			}
 		});
 	},
 	/* 小屏幕伸缩侧边栏 */
 	drawerMobile() {
-		$(".joe_header__above-slideicon").on("click", function () {
+		$(".joe_header__above-slideicon").on("click", function (e) {
+			e.stopPropagation();
 			/* 关闭搜索框 */
 			$(".joe_header__searchout").removeClass("active");
 			/* 处理开启关闭状态 */
@@ -593,7 +564,8 @@ const commonContext = {
 	},
 	/* 小屏幕搜索框 */
 	searchMobile() {
-		$(".joe_header__above-searchicon").on("click", function () {
+		$(".joe_header__above-searchicon").on("click", function (e) {
+			e.stopPropagation();
 			/* 关闭侧边栏 */
 			$(".joe_header__slideout").removeClass("active");
 			/* 处理开启关闭状态 */
@@ -613,12 +585,15 @@ const commonContext = {
 	},
 	/* 点击遮罩层关闭 */
 	maskClose() {
-		$(".joe_header__mask").on("click", function () {
-			$("html").removeClass("disable-scroll");
-			$(".joe_header__mask").removeClass("active slideout");
-			$(".joe_header__searchout").removeClass("active");
-			$(".joe_header__slideout").removeClass("active");
-		}).on("touchmove",e => e.preventDefault);
+		$(".joe_header__mask")
+			.on("click", function (e) {
+				e.stopPropagation();
+				$("html").removeClass("disable-scroll");
+				$(".joe_header__mask").removeClass("active slideout");
+				$(".joe_header__searchout").removeClass("active");
+				$(".joe_header__slideout").removeClass("active");
+			})
+			.on("touchmove", (e) => e.preventDefault);
 	},
 	/* 移动端侧边栏菜单手风琴 */
 	sideMenuMobile() {
@@ -627,7 +602,8 @@ const commonContext = {
 			.show()
 			.siblings(".panel")
 			.addClass("in");
-		$(".joe_header__slideout-menu .panel").on("click", function () {
+		$(".joe_header__slideout-menu .panel").on("click", function (e) {
+			e.stopPropagation();
 			const panelBox = $(this).parent().parent();
 			/* 清除全部内容 */
 			panelBox.find(".panel").not($(this)).removeClass("in");
@@ -639,50 +615,6 @@ const commonContext = {
 			/* 激活当前的内容 */
 			$(this).toggleClass("in").siblings(".panel-body").stop().toggle("fast");
 		});
-	},
-	/* 初始化网站运行时间 */
-	initBirthday() {
-		if (!ThemeConfig.enable_birthday) return;
-		if (
-			!/^\d+$/.test(ThemeConfig.birthday) &&
-      !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(
-      	ThemeConfig.birthday
-      )
-		) {
-			Qmsg.error("“自定义博客起始时间” 格式错误，请检查！");
-			return;
-		}
-		const birthDay = new Date(
-			/^\d+$/g.test(ThemeConfig.birthday)
-				? +ThemeConfig.birthday
-				: ThemeConfig.birthday
-		);
-		const $day = $(".joe_run__day");
-		const $hour = $(".joe_run__hour");
-		const $minute = $(".joe_run__minute");
-		const $second = $(".joe_run__second");
-		const getRunTime = () => {
-			const today = +new Date();
-			const timePast = today - birthDay.getTime();
-			let day = timePast / (1000 * 24 * 60 * 60);
-			let dayPast = Math.floor(day);
-			let hour = (day - dayPast) * 24;
-			let hourPast = Math.floor(hour);
-			let minute = (hour - hourPast) * 60;
-			let minutePast = Math.floor(minute);
-			let second = (minute - minutePast) * 60;
-			let secondPast = Math.floor(second);
-			day = String(dayPast).padStart(2, 0);
-			hour = String(hourPast).padStart(2, 0);
-			minute = String(minutePast).padStart(2, 0);
-			second = String(secondPast).padStart(2, 0);
-			$day.html(day);
-			$hour.html(hour);
-			$minute.html(minute);
-			$second.html(second);
-		};
-		getRunTime();
-		setInterval(getRunTime, 1000);
 	},
 	/* 头部滚动 */
 	initHeadScroll() {
@@ -797,8 +729,108 @@ const commonContext = {
 			}
 		}
 	},
-	/* 初始化pjax */
-	// initPjax() {},
+	/* 加载鼠标特效 */
+	loadMouseEffect() {
+		if (
+			Joe.isMobile ||
+      ThemeConfig.enable_clean_mode ||
+      ThemeConfig.cursor_effect === "off"
+		)
+			return;
+		$.getScript(
+			`${ThemeConfig.BASE_RES_URL}/source/effect/cursor/${ThemeConfig.cursor_effect}.js`
+		);
+	},
+	/* 加载背景特效 */
+	loadBackdropEffect() {
+		if (
+			Joe.isMobile ||
+      ThemeConfig.enable_clean_mode ||
+      ThemeConfig.backdrop === "off"
+		)
+			return;
+		$.getScript(
+			`${ThemeConfig.BASE_RES_URL}/source/effect/backdrop/${ThemeConfig.backdrop}.js`
+		);
+	},
+	/* 自定义favicon */
+	setFavicon() {
+		if (!ThemeConfig.favicon) return;
+		const favicon = new Favico();
+		const image = new Image();
+		image.onload = function () {
+			favicon.image(image);
+		};
+		image.src = ThemeConfig.favicon;
+	},
+	/* 首页离屏提示 */
+	offscreenTip() {
+		if (!ThemeConfig.enable_offscreen_tip) return;
+		const OriginTitile = document.title;
+		let timer = null;
+		document.addEventListener("visibilitychange", function () {
+			if (
+				location.href.indexOf(ThemeConfig.blog_url) > 0 ||
+        location.pathname !== "/"
+			)
+				return;
+			if (document.hidden) {
+				document.title =
+          ThemeConfig.offscreen_title_leave || "歪，你去哪里了？";
+				clearTimeout(timer);
+			} else {
+				document.title =
+          ThemeConfig.offscreen_title_back || "(つェ⊂)咦，又回来了!";
+				timer = setTimeout(function () {
+					document.title = OriginTitile;
+				}, 2000);
+			}
+		});
+	},
+	/* 初始化网站运行时间 */
+	initBirthday() {
+		if (!ThemeConfig.enable_birthday) return;
+		if (
+			!/^\d+$/.test(ThemeConfig.birthday) &&
+      !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(
+      	ThemeConfig.birthday
+      )
+		) {
+			Qmsg.error("“自定义博客起始时间” 格式错误，请检查！");
+			return;
+		}
+		const birthDay = new Date(
+			/^\d+$/g.test(ThemeConfig.birthday)
+				? +ThemeConfig.birthday
+				: ThemeConfig.birthday
+		);
+		const $day = $(".joe_run__day");
+		const $hour = $(".joe_run__hour");
+		const $minute = $(".joe_run__minute");
+		const $second = $(".joe_run__second");
+		const getRunTime = () => {
+			const today = +new Date();
+			const timePast = today - birthDay.getTime();
+			let day = timePast / (1000 * 24 * 60 * 60);
+			let dayPast = Math.floor(day);
+			let hour = (day - dayPast) * 24;
+			let hourPast = Math.floor(hour);
+			let minute = (hour - hourPast) * 60;
+			let minutePast = Math.floor(minute);
+			let second = (minute - minutePast) * 60;
+			let secondPast = Math.floor(second);
+			day = String(dayPast).padStart(2, 0);
+			hour = String(hourPast).padStart(2, 0);
+			minute = String(minutePast).padStart(2, 0);
+			second = String(secondPast).padStart(2, 0);
+			$day.html(day);
+			$hour.html(hour);
+			$minute.html(minute);
+			$second.html(second);
+		};
+		getRunTime();
+		setInterval(getRunTime, 1000);
+	},
 	/* 页面加载耗时（控制台） */
 	showLoadTime() {
 		if (!ThemeConfig.show_loaded_time) return;
@@ -829,7 +861,7 @@ const commonContext = {
 		"initExternalLink",
 		"init3dTag",
 		"foldCode",
-		"initBaidu",
+		"scrollToHash",
 		"loadMouseEffect",
 		"loadBackdropEffect",
 		"setFavicon",

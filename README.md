@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/Release-1.0.6-green" alt="Release"/>
+    <img src="https://img.shields.io/badge/Release-1.0.8-green" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
@@ -397,7 +397,18 @@ class Class10 {
 ```
 ````
 
-#### 13、文章中如何插入视频？
+#### 13、代码块如何设置自定义标题？
+
+> 目前，代码块的标题来自我们设置的语言类型，如果未设置或者未匹配到语言，则显示 `PlainText`。<br>
+> 然而，你可能想要自定义代码块的标题，这时只要在 `markdown` 中像下面这样使用代码块即可（语言类型和标题之间用 “|” 隔开）：
+
+````text
+```js|这是我的第一行代码
+console.log("hello world!!!");
+```
+````
+
+#### 14、文章中如何插入视频？
 
 > 主题已集成 `dplayer`，只需要在编辑文章时使用 `joe-dplayer` 标签插入视频地址即可（建议 MP4 格式，其它格式未必支持），它接受如下属性：
 
@@ -420,7 +431,7 @@ class Class10 {
 <joe-bilibili bvid="BV12h411k7vr"></joe-bilibili>
 ```
 
-#### 14、文章中如何预览 `PDF` 文件？
+#### 15、文章中如何预览 `PDF` 文件？
 
 > 主题已集成 `PDF.js`，可以渲染 `pdf` 文件，只需要在编辑文章时使用 `joe-pdf` 标签插入即可，它接受如下属性：
 
@@ -432,26 +443,36 @@ class Class10 {
 <joe-pdf src="https://xxx.pdf" width="100%" height="500px"></joe-pdf>
 ```
 
-#### 15、如何区分不同的自定义页面？
+#### 16、如何设置文章仅评论后可见？
+
+> 主题目前支持文章页的 `评论后可见功能`，主要是通过在文章内容中设置相应标记实现的。你只需要在想隐藏的内容前面插入 `joe-hide` 组件即可（不要使用单标签形式，且插入多个时只有最后一个生效）：
+
+```html
+前面是直接可查看的内容
+<joe-hide></joe-hide>
+后面是评论后才能查看的内容
+```
+
+#### 17、如何区分不同的自定义页面？
 
 有时候我们可能想在某一个自定义页面内部加入一些资源，单纯靠页面类型 `sheet` 无法进行区分。此时可以先进入 `后台管理系统`，并打开浏览器控制台，切换到 `network-Fetch/XHR` 这一栏，然后进入 `页面-所有页面-自定义页面`，此时控制面板中会出现相应的请求，查看数据获取页面对于的 `id`，这样我们就可以在模板中使用这个 `id` 区分不同的自定义页面了（可在 `sheet.ftl` 文件中通过 `sheet.id` 获取）。
 
 ![自定义页面id](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/sheet_id.png)
 
-#### 16、如何查看博客后台日志？
+#### 18、如何查看博客后台日志？
 
 - 有时博客访问不了，想查看后台日志，可以进入 `后台管理-系统-小工具-实时日志` 查看，生成环境可能需要先开启彩蛋（连续点击 `Halo Dashboard` 10 次触发），更多请参见 [Halo 隐藏功能](https://halo.run/archives/use-hidden-features)；
 
 - 也可以登录服务器，直接执行命令 `journalctl -n 20 -u halo`，其中 20 是显示的日志行数。
 
-#### 17、登录页如何显示找回密码按钮？
+#### 19、登录页如何显示找回密码按钮？
 
 有时候登录后台管理系统忘了密码，想找回密码，但是界面默认没有找回密码的按钮，需要用快捷键触打开。
 
 - Windows/Linux: `Shift + Alt + h`
 - maxOS: `Shift + Command + h`
 
-#### 18、FreeMarker 相关技巧
+#### 20、FreeMarker 相关技巧
 
 主要是本人在开发主题过程中收集的一些 `Freemarker` 知识，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 

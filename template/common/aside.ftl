@@ -39,11 +39,11 @@
         <div id="aplayer" class="aplayer" data-id="${settings.music_id}" list-max-height="20px" data-server="netease" data-type="playlist" data-fixed="false" data-listfolded="true" data-order="random"  data-mode="#f3f3f7"></div>
       </section>
     </#if>
-    <#if settings.show_newest_post!true>
+    <#if settings.enable_newest_post!true>
       <#import "../macro/latest.ftl" as np>
       <@np.newest/>
     </#if>
-    <#if settings.show_lifetime!true>
+    <#if settings.enable_lifetime!true>
       <section class="joe_aside__item timelife">
         <div class="joe_aside__item-title">
           <i class="joe-font joe-icon-shalou"></i>
@@ -82,7 +82,7 @@
         </@commentTag>
       </section>
     </#if>
-    <#if settings.show_tag_cloud!true>
+    <#if settings.enable_tag_cloud!true>
       <section class="joe_aside__item tags-cloud">
         <div class="joe_aside__item-title">
           <i class="joe-font joe-icon-tag"></i>
