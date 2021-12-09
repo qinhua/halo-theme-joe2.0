@@ -57,6 +57,7 @@ const commonContext = {
 		const $nav_side_menus = $(".panel-side-menu .link");
 		let activeIndex = 0;
 		const curPath = location.pathname;
+    
 		if (curPath && curPath !== "/") {
 			$nav_menus.each((index, item) => {
 				if (curPath.indexOf(item.getAttribute("href")) > -1) {
@@ -64,7 +65,18 @@ const commonContext = {
 				}
 			});
 		}
-		$nav_menus.eq(activeIndex).addClass("current");
+
+		// 高亮PC端
+		const $curMenu = $nav_menus.eq(activeIndex);
+		$curMenu.addClass("current");
+		if ($curMenu.parents(".joe_dropdown").length) {
+			$curMenu
+				.parents(".joe_dropdown")
+				.find(".joe_dropdown__link a")
+				.addClass("current");
+		}
+
+		// 高亮移动端
 		$nav_side_menus.eq(activeIndex).addClass("current");
 	},
 	/* 初始化评论主题 */
@@ -857,8 +869,6 @@ const commonContext = {
 	const omits = [
 		"loadingBar",
 		"initHeadScroll",
-		"initGallery",
-		"initExternalLink",
 		"init3dTag",
 		"foldCode",
 		"scrollToHash",
