@@ -46,7 +46,7 @@ genernal:
       type: text
       default: ""
       placeholder: "请填写公网安备号信息"
-      description: "公网安备信息将展示在页脚中，不填不展示（示例：鄂公网安备42011102001234号）"
+      description: "公网安备信息将展示在页脚中，不填不展示，也可在 “页脚” 一栏中单独关闭（示例：鄂公网安备42011102001234号）"
     site_notice:
       name: site_notice
       label: 网站公告
@@ -465,7 +465,7 @@ footer:
       label: 展示公网安备
       type: switch
       data-type: bool
-      default: false
+      default: true
       options:
         - value: true
           label: 是
