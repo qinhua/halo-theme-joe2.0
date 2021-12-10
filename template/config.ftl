@@ -22,6 +22,7 @@
 <#global DEFAULT_LOGO = BASE_RES_URL + "/source/img/logo.png">
 <#global LOGO = (blog_logo?? && blog_logo != "")?then(blog_logo, DEFAULT_LOGO)>
 <#global USER_AVATAR = (user.avatar?? && user.avatar != '' && user.avatar?index_of("gravatar.com") == -1)?then(user.avatar, settings.default_avatar)>
+<#global LAZY_IMG = BASE_RES_URL + "/source/img/lazyload.gif">
 <#global EMPTY_IMG = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
 <script id="theme-config-getter" type="text/javascript">
   // 获取主题配置
@@ -51,6 +52,7 @@
   ThemeConfig['developer'] = 'M酷';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
+  ThemeConfig['LAZY_IMG'] = '${LAZY_IMG}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!15}';
   ThemeConfig['post_index_sort'] = '${options.post_index_sort!}';
   ThemeConfig['gravatar_source_url'] = '${options.gravatar_source!}';

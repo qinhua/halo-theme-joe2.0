@@ -1,5 +1,4 @@
 <#if settings.enable_aside>
-  <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
   <aside class="joe_aside${(settings.aside_position=='left')?then(' pos_left','')}">
     <#if settings.show_blogger!true>
       <#include "../module/blogger.ftl">
@@ -23,7 +22,7 @@
           <span class="text">${settings.qrcode_title!'我的二维码'}</span>
         </div>
         <div class="joe_aside__item-contain">
-          <img class="qrcode_img lazyload" src="${lazy_img}" data-src="${settings.qrcode_url!}" alt="二维码"/>
+          <img class="qrcode_img lazyload" src="${LAZY_IMG}" data-src="${settings.qrcode_url!}" alt="二维码"/>
           <#if settings.qrcode_description??>
             <p class="qrcode_description">${settings.qrcode_description!}</p>
           </#if>

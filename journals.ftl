@@ -39,11 +39,11 @@
                 <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id}" data-clikes="${journal.likes}">
                   <p class="joe_journal_date">
                     <i class="joe-font joe-icon-feather"></i>
-                    <#--  <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>  -->
-                    <@global.timeline datetime=journal.createTime />
+                    <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>
+                    <#--  <@global.timeline datetime=journal.createTime />  -->
                   </p>
                   <div class="joe_journal_block">
-                    <div class="joe_journal_body${settings.enable_code_line_number?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">
+                    <div class="joe_journal_body${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">
                       <div class="content-wrp">${journal.content!}</div>
                       <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
                     </div>
@@ -76,8 +76,8 @@
                   </div>
                 </li>
               </#list>
-            </ul>                   
-            <@paginationTag method="journals" page="${journals.number}" total="${journals.totalPages}" display="10">
+            </ul>
+            <@paginationTag method="journals" page="${journals.number}" total="${journals.totalPages}" display="3">
               <#if (journals.totalPages == 0)>
                 <#include "template/macro/empty.ftl">
                 <@empty type="journals" text="${settings.journals_empty_text!'暂无日志数据'}"/>
@@ -111,7 +111,7 @@
                   </#if>
                 </ul>
               </#if>
-            </@paginationTag>   
+            </@paginationTag>
           </div>
         </div>
         <#if settings.enable_journals_aside!true>

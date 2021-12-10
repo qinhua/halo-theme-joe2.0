@@ -11,7 +11,6 @@
     </div>
     <ul class="joe_index__hot-list hotlist">
       <@categoryTag method="list">
-        <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
         <#list categories?sort_by("postCount")?reverse as category>
           <#if category_index < 4>
             <li class="item animated fadeIn">
@@ -23,7 +22,7 @@
                   <#escape x as x!"">
                     <#assign cur_cover_url=settings['hot_cover'+(category_index+1)]>
                     <#assign cover=(cur_cover_url?? && cur_cover_url!='')?then(cur_cover_url, (category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, BASE_RES_URL+'/source/img/hot_cover${category_index+1}.jpg')) >
-                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
+                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
                   </#escape>
                   <figcaption class="title">${category.name!}</figcaption>
                 </figure>
