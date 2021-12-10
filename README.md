@@ -477,7 +477,7 @@ console.log("hello world!!!");
 > 这个有很多原因，常见的原因有如下这些：
 
 - 网络状况不好，导致上传超时
-- 超过了 Nginx 中上传文件的最大限制（即 `client_max_body_size`，你可以设置的大一点）
+- 附件大小超过了 `Nginx` 中上传文件的最大限制（即 `client_max_body_size`，你可以设置的大一点）
 
 #### 21、FreeMarker 相关技巧
 
