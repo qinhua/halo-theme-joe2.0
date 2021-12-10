@@ -126,6 +126,7 @@ const commonContext = {
 				// }
 				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
+				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
 				// ThemeConfig.enable_code_line_number
 				// 	? $item.addClass("line-numbers")
 				// 	: null;

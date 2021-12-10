@@ -11,23 +11,21 @@
           <div class="joe_index">
             <div class="joe_index__title">
               <ul class="joe_index__title-title pl-15">
-                <li class="item" data-type="created">全部标签</li>
-                <#--  <li class="line"></li>  -->
+                <li class="item active">${settings.tags_title!}<@tagTag method="count"><span class="totals">${count!0}</span></@tagTag></li>
               </ul>
             </div>
             <div class="joe_index__hot">
-              <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
               <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api?trim!=''>
               <ul class="joe_index__hot-list animated fadeIn" style="padding-bottom: 10px;">
                 <@tagTag method="list">
-                  <#list tags as tag>
+                  <#list tags?sort_by(settings.tags_sort)?reverse as tag>
                     <li class="item">
                       <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                         <figure class="inner">
-                          <span class="views">${tag.postCount!} ℃</span>
+                          <#if settings.enable_tags_post_num!true><span class="post-nums">${tag.postCount!}篇</span></#if>
                           <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/175/90')) >
-                          <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
-                          <figcaption class="title">${tag.name!}<@postTag method="listByTagId" tagId="${tag.id}"><span>（${posts?size}）</span></@postTag></figcaption>
+                          <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
+                          <figcaption class="title">${tag.name!}</figcaption>
                         </figure>
                       </a>
                     </li>

@@ -1,5 +1,5 @@
 <#macro post_item post index type="index">
-  <#assign lazy_img=settings.lazyload_thumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
+  <#assign lazy_img=settings.lazyload_thumbnail!LAZY_IMG>
   <li class="joe_list__item default${(type=='index')?then(' animated wow','')}"${(type=='index')?then(' data-wow-delay="0.' + index + 's"', '')}>
     <div class="line"></div>
     <#if settings.enable_post_thumbnail!true>
