@@ -160,13 +160,13 @@ const journalContext = {
 		});
 	},
 	/* 日志发布时间格式化 */
-	// formatTime() {
-	// 	const $allJournalTime = $(".joe_journal-posttime");
-	// 	$allJournalTime.each(function () {
-	// 		const $this = $(this);
-	// 		$this.html(Utils.timeAgo($this.text()));
-	// 	});
-	// },
+	formatTime() {
+		const $allJournalTime = $(".joe_journal-posttime");
+		$allJournalTime.each(function () {
+			const $this = $(this);
+			$this.html(Utils.timeAgo($this.text()));
+		});
+	},
 };
 
 !(function () {

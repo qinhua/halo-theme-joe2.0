@@ -11,24 +11,22 @@
           <div class="joe_index">
             <div class="joe_index__title">
               <ul class="joe_index__title-title pl-15">
-                <li class="item" data-type="created">全部分类</li>
-                <#--  <li class="line"></li>  -->
+                <li class="item active">${settings.categories_title!}<@categoryTag method="count"><span class="totals">${count!0}</span></@categoryTag></li>
               </ul>
             </div>
             <div class="joe_index__hot categories">
               <@categoryTag method="list">
                 <#if categories?size gt 0>
-                  <#assign lazy_img=BASE_RES_URL+'/source/img/lazyload.gif'>
                   <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api!=''>
                   <ul class="joe_index__hot-list animated fadeIn">
-                    <#list categories as category>
+                    <#list categories?sort_by(settings.categories_sort)?reverse as category>
                       <li class="item">
                         <a class="link" href="${category.fullPath!}" title="${category.name!}">
                           <figure class="inner">
-                            <span class="views">${category.postCount!} ℃</span>
+                            <#if settings.enable_categories_post_num!true><span class="post-nums">${category.postCount!}篇</span></#if>
                             <#assign thumbnail=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + category.id,'https://picsum.photos/id/2${category_index}/175/90')) >
-                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
-                            <figcaption class="title">${category.name!}<@postTag method="listByCategoryId" categoryId="${category.id}"><span>（${posts?size}）</span></@postTag></figcaption>
+                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
+                            <figcaption class="title">${category.name!}</figcaption>
                           </figure>
                         </a>
                       </li>

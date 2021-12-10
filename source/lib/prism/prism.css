@@ -185,8 +185,8 @@ pre[class*="language-"].line-numbers > code {
 			content: counter(linenumber);
 			color: #999;
 			display: block;
-			padding-right: 0.8em;
-			text-align: right;
+			/* padding-right: 0.8em; */
+			text-align: center;
 		}
 
 div.code-toolbar {

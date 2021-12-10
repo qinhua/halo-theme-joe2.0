@@ -1,7 +1,7 @@
 <#macro list_index>
   <#include "post_item.ftl">
   <ul class="joe_list">
-    <#assign lazy_img=settings.lazyload_sthumbnail!BASE_RES_URL+'/source/img/lazyload.gif'>
+    <#assign lazy_img=settings.lazyload_sthumbnail!LAZY_IMG>
     <#list posts.content as post>
       <@post_item post=post index=post_index type="index" />
     </#list>

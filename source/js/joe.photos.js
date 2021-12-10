@@ -96,7 +96,7 @@ const photosContext = {
             }" data-fancybox="gallery" data-caption="${item.name || ""}">
       <img width="100%" height="100%" class="lazyload" rsrc="${
 	ThemeConfig.photo_lazyload_img ||
-        ThemeConfig.BASE_RES_URL + "/source/img/lazyload.gif"
+        ThemeConfig.LAZY_IMG
 }" src="${item.thumbnail}" alt="${item.name || ""}"/>
       <span class="team" style="background-color:${Utils.getRandomColor(
 		0.2,
