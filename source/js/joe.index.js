@@ -111,6 +111,7 @@ const homeContext = {
 		// 初始化Dom
 		const initDom = async (sort) => {
 			$domList.html("").show();
+			$domEmpty.addClass("hide");
 			$domLoad.removeAttr("loading").html("查看更多").show();
 			const activeItem = $(
 				`.joe_index__title-title .item[data-type="${sort}"]`
