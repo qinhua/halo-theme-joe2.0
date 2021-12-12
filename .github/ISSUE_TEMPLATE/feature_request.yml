@@ -1,0 +1,39 @@
+name: 功能建议
+description: 为项目提供一些功能上的建议
+labels: [enhancement]
+body:
+  - type: markdown
+    id: preface
+    attributes:
+      value: |
+        感谢你花时间填写此错误报告！在开始之前，我们非常推荐阅读一遍[《开源最佳实践》](https://github.com/LinuxSuRen/open-source-best-practice)，这会在很大程度上提高我们彼此的效率。
+  - type: input
+    id: version
+    validations:
+      required: true
+    attributes:
+      label: "你当前使用的版本"
+  - type: textarea
+    id: influence
+    validations:
+      required: true
+    attributes:
+      label: "你的建议是否涉及到一些现有的问题？"
+      description: "简单而清晰的问题描述（例如：当我 xxx 时，我感到很疑惑）。"
+  - type: textarea
+    id: effect
+    validations:
+      required: true
+    attributes:
+      label: "描述你想实现的效果"
+      description: "简单并清晰的描述你想实现的效果是怎样的。"
+  - type: textarea
+    id: plan
+    attributes:
+      label: "描述一些方案"
+      description: "简单描述一下你想到的方案有哪些。"
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: "附加信息"
+      description: "如果你还有其他需要提供的信息，可以在这里填写（可以提供截图、视频等）。"
