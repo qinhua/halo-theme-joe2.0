@@ -60,7 +60,7 @@ body:
     attributes:
       label: "如何复现"
   - type: textarea
-    id: additional-information
+    id: desired-result
     attributes:
       label: "期望结果"
       description: "简洁而清晰的描述一下你最终期望的结果。"
