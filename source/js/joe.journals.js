@@ -13,6 +13,14 @@ const journalContext = {
 			live: true,
 		}).init();
 	},
+	/* 日志发布时间格式化 */
+	formatTime() {
+		const $allJournalTime = $(".joe_journal-posttime");
+		$allJournalTime.each(function () {
+			const $this = $(this);
+			$this.html(Utils.timeAgo($this.text().replace(/-/g, "/")));
+		});
+	},
 	/* 点赞 */
 	initLike() {
 		if (!ThemeConfig.enable_like_journal) return;
@@ -157,14 +165,6 @@ const journalContext = {
 			) {
 				$this.siblings(".journal_content_expander").show();
 			}
-		});
-	},
-	/* 日志发布时间格式化 */
-	formatTime() {
-		const $allJournalTime = $(".joe_journal-posttime");
-		$allJournalTime.each(function () {
-			const $this = $(this);
-			$this.html(Utils.timeAgo($this.text()));
 		});
 	},
 };

@@ -1,7 +1,7 @@
 <#macro article posts>
 <div class="joe_index__article">
   <div class="joe_index__title">
-    <ul class="joe_index__title-title${(settings.enable_index_list_ajax!=true)?then(' default','')}">
+    <ul class="joe_index__title-title passage-list-tabs${(settings.enable_index_list_ajax!=true)?then(' default','')}">
       <li class="item active" data-type="1">最新文章</li>
       <#if settings.enable_index_list_ajax!true>
         <li class="item" data-type="2">热门文章</li>
