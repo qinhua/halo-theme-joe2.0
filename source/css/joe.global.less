@@ -369,9 +369,8 @@ body {
       }
 
       &.c_newline {
-        white-space: pre-wrap;
-
         code {
+          white-space: pre-wrap;
           word-break: break-all;
         }
       }
@@ -1476,9 +1475,9 @@ body {
 
     &-list {
       display: grid;
-      padding-top: 12px;
       grid-template-columns: repeat(4, 1fr);
       column-gap: 15px;
+      padding-top: 12px;
 
       &.hotlist {
         .item {
@@ -4945,12 +4944,13 @@ body {
         padding: 15px;
         color: #fff;
         word-break: break-word;
+        transform: translate3d(0, 0, 0) scale(1);
         transform-origin: bottom center;
         transition: transform 0.35s;
         border-radius: 8px 0 28px 0;
 
         &:hover {
-          transform: translateY(-2px) scale(1.01);
+          transform: translate3d(0, -2px, 0) scale(1.01);
           // box-shadow: 0 34px 20px -24px rgba(136, 161, 206, 0.3);
         }
 
