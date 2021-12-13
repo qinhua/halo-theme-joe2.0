@@ -265,17 +265,13 @@ const commonContext = {
 	/* 激活全局返回顶部功能 */
 	back2Top() {
 		if (!ThemeConfig.enable_back2top) return;
-		let _debounce = null;
 		const $el = $(".joe_action_item.back2top");
 		const handleScroll = () =>
 			(document.documentElement.scrollTop || document.body.scrollTop) > 300
 				? $el.addClass("active")
 				: $el.removeClass("active");
 		handleScroll();
-		$(document).on("scroll", () => {
-			clearTimeout(_debounce);
-			_debounce = setTimeout(handleScroll, 100);
-		});
+		$(document).on("scroll", Utils.throttle(handleScroll, 100));
 		$el.on("click", function (e) {
 			e.stopPropagation();
 			window.scrollTo({
@@ -654,14 +650,17 @@ const commonContext = {
 		let Y = window.pageYOffset;
 		handleHeader(Y);
 		let _last = Date.now();
-		document.addEventListener("scroll", () => {
-			let _now = Date.now();
-			if (_now - _last > 15) {
-				handleHeader(Y - window.pageYOffset);
-				Y = window.pageYOffset;
-			}
-			_last = _now;
-		});
+		document.addEventListener(
+			"scroll",
+			Utils.throttle(() => {
+				let _now = Date.now();
+				if (_now - _last > 15) {
+					handleHeader(Y - window.pageYOffset);
+					Y = window.pageYOffset;
+				}
+				_last = _now;
+			}, 100)
+		);
 	},
 	/* 渲染数学公式 */
 	initMathjax() {
@@ -700,27 +699,27 @@ const commonContext = {
 		});
 	},
 	/* 禁用浏览器空格滚动页面 */
-	cancelSpaceScroll() {
-		document.body.onkeydown = function (e) {
-			e = e || window.event;
-			const elm = e.target || e.srcElement;
-			const key = e.keyCode || e.charCode;
-			if (key === 32) {
-				if (
-					["text", "input", "textarea", "halo-comment"].includes(
-						elm.tagName.toLowerCase()
-					)
-				) {
-					return;
-				}
-				if (window.event) {
-					e.returnValue = false;
-				} else {
-					e.preventDefault();
-				}
-			}
-		};
-	},
+	// cancelSpaceScroll() {
+	// 	document.body.onkeydown = function (e) {
+	// 		e = e || window.event;
+	// 		const elm = e.target || e.srcElement;
+	// 		const key = e.keyCode || e.charCode;
+	// 		if (key === 32) {
+	// 			if (
+	// 				["text", "input", "textarea", "halo-comment"].includes(
+	// 					elm.tagName.toLowerCase()
+	// 				)
+	// 			) {
+	// 				return;
+	// 			}
+	// 			if (window.event) {
+	// 				e.returnValue = false;
+	// 			} else {
+	// 				e.preventDefault();
+	// 			}
+	// 		}
+	// 	};
+	// },
 	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
 	scrollToHash() {
 		const scroll = new URLSearchParams(location.search).get("scroll");
