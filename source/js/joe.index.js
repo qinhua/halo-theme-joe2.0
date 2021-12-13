@@ -95,8 +95,8 @@ const homeContext = {
       ThemeConfig.enable_fixed_header || Joe.isMobile
       	? $(".joe_header").height()
       	: 0;
-		const $navItems = $(".joe_index__title-title .item");
-		const $navLine = $(".joe_index__title-title .line");
+		const $navItems = $(".passage-list-tabs .item");
+		const $navLine = $(".passage-list-tabs .line");
 		const $domList = $el.find(".joe_list");
 		const $domEmpty = $el.find(".joe_empty");
 		const $domLoad = $(".joe_load");
@@ -114,9 +114,9 @@ const homeContext = {
 			$domEmpty.addClass("hide");
 			$domLoad.removeAttr("loading").html("查看更多").show();
 			const activeItem = $(
-				`.joe_index__title-title .item[data-type="${sort}"]`
+				`.passage-list-tabs .item[data-type="${sort}"]`
 			);
-			const activeLine = $(".joe_index__title-title .line");
+			const activeLine = $(".passage-list-tabs .line");
 			activeItem.addClass("active").siblings().removeClass("active");
 			activeLine.css({
 				left: activeItem.position().left,

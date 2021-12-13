@@ -48,7 +48,6 @@ const commonContext = {
 		hide() {
 			if (!ThemeConfig.enable_loading_bar) return;
 			NProgress.done(true);
-			document.querySelector("html").removeAttribute("class");
 		},
 	},
 	/* 导航条高亮 */
@@ -57,7 +56,7 @@ const commonContext = {
 		const $nav_side_menus = $(".panel-side-menu .link");
 		let activeIndex = 0;
 		const curPath = location.pathname;
-    
+
 		if (curPath && curPath !== "/") {
 			$nav_menus.each((index, item) => {
 				if (curPath.indexOf(item.getAttribute("href")) > -1) {
