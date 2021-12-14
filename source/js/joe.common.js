@@ -699,27 +699,27 @@ const commonContext = {
 		});
 	},
 	/* 禁用浏览器空格滚动页面 */
-	// cancelSpaceScroll() {
-	// 	document.body.onkeydown = function (e) {
-	// 		e = e || window.event;
-	// 		const elm = e.target || e.srcElement;
-	// 		const key = e.keyCode || e.charCode;
-	// 		if (key === 32) {
-	// 			if (
-	// 				["text", "input", "textarea", "halo-comment"].includes(
-	// 					elm.tagName.toLowerCase()
-	// 				)
-	// 			) {
-	// 				return;
-	// 			}
-	// 			if (window.event) {
-	// 				e.returnValue = false;
-	// 			} else {
-	// 				e.preventDefault();
-	// 			}
-	// 		}
-	// 	};
-	// },
+	cancelSpaceScroll() {
+		document.body.onkeydown = function (e) {
+			e = e || window.event;
+			const elm = e.target || e.srcElement;
+			const key = e.keyCode || e.charCode;
+			if (key === 32) {
+				if (
+					["text", "input", "textarea", "halo-comment"].includes(
+						elm.tagName.toLowerCase()
+					)
+				) {
+					return;
+				}
+				if (window.event) {
+					e.returnValue = false;
+				} else {
+					e.preventDefault();
+				}
+			}
+		};
+	},
 	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
 	scrollToHash() {
 		const scroll = new URLSearchParams(location.search).get("scroll");
@@ -879,6 +879,11 @@ const commonContext = {
 	];
 	document.addEventListener("DOMContentLoaded", function () {
 		commonContext.loadingBar.show();
+		// window.lazySizesConfig = window.lazySizes.cfg || {};
+		// window.lazySizesConfig.init = false;
+		// window.lazySizesConfig.loadMode = 1;
+		// window.lazySizesConfig.loadHidden = false;
+		// lazySizes.init();
 		Object.keys(commonContext).forEach(
 			(c) => !omits.includes(c) && commonContext[c]()
 		);
