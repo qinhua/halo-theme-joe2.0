@@ -586,6 +586,7 @@ var Utils = {
 				headers: {
 					"API-Authorization": ThemeConfig.access_key || "joe2.0",
 				},
+				async: true,
 				dataType: "json",
 				timeout: 10000,
 				data,
