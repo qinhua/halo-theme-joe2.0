@@ -6,7 +6,7 @@ body:
     id: preface
     attributes:
       value: |
-        感谢你花时间填写此错误报告！在开始之前，我们非常推荐阅读一遍[《开源最佳实践》](https://github.com/LinuxSuRen/open-source-best-practice)，这会在很大程度上提高我们彼此的效率。
+        感谢你花时间填写此功能建议！在开始之前，我们非常推荐阅读一遍[《开源最佳实践》](https://github.com/LinuxSuRen/open-source-best-practice)，这会在很大程度上提高我们彼此的效率。
   - type: input
     id: version
     validations:
