@@ -33,7 +33,7 @@
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
-  <#assign enable_mathjax = (metas?? && metas.enable_mathjax?? && metas.enable_mathjax?trim!='')?then(metas.enable_mathjax?trim,settings.enable_mermaid?then('true','false'))>
+  <#assign enable_mathjax = (metas?? && metas.enable_mathjax?? && metas.enable_mathjax?trim!='')?then(metas.enable_mathjax?trim,settings.enable_mathjax?then('true','false'))>
   <#if enable_mathjax == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
     <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.css">
     <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.js"></script>
