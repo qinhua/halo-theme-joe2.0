@@ -42,7 +42,11 @@ const commonContext = {
 	loadingBar: {
 		show() {
 			if (!ThemeConfig.enable_loading_bar) return;
-			NProgress.configure({ easing: "ease", speed: 500, showSpinner: false });
+			NProgress.configure({
+				easing: "ease",
+				speed: 500,
+				showSpinner: false,
+			});
 			NProgress.start();
 		},
 		hide() {
@@ -55,11 +59,12 @@ const commonContext = {
 		const $nav_menus = $(".joe_header__above-nav a");
 		const $nav_side_menus = $(".panel-side-menu .link");
 		let activeIndex = 0;
-		const curPath = location.pathname;
+		const { href, pathname } = location;
 
-		if (curPath && curPath !== "/") {
+		if (pathname && pathname !== "/") {
 			$nav_menus.each((index, item) => {
-				if (curPath.indexOf(item.getAttribute("href")) > -1) {
+				const cur_href = item.getAttribute("href");
+				if (pathname.includes(cur_href) || href.includes(cur_href)) {
 					activeIndex = index;
 				}
 			});
@@ -672,10 +677,26 @@ const commonContext = {
 		if (/^true$/.test(enable_mathjax) && window.katex) {
 			renderMathInElement(document.body, {
 				delimiters: [
-					{ left: "$$", right: "$$", display: true },
-					{ left: "$", right: "$", display: false },
-					{ left: "\\(", right: "\\)", display: false },
-					{ left: "\\[", right: "\\]", display: true },
+					{
+						left: "$$",
+						right: "$$",
+						display: true,
+					},
+					{
+						left: "$",
+						right: "$",
+						display: false,
+					},
+					{
+						left: "\\(",
+						right: "\\)",
+						display: false,
+					},
+					{
+						left: "\\[",
+						right: "\\]",
+						display: true,
+					},
 				],
 				throwOnError: false,
 			});
