@@ -68,6 +68,7 @@ const leavingContext = {
 	/* 设置无数据文案 */
 	setEmptyText() {
 		if (
+			!$(".joe_leaving-none.tpl").length ||
 			!ThemeConfig.leaving_empty_text ||
       ThemeConfig.leaving_empty_text.trim() === "暂无留言，期待第一个脚印。"
 		)
