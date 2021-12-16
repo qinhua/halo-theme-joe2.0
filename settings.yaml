@@ -52,7 +52,7 @@ genernal:
       label: 网站公告
       type: textarea
       placeholder: 请输入公告信息
-      description: "网站公告信息，将展示在页面右侧，尽量简洁明了（不填不展示该模块，也可单独开关）"
+      description: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
     baidu_statistic:
       name: baidu_statistic
       label: 统计代码
@@ -3054,12 +3054,19 @@ comment:
       type: switch
       data-type: bool
       default: true
-      description: "是否自动加载评论数据"
+      description: "是否自动加载评论数据，分页大小可在 “后台管理-系统-博客设置-评论设置-每页显示条数” 中统一配置"
       options:
         - value: true
           label: 开启
         - value: false
           label: 关闭
+    # comment_page_size:
+    #   name: comment_page_size
+    #   label: 评论分页大小
+    #   type: text
+    #   data-type: long
+    #   default: 10
+    #   description: "配置评论组件的分页大小，默认为 10"
     enable_comment_ua:
       name: enable_comment_ua
       label: 展示评论者UA信息
