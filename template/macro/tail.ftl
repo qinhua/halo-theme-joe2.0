@@ -1,4 +1,4 @@
-<#macro tail type>
+<#macro tail type subType="">
   <#-- ===== 引入脚本 start ===== -->
   <#if (type == 'index' && settings.enable_index_list_effect == true) || ( type == 'journals' && settings.enable_journal_effect == true) || ( type == 'photos' && settings.enable_photos_effect == true)>
     <script src="${BASE_RES_URL!}/source/lib/wowjs/wow.min.js"></script>
@@ -18,7 +18,7 @@
   <#if type == 'post' && settings.enable_toc == true>
     <script src="${BASE_RES_URL!}/source/lib/tocbot/tocbot.min.js"></script>
   </#if>
-  <#if settings.enable_clean_mode != true && ( type == 'post' || type == 'journals' || type == 'sheet')>
+  <#if settings.enable_clean_mode != true && ( type == 'post' || type == 'journals' || type == 'sheet') && subType != 'only_header_footer'>
     <script src="${BASE_RES_URL!}/source/lib/vue@2.6.10/vue.min.js"></script>
     <script src="${BASE_RES_URL!}/source/lib/halo-comment/halo-comment.min.js?v=${theme.version!}"></script>
   </#if>
@@ -73,7 +73,7 @@
   <#if type == 'photos'>
     <script src="${BASE_RES_URL}/source/js/min/joe.photos.min.js?v=${theme.version!}"></script>
   </#if>
-  <#if type == 'sheet'>
+  <#if type == 'sheet' && subType != 'only_header_footer'>
     <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.min.js"></script>
     <script src="${BASE_RES_URL}/source/js/min/joe.leaving.min.js?v=${theme.version!}"></script>
   </#if>
