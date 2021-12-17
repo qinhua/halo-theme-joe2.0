@@ -569,3 +569,7 @@ location / {
 - [halo-live2d](https://github.com/LIlGG/halo-live2d)
 - [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura)
 - [halo-theme-sagari](https://github.com/cetr/halo-theme-sagiri)
+
+<br>
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/qinhua/halo-theme-joe2.0)
