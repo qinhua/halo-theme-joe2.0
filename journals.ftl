@@ -36,7 +36,7 @@
             <@loading type="journals" />
             <ul class="joe_journals__list hidden${settings.enable_journal_effect?then(' effects','')}">
               <#list journals.content as journal>
-                <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id}" data-clikes="${journal.likes}">
+                <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id?c}" data-clikes="${journal.likes}">
                   <p class="joe_journal_date">
                     <i class="joe-font joe-icon-feather"></i>
                     <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>
