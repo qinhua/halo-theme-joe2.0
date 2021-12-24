@@ -720,18 +720,18 @@ aside:
           label: 是
         - value: false
           label: 否
-    enable_post_aside:
-      name: enable_post_aside
-      label: 文章详情页侧边栏
-      type: switch
-      data-type: bool
-      default: false
-      description: "文章页右侧是否展示侧边栏"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
+    # enable_post_aside:
+    #   name: enable_post_aside
+    #   label: 文章详情页侧边栏
+    #   type: switch
+    #   data-type: bool
+    #   default: false
+    #   description: "文章页右侧是否展示侧边栏"
+    #   options:
+    #     - value: true
+    #       label: 是
+    #     - value: false
+    #       label: 否
     enable_journals_aside:
       name: enable_journals_aside
       label: 日志页侧边栏
