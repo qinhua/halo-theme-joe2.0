@@ -1546,18 +1546,18 @@ archives:
 post:
   label: 文章页
   items:
-    enable_aside_expander:
-      name: enable_aside_expander
-      label: 展示侧边栏切换按钮
-      type: switch
-      data-type: bool
-      default: true
-      description: "文章页顶部显示用于切换侧边栏显示/隐藏状态的按钮（仅在展示侧边栏情况下生效）"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
+    # enable_aside_expander:
+    #   name: enable_aside_expander
+    #   label: 展示侧边栏切换按钮
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "文章页顶部显示用于切换侧边栏显示/隐藏状态的按钮（仅在展示侧边栏情况下生效）"
+    #   options:
+    #     - value: true
+    #       label: 是
+    #     - value: false
+    #       label: 否
     enable_title_shadow:
       name: enable_title_shadow
       label: 开启标题阴影

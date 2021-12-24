@@ -9,7 +9,7 @@
       <#include "template/module/post_bread.ftl">
       <div class="joe_container joe_main_container page-post${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main joe_post">
-          <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>
+          <#--  <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>  -->
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id?c}" data-clikes="${post.likes}" data-author="${user.nickname!}">
             <#include "template/macro/post_status.ftl">
             <@post_status status=post.status />
@@ -75,16 +75,6 @@
               <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
                 ${post.formatContent!}
               </article>
-              <#assign enable_toc = (metas?? && metas.enable_toc?? && metas.enable_toc?trim!='')?then(metas.enable_toc?trim,'true')>
-              <#if enable_toc == 'true' && settings.enable_toc == true>
-                <div class="toc-container animated slideInRight">
-                  <div class="toc-expander">
-                    <i class="joe-font joe-icon-expand-in" title="收起目录"></i>
-                    <i class="joe-font joe-icon-expand-out" title="展开目录"></i>
-                  </div>
-                  <div id="js-toc" class="toc"></div>
-                </div>
-              </#if>
               <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>
               <#if enable_like=='true' && settings.enable_like==true && post.status!='DRAFT'>
                 <#include "template/module/favorite.ftl">
@@ -131,10 +121,19 @@
             </div>
           </#if>
         </div>
-        <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'false')>
+        <#assign enable_toc = (metas?? && metas.enable_toc?? && metas.enable_toc?trim!='')?then(metas.enable_toc?trim,'true')>
+        <#if enable_toc == 'true' && settings.enable_toc == true>
+          <div class="aside-toc">
+            <div class="toc-container animated slideInRight">
+              <h3 class="toc-header"><i class="joe-font joe-icon-xiaoxi" title="文章目录"></i>文章目录</h3>
+              <div id="js-toc" class="toc"></div>
+            </div>
+          </div>
+        </#if>
+        <#--  <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'false')>
         <#if enable_aside == 'true' || settings.enable_post_aside == true>
           <#include "template/common/aside.ftl">
-        </#if>
+        </#if>  -->
       </div>
       <#if settings.enable_progress_bar!true>
         <div class="joe_progress_bar" ${(settings.progress_bar_bgc?? && settings.progress_bar_bgc!='')?then('style="background:${settings.progress_bar_bgc}"','')}></div>
