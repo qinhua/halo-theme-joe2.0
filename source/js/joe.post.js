@@ -260,22 +260,22 @@ const postContext = {
 		});
 	},
 	/* 侧边栏切换 */
-	initAside() {
-		if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
-			return;
-		$(".aside-expander").on("click", function (e) {
-			e.stopPropagation();
-			const $this = $(this);
-			if ($this.hasClass("active")) {
-				$this.removeClass("active");
-				$this.html("隐藏侧边栏");
-			} else {
-				$this.addClass("active");
-				$this.html("显示侧边栏");
-			}
-			$(".joe_aside").toggleClass("hide");
-		});
-	},
+	// initAside() {
+	// 	if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
+	// 		return;
+	// 	$(".aside-expander").on("click", function (e) {
+	// 		e.stopPropagation();
+	// 		const $this = $(this);
+	// 		if ($this.hasClass("active")) {
+	// 			$this.removeClass("active");
+	// 			$this.html("隐藏侧边栏");
+	// 		} else {
+	// 			$this.addClass("active");
+	// 			$this.html("显示侧边栏");
+	// 		}
+	// 		$(".joe_aside").toggleClass("hide");
+	// 	});
+	// },
 	/* 文章视频模块 */
 	initVideo() {
 		if ($(".joe_detail__article-video").length) {
