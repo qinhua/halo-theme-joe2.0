@@ -24,6 +24,7 @@ html {
   --classH: #e9f2ff;
   --classI: #5a3713;
   --classJ: #f9e5fb;
+  --classK: #e4e7ed;
   --quote: #50bfff;
   --code: #409eff;
   --code-background: #ecf5ff;
@@ -44,9 +45,11 @@ html {
   --background-notice: #fbf5f1;
   --background-journal: #fff;
   --background-journal-block: #f5f5f5;
-  --background-journal-gradient: linear-gradient(0deg,
-  #d4d4d4,
-  transparent 80%);
+  --background-journal-gradient: linear-gradient(
+    0deg,
+    #d4d4d4,
+    transparent 80%
+  );
   --shadow-notice: inset 0 0 15px #d1dae8;
   --animation-notice: twinkle 1s ease infinite alternate;
   background: var(--background);
@@ -74,6 +77,7 @@ html {
     --classH: #454545;
     --classI: #36312c;
     --classJ: #39243c;
+    --classK: #eee;
     --quote: #276b92;
     --code: #efa141;
     --code-background: #353535;
@@ -92,9 +96,11 @@ html {
     --background-notice: #303030;
     --background-journal: #383838;
     --background-journal-block: #232323;
-    --background-journal-gradient: linear-gradient(0deg,
-    #151515,
-    transparent 80%);
+    --background-journal-gradient: linear-gradient(
+      0deg,
+      #151515,
+      transparent 80%
+    );
     --shadow-notice: inset 0 0 15px #4a4c4e;
     --animation-notice: twinkle-night 1s ease infinite alternate;
     background: var(--background);
@@ -176,22 +182,30 @@ html {
       .aplayer-lrc {
         &:before {
           height: 5px;
-          background: -webkit-linear-gradient(180deg,
-          rgba(0, 0, 0, 0.3) 0,
-          rgba(0, 0, 0, 0));
-          background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0.3) 0,
-          rgba(0, 0, 0, 0));
+          background: -webkit-linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.3) 0,
+            rgba(0, 0, 0, 0)
+          );
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.3) 0,
+            rgba(0, 0, 0, 0)
+          );
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cc000000", endColorstr="#00000000", GradientType=0);
         }
 
         &:after {
-          background: -webkit-linear-gradient(180deg,
-          rgba(0, 0, 0, 0) 0,
-          rgba(0, 0, 0, 0.3));
-          background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0) 0,
-          rgba(0, 0, 0, 0.3));
+          background: -webkit-linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 0,
+            rgba(0, 0, 0, 0.3)
+          );
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 0,
+            rgba(0, 0, 0, 0.3)
+          );
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#cc000000", GradientType=0);
         }
       }

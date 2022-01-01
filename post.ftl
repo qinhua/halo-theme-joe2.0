@@ -87,6 +87,12 @@
               <#include "template/ads/ads_post.ftl">
             </#if>
           </div>
+          <ul class="aside_operations">
+            <li class="post-operate-like"><i class="joe-font joe-icon-dianzan"></i><#if post.likes gt 0><span>${post.likes!}</span></#if></li>
+            <li class="post-operate-comment"><i class="joe-font joe-icon-message"></i><#if post.likes gt 0><span>${post.commentCount!}</span></#if></li>
+            <li class="post-operate-share"><i class="joe-font joe-icon-huifu"></i></li>
+            <li class="post-operate-donate"><i class="joe-font joe-icon-shang"></i></li>
+          </ul>
           <ul class="joe_post__pagination">
             <#if prevPost??>
               <li class="joe_post__pagination-item prev"><a href="${prevPost.fullPath!}" title="${prevPost.title!}">上一篇</a></li>
@@ -121,19 +127,7 @@
             </div>
           </#if>
         </div>
-        <#assign enable_toc = (metas?? && metas.enable_toc?? && metas.enable_toc?trim!='')?then(metas.enable_toc?trim,'true')>
-        <#if enable_toc == 'true' && settings.enable_toc == true>
-          <div class="aside-toc">
-            <div class="toc-container animated slideInRight">
-              <h3 class="toc-header"><i class="joe-font joe-icon-xiaoxi" title="文章目录"></i>文章目录</h3>
-              <div id="js-toc" class="toc"></div>
-            </div>
-          </div>
-        </#if>
-        <#--  <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'false')>
-        <#if enable_aside == 'true' || settings.enable_post_aside == true>
-          <#include "template/common/aside.ftl">
-        </#if>  -->
+        <#include "template/common/aside_post.ftl">
       </div>
       <#if settings.enable_progress_bar!true>
         <div class="joe_progress_bar" ${(settings.progress_bar_bgc?? && settings.progress_bar_bgc!='')?then('style="background:${settings.progress_bar_bgc}"','')}></div>
