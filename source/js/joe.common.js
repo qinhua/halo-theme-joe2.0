@@ -431,8 +431,9 @@ const commonContext = {
 		);
 		if (!$allLink.length) return;
 		$allLink.each(function () {
-			$(this).attr({
-				target: "_blank",
+			const $this = $(this);
+			$this.attr({
+				target: !$this.attr("href").startsWith("#")? "_blank" :"",
 				rel: "noopener noreferrer nofollow",
 			});
 		});
@@ -744,14 +745,10 @@ const commonContext = {
 	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
 	scrollToHash() {
 		const scroll = new URLSearchParams(location.search).get("scroll");
+		// const scroll = window.decodeURIComponent(location.hash);
 		if (scroll) {
 			const height = $(".joe_header").height();
-			let elementEL = null;
-			if ($("#" + scroll).length > 0) {
-				elementEL = $("#" + scroll);
-			} else {
-				elementEL = $("." + scroll);
-			}
+			const elementEL = $(($("#" + scroll).length?"#":".") + scroll);
 			if (elementEL && elementEL.length > 0) {
 				const top = elementEL.offset().top - height - 15;
 				window.scrollTo({

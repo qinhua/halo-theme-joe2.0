@@ -215,7 +215,7 @@ const postContext = {
       !$(".toc-container").length
 		)
 			return;
-		if (document.body.clientWidth <= 1200) return;
+		if (document.body.clientWidth <= 992) return;
 		tocbot.init({
 			tocSelector: "#js-toc",
 			contentSelector: ".joe_detail__article",
@@ -233,13 +233,13 @@ const postContext = {
 		// toc 菜单收起/展开
 		if (!$("#js-toc").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
-			$(".toc-container").addClass("hide"); // 无目录时默认折叠
+			// $(".toc-container").addClass("hide"); // 无目录时默认折叠
 		}
 		$(".toc-container").show();
-		$(".toc-expander i").on("click", function (e) {
-			e.stopPropagation();
-			$(this).parents(".toc-container").toggleClass("hide");
-		});
+		// $(".toc-expander i").on("click", function (e) {
+		// 	e.stopPropagation();
+		// 	$(this).parents(".toc-container").toggleClass("hide");
+		// });
 	},
 	/* 阅读进度条 */
 	initProgress() {
