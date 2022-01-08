@@ -16,7 +16,7 @@
     <#if settings.motto??>
       <p class="motto joe_motto">${settings.motto!}</p>
     <#else>
-      <#if settings.enable_day_words>
+      <#if settings.enable_day_words!false>
         <img class="motto_day_words" height="14" src="https://v2.jinrishici.com/one.svg?font-size=146&spacing=2&color=grey"/>
       <#else>
         <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>
@@ -52,10 +52,10 @@
   <#if settings.enable_weather==true && settings.weather_key?? && settings.weather_key!=''>
     <div id="he-plugin-simple"></div>
   </#if>
-  <#if settings.enable_social>
+  <#if settings.enable_social!false>
     <#include "social.ftl">
   </#if>
-  <#if settings.enable_strips>
+  <#if settings.enable_strips!false>
     <canvas id="canvas-strips" width="300" height="340"></canvas>
     <script src="${BASE_RES_URL}/source/effect/bg/strips.js"></script>
   </#if>

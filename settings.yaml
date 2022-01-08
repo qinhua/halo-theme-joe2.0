@@ -272,6 +272,18 @@ theme:
           label: 开启
         - value: false
           label: 关闭
+    enable_back2top_smooth:
+      name: enable_back2top_smooth
+      label: 平滑返回顶部
+      type: switch
+      data-type: bool
+      default: true
+      description: "点击返回顶部按钮后，是否平滑的返回顶部，关闭后则没有任何过渡效果"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     scrollbar_width:
       name: scrollbar_width
       label: 滚动条宽度
@@ -621,6 +633,21 @@ carousel:
           label: 开启
         - value: false
           label: 关闭
+    banner_effect:
+      name: banner_effect
+      label: 切换效果
+      type: select
+      data-type: text
+      default: 'slide'
+      options:
+        - value: slide
+          label: 滑动
+        - value: fade
+          label: 淡入
+        - value: cube
+          label: 立方体
+        - value: coverflow
+          label: 封面
     enable_banner_handle:
       name: enable_banner_handle
       label: 允许手动控制
@@ -1210,14 +1237,14 @@ home:
       label: 文章默认缩略图
       width: 100%
       type: attachment
-      default: "https://picsum.photos/id/1081/210/140"
-      description: "文章无配图时生效，可使用占位图服务（210*140） https://source.unsplash.com、https://picsum.photos"
+      default: "https://picsum.photos/id/1081/350/200"
+      description: "文章无配图时生效，可使用占位图服务（350*200） https://source.unsplash.com、https://picsum.photos"
     fallback_thumbnail:
       name: fallback_thumbnail
       label: 文章错误缺省图
       type: attachment
       default: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/default_thumbnail.png"
-      description: "文章图片加载出错时生效，可使用占位图服务（210*140）"
+      description: "文章图片加载出错时生效，可使用占位图服务（350*200）"
     enable_random_img_api:
       name: enable_random_img_api
       label: 启用随机图
@@ -2473,6 +2500,18 @@ code_block:
           label: "xonokai"
         - value: "z-touch"
           label: "z-touch"
+    show_tools_when_hover:
+      name: show_tools_when_hover
+      label: 仅悬浮时显示操作按钮
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否仅在鼠标悬浮到当前代码块时才显示相关操作按钮，不显示时会更加简洁"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_single_code_select:
       name: enable_single_code_select
       label: 点击行内代码自动全选

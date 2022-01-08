@@ -317,7 +317,7 @@ body {
         user-select: none;
         font-size: 14px;
         color: #999;
-        transition: transform 0.2s;
+        transition: all 0.25s;
 
         &:hover {
           filter: brightness(1.2);
@@ -334,7 +334,7 @@ body {
         color: #999;
         cursor: pointer;
         user-select: none;
-        transition: opacity color 0.35s;
+        transition: opacity 0.25s;
 
         &:hover {
           filter: brightness(1.2);
@@ -364,7 +364,7 @@ body {
         }
 
         code {
-          padding: 12px 12px 12px 18px;
+          padding: 12px 12px 14px 18px;
         }
       }
 
@@ -372,6 +372,22 @@ body {
         code {
           white-space: pre-wrap;
           word-break: break-all;
+        }
+      }
+
+      &.c_hover_tools {
+        .code-expander,
+        .copy-button {
+          pointer-events: none;
+          opacity: 0;
+        }
+
+        &:hover {
+          .code-expander,
+          .copy-button {
+            pointer-events: auto;
+            opacity: 1;
+          }
         }
       }
 
@@ -389,7 +405,7 @@ body {
 
       &.line-numbers {
         code {
-          padding: 12px 12px 12px 54px;
+          padding: 12px 12px 16px 54px;
         }
       }
 
@@ -619,7 +635,9 @@ body {
           }
 
           .m-icon {
-            transform: translateY(-2px);
+            // transform: translateY(-2px);
+            animation: swing 1s ease;
+            animation-fill-mode: both;
           }
 
           & + .joe-icon-arrow-down {
@@ -1235,7 +1253,7 @@ body {
         line-height: 25px;
 
         .level {
-          height: 22px;
+          height: 23px;
           margin-left: 2px;
         }
 
@@ -1909,7 +1927,7 @@ body {
           font-weight: 500;
 
           .level {
-            height: 22px;
+            height: 24px;
             margin-left: 2px;
           }
         }
@@ -4089,6 +4107,10 @@ body {
     &.indent {
       > p {
         text-indent: 2em;
+
+        img {
+          margin-left: -2em;
+        }
       }
     }
 
@@ -4516,7 +4538,7 @@ body {
   }
 
   &__agree {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     margin: 30px 0 10px;
@@ -4546,9 +4568,9 @@ body {
 
         .joe-font {
           position: absolute;
+          opacity: 0;
           font-size: 26px;
           color: #fff;
-          opacity: 0;
           transform: scale(0);
           transition: transform 0.85s, opacity 0.85s;
 
@@ -4649,6 +4671,7 @@ body {
     }
 
     &-share {
+      display: none;
       position: relative;
       top: 1px;
       z-index: 10;
@@ -4751,6 +4774,7 @@ body {
   }
 
   .joe_donate {
+    display: none;
     position: relative;
     z-index: 10;
     width: 30px;

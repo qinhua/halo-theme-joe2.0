@@ -153,6 +153,7 @@
     user-select: none;
     max-height: calc(100vh - 150px);
     overflow-y: auto;
+
     &::after {
       position: absolute;
       content: "";
@@ -165,7 +166,7 @@
 
     > .toc-list {
       position: relative;
-      padding-left: 36px;
+      padding: 0 12px 0 36px;
       overflow: hidden;
 
       li {
@@ -174,6 +175,7 @@
 
       & > li > a {
         font-weight: bold;
+
         &::before {
           position: absolute;
           display: block;
@@ -206,11 +208,13 @@
     position: relative;
     z-index: 1;
     margin: 0;
-    padding-left: 20px;
+    padding-left: 14px;
     font-size: 14px;
+
     .toc-list-item {
       position: relative;
     }
+
     .toc-list {
       font-size: 13px;
     }
@@ -270,26 +274,30 @@
 
 .aside_operations {
   position: fixed;
-  top: 320px;
+  top: 250px;
   margin-left: -70px;
   z-index: 10;
   user-select: none;
 
-  li {
+  > li {
     position: relative;
     cursor: pointer;
     width: 44px;
     height: 44px;
     line-height: 44px;
     margin-bottom: 14px;
+    user-select: none;
     text-align: center;
     color: var(--routine);
     background: var(--background);
     box-shadow: var(--box-shadow);
     border-radius: 50%;
+
     i {
+      display: block;
       font-size: 20px;
     }
+
     span {
       position: absolute;
       left: 30px;
@@ -304,26 +312,178 @@
       background-color: var(--classA);
       border-radius: 10px;
     }
+
     &:hover {
       color: var(--theme);
+
+      .joe-icon-dianzan,
+      .joe-icon-huifu,
+      .joe-icon-message,
+      .joe-icon-shang {
+        animation: swing 1s ease;
+      }
     }
   }
-}
 
-.joe_like {
-  .joe-font {
-    cursor: pointer;
-    font-size: 20px;
-    color: #eee;
-    transition: all 0.2s;
+  .post-operate-like {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &:hover {
-      color: #f16520;
-      transform: scale(1.2);
+    .joe-font {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transform: scale(0);
+      transition: transform 0.35s, opacity 0.35s;
+      border-radius: 50%;
+
+      &.active {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
-    &:active {
-      color: #f16520;
+    .icon-unlike {
+      &.active {
+        color: var(--theme);
+      }
+    }
+  }
+
+  .post-operate-share {
+    overflow: hidden;
+
+    .share-icon-list {
+      pointer-events: none;
+      opacity: 0;
+      position: absolute;
+      top: -32px;
+      z-index: 1;
+      margin-left: 35px;
+      padding: 4px;
+      text-align: center;
+      font-size: 0;
+      background: var(--sib-background);
+      border-radius: 50px;
+      transition: all 0.25s;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+      a {
+        position: relative;
+        display: block;
+        line-height: 1;
+        margin: 5px 0;
+      }
+
+      &:before {
+        position: absolute;
+        top: 44px;
+        left: -20px;
+        content: "";
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-right-color: var(--classG);
+      }
+    }
+
+    .qrcode_wrapper {
+      display: none;
+      position: absolute;
+      margin: -100px 0 0 42px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: var(--block-shadow);
+
+      &:before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        margin: 68px 0 0 -100px;
+        border: 10px solid transparent;
+        border-right-color: #e0e0e0;
+      }
+
+      p {
+        padding: 6px 0 0;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+      }
+    }
+
+    &:hover {
+      overflow: initial;
+
+      .share-icon-list {
+        pointer-events: initial;
+        opacity: 1;
+        transform: translate3d(15px, 0, 0);
+      }
+    }
+
+    #share_to_weixin:hover .qrcode_wrapper {
+      display: block;
+    }
+  }
+
+  .post-operate-donate {
+    overflow: hidden;
+
+    .joe_donate {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      min-width: 200px;
+      min-height: 100px;
+      margin: -30px 0 0 35px;
+      padding: 12px;
+      transform: translate3d(0, 0, 0);
+      background: var(--sub-background);
+      box-shadow: var(--block-shadow);
+      border-radius: 5px;
+      transition: all 0.35s;
+
+      &:before {
+        position: absolute;
+        top: 40px;
+        left: -20px;
+        content: "";
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-right-color: var(--classG);
+      }
+    }
+
+    .joe_donate_list {
+      display: flex;
+
+      li {
+        img {
+          display: block;
+          width: 200px;
+          max-width: unset;
+          border-radius: 5px;
+        }
+
+        &:not(:last-child) {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    &:hover {
+      overflow: initial;
+
+      .joe_donate {
+        opacity: 1;
+        transform: translate3d(15px, 0, 0);
+      }
     }
   }
 }

@@ -46,7 +46,7 @@
               <path d="M512 0a512 512 0 1 0 512 512A512 512 0 0 0 512 0zM412.672 646.656a403.456 403.456 0 0 1-83.968-12.288l-83.968 43.008 24.064-73.728a201.216 201.216 0 0 1-96.256-165.376c0-116.224 108.032-207.872 240.128-207.872a240.128 240.128 0 0 1 242.688 172.032h-23.04a198.144 198.144 0 0 0-204.8 193.536 185.344 185.344 0 0 0 7.168 51.2zM768 732.672l17.92 60.928-66.048-36.864a296.96 296.96 0 0 1-72.192 12.288 191.488 191.488 0 0 1-204.8-177.664 191.488 191.488 0 0 1 204.8-177.664c108.032 0 204.8 79.872 204.8 177.664A185.856 185.856 0 0 1 768 732.672z" fill="#3db214"></path>
             </svg>
             <div class="qrcode_wrapper animated bounceIn">
-              <div id="qrcode_wx"></div>
+              <div class="qrcode_wx"></div>
               <p>微信扫一扫</p>
             </div>
           </a>
@@ -56,6 +56,7 @@
   </#if>
   <#assign enable_donate = (metas?? && metas.enable_donate?? && metas.enable_donate?trim!='')?then(metas.enable_donate?trim,'true')>
   <#if enable_donate=='true' && settings.enable_donate==true && post.status!='DRAFT'>
-    <#include "donate.ftl">
+    <#import "donate.ftl" as nsp>
+    <@nsp.donate type="bottom" />
   </#if>
 </div>
