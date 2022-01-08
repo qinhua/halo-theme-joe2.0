@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 			render() {
 				this.innerHTML =
-          "<span class=\"joe_hide\">此处内容仅 <i class=\"joe_hide__button\">评论</i> 后可见</span>";
+          "<div class=\"joe_hide\"><i class=\"joe-font joe-icon-locker\" style=\"color:#f5840d;\"></i>&nbsp;此处内容仅 <span class=\"joe_hide__button\">评论</span> 后可见</div>";
 				this.$button = this.querySelector(".joe_hide__button");
 				const $comment = document.querySelector(".joe_comment");
 				const $header = document.querySelector(".joe_header");
@@ -592,6 +592,7 @@ document.addEventListener("DOMContentLoaded", () => {
 								wrapper.style.maxHeight = content.offsetHeight + "px";
 							}
 							clearTimeout(timer);
+							timer = null;
 						}, 30);
 					});
 				});

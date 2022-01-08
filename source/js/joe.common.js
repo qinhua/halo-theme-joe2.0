@@ -131,6 +131,9 @@ const commonContext = {
 				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
 				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
+				ThemeConfig.show_tools_when_hover
+					? $item.addClass("c_hover_tools")
+					: null;
 				// ThemeConfig.enable_code_line_number
 				// 	? $item.addClass("line-numbers")
 				// 	: null;
@@ -204,7 +207,7 @@ const commonContext = {
 						$("#joe_baidu_record").html(
 							"<span style=\"color: #e6a23c\">未收录，推送中...</span>"
 						);
-						const _timer = setTimeout(function () {
+						let _timer = setTimeout(function () {
 							$.ajax({
 								url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
 								type: "POST",
@@ -227,6 +230,7 @@ const commonContext = {
 								},
 							});
 							clearTimeout(_timer);
+							_timer = null;
 						}, 1000);
 					} else {
 						const url = `https://ziyuan.baidu.com/linksubmit/url?sitename=${encodeURI(
@@ -279,10 +283,9 @@ const commonContext = {
 		$(document).on("scroll", Utils.throttle(handleScroll, 100));
 		$el.on("click", function (e) {
 			e.stopPropagation();
-			window.scrollTo({
-				top: 0,
-				behavior: "smooth",
-			});
+			const cfg = { top: 0 };
+			ThemeConfig.enable_back2top_smooth ? (cfg.behavior = "smooth") : null;
+			window.scrollTo(cfg);
 		});
 	},
 	/* 激活侧边栏人生倒计时功能 */
@@ -433,7 +436,7 @@ const commonContext = {
 		$allLink.each(function () {
 			const $this = $(this);
 			$this.attr({
-				target: !$this.attr("href").startsWith("#")? "_blank" :"",
+				target: !$this.attr("href").startsWith("#") ? "_blank" : "",
 				rel: "noopener noreferrer nofollow",
 			});
 		});
@@ -634,6 +637,8 @@ const commonContext = {
 	initHeadScroll() {
 		if (Joe.isMobile) return;
 		let flag = true;
+		let _last = Date.now();
+		let Y = window.pageYOffset;
 		const handleHeader = (diffY) => {
 			if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
 				if (flag) return;
@@ -653,9 +658,6 @@ const commonContext = {
 				flag = false;
 			}
 		};
-		let Y = window.pageYOffset;
-		handleHeader(Y);
-		let _last = Date.now();
 		document.addEventListener(
 			"scroll",
 			Utils.throttle(() => {
@@ -667,6 +669,7 @@ const commonContext = {
 				_last = _now;
 			}, 100)
 		);
+		handleHeader(Y);
 	},
 	/* 渲染数学公式 */
 	initMathjax() {
@@ -748,7 +751,7 @@ const commonContext = {
 		// const scroll = window.decodeURIComponent(location.hash);
 		if (scroll) {
 			const height = $(".joe_header").height();
-			const elementEL = $(($("#" + scroll).length?"#":".") + scroll);
+			const elementEL = $(($("#" + scroll).length ? "#" : ".") + scroll);
 			if (elementEL && elementEL.length > 0) {
 				const top = elementEL.offset().top - height - 15;
 				window.scrollTo({

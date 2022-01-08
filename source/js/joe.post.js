@@ -117,12 +117,14 @@ const postContext = {
 		if (PageAttrs.metas.enable_share === "false" || !ThemeConfig.enable_share)
 			return;
 		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
-			new ClipboardJS($(".icon-share-link")[0], {
-				text: () => location.href,
-			}).on("success", () => Qmsg.success("文章链接已复制"));
+			$(".icon-share-link").each((_index, item) => {
+				new ClipboardJS($(item)[0], {
+					text: () => location.href,
+				}).on("success", () => Qmsg.success("文章链接已复制"));
+			});
 		}
-		if (ThemeConfig.enable_share_weixin && $("#qrcode_wx").length) {
-			$("#qrcode_wx").qrcode({
+		if (ThemeConfig.enable_share_weixin && $(".qrcode_wx").length) {
+			$(".qrcode_wx").qrcode({
 				width: 140,
 				height: 140,
 				render: "canvas",
@@ -147,10 +149,10 @@ const postContext = {
 		let agreeArr = localStorage.getItem(encryption("agree"))
 			? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 			: [];
-		const $icons = $(".joe_detail__agree .icon");
-		const $iconLike = $(".joe_detail__agree .icon-like");
-		const $iconUnlike = $(".joe_detail__agree .icon-unlike");
-		const $likeNum = $(".joe_detail__agree .text");
+		const $icons = $(".joe_detail__agree, .post-operate-like");
+		const $iconLike = $icons.find(".icon-like");
+		const $iconUnlike = $icons.find(".icon-unlike");
+		const $likeNum = $icons.find(".nums");
 		if (agreeArr.includes(cid)) {
 			$iconUnlike.addClass("active");
 		} else {
@@ -240,6 +242,23 @@ const postContext = {
 		// 	e.stopPropagation();
 		// 	$(this).parents(".toc-container").toggleClass("hide");
 		// });
+	},
+	/**初始化左侧工具条 */
+	initAsideOperate() {
+		// 评论
+		$(".post-operate-comment").on("click", function (e) {
+			const $comment = document.querySelector(".joe_comment");
+			const $header = document.querySelector(".joe_header");
+			if (!$comment || !$header) return;
+			e.stopPropagation();
+			if (!document.getElementsByTagName("halo-comment").length) {
+				Qmsg.warning("评论功能不可用！");
+				return;
+			}
+			const top = $comment.offsetTop - $header.offsetHeight - 15;
+			// window.scrollTo({ top, behavior: "smooth" });
+			window.scrollTo({ top });
+		});
 	},
 	/* 阅读进度条 */
 	initProgress() {

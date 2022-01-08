@@ -11,8 +11,8 @@
       </div>
     </#if>
     <#if settings.enable_newest_post!true>
-      <#import "../macro/latest.ftl" as np>
-      <@np.newest/>
+      <#import "../macro/relate.ftl" as np>
+      <@np.relate postData=post />
     </#if>
     <#if settings.enable_clean_mode!=true && settings.enable_aside_ads==true>
       <#include "../ads/ads_aside.ftl">

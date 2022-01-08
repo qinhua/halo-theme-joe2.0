@@ -19,7 +19,7 @@
       <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
     </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.normalize.min.css?v=${theme.version!}"> 
-  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_bwap47t9zso.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_e243o7fs85u.css">
   <#if settings.iconfont??>
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>

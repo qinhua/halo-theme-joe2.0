@@ -9,6 +9,7 @@ const homeContext = {
 			const config = {
 				direction: ThemeConfig.banner_direction,
 				loop: ThemeConfig.enable_banner_loop,
+				effect: ThemeConfig.banner_effect,
 				keyboard: false,
 				mousewheel: false,
 				grabCursor: ThemeConfig.enable_banner_handle,
