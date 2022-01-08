@@ -77,7 +77,8 @@
               </article>
               <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>
               <#if enable_like=='true' && settings.enable_like==true && post.status!='DRAFT'>
-                <#include "template/module/favorite.ftl">
+                <#import "template/module/favorite.ftl" as nsp>
+                <@nsp.favorite post=post type="bottom" />
               </#if>
             </div>
             <#include "template/module/post_operate.ftl">
@@ -87,12 +88,7 @@
               <#include "template/ads/ads_post.ftl">
             </#if>
           </div>
-          <ul class="aside_operations">
-            <li class="post-operate-like"><i class="joe-font joe-icon-dianzan"></i><#if post.likes gt 0><span>${post.likes!}</span></#if></li>
-            <li class="post-operate-comment"><i class="joe-font joe-icon-message"></i><#if post.likes gt 0><span>${post.commentCount!}</span></#if></li>
-            <li class="post-operate-share"><i class="joe-font joe-icon-huifu"></i></li>
-            <li class="post-operate-donate"><i class="joe-font joe-icon-shang"></i></li>
-          </ul>
+          <#include "template/module/post_operate_aside.ftl">
           <ul class="joe_post__pagination">
             <#if prevPost??>
               <li class="joe_post__pagination-item prev"><a href="${prevPost.fullPath!}" title="${prevPost.title!}">上一篇</a></li>

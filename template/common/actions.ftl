@@ -1,5 +1,5 @@
 
-<#if settings.enable_back2top!=false>
+<#if settings.enable_back2top == true || settings.theme_mode == "user">
   <#-- 悬浮按钮 -->
   <div class="joe_action">
     <#if settings.enable_back2top!true>
