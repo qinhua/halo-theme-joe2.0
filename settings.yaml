@@ -376,6 +376,18 @@ navbar:
           label: 开启
         - value: false
           label: 关闭
+    enable_icon_animate:
+      name: enable_icon_animate
+      label: "菜单图标悬浮动画"
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否开启菜单图标的悬浮动画"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     enable_search:
       name: enable_search
       label: 搜索功能
@@ -1726,7 +1738,7 @@ post:
       type: switch
       data-type: bool
       default: false
-      description: "开启后，文章页中的p标签将首行缩进2个字符（由于文章内容格式不可控，无法保证展示效果）"
+      description: "开启后，文章页中的p标签将首行缩进2个字符，可通过元数据 enable_indent 为某篇文章单独配置（由于文章内容格式不可控，无法保证展示效果，不建议开启）"
       options:
         - value: true
           label: 开启

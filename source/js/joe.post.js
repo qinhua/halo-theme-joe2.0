@@ -46,13 +46,15 @@ const postContext = {
 				}
 			};
 
-			// 重新渲染内容
+			// 重新渲染相关内容
 			const rerenderContent = () => {
 				// console.log("重新渲染内容");
 				// 代码块
 				commonContext.initCode(true);
 				// 图片预览
 				commonContext.initGallery();
+				// PDF预览
+				commonContext.initPDF();
 				// TOC
 				tocbot.refresh();
 			};
@@ -70,7 +72,8 @@ const postContext = {
 				rerenderContent();
 
 				// 滚动到原位置
-				window.scrollTo({ top: offsetTop - 150, behavior: "smooth" });
+				// window.scrollTo({ top: offsetTop - 150, behavior: "smooth" });
+				window.scrollTo({ top: offsetTop - 150 });
 			};
 
 			// 3.检查本地的partialIds

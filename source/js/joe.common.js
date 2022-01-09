@@ -271,6 +271,29 @@ const commonContext = {
 			},
 		});
 	},
+	/* 渲染PDF */
+	initPDF() {
+		const $pdfs = $("joe-pdf");
+		if (!$pdfs.length) return;
+		$pdfs.each((_index, item) => {
+			const $item = $(item);
+			options = {
+				src: $item.attr("src") || "",
+				width: $item.attr("width") || "100%",
+				height: $item.attr("height") || "500px",
+			};
+			let htmlStr="";
+			if (!options.src) {
+				htmlStr = "<p>pdf地址未填写！</p>";
+			}else{
+				htmlStr=`
+      <div class="joe_pdf">
+        <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
+      </div>`;
+			}
+			$(item).replaceWith(htmlStr);
+		});
+	},
 	/* 激活全局返回顶部功能 */
 	back2Top() {
 		if (!ThemeConfig.enable_back2top) return;
@@ -435,6 +458,7 @@ const commonContext = {
 		if (!$allLink.length) return;
 		$allLink.each(function () {
 			const $this = $(this);
+			// 排除内容中的锚点
 			$this.attr({
 				target: !$this.attr("href").startsWith("#") ? "_blank" : "",
 				rel: "noopener noreferrer nofollow",

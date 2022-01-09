@@ -10,7 +10,7 @@
           <img style="border-radius:${settings.logo_radius!}" src="${LOGO}" onerror="this.src='${DEFAULT_LOGO}'" alt="${blog_title!}">
         </a>
       </#if>
-      <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}">
+      <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}${settings.enable_icon_animate?then(' active-animate','')}">
         <@menuTag method="tree">
           <#list menus?sort_by('priority') as menu>
             <#if menu.children?? && menu.children?size gt 0>

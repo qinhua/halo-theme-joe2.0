@@ -30,6 +30,12 @@
         <span>访问量</span>
       </div>
     </@visitTag>  -->
+    <#--  <@categoryTag method="count">
+      <div class="item" title="累计分类数 ${count!}">
+        <span class="num">${count!"0"}</span>
+        <span>分类数</span>
+      </div>
+    </@categoryTag>  -->
     <@tagTag method="count">
       <div class="item" title="累计标签数 ${count!}">
         <span class="num">${count!"0"}</span>
