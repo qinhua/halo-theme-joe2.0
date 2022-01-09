@@ -23,27 +23,27 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	);
 
-	customElements.define(
-		"joe-pdf",
-		class JoePdf extends HTMLElement {
-			constructor() {
-				super();
-				this.options = {
-					src: this.getAttribute("src") || "",
-					width: this.getAttribute("width") || "100%",
-					height: this.getAttribute("height") || "500px",
-				};
-				this.render();
-			}
-			render() {
-				if (!this.options.src) return (this.innerHTML = "pdf地址未填写！");
-				this.innerHTML = `
-				<div class="joe_pdf">
-          <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${this.options.src}" style="width:${this.options.width};height:${this.options.height}"></iframe>
-        </div>`;
-			}
-		}
-	);
+	// customElements.define(
+	// 	"joe-pdf",
+	// 	class JoePdf extends HTMLElement {
+	// 		constructor() {
+	// 			super();
+	// 			this.options = {
+	// 				src: this.getAttribute("src") || "",
+	// 				width: this.getAttribute("width") || "100%",
+	// 				height: this.getAttribute("height") || "500px",
+	// 			};
+	// 			this.render();
+	// 		}
+	// 		render() {
+	// 			if (!this.options.src) return (this.innerHTML = "pdf地址未填写！");
+	// 			this.innerHTML = `
+	// 			<div class="joe_pdf">
+	//         <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${this.options.src}" style="width:${this.options.width};height:${this.options.height}"></iframe>
+	//       </div>`;
+	// 		}
+	// 	}
+	// );
 
 	customElements.define(
 		"joe-mp3",
