@@ -7,6 +7,7 @@
   "scripts": {
     "prepare": "husky install",
     "docs": "docsify serve docs",
+    "all": "npm run lint && npm run build",
     "build": "webpack && node source/utils/update-version.js",
     "lint:staged": "lint-staged",
     "lint": "stylelint --custom-syntax postcss-less --fix source/css/*.less && eslint --fix source/js/*.js"

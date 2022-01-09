@@ -170,7 +170,6 @@ const homeContext = {
 			const thumbnail = homeContext.getThumbnail(post);
 
 			return `<li class="joe_list__item default animated wow" data-wow-delay="0.${index}s">
-            <div class="line"></div>
             ${
 	ThemeConfig.enable_post_thumbnail
 		? `<a href="${post.fullPath}" class="thumbnail" title="${
@@ -280,6 +279,7 @@ const homeContext = {
 		Object.keys(homeContext).forEach(
 			(c) => !omits.includes(c) && homeContext[c]()
 		);
+		// ScrollTrigger.init();
 	});
 
 	// window.addEventListener("load", function () {
