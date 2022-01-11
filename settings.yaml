@@ -3260,23 +3260,23 @@ advertise:
           label: 是
         - value: false
           label: 否
-    ad_address:
-      name: ad_address
-      label: 广告跳转链接（侧边栏）
+    aside_ad_cover:
+      name: aside_ad_cover
+      label: 广告图片URL（侧边栏）
       type: text
       default: ""
       placeholder: 请输入
-      description: "和ad_image组合生效不填不展示"
-    ad_image:
-      name: ad_image
-      label: 广告图片地址（侧边栏）
+      description: "和 “广告跳转URL” 组合生效，不填不展示"
+    aside_ad_link:
+      name: aside_ad_link
+      label: 广告跳转URL（侧边栏）
       type: text
       default: ""
       placeholder: 请输入
-      placeholder: "和ad_address组合生效不填不展示"
-    enable_post_ads:
-      name: enable_post_ads
-      label: 展示文章页广告
+      description: "和 “广告图片URL” 组合生效，不填不展示"
+    enable_post_ads_top:
+      name: enable_post_ads_top
+      label: 展示文章页（顶部）广告
       type: switch
       data-type: bool
       default: false
@@ -3285,20 +3285,45 @@ advertise:
           label: 是
         - value: false
           label: 否
-    post_ad_address:
-      name: post_ad_address
-      label: 广告跳转链接（文章页）
+    post_ad_cover_top:
+      name: post_ad_cover_top
+      label: 广告图片URL（顶部）
       type: text
       default: ""
       placeholder: 请输入
-      description: "和post_ad_image组合生效不填不展示"
-    post_ad_image:
-      name: post_ad_image
-      label: 广告图片地址（文章页）
+      description: "和 “广告跳转URL” 组合生效，不填不展示"
+    post_aside_ad_link_top:
+      name: post_aside_ad_link_top
+      label: 广告跳转URL（顶部）
       type: text
       default: ""
       placeholder: 请输入
-      description: "和post_ad_address组合生效不填不展示"
+      description: "和 “广告图片URL” 组合生效，不填不展示"
+    enable_post_ads_bottom:
+      name: enable_post_ads_bottom
+      label: 展示文章页（底部）广告
+      type: switch
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    post_ad_cover_bottom:
+      name: post_ad_cover_bottom
+      label: 广告图片URL（底部）
+      type: text
+      default: ""
+      placeholder: 请输入
+      description: "和 “广告跳转URL” 组合生效，不填不展示"
+    post_aside_ad_link_bottom:
+      name: post_aside_ad_link_bottom
+      label: 广告跳转URL（底部）
+      type: text
+      default: ""
+      placeholder: 请输入
+      description: "和 “广告图片URL” 组合生效，不填不展示"
 
 # 其它
 others:
@@ -3310,7 +3335,7 @@ others:
       type: switch
       data-type: bool
       default: false
-      description: "启用后，全局评论、留言、特效和广告位将会屏蔽（通常在网站备案期间开启）"
+      description: "启用后，全局评论、留言、特效和广告位将会屏蔽（通常在网站备案期间开启，平时不要忘了关闭哦）"
       options:
         - value: true
           label: 开启

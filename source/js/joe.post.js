@@ -152,11 +152,12 @@ const postContext = {
 		let agreeArr = localStorage.getItem(encryption("agree"))
 			? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 			: [];
+		let flag = agreeArr.includes(cid);
 		const $icons = $(".joe_detail__agree, .post-operate-like");
 		const $iconLike = $icons.find(".icon-like");
 		const $iconUnlike = $icons.find(".icon-unlike");
 		const $likeNum = $icons.find(".nums");
-		if (agreeArr.includes(cid)) {
+		if (flag) {
 			$iconUnlike.addClass("active");
 		} else {
 			$iconLike.addClass("active");
@@ -170,18 +171,11 @@ const postContext = {
 			agreeArr = localStorage.getItem(encryption("agree"))
 				? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 				: [];
-			let flag = agreeArr.includes(cid);
-			$.ajax({
-				url: "/api/content/posts/" + cid + "/likes",
-				type: "POST",
-				dataType: "json",
-				data: {
-					type: flag ? "disagree" : "agree",
-				},
-				success(res) {
-					if (res.status !== 200) {
-						return;
-					}
+			flag = agreeArr.includes(cid);
+			Utils.request("/api/content/posts/" + cid + "/likes", "POST", {
+				type: flag ? "disagree" : "agree",
+			})
+				.then((_res) => {
 					let likes = clikes;
 					if (flag) {
 						likes--;
@@ -201,15 +195,10 @@ const postContext = {
 					const val = encryption(JSON.stringify(agreeArr));
 					localStorage.setItem(name, val);
 					$likeNum.html(likes);
-				},
-				error(err) {
+				})
+				.catch((err) => {
 					_loading = false;
-					return Qmsg.warning(err.responseJSON.message);
-				},
-				complete() {
-					_loading = false;
-				},
-			});
+				});
 		});
 	},
 	/* 文章目录 */
@@ -321,21 +310,17 @@ const postContext = {
 	//   let isSubmit = false;
 	//   $(".joe_detail__article-protected").on("submit", function (e) {
 	//     e.preventDefault();
-	//     const url = $(this).attr("action") + "&time=" + +new Date();
-	//     const protectPassword = $(this).find('input[type="password"]').val();
+	//     const url = $(this).attr("action") + "&time=" + new Date();
+	//     const protectPassword = $(this).find("input[type=\"password\"]").val();
 	//     if (protectPassword.trim() === "") return Qmsg.info("请输入访问密码！");
 	//     if (isSubmit) return;
 	//     isSubmit = true;
-	//     $.ajax({
-	//       url,
-	//       type: "POST",
-	//       data: {
-	//         cid,
-	//         protectCID: cid,
-	//         protectPassword,
-	//       },
-	//       dataType: "text",
-	//       success(res) {
+	// 		Utils.request(url, "POST", {
+	// 			cid,
+	// 			protectCID: cid,
+	// 			protectPassword,
+	// 		})
+	// 			.then((_res) => {
 	//         let arr = [],
 	//           str = "";
 	//         arr = $(res).contents();
@@ -351,8 +336,9 @@ const postContext = {
 	//         } else {
 	//           location.reload();
 	//         }
-	//       },
-	//     });
+	//       }).catch(err=>{
+	// 				isSubmit = false;
+	// 			});
 	//   });
 	// },
 };
