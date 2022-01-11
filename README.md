@@ -50,7 +50,7 @@
 1. 复制主题仓库地址 `https://github.com/qinhua/halo-theme-joe2.0.git`
 
 2. 进入博客后台管理 `外观-主题-安装-远程下载`，贴入仓库地址进行安装（建议直接使用最新版本 ）。
-   如果在线安装失败（大概率失败 😆 ），可以选择 `本地上传`，到主题 [Release](https://github.com/qinhua/halo-theme-joe2.0/releases) 页面下载指定版本主题包，并上传上去（**记住务必在 `Release` 页面下载压缩包**）；
+   如果在线安装失败（大概率失败 😆 ），那就选择 `本地上传`，到主题 [Release](https://github.com/qinhua/halo-theme-joe2.0/releases) 页面下载指定版本主题压缩包，并上传上去（**务必在 `Release` 页面下载压缩包，否则可能出现资源加载出错的问题**）；
 
 3. 等待提示安装完成即可；
 
