@@ -35,10 +35,11 @@ const journalContext = {
 						decrypt(localStorage.getItem(encryption("agree-journal")))
 					)
 					: [];
+				let flag = agreeArr.includes(cid);
 				const $iconLike = $this.find(".journal-like");
 				const $iconUnlike = $this.find(".journal-unlike");
 				const $likeNum = $this.find(".journal-likes-num");
-				if (agreeArr.includes(cid)) {
+				if (flag) {
 					$iconLike.hide();
 					$iconUnlike.show();
 				} else {
@@ -56,18 +57,11 @@ const journalContext = {
 							decrypt(localStorage.getItem(encryption("agree-journal")))
 						)
 						: [];
-					let flag = agreeArr.includes(cid);
-					$.ajax({
-						url: "/api/content/journals/" + cid + "/likes",
-						type: "POST",
-						dataType: "json",
-						data: {
-							type: flag ? "disagree" : "agree",
-						},
-						success(res) {
-							if (res.status !== 200) {
-								return;
-							}
+					flag = agreeArr.includes(cid);
+					Utils.request("/api/content/journals/" + cid + "/likes", "POST", {
+						type: flag ? "disagree" : "agree",
+					})
+						.then((_res) => {
 							let likes = clikes;
 							if (flag) {
 								likes--;
@@ -85,15 +79,10 @@ const journalContext = {
 							const val = encryption(JSON.stringify(agreeArr));
 							localStorage.setItem(name, val);
 							$likeNum.html(likes);
-						},
-						error(err) {
+						})
+						.catch((err) => {
 							_loading = false;
-							return Qmsg.warning(err.responseJSON.message);
-						},
-						complete() {
-							_loading = false;
-						},
-					});
+						});
 				});
 			});
 		}

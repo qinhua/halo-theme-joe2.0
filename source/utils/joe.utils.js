@@ -591,8 +591,8 @@ var Utils = {
 				timeout: 10000,
 				data,
 				success(res) {
-					if (res.status === 200 && res.data) {
-						resolve(res.data);
+					if (res.status === 200) {
+						resolve(res.data || "");
 					} else {
 						reject(res);
 					}
@@ -605,7 +605,7 @@ var Utils = {
 						: "出错了！";
 					Qmsg.error(errMsg);
 					reject(errMsg);
-				},
+				}
 			});
 		});
 	},
