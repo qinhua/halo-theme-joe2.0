@@ -214,7 +214,7 @@ const postContext = {
 			tocSelector: "#js-toc",
 			contentSelector: ".joe_detail__article",
 			ignoreSelector: ".js-toc-ignore",
-			headingSelector: "h1, h2, h3, h4, h5",
+			headingSelector: "h1, h2, h3, h4, h5, h6",
 			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
 			hasInnerContainers: false,
 			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联

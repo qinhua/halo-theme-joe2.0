@@ -36,6 +36,9 @@
     "url": "https://github.com/qinhua/halo-theme-joe2.0/issues"
   },
   "homepage": "https://github.com/qinhua/halo-theme-joe2.0#readme",
+  "contributors": [
+    "Ryan Wang"
+  ],
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/plugin-transform-runtime": "^7.15.0",
