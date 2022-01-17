@@ -299,6 +299,7 @@
     }
 
     span {
+      display: none;
       position: absolute;
       left: 30px;
       top: -4px;
@@ -311,6 +312,9 @@
       color: var(--classD);
       background-color: var(--theme);
       border-radius: 10px;
+      &.visible {
+        display: block;
+      }
     }
 
     &:hover {
