@@ -194,7 +194,7 @@ const postContext = {
 					const name = encryption("agree");
 					const val = encryption(JSON.stringify(agreeArr));
 					localStorage.setItem(name, val);
-					$likeNum.html(likes);
+					$likeNum.html(likes).show();
 				})
 				.catch((err) => {
 					_loading = false;

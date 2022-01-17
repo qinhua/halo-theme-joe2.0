@@ -7,7 +7,7 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <div class="joe_container joe_main_container page-sheet"></div>
-      <#--  <#include "template/common/actions.ftl">  -->
+      <#include "template/common/actions.ftl">
       <#include "template/common/footer.ftl">
     </div>
     <@tailInfo.tail type="sheet" subType="only_header_footer" />
