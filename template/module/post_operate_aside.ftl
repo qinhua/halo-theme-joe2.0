@@ -6,7 +6,7 @@
   </#if>
   <#assign enable_comment = (metas?? && metas.enable_comment?? && metas.enable_comment?trim!='')?then(metas.enable_comment?trim,'true')>
   <#if settings.enable_clean_mode!=true && settings.enable_comment==true && post.status!='DRAFT'>
-    <li class="post-operate-comment"><i class="joe-font joe-icon-message"></i><#if post.commentCount gt 0><span>${post.commentCount!}</span></#if></li>
+    <li class="post-operate-comment"><i class="joe-font joe-icon-message"></i><#if post.commentCount gt 0><span class="visible">${post.commentCount!}</span></#if></li>
   </#if>
   <#assign enable_share = (metas?? && metas.enable_share?? && metas.enable_share?trim!='')?then(metas.enable_share?trim,'true')>
   <#if enable_share=='true' && settings.enable_share==true && post.status!='DRAFT'>
