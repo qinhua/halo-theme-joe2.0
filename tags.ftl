@@ -16,19 +16,34 @@
             </div>
             <div class="joe_index__hot">
               <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api?trim!=''>
-              <ul class="joe_index__hot-list animated fadeIn" style="padding-bottom: 10px;">
+              <ul class="joe_index__hot-list${(settings.tags_type!='card')?then('-tag','')} animated fadeIn" style="padding-bottom: 10px;">
                 <@tagTag method="list">
                   <#list tags?sort_by(settings.tags_sort)?reverse as tag>
-                    <li class="item">
-                      <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
-                        <figure class="inner">
-                          <#if settings.enable_tags_post_num!true><span class="post-nums">${tag.postCount!}篇</span></#if>
-                          <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/350/200')) >
-                          <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
-                          <figcaption class="title">${tag.name!}</figcaption>
-                        </figure>
-                      </a>
-                    </li>
+                    <#if settings.tags_type=='card'>
+                      <li class="item">
+                        <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
+                          <figure class="inner">
+                            <#if settings.enable_tags_post_num!true>
+                              <#include "template/macro/post_num.ftl">
+                              <@post_num type="tag" id="${tag.id?c}" suffix="篇" />
+                            </#if>
+                            <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/350/200')) >
+                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
+                            <figcaption class="title">${tag.name!}</figcaption>
+                          </figure>
+                        </a>
+                      </li>
+                    <#else>
+                      <li class="item">
+                        <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
+                          <span title="${tag.name!}">${tag.name!}</span>
+                          <#if settings.enable_tags_post_num!true>
+                            <#include "template/macro/post_num.ftl">
+                            <@post_num type="tag" id="${tag.id?c}" />
+                          </#if>
+                        </a>
+                      </li>
+                    </#if>
                   </#list>
                 </@tagTag>
               </ul>

@@ -15,10 +15,18 @@
   detectIE() && (alert('当前站点不支持IE浏览器或您开启了兼容模式，请使用其他浏览器访问或关闭兼容模式。'), (location.href = 'https://www.baidu.com'));
 </script>
 
-<#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then('production', 'development')>
-<#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version, theme_base)>
-<#--  <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master", theme_base)>  -->
-<#--  <#global BASE_RES_URL = (mode == "production" && settings.enable_cdn == true)?string("https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@dev", theme_base)>  -->
+<#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then("production", "development")>
+<#if mode == "development" || settings.cdn_type == "none">
+  <#global BASE_RES_URL = theme_base>
+<#else>
+  <#if settings.cdn_type == "jsdelivr">
+    <#global BASE_RES_URL = "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version>
+  <#elseif settings.cdn_type == "custom" && settings.custom_cdn_url != "">
+    <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri")>
+  <#else>
+    <#global BASE_RES_URL = theme_base>
+  </#if>
+</#if>
 <#global DEFAULT_LOGO = BASE_RES_URL + "/source/img/logo.png">
 <#global LOGO = (blog_logo?? && blog_logo != "")?then(blog_logo, DEFAULT_LOGO)>
 <#global USER_AVATAR = (user.avatar?? && user.avatar != '' && user.avatar?index_of("gravatar.com") == -1)?then(user.avatar, settings.default_avatar)>

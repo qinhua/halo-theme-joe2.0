@@ -16,14 +16,14 @@
             <#assign colors=["#F8D800", "#0396FF", "#EA5455", "#7367F0", "#32CCBC", "#F6416C", "#32B76E", "#9F44D3", "#F55555", "#736EFE", "#E96D71", "#DE4313", "#D939CD", "#4C83FF", "#F072B6", "#C346C2", "#5961F9", "#FD6585", "#5569E8", "#FFC600", "#FA742B", "#5151E5", "#BB4E75", "#FF52E5", "#4DA037", "#15D1E2", "#F067B4", "#F067B4", "#ff9a9e", "#00f2fe", "#4facfe", "#f093fb", "#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c", "#e8583d", "#f68e5f"]>
             <#assign omits=settings.links_omit?trim!''>
             <article class="joe_detail__article animated fadeIn">
-              <h5>友链列表<#if omits == ''><@linkTag method="count"><#if count gt 0><span class="totals">${count!0} 条</span></#if></@linkTag></#if></h5>
+              <h3>友链列表<#if omits == ''><@linkTag method="count"><#if count gt 0><span class="totals">${count!0} 条</span></#if></@linkTag></#if></h3>
               <#if settings.links_type?ends_with('group')>
                 <@linkTag method="${(settings.links_type == 'group')?then('listTeams', 'listTeamsByRandom')}">
                     <#assign flag = 0>
                     <#list teams as team>
                       <#if omits?index_of(team.team) == -1>
                         <div class="links-group">
-                          <h1>${team.team!}</h1>
+                          <h4>${team.team!}</h4>
                           <@links_item links=team.links />
                         </div>
                       <#else>
@@ -42,13 +42,12 @@
               </#if>
             </article>
             <article class="joe_detail__article animated fadeIn">
-              <h5>申请格式</h5>
+              <h3>申请格式</h3>
               <div class="link-requirement">
                 <p>
-                  <joe-message type="info" content='<em style="font-style:normal;font-weight:bold;">< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>补充：Halo 博客用户可直接用短链接形式：<br>- 博客地址/logo<br>- 博客地址/avatar<br>(大家在留言栏目中留言即可)'></joe-message>
+                  <#assign logo_url = blog_url + '/logo'>
+                  <joe-message type="info" content='<em style="font-style:normal;font-weight:bold;">< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>博客名称：${blog_title!}<br>博客地址：<a href="${blog_url!}">${blog_url!}</a><br>博客Logo：<a href="${logo_url!!}">${logo_url!}</a><br>博客简介：${(meta_description?? && meta_description!="")?then(meta_description,"这是一个非常牛逼的博客")}<br>(大家在留言栏目中留言即可)'></joe-message>
                 </p>
-                <#assign logo_url = blog_url + '/logo'>
-                <blockquote class="joe_link__demo">博客名称：${blog_title!}<br>博客地址：<a href="${blog_url!}">${blog_url!}</a><br>博客Logo：<a href="${logo_url!!}">${logo_url!}</a><br>博客简介：${(meta_description?? && meta_description!='')?then(meta_description,'这是一个非常牛逼的博客')}</blockquote>
               </div>
             </article>
           </div>
