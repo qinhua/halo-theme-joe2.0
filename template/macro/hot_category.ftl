@@ -17,7 +17,8 @@
               <a class="link" href="${category.fullPath!}" title="${category.name!}">
                 <figure class="inner">
                   <#if settings.enabel_category_celcius!true>
-                    <span class="views">${category.postCount!} ℃</span>
+                    <#include "post_num.ftl">
+                    <@post_num type="category" id="${category.id?c}" suffix="℃" />
                   </#if>
                   <#escape x as x!"">
                     <#assign cur_cover_url=settings['hot_cover'+(category_index+1)]>
