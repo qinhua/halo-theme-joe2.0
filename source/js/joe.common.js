@@ -282,11 +282,11 @@ const commonContext = {
 				width: $item.attr("width") || "100%",
 				height: $item.attr("height") || "500px",
 			};
-			let htmlStr="";
+			let htmlStr = "";
 			if (!options.src) {
 				htmlStr = "<p>pdf地址未填写！</p>";
-			}else{
-				htmlStr=`
+			} else {
+				htmlStr = `
       <div class="joe_pdf">
         <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
       </div>`;
@@ -589,15 +589,17 @@ const commonContext = {
 			/* 关闭搜索框 */
 			$(".joe_header__searchout").removeClass("active");
 			/* 处理开启关闭状态 */
-			const $body = $("html");
+			const $html = $("html");
 			const $mask = $(".joe_header__mask");
 			const $slide_out = $(".joe_header__slideout");
 			if ($slide_out.hasClass("active")) {
-				$body.removeClass("disable-scroll");
+				$html.removeClass("disable-scroll");
 				$mask.removeClass("active slideout");
 				$slide_out.removeClass("active");
 			} else {
-				$body.addClass("disable-scroll");
+				// 保存滚动位置
+				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
+				$html.addClass("disable-scroll");
 				$mask.addClass("active slideout");
 				$slide_out.addClass("active");
 			}
@@ -610,15 +612,17 @@ const commonContext = {
 			/* 关闭侧边栏 */
 			$(".joe_header__slideout").removeClass("active");
 			/* 处理开启关闭状态 */
-			const $body = $("html");
+			const $html = $("html");
 			const $mask = $(".joe_header__mask");
 			const $search_out = $(".joe_header__searchout");
 			if ($search_out.hasClass("active")) {
-				$body.removeClass("disable-scroll");
+				$html.removeClass("disable-scroll");
 				$mask.removeClass("active slideout");
 				$search_out.removeClass("active");
 			} else {
-				$body.addClass("disable-scroll");
+				// 保存滚动位置
+				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
+				$html.addClass("disable-scroll");
 				$mask.addClass("active");
 				$search_out.addClass("active");
 			}
@@ -629,10 +633,15 @@ const commonContext = {
 		$(".joe_header__mask")
 			.on("click", function (e) {
 				e.stopPropagation();
-				$("html").removeClass("disable-scroll");
+				const $html = $("html");
+				$html.removeClass("disable-scroll");
 				$(".joe_header__mask").removeClass("active slideout");
 				$(".joe_header__searchout").removeClass("active");
 				$(".joe_header__slideout").removeClass("active");
+				// 还原滚动位置
+				const lastScroll = window.sessionStorage.getItem("lastScroll");
+				lastScroll && $html.scrollTop(lastScroll);
+				window.sessionStorage.removeItem("lastScroll");
 			})
 			.on("touchmove", (e) => e.preventDefault);
 	},
