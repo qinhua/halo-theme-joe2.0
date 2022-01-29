@@ -92,7 +92,7 @@
             </div>
             <#include "template/module/post_operate.ftl">
             <#import "template/macro/post_copyright.ftl" as pc>
-            <@pc.post_copyright post_url="${post.fullPath}"/>
+            <@pc.post_copyright post_url="${blog_url!}${post.fullPath}"/>
             <#if settings.enable_clean_mode!=true && settings.enable_post_ads == true && post.status!='DRAFT'>
               <#include "template/ads/ads_post.ftl">
             </#if>
