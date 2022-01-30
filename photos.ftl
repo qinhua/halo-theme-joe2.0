@@ -34,41 +34,10 @@
             </div>  -->
           </div>
           <#include "template/module/gallery.ftl">
-          <#--  <@paginationTag method="photos" page="${photos.number}" total="${photos.totalPages}" display="3">
-            <#if (photos.totalPages == 0)>
-              <#include "template/macro/empty.ftl">
-              <@empty type="photos" text="${settings.photos_empty_text!'暂无图片数据'}"/>
-            <#elseif (photos.totalPages == 1)>
-            <#else>
-              <ul class="joe_pagination">
-                <#if pagination.hasPrev>
-                  <li class="prev">
-                    <a href="${pagination.prevPageFullPath!}">
-                      <i class="joe-font joe-icon-prev"></i>
-                    </a>
-                  </li>
-                </#if>
-                <#list pagination.rainbowPages as number>
-                  <#if number.isCurrent>
-                    <li class="active">
-                      <a href="${number.fullPath!}">${number.page!}</a>
-                    </li>
-                  <#else>
-                    <li>
-                      <a href="${number.fullPath!}">${number.page!}</a>
-                    </li>
-                  </#if>
-                </#list>
-                <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
-                  <li class="next">
-                    <a href="${pagination.nextPageFullPath!}">
-                      <i class="joe-font joe-icon-next"></i>
-                    </a>
-                  </li>
-                </#if>
-              </ul>
-            </#if>    
-          </@paginationTag>   -->
+          <#--  <#include "template/common/pager.ftl">
+          <@pager method="photos" postsData=photos display="${settings.index_pager_number!5}" />
+          <#include "template/macro/empty.ftl">
+          <@empty type="photos" text="${settings.photos_empty_text!'暂无图片数据'}"/>  -->
         </div>
         <#if settings.enable_photos_aside!true>
           <#include "template/common/aside.ftl">

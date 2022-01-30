@@ -1226,6 +1226,13 @@ home:
     #       label: 是
     #     - value: false
     #       label: 否
+    index_pager_number:
+      name: index_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5（仅在关闭 “异步加载文章列表” 时生效），分页数请到 “首页-系统-博客设置-文章设置” 中配置"
     enable_post_thumbnail:
       name: enable_post_thumbnail
       label: 开启文章缩略图
@@ -1546,6 +1553,13 @@ archives:
     #   type: text
     #   default: "10"
     #   placeholder: '列表分页大小，默认10条（请填数字）'
+    archives_pager_number:
+      name: archives_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
     archives_timeline_metric:
       name: archives_timeline_metric
       label: 时间轴展示维度
@@ -1901,6 +1915,13 @@ journals:
           label: 是
         - value: false
           label: 否
+    journals_pager_number:
+      name: journals_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5"
     journal_list_effect_class:
       name: index_list_effect_class
       label: 动画效果类名
@@ -2288,6 +2309,13 @@ categories:
           label: 开启
         - value: false
           label: 关闭
+    categories_pager_number:
+      name: categories_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
  
 # 标签页
 tags:
@@ -2335,6 +2363,67 @@ tags:
           label: 开启
         - value: false
           label: 关闭
+    tags_pager_number:
+      name: tags_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
+
+# 搜索页
+search:
+  label: 搜索页
+  items: 
+    # tags_title:
+    #   name: tags_title
+    #   label: 标签页标题
+    #   default: "全部标签"
+    #   placeholder: "请输入"
+    #   description: "修改标签页顶部的标题"
+    # tags_type:
+    #   name: tags_type
+    #   label: 展示形式
+    #   type: select
+    #   data-type: text
+    #   default: card
+    #   description: "配置标签的展示形式，默认为 “卡片形式”"
+    #   options:
+    #     - value: tag
+    #       label: 标签
+    #     - value: card
+    #       label: 卡片
+    # tags_sort:
+    #   name: tags_sort
+    #   label: 排序方式
+    #   type: select
+    #   data-type: text
+    #   default: createTime
+    #   description: "配置标签页的数据排序方式"
+    #   options:
+    #     - value: createTime
+    #       label: 创建时间降序
+    #     - value: postCount
+    #       label: 文章数降序
+    # enable_tags_post_num:
+    #   name: enable_tags_post_num
+    #   label: 展示文章数
+    #   type: switch
+    #   data-type: bool
+    #   default: true
+    #   description: "是否展示标签下的文章数"
+    #   options:
+    #     - value: true
+    #       label: 开启
+    #     - value: false
+    #       label: 关闭
+    search_pager_number:
+      name: search_pager_number
+      label: 最大分页按钮数
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
 
 # 代码块
 code_block:

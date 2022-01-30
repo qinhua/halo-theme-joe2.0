@@ -17,7 +17,8 @@
         </svg>
         <span>本文链接：</span>
         <span class="text">
-          <a class="link" href="${post_url!}" target="_blank" rel="noopener noreferrer nofollow">${post_url!}</a>
+          <#assign link = (post_url?starts_with('http'))?then(post_url, blog_url + post_url)>
+          <a class="link" href="${link}" target="_blank" rel="noopener noreferrer nofollow">${link}</a>
         </span>
       </div>
       <div class="item">
