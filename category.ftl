@@ -23,46 +23,13 @@
                   <@post_item post=post index=post_index type="category"/>
                 </#list>
               </ul>
+              <#include "template/common/pager.ftl">
+              <@pager method="categoryPosts" postsData=posts slug="${category.slug!}" display="${settings.categories_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">
               <@empty type="category" text="未找到相关文章..."/>
             </#if>
           </div>
-          <@paginationTag method="categoryPosts" slug="${category.slug!}" page="${posts.number}" total="${posts.totalPages}" display="10">
-            <#if (posts.totalPages == 0)>
-              <#--  <#include "template/macro/empty.ftl">
-              <@empty type="category" text="未找到相关文章..."/>  -->
-            <#elseif (posts.totalPages == 1)>
-            <#else>
-              <ul class="joe_pagination">
-                <#if pagination.hasPrev>
-                  <li class="prev">
-                    <a href="${pagination.prevPageFullPath!}">
-                      <i class="joe-font joe-icon-prev"></i>
-                    </a>
-                  </li>
-                </#if>
-                <#list pagination.rainbowPages as number>
-                  <#if number.isCurrent>
-                    <li class="active">
-                      <a href="${number.fullPath!}">${number.page!}</a>
-                    </li>
-                  <#else>
-                    <li>
-                      <a href="${number.fullPath!}">${number.page!}</a>
-                    </li>
-                  </#if>
-                </#list>
-                <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
-                  <li class="next">
-                    <a href="${pagination.nextPageFullPath!}">
-                      <i class="joe-font joe-icon-next"></i>
-                    </a>
-                  </li>
-                </#if>
-              </ul>
-            </#if>    
-          </@paginationTag> 
         </div>
         <#--  <#include "template/common/aside.ftl">  -->
       </div>

@@ -21,41 +21,10 @@
             <@h_article.article posts=posts />
           </div>
           <#if settings.enable_index_list_ajax==false>
-            <@paginationTag method="index" page="${posts.number}" total="${posts.totalPages}" display="3">
-              <#if (posts.totalPages == 0)>
-                <#include "template/macro/empty.ftl">
-                <@empty type="index" text="${settings.home_empty_text!'暂无文章数据'}" isAsync="true"/>
-              <#elseif (posts.totalPages == 1)>
-              <#else>
-                <ul class="joe_pagination">
-                  <#if pagination.hasPrev>
-                    <li class="prev">
-                      <a href="${pagination.prevPageFullPath!}">
-                        <i class="joe-font joe-icon-prev"></i>
-                      </a>
-                    </li>
-                  </#if>
-                  <#list pagination.rainbowPages as number>
-                    <#if number.isCurrent>
-                      <li class="active">
-                        <a href="${number.fullPath!}">${number.page!}</a>
-                      </li>
-                    <#else>
-                      <li>
-                        <a href="${number.fullPath!}">${number.page!}</a>
-                      </li>
-                    </#if>
-                  </#list>
-                  <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
-                    <li class="next">
-                      <a href="${pagination.nextPageFullPath!}">
-                        <i class="joe-font joe-icon-next"></i>
-                      </a>
-                    </li>
-                  </#if>
-                </ul>
-              </#if>    
-            </@paginationTag>
+            <#include "template/common/pager.ftl">
+            <@pager method="index" postsData=posts display="${settings.index_pager_number!5}" />
+            <#--  <#include "template/macro/empty.ftl">
+            <@empty type="index" text="${settings.home_empty_text!'暂无文章数据'}" isAsync="true"/>  -->
           <#else>
             <div class="joe_load" loading="true">加载中...</div>
           </#if>
