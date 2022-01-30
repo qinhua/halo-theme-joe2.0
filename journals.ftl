@@ -34,84 +34,56 @@
               </div>
             </div>
             <@loading type="journals" />
-            <ul class="joe_journals__list hidden${settings.enable_journal_effect?then(' effects','')}">
-              <#list journals.content as journal>
-                <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id?c}" data-clikes="${journal.likes}">
-                  <p class="joe_journal_date">
-                    <i class="joe-font joe-icon-feather"></i>
-                    <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>
-                    <#--  <@global.timeline datetime=journal.createTime />  -->
-                  </p>
-                  <div class="joe_journal_block">
-                    <div class="joe_journal_body${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">
-                      <div class="content-wrp">${journal.content!}</div>
-                      <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
-                    </div>
-                    <#if settings.enable_like_journal || settings.enable_comment_journal>
-                      <div class="joe_journal_footer">
-                        <div class="footer-wrap">
-                          <#if settings.enable_like_journal!true>
-                            <span class="joe_journal_operate_item like">
-                              <i class="joe-font joe-icon-xihuan journal-like"></i>
-                              <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
-                              <em class="journal-likes-num">${journal.likes!0}</em>
-                            </span>
-                          </#if>
-                          <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
-                            <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em>${journal.commentCount!0}</em></span>
-                            <#if journal.commentCount gt 0>
-                              <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
-                            </#if>
-                          </#if>
-                          <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
-                            <div class="joe_journal_comment">
-                              <#assign sys_options = '{"blog_logo": "${options.blog_logo!}", "gravatar_source": "${options.gravatar_source!}", "comment_gravatar_default": "${options.comment_gravatar_default!}"}'>
-                              <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": "${settings.enable_comment_ua?string}", "gravatarSource": "${settings.gravatar_source!}", "loadingStyle": "${settings.comment_loading_style!}", "authorPopup": "${settings.comment_author_poptext!}", "emailPopup": "${settings.comment_email_poptext!}", "aWord": "${settings.comment_aword!}", "avatarLoading": "${settings.comment_avatar_loading!}", "avatarError": "${settings.comment_avatar_error!}", "notComment": "${settings.comment_empty_text!}"}'>
-                              <halo-comment id="${journal.id?c}" type="journal" configs='${configs}' options='${sys_options}'/>
-                            </div>
-                          </#if>
-                        </div>
+            <#if journals.content?size gt 0>
+              <ul class="joe_journals__list hidden${settings.enable_journal_effect?then(' effects','')}">
+                <#list journals.content as journal>
+                  <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id?c}" data-clikes="${journal.likes}">
+                    <p class="joe_journal_date">
+                      <i class="joe-font joe-icon-feather"></i>
+                      <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>
+                      <#--  <@global.timeline datetime=journal.createTime />  -->
+                    </p>
+                    <div class="joe_journal_block">
+                      <div class="joe_journal_body${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">
+                        <div class="content-wrp">${journal.content!}</div>
+                        <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
                       </div>
-                    </#if>
-                  </div>
-                </li>
-              </#list>
-            </ul>
-            <@paginationTag method="journals" page="${journals.number}" total="${journals.totalPages}" display="3">
-              <#if (journals.totalPages == 0)>
-                <#include "template/macro/empty.ftl">
-                <@empty type="journals" text="${settings.journals_empty_text!'暂无日志数据'}"/>
-              <#elseif (journals.totalPages == 1)>
-              <#else>
-                <ul class="joe_pagination">
-                  <#if pagination.hasPrev>
-                    <li class="prev">
-                      <a href="${pagination.prevPageFullPath!}">
-                        <i class="joe-font joe-icon-prev"></i>
-                      </a>
-                    </li>
-                  </#if>
-                  <#list pagination.rainbowPages as number>
-                    <#if number.isCurrent>
-                      <li class="active">
-                        <a href="${number.fullPath!}">${number.page!}</a>
-                      </li>
-                    <#else>
-                      <li>
-                        <a href="${number.fullPath!}">${number.page!}</a>
-                      </li>
-                    </#if>
-                  </#list>
-                  <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
-                    <li class="next">
-                      <a href="${pagination.nextPageFullPath!}">
-                        <i class="joe-font joe-icon-next"></i>
-                      </a>
-                    </li>
-                  </#if>
-                </ul>
-              </#if>
-            </@paginationTag>
+                      <#if settings.enable_like_journal || settings.enable_comment_journal>
+                        <div class="joe_journal_footer">
+                          <div class="footer-wrap">
+                            <#if settings.enable_like_journal!true>
+                              <span class="joe_journal_operate_item like">
+                                <i class="joe-font joe-icon-xihuan journal-like"></i>
+                                <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
+                                <em class="journal-likes-num">${journal.likes!0}</em>
+                              </span>
+                            </#if>
+                            <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
+                              <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em>${journal.commentCount!0}</em></span>
+                              <#if journal.commentCount gt 0>
+                                <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                              </#if>
+                            </#if>
+                            <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
+                              <div class="joe_journal_comment">
+                                <#assign sys_options = '{"blog_logo": "${options.blog_logo!}", "gravatar_source": "${options.gravatar_source!}", "comment_gravatar_default": "${options.comment_gravatar_default!}"}'>
+                                <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": "${settings.enable_comment_ua?string}", "gravatarSource": "${settings.gravatar_source!}", "loadingStyle": "${settings.comment_loading_style!}", "authorPopup": "${settings.comment_author_poptext!}", "emailPopup": "${settings.comment_email_poptext!}", "aWord": "${settings.comment_aword!}", "avatarLoading": "${settings.comment_avatar_loading!}", "avatarError": "${settings.comment_avatar_error!}", "notComment": "${settings.comment_empty_text!}"}'>
+                                <halo-comment id="${journal.id?c}" type="journal" configs='${configs}' options='${sys_options}'/>
+                              </div>
+                            </#if>
+                          </div>
+                        </div>
+                      </#if>
+                    </div>
+                  </li>
+                </#list>
+              </ul>
+              <#include "template/common/pager.ftl">
+              <@pager method="journals" postsData=journals display="${settings.journals_pager_number!5}" />
+            <#else>
+              <#include "template/macro/empty.ftl">
+              <@empty type="journals" text="${settings.journals_empty_text!'暂无日志数据'}"/>
+            </#if>
           </div>
         </div>
         <#if settings.enable_journals_aside!true>

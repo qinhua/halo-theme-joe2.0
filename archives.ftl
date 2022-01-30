@@ -48,49 +48,21 @@
                   </#if>
                 </div>
                 <#if settings.archives_list_type=='list'>
-                  <ul class="joe_archives-list">
-                    <#list posts.content?sort_by("createTime")?reverse as post>
-                      <li class="item">
-                        <a rel="noopener noreferrer" target="_blank" title="${post.title!}" href="${post.fullPath!}">${post.title!}</a>
-                        <span>${post.createTime?string('yyyy-MM-dd')}</span>
-                      </li>
-                    </#list>
-                  </ul>
-                  <@paginationTag method="archives" page="${posts.number}" total="${posts.totalPages}" display="3">
-                    <#if (posts.totalPages == 0)>
-                      <#include "template/macro/empty.ftl">
-                      <@empty type="archives" text="${settings.archives_empty_text!'暂无文章数据'}"/>
-                    <#elseif (posts.totalPages == 1)>
-                    <#else>
-                      <ul class="joe_pagination">
-                        <#if pagination.hasPrev>
-                          <li class="prev">
-                            <a href="${pagination.prevPageFullPath!}">
-                              <i class="joe-font joe-icon-prev"></i>
-                            </a>
-                          </li>
-                        </#if>
-                        <#list pagination.rainbowPages as number>
-                          <#if number.isCurrent>
-                            <li class="active">
-                              <a href="${number.fullPath!}">${number.page!}</a>
-                            </li>
-                          <#else>
-                            <li>
-                              <a href="${number.fullPath!}">${number.page!}</a>
-                            </li>
-                          </#if>
-                        </#list>
-                        <#if pagination.hasNext && (pagination.rainbowPages?size gt 0)>
-                          <li class="next">
-                            <a href="${pagination.nextPageFullPath!}">
-                              <i class="joe-font joe-icon-next"></i>
-                            </a>
-                          </li>
-                        </#if>
-                      </ul>
-                    </#if>
-                  </@paginationTag>
+                  <#if posts.content?size gt 0>
+                    <ul class="joe_archives-list">
+                      <#list posts.content?sort_by("createTime")?reverse as post>
+                        <li class="item">
+                          <a rel="noopener noreferrer" target="_blank" title="${post.title!}" href="${post.fullPath!}">${post.title!}</a>
+                          <span>${post.createTime?string('yyyy-MM-dd')}</span>
+                        </li>
+                      </#list>
+                    </ul>
+                    <#include "template/common/pager.ftl">
+                    <@pager method="archives" postsData=posts display="${settings.archives_pager_number!5}" />
+                  <#else>
+                    <#include "template/macro/empty.ftl">
+                    <@empty type="archives" text="${settings.archives_empty_text!'暂无文章数据'}"/>
+                  </#if>
                 <#else>
                   <ul class="joe_archives-timelist">
                     <@postTag method="archive" type="${metric}">
