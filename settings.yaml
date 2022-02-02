@@ -341,6 +341,32 @@ navbar:
           label: 是
         - value: false
           label: 否
+    # header_position:
+    #   name: header_position
+    #   label: 导航条位置
+    #   type: select
+    #   data-type: text
+    #   default: auto
+    #   description: "设置页面滚动时导航条的位置，默认为 “自动”。（主题提供了 3 种模式，自动：根据滚动方向自动显示/隐藏导航条；吸顶：滚动时总是固定在可视区域顶部；初始：滚动时保持导航条原始的位置不变）"
+    #   options:
+    #     - value: auto
+    #       label: 自动（推荐）
+    #     - value: sticky
+    #       label: 吸顶
+    #     - value: origin
+    #       label: 初始
+    enable_full_header:
+      name: enable_full_header
+      label: 100%宽度
+      type: switch
+      data-type: bool
+      default: false
+      description: "导航条宽度是否100%"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     show_logo:
       name: show_logo
       label: 展示博客LOGO
@@ -2374,49 +2400,7 @@ tags:
 # 搜索页
 search:
   label: 搜索页
-  items: 
-    # tags_title:
-    #   name: tags_title
-    #   label: 标签页标题
-    #   default: "全部标签"
-    #   placeholder: "请输入"
-    #   description: "修改标签页顶部的标题"
-    # tags_type:
-    #   name: tags_type
-    #   label: 展示形式
-    #   type: select
-    #   data-type: text
-    #   default: card
-    #   description: "配置标签的展示形式，默认为 “卡片形式”"
-    #   options:
-    #     - value: tag
-    #       label: 标签
-    #     - value: card
-    #       label: 卡片
-    # tags_sort:
-    #   name: tags_sort
-    #   label: 排序方式
-    #   type: select
-    #   data-type: text
-    #   default: createTime
-    #   description: "配置标签页的数据排序方式"
-    #   options:
-    #     - value: createTime
-    #       label: 创建时间降序
-    #     - value: postCount
-    #       label: 文章数降序
-    # enable_tags_post_num:
-    #   name: enable_tags_post_num
-    #   label: 展示文章数
-    #   type: switch
-    #   data-type: bool
-    #   default: true
-    #   description: "是否展示标签下的文章数"
-    #   options:
-    #     - value: true
-    #       label: 开启
-    #     - value: false
-    #       label: 关闭
+  items:
     search_pager_number:
       name: search_pager_number
       label: 最大分页按钮数
@@ -2435,7 +2419,7 @@ code_block:
       type: switch
       data-type: bool
       default: true
-      description: "开启代码块的标题"
+      description: "开启代码块的标题，默认显示语言类型，也可自定义标题"
       options:
         - value: true
           label: 开启
@@ -2448,6 +2432,18 @@ code_block:
       data-type: bool
       default: true
       description: "是否展示标题和内容之间的分割线，不展示时会更加简洁"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_code_macdot:
+      name: enable_code_macdot
+      label: mac彩点
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示左上角的mac风格彩点"
       options:
         - value: true
           label: 开启
