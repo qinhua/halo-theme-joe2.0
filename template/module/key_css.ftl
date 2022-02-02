@@ -90,10 +90,4 @@
       background-image: none;
     }
   </#if>
-  #Joe .joe_container {
-    max-width: ${settings.content_max_width!"1320px"}!important;
-  }
-  #Joe .joe_header.active {
-    top: ${settings.enable_fixed_header?string("0px", "-60px")}!important;
-  }
 </style>

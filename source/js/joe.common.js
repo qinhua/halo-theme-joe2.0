@@ -130,6 +130,7 @@ const commonContext = {
 				// }
 				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
+				ThemeConfig.enable_code_macdot ? $item.addClass("c_macdot") : null;
 				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
 				ThemeConfig.show_tools_when_hover
 					? $item.addClass("c_hover_tools")
@@ -654,53 +655,54 @@ const commonContext = {
 			.addClass("in");
 		$(".joe_header__slideout-menu .panel").on("click", function (e) {
 			e.stopPropagation();
-			const panelBox = $(this).parent().parent();
+			const $this = $(this);
+			const panelBox = $this.parent().parent();
 			/* 清除全部内容 */
-			panelBox.find(".panel").not($(this)).removeClass("in");
+			panelBox.find(".panel").not($this).removeClass("in");
 			panelBox
 				.find(".panel-body")
-				.not($(this).siblings(".panel-body"))
+				.not($this.siblings(".panel-body"))
 				.stop()
 				.hide("fast");
 			/* 激活当前的内容 */
-			$(this).toggleClass("in").siblings(".panel-body").stop().toggle("fast");
+			$this.toggleClass("in").siblings(".panel-body").stop().toggle("fast");
 		});
 	},
 	/* 头部滚动 */
 	initHeadScroll() {
-		if (Joe.isMobile) return;
+		if (Joe.isMobile || ThemeConfig.enable_fixed_header) return;
 		let flag = true;
 		let _last = Date.now();
 		let Y = window.pageYOffset;
+		const $joeHeader = $(".joe_header");
+		const $effectEl = $(".joe_aside_post, .joe_aside .joe_aside__item:last-child");
+		const headerHeight = $joeHeader.height();
+		const offset1 = headerHeight - 60 + 15;
+		const offset2 = headerHeight + 15;
 		const handleHeader = (diffY) => {
-			if (window.pageYOffset >= $(".joe_header").height() && diffY <= 0) {
+			if (window.pageYOffset >= headerHeight && diffY <= 0) {
 				if (flag) return;
-				$(".joe_header").addClass("active");
-				$(".joe_aside .joe_aside__item:last-child").css(
-					"top",
-					$(".joe_header").height() - 60 + 15
-				);
+				$joeHeader.addClass("active");
+				$effectEl.css("top", offset1);
 				flag = true;
 			} else {
 				if (!flag) return;
-				$(".joe_header").removeClass("active");
-				$(".joe_aside .joe_aside__item:last-child").css(
-					"top",
-					$(".joe_header").height() + 15
-				);
+				$joeHeader.removeClass("active");
+				$effectEl.css("top", offset2);
 				flag = false;
 			}
 		};
+
 		document.addEventListener(
 			"scroll",
 			Utils.throttle(() => {
-				let _now = Date.now();
-				if (_now - _last > 15) {
+				const _now = Date.now();
+				if (_now - _last > 16) {
 					handleHeader(Y - window.pageYOffset);
 					Y = window.pageYOffset;
 				}
 				_last = _now;
-			}, 100)
+			}, 120)
 		);
 		handleHeader(Y);
 	},
