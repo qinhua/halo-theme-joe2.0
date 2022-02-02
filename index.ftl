@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-index${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-index fadeIn animated${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_index">
             <#if settings.enable_banner!true>

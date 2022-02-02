@@ -241,7 +241,7 @@ const homeContext = {
 			initDom(typeId);
 			getDate();
 		});
-
+  
 		// 加载更多
 		$domLoad.on("click", async function (e) {
 			e.stopPropagation();
@@ -254,7 +254,7 @@ const homeContext = {
 					top: lastItemTop - $headerHeight,
 					behavior: "smooth",
 				});
-			}, 250);
+			}, 300);
 		});
 
 		getDate();
@@ -279,7 +279,6 @@ const homeContext = {
 		Object.keys(homeContext).forEach(
 			(c) => !omits.includes(c) && homeContext[c]()
 		);
-		// ScrollTrigger.init();
 	});
 
 	// window.addEventListener("load", function () {

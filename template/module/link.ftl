@@ -25,6 +25,11 @@
   </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.theme.min.css?v=${theme.version!}">
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.global.min.css?v=${theme.version!}">
+  <style>
+    #Joe .joe_container {
+      max-width: ${settings.content_max_width!"1320px"};
+    }
+  </style>
   <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/qmsg/qmsg.css">
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/animate/animate.min.css">
   <#if type == 'index' && settings.enable_banner == true>
