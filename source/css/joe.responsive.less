@@ -549,6 +549,7 @@ html {
       }
 
       &_header {
+        top: 0;
         height: 55px;
         animation-fill-mode: backwards;
 
@@ -591,6 +592,20 @@ html {
 
         &__searchout {
           top: 55px;
+        }
+      }
+
+      &_main {
+        .code-toolbar {
+          pre[class*="language-"] {
+            &.c_hover_tools {
+              .code-expander,
+              .copy-button {
+                pointer-events: auto;
+                opacity: 1;
+              }
+            }
+          }
         }
       }
 
@@ -1215,9 +1230,11 @@ html {
           .swiper-container {
             height: 220px;
             border-radius: 0;
+
             .swiper-slide {
               border-radius: 0;
             }
+
             .item {
               height: 220px;
             }

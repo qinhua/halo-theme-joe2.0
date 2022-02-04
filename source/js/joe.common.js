@@ -672,14 +672,19 @@ const commonContext = {
 	initHeadScroll() {
 		if (Joe.isMobile || ThemeConfig.enable_fixed_header) return;
 		let flag = true;
-		let _last = Date.now();
 		let Y = window.pageYOffset;
 		const $joeHeader = $(".joe_header");
-		const $effectEl = $(".joe_aside_post, .joe_aside .joe_aside__item:last-child");
+		const $effectEl = $(
+			".joe_aside_post, .joe_aside .joe_aside__item:last-child"
+		);
 		const headerHeight = $joeHeader.height();
-		const offset1 = headerHeight - 60 + 15;
-		const offset2 = headerHeight + 15;
+		const offset1 = headerHeight + 15;
+		const offset2 = headerHeight - 60 + 15;
+
 		const handleHeader = (diffY) => {
+			// const direction = diffY <= 0 ? "上" : "下";
+			// console.log(direction, diffY, window.tocPhase);
+			if(window.tocPhase) return;
 			if (window.pageYOffset >= headerHeight && diffY <= 0) {
 				if (flag) return;
 				$joeHeader.addClass("active");
@@ -696,14 +701,12 @@ const commonContext = {
 		document.addEventListener(
 			"scroll",
 			Utils.throttle(() => {
-				const _now = Date.now();
-				if (_now - _last > 16) {
-					handleHeader(Y - window.pageYOffset);
-					Y = window.pageYOffset;
-				}
-				_last = _now;
-			}, 120)
+				const diff = window.pageYOffset - Y;
+				handleHeader(diff);
+				Y = window.pageYOffset;
+			}, 200)
 		);
+    
 		handleHeader(Y);
 	},
 	/* 渲染数学公式 */
@@ -923,7 +926,6 @@ const commonContext = {
 !(function () {
 	const omits = [
 		"loadingBar",
-		"initHeadScroll",
 		"init3dTag",
 		"foldCode",
 		"scrollToHash",

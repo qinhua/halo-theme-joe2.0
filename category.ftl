@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-category">
+      <div class="joe_container joe_main_container page-category${settings.enable_show_in_up?then(' animated showInUp','')}">
         <div class="joe_main">
           <div class="joe_archive">
             <div class="joe_archive__title">
@@ -18,13 +18,13 @@
             </div>
             <#if posts.content?size gt 0>
               <#include "template/macro/post_item.ftl">
-              <ul class="joe_archive__list joe_list animated fadeIn">
+              <ul class="joe_archive__list joe_list">
                 <#list posts.content as post>
                   <@post_item post=post index=post_index type="category"/>
                 </#list>
               </ul>
-              <#include "template/common/pager.ftl">
-              <@pager method="categoryPosts" postsData=posts slug="${category.slug!}" display="${settings.categories_pager_number!5}" />
+              <#include "template/common/pager/index.ftl">
+              <@pager method="categoryPosts" postsData=posts slug="${category.slug!}" display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">
               <@empty type="category" text="未找到相关文章..."/>

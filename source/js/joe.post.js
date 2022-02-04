@@ -222,7 +222,14 @@ const postContext = {
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
 			positionFixedClass: "is-position-fixed", // 固定类名称
 			fixedSidebarOffset: "auto",
-			// scrollEndCallback: function (e) {},
+			onClick: function (e) {
+				// console.log(e);
+				window.tocPhase = true;
+			},
+			scrollEndCallback: function (e) {
+				// console.log(e);
+				window.tocPhase = null;
+			},
 		});
 		// toc 菜单收起/展开
 		if (!$("#js-toc").children().length) {
@@ -270,23 +277,6 @@ const postContext = {
 			});
 		});
 	},
-	/* 侧边栏切换 */
-	// initAside() {
-	// 	if (!ThemeConfig.enable_post_aside || !ThemeConfig.enable_aside_expander)
-	// 		return;
-	// 	$(".aside-expander").on("click", function (e) {
-	// 		e.stopPropagation();
-	// 		const $this = $(this);
-	// 		if ($this.hasClass("active")) {
-	// 			$this.removeClass("active");
-	// 			$this.html("隐藏侧边栏");
-	// 		} else {
-	// 			$this.addClass("active");
-	// 			$this.html("显示侧边栏");
-	// 		}
-	// 		$(".joe_aside").toggleClass("hide");
-	// 	});
-	// },
 	/* 文章视频模块 */
 	initVideo() {
 		if ($(".joe_detail__article-video").length) {

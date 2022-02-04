@@ -7,7 +7,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-archives${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-archives${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_index joe_archives__filing">
             <div class="title">${title}</div>
@@ -16,7 +16,7 @@
                 <canvas width="100%" height="300"></canvas>
               </div>  -->
               <#if settings.enable_archives_category!true>
-                <div class="joe_archives__category${(settings.enable_archives_effect==true)?string(' animated fadeIn','')}">
+                <div class="joe_archives__category animated fadeIn">
                   <div class="joe_archives-title"><i class="joe-font joe-icon-fenlei"></i>分类</div>
                   <ul class="joe_category-list">
                     <@categoryTag method="list">
@@ -38,7 +38,7 @@
                   </ul>
                 </div>
               </#if>
-              <div class="joe_archives__wrapper${(settings.enable_archives_effect==true)?then(' animated fadeIn','')}">
+              <div class="joe_archives__wrapper animated fadeIn">
                 <div class="joe_archives-title">
                   <#if settings.archives_list_type=='timeline'>
                     <#assign metric=settings.archives_timeline_metric!"month">
@@ -57,8 +57,8 @@
                         </li>
                       </#list>
                     </ul>
-                    <#include "template/common/pager.ftl">
-                    <@pager method="archives" postsData=posts display="${settings.archives_pager_number!5}" />
+                    <#include "template/common/pager/index.ftl">
+                    <@pager method="archives" postsData=posts display="${settings.max_pager_number!5}" />
                   <#else>
                     <#include "template/macro/empty.ftl">
                     <@empty type="archives" text="${settings.archives_empty_text!'暂无文章数据'}"/>

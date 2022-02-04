@@ -8,7 +8,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-journals${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-journals${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_detail">
             <h1 class="joe_detail__title txt-shadow">${title}</h1>
@@ -78,8 +78,8 @@
                   </li>
                 </#list>
               </ul>
-              <#include "template/common/pager.ftl">
-              <@pager method="journals" postsData=journals display="${settings.journals_pager_number!5}" />
+              <#include "template/common/pager/index.ftl">
+              <@pager method="journals" postsData=journals display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">
               <@empty type="journals" text="${settings.journals_empty_text!'暂无日志数据'}"/>

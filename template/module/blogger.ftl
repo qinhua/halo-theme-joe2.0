@@ -25,35 +25,89 @@
   </div>
   <div class="count">
     <#--  <@visitTag method="count">
-      <div class="item" title="累计访问数 ${count!}">
-        <span class="num">${count!"0"}</span>
+      <div class="item" title="累计访问数 ${count!'0'}">
+        <span class="num">${count!'0'}</span>
         <span>访问量</span>
       </div>
     </@visitTag>  -->
-    <#--  <@categoryTag method="count">
-      <div class="item" title="累计分类数 ${count!}">
-        <span class="num">${count!"0"}</span>
-        <span>分类数</span>
-      </div>
-    </@categoryTag>  -->
-    <@tagTag method="count">
-      <div class="item" title="累计标签数 ${count!}">
-        <span class="num">${count!"0"}</span>
-        <span>标签数</span>
-      </div>
-    </@tagTag>
-    <@postTag method="count">
-      <div class="item" title="累计文章数 ${count!}">
-        <span class="num">${count!"0"}</span>
-        <span>文章数</span>
-      </div>
-    </@postTag>
-    <@commentTag method="count">
-      <div class="item" title="累计评论数 ${count!}">
-        <span class="num">${count!"0"}</span>
-        <span>评论量</span>
-      </div>
-    </@commentTag>
+    <#if settings.overview_type == 'A'>
+      <@categoryTag method="count">
+        <div class="item" title="累计分类数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>分类数</span>
+        </div>
+      </@categoryTag>
+      <@tagTag method="count">
+        <div class="item" title="累计标签数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>标签数</span>
+        </div>
+      </@tagTag>
+      <@postTag method="count">
+        <div class="item" title="累计文章数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>文章数</span>
+        </div>
+      </@postTag>
+    <#elseif settings.overview_type == 'B'>
+      <@categoryTag method="count">
+        <div class="item" title="累计分类数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>分类数</span>
+        </div>
+      </@categoryTag>
+      <@tagTag method="count">
+        <div class="item" title="累计标签数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>标签数</span>
+        </div>
+      </@tagTag>
+      <@commentTag method="count">
+        <div class="item" title="累计评论数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>评论数</span>
+        </div>
+      </@commentTag>
+    <#elseif settings.overview_type == 'C'>
+      <@categoryTag method="count">
+        <div class="item" title="累计分类数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>分类数</span>
+        </div>
+      </@categoryTag>
+      <@postTag method="count">
+        <div class="item" title="累计文章数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>文章数</span>
+        </div>
+      </@postTag>
+      <@commentTag method="count">
+        <div class="item" title="累计评论数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>评论数</span>
+        </div>
+      </@commentTag>
+    <#elseif settings.overview_type == 'D'>
+      <@tagTag method="count">
+        <div class="item" title="累计标签数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>标签数</span>
+        </div>
+      </@tagTag>
+      <@postTag method="count">
+        <div class="item" title="累计文章数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>文章数</span>
+        </div>
+      </@postTag>
+      <@commentTag method="count">
+        <div class="item" title="累计评论数 ${count!'0'}">
+          <span class="num">${count!'0'}</span>
+          <span>评论数</span>
+        </div>
+      </@commentTag>
+    <#else>
+    </#if>
   </div>
   <#if settings.enable_weather==true && settings.weather_key?? && settings.weather_key!=''>
     <div id="he-plugin-simple"></div>
