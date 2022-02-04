@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-sheet${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-sheet${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_detail">
             <#include "template/macro/post_status.ftl">

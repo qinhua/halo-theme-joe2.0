@@ -1,7 +1,9 @@
 <#macro link type>
   <link rel="shortcut icon" size="32x32" href="${options.blog_favicon!}">
   <link rel="canonical" href="${blog_url!}">
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <#if settings.cdn_type == "jsdelivr">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  </#if>
   <link rel="apple-touch-icon" sizes="180x180" href="${options.blog_favicon!}">
   <#include "key_css.ftl">
   <#if settings.enable_loading_bar!true>
@@ -19,7 +21,7 @@
       <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
     </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/joe.normalize.min.css?v=${theme.version!}"> 
-  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_e243o7fs85u.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_0cm71z73z04.css">
   <#if settings.iconfont??>
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>

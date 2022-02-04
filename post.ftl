@@ -7,9 +7,8 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <#include "template/module/post_bread.ftl">
-      <div class="joe_container joe_main_container page-post${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-post${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main joe_post">
-          <#--  <#if settings.enable_post_aside && settings.enable_aside_expander><span class="aside-expander">隐藏侧边栏</span></#if>  -->
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id?c}" data-clikes="${post.likes?c}" data-author="${user.nickname!}">
             <#include "template/macro/post_status.ftl">
             <@post_status status=post.status />

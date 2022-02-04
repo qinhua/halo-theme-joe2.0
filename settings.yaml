@@ -236,6 +236,25 @@ theme:
           label: 固定的彩带
         - value: balloon
           label: 上升的气球
+    enable_show_in_up:
+      name: enable_show_in_up
+      label: 开启模块缓入效果（全局）
+      type: switch
+      data-type: bool
+      default: true
+      description: "开启后，当页面载入时，页面中的模块会有缓入动画"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    max_pager_number:
+      name: max_pager_number
+      label: 最大分页按钮数（全局）
+      type: text
+      default: "5"
+      placeholder: "请输入数字"
+      description: "控制全局分页器展示的最大分页按钮个数，默认为5（可保证移动端正常展示）。每页的分页数请到 “首页-系统-博客设置-文章设置” 中配置"
     enable_offscreen_tip:
       name: enable_offscreen_tip
       label: 开启离屏提示
@@ -325,9 +344,9 @@ theme:
       placeholder: "请输入有效的颜色值"
       description: "设置全局加载条背景色，默认跟随主题色。如需分别设置浅色/暗黑模式下的颜色，请严格按照 【浅色模式颜色|深色模式颜色】 这种格式，用 “|” 隔开"
 
-# 导航条
+# 导航
 navbar:
-  label: 导航条
+  label: 导航
   items:
     enable_fixed_header:
       name: enable_fixed_header
@@ -767,7 +786,7 @@ aside:
       type: radio
       data-type: text
       default: right
-      description: "侧边栏展示位置，左边或右边"
+      description: "侧边栏展示位置，左边或右边（注意：文章页侧边栏强制展示在右侧）"
       options:
         - value: left
           label: 左侧
@@ -785,18 +804,6 @@ aside:
           label: 是
         - value: false
           label: 否
-    # enable_post_aside:
-    #   name: enable_post_aside
-    #   label: 文章详情页侧边栏
-    #   type: switch
-    #   data-type: bool
-    #   default: false
-    #   description: "文章页右侧是否展示侧边栏"
-    #   options:
-    #     - value: true
-    #       label: 是
-    #     - value: false
-    #       label: 否
     enable_journals_aside:
       name: enable_journals_aside
       label: 日志页侧边栏
@@ -1092,6 +1099,21 @@ blogger:
           label: "圆形"
         - value: round
           label: "圆角矩形"
+    overview_type:
+      name: overview_type
+      label: 概览指标
+      type: select
+      default: C
+      description: "选择概览展示的指标，包括分类数、标签数、文章数、评论数（提供了一些可选组合，也可自行修改 template/module/blogger.ftl 文件）"
+      options:
+        - value: A
+          label: 分类+标签+文章
+        - value: B
+          label: 分类+标签+评论
+        - value: C
+          label: 分类+文章+评论
+        - value: D
+          label: 标签+文章+评论
     enable_social:
       name: enable_social
       label: 展示社交账号
@@ -1252,13 +1274,6 @@ home:
     #       label: 是
     #     - value: false
     #       label: 否
-    index_pager_number:
-      name: index_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5（仅在关闭 “异步加载文章列表” 时生效），分页数请到 “首页-系统-博客设置-文章设置” 中配置"
     enable_post_thumbnail:
       name: enable_post_thumbnail
       label: 开启文章缩略图
@@ -1310,7 +1325,7 @@ home:
       description: "自定义随机图API，用于填充没有设置封面的 “文章|分类|标签”，为空则使用默认随机图 API，免费 API 不会一直可用，请知悉"
     enable_index_list_effect:
       name: enable_index_list_effect
-      label: 开启文章列表动画效果
+      label: 开启列表动画效果
       type: switch
       data-type: bool
       default: true
@@ -1561,31 +1576,12 @@ archives:
           label: 列表
         - value: timeline
           label: 时间轴
-    enable_archives_effect:
-      name: enable_archives_effect
-      label: 开启缓入效果
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否开启页面缓入效果"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
     # archives_page_size:
     #   name: archives_page_size
     #   label: 分页大小
     #   type: text
     #   default: "10"
     #   placeholder: '列表分页大小，默认10条（请填数字）'
-    archives_pager_number:
-      name: archives_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
     archives_timeline_metric:
       name: archives_timeline_metric
       label: 时间轴展示维度
@@ -1725,7 +1721,7 @@ post:
       type: text
       default: "0"
       placeholder: "请填写标题层级（只能是数字）"
-      description: "TOC目录自动展开的标题层级（0~5级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录（可通过后台配置文章元数据 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField）"
+      description: "TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录（可通过后台配置文章元数据 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField）"
     enable_comment:
       name: enable_comment
       label: 文章评论
@@ -1941,13 +1937,6 @@ journals:
           label: 是
         - value: false
           label: 否
-    journals_pager_number:
-      name: journals_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5"
     journal_list_effect_class:
       name: index_list_effect_class
       label: 动画效果类名
@@ -2335,13 +2324,6 @@ categories:
           label: 开启
         - value: false
           label: 关闭
-    categories_pager_number:
-      name: categories_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
  
 # 标签页
 tags:
@@ -2389,25 +2371,18 @@ tags:
           label: 开启
         - value: false
           label: 关闭
-    tags_pager_number:
-      name: tags_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
 
 # 搜索页
-search:
-  label: 搜索页
-  items:
-    search_pager_number:
-      name: search_pager_number
-      label: 最大分页按钮数
-      type: text
-      default: "5"
-      placeholder: "请输入数字"
-      description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
+# search:
+#   label: 搜索页
+#   items:
+#     search_pager_number:
+#       name: search_pager_number
+#       label: 最大分页按钮数
+#       type: text
+#       default: "5"
+#       placeholder: "请输入数字"
+#       description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
 
 # 代码块
 code_block:
