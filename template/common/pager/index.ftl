@@ -1,5 +1,5 @@
 <#macro pager method postsData slug="" keyword="" display="8">
-  <#include "../macro/pager_item.ftl">
+  <#include "item.ftl">
   <#if method=="index">
     <@paginationTag method="index" page="${postsData.number!}" total="${postsData.totalPages!}" display="${display}">
       <@pager_item postsData=postsData pagination=pagination />

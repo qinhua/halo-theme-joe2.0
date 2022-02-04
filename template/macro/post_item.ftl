@@ -19,9 +19,9 @@
       <div class="meta">
         <ul class="items">
           <li>${post.createTime?string('yyyy-MM-dd')}</li>
-          <li>${post.visits!0} 阅读</li>
-          <li>${post.commentCount!0} 评论</li>
-          <li>${post.likes!0} 点赞</li>
+          <li><i class="joe-font joe-icon-eye"></i>${post.visits?c}</li>
+          <li><i class="joe-font joe-icon-message"></i>${post.commentCount?c}</li>
+          <li><i class="joe-font joe-icon-dianzan"></i>${post.likes?c}</li>
         </ul>
         <#if post.categories?size gt 0>
           <ul class="categories">

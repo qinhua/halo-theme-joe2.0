@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-index fadeIn animated${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-index${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_index">
             <#if settings.enable_banner!true>
@@ -21,8 +21,8 @@
             <@h_article.article posts=posts />
           </div>
           <#if settings.enable_index_list_ajax==false>
-            <#include "template/common/pager.ftl">
-            <@pager method="index" postsData=posts display="${settings.index_pager_number!5}" />
+            <#include "template/common/pager/index.ftl">
+            <@pager method="index" postsData=posts display="${settings.max_pager_number!5}" />
             <#--  <#include "template/macro/empty.ftl">
             <@empty type="index" text="${settings.home_empty_text!'暂无文章数据'}" isAsync="true"/>  -->
           <#else>

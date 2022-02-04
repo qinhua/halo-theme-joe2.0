@@ -127,6 +127,7 @@ body {
   .page-links {
     .joe_detail__article {
       padding: 10px 0;
+
       h3 {
         margin: 20px 0;
       }
@@ -148,6 +149,10 @@ body {
 
     .links-group {
       padding-left: 24px;
+
+      h5 {
+        font-size: 16px;
+      }
 
       .joe_detail__friends {
         padding-left: 0;
@@ -311,6 +316,7 @@ body {
 
       .autofold-tip {
         padding-left: 5px;
+        font-size: 12px;
       }
     }
 
@@ -396,6 +402,7 @@ body {
 
       &.c_hr {
         padding: 30px 0 0;
+
         &:after {
           position: absolute;
           top: 30px;
@@ -544,20 +551,52 @@ body {
   }
 }
 
+.showInUp {
+  animation: showInUp 0.35s;
+}
+
+@keyframes showInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.showInDown {
+  animation: showInDown 0.35s;
+}
+
+@keyframes showInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .joe_header {
   position: sticky;
-  top: 0;
+  top: -60px;
   z-index: 100;
   height: 60px;
-  transition: top 0.4s;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  will-change: top;
+  transition: top 0.35s;
 
   .full {
     max-width: 100% !important;
   }
 
   &.active {
-    top: -60px;
+    top: 0;
 
     .joe_header__below {
       border-top: none;
@@ -583,6 +622,7 @@ body {
     position: relative;
     z-index: 6;
     background: var(--background);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 
     .joe_container {
       align-items: center;
@@ -1337,11 +1377,11 @@ body {
     }
 
     &-count {
+      margin-bottom: 15px;
+      padding: 10px 15px;
       background: var(--background);
       border-radius: var(--radius-wrap);
-      padding: 10px 15px;
       box-shadow: var(--box-shadow);
-      margin-bottom: 15px;
 
       .item {
         display: flex;
@@ -1707,6 +1747,7 @@ body {
     &-list-tag {
       padding-top: 20px;
       overflow: hidden;
+
       .item {
         float: left;
         margin: 0 6px 10px;
@@ -2199,6 +2240,12 @@ body {
           justify-content: space-between;
           line-height: 20px;
 
+          .joe-font {
+            font-size: 18px;
+            color: var(--routine);
+            transition: transform 0.3s;
+          }
+
           &:hover {
             .link {
               color: var(--theme);
@@ -2209,6 +2256,7 @@ body {
             }
 
             .joe-font {
+              transform: rotate(-135deg);
               color: var(--theme);
             }
           }
@@ -2250,11 +2298,6 @@ body {
               background: var(--theme);
               transition: all 0.35s;
             }
-          }
-
-          .joe-font {
-            font-size: 18px;
-            color: var(--routine);
           }
         }
       }
@@ -2660,12 +2703,13 @@ body {
             justify-content: space-between;
 
             .author {
-              color: var(--main);
-              font-weight: 600;
               max-width: 150px;
+              margin-bottom: 4px;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
+              font-weight: 600;
+              color: var(--main);
             }
 
             .date {
@@ -2921,6 +2965,11 @@ body {
         flex-shrink: 0;
 
         li {
+          .joe-font {
+            margin-right: 3px;
+            font-size: 15px;
+          }
+
           &::after {
             content: "/";
             color: var(--seat);
@@ -3193,7 +3242,8 @@ body {
   padding: 40px;
   text-align: center;
 
-  svg {
+  svg,
+  img {
     width: 40px;
   }
 }
@@ -3998,11 +4048,11 @@ body {
 
 .joe_detail {
   position: relative;
+  margin-bottom: 15px;
+  padding: 20px;
   background: var(--background);
   border-radius: var(--radius-wrap);
-  padding: 20px;
   box-shadow: var(--box-shadow);
-  margin-bottom: 15px;
 
   .post-status {
     position: absolute;
@@ -4330,6 +4380,7 @@ body {
 
     h4 {
       font-size: 1em;
+
       &::before {
         content: "「";
         color: var(--theme);
@@ -4526,6 +4577,7 @@ body {
         th {
           font-weight: 500;
           background: var(--classC);
+
           &:last-child {
             border-right: none;
           }
@@ -4535,6 +4587,7 @@ body {
       tbody {
         tr {
           transition: background 0.35s;
+
           &:last-child td {
             border-bottom: none;
           }
@@ -4657,9 +4710,9 @@ body {
 
       .contain {
         position: relative;
-        box-shadow: var(--box-shadow);
-        border-radius: 20px;
         overflow: hidden;
+        border-radius: 20px;
+        box-shadow: var(--box-shadow);
 
         .icon {
           position: absolute;
@@ -4735,7 +4788,6 @@ body {
 
         .icon-like {
           border-radius: 50%;
-          box-shadow: var(--box-shadow);
 
           &:hover {
             animation: box_shadow 1s infinite;
@@ -5412,15 +5464,6 @@ body {
     border-radius: 3px;
     box-shadow: var(--box-shadow-pager);
 
-    &.active {
-      font-weight: 600;
-      background: var(--theme);
-      box-shadow: 1px 2px 5px 0 var(--theme);
-      a {
-        color: #fff;
-      }
-    }
-
     a {
       display: block;
       height: 32px;
@@ -5440,6 +5483,24 @@ body {
 
     &.next {
       border-radius: 3px 6px 6px 3px;
+    }
+
+    &.active {
+      font-weight: 600;
+      background: var(--theme);
+      box-shadow: 1px 2px 5px 0 var(--theme);
+
+      a {
+        color: #fff;
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      a {
+        color: var(--classA);
+      }
     }
   }
 }
@@ -5511,10 +5572,10 @@ body {
 }
 
 .joe_comment {
+  padding: 20px;
   background: var(--background);
   border-radius: var(--radius-wrap);
   box-shadow: var(--box-shadow);
-  padding: 20px;
 
   &__title {
     font-weight: 500;

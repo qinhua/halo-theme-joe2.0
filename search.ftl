@@ -11,7 +11,7 @@
           <div class="joe_archive">
             <div class="joe_archive__title">
               <div class="joe_archive__title-title">
-                  <i class="joe-font joe-icon-feather joe_archive__title-icon"></i>
+                  <i class="joe-font joe-icon-search joe_archive__title-icon"></i>
                   <#if keyword?? && keyword?trim!=''>
                     搜索到<span class="muted ellipsis">${posts.content?size}</span>条与<span class="muted ellipsis">${keyword}</span>
                     <span>相关的文章：</span>
@@ -27,8 +27,8 @@
                   <@post_item post=post index=post_index type="search"/>
                 </#list>
               </ul>
-              <#include "template/common/pager.ftl">
-              <@pager method="search" postsData=posts keyword="${keyword}" display="${settings.search_pager_number!5}" />
+              <#include "template/common/pager/index.ftl">
+              <@pager method="search" postsData=posts keyword="${keyword}" display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">
               <@empty type="search" text="未找到相关文章..."/>

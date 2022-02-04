@@ -204,9 +204,9 @@ const homeContext = {
             <div class="meta">
                 <ul class="items">
                     <li>${Utils.formatDate(post.createTime)}</li>
-                    <li>${post.visits || 0} 阅读</li>
-                    <li>${post.commentCount || 0} 评论</li>
-                    <li>${post.likes || 0} 点赞</li>
+                    <li><i class="joe-font joe-icon-eye"></i>${post.visits || 0}</li>
+                    <li><i class="joe-font joe-icon-message"></i>${post.commentCount || 0}</li>
+                    <li><i class="joe-font joe-icon-dianzan"></i>${post.likes || 0}</li>
                 </ul>
                 ${
 	post.categories.length > 0

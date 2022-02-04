@@ -7,7 +7,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-links${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-links${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_detail">
             <h1 class="joe_detail__title txt-shadow">${title}</h1>
@@ -23,7 +23,7 @@
                     <#list teams as team>
                       <#if omits?index_of(team.team) == -1>
                         <div class="links-group">
-                          <h4>${team.team!}</h4>
+                          <h5>${team.team!}</h5>
                           <@links_item links=team.links />
                         </div>
                       <#else>

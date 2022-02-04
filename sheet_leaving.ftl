@@ -6,7 +6,7 @@
   <body>
     <div id="Joe">
       <#include "template/common/navbar.ftl">
-      <div class="joe_container joe_main_container page-sheet${(settings.aside_position=='left')?then(' revert','')}">
+      <div class="joe_container joe_main_container page-sheet${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}">
         <div class="joe_main">
           <div class="joe_detail">
             <#include "template/macro/post_status.ftl">
@@ -44,40 +44,8 @@
             <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
               <div class="joe_leaving tpl">
                 <ul class="joe_leaving-list"></ul>
-                <div class="joe_loading">
-                  <svg width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="var(--main)">
-                    <circle cx="15" cy="15" r="15">
-                      <animate attributeName="r" from="15" to="15"
-                        begin="0s" dur="0.8s"
-                        values="15;9;15" calcMode="linear"
-                        repeatCount="indefinite" />
-                      <animate attributeName="fill-opacity" from="1" to="1"
-                        begin="0s" dur="0.8s"
-                        values="1;.5;1" calcMode="linear"
-                        repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="60" cy="15" r="9" fill-opacity="0.3">
-                      <animate attributeName="r" from="9" to="9"
-                        begin="0s" dur="0.8s"
-                        values="9;15;9" calcMode="linear"
-                        repeatCount="indefinite" />
-                      <animate attributeName="fill-opacity" from="0.5" to="0.5"
-                        begin="0s" dur="0.8s"
-                        values=".5;1;.5" calcMode="linear"
-                        repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="105" cy="15" r="15">
-                      <animate attributeName="r" from="15" to="15"
-                        begin="0s" dur="0.8s"
-                        values="15;9;15" calcMode="linear"
-                        repeatCount="indefinite" />
-                      <animate attributeName="fill-opacity" from="1" to="1"
-                        begin="0s" dur="0.8s"
-                        values="1;.5;1" calcMode="linear"
-                        repeatCount="indefinite" />
-                    </circle>
-                  </svg>
-                </div>
+                <#include "template/macro/loading.ftl">
+                <@loading/>
                 <div class="joe_leaving-none tpl">${settings.leaving_empty_text!}</div>
               </div>
             </article>

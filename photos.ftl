@@ -7,7 +7,7 @@
   <body> 
     <div id="Joe"> 
       <#include "template/common/navbar.ftl"> 
-      <div class="joe_container joe_main_container page-photos${(settings.aside_position=='left')?then(' revert','')}"> 
+      <div class="joe_container joe_main_container page-photos${settings.enable_show_in_up?then(' animated showInUp','')}${(settings.aside_position=='left')?then(' revert','')}"> 
         <div class="joe_main">
           <div class="joe_photos__type"> 
             <div class="joe_photos__type-title">
@@ -34,8 +34,8 @@
             </div>  -->
           </div>
           <#include "template/module/gallery.ftl">
-          <#--  <#include "template/common/pager.ftl">
-          <@pager method="photos" postsData=photos display="${settings.index_pager_number!5}" />
+          <#--  <#include "template/common/pager/index.ftl">
+          <@pager method="photos" postsData=photos display="${settings.max_pager_number!5}" />
           <#include "template/macro/empty.ftl">
           <@empty type="photos" text="${settings.photos_empty_text!'暂无图片数据'}"/>  -->
         </div>
