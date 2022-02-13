@@ -69,7 +69,9 @@
                     </div>
                   </div>
                   <div class="reply">
-                    <a class="link aside-reply-content" href="${comment.post.fullPath}/#${comment.id}">${comment.content!}</a>
+                    <#assign tmp = comment.post.fullPath?ends_with('/')?then(comment.post.fullPath?replace('/$','','ri'), comment.post.fullPath)>
+                    <#assign basePath = (tmp?index_of('?')!=-1)?then(tmp + '&', tmp + '?')>
+                    <a class="link aside-reply-content" href="${basePath}cid=${comment.id?c}">${comment.content!}</a>
                   </div>
                 </li>
               </#list>

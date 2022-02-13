@@ -78,7 +78,7 @@
                   </li>
                 </#list>
               </ul>
-              <#include "template/common/pager/index.ftl">
+              <#include "template/common/pager.ftl">
               <@pager method="journals" postsData=journals display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">

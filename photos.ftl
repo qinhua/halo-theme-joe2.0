@@ -34,7 +34,7 @@
             </div>  -->
           </div>
           <#include "template/module/gallery.ftl">
-          <#--  <#include "template/common/pager/index.ftl">
+          <#--  <#include "template/common/pager.ftl">
           <@pager method="photos" postsData=photos display="${settings.max_pager_number!5}" />
           <#include "template/macro/empty.ftl">
           <@empty type="photos" text="${settings.photos_empty_text!'暂无图片数据'}"/>  -->

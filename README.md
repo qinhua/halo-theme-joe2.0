@@ -236,9 +236,9 @@
 
 > 3、转换并压缩 `ES6+` 代码（前 2 步里的 js 没有经过 babel 编译，只可用于开发环境）：
 
-- 安装 `nodejs`;
-- 主题目录下执行 `npm i` 安装依赖;
-- 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 文件。
+- 安装 `nodejs`；
+- 主题目录下执行 `npm i` 安装依赖；
+- 执行 `npm run build` 即可在相应目录生成可用于生产环境的 js 和 css 文件。
 
 <br>
 
@@ -351,13 +351,13 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 
 > 目前主题默认使用 `CDN` 加载静态资源，要使用自己修改后的版本，需要到 `后台管理-外观-主题设置-其它` 中关闭 `使用CDN加载静态资源` 即可生效。但关闭后同时也失去了 `CDN` 加载的优势，如果你不想关闭，就需要自己单独修改文件引入处的链接。
 
-比如我修改了 `joe.index.min.css` 这个文件，那么就需要到 `template/module/link.ftl` 中找到引入它的地方：
+比如我修改了 `index.min.css` 这个文件，那么就需要到 `template/module/link.ftl` 中找到引入它的地方：
 
 ```html
 <link
   rel="preload stylesheet"
   as="style"
-  href="${BASE_RES_URL}/source/css/min/joe.index.min.css?v=${theme.version!}"
+  href="${BASE_RES_URL}/source/css/min/index.min.css?v=${theme.version!}"
 />
 ```
 
