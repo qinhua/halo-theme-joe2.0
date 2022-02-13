@@ -8,7 +8,7 @@
   <#if settings.show_newreply == true || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/j-marked/marked.min.js"></script>
   </#if>
-  <script src="${BASE_RES_URL}/source/js/min/joe.utils.min.js?v=${theme.version!}"></script>
+  <script src="${BASE_RES_URL}/source/js/min/utils.min.js?v=${theme.version!}"></script>
   <#if type == 'index' && settings.enable_banner == true>
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
   </#if>
@@ -29,7 +29,7 @@
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
   <script src="${BASE_RES_URL!}/source/lib/smooth-scroll/smooth-scroll.min.js"></script>
-  <script src="${BASE_RES_URL}/source/js/min/joe.custom.min.js?v=${theme.version!}"></script>
+  <script src="${BASE_RES_URL}/source/js/min/custom.min.js?v=${theme.version!}"></script>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
   </#if>
@@ -57,25 +57,25 @@
   </#if>
 
   <#-- ===== 引入页面级js start ===== -->
-  <script src="${BASE_RES_URL}/source/js/min/joe.common.min.js?v=${theme.version!}"></script>
+  <script src="${BASE_RES_URL}/source/js/min/common.min.js?v=${theme.version!}"></script>
   <#if type == 'index'>
-    <script src="${BASE_RES_URL}/source/js/min/joe.index.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/index.min.js?v=${theme.version!}"></script>
   </#if>
   <#if type == 'archives'>
-    <script src="${BASE_RES_URL}/source/js/min/joe.archives.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/archives.min.js?v=${theme.version!}"></script>
   </#if>
   <#if type == 'post'>
-    <script src="${BASE_RES_URL}/source/js/min/joe.post.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/post.min.js?v=${theme.version!}"></script>
   </#if>
   <#if type == 'journals'>
-    <script src="${BASE_RES_URL}/source/js/min/joe.journals.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/journals.min.js?v=${theme.version!}"></script>
   </#if>
   <#if type == 'photos'>
-    <script src="${BASE_RES_URL}/source/js/min/joe.photos.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/photos.min.js?v=${theme.version!}"></script>
   </#if>
   <#if type == 'sheet' && subType != 'only_header_footer'>
     <script src="${BASE_RES_URL}/source/lib/draggabilly/draggabilly.min.js"></script>
-    <script src="${BASE_RES_URL}/source/js/min/joe.leaving.min.js?v=${theme.version!}"></script>
+    <script src="${BASE_RES_URL}/source/js/min/leaving.min.js?v=${theme.version!}"></script>
   </#if>
   <#--  <#if settings.enable_pjax!false>
     <script src="${BASE_RES_URL}/source/lib/jquery-pjax/jquery.pjax.min.js"></script>

@@ -27,7 +27,7 @@
                   <@post_item post=post index=post_index type="search"/>
                 </#list>
               </ul>
-              <#include "template/common/pager/index.ftl">
+              <#include "template/common/pager.ftl">
               <@pager method="search" postsData=posts keyword="${keyword}" display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">

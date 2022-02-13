@@ -21,7 +21,7 @@
             <@h_article.article posts=posts />
           </div>
           <#if settings.enable_index_list_ajax==false>
-            <#include "template/common/pager/index.ftl">
+            <#include "template/common/pager.ftl">
             <@pager method="index" postsData=posts display="${settings.max_pager_number!5}" />
             <#--  <#include "template/macro/empty.ftl">
             <@empty type="index" text="${settings.home_empty_text!'暂无文章数据'}" isAsync="true"/>  -->

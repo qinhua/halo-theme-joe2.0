@@ -23,7 +23,7 @@
                   <@post_item post=post index=post_index type="tag"/>
                 </#list>
               </ul>
-              <#include "template/common/pager/index.ftl">
+              <#include "template/common/pager.ftl">
               <@pager method="tagPosts" postsData=posts slug="${tag.slug!}" display="${settings.max_pager_number!5}" />
             <#else>
               <#include "template/macro/empty.ftl">

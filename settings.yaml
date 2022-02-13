@@ -3437,7 +3437,7 @@ others:
       type: select
       data-type: text
       default: none
-      description: "目前提供 3 种类型，“无” 为不启用 CDN，从源站请求资源；“jsdelivr” 为使用 jsdelivr 的免费 CDN 从当前版本的主题加载资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
+      description: "目前提供 3 种类型，“无” 为不启用 CDN，从源站请求资源；“jsdelivr” 为使用 jsdelivr 的免费 CDN 从当前版本的主题仓库加载资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
       options:
         - value: none
           label: 无
