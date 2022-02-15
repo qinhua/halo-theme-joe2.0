@@ -241,7 +241,7 @@ theme:
       label: 开启模块缓入效果（全局）
       type: switch
       data-type: bool
-      default: true
+      default: false
       description: "开启后，当页面载入时，页面中的模块会有缓入动画"
       options:
         - value: true
@@ -354,7 +354,7 @@ navbar:
       type: switch
       data-type: bool
       default: true
-      description: "开启后，当页面滚动时，导航条始终固定在可视区域顶部，默认只在向上滚动时显示"
+      description: "开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示）"
       options:
         - value: true
           label: 是

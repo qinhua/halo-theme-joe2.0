@@ -671,8 +671,8 @@ const commonContext = {
 	/* 头部滚动 */
 	initHeadScroll() {
 		if (Joe.isMobile || ThemeConfig.enable_fixed_header) return;
-		let flag = true;
-		let Y = window.pageYOffset;
+		let last_scroll_position = 0;
+		let new_scroll_position = 0;
 		const $joeHeader = $(".joe_header");
 		const $effectEl = $(
 			".joe_aside_post, .joe_aside .joe_aside__item:last-child"
@@ -681,33 +681,23 @@ const commonContext = {
 		const offset1 = headerHeight + 15;
 		const offset2 = headerHeight - 60 + 15;
 
-		const handleHeader = (diffY) => {
-			// const direction = diffY <= 0 ? "上" : "下";
-			// console.log(direction, diffY, window.tocPhase);
-			if(window.tocPhase || Math.abs(diffY) < 10) return;
-			if (window.pageYOffset >= headerHeight && diffY <= 0) {
-				if (flag) return;
-				$joeHeader.addClass("active");
-				$effectEl.css("top", offset1);
-				flag = true;
-			} else {
-				if (!flag) return;
+		const handleHeader = () => {
+			if (window.tocPhase) return;
+			last_scroll_position = window.scrollY;
+			if (
+				new_scroll_position < last_scroll_position &&
+        last_scroll_position > headerHeight
+			) {
 				$joeHeader.removeClass("active");
 				$effectEl.css("top", offset2);
-				flag = false;
+			} else if (new_scroll_position > last_scroll_position) {
+				$joeHeader.addClass("active");
+				$effectEl.css("top", offset1);
 			}
+			new_scroll_position = last_scroll_position;
 		};
 
-		document.addEventListener(
-			"scroll",
-			Utils.throttle(() => {
-				const diff = window.pageYOffset - Y;
-				handleHeader(diff);
-				Y = window.pageYOffset;
-			}, 200)
-		);
-    
-		handleHeader(Y);
+		document.addEventListener("scroll", Utils.throttle(handleHeader, 100));
 	},
 	/* 渲染数学公式 */
 	initMathjax() {
@@ -935,7 +925,7 @@ const commonContext = {
 		"showLoadTime",
 		"clean",
 	];
-  
+
 	document.addEventListener("DOMContentLoaded", function () {
 		commonContext.loadingBar.show();
 		// window.lazySizesConfig = window.lazySizes.cfg || {};
