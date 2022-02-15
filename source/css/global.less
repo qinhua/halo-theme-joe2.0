@@ -2743,6 +2743,7 @@ body {
 
     &.advert {
       display: block;
+      min-height: 32px;
       background: var(--background);
 
       img {
@@ -5416,10 +5417,12 @@ body {
       font-size: 12px;
 
       > i {
+        display: inline-block;
         margin-right: 3px;
         font-size: 14px;
         color: #5dad16;
         vertical-align: bottom;
+        animation: swing 1s ease infinite;
       }
     }
 
@@ -6075,7 +6078,8 @@ body {
 .joe_advert-large,
 .joe_advert-small {
   position: relative;
-  background: #fff;
+  min-height: 32px;
+  background: var(--sib-background);
 
   img {
     display: block;
