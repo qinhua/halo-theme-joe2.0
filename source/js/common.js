@@ -289,7 +289,7 @@ const commonContext = {
 			} else {
 				htmlStr = `
       <div class="joe_pdf">
-        <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
+        <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
       </div>`;
 			}
 			$(item).replaceWith(htmlStr);

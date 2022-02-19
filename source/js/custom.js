@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// 			if (!this.options.src) return (this.innerHTML = "pdf地址未填写！");
 	// 			this.innerHTML = `
 	// 			<div class="joe_pdf">
-	//         <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs@2.10.377/web/viewer.html?file=${this.options.src}" style="width:${this.options.width};height:${this.options.height}"></iframe>
+	//         <iframe src="${ThemeConfig.BASE_RES_URL}/source/lib/pdfjs/web/viewer.html?file=${this.options.src}" style="width:${this.options.width};height:${this.options.height}"></iframe>
 	//       </div>`;
 	// 		}
 	// 	}
