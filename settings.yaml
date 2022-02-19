@@ -2577,7 +2577,7 @@ code_block:
       label: 仅悬浮时显示操作按钮
       type: switch
       data-type: bool
-      default: false
+      default: true
       description: "是否仅在鼠标悬浮到当前代码块时才显示相关操作按钮，不显示时会更加简洁"
       options:
         - value: true
