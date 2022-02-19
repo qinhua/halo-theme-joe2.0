@@ -24,7 +24,9 @@
                     <a class="item${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
                       <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" alt="${cur_title!'banner'}">
                       <#if settings.enable_banner_title == true && cur_title!=''>
-                        <div class="title">${cur_title}</div>
+                        <div class="title-row">
+                          <h3 class="title">${cur_title}</h3>
+                        </div>
                       </#if>
                       <i class="joe-font joe-icon-zhifeiji"></i>
                     </a>
