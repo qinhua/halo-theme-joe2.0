@@ -277,8 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
 						Qmsg.warning("评论功能不可用！");
 						return;
 					}
-					const top = $comment.offsetTop - $header.offsetHeight - 15;
-					window.scrollTo({ top, behavior: "smooth" });
+					const scrollTop = $comment.offsetTop - $header.offsetHeight - 15;
+					$("html").animate(
+						{
+							scrollTop,
+						},
+						500
+					);
 				});
 			}
 		}

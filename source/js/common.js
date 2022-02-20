@@ -307,9 +307,12 @@ const commonContext = {
 		$(document).on("scroll", Utils.throttle(handleScroll, 100));
 		$el.on("click", function (e) {
 			e.stopPropagation();
-			const cfg = { top: 0 };
-			ThemeConfig.enable_back2top_smooth ? (cfg.behavior = "smooth") : null;
-			window.scrollTo(cfg);
+			$("html").animate(
+				{
+					scrollTop: 0,
+				},
+				ThemeConfig.enable_back2top_smooth ? 500 : 0
+			);
 		});
 	},
 	/* 激活侧边栏人生倒计时功能 */
@@ -774,21 +777,23 @@ const commonContext = {
 		};
 	},
 	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-	scrollToHash() {
-		const scroll = new URLSearchParams(location.search).get("scroll");
-		// const scroll = window.decodeURIComponent(location.hash);
-		if (scroll) {
-			const height = $(".joe_header").height();
-			const elementEL = $(($("#" + scroll).length ? "#" : ".") + scroll);
-			if (elementEL && elementEL.length > 0) {
-				const top = elementEL.offset().top - height - 15;
-				window.scrollTo({
-					top,
-					behavior: "smooth",
-				});
-			}
-		}
-	},
+	// scrollToHash() {
+	// 	const scroll = new URLSearchParams(location.search).get("scroll");
+	// 	// const scroll = window.decodeURIComponent(location.hash);
+	// 	if (scroll) {
+	// 		const height = $(".joe_header").height();
+	// 		const elementEL = $(($("#" + scroll).length ? "#" : ".") + scroll);
+	// 		if (elementEL && elementEL.length > 0) {
+	// 			const scrollTop = elementEL.offset().top - height - 15;
+	// 			$("html").animate(
+	// 				{
+	// 					scrollTop,
+	// 				},
+	// 				500
+	// 			);
+	// 		}
+	// 	}
+	// },
 	/* 加载鼠标特效 */
 	loadMouseEffect() {
 		if (
@@ -847,6 +852,13 @@ const commonContext = {
 			}
 		});
 	},
+	/* 总访问量 */
+	// initUV() {
+	// 	if (!ThemeConfig.enable_visit_number) return;
+	// 	Utils.request("/api/content/statistics/user", "GET").then((res) => {
+	// 		res && $("#site-uv").text(res.visitCount || 0);
+	// 	});
+	// },
 	/* 初始化网站运行时间 */
 	initBirthday() {
 		if (!ThemeConfig.enable_birthday) return;
@@ -922,6 +934,7 @@ const commonContext = {
 		"loadMouseEffect",
 		"loadBackdropEffect",
 		"setFavicon",
+		"initUV",
 		"showLoadTime",
 		"clean",
 	];
@@ -942,7 +955,7 @@ const commonContext = {
 		if (omits.length === 1) {
 			commonContext[omits[0]]();
 		} else {
-			omits.forEach((c) => c !== "loadingBar" && commonContext[c]());
+			omits.forEach((c) => c !== "loadingBar" && commonContext[c] && commonContext[c]());
 		}
 	});
 })();

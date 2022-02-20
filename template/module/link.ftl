@@ -23,7 +23,7 @@
       <script src="${BASE_RES_URL}/source/lib/nprogress/nprogress.min.js"></script>
     </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/normalize.min.css?v=${theme.version!}"> 
-  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_0cm71z73z04.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_sf8gfvar1r.css">
   <#if settings.iconfont??>
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>
