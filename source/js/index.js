@@ -11,6 +11,7 @@ const homeContext = {
 				loop: ThemeConfig.enable_banner_loop,
 				effect: ThemeConfig.banner_effect,
 				keyboard: false,
+				speed: ThemeConfig.banner_speed,
 				mousewheel: false,
 				grabCursor: ThemeConfig.enable_banner_handle,
 				allowTouchMove: ThemeConfig.enable_banner_handle,

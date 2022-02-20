@@ -728,6 +728,20 @@ carousel:
           label: 开启
         - value: false
           label: 关闭
+    banner_speed:
+      name: banner_speed
+      label: 切换速度
+      type: text
+      default: "500"
+      placeholder: "请输入"
+      description: "设置轮播图的切换速度，默认500（单位：毫秒）"
+    banner_delay:
+      name: banner_delay
+      label: 切换间隔
+      type: text
+      default: "3500"
+      placeholder: "请输入"
+      description: "设置轮播图切换的间隔时间，默认3500（仅在自动切换开启时生效，单位：毫秒）"
     enable_banner_title:
       name: enable_banner_title
       label: 展示标题
@@ -761,13 +775,6 @@ carousel:
           label: 开启
         - value: false
           label: 关闭
-    banner_delay:
-      name: banner_delay
-      label: 切换间隔
-      type: text
-      default: "3500"
-      placeholder: "请输入"
-      description: "设置轮播图切换的间隔时间，默认3500（仅在自动切换开启时生效）"
     banner_lazyload_img:
       name: banner_lazyload_img
       label: 图片预载图
