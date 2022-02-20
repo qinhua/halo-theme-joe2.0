@@ -8,7 +8,7 @@ const postContext = {
 
 		if ($hideMark.length) {
 			const cid = $(".joe_detail").attr("data-cid");
-			// 1、有多个joe-hide标记时移除前面的标记，只处理最后一个
+			// 1.有多个joe-hide标记时移除前面的标记，只处理最后一个
 			if ($hideMark.length > 1) {
 				const $lastOne = $hideMark.eq($hideMark.length - 1);
 				$lastOne.addClass("marker");
@@ -16,7 +16,7 @@ const postContext = {
 				$("joe-hide:not(.marker)").parent().remove();
 			}
 
-			// 2、设置data-partial属性
+			// 2.设置data-partial属性
 			$content.attr("data-partial", "true");
 
 			// 暂存并移除相关DOM
@@ -60,7 +60,7 @@ const postContext = {
 			};
 
 			// 更新当前评论状态
-			const updateState = () => {
+			const updateState = async () => {
 				const localIds = localStorage.getItem("partialIds");
 				const offsetTop = $hideMark.offset().top;
 				tmpDom.replaceAll($hideMark.parent());
@@ -72,15 +72,21 @@ const postContext = {
 				rerenderContent();
 
 				// 滚动到原位置
-				// window.scrollTo({ top: offsetTop - 150, behavior: "smooth" });
-				window.scrollTo({ top: offsetTop - 150 });
+				await Utils.sleep(500);
+				const scrollTop = offsetTop - 150;
+				$("html").animate(
+					{
+						scrollTop,
+					},
+					0
+				);
 			};
 
 			// 3.检查本地的partialIds
 			checkPartialIds(cid, hideDom);
 		}
 
-		// 显示文章内容
+		// 4.显示文章内容
 		$content.addClass("show");
 	},
 	/* 文章复制 + 版权文字 */
@@ -294,7 +300,7 @@ const postContext = {
 		}
 	},
 	/*跳转到指定评论 */
-	jumpToComment() {
+	async jumpToComment() {
 		if (
 			ThemeConfig.enable_clean_mode ||
       !ThemeConfig.enable_comment ||
@@ -303,27 +309,33 @@ const postContext = {
 			return;
 		const { cid: commentId = "", p: postId = "" } = Utils.getUrlParams();
 		if (!commentId) return;
-		setTimeout(() => {
-			try {
-				const commentEl = document.getElementsByTagName("halo-comment");
-				if (!commentEl) return;
-				const el = $(
-					commentEl[0].shadowRoot.getElementById("halo-comment")
-				).find("#comment-" + commentId);
-				if (!el) return;
-				const offsetTop = el.offset().top - 50;
-				// 滚动到指定位置
-				window.scrollTo({ top: offsetTop });
-				// 清除url参数
-				window.history.replaceState(
-					null,
-					null,
-					postId ? `?p=${postId}` : location.origin + location.pathname
-				);
-			} catch (error) {
-				console.error(error);
-			}
-		}, 1000);
+		await Utils.sleep(1000);
+		try {
+			const commentEl = document.getElementsByTagName("halo-comment");
+			if (!commentEl) return;
+			const el = $(
+				commentEl[0].shadowRoot.getElementById("halo-comment")
+			).find("#comment-" + commentId);
+			if (!el) return;
+			const offsetTop = el.offset().top - 50;
+			// 滚动到指定位置
+			window.scrollTo({ top: offsetTop });
+			// 高亮该评论元素
+			const el_comment = el.find(".markdown-content");
+			el_comment.addClass("blink");
+			await Utils.sleep(2000);
+			el_comment.removeClass("blink");
+			// 清除url参数
+			window.history.replaceState(
+				null,
+				null,
+				postId ? `?p=${postId}` : location.origin + location.pathname
+			);
+			tocbot.refresh();
+      
+		} catch (error) {
+			console.error(error);
+		}
 	},
 	/* TODO:密码保护文章，输入密码访问 */
 	// initArticleProtect() {
