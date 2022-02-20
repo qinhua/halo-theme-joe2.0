@@ -1873,6 +1873,7 @@ body {
           width: 75px;
           height: 75px;
           margin-bottom: 12px;
+          user-select: none;
 
           &.round .avatar {
             border-radius: 6px;
@@ -1902,6 +1903,7 @@ body {
           z-index: 2;
           width: 75px;
           height: 75px;
+          pointer-events: none;
           transform: scale(1.23);
 
           &.rainbow-girl,
@@ -2004,6 +2006,7 @@ body {
           top: -10px;
           z-index: 3;
           width: 75px;
+          pointer-events: none;
 
           &.wing {
             top: -33px;
@@ -5396,6 +5399,13 @@ body {
       }
     }
 
+    .site_visit_number {
+      margin-left: 5px;
+      font-size: 13px;
+      span {
+        color: var(--theme);
+      }
+    }
     .rss {
       i {
         font-size: 14px;
@@ -5444,7 +5454,7 @@ body {
     &.active {
       font-weight: 600;
       background: var(--theme);
-      box-shadow: 1px 2px 5px 0 var(--theme);
+      box-shadow: 0 3px 20px -2px var(--theme);
 
       a {
         color: #fff;
@@ -5519,11 +5529,15 @@ body {
 }
 
 .joe_comment_box {
+  text-align: center;
   h2 {
-    padding: 28px 0;
-    text-align: center;
+    display: inline-block;
+    padding: 28px 110px;
     font-size: 18px;
     color: var(--routine);
+    background: no-repeat url(/themes/Joe2.0/source/img/t_left.png) 0/90px auto,
+      no-repeat url(/themes/Joe2.0/source/img/t_right.png) 100%/90px auto;
+    filter: grayscale(1);
   }
 }
 
@@ -6068,6 +6082,15 @@ body {
   &.above {
     z-index: 90;
   }
+}
+
+.blur-up {
+  filter: blur(5px) !important;
+  transition: filter 400ms;
+}
+
+.blur-up.lazyloaded {
+  filter: blur(0) !important;
 }
 
 .profile-color-modes-illu-frame {

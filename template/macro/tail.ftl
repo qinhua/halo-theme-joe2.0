@@ -28,7 +28,7 @@
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
-  <script src="${BASE_RES_URL!}/source/lib/smooth-scroll/smooth-scroll.min.js"></script>
+  <#--  <script src="${BASE_RES_URL!}/source/lib/smooth-scroll/smooth-scroll.min.js"></script>  -->
   <script src="${BASE_RES_URL}/source/js/min/custom.min.js?v=${theme.version!}"></script>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>

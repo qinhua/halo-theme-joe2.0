@@ -47,6 +47,7 @@
           <div class="item">
             <#if settings.enable_rss><a class="rss" href="${rss_url!}" target="_blank" rel="noopener noreferrer"><i class="joe-font joe-icon-rss-fill"></i>&nbsp;RSS</a></#if>
             <#if settings.enable_sitemap><a href="${sitemap_xml_url!}" target="_blank" rel="noopener noreferrer">站点地图</a></#if>
+            <#--  <#if settings.enable_visit_number><a class="site_visit_number">—&nbsp;总访客：<span id="site-uv">0</span>&nbsp;</a></#if>  -->
           </div>
         </#if>
       </div>

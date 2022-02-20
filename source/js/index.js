@@ -115,9 +115,7 @@ const homeContext = {
 			$domList.html("").show();
 			$domEmpty.addClass("hide");
 			$domLoad.removeAttr("loading").html("查看更多").show();
-			const activeItem = $(
-				`.passage-list-tabs .item[data-type="${sort}"]`
-			);
+			const activeItem = $(`.passage-list-tabs .item[data-type="${sort}"]`);
 			const activeLine = $(".passage-list-tabs .line");
 			activeItem.addClass("active").siblings().removeClass("active");
 			activeLine.css({
@@ -205,9 +203,15 @@ const homeContext = {
             <div class="meta">
                 <ul class="items">
                     <li>${Utils.formatDate(post.createTime)}</li>
-                    <li><i class="joe-font joe-icon-eye"></i>${post.visits || 0}</li>
-                    <li><i class="joe-font joe-icon-message"></i>${post.commentCount || 0}</li>
-                    <li><i class="joe-font joe-icon-dianzan"></i>${post.likes || 0}</li>
+                    <li><i class="joe-font joe-icon-eye"></i>${
+	post.visits || 0
+}</li>
+                    <li><i class="joe-font joe-icon-message"></i>${
+	post.commentCount || 0
+}</li>
+                    <li><i class="joe-font joe-icon-dianzan"></i>${
+	post.likes || 0
+}</li>
                 </ul>
                 ${
 	post.categories.length > 0
@@ -242,7 +246,7 @@ const homeContext = {
 			initDom(typeId);
 			getDate();
 		});
-  
+
 		// 加载更多
 		$domLoad.on("click", async function (e) {
 			e.stopPropagation();
@@ -250,12 +254,16 @@ const homeContext = {
 			const lastItemTop = $domList.find(".joe_list__item:last").offset().top;
 			queryData.page++;
 			await getDate();
-			setTimeout(() => {
-				window.scrollTo({
-					top: lastItemTop - $headerHeight,
-					behavior: "smooth",
-				});
-			}, 300);
+      
+			// 向下滚动一段距离
+			await Utils.sleep(300);
+			const scrollTop = lastItemTop - $headerHeight;
+			$("html").animate(
+				{
+					scrollTop,
+				},
+				500
+			);
 		});
 
 		getDate();
