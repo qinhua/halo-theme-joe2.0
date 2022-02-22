@@ -63,6 +63,8 @@ const postContext = {
 			const updateState = async () => {
 				const localIds = localStorage.getItem("partialIds");
 				const offsetTop = $hideMark.offset().top;
+
+				await Utils.sleep(800);
 				tmpDom.replaceAll($hideMark.parent());
 				localStorage.setItem(
 					"partialIds",
@@ -72,7 +74,6 @@ const postContext = {
 				rerenderContent();
 
 				// 滚动到原位置
-				await Utils.sleep(500);
 				const scrollTop = offsetTop - 150;
 				$("html").animate(
 					{
