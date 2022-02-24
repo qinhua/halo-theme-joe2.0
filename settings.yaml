@@ -1202,6 +1202,32 @@ blogger:
           label: "圣诞老人"
         - value: "cactus"
           label: "仙人掌"
+        - value: "rabbit"
+          label: "幸福兔子（动态）"
+        - value: "gaoda"
+          label: "高达（动态）"
+        - value: "donut"
+          label: "甜甜圈（动态）"
+        - value: "bat"
+          label: "吸血蝙蝠（动态）"
+        - value: "bilibili"
+          label: "Bilibili"
+        - value: "constellation"
+          label: "星座"
+        - value: "putin"
+          label: "布丁"
+        - value: "princess"
+          label: "小公主"
+        - value: "mangci"
+          label: "芒刺"
+        - value: "maid"
+          label: "女仆"
+        - value: "orchid"
+          label: "兰花"
+        - value: "gulu"
+          label: "咕噜"
+        - value: "gufeng"
+          label: "古风"
     avatar_widget:
       name: avatar_widget
       label: 头像挂件
@@ -1215,8 +1241,6 @@ blogger:
         #   label: 樱花
         # - value: "mechanic"
         #   label: 机械
-        # - value: "heart"
-        #   label: 爱心
         - value: "angel"
           label: 天使
         - value: "meteor"
@@ -1227,6 +1251,8 @@ blogger:
           label: 天使之翼
         - value: "rotate-heart"
           label: 旋转的心
+        - value: "fall-in-love"
+          label: 坠入爱河
         - value: "sun-flower"
           label: 向日葵
         - value: "swirl-heart"

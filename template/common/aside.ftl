@@ -63,6 +63,7 @@
               <#list comments.content as comment>
                 <li class="item">
                   <div class="user">
+                    <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar!}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="头像">
                     <div class="info">
                       <div class="author">${comment.author!}</div>
                       <span class="date">${comment.createTime?string("yyyy-MM-dd")}</span>
