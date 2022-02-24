@@ -5,6 +5,11 @@ window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
 	initMode() {
+		// 取消Chrome浏览器默认滚动到上次浏览位置
+		if ("scrollRestoration" in history) {
+			history.scrollRestoration = "manual";
+		}
+
 		if (ThemeConfig.theme_mode !== "user") return;
 		const $html = $("html");
 		const $icon_light = $(".mode-light");
@@ -777,23 +782,26 @@ const commonContext = {
 		};
 	},
 	/* 判断地址栏是否有锚点链接，有则跳转到对应位置 */
-	// scrollToHash() {
-	// 	const scroll = new URLSearchParams(location.search).get("scroll");
-	// 	// const scroll = window.decodeURIComponent(location.hash);
-	// 	if (scroll) {
-	// 		const height = $(".joe_header").height();
-	// 		const elementEL = $(($("#" + scroll).length ? "#" : ".") + scroll);
-	// 		if (elementEL && elementEL.length > 0) {
-	// 			const scrollTop = elementEL.offset().top - height - 15;
-	// 			$("html").animate(
-	// 				{
-	// 					scrollTop,
-	// 				},
-	// 				500
-	// 			);
-	// 		}
-	// 	}
-	// },
+	scrollToHash(hash, duration = 0) {
+		hash = hash || window.decodeURIComponent(location.hash);
+		if (!hash) return;
+
+		const headerHeight = $(".joe_header").height();
+		const $targetEl = $(hash);
+		if ($targetEl && $targetEl.length > 0) {
+			const scrollTop = $targetEl.offset().top - headerHeight - 15;
+			if (duration > 0) {
+				$("html").animate(
+					{
+						scrollTop,
+					},
+					duration
+				);
+			} else {
+				document.documentElement.scrollTop = scrollTop;
+			}
+		}
+	},
 	/* 加载鼠标特效 */
 	loadMouseEffect() {
 		if (
@@ -830,7 +838,7 @@ const commonContext = {
 	},
 	/* 首页离屏提示 */
 	offscreenTip() {
-		if (!ThemeConfig.enable_offscreen_tip) return;
+		if (Joe.isMobile || !ThemeConfig.enable_offscreen_tip) return;
 		const OriginTitile = document.title;
 		let timer = null;
 		document.addEventListener("visibilitychange", function () {
@@ -905,7 +913,7 @@ const commonContext = {
 	},
 	/* 页面加载耗时（控制台） */
 	showLoadTime() {
-		if (!ThemeConfig.show_loaded_time) return;
+		if (Joe.isMobile || !ThemeConfig.show_loaded_time) return;
 		const consume_time = performance.now();
 		consume_time &&
       console.log(
@@ -930,7 +938,6 @@ const commonContext = {
 		"loadingBar",
 		"init3dTag",
 		"foldCode",
-		"scrollToHash",
 		"loadMouseEffect",
 		"loadBackdropEffect",
 		"setFavicon",
@@ -955,7 +962,9 @@ const commonContext = {
 		if (omits.length === 1) {
 			commonContext[omits[0]]();
 		} else {
-			omits.forEach((c) => c !== "loadingBar" && commonContext[c] && commonContext[c]());
+			omits.forEach(
+				(c) => c !== "loadingBar" && commonContext[c] && commonContext[c]()
+			);
 		}
 	});
 })();
