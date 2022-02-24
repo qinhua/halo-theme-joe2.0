@@ -59,10 +59,7 @@ const commonContext = {
 		const $nav_menus = $(".joe_header__above-nav a");
 		const $nav_side_menus = $(".panel-side-menu .link");
 		let activeIndex = 0;
-		const {
-			href,
-			pathname
-		} = location;
+		const { href, pathname } = location;
 
 		if (pathname && pathname !== "/") {
 			$nav_menus.each((index, item) => {
@@ -135,9 +132,9 @@ const commonContext = {
 				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
 				ThemeConfig.enable_code_macdot ? $item.addClass("c_macdot") : null;
 				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
-				ThemeConfig.show_tools_when_hover ?
-					$item.addClass("c_hover_tools") :
-					null;
+				ThemeConfig.show_tools_when_hover
+					? $item.addClass("c_hover_tools")
+					: null;
 				// ThemeConfig.enable_code_line_number
 				// 	? $item.addClass("line-numbers")
 				// 	: null;
@@ -303,55 +300,59 @@ const commonContext = {
 		if (!ThemeConfig.enable_back2top) return;
 		const $el = $(".joe_action_item.back2top");
 		const handleScroll = () =>
-			(document.documentElement.scrollTop || document.body.scrollTop) > 300 ?
-				$el.addClass("active") :
-				$el.removeClass("active");
+			(document.documentElement.scrollTop || document.body.scrollTop) > 300
+				? $el.addClass("active")
+				: $el.removeClass("active");
 		handleScroll();
 		$(document).on("scroll", Utils.throttle(handleScroll, 100));
 		$el.on("click", function (e) {
 			e.stopPropagation();
-			$("html").animate({
-				scrollTop: 0,
-			},
-			ThemeConfig.enable_back2top_smooth ? 500 : 0
+			$("html").animate(
+				{
+					scrollTop: 0,
+				},
+				ThemeConfig.enable_back2top_smooth ? 500 : 0
 			);
 		});
 	},
 	/* 激活侧边栏人生倒计时功能 */
 	initTimeCount() {
 		if (Joe.isMobile || !$(".joe_aside__item.timelife").length) return;
-		let timelife = [{
-			title: "今日已经过去",
-			endTitle: "小时",
-			num: 0,
-			percent: "0%",
-		},
+		let timelife = [
+			{
+				title: "今日已经过去",
+				endTitle: "小时",
+				num: 0,
+				percent: "0%",
+			},
+			{
+				title: "这周已经过去",
+				endTitle: "天",
+				num: 0,
+				percent: "0%",
+			},
+			{
+				title: "本月已经过去",
+				endTitle: "天",
+				num: 0,
+				percent: "0%",
+			},
+			{
+				title: "今年已经过去",
+				endTitle: "个月",
+				num: 0,
+				percent: "0%",
+			},
+		];
 		{
-			title: "这周已经过去",
-			endTitle: "天",
-			num: 0,
-			percent: "0%",
-		},
-		{
-			title: "本月已经过去",
-			endTitle: "天",
-			num: 0,
-			percent: "0%",
-		},
-		{
-			title: "今年已经过去",
-			endTitle: "个月",
-			num: 0,
-			percent: "0%",
-		},
-		]; {
 			let nowDate = +new Date();
 			let todayStartDate = new Date(new Date().toLocaleDateString()).getTime();
 			let todayPassHours = (nowDate - todayStartDate) / 1000 / 60 / 60;
 			let todayPassHoursPercent = (todayPassHours / 24) * 100;
 			timelife[0].num = parseInt(todayPassHours);
 			timelife[0].percent = parseInt(todayPassHoursPercent) + "%";
-		} {
+		}
+		{
 			let weeks = {
 				0: 7,
 				1: 1,
@@ -365,7 +366,8 @@ const commonContext = {
 			let weekDayPassPercent = (weekDay / 7) * 100;
 			timelife[1].num = parseInt(weekDay);
 			timelife[1].percent = parseInt(weekDayPassPercent) + "%";
-		} {
+		}
+		{
 			let year = new Date().getFullYear();
 			let date = new Date().getDate();
 			let month = new Date().getMonth() + 1;
@@ -373,7 +375,8 @@ const commonContext = {
 			let monthPassPercent = (date / monthAll) * 100;
 			timelife[2].num = date;
 			timelife[2].percent = parseInt(monthPassPercent) + "%";
-		} {
+		}
+		{
 			let month = new Date().getMonth() + 1;
 			let yearPass = (month / 12) * 100;
 			timelife[3].num = month;
@@ -678,23 +681,35 @@ const commonContext = {
 			".joe_aside_post, .joe_aside .joe_aside__item:last-child"
 		);
 		const headerHeight = $joeHeader.height();
-		const offset1 = headerHeight + 15;
-		const offset2 = headerHeight - 60 + 15;
+		if ($effectEl) {
+			var offset1 = headerHeight + 15;
+			var offset2 = headerHeight - 60 + 15;
+		}
 
 		const handleHeader = () => {
-			if (window.tocPhase) return;
-			last_scroll_position = window.scrollY;
-			if (
-				new_scroll_position < last_scroll_position &&
-        last_scroll_position > headerHeight
+			// if (window.tocPhase) return;
+			// last_scroll_position = window.scrollY;
+			// if (
+			// 	new_scroll_position < last_scroll_position &&
+			//   last_scroll_position > headerHeight
+			// ) {
+			// 	$joeHeader.removeClass("active");
+			// 	$effectEl && $effectEl.css("top", offset2);
+			// } else if (new_scroll_position > last_scroll_position) {
+			// 	$joeHeader.addClass("active");
+			// 	$effectEl && $effectEl.css("top", offset1);
+			// }
+			// new_scroll_position = last_scroll_position;
+
+      	if (
+				Math.abs(document.querySelector("body").getBoundingClientRect().top)> headerHeight
 			) {
-				$joeHeader.removeClass("active");
-				$effectEl && $effectEl.css("top", offset2);
-			} else if (new_scroll_position > last_scroll_position) {
 				$joeHeader.addClass("active");
 				$effectEl && $effectEl.css("top", offset1);
+			} else {
+				$joeHeader.removeClass("active");
+				$effectEl && $effectEl.css("top", offset2);
 			}
-			new_scroll_position = last_scroll_position;
 		};
 
 		// document.addEventListener("scroll", Utils.throttle(handleHeader, 100));
@@ -704,31 +719,32 @@ const commonContext = {
 	initMathjax() {
 		const enable_mathjax =
       PageAttrs.metas.enable_mathjax &&
-      PageAttrs.metas.enable_mathjax.trim() != "" ?
-      	PageAttrs.metas.enable_mathjax.trim() :
-      	ThemeConfig.enable_mathjax;
+      PageAttrs.metas.enable_mathjax.trim() != ""
+      	? PageAttrs.metas.enable_mathjax.trim()
+      	: ThemeConfig.enable_mathjax;
 		if (/^true$/.test(enable_mathjax) && window.katex) {
 			renderMathInElement(document.body, {
-				delimiters: [{
-					left: "$$",
-					right: "$$",
-					display: true,
-				},
-				{
-					left: "$",
-					right: "$",
-					display: false,
-				},
-				{
-					left: "\\(",
-					right: "\\)",
-					display: false,
-				},
-				{
-					left: "\\[",
-					right: "\\]",
-					display: true,
-				},
+				delimiters: [
+					{
+						left: "$$",
+						right: "$$",
+						display: true,
+					},
+					{
+						left: "$",
+						right: "$",
+						display: false,
+					},
+					{
+						left: "\\(",
+						right: "\\)",
+						display: false,
+					},
+					{
+						left: "\\[",
+						right: "\\]",
+						display: true,
+					},
 				],
 				throwOnError: false,
 			});
@@ -869,9 +885,9 @@ const commonContext = {
 			return;
 		}
 		const birthDay = new Date(
-			/^\d+$/g.test(ThemeConfig.birthday) ?
-				+ThemeConfig.birthday :
-				ThemeConfig.birthday
+			/^\d+$/g.test(ThemeConfig.birthday)
+				? +ThemeConfig.birthday
+				: ThemeConfig.birthday
 		);
 		const $day = $(".joe_run__day");
 		const $hour = $(".joe_run__hour");
@@ -952,7 +968,9 @@ const commonContext = {
 		if (omits.length === 1) {
 			commonContext[omits[0]]();
 		} else {
-			omits.forEach((c) => c !== "loadingBar" && commonContext[c] && commonContext[c]());
+			omits.forEach(
+				(c) => c !== "loadingBar" && commonContext[c] && commonContext[c]()
+			);
 		}
 	});
 })();
