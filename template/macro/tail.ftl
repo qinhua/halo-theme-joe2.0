@@ -12,9 +12,6 @@
   <#if type == 'index' && settings.enable_banner == true>
     <script src="${BASE_RES_URL!}/source/lib/swiper/swiper.min.js"></script>
   </#if>
-  <#if type == 'post' || type == 'journals' || type == 'sheet'>
-    <script src="${BASE_RES_URL!}/source/lib/prism/prism.min.js"></script>
-  </#if>
   <#if type == 'post' && settings.enable_toc == true>
     <script src="${BASE_RES_URL!}/source/lib/tocbot/tocbot.min.js"></script>
   </#if>
@@ -58,6 +55,9 @@
 
   <#-- ===== 引入页面级js start ===== -->
   <script src="${BASE_RES_URL}/source/js/min/common.min.js?v=${theme.version!}"></script>
+  <#if type == 'post' || type == 'journals' || type == 'sheet'>
+    <script src="${BASE_RES_URL!}/source/lib/prism/prism.min.js"></script>
+  </#if>
   <#if type == 'index'>
     <script src="${BASE_RES_URL}/source/js/min/index.min.js?v=${theme.version!}"></script>
   </#if>
