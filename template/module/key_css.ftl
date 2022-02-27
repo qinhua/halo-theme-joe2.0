@@ -52,6 +52,7 @@
     --loading-bar: ${lbar_light_color!"var(--theme)"};
     --img-max-width: ${img_max_width};
     font-family: "Joe Font", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
+    --res-url: '${BASE_RES_URL}';
   }
   html[data-mode='dark'] body {
     --theme: ${settings.mode_color_dark!"#9999ff"};
