@@ -1,9 +1,8 @@
 <#import "../macro/search_part.ftl" as sp>
-<header class="joe_header${settings.enable_fixed_header?then(' active','')}${settings.enable_glass_blur?then(' glass','')}">
+<header class="joe_header">
   <#assign logo_link=(settings.logo_link?? && settings.logo_link!='')?then((settings.logo_link=='#')?then('javascript:;',settings.logo_link), blog_url)>
   <#--  web菜单  -->
-  <#--  <div class="joe_header__above${settings.enable_show_in_up?then(' animated showInDown','')}">  -->
-  <div class="joe_header__above">
+  <div class="joe_header__above${settings.enable_show_in_up?then(' topInDown','')}${settings.enable_fixed_header?then(' fixed','')}${(settings.enable_fixed_header && settings.enable_glass_blur)?then(' glass','')}">
     <div class="joe_container joe_header_container${settings.enable_full_header?then(' full','')}">
       <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
       <#if settings.show_logo>
