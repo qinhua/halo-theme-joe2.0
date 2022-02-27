@@ -623,16 +623,19 @@ const commonContext = {
 			/* 处理开启关闭状态 */
 			const $html = $("html");
 			const $mask = $(".joe_header__mask");
+			const $header_above = $(".joe_header__above");
 			const $search_out = $(".joe_header__searchout");
 			if ($search_out.hasClass("active")) {
 				$html.removeClass("disable-scroll");
 				$mask.removeClass("active slideout");
 				$search_out.removeClass("active");
+				$header_above.removeClass("solid");
 			} else {
 				// 保存滚动位置
 				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
 				$html.addClass("disable-scroll");
 				$mask.addClass("active");
+				$header_above.addClass("solid");
 				$search_out.addClass("active");
 			}
 		});
@@ -647,6 +650,7 @@ const commonContext = {
 				$(".joe_header__mask").removeClass("active slideout");
 				$(".joe_header__searchout").removeClass("active");
 				$(".joe_header__slideout").removeClass("active");
+				$(".joe_header__above").removeClass("solid");
 				// 还原滚动位置
 				const lastScroll = window.sessionStorage.getItem("lastScroll");
 				lastScroll && $html.scrollTop(lastScroll);
@@ -681,26 +685,28 @@ const commonContext = {
 		if (Joe.isMobile || ThemeConfig.enable_fixed_header) return;
 		let last_scroll_position = 0;
 		let new_scroll_position = 0;
-		const $joeHeader = $(".joe_header");
+		const $joeHeader = $(".joe_header__above");
 		const $effectEl = $(
 			".joe_aside_post, .joe_aside .joe_aside__item:last-child"
 		);
 		const headerHeight = $joeHeader.height();
-		const offset1 = headerHeight + 15;
-		const offset2 = headerHeight - 60 + 15;
+		if ($effectEl) {
+			var offset1 = headerHeight + 15;
+			var offset2 = headerHeight - 60 + 15;
+		}
 
 		const handleHeader = () => {
 			if (window.tocPhase) return;
 			last_scroll_position = window.scrollY;
 			if (
 				new_scroll_position < last_scroll_position &&
-        last_scroll_position > headerHeight
+			  last_scroll_position > headerHeight
 			) {
-				$joeHeader.removeClass("active");
-				$effectEl.css("top", offset2);
-			} else if (new_scroll_position > last_scroll_position) {
 				$joeHeader.addClass("active");
-				$effectEl.css("top", offset1);
+				$effectEl && $effectEl.css("top", offset2);
+			} else if (new_scroll_position > last_scroll_position) {
+				$joeHeader.removeClass("active");
+				$effectEl && $effectEl.css("top", offset1);
 			}
 			new_scroll_position = last_scroll_position;
 		};
