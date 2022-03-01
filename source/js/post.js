@@ -101,7 +101,7 @@ const postContext = {
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
 			const appendLink = ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
-          `\r\n\r\n====================================<br>作者：${author}<br>来源：${ThemeConfig.blog_title}<br>链接：${curl}<br>版权声明：内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+          `\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "";
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
@@ -114,7 +114,7 @@ const postContext = {
 				newdiv.style.position = "absolute";
 				newdiv.style.left = "-99999px";
 				body_element.appendChild(newdiv);
-				newdiv.innerHTML = copytext;
+				newdiv.innerText = copytext;
 				selection.selectAllChildren(newdiv);
 				setTimeout(function () {
 					body_element.removeChild(newdiv);

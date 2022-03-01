@@ -587,6 +587,7 @@ location / {
 - [Halo](https://halo.run)
 - [Typecho Themes Joe](https://github.com/HaoOuBa/Joe)
 - [halo-live2d](https://github.com/LIlGG/halo-live2d)
+- [halo-comment-joe2.0](https://github.com/qinhua/halo-comment-joe2.0)
 - [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura)
 - [halo-theme-sagari](https://github.com/cetr/halo-theme-sagiri)
 
