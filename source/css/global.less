@@ -1432,6 +1432,7 @@ body {
 
         &.active {
           color: var(--theme);
+          font-weight: bold;
         }
       }
 
@@ -5514,6 +5515,20 @@ body {
         font-size: 14px;
         color: #f18651;
       }
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 2;
+    box-shadow: -2px 0 4px 0 var(--classG);
+  }
+
+  &.full {
+    .joe_container {
+      max-width: 100% !important;
     }
   }
 }

@@ -354,33 +354,19 @@ navbar:
       type: switch
       data-type: bool
       default: true
-      description: "开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示）"
+      description: "开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示，移动端强制吸顶展示）"
       options:
         - value: true
           label: 是
         - value: false
           label: 否
-    # header_position:
-    #   name: header_position
-    #   label: 导航条位置
-    #   type: select
-    #   data-type: text
-    #   default: auto
-    #   description: "设置页面滚动时导航条的位置，默认为 “自动”。（主题提供了 3 种模式，自动：根据滚动方向自动显示/隐藏导航条；吸顶：滚动时总是固定在可视区域顶部；初始：滚动时保持导航条原始的位置不变）"
-    #   options:
-    #     - value: auto
-    #       label: 自动（推荐）
-    #     - value: sticky
-    #       label: 吸顶
-    #     - value: origin
-    #       label: 初始
     enable_full_header:
       name: enable_full_header
       label: 100%宽度
       type: switch
       data-type: bool
       default: false
-      description: "导航条宽度是否100%"
+      description: "导航条宽度是否100%，默认和内容区域宽度一致"
       options:
         - value: true
           label: 是
@@ -480,6 +466,29 @@ footer:
       type: switch
       data-type: bool
       default: true
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    footer_position:
+      name: footer_position
+      label: 页脚位置
+      type: radio
+      data-type: string
+      default: none
+      options:
+        - value: none
+          label: 默认位置
+        - value: fixed
+          label: 底部固定
+    enable_full_footer:
+      name: enable_full_footer
+      label: 100%宽度
+      type: switch
+      data-type: bool
+      default: false
+      description: "页脚宽度是否100%，默认和内容区域宽度一致"
       options:
         - value: true
           label: 是
@@ -3291,64 +3300,6 @@ comment:
       placeholder: 请输入
       description: "没有评论数据时显示的文字"
 
-# 自定义
-custom:
-  label: 自定义
-  items:
-    favicon:
-      name: favicon
-      label: 自定义favicon
-      type: attachment
-      default: ""
-      description: "覆盖博客默认的favicon图标，尺寸64*64，格式jpg、png等"
-    custom_font:
-      name: custom_font
-      label: "自定义网站字体"
-      type: attachment
-      description: "修改网站使用的字体，请填入字体文件的链接（考虑兼容，建议 woff/woff2 格式字体，最好放CDN链接，另外主题无法保证使用自定义字体后的页面样式)"
-    iconfont:
-      name: iconfont
-      label: "字体图标链接"
-      type: text
-      placeholder: 请输入
-      description: "填入iconfont生成的图标链接，无需link标签，将插入head标签尾部"
-    external_css:
-      name: external_css
-      label: "外部CSS链接"
-      type: text
-      placeholder: 请输入
-      description: "填入外部CSS链接，无需link标签，将插入head标签尾部"
-    custom_css:
-      name: custom_css
-      label: "自定义CSS"
-      type: textarea
-      placeholder: 请输入
-      description: "填入CSS代码，无需style标签，将插入head标签尾部"
-    custom_external_js_head:
-      name: custom_external_js_head
-      label: "外部JS链接（head）"
-      type: textarea
-      placeholder: 请输入
-      description: "填入外部JS链接，需要script标签，可按情况指定async和defer属性，将插入head标签尾部"
-    custom_js_head:
-      name: custom_js_head
-      label: "自定义JS（head）"
-      type: textarea
-      placeholder: 请输入
-      description: "填入JS代码，无需script标签，将插入head标签尾部"
-    custom_external_js_body:
-      name: custom_external_js_body
-      label: "外部JS链接（body）"
-      type: text
-      placeholder: 请输入
-      description: "填入外部JS链接，无需script标签，将插入body标签尾部（可用于添加插件等）"
-    custom_js_body:
-      name: custom_js_body
-      label: "自定义JS（body）"
-      type: textarea
-      placeholder: 请输入
-      description: "填入JS代码，无需script标签，将插入body标签尾部"
-
 # 广告位
 advertise:
   label: 广告位
@@ -3428,6 +3379,64 @@ advertise:
       default: ""
       placeholder: 请输入
       description: "和 “广告图片URL” 组合生效，不填不展示"
+
+# 自定义
+custom:
+  label: 自定义
+  items:
+    favicon:
+      name: favicon
+      label: 自定义favicon
+      type: attachment
+      default: ""
+      description: "覆盖博客默认的favicon图标，尺寸64*64，格式jpg、png等"
+    custom_font:
+      name: custom_font
+      label: "自定义网站字体"
+      type: attachment
+      description: "修改网站使用的字体，请填入字体文件的链接（考虑兼容，建议 woff/woff2 格式字体，最好放CDN链接，另外主题无法保证使用自定义字体后的页面样式)"
+    iconfont:
+      name: iconfont
+      label: "字体图标链接"
+      type: text
+      placeholder: 请输入
+      description: "填入iconfont生成的图标链接，无需link标签，将插入head标签尾部"
+    external_css:
+      name: external_css
+      label: "外部CSS链接"
+      type: text
+      placeholder: 请输入
+      description: "填入外部CSS链接，无需link标签，将插入head标签尾部"
+    custom_css:
+      name: custom_css
+      label: "自定义CSS"
+      type: textarea
+      placeholder: 请输入
+      description: "填入CSS代码，无需style标签，将插入head标签尾部"
+    custom_external_js_head:
+      name: custom_external_js_head
+      label: "外部JS链接（head）"
+      type: textarea
+      placeholder: 请输入
+      description: "填入外部JS链接，需要script标签，可按情况指定async和defer属性，将插入head标签尾部"
+    custom_js_head:
+      name: custom_js_head
+      label: "自定义JS（head）"
+      type: textarea
+      placeholder: 请输入
+      description: "填入JS代码，无需script标签，将插入head标签尾部"
+    custom_external_js_body:
+      name: custom_external_js_body
+      label: "外部JS链接（body）"
+      type: text
+      placeholder: 请输入
+      description: "填入外部JS链接，无需script标签，将插入body标签尾部（可用于添加插件等）"
+    custom_js_body:
+      name: custom_js_body
+      label: "自定义JS（body）"
+      type: textarea
+      placeholder: 请输入
+      description: "填入JS代码，无需script标签，将插入body标签尾部"
 
 # 其它
 others:

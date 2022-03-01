@@ -88,6 +88,12 @@ const commonContext = {
 		// 高亮移动端
 		$nav_side_menus.eq(activeIndex).addClass("current");
 	},
+	/* 页脚位置 */
+	initFooter() {
+		if (!ThemeConfig.enable_footer || ThemeConfig.footer_position !== "fixed")
+			return;
+		$("#Joe").css("margin-bottom", $(".joe_footer").height() + 30);
+	},
 	/* 初始化评论主题 */
 	initCommentTheme() {
 		const comments = document.getElementsByTagName("halo-comment");
@@ -700,7 +706,7 @@ const commonContext = {
 			last_scroll_position = window.scrollY;
 			if (
 				new_scroll_position < last_scroll_position &&
-			  last_scroll_position > headerHeight
+        last_scroll_position > headerHeight
 			) {
 				$joeHeader.addClass("active");
 				$effectEl && $effectEl.css("top", offset2);
