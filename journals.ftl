@@ -40,8 +40,7 @@
                   <li class="joe_journal__item animated wow" data-wow-delay="0.${journal_index}s" data-cid="${journal.id?c}" data-clikes="${journal.likes}">
                     <p class="joe_journal_date">
                       <i class="joe-font joe-icon-feather"></i>
-                      <em class="joe_journal-posttime">${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}</em>
-                      <#--  <@global.timeline datetime=journal.createTime />  -->
+                      <em class="joe_journal-posttime">${journal.createTime?string('yyyy/MM/dd HH:mm:ss')}</em>
                     </p>
                     <div class="joe_journal_block">
                       <div class="joe_journal_body${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}" style="max-height:${settings.journal_block_height!300}px">

@@ -18,7 +18,7 @@ const journalContext = {
 		const $allJournalTime = $(".joe_journal-posttime");
 		$allJournalTime.each(function () {
 			const $this = $(this);
-			$this.html(Utils.timeAgo($this.text().replace(/-/g, "/")));
+			$this.html(Utils.timeAgo($this.text()));
 		});
 	},
 	/* 点赞 */
