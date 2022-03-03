@@ -7,7 +7,6 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <#include "template/module/post_bread.ftl">
-      <#--  <div class="joe_container joe_main_container page-post${(settings.aside_position=='left')?then(' revert','')}">  -->
       <div class="joe_container joe_main_container page-post${settings.enable_show_in_up?then(' animated fadeIn','')}">
         <div class="joe_main joe_post">
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id?c}" data-clikes="${post.likes?c}" data-author="${user.nickname!}">
@@ -50,7 +49,8 @@
                 <time class="joe_detail__count-created" datetime="${post.createTime?string('MM/dd')}">${post.createTime?string('MM/dd')}</time>
               </div>
               <div class="joe_detail__overdue">
-                <#if settings.enable_passage_tips>
+              <#assign enable_passage_tips = (metas?? && metas.enable_passage_tips?? && metas.enable_passage_tips?trim!='')?then(metas.enable_passage_tips?trim,'true')>
+                <#if (settings.enable_passage_tips && enable_passage_tips == 'true') || (settings.enable_passage_tips==false && enable_passage_tips == 'true')>
                   <div class="joe_detail__overdue-wrapper">
                     <div class="title">
                       <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">

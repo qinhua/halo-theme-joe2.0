@@ -15,76 +15,78 @@ const postContext = {
 				$hideMark = $lastOne;
 				$("joe-hide:not(.marker)").parent().remove();
 			}
+			// 判断是否禁用
+			if (!$hideMark.attr("disabled")) {
+				// 2.设置data-partial属性
+				$content.attr("data-partial", "true");
 
-			// 2.设置data-partial属性
-			$content.attr("data-partial", "true");
+				// 暂存并移除相关DOM
+				const hideDom = () => {
+					const $hideDom = $hideMark.parent().nextAll();
+					tmpDom = $hideDom;
+					$hideDom.remove();
 
-			// 暂存并移除相关DOM
-			const hideDom = () => {
-				const $hideDom = $hideMark.parent().nextAll();
-				tmpDom = $hideDom;
-				$hideDom.remove();
+					// 监听评论成功事件（区分首次和后续提交）
+					const commentNode = document.getElementsByTagName("halo-comment")[0];
+					commentNode.addEventListener("post-success", (_data) => {
+						// console.log(_data, "评论成功");
+						// 检查是否已经评论过该文章
+						checkPartialIds(cid, updateState);
+					});
+				};
 
-				// 监听评论成功事件（区分首次和后续提交）
-				const commentNode = document.getElementsByTagName("halo-comment")[0];
-				commentNode.addEventListener("post-success", (_data) => {
-					// console.log(_data, "评论成功");
-					// 检查是否已经评论过该文章
-					checkPartialIds(cid, updateState);
-				});
-			};
+				// 检查本地的 partialIds
+				const checkPartialIds = (postId, cb) => {
+					const localIds = localStorage.getItem("partialIds");
+					if (localIds && localIds.includes(postId)) {
+						// console.log("已经评论过了");
+						$("joe-hide").parent().remove(); // 移除内容中所有 joe-hide 组件
+					} else {
+						// console.log("没有评论记录");
+						cb && cb(postId);
+					}
+				};
 
-			// 检查本地的 partialIds
-			const checkPartialIds = (postId, cb) => {
-				const localIds = localStorage.getItem("partialIds");
-				if (localIds && localIds.includes(postId)) {
-					// console.log("已经评论过了");
-					$("joe-hide").parent().remove(); // 移除内容中所有 joe-hide 组件
-				} else {
-					// console.log("没有评论记录");
-					cb && cb(postId);
-				}
-			};
+				// 重新渲染相关内容
+				const rerenderContent = () => {
+					// console.log("重新渲染内容");
+					// 代码块
+					commonContext.initCode(true);
+					// 图片预览
+					commonContext.initGallery();
+					// PDF预览
+					commonContext.initPDF();
+					// TOC
+					tocbot.refresh();
+				};
 
-			// 重新渲染相关内容
-			const rerenderContent = () => {
-				// console.log("重新渲染内容");
-				// 代码块
-				commonContext.initCode(true);
-				// 图片预览
-				commonContext.initGallery();
-				// PDF预览
-				commonContext.initPDF();
-				// TOC
-				tocbot.refresh();
-			};
+				// 更新当前评论状态
+				const updateState = async () => {
+					const localIds = localStorage.getItem("partialIds");
+					const offsetTop = $hideMark.offset().top;
 
-			// 更新当前评论状态
-			const updateState = async () => {
-				const localIds = localStorage.getItem("partialIds");
-				const offsetTop = $hideMark.offset().top;
+					await Utils.sleep(800);
+					tmpDom.replaceAll($hideMark.parent());
+					localStorage.setItem(
+						"partialIds",
+						localIds ? localIds + "," + cid : cid
+					);
+					tmpDom = null;
+					rerenderContent();
 
-				await Utils.sleep(800);
-				tmpDom.replaceAll($hideMark.parent());
-				localStorage.setItem(
-					"partialIds",
-					localIds ? localIds + "," + cid : cid
-				);
-				tmpDom = null;
-				rerenderContent();
+					// 滚动到原位置
+					const scrollTop = offsetTop - 150;
+					$("html").animate(
+						{
+							scrollTop,
+						},
+						0
+					);
+				};
 
-				// 滚动到原位置
-				const scrollTop = offsetTop - 150;
-				$("html").animate(
-					{
-						scrollTop,
-					},
-					0
-				);
-			};
-
-			// 3.检查本地的partialIds
-			checkPartialIds(cid, hideDom);
+				// 3.检查本地的partialIds
+				checkPartialIds(cid, hideDom);
+			}
 		}
 
 		// 4.显示文章内容
@@ -223,7 +225,7 @@ const postContext = {
 			ignoreSelector: ".js-toc-ignore",
 			headingSelector: "h1, h2, h3, h4, h5, h6",
 			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
-			hasInnerContainers: false,
+			hasInnerContainers: true,
 			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
 			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
@@ -314,9 +316,9 @@ const postContext = {
 		try {
 			const commentEl = document.getElementsByTagName("halo-comment");
 			if (!commentEl) return;
-			const el = $(
-				commentEl[0].shadowRoot.getElementById("halo-comment")
-			).find("#comment-" + commentId);
+			const el = $(commentEl[0].shadowRoot.getElementById("halo-comment")).find(
+				"#comment-" + commentId
+			);
 			if (!el) return;
 			const offsetTop = el.offset().top - 50;
 			// 滚动到指定位置
@@ -333,7 +335,6 @@ const postContext = {
 				postId ? `?p=${postId}` : location.origin + location.pathname
 			);
 			tocbot.refresh();
-      
 		} catch (error) {
 			console.error(error);
 		}
