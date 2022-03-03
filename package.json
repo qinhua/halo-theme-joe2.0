@@ -1,6 +1,6 @@
 {
   "name": "halo-theme-joe2.0",
-  "version": "1.0.9-alpha",
+  "version": "1.0.9",
   "description": "A halo theme joe2.0",
   "main": "index.js",
   "author": "BabyChin",
@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/qinhua/halo-theme-joe2.0#readme",
   "contributors": [
+    "Baby Chin",
     "Ryan Wang"
   ],
   "devDependencies": {

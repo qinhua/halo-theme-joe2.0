@@ -241,7 +241,7 @@ theme:
       label: 开启模块缓入效果（全局）
       type: switch
       data-type: bool
-      default: false
+      default: true
       description: "开启后，当页面载入时，页面中的模块会有缓入动画"
       options:
         - value: true
@@ -1374,7 +1374,8 @@ home:
       name: random_img_api
       label: 随机图 API
       type: text
-      default: "https://tu.ltyuanfang.cn/api/fengjing.php"
+      # default: "https://tu.ltyuanfang.cn/api/fengjing.php"
+      default: "https://bing.ioliu.cn/v1/rand?w=400&h=300"
       description: "自定义随机图API，用于填充没有设置封面的 “文章|分类|标签”，为空则使用默认随机图 API，免费 API 不会一直可用，请知悉"
     enable_index_list_effect:
       name: enable_index_list_effect
