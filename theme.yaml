@@ -8,13 +8,13 @@ logo: https://bbchin.com/logo
 website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
 cover: https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg
-version: 1.0.9-alpha
+version: 1.0.9
 require: ^1.4.11
 # 文章页 meta 变量
 postMetaField:
-  - enable_aside
-  - enable_comment
+  - enable_passage_tips
   - enable_collect_check
+  - enable_comment
   - enable_toc
   - toc_depth
   - img_align
@@ -33,7 +33,8 @@ sheetMetaField:
   - enable_page_meta
   - enable_collect_check
   - enable_comment
+  - img_align
+  - img_max_width
   - enable_mathjax
   - enable_mermaid
-  - img_align
   # - show_thumbnail
