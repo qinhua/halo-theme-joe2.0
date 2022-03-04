@@ -1,4 +1,4 @@
-# 文本元素
+### 文本元素
 
 ---
 
@@ -42,7 +42,7 @@
 <joe-mtitle title="牛鞭牛鞭"></joe-mtitle>
 ```
 
-# 代码元素
+### 代码元素
 
 ---
 
@@ -74,7 +74,7 @@
 }
 ```
 
-# 列表元素
+### 列表元素
 
 ---
 
@@ -102,7 +102,7 @@
 - [ ] 锻炼
 - [ ] 睡觉
 
-# 表格元素
+### 表格元素
 
 ---
 
@@ -124,7 +124,7 @@
 | -----: | -----: | -----: |
 | 内容 1 | 内容 2 | 内容 3 |
 
-# 按钮元素
+### 按钮元素
 
 ---
 
@@ -221,7 +221,7 @@
 <joe-cloud type="lz" url="" password=""></joe-cloud>
 ```
 
-# 装饰元素
+### 装饰元素
 
 ---
 
@@ -271,7 +271,7 @@
 
 😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷🙁🙂🙃🙄🤐🤑🤒🤓🤔🤕🤠🤡🤢🤣🤤🤥🤧🤨🤩🤪🤫🤬🤭🤮🤯🧐😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀🙁🙂🙃🙄
 
-# 媒体元素
+### 媒体元素
 
 ---
 
@@ -321,7 +321,7 @@
 <joe-music id="1303046498"></joe-music>
 ```
 
-# 提示元素
+### 提示元素
 
 ---
 
@@ -339,17 +339,6 @@
 <joe-message type="error" content="错误消息"></joe-message>
 ```
 
-#### Tabs 标签页
-
-<joe-tabs>
-<span class="_temp" style="display: none"><br>{tabs-pane label="标签一"}<pre class="  language-html" tabindex="0"><code class="  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>啊哈哈哈哈我是大傻逼！<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code><span class="copy"><i class="fa fa-clone"></i></span></pre><p>{/tabs-pane}<br>{tabs-pane label="标签二"}</p><ul><li>啊啊啊啊啊！</li><li>哦哦哦哦哦？</li><li>哈哈哈哈哈！<br>{/tabs-pane}<br></li></ul></span><span class="_content" style="display: block;">
-                <div class="joe_tabs">
-                    <div class="joe_tabs__head"><div class="joe_tabs__head-item active" label="标签一">标签一</div><div class="joe_tabs__head-item" label="标签二">标签二</div></div>
-                    <div class="joe_tabs__body"><div style="display: block;" class="joe_tabs__body-item" label="标签一"><pre class="  language-html" tabindex="0"><code class="  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>啊哈哈哈哈我是大傻逼！<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code><span class="copy"><i class="fa fa-clone"></i></span></pre></div><div style="display: none;" class="joe_tabs__body-item" label="标签二"><ul><li>啊啊啊啊啊！</li><li>哦哦哦哦哦？</li><li>哈哈哈哈哈！</li></ul></div></div>
-                </div>
-            </span>
-</joe-tabs>
-
-# 注意事项！！！
+### 注意事项！！！
 
 以上大部分为 `webcomponents` 组件，且仅在使用 `halo-theme-joe2.0` 主题时才能生效，请根据实际情况使用。
