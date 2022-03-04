@@ -150,32 +150,33 @@
 
   .toc {
     position: relative;
-    padding: 10px 0 20px;
     user-select: none;
     min-height: 50px;
     max-height: calc(100vh - 150px);
     overflow-y: auto;
 
-    &::after {
-      position: absolute;
-      content: "";
-      left: 16px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--classB);
-    }
 
-    > .toc-list {
+
+    >.toc-list {
       position: relative;
-      padding: 0 12px 0 36px;
+      padding: 10px 12px 20px 36px;
       overflow: hidden;
+
+      &::after {
+        position: absolute;
+        content: "";
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--classB);
+      }
 
       li {
         list-style: none;
       }
 
-      & > li > a {
+      &>li>a {
         font-weight: bold;
 
         &::before {
@@ -184,6 +185,7 @@
           content: "";
           left: -25px;
           top: 4px;
+          z-index: 1;
           width: 8px;
           height: 8px;
           background: var(--background);
@@ -281,7 +283,7 @@
   z-index: 10;
   user-select: none;
 
-  > li {
+  >li {
     position: relative;
     cursor: pointer;
     width: 44px;
@@ -314,6 +316,7 @@
       color: var(--classD);
       background-color: var(--theme);
       border-radius: 10px;
+
       &.visible {
         display: block;
       }
