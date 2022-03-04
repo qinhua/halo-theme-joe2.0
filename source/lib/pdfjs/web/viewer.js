@@ -1,4 +1,5 @@
 /**
+ * 注释了PDF浏览历史的功能
  * @licstart The following is the entire license notice for the
  * Javascript code in this page
  *
@@ -13537,7 +13538,8 @@ class ViewHistory {
     this.fingerprint = fingerprint;
     this.cacheSize = cacheSize;
     this._initializedPromise = this._readFromStorage().then(databaseStr => {
-      const database = JSON.parse(databaseStr || "{}");
+      // const database = JSON.parse(databaseStr || "{}");
+      const database = {};
       let index = -1;
 
       if (!Array.isArray(database.files)) {
@@ -13570,7 +13572,7 @@ class ViewHistory {
 
   async _writeToStorage() {
     const databaseStr = JSON.stringify(this.database);
-    localStorage.setItem("pdfjs.history", databaseStr);
+    // localStorage.setItem("pdfjs.history", databaseStr);
   }
 
   async _readFromStorage() {
@@ -13642,7 +13644,7 @@ exports.GenericCom = GenericCom;
 
 class GenericPreferences extends _preferences.BasePreferences {
   async _writeToStorage(prefObj) {
-    localStorage.setItem("pdfjs.preferences", JSON.stringify(prefObj));
+    // localStorage.setItem("pdfjs.preferences", JSON.stringify(prefObj));
   }
 
   async _readFromStorage(prefObj) {

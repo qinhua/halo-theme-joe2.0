@@ -578,25 +578,25 @@ var Utils = {
 		return currentLang;
 	},
 	/* 获取URL中带的链接参数
- * @param search 链接后缀
- * @return {{}} 对象
- */
-	getUrlParams () {
+   * @param search 链接后缀
+   * @return {{}} 对象
+   */
+	getUrlParams() {
 		var search = location.search;
- 
+
 		// 判断是否为字符串类型
 		if (typeof search !== "string") {
 			search = search.toString();
 		}
- 
+
 		var paramsSplit = search.replace(/^[^\?]*\?/i, "").split(/&/);
 		var params = {};
- 
+
 		// 数据为空
 		if (paramsSplit.length < 1) {
 			return params;
 		}
- 
+
 		if (Array.isArray(paramsSplit)) {
 			paramsSplit.forEach(function (item) {
 				// 数据为空, 退出方法
@@ -604,9 +604,10 @@ var Utils = {
 					return false;
 				}
 				var itemSplit = item.split(/=/);
- 
+
 				// 判断字符串中是否有多个=
-				if (itemSplit.length >= 2) { // 是
+				if (itemSplit.length >= 2) {
+					// 是
 					var key = itemSplit.splice(0, 1);
 					params[key] = itemSplit.join("=");
 				}
@@ -615,23 +616,36 @@ var Utils = {
 		return params;
 	},
 	/* 请求封装 */
-	request(url, method = "GET", data) {
+	request({
+		url = "",
+		method = "GET",
+		data,
+		headers = {},
+		timeout = 10000,
+		returnRaw = false,
+	}) {
 		return new Promise((resolve, reject) => {
+			method = method.toUpperCase();
 			$.ajax({
-				url: `${url}?_r=${Date.now()}`,
-				type: method.toUpperCase(),
+				url: `${url}${method === "GET" ? `${url.indexOf("?")===-1?"?":"&"}_r=${Date.now()}` : ""}`,
+				type: method,
 				headers: {
 					"API-Authorization": ThemeConfig.access_key || "joe2.0",
+					...headers,
 				},
 				async: true,
 				dataType: "json",
-				timeout: 10000,
+				timeout,
 				data,
 				success(res) {
-					if (res.status === 200) {
-						resolve(res.data || "");
+					if (returnRaw) {
+						resolve(res);
 					} else {
-						reject(res);
+						if (res.status === 200) {
+							resolve(res.data || "");
+						} else {
+							reject(res);
+						}
 					}
 				},
 				error(err) {
@@ -642,7 +656,7 @@ var Utils = {
 						: "出错了！";
 					Qmsg.error(errMsg);
 					reject(errMsg);
-				}
+				},
 			});
 		});
 	},

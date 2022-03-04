@@ -6,10 +6,15 @@ const leavingContext = {
 		const $leavingList = $(".joe_leaving-list");
 		const $leavingNone = $(".joe_leaving-none");
 		const $leavingLoading = $(".joe_loading");
-		Utils.request(`/api/content/sheets/${sheetId}/comments/top_view`, "GET", {
-			page: 0,
-			// size: ThemeConfig.leaving_card_max,
-			sort: "createTime,desc",
+
+		Utils.request({
+			url: `/api/content/sheets/${sheetId}/comments/top_view`,
+			method: "GET",
+			data: {
+				page: 0,
+				// size: ThemeConfig.leaving_card_max,
+				sort: "createTime,desc",
+			},
 		})
 			.then((res) => {
 				if (res.total) {
@@ -69,7 +74,7 @@ const leavingContext = {
 	setEmptyText() {
 		if (
 			!$(".joe_leaving-none.tpl").length ||
-			!ThemeConfig.leaving_empty_text ||
+      !ThemeConfig.leaving_empty_text ||
       ThemeConfig.leaving_empty_text.trim() === "暂无留言，期待第一个脚印。"
 		)
 			return;

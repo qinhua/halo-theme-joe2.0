@@ -130,8 +130,13 @@ const homeContext = {
 			$domLoad.attr("loading", true).html("加载中...");
 			$domLoading.show();
 			await Utils.sleep(200);
+      
 			return new Promise((reslove, reject) => {
-				Utils.request("/api/content/posts", "GET", queryData)
+				Utils.request({
+					url: "/api/content/posts",
+					method: "GET",
+					data: queryData,
+				})
 					.then((res) => {
 						const resD = res.content;
 						if (resD.length === 0) {
@@ -255,7 +260,7 @@ const homeContext = {
 			const lastItemTop = $domList.find(".joe_list__item:last").offset().top;
 			queryData.page++;
 			await getDate();
-      
+
 			// 向下滚动一段距离
 			await Utils.sleep(300);
 			const scrollTop = lastItemTop - $headerHeight;

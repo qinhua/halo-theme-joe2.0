@@ -203,14 +203,15 @@ const commonContext = {
 	initBaidu() {
 		if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
 			return;
-		$.ajax({
+		Utils.request({
 			url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
-			type: "GET",
-			dataType: "json",
+			method: "GET",
+			returnRaw: true,
 			data: {
 				url: window.location.href,
 			},
-			success(res) {
+		})
+			.then((res) => {
 				if (res.data && res.data.collected) {
 					$("#joe_baidu_record").css("color", "#67c23a").html("已收录");
 				} else {
@@ -220,16 +221,17 @@ const commonContext = {
 							"<span style=\"color: #e6a23c\">未收录，推送中...</span>"
 						);
 						let _timer = setTimeout(function () {
-							$.ajax({
+							Utils.request({
 								url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
-								type: "POST",
-								dataType: "json",
+								method: "POST",
+								returnRaw: true,
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.baidu_token,
 									urls: window.location.href,
 								},
-								success(res) {
+							})
+								.then((res) => {
 									if (res.data.success === 0) {
 										$("#joe_baidu_record").html(
 											"<span style=\"color: #f56c6c\">推送失败，请检查！</span>"
@@ -239,8 +241,10 @@ const commonContext = {
 											"<span style=\"color: #67c23a\">推送成功！</span>"
 										);
 									}
-								},
-							});
+								})
+								.catch((err) => {
+									console.log(err);
+								});
 							clearTimeout(_timer);
 							_timer = null;
 						}, 1000);
@@ -253,20 +257,20 @@ const commonContext = {
 						);
 					}
 				}
-			},
-			error(err) {
+			})
+			.catch((err) => {
 				console.log(err);
-			},
-		});
+			});
 	},
 	/* 音乐播放器 */
 	initMusic() {
 		if (!ThemeConfig.enable_global_music_player) return;
-		$.ajax({
+		Utils.request({
 			url: `${ThemeConfig.music_api}?server=${ThemeConfig.music_source}&type=${ThemeConfig.music_player_type}&id=${ThemeConfig.music_list_id}`,
 			type: "GET",
-			dataType: "json",
-			success(res) {
+			returnRaw: true,
+		})
+			.then((res) => {
 				new APlayer({
 					container: document.getElementById("global-aplayer"),
 					fixed: true,
@@ -277,11 +281,9 @@ const commonContext = {
 					loop: ThemeConfig.music_loop_play,
 					audio: res,
 				});
-			},
-			error(err) {
+			}).catch(err=>{
 				console.log(err);
-			},
-		});
+			});
 	},
 	/* 渲染PDF */
 	initPDF() {
@@ -875,7 +877,9 @@ const commonContext = {
 	/* 总访问量 */
 	// initUV() {
 	// 	if (!ThemeConfig.enable_visit_number) return;
-	// 	Utils.request("/api/content/statistics/user", "GET").then((res) => {
+	// 	Utils.request({
+	// 		url: "/api/content/statistics/user",
+	// 	}).then((res) => {
 	// 		res && $("#site-uv").text(res.visitCount || 0);
 	// 	});
 	// },

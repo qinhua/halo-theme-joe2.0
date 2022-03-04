@@ -95,8 +95,7 @@ const photosContext = {
             	item.url
             }" data-fancybox="gallery" data-caption="${item.name || ""}">
       <img width="100%" height="100%" class="lazyload" rsrc="${
-	ThemeConfig.photo_lazyload_img ||
-        ThemeConfig.LAZY_IMG
+	ThemeConfig.photo_lazyload_img || ThemeConfig.LAZY_IMG
 }" src="${item.thumbnail}" alt="${item.name || ""}"/>
       <span class="team" style="background-color:${Utils.getRandomColor(
 		0.2,
@@ -160,7 +159,12 @@ const photosContext = {
 				$domLoading.show();
 				const params = { ...queryData, ...(param || {}) };
 				params.team === "" ? delete params.team : null;
-				Utils.request("/api/content/photos", "GET", params)
+
+				Utils.request({
+					url: "/api/content/photos",
+					method: "GET",
+					data: params,
+				})
 					.then((res) => {
 						const resD = res.content || [];
 						if (resD.length === 0) {
