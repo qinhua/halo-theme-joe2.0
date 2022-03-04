@@ -181,7 +181,7 @@ const postContext = {
 				? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 				: [];
 			flag = agreeArr.includes(cid);
-      
+
 			Utils.request({
 				url: "/api/content/posts/" + cid + "/likes",
 				method: "POST",
@@ -224,13 +224,16 @@ const postContext = {
 		)
 			return;
 		if (document.body.clientWidth <= 992) return;
+
 		tocbot.init({
 			tocSelector: "#js-toc",
 			contentSelector: ".joe_detail__article",
 			ignoreSelector: ".js-toc-ignore",
 			headingSelector: "h1, h2, h3, h4, h5, h6",
 			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
-			hasInnerContainers: true,
+			scrollSmooth: true,
+			// scrollSmoothDuration: 420,
+			hasInnerContainers: false,
 			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
 			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
@@ -245,6 +248,7 @@ const postContext = {
 				window.tocPhase = null;
 			},
 		});
+
 		// toc 菜单收起/展开
 		if (!$("#js-toc").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
@@ -350,7 +354,7 @@ const postContext = {
 	//     if (protectPassword.trim() === "") return Qmsg.info("请输入访问密码！");
 	//     if (isSubmit) return;
 	//     isSubmit = true;
-  
+
 	// 		Utils.request({
 	// 			url: url,
 	// 			method: "POST",
