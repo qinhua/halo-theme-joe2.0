@@ -25,14 +25,15 @@ const censusContext = {
 		if (flowDom && workDom) initChart();
 
 		function initChart() {
-			$.ajax({
+			Utils.request({
 				url: Joe.BASE_API,
 				type: "POST",
-				dataType: "json",
+				returnRaw: true,
 				data: {
 					routeType: "server_status",
 				},
-				success(res) {
+			})
+				.then((res) => {
 					if (!res.status) Qmsg.warning("服务器接口异常！");
 					{
 						$(".joe_census__server-item .count .core").html(`${res.cpu[1]} 核`);
@@ -236,8 +237,10 @@ const censusContext = {
 						});
 					}
 					setTimeout(initChart, 2000);
-				},
-			});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	},
 	/* 初始化分类统计 */
@@ -271,14 +274,16 @@ const censusContext = {
 	comment() {
 		const latelyDom = document.querySelector("#lately");
 		const latelyChart = echarts.init(latelyDom);
-		$.ajax({
+
+		Utils.request({
 			url: Joe.BASE_API,
 			type: "POST",
-			dataType: "json",
+			returnRaw: true,
 			data: {
 				routeType: "comment_lately",
 			},
-			success(res) {
+		})
+			.then((res) => {
 				latelyChart.setOption({
 					title: {
 						subtext: "单位 数量",
@@ -324,23 +329,27 @@ const censusContext = {
 						smooth: true,
 					},
 				});
-			},
-		});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	},
 	/* 初始化归档 */
 	archive() {
 		let page = 0;
 		function initFiling() {
 			if ($(".joe_census__filing .button").html() === "loading...") return;
-			$.ajax({
+
+			Utils.request({
 				url: Joe.BASE_API,
 				type: "POST",
-				dataType: "json",
+				returnRaw: true,
 				data: {
 					routeType: "article_filing",
 					page: ++page,
 				},
-				success(res) {
+			})
+				.then((res) => {
 					if (!res.length) {
 						$(".joe_census__filing .item.load").remove();
 						return Qmsg.warning("没有更多内容了");
@@ -369,8 +378,10 @@ const censusContext = {
 					});
 					$("#filing").append(htmlStr);
 					$(".joe_census__filing .button").html("加载更多");
-				},
-			});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 		initFiling();
 		$(".joe_census__filing .content").on("click", ".panel", function () {
@@ -387,11 +398,11 @@ const censusContext = {
 			initFiling();
 			$(this).html("loading...");
 		});
-	}
+	},
 };
 
-!(function () {
+!function () {
 	document.addEventListener("DOMContentLoaded", function () {
 		Object.keys(censusContext).forEach((c) => censusContext[c]());
 	});
-});
+};

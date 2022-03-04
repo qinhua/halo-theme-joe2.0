@@ -181,8 +181,13 @@ const postContext = {
 				? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 				: [];
 			flag = agreeArr.includes(cid);
-			Utils.request("/api/content/posts/" + cid + "/likes", "POST", {
-				type: flag ? "disagree" : "agree",
+      
+			Utils.request({
+				url: "/api/content/posts/" + cid + "/likes",
+				method: "POST",
+				data: {
+					type: flag ? "disagree" : "agree",
+				},
 			})
 				.then((_res) => {
 					let likes = clikes;
@@ -243,13 +248,8 @@ const postContext = {
 		// toc 菜单收起/展开
 		if (!$("#js-toc").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
-			// $(".toc-container").addClass("hide"); // 无目录时默认折叠
 		}
 		$(".toc-container").show();
-		// $(".toc-expander i").on("click", function (e) {
-		// 	e.stopPropagation();
-		// 	$(this).parents(".toc-container").toggleClass("hide");
-		// });
 	},
 	/**初始化左侧工具条 */
 	initAsideOperate() {
@@ -350,10 +350,15 @@ const postContext = {
 	//     if (protectPassword.trim() === "") return Qmsg.info("请输入访问密码！");
 	//     if (isSubmit) return;
 	//     isSubmit = true;
-	// 		Utils.request(url, "POST", {
-	// 			cid,
-	// 			protectCID: cid,
-	// 			protectPassword,
+  
+	// 		Utils.request({
+	// 			url: url,
+	// 			method: "POST",
+	// 			data: {
+	//     			cid,
+	//     			protectCID: cid,
+	//     			protectPassword,
+	//     		}
 	// 		})
 	// 			.then((_res) => {
 	//         let arr = [],
