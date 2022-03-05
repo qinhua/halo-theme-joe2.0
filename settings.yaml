@@ -909,7 +909,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在右侧展示公告信息模块，必须配置公告内容才生效（请在 '基本设置' 栏中配置）"
+      description: "在侧边栏展示公告信息模块，必须配置公告内容才生效（请在 '基本设置' 栏中配置）"
       options:
         - value: true
           label: 开启
@@ -921,7 +921,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在右侧展示二维码模块，必须配置图片url"
+      description: "在侧边栏展示二维码模块，必须配置图片url"
       options:
         - value: true
           label: 开启
@@ -949,7 +949,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在右侧展示二维码模块，必须配置图片url"
+      description: "在侧边栏展示二维码模块，必须配置图片url"
       options:
         - value: true
           label: 开启
@@ -961,7 +961,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在右侧展示音乐播放器模块，必须配置歌单ID"
+      description: "在侧边栏展示音乐播放器模块，必须配置歌单ID"
       options:
         - value: true
           label: 开启
@@ -978,7 +978,7 @@ aside:
       type: switch
       data-type: bool
       default: true
-      description: "在右侧展示最新文章"
+      description: "在侧边栏展示最新文章"
       options:
         - value: true
           label: 开启
@@ -1006,7 +1006,7 @@ aside:
       type: switch
       data-type: bool
       default: true
-      description: "在右侧展示最新的评论"
+      description: "在侧边栏展示最新的评论"
       options:
         - value: true
           label: 开启
@@ -1025,7 +1025,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在右侧展示标签云，默认关闭以节省性能"
+      description: "在侧边栏展示标签云，默认关闭以节省性能"
       options:
         - value: true
           label: 开启
@@ -1776,6 +1776,18 @@ post:
       default: "0"
       placeholder: "请填写标题层级（只能是数字）"
       description: "TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录（可通过后台配置文章元数据 toc_depth 来设置单个文章的目录展开层级，参见 theme.yaml 中的 postMetaField）"
+    enable_relate_post:
+      name: enable_relate_post
+      label: 展示相关文章
+      type: switch
+      data-type: bool
+      default: true
+      description: "在右侧展示相关文章模块"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_comment:
       name: enable_comment
       label: 文章评论
