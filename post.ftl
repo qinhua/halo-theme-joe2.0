@@ -50,7 +50,7 @@
               </div>
               <div class="joe_detail__overdue">
               <#assign enable_passage_tips = (metas?? && metas.enable_passage_tips?? && metas.enable_passage_tips?trim!='')?then(metas.enable_passage_tips?trim,'true')>
-                <#if (settings.enable_passage_tips && enable_passage_tips == 'true') || (settings.enable_passage_tips==false && enable_passage_tips == 'true')>
+                <#if settings.enable_passage_tips && enable_passage_tips == 'true'>
                   <div class="joe_detail__overdue-wrapper">
                     <div class="title">
                       <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
