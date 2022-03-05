@@ -10,7 +10,7 @@
         <div id="js-toc" class="toc"></div>
       </div>
     </#if>
-    <#if settings.enable_newest_post!true>
+    <#if settings.enable_relate_post!true>
       <#import "../macro/relate.ftl" as np>
       <@np.relate postData=post />
     </#if>
