@@ -267,10 +267,17 @@
 <joe-hide></joe-hide>
 ```
 
+#### 头像框
+
+> 列出了当前主题包含的头像框，方便大家进行选择
+
+![头像框](https://bbchin.com/upload/2022/03/avatar_frame_sample-34ed1f7e269b4bada82a15cea330fd05.jpg)
+
 #### emoji 表情
 
 > 列出一些通用表情元素，更多请 [参见这里](https://bbchin.com/s/emoji)
 
+<p style="letter-spacing:4px;font-size:20px;">
 😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷🙁🙂🙃🙄🤐🤑🤒🤓🤔🤕🤠🤡🤢🤣🤤🤥🤧🤨🤩🤪🤫🤬🤭🤮🤯🧐😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀🙁🙂🙃🙄
 
 ### 媒体元素
@@ -279,7 +286,7 @@
 
 #### 图片预览
 
-![joe2.0](https://bbchin.com/themes/joe2.0/source/img/logo.png)
+<img src="https://bbchin.com/themes/joe2.0/source/img/logo.png" style="padding:10px;max-width:200px!important;" alt="joe2.0">
 
 #### 视频播放器
 
