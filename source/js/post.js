@@ -328,7 +328,7 @@ const postContext = {
 			// 滚动到指定位置
 			window.scrollTo({ top: offsetTop });
 			// 高亮该评论元素
-			const el_comment = el.find(".markdown-content");
+			const el_comment = el.find(".markdown-content").eq(0);
 			el_comment.addClass("blink");
 			await Utils.sleep(2000);
 			el_comment.removeClass("blink");
