@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/Release-1.0.8-green" alt="Release"/>
+    <img src="https://img.shields.io/badge/Release-1.0.9-green" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
@@ -179,18 +179,17 @@
 
 ### 📃 TODO
 
-> 目前仍有部分功能不完善，暂时没时间做，后面继续迭代。
+> 目前仍有部分功能不完善，暂时没时间做或受限，后面继续迭代。
 
+- 大屏欢迎页面
 - 统计页面
-- 评论组件升级（头像保存等）
-- 视频背景
-- 全站 Pjax
-- 欢迎页面
 - 集成统计插件
+- 视频背景
 - 相册页优化
-- 多种布局切换
+- 评论组件升级（头像保存等）
 - 自定义模板引擎
-- 博客自动备份
+- 全站 Pjax
+- ~~博客自动备份~~
 
 <br>
 
