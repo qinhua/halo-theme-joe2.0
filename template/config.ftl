@@ -22,7 +22,7 @@
   <#if settings.cdn_type == "jsdelivr">
     <#global BASE_RES_URL = "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version>
   <#elseif settings.cdn_type == "custom" && settings.custom_cdn_url != "">
-    <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri")>
+    <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri") + "/themes/joe2.0">
   <#else>
     <#global BASE_RES_URL = theme_base>
   </#if>
@@ -31,16 +31,12 @@
 <#global LOGO = (blog_logo?? && blog_logo != "")?then(blog_logo, DEFAULT_LOGO)>
 <#global USER_AVATAR = (user.avatar?? && user.avatar != '' && user.avatar?index_of("gravatar.com") == -1)?then(user.avatar, settings.default_avatar)>
 <#global LAZY_IMG = BASE_RES_URL + "/source/img/lazyload.gif">
+<#--  <#global ERROR_IMG = BASE_RES_URL + "/source/img/error_img.png">  -->
 <#global EMPTY_IMG = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
 <script id="theme-config-getter" type="text/javascript">
   // 获取主题配置
   var ThemeConfig = {};
-  <#list settings?keys as key>
-    <#assign valueString = settings[key]?string>
-    <#assign isNeeded = key?index_of('custom_')==-1 && valueString?index_of('<script')==-1 && valueString?index_of('<link')==-1>
-    <#if isNeeded>
-      var field = '${key}';
-      var value = '${valueString?js_string}';
+  var handleValue = function(value) {
       value = value.replace(/</g,"&lt;").replace(/>/g, "&gt;");
       if(/^(true|false)$/.test(value)) {
         value = JSON.parse(value);
@@ -48,7 +44,13 @@
       if(/^\d+$/.test(value)) {
         value = Number(value);
       }
-      ThemeConfig[field] = value;
+      return value;
+  }
+  <#list settings?keys as key>
+    <#assign valueString = settings[key]?string>
+    <#assign isNeeded = key?index_of('custom_')==-1 && valueString?index_of('<script')==-1 && valueString?index_of('<link')==-1>
+    <#if isNeeded>
+      ThemeConfig['${key}'] = handleValue('${valueString?js_string}');
     </#if>
   </#list>
   ThemeConfig['name'] = '${options.theme!"Joe2.0"}';
