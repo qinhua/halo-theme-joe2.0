@@ -3515,7 +3515,7 @@ others:
       name: custom_cdn_url
       label: 自定义 CDN 域名
       default: ""
-      description: "若需要使用自己的 CDN 服务，可以在这里填入 CDN 域名（仅在 CDN 域名类型为 “自定义” 时生效，确保能访问到相关静态资源）"
+      description: "若需要使用自己的 CDN 服务，可以在这里填入 CDN 域名（仅在 CDN 域名类型为 “自定义” 时生效，确保能访问到相关静态资源，示例：https://cdn.xxx.com）"
     enable_console_theme:
       name: enable_console_theme
       label: 控制台输出主题信息
