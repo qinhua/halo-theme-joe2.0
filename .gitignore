@@ -10,7 +10,6 @@ logs/
 .vscode
 .settings/
 *.swp
-*.lock
 !.autod.conf.js
 
 dist/
