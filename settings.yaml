@@ -1788,6 +1788,18 @@ post:
           label: 开启
         - value: false
           label: 关闭
+    relate_post_max:
+      name: relate_post_max
+      label: 相关文章最大条数
+      type: text
+      data-type: long
+      default: 5
+      description: "相关文章模块展示的最大文章数，默认5条"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     enable_comment:
       name: enable_comment
       label: 文章评论

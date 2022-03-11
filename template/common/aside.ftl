@@ -79,7 +79,7 @@
             </ul>
           <#else>
             <#include "../macro/empty.ftl">
-            <@empty type="aside" showImg="false"/>
+            <@empty type="aside" showImg="false" mini="true" />
           </#if>
         </@commentTag>
       </section>
