@@ -26,10 +26,6 @@
         ${settings.custom_js_head!}
       </script>
     </#if>
-    <#if settings.baidu_statistic??>
-      <!-- 百度统计 -->
-      ${settings.baidu_statistic!}
-    </#if>
     <@global.head />
   </head>
 </#macro>

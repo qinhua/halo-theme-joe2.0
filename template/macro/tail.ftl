@@ -103,4 +103,5 @@
     <!-- 自定义js -->
     <script type="text/javascript">${settings.custom_js_body!}</script>
   </#if>
+  <@global.statistics />
 </#macro>

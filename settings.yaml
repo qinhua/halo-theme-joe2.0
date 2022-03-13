@@ -53,12 +53,6 @@ genernal:
       type: textarea
       placeholder: 请输入公告信息
       description: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
-    baidu_statistic:
-      name: baidu_statistic
-      label: 统计代码
-      type: textarea
-      placeholder: 请输入统计代码
-      description: "支持百度或其他平台统计代码（请自行生成），将插入 head 标签中（后台管理中也可设置，只需设置一处即可）"
 
 # 主题
 theme:
