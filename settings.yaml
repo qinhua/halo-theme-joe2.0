@@ -661,7 +661,7 @@ carousel:
       name: bannerData
       label: 手动配置数据
       type: textarea
-      default: "欢迎使用Joe2.0主题-|||-https://bbchin.com/themes/joe2.0/source/img/dp/welcome.jpg-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
+      default: "欢迎使用Joe2.0主题-|||-/themes/joe2.0/source/img/dp/welcome.jpg-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
       description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效（注意：主题内默认配置了演示数据）。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
     banner_amount_limit:
       name: banner_amount_limit
@@ -782,7 +782,7 @@ carousel:
       name: banner_lazyload_img
       label: 图片预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/lazyload_h.gif"
+      default: "/themes/joe2.0/source/img/lazyload_h.gif"
       description: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
     
 # 侧边栏
@@ -1095,19 +1095,19 @@ blogger:
       name: lazyload_avatar
       label: 头像预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/svg/spinner-preloader.svg"
+      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
       description: "头像加载出来之前展示的图片"
     default_avatar:
       name: default_avatar
       label: 默认头像
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/default_avatar.jpg"
+      default: "/themes/joe2.0/source/img/default_avatar.jpg"
       description: "用于头像未设置或加载出错时显示的图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
     author_bg:
       name: author_bg
       label: 博主栏背景图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/author_bg.jpg"
+      default: "/themes/joe2.0/source/img/author_bg.jpg"
       description: "用于博主信息的背景图"
     avatar_type:
       name: avatar_type
@@ -1337,7 +1337,7 @@ home:
       name: lazyload_thumbnail
       label: 文章预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/lazyload.gif"
+      default: "/themes/joe2.0/source/img/lazyload.gif"
       description: "文章配图加载出来之前展示的图片，体积尽可能的小"
     post_thumbnail:
       name: post_thumbnail
@@ -1350,7 +1350,7 @@ home:
       name: fallback_thumbnail
       label: 文章错误缺省图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/default_thumbnail.png"
+      default: "/themes/joe2.0/source/img/default_thumbnail.png"
       description: "文章图片加载出错时生效，可使用占位图服务（350*200）"
     enable_random_img_api:
       name: enable_random_img_api
@@ -2254,7 +2254,7 @@ photos:
     #   name: photo_lazyload_img
     #   label: 预载图
     #   type: attachment
-    #   default: "https://bbchin.com/themes/joe2.0/source/img/lazyload.gif"
+    #   default: "/themes/joe2.0/source/img/lazyload.gif"
     #   description: "图片加载出来之前展示的图片"
     # photos_layout:
     #   name: photos_layout
@@ -3302,14 +3302,14 @@ comment:
       label: 缺省头像
       type: text
       placeholder: 请输入
-      default: "https://bbchin.com/themes/joe2.0/source/img/error_avatar.jpg"
+      default: "/themes/joe2.0/source/img/error_avatar.jpg"
       description: "当评论头像加载不出来时展示的默认头像"
     comment_avatar_loading:
       name: comment_avatar_loading
       label: 头像加载图
       type: text
       placeholder: 请输入
-      default: "https://bbchin.com/themes/joe2.0/source/svg/spinner-preloader.svg"
+      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
       description: "头像加载时展示的loading图片"
     comment_empty_text:
       name: comment_empty_text
@@ -3509,12 +3509,10 @@ others:
       type: select
       data-type: text
       default: none
-      description: "目前提供 3 种类型，“无” 为不启用 CDN，从源站请求资源；“jsdelivr” 为使用 jsdelivr 的免费 CDN 从当前版本的主题仓库加载资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
+      description: "目前提供 2 种类型，“无” 为不启用 CDN，从源站请求资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
       options:
         - value: none
           label: 无
-        - value: jsdelivr
-          label: jsdelivr
         - value: custom
           label: 自定义
     custom_cdn_url:
