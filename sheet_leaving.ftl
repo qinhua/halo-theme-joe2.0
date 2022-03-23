@@ -11,7 +11,7 @@
           <div class="joe_detail">
             <#include "template/macro/post_status.ftl">
             <@post_status status=sheet.status />
-            <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id}">${sheet.title}</h1>
+            <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id?c}">${sheet.title}</h1>
             <#assign enable_page_meta = (metas?? && metas.enable_page_meta?? && metas.enable_page_meta?trim!='')?then(metas.enable_page_meta?trim,'true')>
             <#if enable_page_meta=='true'>
               <div class="joe_detail__count">

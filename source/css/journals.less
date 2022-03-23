@@ -269,6 +269,22 @@
           }
         }
 
+        ins,
+        del {
+          >a:not([class]) {
+            text-decoration: inherit;
+
+            &::after {
+              display: none;
+            }
+          }
+        }
+
+        del>a {
+          pointer-events: none;
+          cursor: not-allowed;
+        }
+
         hr {
           border: none;
           height: 1px;

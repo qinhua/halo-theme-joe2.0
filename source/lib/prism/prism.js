@@ -22,7 +22,7 @@ var _self = (typeof window !== 'undefined')
 var Prism = (function (_self) {
 
 	// Private helper vars
-	var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
+	var lang = /(?:^|\s)lang(?:uage)?-([\w-+]+)(?=\s|$)/i; // 语言类名匹配
 	var uniqueId = 0;
 
 	// The grammar object for plaintext
@@ -2646,6 +2646,8 @@ delete Prism.languages.c['boolean'];
 		'class-name': /\b[a-z_]\w*\b(?!\s*::)/i
 	}, Prism.languages.cpp['base-clause']);
 
+  Prism.languages['c++'] = Prism.languages.cpp;
+  Prism.languages['C++'] = Prism.languages.cpp;
 }(Prism));
 
 (function (Prism) {
@@ -7338,6 +7340,8 @@ Prism.languages.wasm = {
 		"cs": "C#",
 		"dotnet": "C#",
 		"cpp": "C++",
+		"c++": "C++",
+		"C++": "C++",
 		"cfscript": "CFScript",
 		"cfc": "CFScript",
 		"cil": "CIL",

@@ -4553,6 +4553,22 @@ body {
       }
     }
 
+    ins,
+    del {
+      >a:not([class]) {
+        text-decoration: inherit;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    del>a {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
     span[data-fancybox] {
       display: block;
       text-align: left;

@@ -103,5 +103,7 @@
     <!-- 自定义js -->
     <script type="text/javascript">${settings.custom_js_body!}</script>
   </#if>
-  <@global.statistics />
+  <#if mode != "development">
+    <@global.statistics />
+  </#if>
 </#macro>

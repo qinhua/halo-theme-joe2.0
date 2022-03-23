@@ -15,13 +15,11 @@
   detectIE() && (alert('当前站点不支持IE浏览器或您开启了兼容模式，请使用其他浏览器访问或关闭兼容模式。'), (location.href = 'https://www.baidu.com'));
 </script>
 
-<#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then("production", "development")>
+<#global mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then("production", "development")>
 <#if mode == "development" || settings.cdn_type == "none">
   <#global BASE_RES_URL = theme_base>
 <#else>
-  <#if settings.cdn_type == "jsdelivr">
-    <#global BASE_RES_URL = "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version>
-  <#elseif settings.cdn_type == "custom" && settings.custom_cdn_url != "">
+  <#if settings.cdn_type == "custom" && settings.custom_cdn_url != "">
     <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri") + "/themes/joe2.0">
   <#else>
     <#global BASE_RES_URL = theme_base>
