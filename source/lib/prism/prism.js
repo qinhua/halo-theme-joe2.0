@@ -22,7 +22,7 @@ var _self = (typeof window !== 'undefined')
 var Prism = (function (_self) {
 
 	// Private helper vars
-	var lang = /(?:^|\s)lang(?:uage)?-([\w-+]+)(?=\s|$)/i; // 语言类名匹配
+	var lang = /(?:^|\s)lang(?:uage)?-([\w-+]+)(?=\s|$)/i; //语言类名匹配
 	var uniqueId = 0;
 
 	// The grammar object for plaintext

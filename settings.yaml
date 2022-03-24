@@ -266,13 +266,13 @@ theme:
       label: "离屏文案（离开）"
       default: "歪，你去哪里了？"
       placeholder: "请输入"
-      description: "在切换到其它站点标签或后台时，页面title展示的文字"
+      description: "在切换到其它站点标签或后台时，页面title展示的文字（仅对首页生效）"
     offscreen_title_back:
       name: offscreen_title_back
       label: "离屏文案（回来）"
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
-      description: "在返回到当前标签时，通过title展示的文字"
+      description: "在返回到当前标签时，通过title展示的文字（仅对首页生效）"
     enable_back2top:
       name: enable_back2top
       label: 开启返回顶部
@@ -1697,7 +1697,7 @@ post:
       label: 展示温馨提示
       type: switch
       data-type: bool
-      default: true
+      default: false
       description: "是否展示文章页顶部温馨提示"
       options:
         - value: true
@@ -1871,25 +1871,13 @@ post:
       placeholder: 请输入版权文案
       default: ""
       description: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
-    enable_mathjax:
-      name: enable_mathjax
-      label: "开启 Mathjax 支持"
+    enable_katex:
+      name: enable_katex
+      label: "数学公式支持"
       type: switch
       data-type: bool
       default: false
-      description: "markdown中使用```math```包裹即可"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_mermaid:
-      name: enable_mermaid
-      label: "开启 Mermaid 支持"
-      type: switch
-      data-type: bool
-      default: false
-      description: "markdown中使用```mermaid```包裹即可"
+      description: "若文章中插入了数学公式，请开启此选项，保证公式正常渲染"
       options:
         - value: true
           label: 开启

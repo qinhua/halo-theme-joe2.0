@@ -719,41 +719,6 @@ const commonContext = {
 
 		document.addEventListener("scroll", Utils.throttle(handleHeader, 100));
 	},
-	/* 渲染数学公式 */
-	initMathjax() {
-		const enable_mathjax =
-      PageAttrs.metas.enable_mathjax &&
-      PageAttrs.metas.enable_mathjax.trim() != ""
-      	? PageAttrs.metas.enable_mathjax.trim()
-      	: ThemeConfig.enable_mathjax;
-		if (/^true$/.test(enable_mathjax) && window.katex) {
-			renderMathInElement(document.body, {
-				delimiters: [
-					{
-						left: "$$",
-						right: "$$",
-						display: true,
-					},
-					{
-						left: "$",
-						right: "$",
-						display: false,
-					},
-					{
-						left: "\\(",
-						right: "\\)",
-						display: false,
-					},
-					{
-						left: "\\[",
-						right: "\\]",
-						display: true,
-					},
-				],
-				throwOnError: false,
-			});
-		}
-	},
 	/* 渲染最新评论中的 emoji */
 	renderReplyEmoji() {
 		const $replys = $(".aside-reply-content");

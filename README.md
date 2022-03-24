@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
-    <img src="https://img.shields.io/badge/Release-1.0.9-green" alt="Release"/>
+    <img src="https://img.shields.io/badge/Release-1.0.10-green" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
@@ -344,11 +344,12 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 #
 ```
 
-#### 10、自己修改了主题中的 CSS 或 JS 后为什么还是用的以前的？
+#### 10、修改了主题中的 CSS 或 JS 后页面为什么还是引入的旧的文件？
 
-> 目前主题默认使用 `CDN` 加载静态资源，要使用自己修改后的版本，需要到 `后台管理-外观-主题设置-其它` 中关闭 `使用CDN加载静态资源` 即可生效。但关闭后同时也失去了 `CDN` 加载的优势，如果你不想关闭，就需要自己单独修改文件引入处的链接。
+> 目前主题静态资源默认从源站加载，也可以配置 CDN。
 
-比如我修改了 `index.min.css` 这个文件，那么就需要到 `template/module/link.ftl` 中找到引入它的地方：
+- 请先确认是否是浏览器缓存导致的，清除下缓存试试；
+- 检查是否在主题设置中配置了 `自定义CDN域名`，如果配置了，可能是由于 CDN 缓存导致的，自行刷新缓存即可。
 
 ```html
 <link
@@ -358,7 +359,7 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 />
 ```
 
-把其中的 `${BASE_RES_URL}` 修改为主题自身路径 `${theme_base!}` 即可。
+其中 `${BASE_RES_URL}` 为静态资源域名，默认为 `${theme_base!}`，即主题目录。
 
 #### 11、如何通过元数据为页面进行单独的功能配置？
 
@@ -388,8 +389,7 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 | enable_share         | Boolean |    true    | 是否启用分享                                           |
 | enable_like          | Boolean |    true    | 是否启用点赞                                           |
 | code_theme           | String  | “one-dark” | 指定代码主题（默认和全局设置一致）                     |
-| enable_mathjax       | Boolean |   false    | 是否启用公式支持                                       |
-| enable_mermaid       | Boolean |   false    | 是否启用图形支持（流程图、UML、Graphviz 等）           |
+| enable_katex         | Boolean |   false    | 是否启用公式支持                                       |
 
 ##### b、自定义页元数据（sheetMetaField）
 
@@ -401,28 +401,26 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 | enable_comment       | Boolean |   true   | 是否启用评论功能                                       |
 | img_align            | String  | "center" | 图片对齐方式（left-左对齐；center-居中；right-右对齐） |
 | img_max_width        | String  |  "100%"  | 图片最大宽度                                           |
-| enable_mathjax       | Boolean |  false   | 是否启用公式支持                                       |
-| enable_mermaid       | Boolean |  false   | 是否启用图形支持（流程图、UML、Graphviz 等）           |
+| enable_katex         | Boolean |  false   | 是否启用公式支持                                       |
 
-#### 12、如何支持数学公式和 Mermaid？
+#### 12、如何支持数学公式和 Mermaid 图形？
 
-> 主题已经提供了对 `数学公式` 和 `Mermaid` 图形的支持，只是默认为关闭状态，需要手动打开，其中数学公式使用 `Katex` 进行渲染。
+> 主题已经提供了对 `数学公式` 和 `Mermaid图形` 的支持，数学公式使用 `Katex` 进行渲染，默认为关闭状态，需要手动打开。
 
-- 首先要到 `后台管理-外观-主题设置-文章页` 中启用 `开启 Mathjax 支持` ；
-- 然后使用代码块来包裹要展示的公式，并指定语言类型为 `math`，示例如下：
+- 必须先在 `后台管理-外观-主题设置-文章页` 中启用 `数学公式支持`
+<!-- - 然后使用代码块来包裹要展示的公式，并指定语言类型为 `math`，示例如下： -->
 
-````text
-```math
+```text
 $\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$
 $$\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$$
 ```
-````
 
-> 对于要展示 `时序图、UML类图、甘特图` 等的场景，同理先启用 `开启 Mermaid 支持`，然后使用代码块包裹内容，并指定语言类型为 `mermaid` 即可（下面的示例是一个 `UML类图`，更多用法大家可以去 [Mermaid 仓库](https://github.com/mermaid-js/mermaid) 查看）。
+> 对于要展示 `时序图、UML类图、甘特图` 等的场景，需要使用代码块包裹内容，并指定语言类型为 `mermaid`，Halo 会自动将它转换为 `svg` 给前台展示。（下面的示例是一个 `UML类图`，更多用法大家可以去 [Mermaid 仓库](https://github.com/mermaid-js/mermaid) 查看）。
 
 ````text
 ```mermaid
 classDiagram
+
 Class01 <|-- AveryLongClass : Cool
 <<interface>> Class01
 Class09 --> C2 : Where am i?

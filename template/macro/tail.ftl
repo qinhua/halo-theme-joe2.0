@@ -25,20 +25,14 @@
     <script src="${BASE_RES_URL}/source/lib/APlayer/APlayer.min.js"></script>
     <script src="${BASE_RES_URL}/source/lib/meting/meting.min.js"></script>
   </#if>
+  <#assign enable_katex = (metas?? && metas.enable_katex?? && metas.enable_katex?trim!='')?then(metas.enable_katex?trim,settings.enable_katex?then('true','false'))>
+  <#if enable_katex == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
+    <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.css">
+  </#if>
   <#--  <script src="${BASE_RES_URL!}/source/lib/smooth-scroll/smooth-scroll.min.js"></script>  -->
   <script src="${BASE_RES_URL}/source/js/min/custom.min.js?v=${theme.version!}"></script>
   <#if type == 'post' || type == 'journals' || type == 'sheet'>
     <script src="${BASE_RES_URL}/source/lib/clipboard/clipboard.min.js"></script>
-  </#if>
-  <#assign enable_mathjax = (metas?? && metas.enable_mathjax?? && metas.enable_mathjax?trim!='')?then(metas.enable_mathjax?trim,settings.enable_mathjax?then('true','false'))>
-  <#if enable_mathjax == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
-    <link rel="stylesheet" href="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.css">
-    <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/katex.min.js"></script>
-    <script src="${BASE_RES_URL}/source/lib/katex@0.13.18/contrib/auto-render.min.js"></script>
-  </#if>
-  <#assign enable_mermaid = (metas?? && metas.enable_mermaid?? && metas.enable_mermaid?trim!='')?then(metas.enable_mermaid?trim,settings.enable_mermaid?then('true','false'))>
-  <#if enable_mermaid == 'true' && (type == 'post' || type == 'journals' || type == 'sheet')>
-    <script src="${BASE_RES_URL}/source/lib/mermaid@8.4.4/mermaid.min.js"></script>
   </#if>
   <#if settings.favicon?? && settings.favicon?trim!=''>
     <script src="${BASE_RES_URL}/source/lib/favico/favico.min.js"></script>
