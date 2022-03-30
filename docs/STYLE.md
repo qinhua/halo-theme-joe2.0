@@ -114,17 +114,35 @@
 | :----- | :----- | :----- |
 | 内容 1 | 内容 2 | 内容 3 |
 
+```text
+| 表头 1 | 表头 2 | 表头 3 |
+| :----- | :----- | :----- |
+| 内容 1 | 内容 2 | 内容 3 |
+```
+
 #### 居中
 
 | 表头 1 | 表头 2 | 表头 3 |
 | :----: | :----: | :----: |
 | 内容 1 | 内容 2 | 内容 3 |
 
+```text
+| 表头 1 | 表头 2 | 表头 3 |
+| :----: | :----: | :----: |
+| 内容 1 | 内容 2 | 内容 3 |
+```
+
 #### 右对齐
 
 | 表头 1 | 表头 2 | 表头 3 |
 | -----: | -----: | -----: |
 | 内容 1 | 内容 2 | 内容 3 |
+
+```text
+| 表头 1 | 表头 2 | 表头 3 |
+| -----: | -----: | -----: |
+| 内容 1 | 内容 2 | 内容 3 |
+```
 
 ### 按钮元素
 
@@ -186,6 +204,19 @@
 <joe-anote icon="fa-bus" href="#" type="warning" content="便条按钮"></joe-anote>
 <joe-anote icon="fa-bus" href="#" type="error" content="便条按钮"></joe-anote>
 <joe-anote icon="fa-bus" href="#" type="info" content="便条按钮"></joe-anote>
+```
+
+#### 复制按钮
+
+<joe-copy title="点击复制" content="这是一段美好的鸡汤文" color="green" bold></joe-copy>
+
+```html
+<joe-copy
+  title="点击复制"
+  content="这是一段美好的鸡汤文"
+  color="green"
+  bold
+></joe-copy>
 ```
 
 #### 标签按钮
@@ -259,12 +290,78 @@
 <joe-dotted startcolor="#1772e8" endcolor="#4cd327"></joe-dotted>
 ```
 
+#### Tabs
+
+<joe-tabs>
+ <div class="_tpl">
+   {tabs-pane 第一个}单身狗的故事{/tabs-pane}
+   {tabs-pane 第二个}小说家的故事{/tabs-pane}
+ </div>
+</joe-tabs>
+
+```xml
+<joe-tabs>
+  <div class="_tpl">
+    {tabs-pane 第一个}单身狗的故事{/tabs-pane}
+    {tabs-pane 第二个}小说家的故事{/tabs-pane}
+  </div>
+</joe-tabs>
+```
+
+#### 时间线
+
+<joe-timeline>
+ <div class="_tpl">
+   {timeline-item 2020}10元{/timeline-item}
+   {timeline-item 2021}20元{/timeline-item}
+   {timeline-item 2022}100元{/timeline-item}
+ </div>
+</joe-timeline>
+
+```xml
+<joe-timeline>
+ <div class="_tpl">
+   {timeline-item 2020}10元{/timeline-item}
+   {timeline-item 2021}20元{/timeline-item}
+   {timeline-item 2022}100元{/timeline-item}
+ </div>
+</joe-timeline>
+```
+
 #### 评论后可见
 
 <joe-hide disabled></joe-hide>
 
 ```html
 <joe-hide></joe-hide>
+```
+
+#### 渲染原始内容
+
+> 主题默认对常用的 HTML 标签进行了样式美化，但有时候你可能不想应用这些样式。比如你想富文本内容中的样式能够原样展示，那么就需要用到这个标签来承载你的内容，该标签内的内容将 **不会被外部样式和脚本污染**，反之亦然。
+
+<joe-raw-content>
+  <div id="_raw">
+    <div style="padding: 1px 10px;background: linear-gradient(45deg, #329891, #ffe266);">
+      <h3 style="color:blue;font-style:italic">俺是个3级标题，我有自己的样式</h3>
+      <p>我是原始内容，可以是任何合法的文本或HTML，我的样式和外界是隔离的</p>
+    </div>
+  </div>
+</joe-raw-content>
+
+```html
+<joe-raw-content>
+  <div id="_raw">
+    <div
+      style="padding: 1px 10px;background: linear-gradient(45deg, #329891, #ffe266);"
+    >
+      <h3 style="color:blue;font-style:italic">
+        俺是个3级标题，我有自己的样式
+      </h3>
+      <p>我是原始内容，可以是任何合法的文本或HTML，我的样式和外界是隔离的</p>
+    </div>
+  </div>
+</joe-raw-content>
 ```
 
 #### 头像框
@@ -296,7 +393,7 @@
 <joe-dplayer src="https://stream7.iqilu.com/10339/upload_transcode/202002/17/20200217101826WjyFCbUXQ2.mp4"></joe-dplyer>
 ```
 
-#### bilibili 视频
+#### Bilibili 视频
 
 <joe-bilibili bvid="BV12h411k7vr"></joe-bilibili>
 
@@ -330,6 +427,20 @@
 <joe-music id="1303046498"></joe-music>
 ```
 
+#### 音频播放器
+
+<joe-mp3 name="一段音频" url="xxx.mp3" theme="red" cover="xxx.jpg" autoplay></joe-mp3>
+
+```html
+<joe-mp3
+  name="一段音频"
+  url="xxx.mp3"
+  theme="red"
+  cover="xxx.jpg"
+  autoplay
+></joe-mp3>
+```
+
 ### 提示元素
 
 ---
@@ -350,4 +461,5 @@
 
 ### 注意事项！！！
 
-以上大部分为 `webcomponents` 组件，且仅在使用 `halo-theme-joe2.0` 主题时才能生效，请根据实际情况使用。
+> 以上大部分为 `webcomponents` 组件，且仅在使用 `halo-theme-joe2.0` 主题时才能生效，请根据实际情况使用。<br>
+> 组件定义文件见主题目录下的 `source/js/custom.js`。

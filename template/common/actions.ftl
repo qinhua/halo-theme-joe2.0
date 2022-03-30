@@ -1,7 +1,12 @@
 
-<#if settings.enable_back2top == true || settings.theme_mode == "user">
+<#if settings.enable_mobile_toc == true || settings.enable_back2top == true || settings.theme_mode == "user">
   <#-- 悬浮按钮 -->
   <div class="joe_action">
+    <#if settings.enable_mobile_toc!true>
+      <div class="joe_action_item toc">
+        <i class="joe-font joe-icon-xiaoxi" title="文章目录"></i>
+      </div>
+    </#if>
     <#if settings.enable_back2top!true>
       <div class="joe_action_item back2top">
         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="25" height="25">

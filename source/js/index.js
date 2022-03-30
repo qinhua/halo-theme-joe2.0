@@ -264,7 +264,7 @@ const homeContext = {
 			// 向下滚动一段距离
 			await Utils.sleep(300);
 			const scrollTop = lastItemTop - $headerHeight;
-			$("html").animate(
+			$("html,body").animate(
 				{
 					scrollTop,
 				},

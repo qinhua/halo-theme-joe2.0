@@ -825,6 +825,18 @@ aside:
           label: 是
         - value: false
           label: 否
+    enable_post_aside:
+      name: enable_post_aside
+      label: 文章页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "文章页右侧是否展示侧边栏（关闭后，TOC 目录也就没有了）"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
     enable_journals_aside:
       name: enable_journals_aside
       label: 日志页侧边栏
@@ -1683,10 +1695,23 @@ post:
     #       label: 否
     enable_title_shadow:
       name: enable_title_shadow
-      label: 开启标题阴影
+      label: 标题阴影
       type: switch
       data-type: bool
       default: true
+      description: "是否为文章页标题应用文字阴影"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_page_meta:
+      name: enable_page_meta
+      label: 页面元数据
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示文章页/自定义页顶部的页面元数据（点赞、阅读、字数等）"
       options:
         - value: true
           label: 开启
@@ -1694,11 +1719,11 @@ post:
           label: 关闭
     enable_passage_tips:
       name: enable_passage_tips
-      label: 展示温馨提示
+      label: 温馨提示
       type: switch
       data-type: bool
       default: false
-      description: "是否展示文章页顶部温馨提示"
+      description: "是否展示文章页顶部的温馨提示"
       options:
         - value: true
           label: 开启
@@ -1758,6 +1783,18 @@ post:
       data-type: bool
       default: true
       description: "可通过后台配置文章元属性 enable_toc 来启用/关闭单个文章的 Toc 目录，参见 theme.yaml 中的 postMetaField"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_mobile_toc:
+      name: enable_mobile_toc
+      label: 移动端文章TOC目录
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否启用移动端的TOC目录，可通过后台配置文章元属性 enable_mobile_toc 来启用/关闭单个文章的 Toc 目录，参见 theme.yaml 中的 postMetaField"
       options:
         - value: true
           label: 开启

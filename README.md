@@ -377,8 +377,11 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 
 | 字段名               | 值类型  |   默认值   | 描述                                                   |
 | :------------------- | :-----: | :--------: | :----------------------------------------------------- |
+| enable_aside         | Boolean |    true    | 是否启用侧边栏                                         |
+| enable_page_meta     | Boolean |    true    | 是否展示页面元信息（即顶部的字数、阅读量等数据）       |
 | enable_passage_tips  | Boolean |    true    | 是否展示温馨提示                                       |
 | enable_collect_check | Boolean |    true    | 是否启用百度收录检查                                   |
+| use_raw_content      | Boolean |   false    | 是否渲染原始内容                                       |
 | enable_comment       | Boolean |    true    | 是否启用评论功能                                       |
 | enable_toc           | Boolean |    true    | 是否启用 Toc 目录                                      |
 | toc_depth            | Number  |     0      | Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6        |
@@ -398,6 +401,7 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 | enable_aside         | Boolean |   true   | 是否启用侧边栏                                         |
 | enable_page_meta     | Boolean |   true   | 是否展示页面元信息（即顶部的字数、阅读量等数据）       |
 | enable_collect_check | Boolean |   true   | 是否启用百度收录检查                                   |
+| use_raw_content      | Boolean |  false   | 是否渲染原始内容                                       |
 | enable_comment       | Boolean |   true   | 是否启用评论功能                                       |
 | img_align            | String  | "center" | 图片对齐方式（left-左对齐；center-居中；right-右对齐） |
 | img_max_width        | String  |  "100%"  | 图片最大宽度                                           |
@@ -503,7 +507,17 @@ console.log("hello world!!!");
 <joe-pdf src="https://xxx.pdf" width="100%" height="500px"></joe-pdf>
 ```
 
-#### 17、如何设置文章仅评论后可见？
+#### 17、如何渲染原始内容？
+
+> 主题默认对常用的 `HTML` 标签进行了样式美化，但有时候你可能不想应用这些样式。比如你想富文本内容中的样式能够原样展示，那么就需要用到这个标签来承载你的内容，该标签内的内容将 **不会被外部样式和脚本污染**，反之亦然。
+
+```html
+<joe-raw-content>
+  <div id="_raw">你的原始文本或html内容</div>
+</joe-raw-content>
+```
+
+#### 18、如何设置文章仅评论后可见？
 
 > 主题目前支持文章页的 `评论后可见功能`，主要是通过在文章内容中设置相应标记实现的。你只需要在想隐藏的内容前面插入 `joe-hide` 组件即可（切记前后要空一行，且不要使用单标签形式，插入多个时只有最后一个会生效）：
 
@@ -515,44 +529,44 @@ console.log("hello world!!!");
 后面是评论后才能查看的内容
 ```
 
-#### 18、如何区分不同的自定义页面？
+#### 19、如何区分不同的自定义页面？
 
 有时候我们可能想在某一个自定义页面内部加入一些资源，单纯靠页面类型 `sheet` 无法进行区分。此时可以先进入 `后台管理系统`，并打开浏览器控制台，切换到 `network-Fetch/XHR` 这一栏，然后进入 `页面-所有页面-自定义页面`，此时控制面板中会出现相应的请求，查看数据获取页面对于的 `id`，这样我们就可以在模板中使用这个 `id` 区分不同的自定义页面了（可在 `sheet.ftl` 文件中通过 `sheet.id` 获取）。
 
 ![自定义页面id](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/sheet_id.png)
 
-#### 19、为什么评论头像不显示或加载出错？
+#### 20、为什么评论头像不显示或加载出错？
 
 > 目前主题内的头像使用了 `gravatar` 的头像服务，但是国内基本会被 GFW，所以会导致头像加载不出来。
 > 此时，我们只需要去 `后台管理-系统-博客设置-评论设置` 中找到 `Gravatar镜像源` 更换可用的头像源即可，注意末尾要有 `/`。
 
 另外说明一点，基于普适性考虑，当前评论组件咱不支持保存头像，统一使用过了随机的 `gravatar` 头像。
 
-#### 20、如何查看博客后台日志？
+#### 21、如何查看博客后台日志？
 
 - 有时博客访问不了，想查看后台日志，可以进入 `后台管理-系统-小工具-实时日志` 查看，生成环境可能需要先开启彩蛋（连续点击 `Halo Dashboard` 10 次触发），更多请参见 [Halo 隐藏功能](https://halo.run/archives/use-hidden-features)；
 
 - 也可以登录服务器，直接执行命令 `journalctl -n 20 -u halo`，其中 20 是显示的日志行数。
 
-#### 21、登录页如何显示找回密码按钮？
+#### 22、登录页如何显示找回密码按钮？
 
 > 有时候登录后台管理系统忘了密码，想找回密码，但是界面默认没有找回密码的按钮，需要用快捷键触打开。
 
 - Windows/Linux: `Shift + Alt + h`
 - maxOS: `Shift + Command + h`
 
-#### 22、如何修改/定制评论组件？
+#### 23、如何修改/定制评论组件？
 
 当前主题使用了定制的评论组件 [halo-comment-joe2.0](https://github.com/qinhua/halo-comment-joe2.0)，有兴趣可以在此基础上继续定制，最后替换 `source/lib/halo-comment` 下的同名文件。
 
-#### 23、为何主题保存时提示服务器内部错误或失败？
+#### 24、为何主题保存时提示服务器内部错误或失败？
 
 > 这个问题的原因通常有下面这些：
 
 - 网络或接口响应慢导致超时失败；
 - 由于误操作（比如重复提交）导致主题配置重复，后台保存时不知道保存到哪里（这种情况需要你手动删除重复的配置）
 
-#### 24、为何上传主题包会失败？
+#### 25、为何上传主题包会失败？
 
 > 这个有很多原因，常见的原因有如下这些：
 
@@ -560,7 +574,7 @@ console.log("hello world!!!");
 - 附件大小超过了 `Nginx` 中上传文件的最大限制（即 `client_max_body_size`，你可以设置的大一点）；
 - 后台解压时出错（这种情况建议手动用 FTP 工具上传主题文件夹到服务器 `~/.halo/template/themes/` 目录下，然后刷新主题页面）
 
-#### 25、FreeMarker 相关技巧
+#### 26、FreeMarker 相关技巧
 
 主要是本人在开发主题过程中收集的一些 `Freemarker` 知识，希望能帮到需要的人。请参见 [FreeMarker 常用技巧](https://www.yuque.com/docs/share/f8a15e0c-3bf2-4c93-b2ef-e3bf2357d09c)
 

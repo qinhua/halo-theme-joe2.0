@@ -34,7 +34,7 @@ body {
   }
 
   .aplayer {
-    min-height: 90px;
+    min-height: 66px;
 
     .aplayer-body {
       .aplayer-bar {
@@ -3342,6 +3342,14 @@ body {
   }
 }
 
+.joe_raw {
+  display: inline-block;
+  width: 22px;
+  height: 24px;
+  background: url(../../img/raw.png) no-repeat center;
+  background-size: cover;
+}
+
 .joe_alert {
   padding: 12px;
   border-radius: var(--radius-inner);
@@ -4564,10 +4572,11 @@ body {
       }
     }
 
-    del>a {
-      pointer-events: none;
-      cursor: not-allowed;
-    }
+    // 控制带删除线的a标签是否可点击
+    // del>a {
+    //   pointer-events: none;
+    //   cursor: not-allowed;
+    // }
 
     span[data-fancybox] {
       display: block;
@@ -5652,6 +5661,17 @@ body {
       width: 25px;
       height: 25px;
       fill: var(--theme);
+    }
+
+    &.toc {
+      pointer-events: none;
+      margin-bottom: 15px;
+
+      i {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--theme);
+      }
     }
 
     &.back2top {

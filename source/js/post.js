@@ -76,7 +76,7 @@ const postContext = {
 
 					// 滚动到原位置
 					const scrollTop = offsetTop - 150;
-					$("html").animate(
+					$("html,body").animate(
 						{
 							scrollTop,
 						},
@@ -225,14 +225,32 @@ const postContext = {
 			return;
 		if (document.body.clientWidth <= 992) return;
 
+		if (PageAttrs.metas.use_raw_content === "true") {
+			$("#js-toc").html("<div class=\"toc-nodata\">暂不支持解析原始内容目录</div>");
+			$(".toc-container").show();
+			return;
+		}
+
+		// 1.还原 Halo1.5 中被编码的标题id
+		const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
+		const $wrp = $(".joe_detail__article");
+		headings.forEach((head) => {
+			const $heads = $wrp.find(head);
+			$heads.each((_index, head) => {
+				head.id = decodeURIComponent(head.id);
+			});
+		});
+
+		// 2.初始化TOC  
 		tocbot.init({
 			tocSelector: "#js-toc",
 			contentSelector: ".joe_detail__article",
 			ignoreSelector: ".js-toc-ignore",
-			headingSelector: "h1, h2, h3, h4, h5, h6",
+			headingSelector: headings.join(","),
 			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
 			scrollSmooth: true,
-			// scrollSmoothDuration: 420,
+			includeTitleTags: true,
+			// scrollSmoothDuration: 400,
 			hasInnerContainers: false,
 			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
 			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
@@ -249,7 +267,7 @@ const postContext = {
 			},
 		});
 
-		// toc 菜单收起/展开
+		// 无菜单数据
 		if (!$("#js-toc").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
 		}

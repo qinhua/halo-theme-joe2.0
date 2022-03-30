@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					name: this.getAttribute("name"),
 					url: this.getAttribute("url"),
 					theme: this.getAttribute("theme") || "#1989fa",
-					cover: this.getAttribute("cover"),
+					cover: this.getAttribute("cover")|| "",
 					autoplay: this.getAttribute("autoplay") ? true : false,
 				};
 				this.render();
@@ -273,12 +273,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (!$comment || !$header) return;
 				this.$button.addEventListener("click", (e) => {
 					e.stopPropagation();
-					if(!document.getElementsByTagName("halo-comment").length) {
+					if (!document.getElementsByTagName("halo-comment").length) {
 						Qmsg.warning("评论功能不可用！");
 						return;
 					}
 					const scrollTop = $comment.offsetTop - $header.offsetHeight - 15;
-					$("html").animate(
+					$("html,body").animate(
 						{
 							scrollTop,
 						},
@@ -497,7 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeTimeline extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
 				let content = "";
 				_innerHTML.replace(
@@ -530,6 +530,8 @@ document.addEventListener("DOMContentLoaded", () => {
 						item.style.borderColor = color;
 					}
 				);
+				
+				_temp.parentNode.removeChild(_temp); // 清理无用标签
 			}
 		}
 	);
@@ -652,21 +654,42 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 	);
+  
+	customElements.define(
+		"joe-raw-content",
+		class JoeRawContent extends HTMLElement {
+			constructor() {
+				super();
+				this.options = {
+					content: this.querySelector("#_raw"),
+					width: this.getAttribute("width") || "unset",
+					height: this.getAttribute("height") || "unset",
+				};
+				this.render();
+			}
+			render() {
+				if (this.options.content) {
+					const shadowRoot = this.attachShadow({ mode: "closed" });
+					shadowRoot.appendChild(this.options.content);
+				}
+			}
+		}
+	);
 
 	customElements.define(
 		"joe-tabs",
 		class JoeTabs extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
 				let navs = "";
 				let contents = "";
 				_innerHTML.replace(
 					/{tabs-pane([^}]*)}([\s\S]*?){\/tabs-pane}/g,
 					function ($0, $1, $2) {
-						navs += `<div class="joe_tabs__head-item" ${$1}></div>`;
-						contents += `<div style="display: none" class="joe_tabs__body-item" ${$1}>${$2
+						navs += `<div class="joe_tabs__head-item" label="${$1}"></div>`;
+						contents += `<div style="display: none" class="joe_tabs__body-item" label="${$1}">${$2
 							.trim()
 							.replace(/^(<br>)|(<br>)$/g, "")}</div>`;
 					}
@@ -706,6 +729,8 @@ document.addEventListener("DOMContentLoaded", () => {
 					});
 					if (index === 0) item.click();
 				});
+				
+				_temp.parentNode.removeChild(_temp); // 清理无用标签
 			}
 		}
 	);
@@ -756,13 +781,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			constructor() {
 				super();
 				this.options = {
-					showText: this.getAttribute("showText") || "点击复制",
-					copyText: this.getAttribute("copyText") || "默认文本",
+					title: this.getAttribute("title") || "点击复制",
+					content: this.getAttribute("content") || "默认文本",
+					color: this.getAttribute("color") || "inherit",
+					bold: this.getAttribute("bold") != null ? "bold" : "normal",
 				};
-				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;">${this.options.showText}</span>`;
+				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;font-weight:${this.options.bold};color:${this.options.color};">${this.options.title}</span>`;
 				const button = getChildren(this, "joe_copy");
 				if (typeof ClipboardJS !== "undefined" && typeof Qmsg !== "undefined") {
-					new ClipboardJS(button, { text: () => this.options.copyText }).on(
+					new ClipboardJS(button, { text: () => this.options.content }).on(
 						"success",
 						() => Qmsg.success("复制成功！")
 					);

@@ -1,6 +1,16 @@
 /**通用逻辑 */
 window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
+jQuery.event.special.touchmove = {
+	setup: function( _, ns, handle ) {
+		this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+	}
+};
+jQuery.event.special.scroll = {
+	setup: function( _, ns, handle ) {
+		this.addEventListener("touchmove", scroll, { passive: !ns.includes("noPreventDefault") });
+	}
+};
 
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
@@ -306,19 +316,21 @@ const commonContext = {
 			$(item).replaceWith(htmlStr);
 		});
 	},
-	/* 激活全局返回顶部功能 */
+	/* 全局返回顶 */
 	back2Top() {
 		if (!ThemeConfig.enable_back2top) return;
 		const $el = $(".joe_action_item.back2top");
-		const handleScroll = () =>
-			(document.documentElement.scrollTop || document.body.scrollTop) > 300
+		const handleScroll = () => {
+			console.log(999);
+			document.documentElement.scrollTop || document.body.scrollTop > 300
 				? $el.addClass("active")
 				: $el.removeClass("active");
+		};
 		handleScroll();
-		$(document).on("scroll", Utils.throttle(handleScroll, 100));
+		$("html,body").on("scroll", Utils.throttle(handleScroll, 100));
 		$el.on("click", function (e) {
 			e.stopPropagation();
-			$("html").animate(
+			$("html,body").animate(
 				{
 					scrollTop: 0,
 				},
@@ -326,7 +338,7 @@ const commonContext = {
 			);
 		});
 	},
-	/* 激活侧边栏人生倒计时功能 */
+	/* 激活侧边栏人生倒计时 */
 	initTimeCount() {
 		if (Joe.isMobile || !$(".joe_aside__item.timelife").length) return;
 		let timelife = [
@@ -412,7 +424,7 @@ const commonContext = {
 		});
 		$(".joe_aside__item.timelife .joe_aside__item-contain").html(htmlStr);
 	},
-	/* 激活侧边栏天气功能 */
+	/* 激活侧边栏天气 */
 	initWeather() {
 		if (
 			Joe.isMobile ||
@@ -447,7 +459,7 @@ const commonContext = {
 			"https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
 		);
 	},
-	/* 全局图片预览功能（文章、日志页等） */
+	/* 全局图片预览（文章、日志页等） */
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
@@ -574,7 +586,7 @@ const commonContext = {
 			$result.removeClass("active");
 		});
 	},
-	/* 激活全局下拉框功能 */
+	/* 激活全局下拉框 */
 	initDropMenu() {
 		$(".joe_dropdown").each(function (index, item) {
 			const menu = $(this).find(".joe_dropdown__menu");
@@ -768,7 +780,7 @@ const commonContext = {
 		if ($targetEl && $targetEl.length > 0) {
 			const scrollTop = $targetEl.offset().top - headerHeight - 15;
 			if (duration > 0) {
-				$("html").animate(
+				$("html,body").animate(
 					{
 						scrollTop,
 					},
