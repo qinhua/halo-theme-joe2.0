@@ -1,16 +1,6 @@
 /**通用逻辑 */
 window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
-jQuery.event.special.touchmove = {
-	setup: function( _, ns, handle ) {
-		this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
-	}
-};
-jQuery.event.special.scroll = {
-	setup: function( _, ns, handle ) {
-		this.addEventListener("touchmove", scroll, { passive: !ns.includes("noPreventDefault") });
-	}
-};
 
 const commonContext = {
 	/* 初始化主题模式（仅用户模式） */
@@ -289,7 +279,8 @@ const commonContext = {
 					loop: ThemeConfig.music_loop_play,
 					audio: res,
 				});
-			}).catch(err=>{
+			})
+			.catch((err) => {
 				console.log(err);
 			});
 	},
@@ -321,13 +312,14 @@ const commonContext = {
 		if (!ThemeConfig.enable_back2top) return;
 		const $el = $(".joe_action_item.back2top");
 		const handleScroll = () => {
-			console.log(999);
-			document.documentElement.scrollTop || document.body.scrollTop > 300
-				? $el.addClass("active")
-				: $el.removeClass("active");
+			const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+			$el[(scrollTop > 300 ? "add" : "remove") + "Class"]("active");
 		};
+
 		handleScroll();
-		$("html,body").on("scroll", Utils.throttle(handleScroll, 100));
+
+		$(document).on("scroll", Utils.throttle(handleScroll, 120));
 		$el.on("click", function (e) {
 			e.stopPropagation();
 			$("html,body").animate(
@@ -668,7 +660,9 @@ const commonContext = {
 				$(".joe_header__mask").removeClass("active slideout");
 				$(".joe_header__searchout").removeClass("active");
 				$(".joe_header__slideout").removeClass("active");
+				$(".joe_header__toc").removeClass("active");
 				$(".joe_header__above").removeClass("solid");
+        
 				// 还原滚动位置
 				const lastScroll = window.sessionStorage.getItem("lastScroll");
 				lastScroll && $html.scrollTop(lastScroll);

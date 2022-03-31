@@ -223,7 +223,7 @@ const postContext = {
       !$(".toc-container").length
 		)
 			return;
-		if (document.body.clientWidth <= 992) return;
+		// if (document.body.clientWidth <= 992) return;
 
 		if (PageAttrs.metas.use_raw_content === "true") {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂不支持解析原始内容目录</div>");
@@ -242,36 +242,66 @@ const postContext = {
 		});
 
 		// 2.初始化TOC  
-		tocbot.init({
-			tocSelector: "#js-toc",
-			contentSelector: ".joe_detail__article",
-			ignoreSelector: ".js-toc-ignore",
-			headingSelector: headings.join(","),
-			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
-			scrollSmooth: true,
-			includeTitleTags: true,
-			// scrollSmoothDuration: 400,
-			hasInnerContainers: false,
-			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
-			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
-			positionFixedSelector: ".toc-container", // 固定类添加的容器
-			positionFixedClass: "is-position-fixed", // 固定类名称
-			fixedSidebarOffset: "auto",
-			onClick: function (e) {
-				// console.log(e);
-				window.tocPhase = true;
-			},
-			scrollEndCallback: function (e) {
-				// console.log(e);
-				window.tocPhase = null;
-			},
-		});
+		const renderToc=(type="pc")=>{
+			tocbot.init({
+				tocSelector: type==="pc"?"#js-toc":"#js-toc-mobile",
+				contentSelector: ".joe_detail__article",
+				ignoreSelector: ".js-toc-ignore",
+				headingSelector: headings.join(","),
+				collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
+				scrollSmooth: true,
+				includeTitleTags: true,
+				// scrollSmoothDuration: 400,
+				hasInnerContainers: false,
+				headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
+				scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
+				positionFixedSelector: ".toc-container", // 固定类添加的容器
+				positionFixedClass: "is-position-fixed", // 固定类名称
+				fixedSidebarOffset: "auto",
+				onClick: function (e) {
+					// console.log(e);
+					window.tocPhase = true;
+					if (location.hash) {
+						// TODO：处理toc滚动位置
+						$("html,body").animate(
+							{
+								scrollTop: $(decodeURIComponent(location.hash)).offset().top,
+							},
+							0
+						);
+					} 
+					$("html").removeClass("disable-scroll");
+					$(".joe_header__toc").removeClass("active");
+					$(".joe_header__mask").removeClass("active slideout");
+				},
+				scrollEndCallback: function (e) {
+					// console.log(e);
+					window.tocPhase = null;
+				},
+			});
+		};
+
+		renderToc("pc");
 
 		// 无菜单数据
 		if (!$("#js-toc").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
 		}
 		$(".toc-container").show();
+
+		// 移动端TOC
+		const $html = $("html");
+		const $mask = $(".joe_header__mask");
+		const $slide_toc = $(".joe_header__toc");
+
+		renderToc("mobile");
+		$(".joe_action .toc").on("click",()=>{
+			$mask.addClass("active slideout");
+			$slide_toc.addClass("active");
+			// 保存滚动位置
+			window.sessionStorage.setItem("lastScroll", $html.scrollTop());
+			$html.addClass("disable-scroll");
+		});
 	},
 	/**初始化左侧工具条 */
 	initAsideOperate() {
