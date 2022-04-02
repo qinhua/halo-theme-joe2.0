@@ -657,8 +657,8 @@ carousel:
       default: ""
       placeholder: "请输入"
       description: "当数据源为 “特定关键词/分类/标签” 文章时，需要在这里设置【关键词/分类别名/标签别名】进行匹配，相关别名请到 “后台管理-文章” 菜单下获取。（填写错误的别名可能导致网站无法渲染，别名或内容为空时展示 “欢迎使用Joe2.0主题”） "
-    bannerData:
-      name: bannerData
+    banner_data:
+      name: banner_data
       label: 手动配置数据
       type: textarea
       default: "欢迎使用Joe2.0主题-|||-/themes/joe2.0/source/img/dp/welcome.jpg-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
@@ -1582,31 +1582,24 @@ home:
           label: 是
         - value: false
           label: 否
-    hot_cover1:
-      name: hot_cover1
-      label: 分类图1
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-      description: "对于首页的分类图封面，会优先取这里配置的，取不到再去取后台管理中配置的，都没有则展示默认封面"
-    hot_cover2:
-      name: hot_cover2
-      label: 分类图2
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-    hot_cover3:
-      name: hot_cover3
-      label: 分类图3
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-    hot_cover4:
-      name: hot_cover4
-      label: 分类图4
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
+    hot_category_source:
+      name: hot_category_source
+      label: 精品分类数据源
+      type: select
+      data-type: text
+      default: auto
+      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类，“自定义”-展示自己填入的指定分类】，默认为“自动”"
+      options:
+        - value: auto
+          label: 热门分类
+        - value: custom
+          label: 自定义
+    custom_category_data:
+      name: custom_category_data
+      label: 自定义数据
+      type: textarea
+      default: "前端技术-|||-/themes/joe2.0/source/img/hot_cover1.jpg-|||-/categories/front=====后端技术-|||-/themes/joe2.0/source/img/hot_cover2.jpg-|||-#"
+      description: "手动配置精品分类展示的数据，仅当 “精品分类数据源” 为 “自定义” 时生效（注意：【多个分类数据之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
 
 # 归档页
 archives:

@@ -1387,7 +1387,7 @@ body {
     bottom: 0;
     left: 0;
     z-index: 10;
-    width: 60%;
+    width: 70%;
     max-width: 480px;
     background: var(--classD);
     transform: translate3d(-100%, 0, 0);
@@ -1433,25 +1433,68 @@ body {
     }
 
     #js-toc-mobile {
-      padding: 20px 15px;
+      position: relative;
+      user-select: none;
+      padding: 20px 15px 40px 0;
+      max-height: calc(100vh - 150px);
+      overflow: overlay;
 
-      // >.toc-list {}
+      >.toc-list {
+        position: relative;
+        overflow: hidden;
 
-      .toc-list-item {
-        padding: 6px 0;
-
-        a {
-          font-size: 14px;
-          color: #333;
+        li {
+          list-style: none;
         }
 
-        &.is-active-li {
-          color: var(--theme);
-          font-weight: 500;
-          font-size: 15px;
-          background: var(--classD);
-          border-radius: 4px;
+        // TODO:【待修复】移动端弹窗时会丢失滚动高度，导致TOC目录高亮状态丢失
+        // &>li>a {
+        //   font-weight: bold;
+
+        //   &.is-active-link {
+        //     font-weight: 700;
+        //     color: var(--theme);
+        //     border-color: var(--classK);
+        //   }
+        // }
+      }
+
+      .toc-list {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        padding-left: 14px;
+        font-size: 14px;
+
+        .toc-list-item {
+          position: relative;
+          padding: 6px 0;
+
+          a {
+            font-size: 14px;
+            color: var(--main);
+          }
+
+          // &.is-active-li {
+          //   color: var(--theme);
+          //   font-weight: 500;
+          //   font-size: 15px;
+          //   background: var(--classD);
+          //   border-radius: 4px;
+          // }
         }
+
+        .toc-list {
+          font-size: 13px;
+        }
+      }
+
+      .toc-nodata {
+        padding: 20px;
+        text-align: center;
+        color: var(--minor);
+        font-style: italic;
+        background: var(--classD);
       }
     }
   }
@@ -1591,50 +1634,58 @@ body {
         .item {
           margin-bottom: 0;
 
-          .link .inner {
-            .title {
-              position: absolute;
-              display: flex;
-              flex-wrap: nowrap;
-              justify-content: center;
-              align-items: center;
-              left: 0;
-              top: 0;
-              bottom: 0;
-              right: 0;
-              color: #fff;
-              font-size: 14px;
-              background: rgba(0, 0, 0, 0.4);
-              transition: background 0.5s;
-              will-change: background;
+          .link {
+            cursor: default;
+
+            &.clickable {
+              cursor: pointer;
             }
 
-            &:hover {
-              .image {
-                background: rgba(0, 0, 0, 0.5);
-                transform: scale(1.1);
-              }
-
+            .inner {
               .title {
-                background: rgba(0, 0, 0, 0.3);
+                position: absolute;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                color: #fff;
+                font-size: 14px;
+                background: rgba(0, 0, 0, 0.4);
+                transition: background 0.5s;
+                will-change: background;
               }
-            }
 
-            .post-nums {
-              display: flex;
-              align-items: center;
-              position: absolute;
-              z-index: 1;
-              top: 5px;
-              right: 5px;
-              height: 18px;
-              padding: 0 8px;
-              color: #fff;
-              white-space: nowrap;
-              font-size: 12px;
-              background-image: linear-gradient(to right, #fc712a, #f84c39);
-              background-color: #f84c39;
-              border-radius: 8px;
+              &:hover {
+                .image {
+                  background: rgba(0, 0, 0, 0.5);
+                  transform: scale(1.1);
+                }
+
+                .title {
+                  background: rgba(0, 0, 0, 0.3);
+                }
+              }
+
+              .post-nums {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                z-index: 1;
+                top: 5px;
+                right: 5px;
+                height: 18px;
+                padding: 0 8px;
+                color: #fff;
+                white-space: nowrap;
+                font-size: 12px;
+                background-image: linear-gradient(to right, #fc712a, #f84c39);
+                background-color: #f84c39;
+                border-radius: 8px;
+              }
             }
           }
 
@@ -6294,8 +6345,15 @@ body {
 }
 
 .joe_nodata {
+  display: flex;
+  align-items: center;
   padding: 20px;
   color: var(--minor);
+
+  i {
+    margin-right: 4px;
+    vertical-align: middle;
+  }
 }
 
 .joe_advert-large,

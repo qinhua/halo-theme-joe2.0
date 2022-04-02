@@ -11,8 +11,8 @@
       <div class="swiper-wrapper">
         <#--  手动配置  -->
         <#if source_type == 'manual'>
-          <#if settings.bannerData?? && settings.bannerData != ''>
-            <#list settings.bannerData?split('=====') as banners>
+          <#if settings.banner_data?? && settings.banner_data != ''>
+            <#list settings.banner_data?split('=====') as banners>
               <#if (banners_index + 1) lte limit>
                 <#assign banner = banners?split('-|||-')>
                 <#assign cur_title = (banner[0]?? && banner[0]?trim!='')?then(banner[0]?replace('\n','')?replace('\r','')?trim,'')>

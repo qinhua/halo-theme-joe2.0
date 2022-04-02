@@ -203,7 +203,7 @@
   <div class="joe_header__toc">
     <div class="joe_header__toc-wrap">
       <div class="toc_top">
-        <h3>目录</h3>      
+        <h3>目 录</h3>      
         <img width="100%" height="150" src="${BASE_RES_URL+'/source/img/context_bg.webp'}" alt="文章目录" />
       </div>
       <div id="js-toc-mobile" class="toc"></div>
