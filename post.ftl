@@ -7,7 +7,7 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <#include "template/module/post_bread.ftl">
-      <div class="joe_container joe_main_container page-post${settings.enable_show_in_up?then(' animated fadeIn','')}">
+      <div class="joe_container joe_main_container page-post${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')}">
         <div class="joe_main joe_post">
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id?c}" data-clikes="${post.likes?c}" data-author="${user.nickname!}">
             <#include "template/macro/post_status.ftl">
@@ -74,7 +74,7 @@
               <@adpost.ads_post type="top" />
               <#assign enable_copy = (metas?? && metas.enable_copy?? && metas.enable_copy?trim!='')?then(metas.enable_copy?trim,'true')>
               <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
-              <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+              <article class="joe_detail__article${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')} ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
                 ${post.formatContent!}
               </article>
               <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>
