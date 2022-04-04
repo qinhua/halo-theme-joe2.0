@@ -375,24 +375,25 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 
 ##### a、文章页元数据（postMetaField）
 
-| 字段名               | 值类型  |   默认值   | 描述                                                   |
-| :------------------- | :-----: | :--------: | :----------------------------------------------------- |
-| enable_aside         | Boolean |    true    | 是否启用侧边栏                                         |
-| enable_page_meta     | Boolean |    true    | 是否展示页面元信息（即顶部的字数、阅读量等数据）       |
-| enable_passage_tips  | Boolean |    true    | 是否展示温馨提示                                       |
-| enable_collect_check | Boolean |    true    | 是否启用百度收录检查                                   |
-| use_raw_content      | Boolean |   false    | 是否渲染原始内容                                       |
-| enable_comment       | Boolean |    true    | 是否启用评论功能                                       |
-| enable_toc           | Boolean |    true    | 是否启用 Toc 目录                                      |
-| toc_depth            | Number  |     0      | Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6        |
-| img_align            | String  |  "center"  | 图片对齐方式（left-左对齐；center-居中；right-右对齐） |
-| img_max_width        | String  |   "100%"   | 图片最大宽度                                           |
-| enable_copy          | Boolean |    true    | 是否允许复制内容                                       |
-| enable_donate        | Boolean |    true    | 是否启用打赏（必须配置好相应二维码）                   |
-| enable_share         | Boolean |    true    | 是否启用分享                                           |
-| enable_like          | Boolean |    true    | 是否启用点赞                                           |
-| code_theme           | String  | “one-dark” | 指定代码主题（默认和全局设置一致）                     |
-| enable_katex         | Boolean |   false    | 是否启用公式支持                                       |
+| 字段名                | 值类型  |   默认值   | 描述                                                   |
+| :-------------------- | :-----: | :--------: | :----------------------------------------------------- |
+| enable_aside          | Boolean |    true    | 是否启用侧边栏                                         |
+| enable_page_meta      | Boolean |    true    | 是否展示页面元信息（即顶部的字数、阅读量等数据）       |
+| enable_passage_tips   | Boolean |    true    | 是否展示温馨提示                                       |
+| enable_collect_check  | Boolean |    true    | 是否启用百度收录检查                                   |
+| use_raw_content       | Boolean |   false    | 是否渲染原始内容                                       |
+| enable_comment        | Boolean |    true    | 是否启用评论功能                                       |
+| enable_toc            | Boolean |    true    | 是否启用 Toc 目录                                      |
+| toc_depth             | Number  |     0      | Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6        |
+| img_align             | String  |  "center"  | 图片对齐方式（left-左对齐；center-居中；right-右对齐） |
+| img_max_width         | String  |   "100%"   | 图片最大宽度                                           |
+| enable_copy           | Boolean |    true    | 是否允许复制内容                                       |
+| enable_donate         | Boolean |    true    | 是否启用打赏（必须配置好相应二维码）                   |
+| enable_share          | Boolean |    true    | 是否启用分享                                           |
+| enable_like           | Boolean |    true    | 是否启用点赞                                           |
+| code_theme            | String  | “one-dark” | 指定代码主题（默认和全局设置一致）                     |
+| enable_fold_long_code | Boolean |    true    | 是否开启长代码块自动折叠                               |
+| enable_katex          | Boolean |   false    | 是否启用公式支持                                       |
 
 ##### b、自定义页元数据（sheetMetaField）
 

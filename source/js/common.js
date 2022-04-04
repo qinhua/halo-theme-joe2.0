@@ -182,8 +182,12 @@ const commonContext = {
 	},
 	/*自动折叠长代码 <仅针对文章页>*/
 	foldCode() {
-		if (!$(".page-post").length) return;
-		if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
+		if (!$(".page-post").length) return; // 仅针对文章页
+		if (
+			ThemeConfig.enable_code_expander &&
+      ThemeConfig.enable_fold_long_code &&
+      PageAttrs.metas.enable_fold_long_code !== "false"
+		) {
 			$(".page-post pre[class*='language-']").each(function (_index, item) {
 				const $item = $(item);
 				if ($item.height() > ThemeConfig.long_code_height) {
@@ -662,7 +666,7 @@ const commonContext = {
 				$(".joe_header__slideout").removeClass("active");
 				$(".joe_header__toc").removeClass("active");
 				$(".joe_header__above").removeClass("solid");
-        
+
 				// 还原滚动位置
 				const lastScroll = window.sessionStorage.getItem("lastScroll");
 				lastScroll && $html.scrollTop(lastScroll);

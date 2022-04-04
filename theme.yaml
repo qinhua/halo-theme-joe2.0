@@ -27,6 +27,7 @@ postMetaField:
   - enable_share
   - enable_like
   - code_theme
+  - enable_fold_long_code
   - enable_katex
 
 # 自定义页 meta 变量

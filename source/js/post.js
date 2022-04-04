@@ -234,13 +234,13 @@ const postContext = {
 
 		// 1.还原 Halo1.5 中被编码的标题id
 		const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
-		const $wrp = $(".joe_detail__article");
-		headings.forEach((head) => {
-			const $heads = $wrp.find(head);
-			$heads.each((_index, head) => {
-				head.id = decodeURIComponent(head.id);
-			});
-		});
+		// const $wrp = $(".joe_detail__article");
+		// headings.forEach((head) => {
+		// 	const $heads = $wrp.find(head);
+		// 	$heads.each((_index, head) => {
+		// 		head.id = decodeURIComponent(head.id);
+		// 	});
+		// });
 
 		// 2.初始化TOC
 		const renderToc = (type = "pc") => {
@@ -266,18 +266,18 @@ const postContext = {
 				disableTocScrollSync: !false,
 				onClick: function (e) {
 					// console.log(e);
-					// 处理toc滚动位置
-					$("html").removeClass("disable-scroll");
-					$(".joe_header__toc").removeClass("active");
-					$(".joe_header__mask").removeClass("active slideout");
-					if (location.hash) {
-						$("html,body").animate(
-							{
-								scrollTop: $(decodeURIComponent(location.hash)).offset().top,
-							},
-							0
-						);
-					}
+					// 更新移动端toc文章滚动位置
+					// $("html").removeClass("disable-scroll");
+					// $(".joe_header__toc").removeClass("active");
+					// $(".joe_header__mask").removeClass("active slideout");
+					// if (location.hash) {
+					// 	$("html,body").animate(
+					// 		{
+					// 			scrollTop: $(decodeURIComponent(location.hash)).offset().top,
+					// 		},
+					// 		0
+					// 	);
+					// }
 
 					window.tocPhase = true;
 				},
