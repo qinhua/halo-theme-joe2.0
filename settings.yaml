@@ -3576,13 +3576,25 @@ others:
     #       label: 开启
     #     - value: false
     #       label: 关闭
-    rip_mode:
-      name: rip_mode
-      label: RIP模式(灰色模式)
+    enable_debug:
+      name: enable_debug
+      label: 调试模式
       type: switch
       data-type: bool
       default: false
-      description: "向生命致敬，愿精神长存 <愿此功能永不被启用>"
+      description: "调试模式开启后，页面会展示 vconsole 的绿色调试按钮，便于排查移动端的线上问题"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    rip_mode:
+      name: rip_mode
+      label: RIP模式
+      type: switch
+      data-type: bool
+      default: false
+      description: "整站变灰，向生命致敬，愿精神长存 <愿此功能永不被启用>"
       options:
         - value: true
           label: 开启

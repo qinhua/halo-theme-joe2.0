@@ -97,6 +97,10 @@
     <!-- 自定义js -->
     <script type="text/javascript">${settings.custom_js_body!}</script>
   </#if>
+  <#if settings.enable_debug>
+    <!-- vconsole -->
+    <script src="${BASE_RES_URL}/source/lib/vconsole/vconsole.min.js"></script>
+  </#if>
   <#if mode != "development">
     <@global.statistics />
   </#if>

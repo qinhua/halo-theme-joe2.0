@@ -23,24 +23,28 @@ const commonContext = {
 		// 手动切换
 		$(".joe_action_item.mode").on("click", function (e) {
 			e.stopPropagation();
-			local_theme = localStorage.getItem("data-mode");
-			let theme = "";
-			if (local_theme) {
-				theme = local_theme === "light" ? "dark" : "light";
-				$icon_light[`${local_theme === "light" ? "add" : "remove"}Class`](
-					"active"
-				);
-				$icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
-					"active"
-				);
-			} else {
-				theme = "dark";
-				$icon_light.removeClass("active");
-				$icon_dark.addClass("active");
+			try {
+				local_theme = localStorage.getItem("data-mode");
+				let theme = "";
+				if (local_theme) {
+					theme = local_theme === "light" ? "dark" : "light";
+					$icon_light[`${local_theme === "light" ? "add" : "remove"}Class`](
+						"active"
+					);
+					$icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
+						"active"
+					);
+				} else {
+					theme = "dark";
+					$icon_light.removeClass("active");
+					$icon_dark.addClass("active");
+				}
+				$html.attr("data-mode", theme);
+				localStorage.setItem("data-mode", theme);
+				commonContext.initCommentTheme();
+			} catch (err) {
+				console.log(err);
 			}
-			$html.attr("data-mode", theme);
-			localStorage.setItem("data-mode", theme);
-			commonContext.initCommentTheme();
 		});
 	},
 	/* 加载条 */
@@ -910,6 +914,11 @@ const commonContext = {
       	"padding: 6px 8px;color:#fff;background:linear-gradient(270deg, #4edb21, #f15206);border-radius: 3px;"
       );
 	},
+	/* 调试模式 */
+	debug() {
+		if(!ThemeConfig.enable_debug) return;	
+		new window.VConsole();
+	},
 	/* 清理工作 */
 	clean() {
 		// 移除无用标签
@@ -932,6 +941,7 @@ const commonContext = {
 		"setFavicon",
 		"initUV",
 		"showLoadTime",
+		"debug",
 		"clean",
 	];
 

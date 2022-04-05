@@ -429,14 +429,14 @@
 
 #### 音频播放器
 
-<joe-mp3 name="一段音频" url="xxx.mp3" theme="red" cover="xxx.jpg" autoplay></joe-mp3>
+<joe-mp3 name="天生狂野-柴古唐斯主题曲" url="https://bbchin.com/upload/2022/04/%E5%A4%A9%E7%94%9F%E7%8B%82%E9%87%8E-%E6%9F%B4%E5%8F%A4%E5%94%90%E6%96%AF%E4%B8%BB%E9%A2%98%E6%9B%B2.mp3" theme="red" cover="https://bbchin.com/upload/2022/04/cgts.png" autoplay></joe-mp3>
 
 ```html
 <joe-mp3
-  name="一段音频"
-  url="xxx.mp3"
+  name="天生狂野-柴古唐斯主题曲"
+  url="https://bbchin.com/upload/2022/04/%E5%A4%A9%E7%94%9F%E7%8B%82%E9%87%8E-%E6%9F%B4%E5%8F%A4%E5%94%90%E6%96%AF%E4%B8%BB%E9%A2%98%E6%9B%B2.mp3"
   theme="red"
-  cover="xxx.jpg"
+  cover="https://bbchin.com/upload/2022/04/cgts.png"
   autoplay
 ></joe-mp3>
 ```

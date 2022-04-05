@@ -87,23 +87,27 @@
   }
   // 读取主题模式
   var initThemeMode = function() {
-    var curMode = "";
-    if (ThemeConfig.theme_mode === "auto") {
-      var light_scope = ThemeConfig.light_time_scope.split("~");
-      var now = new Date();
-      var today = now.toLocaleString().split(" ")[0];
-      var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
-      localStorage.removeItem("data-mode");
-    } else if (ThemeConfig.theme_mode === "user") {
-      // 用户模式下优先从本地取主题模式，默认为浅色
-      curMode = localStorage.getItem("data-mode") || "light";
-      localStorage.setItem("data-mode", curMode);
-    } else {
-      // 非用户模式下直接取后台配置的模式
-      curMode = ThemeConfig.theme_mode;
-      localStorage.removeItem("data-mode");
+    try {
+      var curMode = ""; 
+      if (ThemeConfig.theme_mode === "auto") {
+        var light_scope = ThemeConfig.light_time_scope.split("~");
+        var now = new Date();
+        var today = now.toLocaleString().split(" ")[0];
+        var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
+        localStorage.removeItem("data-mode");
+      } else if (ThemeConfig.theme_mode === "user") {
+        // 用户模式下优先从本地取主题模式，默认为浅色
+        curMode = localStorage.getItem("data-mode") || "light";
+        localStorage.setItem("data-mode", curMode);
+      } else {
+        // 非用户模式下直接取后台配置的模式
+        curMode = ThemeConfig.theme_mode;
+        localStorage.removeItem("data-mode");
+      }
+      document.querySelector("html").setAttribute("data-mode", curMode);
+    } catch(e) {
+      console.log(e);
     }
-    document.querySelector("html").setAttribute("data-mode", curMode);
   }
   initThemeMode();
   window.Joe = {
