@@ -110,6 +110,5 @@
     isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
     BASE_API: ""
   }
-  var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
   ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.developer + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>

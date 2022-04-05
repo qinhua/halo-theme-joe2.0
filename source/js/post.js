@@ -232,86 +232,65 @@ const postContext = {
 			return;
 		}
 
-		// 1.还原 Halo1.5 中被编码的标题id
-		const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
-		// const $wrp = $(".joe_detail__article");
-		// headings.forEach((head) => {
-		// 	const $heads = $wrp.find(head);
-		// 	$heads.each((_index, head) => {
-		// 		head.id = decodeURIComponent(head.id);
-		// 	});
-		// });
+		const $html = $("html");
+		const $mask = $(".joe_header__mask");
+		const $btn_mobile_toc = $(".joe_action .toc");
+		const $mobile_toc = $(".joe_header__toc");
 
-		// 2.初始化TOC
-		const renderToc = (type = "pc") => {
-			tocbot.init({
-				tocSelector: type === "pc" ? "#js-toc" : "#js-toc-mobile",
-				contentSelector: ".joe_detail__article",
-				ignoreSelector: ".js-toc-ignore",
-				headingSelector: headings.join(","),
-				collapseDepth: +(
-					PageAttrs.metas.toc_depth ||
-          ThemeConfig.toc_depth ||
-          0
-				),
-				scrollSmooth: true,
-				includeTitleTags: true,
-				// scrollSmoothDuration: 400,
-				hasInnerContainers: false,
-				headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
-				scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
-				positionFixedSelector: ".toc-container", // 固定类添加的容器
-				positionFixedClass: "is-position-fixed", // 固定类名称
-				fixedSidebarOffset: "auto",
-				disableTocScrollSync: !false,
-				onClick: function (e) {
-					// console.log(e);
+		// 初始化TOC
+		tocbot.init({
+			tocSelector: Joe.isMobile ? "#js-toc-mobile" : "#js-toc",
+			contentSelector: ".joe_detail__article",
+			ignoreSelector: ".js-toc-ignore",
+			headingSelector: "h1,h2,h3,h4,h5,h6",
+			collapseDepth: +(PageAttrs.metas.toc_depth || ThemeConfig.toc_depth || 0),
+			scrollSmooth: true,
+			includeTitleTags: true,
+			// scrollSmoothDuration: 400,
+			hasInnerContainers: false,
+			headingsOffset: 80, // 目录中高亮的偏移值，和scrollSmoothOffset有关联
+			scrollSmoothOffset: -80, // 屏幕滚动的偏移值（这里和导航条固定也有关联）
+			positionFixedSelector: ".toc-container", // 固定类添加的容器
+			positionFixedClass: "is-position-fixed", // 固定类名称
+			fixedSidebarOffset: "auto",
+			disableTocScrollSync: !false,
+			onClick: function (e) {
+				// console.log(e);
+				if (Joe.isMobile) {
 					// 更新移动端toc文章滚动位置
-					// $("html").removeClass("disable-scroll");
-					// $(".joe_header__toc").removeClass("active");
-					// $(".joe_header__mask").removeClass("active slideout");
-					// if (location.hash) {
-					// 	$("html,body").animate(
-					// 		{
-					// 			scrollTop: $(decodeURIComponent(location.hash)).offset().top,
-					// 		},
-					// 		0
-					// 	);
-					// }
+					$html.removeClass("disable-scroll");
+					$mobile_toc.removeClass("active");
+					$mask.removeClass("active slideout");
+					if (location.hash) {
+						$("html,body").animate(
+							{
+								scrollTop: $(decodeURIComponent(location.hash)).offset().top,
+							},
+							0
+						);
+					}
+				}
 
-					window.tocPhase = true;
-				},
-				scrollEndCallback: function (e) {
-					// console.log(e);
-					window.tocPhase = null;
-				},
-			});
-		};
-
-		if (document.body.clientWidth > 768) {
-			// PC端TOC
-			renderToc("pc");
-		} else {
-			// 移动端TOC
-			const $html = $("html");
-			const $mask = $(".joe_header__mask");
-			const $slide_toc = $(".joe_header__toc");
-
-			renderToc("mobile");
-
-			$(".joe_action .toc").on("click", () => {
-				$mask.addClass("active slideout");
-				$slide_toc.addClass("active");
-				// 保存滚动位置
-				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
-				$html.addClass("disable-scroll");
-			});
-		}
-
+				window.tocPhase = true;
+			},
+			scrollEndCallback: function (e) {
+				// console.log(e);
+				window.tocPhase = null;
+			},
+		});
 
 		// 无菜单数据
 		if (!$("#js-toc, #js-toc-mobile").children().length) {
 			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
+		}
+		if (Joe.isMobile) {
+			$btn_mobile_toc.show();
+			$btn_mobile_toc.on("click", () => {
+				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
+				$html.addClass("disable-scroll");
+				$mask.addClass("active");
+				$mobile_toc.addClass("active");
+			});
 		}
 		$(".toc-container").show();
 	},
