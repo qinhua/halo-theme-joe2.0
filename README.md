@@ -110,7 +110,7 @@
 - [x] 文章和日志页 点赞 + 评论
 - [x] 文章页 a 标签新页面打开
 - [x] 文章页复制加版权文字
-- [x] 文章页评论后可见
+- [x] 文章内容评论后可见
 - [x] 播放器插件/B 站视频
 - [x] PDF 插件
 - [x] 留言页面
@@ -386,6 +386,7 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 | enable_page_meta      | Boolean |    true    | 是否展示页面元信息（即顶部的字数、阅读量等数据）       |
 | enable_passage_tips   | Boolean |    true    | 是否展示温馨提示                                       |
 | enable_collect_check  | Boolean |    true    | 是否启用百度收录检查                                   |
+| enable_read_limit     | Boolean |   false    | 是否开启评论后可见                                     |
 | use_raw_content       | Boolean |   false    | 是否渲染原始内容                                       |
 | enable_comment        | Boolean |    true    | 是否启用评论功能                                       |
 | enable_toc            | Boolean |    true    | 是否启用 Toc 目录                                      |
@@ -525,15 +526,9 @@ console.log("hello world!!!");
 
 #### 18、如何设置文章仅评论后可见？
 
-> 主题目前支持文章页的 `评论后可见功能`，主要是通过在文章内容中设置相应标记实现的。你只需要在想隐藏的内容前面插入 `joe-hide` 组件即可（切记前后要空一行，且不要使用单标签形式，插入多个时只有最后一个会生效）：
+> 主题目前支持文章页的 `评论后可见功能`，只要在后台管理中发布文章时设置-元数据 `enable_read_limit` 为 `true` 即可。设置之后文章页默认只展示一屏高度的内容，剩余内容需要评论后才可见（如果文章内容小于一屏高度，则此功能会被忽略）。
 
-```html
-前面是直接可查看的内容
-
-<joe-hide></joe-hide>
-
-后面是评论后才能查看的内容
-```
+![评论后可见](https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/read_limit.png)
 
 #### 19、如何区分不同的自定义页面？
 

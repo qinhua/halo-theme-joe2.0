@@ -83,13 +83,15 @@
               <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
               <#assign enable_read_limit = (metas?? && metas.enable_read_limit?? && metas.enable_read_limit?trim!='')?then(metas.enable_read_limit?trim,'false')>
               <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_read_limit=='true')?then(' limited','')}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
-                <#if use_raw_content == 'false'>
-                  ${post.formatContent!}
-                <#else>
-                  <joe-raw-content>
-                    <div id="_raw">${post.formatContent!}</div>
-                  </joe-raw-content>
-                </#if>
+                <div id="post-inner">
+                  <#if use_raw_content == 'false'>
+                    ${post.formatContent!}
+                  <#else>
+                    <joe-raw-content>
+                      <div id="_raw">${post.formatContent!}</div>
+                    </joe-raw-content>
+                  </#if>
+                </div>
                 <#if enable_read_limit == 'true'>
                   <joe-read-limited></joe-read-limited>
                 </#if>

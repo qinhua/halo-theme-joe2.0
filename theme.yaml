@@ -16,6 +16,7 @@ postMetaField:
   - enable_page_meta
   - enable_passage_tips
   - enable_collect_check
+  - enable_read_limit
   - use_raw_content
   - enable_comment
   - enable_toc

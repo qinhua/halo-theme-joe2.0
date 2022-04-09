@@ -8,9 +8,24 @@ const postContext = {
 		)
 			return;
 
-		const $content = $(".page-post .joe_detail__article");
+		const $article = $(".page-post .joe_detail__article");
+		const $content = $("#post-inner");
 		const $hideMark = $(".page-post .joe_read_limited");
+		const clientHeight =
+      document.documentElement.clientHeight || document.body.clientHeight;
 		const cid = $(".joe_detail").attr("data-cid");
+
+		// 移除限制
+		const removeLimit = () => {
+			$hideMark.parent().remove();
+			$article.removeClass("limited");
+		};
+
+		// 如果文章内容高度小于等于屏幕高度，则自动忽略限制
+		if ($content.height() < clientHeight + 180) {
+			removeLimit();
+			return;
+		}
 
 		// 检查本地的 partialIds
 		const checkPartialIds = (postId, cb) => {
@@ -22,18 +37,12 @@ const postContext = {
 				cb && cb();
 			}
 		};
-    
-		// 移除限制
-		const removeLimit = () => {
-			$content.removeClass("limited");
-			$hideMark.remove();
-		};
 
 		// 更新当前评论状态
 		const updateState = async () => {
 			// console.log("评论成功，更新状态");
+			const scrollTop = $hideMark.offset().top - 180;
 			const localIds = localStorage.getItem("partialIds");
-			const offsetTop = $hideMark.offset().top;
 
 			await Utils.sleep(800); // 延迟一下
 			removeLimit(); // 移除限制
@@ -42,7 +51,6 @@ const postContext = {
 			Qmsg.success("感谢您的支持");
 
 			// 滚动到原位置
-			const scrollTop = offsetTop - 150;
 			$("html,body").animate(
 				{
 					scrollTop,
