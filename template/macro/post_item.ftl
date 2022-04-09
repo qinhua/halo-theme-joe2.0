@@ -6,7 +6,7 @@
       <@tbn.post_thumbnail post=post />
       <#assign thumbnail = tbn.thumbnail>
       <a href="${post.fullPath!}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
-        <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${post.title!}">
+        <img width="100%" height="100%" class="lazyload" data-src="${thumbnail!}" src="${lazy_img}" onerror="Joe.errorImg(this,'${settings.fallback_thumbnail!}')" alt="${post.title!}">
         <time datetime="${post.createTime?string('yyyy-MM-dd')}">${post.createTime?string('yyyy-MM-dd')}</time>
         <i class="joe-font joe-icon-picture"></i>
       </a>

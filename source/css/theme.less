@@ -26,6 +26,7 @@ html {
   --classJ: #f9e5fb;
   --classK: #e4e7ed;
   --classL: #666;
+  --classM: #2d2e37;
   --quote: #50bfff;
   --code: #409eff;
   --code-background: #e8f3ff;
@@ -81,6 +82,7 @@ html {
     --classJ: #39243c;
     --classK: #eee;
     --classL: #333;
+    --classM: #fff;
     --quote: #276b92;
     --code: #efa141;
     --code-background: #353246;
@@ -207,6 +209,17 @@ html {
 
     .joe_detail__friends {
       filter: brightness(0.8);
+    }
+
+    .site_driven {
+      img {
+
+        &.baidu,
+        &.huawei,
+        &.jinshan {
+          filter: invert(1);
+        }
+      }
     }
   }
 }

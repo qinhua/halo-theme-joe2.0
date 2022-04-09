@@ -85,11 +85,12 @@
   padding: 0 10px 0;
 
   article {
-    visibility: hidden;
+    position: relative;
     padding: 15px 0 30px;
 
-    &.show {
-      visibility: visible;
+    &.limited {
+      height: 100vh;
+      overflow: hidden;
     }
   }
 }

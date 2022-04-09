@@ -258,16 +258,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 
 	customElements.define(
-		"joe-hide",
-		class JoeHide extends HTMLElement {
+		"joe-read-limited",
+		class JoeReadLimited extends HTMLElement {
 			constructor() {
 				super();
 				this.render();
 			}
 			render() {
 				this.innerHTML =
-          "<div class=\"joe_hide\"><i class=\"joe-font joe-icon-locker\" style=\"color:#f5840d;\"></i>&nbsp;此处内容仅 <span class=\"joe_hide__button\">评论</span> 后可见</div>";
-				this.$button = this.querySelector(".joe_hide__button");
+          "<div class=\"joe_read_limited\"><p><i class=\"joe-font joe-icon-locker\" style=\"color:#f5840d;\"></i>&nbsp;此处内容仅 <span class=\"joe_read_limited__button\">评论</span> 后可见</p></div>";
+				this.$button = this.querySelector(".joe_read_limited__button");
 				const $comment = document.querySelector(".joe_comment");
 				const $header = document.querySelector(".joe_header");
 				if (!$comment || !$header) return;

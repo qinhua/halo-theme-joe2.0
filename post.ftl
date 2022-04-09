@@ -29,7 +29,7 @@
               <#if settings.enable_page_meta && enable_page_meta=='true'>
                 <div class="joe_detail__count">
                   <div class="joe_detail__count-information">
-                    <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="this.src='${settings.default_avatar!}'" alt="${user.nickname!}">
+                    <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="Joe.errorImg(this)" alt="${user.nickname!}">
                     <div class="meta">
                       <div class="author">
                         <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
@@ -47,7 +47,7 @@
                         <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
                         <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
                           <span class="line">/</span>
-                          <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                          <#include "template/module/baidu_push.ftl">
                         </#if>
                       </div>
                     </div>
@@ -81,13 +81,17 @@
               <@adpost.ads_post type="top" />
               <#assign enable_copy = (metas?? && metas.enable_copy?? && metas.enable_copy?trim!='')?then(metas.enable_copy?trim,'true')>
               <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
-              <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+              <#assign enable_read_limit = (metas?? && metas.enable_read_limit?? && metas.enable_read_limit?trim!='')?then(metas.enable_read_limit?trim,'false')>
+              <article class="joe_detail__article animated fadeIn ${img_align+'-img'}${(enable_read_limit=='true')?then(' limited','')}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
                 <#if use_raw_content == 'false'>
                   ${post.formatContent!}
                 <#else>
                   <joe-raw-content>
                     <div id="_raw">${post.formatContent!}</div>
                   </joe-raw-content>
+                </#if>
+                <#if enable_read_limit == 'true'>
+                  <joe-read-limited></joe-read-limited>
                 </#if>
               </article>
               <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>

@@ -22,7 +22,7 @@
                       <@post_num type="category" id="${category.id?c}" suffix="℃" />
                     </#if>
                     <#assign cover=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, BASE_RES_URL+'/source/img/hot_cover${category_index+1}.jpg')>
-                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
+                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="Joe.errorImg(this)" alt="${category.name!}">
                     <figcaption class="title">${category.name!}</figcaption>
                   </figure>
                 </a>
@@ -43,7 +43,7 @@
                 <a class="link${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow" href="${cur_link!}" title="${cur_title!}">
                   <figure class="inner">
                     <#assign cover=(cur_img!='')?then(cur_img, BASE_RES_URL+'/source/img/hot_cover${categorys_index+1}.jpg')>
-                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${cur_title!}">
+                    <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="Joe.errorImg(this)" alt="${cur_title!}">
                     <figcaption class="title">${cur_title!}</figcaption>
                   </figure>
                 </a>

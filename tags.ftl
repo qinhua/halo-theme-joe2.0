@@ -28,7 +28,7 @@
                               <@post_num type="tag" id="${tag.id?c}" suffix="篇" />
                             </#if>
                             <#assign thumbnail=(tag.thumbnail?? && tag.thumbnail!='')?then(tag.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + tag.id,'https://picsum.photos/id/1${tag_index}/350/200')) >
-                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${tag.name!}">
+                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="Joe.errorImg(this,'${settings.fallback_thumbnail!}')" alt="${tag.name!}">
                             <figcaption class="title">${tag.name!}</figcaption>
                           </figure>
                         </a>

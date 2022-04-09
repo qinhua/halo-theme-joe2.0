@@ -8,7 +8,7 @@
       <#assign cur_subtitle = (post.summary??)?then(post.summary?trim!, '')>
       <#assign cur_link = post.fullPath!>
       <a class="item" href="${cur_link}" target="_blank" rel="noopener noreferrer nofollow">
-        <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" alt="${cur_title!'banner'}">
+        <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" onerror="Joe.errorImg(this)" alt="${cur_title!'banner'}">
         <#if settings.enable_banner_title==true && cur_title!=''>
           <div class="title-row">
             <h3 class="title">${cur_title}</h3>

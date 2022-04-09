@@ -9,5 +9,5 @@
     <#if count gte 300 && count lt 500><#assign level=5></#if>
     <#if count gte 500><#assign level=6></#if>
   </@postTag>
-  <img class="level" src="${BASE_RES_URL!}/source/svg/level_${level}.svg" onerror="this.src='${EMPTY_IMG!}'" alt="博主等级"/>
+  <img class="level" src="${BASE_RES_URL!}/source/svg/level_${level}.svg" onerror="Joe.errorImg(this)" alt="博主等级"/>
 </#if>

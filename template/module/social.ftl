@@ -61,7 +61,7 @@
       <#assign channel_link=(channel[2]?? && channel[2]?trim!='')?then(channel[2]?trim,'')>
       <#if channel_name!='' && channel_logo!='' && channel_link!=''>
         <a class="custom_channel" href="${channel_link}" target="_blank" title="${channel_name}" rel="noopener noreferrer nofollow">
-          <img src="${channel_logo}" alt="${channel_name}"/>
+          <img src="${channel_logo}" onerror="Joe.errorImg(this)" onerror="Joe.errorImg(this)" alt="${channel_name}"/>
         </a>
       </#if>
     </#if>

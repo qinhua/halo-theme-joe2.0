@@ -557,11 +557,11 @@ footer:
           label: 否
     driven_by:
       name: driven_by
-      label: 网站由xxx云提供云服务
+      label: 云服务提供商
       type: select
       data-type: text
       default: none
-      description: "配置本站点由xxx云提供云服务"
+      description: "配置本站点由xxx云提供云服务，若要修改相关跳转链接请自行到 template/common/footer.ftl 中修改"
       options:
         - value: none
           label: 不展示(默认)
@@ -569,10 +569,25 @@ footer:
           label: 阿里云
         - value: tencent
           label: 腾讯云
+        - value: baidu
+          label: 百度云
         - value: upyun
           label: 又拍云
         - value: qiniu
           label: 七牛云
+        - value: huawei
+          label: 华为云
+        - value: jinshan
+          label: 金山云
+        - value: custom
+          label: 自定义
+    custome_cloud:
+      name: custome_cloud
+      label: 自定义云服务商
+      type: textarea
+      default: ""
+      placeholder: "请按描述文字规定的格式输入"
+      description: "自定义云服务商，支持自己定义图标和链接。格式要求：图标+链接（务必用换行隔开并按顺序输入，否则展示不了，仅在 “云服务商” 选项为 “自定义” 时生效）"
     enable_rss:
       name: enable_rss
       label: 展示 RSS
@@ -2697,14 +2712,14 @@ social:
       name: email
       label: 邮箱
       type: text
-      defaut: ""
+      default: ""
       # default: "352484005@qq.com"
       placeholder: "邮箱地址"
     github:
       name: github
       label: Github
       type: text
-      defaut: ""
+      default: ""
       # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
       placeholder: "邮箱地址"
@@ -2712,55 +2727,55 @@ social:
       name: gitee
       label: Gitee
       type: text
-      defaut: ""
+      default: ""
       # default: "https://gitee.com/duider"
       placeholder: "gitee主页地址"
     zhihu:
       name: zhihu
       label: 知乎
       type: text
-      defaut: ""
+      default: ""
       # default: "https://www.zhihu.com"
       placeholder: "知乎主页地址"
     telegram:
       name: telegram
       label: Telegram
       type: text
-      defaut: ""
+      default: ""
       placeholder: "Telegram主页地址"
     juejin:
       name: juejin
       label: 掘金
       type: text
-      defaut: ""
+      default: ""
       # default: "https://juejin.cn/user/817692384432407"
       placeholder: "掘金主页地址"
     bilibili:
       name: bilibili
       label: B站
       type: text
-      defaut: ""
+      default: ""
       # default: "https://space.bilibili.com/89927969"
       placeholder: "B站主页地址"
     qq:
       name: qq
       label: QQ
       type: text
-      defaut: ""
+      default: ""
       # default: "352484005"
       placeholder: "QQ号"
     weibo:
       name: weibo
       label: 微博
       type: text
-      defaut: ""
+      default: ""
       # default: "https://weibo.com/duider"
       placeholder: "微博主页地址"
     custome_social_channel:
       name: custome_social_channel
       label: 自定义社交渠道
       type: textarea
-      defaut: ""
+      default: ""
       placeholder: "请按描述文字规定的格式输入"
       description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
     qq_group:
@@ -3242,7 +3257,7 @@ live2d:
 
 # 评论插件
 comment:
-  label: 评论
+  label: 评论框
   items:
     gravatar_source:
       name: gravatar_source
@@ -3307,7 +3322,7 @@ comment:
       name: comment_author_poptext
       label: "提示文案（输入昵称时）"
       type: text
-      default: "输入QQ号将自动拉取昵称和头像"
+      default: "你的昵称是啥呢？"
       placeholder: 请输入
       description: "填写昵称时的提示文字"
     comment_email_poptext:

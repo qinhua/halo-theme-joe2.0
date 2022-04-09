@@ -182,9 +182,9 @@ const homeContext = {
 		}" target="_blank" rel="noopener noreferrer">
                       <img width="100%" height="100%" class="lazyload" src="${
 	ThemeConfig.lazyload_thumbnail
-}" data-src="${thumbnail}" onerror="this.src='${
+}" data-src="${thumbnail}" onerror="Joe.errorImg(this,${
 	ThemeConfig.fallback_thumbnail
-}'" alt="${post.title}">
+})" alt="${post.title}">
                       <time datetime="${Utils.formatDate(
 		post.createTime
 	)}">${Utils.formatDate(post.createTime)}</time>

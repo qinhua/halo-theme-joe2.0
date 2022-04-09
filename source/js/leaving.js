@@ -34,9 +34,9 @@ const leavingContext = {
             <div class="user">
                 <img class="avatar lazyload" src="${
 							ThemeConfig.lazyload_avatar
-							}" data-src="${avatar}" alt="用户头像" onerror="this.src='${
+							}" data-src="${avatar}" alt="用户头像" onerror="Joe.errorImg(this,${
 								ThemeConfig.comment_avatar_error
-							}'"/>
+							})"/>
                 <div class="nickname">${item.author}</div>
                 <div class="date">${new Date(
 								item.createTime

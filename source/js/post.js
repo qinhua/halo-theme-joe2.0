@@ -1,96 +1,68 @@
 /**文章页逻辑 */
-let tmpDom = null;
 const postContext = {
 	/* 初始化评论后可见 */
 	initReadLimit() {
+		if (
+			PageAttrs.metas.enable_read_limit &&
+      PageAttrs.metas.enable_read_limit.trim() !== "true"
+		)
+			return;
+
 		const $content = $(".page-post .joe_detail__article");
-		let $hideMark = $("joe-hide");
+		const $hideMark = $(".page-post .joe_read_limited");
+		const cid = $(".joe_detail").attr("data-cid");
 
-		if ($hideMark.length) {
-			const cid = $(".joe_detail").attr("data-cid");
-			// 1.有多个joe-hide标记时移除前面的标记，只处理最后一个
-			if ($hideMark.length > 1) {
-				const $lastOne = $hideMark.eq($hideMark.length - 1);
-				$lastOne.addClass("marker");
-				$hideMark = $lastOne;
-				$("joe-hide:not(.marker)").parent().remove();
+		// 检查本地的 partialIds
+		const checkPartialIds = (postId, cb) => {
+			const localIds = localStorage.getItem("partialIds");
+			if (localIds && localIds.includes(postId)) {
+				// console.log("已经评论过了");
+				removeLimit(); // 移除限制
+			} else {
+				cb && cb();
 			}
-			// 判断是否禁用
-			if (!$hideMark.attr("disabled")) {
-				// 2.设置data-partial属性
-				$content.attr("data-partial", "true");
+		};
+    
+		// 移除限制
+		const removeLimit = () => {
+			$content.removeClass("limited");
+			$hideMark.remove();
+		};
 
-				// 暂存并移除相关DOM
-				const hideDom = () => {
-					const $hideDom = $hideMark.parent().nextAll();
-					tmpDom = $hideDom;
-					$hideDom.remove();
+		// 更新当前评论状态
+		const updateState = async () => {
+			// console.log("评论成功，更新状态");
+			const localIds = localStorage.getItem("partialIds");
+			const offsetTop = $hideMark.offset().top;
 
-					// 监听评论成功事件（区分首次和后续提交）
-					const commentNode = document.getElementsByTagName("halo-comment")[0];
-					commentNode.addEventListener("post-success", (_data) => {
-						// console.log(_data, "评论成功");
-						// 检查是否已经评论过该文章
-						checkPartialIds(cid, updateState);
-					});
-				};
+			await Utils.sleep(800); // 延迟一下
+			removeLimit(); // 移除限制
+			localStorage.setItem("partialIds", localIds ? localIds + "," + cid : cid); // 记录id
+			postContext.initToc(true); // 重新渲染TOC
+			Qmsg.success("感谢您的支持");
 
-				// 检查本地的 partialIds
-				const checkPartialIds = (postId, cb) => {
-					const localIds = localStorage.getItem("partialIds");
-					if (localIds && localIds.includes(postId)) {
-						// console.log("已经评论过了");
-						$("joe-hide").parent().remove(); // 移除内容中所有 joe-hide 组件
-					} else {
-						// console.log("没有评论记录");
-						cb && cb(postId);
-					}
-				};
+			// 滚动到原位置
+			const scrollTop = offsetTop - 150;
+			$("html,body").animate(
+				{
+					scrollTop,
+				},
+				500
+			);
+		};
 
-				// 重新渲染相关内容
-				const rerenderContent = () => {
-					// console.log("重新渲染内容");
-					// 代码块
-					commonContext.initCode(true);
-					// 图片预览
-					commonContext.initGallery();
-					// PDF预览
-					commonContext.initPDF();
-					// TOC
-					tocbot.refresh();
-				};
+		// 监听评论成功事件（区分首次和后续提交）
+		const handleCallback = () => {
+			// console.log("没有评论记录");
+			const commentNode = document.getElementsByTagName("halo-comment")[0];
+			commentNode.addEventListener("post-success", (_data) => {
+				// console.log(_data, "评论成功");
+				// 检查是否已经评论过该文章
+				checkPartialIds(cid, updateState);
+			});
+		};
 
-				// 更新当前评论状态
-				const updateState = async () => {
-					const localIds = localStorage.getItem("partialIds");
-					const offsetTop = $hideMark.offset().top;
-
-					await Utils.sleep(800);
-					tmpDom.replaceAll($hideMark.parent());
-					localStorage.setItem(
-						"partialIds",
-						localIds ? localIds + "," + cid : cid
-					);
-					tmpDom = null;
-					rerenderContent();
-
-					// 滚动到原位置
-					const scrollTop = offsetTop - 150;
-					$("html,body").animate(
-						{
-							scrollTop,
-						},
-						0
-					);
-				};
-
-				// 3.检查本地的partialIds
-				checkPartialIds(cid, hideDom);
-			}
-		}
-
-		// 4.显示文章内容
-		$content.addClass("show");
+		checkPartialIds(cid, handleCallback);
 	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
@@ -216,7 +188,7 @@ const postContext = {
 		});
 	},
 	/* 文章目录 */
-	initToc() {
+	initToc(reload) {
 		if (
 			PageAttrs.metas.enable_toc === "false" ||
       !ThemeConfig.enable_toc ||
@@ -224,6 +196,7 @@ const postContext = {
 		)
 			return;
 
+		// 原始内容的文章不支持TOC
 		if (PageAttrs.metas.use_raw_content === "true") {
 			$("#js-toc").html(
 				"<div class=\"toc-nodata\">暂不支持解析原始内容目录</div>"
@@ -232,6 +205,16 @@ const postContext = {
 			return;
 		}
 
+		// 回复可见的文章首次不渲染TOC
+		if (PageAttrs.metas.enable_read_limit === "true" && !reload) {
+			$("#js-toc").html(
+				"<div class=\"toc-nodata\">文章内容不完整，目录仅评论后可见</div>"
+			);
+			$(".toc-container").show();
+			return;
+		}
+
+		// 渲染TOC&处理相关交互
 		const $html = $("html");
 		const $mask = $(".joe_header__mask");
 		const $btn_mobile_toc = $(".joe_action .toc");

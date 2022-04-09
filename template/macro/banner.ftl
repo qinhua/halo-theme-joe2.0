@@ -22,7 +22,7 @@
                 <#if cur_title?index_of('欢迎使用Joe2.0主题') == -1>
                   <div class="swiper-slide">
                     <a class="item${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
-                      <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" alt="${cur_title!'banner'}">
+                      <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" onerror="Joe.errorImg(this)" alt="${cur_title!'banner'}">
                       <#if settings.enable_banner_title == true && cur_title!=''>
                         <div class="title-row">
                           <h3 class="title">${cur_title}</h3>

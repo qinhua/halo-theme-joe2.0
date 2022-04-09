@@ -7,7 +7,7 @@
       <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
       <#if settings.show_logo>
         <a title="${blog_title!}" class="joe_header__above-logo" href="${logo_link}">
-          <img style="border-radius:${settings.logo_radius!}" src="${LOGO}" onerror="this.src='${DEFAULT_LOGO}'" alt="${blog_title!}">
+          <img style="border-radius:${settings.logo_radius!}" src="${LOGO}" onerror="Joe.errorImg(this)" alt="${blog_title!}">
         </a>
       </#if>
       <nav class="joe_header__above-nav${settings.enable_active_shadow?then(' active-shadow','')}${settings.enable_icon_animate?then(' active-animate','')}">
@@ -75,9 +75,9 @@
   <#--  mobile菜单  -->
   <div class="joe_header__slideout">
     <div class="joe_header__slideout-wrap">
-      <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" alt="侧边栏壁纸" />
+      <img width="100%" height="150" class="joe_header__slideout-image" src="${settings.author_bg!BASE_RES_URL+'/source/img/author_bg.jpg'}" onerror="Joe.errorImg(this)" alt="侧边栏壁纸" />
       <div class="joe_header__slideout-author">
-        <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="博主头像"/>
+        <img width="50" height="50" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="Joe.errorImg(this)" alt="博主头像"/>
         <div class="info">
           <a class="link" href="${logo_link}" target="_blank" rel="noopener noreferrer nofollow">${user.nickname!}<#compress><#include "../module/level.ftl"></#compress></a>
           <#if settings.motto??>
@@ -204,7 +204,7 @@
     <div class="joe_header__toc-wrap">
       <div class="toc_top">
         <h3>目 录</h3>      
-        <img width="100%" height="150" src="${BASE_RES_URL+'/source/img/context_bg.webp'}" alt="文章目录" />
+        <img width="100%" height="150" src="${BASE_RES_URL+'/source/img/context_bg.webp'}" onerror="Joe.errorImg(this)" alt="文章目录" />
       </div>
       <div id="js-toc-mobile" class="toc"></div>
     </div>

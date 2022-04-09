@@ -10,7 +10,7 @@
             <div class="content">
               <div class="desc" title="${link.description!}">${(link.description?? && link.description?trim!='')?then(link.description,'这位博主啥也没说')}</div>
               <#assign logo=(link.logo?? && link.logo!='')?then(link.logo,logo_default)>
-              <img width="40" height="40" class="avatar lazyload" data-src="${logo!}" src="${BASE_RES_URL+'/source/svg/spinner-preloader.svg'}" onerror="this.src='${logo_default}'" alt="${link.name!}">
+              <img width="40" height="40" class="avatar lazyload" data-src="${logo!}" src="${BASE_RES_URL+'/source/svg/spinner-preloader.svg'}" onerror="Joe.errorImg(this)" alt="${link.name!}">
             </div>
           </a>
         </li>

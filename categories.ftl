@@ -30,7 +30,7 @@
                               <@post_num type="category" id="${category.id?c}" suffix="篇" />
                             </#if>
                             <#assign thumbnail=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + category.id,'https://picsum.photos/id/2${category_index}/350/200')) >
-                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="this.src='${settings.fallback_thumbnail!}'" alt="${category.name!}">
+                            <img width="100%" height="120" class="image lazyload" data-src="${thumbnail}" src="${LAZY_IMG}" onerror="Joe.errorImg(this,'${settings.fallback_thumbnail!}')" alt="${category.name!}">
                             <figcaption class="title">${category.name!}</figcaption>
                           </figure>
                         </a>

@@ -6,7 +6,7 @@
       <#if cover != '' && link != ''>
         <section class="joe_advert-large">
           <a target="_blank" rel="noopener noreferrer nofollow" href="${link}" title="广告">
-            <img class="omit" width="100%" src="${cover}" alt="广告"/>
+            <img class="omit" width="100%" src="${cover}" onerror="Joe.errorImg(this)" alt="广告"/>
             <span class="icon">广告</span>
           </a>
         </section>
