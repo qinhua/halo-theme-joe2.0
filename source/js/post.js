@@ -233,6 +233,7 @@ const postContext = {
 		const $mask = $(".joe_header__mask");
 		const $btn_mobile_toc = $(".joe_action .toc");
 		const $mobile_toc = $(".joe_header__toc");
+		const $tocContainer = $("#js-toc, #js-toc-mobile");
 
 		// 初始化TOC
 		tocbot.init({
@@ -250,7 +251,7 @@ const postContext = {
 			positionFixedSelector: ".toc-container", // 固定类添加的容器
 			positionFixedClass: "is-position-fixed", // 固定类名称
 			fixedSidebarOffset: "auto",
-			disableTocScrollSync: !false,
+			// disableTocScrollSync: false,
 			onClick: function (e) {
 				// console.log(e);
 				if (Joe.isMobile) {
@@ -277,15 +278,15 @@ const postContext = {
 		});
 
 		// 无菜单数据
-		if (!$("#js-toc, #js-toc-mobile").children().length) {
-			$("#js-toc").html("<div class=\"toc-nodata\">暂无目录</div>");
+		if (!$tocContainer.children().length) {
+			$tocContainer.html(Joe.isMobile?"<div class=\"toc-nodata\"><em></em>暂无目录</div>":"<div class=\"toc-nodata\">暂无目录</div>");
 		}
 		if (Joe.isMobile) {
 			$btn_mobile_toc.show();
 			$btn_mobile_toc.on("click", () => {
 				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
 				$html.addClass("disable-scroll");
-				$mask.addClass("active");
+				$mask.addClass("active slideout");
 				$mobile_toc.addClass("active");
 			});
 		}
