@@ -19,6 +19,7 @@ const postContext = {
 		const removeLimit = () => {
 			$hideMark.parent().remove();
 			$article.removeClass("limited");
+			postContext.initToc(true); // 重新渲染TOC
 		};
 
 		// 如果文章内容高度小于等于屏幕高度，则自动忽略限制
@@ -47,7 +48,6 @@ const postContext = {
 			await Utils.sleep(800); // 延迟一下
 			removeLimit(); // 移除限制
 			localStorage.setItem("partialIds", localIds ? localIds + "," + cid : cid); // 记录id
-			postContext.initToc(true); // 重新渲染TOC
 			Qmsg.success("感谢您的支持");
 
 			// 滚动到原位置
