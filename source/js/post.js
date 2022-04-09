@@ -1,5 +1,6 @@
 /**文章页逻辑 */
 const postContext = {
+	limited: false,
 	/* 初始化评论后可见 */
 	initReadLimit() {
 		if (
@@ -7,7 +8,7 @@ const postContext = {
       PageAttrs.metas.enable_read_limit.trim() !== "true"
 		)
 			return;
-
+		postContext.limited = true;
 		const $article = $(".page-post .joe_detail__article");
 		const $content = $("#post-inner");
 		const $hideMark = $(".page-post .joe_read_limited");
@@ -17,6 +18,7 @@ const postContext = {
 
 		// 移除限制
 		const removeLimit = () => {
+			postContext.limited = false;
 			$hideMark.parent().remove();
 			$article.removeClass("limited");
 			postContext.initToc(true); // 重新渲染TOC
@@ -214,7 +216,11 @@ const postContext = {
 		}
 
 		// 回复可见的文章首次不渲染TOC
-		if (PageAttrs.metas.enable_read_limit === "true" && !reload) {
+		if (
+			PageAttrs.metas.enable_read_limit === "true" &&
+      !reload &&
+      postContext.limited
+		) {
 			$("#js-toc").html(
 				"<div class=\"toc-nodata\">文章内容不完整，目录仅评论后可见</div>"
 			);
@@ -419,6 +425,8 @@ const postContext = {
 
 !(function () {
 	document.addEventListener("DOMContentLoaded", function () {
-		Object.keys(postContext).forEach((c) => postContext[c]());
+		Object.keys(postContext).forEach(
+			(c) => typeof postContext[c] === "function" && postContext[c]()
+		);
 	});
 })();
