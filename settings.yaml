@@ -2687,7 +2687,6 @@ social:
       defaut: ""
       # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
-      placeholder: "邮箱地址"
     gitee:
       name: gitee
       label: Gitee
