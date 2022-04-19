@@ -59,13 +59,21 @@
             </p>
           </#if>
         </div>
+        <div class="side-col">
         <#if settings.enable_rss==true || settings.enable_sitemap==true>
           <div class="item">
             <#if settings.enable_rss><a class="rss" href="${rss_url!}" target="_blank" rel="noopener noreferrer"><i class="joe-font joe-icon-rss-fill"></i>&nbsp;RSS</a></#if>
             <#if settings.enable_sitemap><a href="${sitemap_xml_url!}" target="_blank" rel="noopener noreferrer">站点地图</a></#if>
-            <#--  <#if settings.enable_visit_number><a class="site_visit_number">—&nbsp;总访客：<span id="site-uv">0</span>&nbsp;</a></#if>  -->
           </div>
         </#if>
+        <#if settings.enable_busuanzi!false>
+          <div class="item busuanzi-statistic">
+            <span class="site-pv"><i class="joe-font joe-icon-zhexiantu"></i>访问量<em id="busuanzi_value_site_pv">0</em></span>
+            <span class="site-uv"><i class="joe-font joe-icon-monitor"></i>访客量<em id="busuanzi_value_site_uv">0</em></span>
+            <span class="site-page-pv"><i class="joe-font joe-icon-dianji"></i>本页访客<em id="busuanzi_value_page_pv">0</em></span>
+          </div>
+        </#if>
+      </div>
       </div>
     </#if>
     <#if settings.footer_source=='both' || settings.footer_source=='backend'>

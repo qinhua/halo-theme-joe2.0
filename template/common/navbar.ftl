@@ -87,6 +87,9 @@
           </#if>
         </div>
       </div>
+        <#if settings.enable_mobile_social!false>
+          <#include "../module/social.ftl">
+        </#if>
       <ul class="joe_header__slideout-count">
         <li class="item">
           <i class="joe-font joe-icon-riji"></i>

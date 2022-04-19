@@ -610,17 +610,18 @@ footer:
           label: 是
         - value: false
           label: 否
-    # enable_visit_number:
-    #   name: enable_visit_number
-    #   label: 展示总访问量
-    #   type: switch
-    #   data-type: bool
-    #   default: false
-    #   options:
-    #     - value: true
-    #       label: 是
-    #     - value: false
-    #       label: 否
+    enable_busuanzi:
+      name: enable_busuanzi
+      label: 展示访问量数据
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启后将使用卜算子的统计功能"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
 
 # 轮播图
 carousel:
@@ -1170,7 +1171,19 @@ blogger:
       type: switch
       data-type: bool
       default: true
-      description: "是否展示社交账号"
+      description: "是否展示社交账号，具体账号类型请到 “社交” 一栏配置"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_mobile_social:
+      name: enable_mobile_social
+      label: 展示社交账号（移动端）
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否在移动端展示社交账号，默认关闭"
       options:
         - value: true
           label: 是
@@ -1200,7 +1213,7 @@ blogger:
       label: 头像框
       type: select
       default: "0"
-      description: "作用于博主头像的相框"
+      description: "作用于博主头像的相框，可以参考这里进行选择 https://bbchin.com/archives/style-guideline#%E5%A4%B4%E5%83%8F%E6%A1%86"
       options:
         - value: "0"
           label: 无
@@ -1397,7 +1410,6 @@ home:
       name: random_img_api
       label: 随机图 API
       type: text
-      # default: "https://tu.ltyuanfang.cn/api/fengjing.php"
       default: "https://bing.ioliu.cn/v1/rand?w=400&h=300"
       description: "自定义随机图API，用于填充没有设置封面的 “文章|分类|标签”，为空则使用默认随机图 API，免费 API 不会一直可用，请知悉"
     enable_index_list_effect:
@@ -2722,7 +2734,6 @@ social:
       default: ""
       # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
-      placeholder: "邮箱地址"
     gitee:
       name: gitee
       label: Gitee

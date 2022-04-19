@@ -79,8 +79,12 @@
 
   <#-- ===== 引入脚本 start ===== -->
   <#if settings.enable_global_music_player!false>
-    <#--  <!-- 音乐播放器 -->
+    <!-- 音乐播放器 -->
     <div id="global-aplayer"></div>
+  </#if>
+  <#if settings.enable_busuanzi!false>
+    <!-- 卜算子 -->
+    <script src="${BASE_RES_URL}/source/lib/busuanzi/busuanzi.min.js"></script>
   </#if>
   <#if settings.enable_live2d>
     <!-- live2d -->
