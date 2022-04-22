@@ -616,7 +616,7 @@ footer:
       type: switch
       data-type: bool
       default: false
-      description: "开启后将使用卜算子的统计功能"
+      description: "开启后将启用卜算子对站点进行统计，并展示访问量、访客量等数据"
       options:
         - value: true
           label: 是
