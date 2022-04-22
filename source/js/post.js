@@ -279,7 +279,11 @@ const postContext = {
 
 		// 无菜单数据
 		if (!$tocContainer.children().length) {
-			$tocContainer.html(Joe.isMobile?"<div class=\"toc-nodata\"><em></em>暂无目录</div>":"<div class=\"toc-nodata\">暂无目录</div>");
+			$tocContainer.html(
+				Joe.isMobile
+					? "<div class=\"toc-nodata\"><em></em>暂无目录</div>"
+					: "<div class=\"toc-nodata\">暂无目录</div>"
+			);
 		}
 		if (Joe.isMobile) {
 			$btn_mobile_toc.show();
@@ -307,6 +311,25 @@ const postContext = {
 			const top = $comment.offsetTop - $header.offsetHeight - 15;
 			window.scrollTo({ top });
 		});
+
+		// 判断是否需要隐藏菜单
+		if (Joe.isMobile) return;
+		const $asideEl = $(".aside_operations");
+		const $operateEl = $(
+			".joe_detail__agree,.joe_detail__operate-share,.joe_detail__operate .joe_donate"
+		);
+		const toggleAsideMenu = (e) => {
+			const offsetLeft = $(".joe_post")[0].getBoundingClientRect().left;
+			if (offsetLeft < 75) {
+				$asideEl.hide();
+				$operateEl.show();
+			} else {
+				$asideEl.show();
+				$operateEl.hide();
+			}
+		};
+		toggleAsideMenu();
+		window.addEventListener("resize", Utils.throttle(toggleAsideMenu), 500);
 	},
 	/* 阅读进度条 */
 	initProgress() {
@@ -425,9 +448,23 @@ const postContext = {
 };
 
 !(function () {
+	const omits = ["jumpToComment"];
 	document.addEventListener("DOMContentLoaded", function () {
 		Object.keys(postContext).forEach(
-			(c) => typeof postContext[c] === "function" && postContext[c]()
+			(c) =>
+				!omits.includes(c) &&
+        typeof postContext[c] === "function" &&
+        postContext[c]()
 		);
+	});
+
+	window.addEventListener("load", function () {
+		if (omits.length === 1) {
+			postContext[omits[0]]();
+		} else {
+			omits.forEach(
+				(c) => c !== "loadingBar" && postContext[c] && postContext[c]()
+			);
+		}
 	});
 })();

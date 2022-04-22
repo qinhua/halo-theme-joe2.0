@@ -231,6 +231,11 @@ body {
     max-width: 100%;
   }
 
+  pre,
+  code {
+    overflow-x: auto;
+  }
+
   // ==== 代码块样式 start
   code:not([class]) {
     display: inline-block;
@@ -3037,6 +3042,18 @@ body {
             color: var(--theme);
           }
         }
+
+        &.responsive {
+          a {
+            width: unset;
+            margin: 4px;
+            line-height: 1.2;
+            overflow: unset;
+            text-overflow: unset;
+            white-space: unset;
+            text-align: left;
+          }
+        }
       }
 
       .empty {
@@ -5047,7 +5064,7 @@ body {
   }
 
   &__agree {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     margin: 30px 0 10px;
@@ -5178,7 +5195,6 @@ body {
     }
 
     &-share {
-      display: none;
       position: relative;
       top: 1px;
       z-index: 10;
@@ -5281,7 +5297,6 @@ body {
   }
 
   .joe_donate {
-    display: none;
     position: relative;
     z-index: 10;
     width: 30px;

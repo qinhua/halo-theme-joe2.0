@@ -1074,6 +1074,18 @@ aside:
       default: "15"
       placeholder: "请输入数字"
       description: "设置标签云展示的最大数量，超过会显示 “更多” 按钮"
+    tag_cloud_width:
+      name: tag_cloud_width
+      label: 标签宽度
+      type: radio
+      data-type: text
+      default: static
+      description: "设置标签列表中标签的宽度样式，默认为 “固定宽度”（仅在标签云类型为 “标签列表” 时有效）"
+      options:
+        - value: static
+          label: 固定宽度
+        - value: responsive
+          label: 自适应宽度
 
 # 博主信息
 blogger:
@@ -2219,18 +2231,6 @@ journals:
       type: switch
       data-type: bool
       default: false
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
-    enable_like_journal:
-      name: enable_like_journal
-      label: 开启日志点赞
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否开启对单条日志的点赞功能"
       options:
         - value: true
           label: 是
