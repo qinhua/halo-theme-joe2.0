@@ -1453,28 +1453,40 @@ body {
 
     .toc_top {
       position: relative;
+      z-index: 2;
 
       h3 {
         position: absolute;
         left: 20px;
         top: 60px;
         z-index: 1;
+        padding: 6px 10px;
+        letter-spacing: 2px;
         font-weight: bold;
         font-size: 28px;
         color: #fff;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 10px 2px;
+
+        span {
+          display: block;
+          letter-spacing: 0;
+          font-weight: normal;
+          font-size: 14px;
+          color: #ccc;
+        }
       }
 
       img {
         display: block;
         width: 100%;
-        height: 150px;
-        object-fit: cover;
-        z-index: -1;
       }
     }
 
     #js-toc-mobile {
       position: relative;
+      top: -5px;
+      z-index: 1;
       user-select: none;
       padding: 20px 15px 40px 0;
       max-height: calc(100vh - 150px);

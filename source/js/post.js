@@ -259,14 +259,14 @@ const postContext = {
 					$html.removeClass("disable-scroll");
 					$mobile_toc.removeClass("active");
 					$mask.removeClass("active slideout");
-					if (location.hash) {
-						$("html,body").animate(
-							{
-								scrollTop: $(decodeURIComponent(location.hash)).offset().top,
-							},
-							0
-						);
-					}
+					// if (location.hash) {
+					// 	$("html,body").animate(
+					// 		{
+					// 			scrollTop: $(decodeURIComponent(location.hash)).offset().top,
+					// 		},
+					// 		0
+					// 	);
+					// }
 				}
 
 				window.tocPhase = true;
