@@ -273,6 +273,19 @@ theme:
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
       description: "在返回到当前标签时，通过title展示的文字（仅对首页生效）"
+    link_behavior:
+      name: link_behavior
+      label: 链接跳转行为（全局-内容区域）
+      type: select
+      default: default
+      description: "配置网站 “内容区域（不包含导航条和页脚）” 的 a 标签跳转行为，暂时提供 3 种供选择【默认：遵循主题默认行为；当前页：在当前页打开链接；新标签：在新标签页中打开链接】"
+      options:
+        - value: default
+          label: 默认
+        - value: current
+          label: 当前页
+        - value: new
+          label: 新标签
     enable_back2top:
       name: enable_back2top
       label: 开启返回顶部
@@ -2318,8 +2331,8 @@ photos:
       name: photos_page_size
       label: 分页大小
       type: text
-      default: "10"
-      placeholder: '列表分页大小，默认10条（请填数字）'
+      default: "15"
+      placeholder: '图片列表分页大小，默认15条（请填数字，如果出现滚动时图片部分图片不出来，请加大分页数）'
     photos_gap:
       name: photos_gap
       label: 图片间距

@@ -18,7 +18,8 @@ const photosContext = {
 		const $domLoading = $(".joe_loading");
 		const queryData = {
 			page: 0,
-			size: ThemeConfig.photos_page_size,
+			// size: ThemeConfig.photos_page_size,
+			size: 15,
 			sort: "createTime,desc",
 		};
 		let isLoading = false;
@@ -215,13 +216,14 @@ const photosContext = {
 			Utils.throttle(function () {
 				if (
 					$(window).scrollTop() + $(window).height() >=
-          $(".joe_container").height()
+          $(".page-photos").height()
 				) {
 					if (isLoading || isEnd) return;
 					// console.log("需要加载了");
 					queryData.page++;
 					getData({
 						team: $(".joe_photos__filter li.active").attr("data-filter"),
+						size: 10
 					});
 				}
 			})
@@ -262,14 +264,6 @@ const photosContext = {
 	},
 };
 
-// !(function () {
-//   const omits = ["formatTime", "foldBlock"];
 document.addEventListener("DOMContentLoaded", function () {
 	photosContext.initList();
-	// Object.keys(journalContext).forEach(
-	//   (c) => !omits.includes(c) && journalContext[c]()
-	// );
 });
-// window.addEventListener("load", function () {
-// });
-// })();

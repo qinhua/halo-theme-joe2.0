@@ -233,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					ct: "城通网盘",
 					wy: "微云网盘",
 					github: "Github仓库",
+					gitee: "Gitee仓库",
 					lz: "蓝奏云网盘",
 				};
 				this.innerHTML = `

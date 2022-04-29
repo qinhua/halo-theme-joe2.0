@@ -12,7 +12,7 @@
 
 <p class="badge-row" align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/Halo-1.4.11+-p" alt="Halo"/>
+    <img src="https://img.shields.io/badge/Halo-1.5.x-p" alt="Halo"/>
   </a>
   <a href="https://github.com/qinhua/halo-theme-joe2.0" target="_blank">
     <img src="https://img.shields.io/badge/FreeMarker-2.3.3-blue" alt="Release"/>
@@ -47,6 +47,8 @@
 
 ### 🌈 安装 & 更新
 
+> 安装前请确保 `Halo版本` 和主题的兼容性，`V1.0.10` 及以上版本仅支持 `Halo 1.5+`，以下版本兼容到 `Halo 1.4.11`，请知悉。
+
 1. 复制主题仓库地址 `https://github.com/qinhua/halo-theme-joe2.0.git`
 
 2. 进入博客后台管理 `外观-主题-安装-远程下载`，贴入仓库地址进行安装（建议直接使用最新版本 ）。
@@ -55,6 +57,8 @@
 3. 等待提示安装完成即可；
 
 4. 更新主题时，建议直接通过 `外观-主题-Joe2.0-更多-从主题包更新` 把下载好的 `zip` 包上传上去，然后 **先切换到其他主题，再切回本主题，并进入主题设置执行一次保存，最后强刷前端页面即可**（这里切主题主要是为了避免有时候主题状态未激活和缓存的问题）。
+
+> 如果 `github` 访问不了，可以访问 `gitee` 仓库：https://gitee.com/duider/halo-theme-joe2.0
 
 #### ⚠️ 必读
 
@@ -423,7 +427,6 @@ Halo 已经提供好了邮件服务，我们只需要配置相关参数即可。
 > 主题已经提供了对 `数学公式` 和 `Mermaid图形` 的支持，数学公式使用 `Katex` 进行渲染，默认为关闭状态，需要手动打开。
 
 - 必须先在 `后台管理-外观-主题设置-文章页` 中启用 `数学公式支持`
-<!-- - 然后使用代码块来包裹要展示的公式，并指定语言类型为 `math`，示例如下： -->
 
 ```text
 $\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$
@@ -527,6 +530,9 @@ console.log("hello world!!!");
   <div id="_raw">你的原始文本或html内容</div>
 </joe-raw-content>
 ```
+
+如果你在后台新建文章时，想直接用其它地方复制过来的富文本内容，那么需要你配置当前文章的元数据，把其中的 `use-raw-content`
+的值改成 `true`。这样前台就会自动使用 `joe-raw-content` 这个标签去展示，但目前主题不支持解析富文本中的目录，请知悉。
 
 #### 18、如何设置文章仅评论后可见？
 

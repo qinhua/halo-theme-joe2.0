@@ -477,20 +477,52 @@ const commonContext = {
 			);
 		});
 	},
-	/* 设置文章/日志页的链接为新窗口打开 */
+	/* 设置页面中链接的打开方式 */
 	initExternalLink() {
-		const $allLink = $(
-			".page-post .joe_detail__article a[href], .joe_journal_body a[href]"
-		);
-		if (!$allLink.length) return;
-		$allLink.each(function () {
-			const $this = $(this);
-			// 排除内容中的锚点
-			$this.attr({
-				target: !$this.attr("href").startsWith("#") ? "_blank" : "",
-				rel: "noopener noreferrer nofollow",
+		let $allLink;
+
+		if (ThemeConfig.link_behavior !== "default") {
+			// 自定义行为（全局处理，不包括导航条和页脚，导航条可以在后台管理-菜单中配置）
+			$allLink = $(".joe_main_container a[href]"); // 页面中所有a标签
+
+			if (!$allLink.length) return;
+
+			$allLink.each(function () {
+				const $this = $(this);
+				const curHref=$this.attr("href");
+				if(!curHref.includes("javascript:;")){
+					let target = "";
+					target =
+          ThemeConfig.link_behavior === "new" &&
+          !$this.attr("href").startsWith("#")
+          	? "_blank"
+          	: "";
+					$this.attr({
+						target,
+						rel: "noopener noreferrer nofollow",
+					});
+				}
 			});
-		});
+		} else {
+			// 主题默认行为（只处理了部分页面的a标签）
+			$allLink = $(
+				".page-post .joe_detail__article a[href], .joe_journal_body a[href], .page-sheet .joe_detail__article a[href]"
+			); // 内容区域中所有a标签（文章/日志页）
+			if (!$allLink.length) return;
+
+			$allLink.each(function () {
+				const $this = $(this);
+				// 排除内容中的锚点、排除href设置为javascript:;的情况
+				const curHref=$this.attr("href");
+				if(!curHref.includes("javascript:;")){
+					const target = !curHref.startsWith("#") ? "_blank" : "";
+					$this.attr({
+						target,
+						rel: "noopener noreferrer nofollow",
+					});
+				}
+			});
+		}
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
@@ -916,7 +948,7 @@ const commonContext = {
 	},
 	/* 调试模式 */
 	debug() {
-		if(!ThemeConfig.enable_debug) return;	
+		if (!ThemeConfig.enable_debug) return;
 		new window.VConsole();
 	},
 	/* 清理工作 */

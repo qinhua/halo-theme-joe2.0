@@ -400,7 +400,7 @@ const postContext = {
 			);
 			tocbot.refresh();
 		} catch (error) {
-			console.error(error);
+			console.info(error);
 		}
 	},
 	/* TODO:密码保护文章，输入密码访问 */

@@ -36,6 +36,13 @@
 
 <p class="indent">有些男人就像烤面筋，外表黄黄的，身体圆圆的，说话柔柔的，无害，看上去还非常好吃。可当你吃下去，才知道他绵绵的，并无特别的味道，甚至到你吃完，你都不知道他是用什么做的。 ---- 李七毛《我们都不擅长告别》</p>
 
+```html
+<p class="indent">
+  有些男人就像烤面筋，外表黄黄的，身体圆圆的，说话柔柔的，无害，看上去还非常好吃。可当你吃下去，才知道他绵绵的，并无特别的味道，甚至到你吃完，你都不知道他是用什么做的。
+  ---- 李七毛《我们都不擅长告别》
+</p>
+```
+
 #### 居中标题
 
 <joe-mtitle title="牛鞭牛鞭"></joe-mtitle>
@@ -241,6 +248,7 @@
 <joe-cloud type="ct" url="" password=""></joe-cloud>
 <joe-cloud type="wy" url="" password=""></joe-cloud>
 <joe-cloud type="github" url="" password=""></joe-cloud>
+<joe-cloud type="gitee" url="" password=""></joe-cloud>
 <joe-cloud type="lz" url="" password=""></joe-cloud>
 
 ```html
@@ -251,6 +259,7 @@
 <joe-cloud type="ct" url="" password=""></joe-cloud>
 <joe-cloud type="wy" url="" password=""></joe-cloud>
 <joe-cloud type="github" url="" password=""></joe-cloud>
+<joe-cloud type="gitee" url="" password=""></joe-cloud>
 <joe-cloud type="lz" url="" password=""></joe-cloud>
 ```
 

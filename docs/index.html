@@ -8,10 +8,23 @@
   <meta name="description" content="halo-theme-joe2.0 官方文档">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <style>
     .sidebar .app-name {
       font-weight: bold;
     }
+
+    /* #nav-bar {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      height: 30px;
+      z-index: 10;
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    } */
 
     .sidebar-nav>ul>li .section-link {
       font-weight: bold;
@@ -41,17 +54,59 @@
         height: 40px;
       }
     }
+
+    .select-version {
+      width: 120px;
+      height: 30px;
+    }
+
+    /* .select2-container {
+      margin-right: 30px;
+    } */
+
+    .select2-container--default .select2-selection--single {
+      width: 120px;
+      height: 30px;
+      padding: 0 6px;
+      font-size: 18px;
+      background: unset;
+      border: unset;
+    }
+
+    .select2-container--open .select2-dropdown--below {
+      border-top: 1px solid #aaa;
+      border-radius: 5px;
+    }
   </style>
 </head>
 
 <body>
+  <nav id="nav-bar">
+    <!-- <a href="#/">EN</a>
+    <a href="#/zh-cn/">中文</a> -->
+    <select class="select-version" name="version">
+      <option value="1.0.10">V1.0.10</option>
+      <option value="1.0.9">V1.0.9</option>
+      <option value="1.0.8">V1.0.8</option>
+      <option value="1.0.7">V1.0.7</option>
+      <option value="1.0.6">V1.0.6</option>
+      <option value="1.0.5">V1.0.5</option>
+      <option value="1.0.4">V1.0.4</option>
+      <option value="1.0.3">V1.0.3</option>
+      <option value="1.0.2">V1.0.2</option>
+      <option value="1.0.1">V1.0.1</option>
+      <option value="1.0.0">V1.0.0</option>
+    </select>
+  </nav>
   <div id="app">加载中…</div>
   <script>
+    var lastVersion = sessionStorage.getItem('joe2.0-docs-version') || '1.0.10'
     window.$docsify = {
       name: 'Joe2.0文档',
       repo: 'https://github.com/qinhua/halo-theme-joe2.0',
       // coverpage: true,
-      homepage: 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/README.md',
+      // homepage: 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/README.md',
+      homepage: 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@' + lastVersion + '/README.md',
       // relativePath: true,
       subMaxLevel: 3,
       auto2top: true,
@@ -67,6 +122,21 @@
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var instance = $('.select-version').select2({
+        minimumResultsForSearch: -1
+      })
+      instance.val(lastVersion).trigger("change");
+      instance.on('select2:select', function (e) {
+        var data = e.params.data;
+        sessionStorage.setItem('joe2.0-docs-version', data.id)
+        location.href = '/'
+      });;
+    });
+  </script>
 </body>
 
 </html>
