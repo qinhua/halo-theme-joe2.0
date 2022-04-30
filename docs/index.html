@@ -101,12 +101,13 @@
   <div id="app">加载中…</div>
   <script>
     var lastVersion = sessionStorage.getItem('joe2.0-docs-version') || '1.0.10'
+    var isProd = !location.href.indexOf('localhost') && !location.href.indexOf('127.0.0.1')
     window.$docsify = {
       name: 'Joe2.0文档',
       repo: 'https://github.com/qinhua/halo-theme-joe2.0',
       // coverpage: true,
-      // homepage: 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/README.md',
-      homepage: 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@' + lastVersion + '/README.md',
+      homepage: isProd ? 'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@' + lastVersion + '/README.md' :
+        'https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/README.md',
       // relativePath: true,
       subMaxLevel: 3,
       auto2top: true,

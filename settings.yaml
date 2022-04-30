@@ -106,7 +106,7 @@ theme:
         - value: false
           label: 否
     background_light_mode:
-      name: lazyload_avatar
+      name: background_light_mode
       label: 背景图（浅色模式）
       type: attachment
       default: ""
@@ -2737,69 +2737,51 @@ social:
       name: email
       label: 邮箱
       type: text
-      default: ""
-      # default: "352484005@qq.com"
       placeholder: "邮箱地址"
     github:
       name: github
       label: Github
       type: text
-      default: ""
-      # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
     gitee:
       name: gitee
       label: Gitee
       type: text
-      default: ""
-      # default: "https://gitee.com/duider"
       placeholder: "gitee主页地址"
     zhihu:
       name: zhihu
       label: 知乎
       type: text
-      default: ""
-      # default: "https://www.zhihu.com"
       placeholder: "知乎主页地址"
     telegram:
       name: telegram
       label: Telegram
       type: text
-      default: ""
       placeholder: "Telegram主页地址"
     juejin:
       name: juejin
       label: 掘金
       type: text
-      default: ""
-      # default: "https://juejin.cn/user/817692384432407"
       placeholder: "掘金主页地址"
     bilibili:
       name: bilibili
       label: B站
       type: text
-      default: ""
-      # default: "https://space.bilibili.com/89927969"
       placeholder: "B站主页地址"
     qq:
       name: qq
       label: QQ
       type: text
-      default: ""
-      # default: "352484005"
       placeholder: "QQ号"
     weibo:
       name: weibo
       label: 微博
       type: text
-      default: ""
-      # default: "https://weibo.com/duider"
       placeholder: "微博主页地址"
     custome_social_channel:
       name: custome_social_channel
       label: 自定义社交渠道
       type: textarea
-      default: ""
       placeholder: "请按描述文字规定的格式输入"
       description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
     qq_group:
