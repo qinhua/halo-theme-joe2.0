@@ -34,6 +34,7 @@
                         </a>
                       </li>
                     <#else>
+                      <#--  <li class="item" ${(tag.color??)?then('style="background-color:'+tag.color+'"','')}>  -->
                       <li class="item">
                         <a class="link" href="${tag.fullPath!}" title="${tag.name!}">
                           <span title="${tag.name!}">${tag.name!}</span>
