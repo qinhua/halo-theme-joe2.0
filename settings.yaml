@@ -1641,10 +1641,10 @@ home:
       label: 精品分类数据源
       type: select
       data-type: text
-      default: auto
-      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类，“自定义”-展示自己填入的指定分类】，默认为“自动”"
+      default: hot
+      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类，“自定义”-展示自己配置的数据】，默认为“热门分类”"
       options:
-        - value: auto
+        - value: hot
           label: 热门分类
         - value: custom
           label: 自定义

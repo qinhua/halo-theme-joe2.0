@@ -233,7 +233,8 @@ const postContext = {
 		const $mask = $(".joe_header__mask");
 		const $btn_mobile_toc = $(".joe_action .toc");
 		const $mobile_toc = $(".joe_header__toc");
-		const $tocContainer = $("#js-toc, #js-toc-mobile");
+		const $tocContainer = $("#js-toc");
+		const $tocMobileContainer = $("#js-toc-mobile");
 
 		// 初始化TOC
 		tocbot.init({
@@ -278,13 +279,17 @@ const postContext = {
 		});
 
 		// 无菜单数据
-		if (!$tocContainer.children().length) {
-			$tocContainer.html(
-				Joe.isMobile
-					? "<div class=\"toc-nodata\"><em></em>暂无目录</div>"
-					: "<div class=\"toc-nodata\">暂无目录</div>"
-			);
+		if (Joe.isMobile) {
+			!$tocMobileContainer.children().length &&
+        $tocMobileContainer.html(
+        	"<div class=\"toc-nodata\"><em></em>暂无目录</div>"
+        );
+		} else {
+			!$tocContainer.children().length &&
+        $tocContainer.html("<div class=\"toc-nodata\">暂无目录</div>");
 		}
+
+		// 移动端toc菜单交互
 		if (Joe.isMobile) {
 			$btn_mobile_toc.show();
 			$btn_mobile_toc.on("click", () => {
@@ -294,6 +299,7 @@ const postContext = {
 				$mobile_toc.addClass("active");
 			});
 		}
+
 		$(".toc-container").show();
 	},
 	/**初始化左侧工具条 */

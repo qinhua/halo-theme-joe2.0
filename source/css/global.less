@@ -20,36 +20,6 @@ body {
   }
 }
 
-
-.social-account {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 10px;
-  text-align: center;
-  font-size: 14px;
-  border-top: 1px solid var(--classC);
-
-  a {
-    transform: scale(0.9);
-    display: inline-block;
-    margin: 0 2px;
-    font-size: 0;
-    color: var(--minor);
-    transition: transform 0.2s;
-
-    img {
-      display: inline-block;
-      height: 20px;
-      border-radius: 3px;
-    }
-
-    &:hover {
-      transform: scale(1);
-    }
-  }
-}
-
 #Joe {
   position: relative;
   z-index: 1;
@@ -5801,7 +5771,7 @@ body {
       span {
         position: relative;
         display: inline-block;
-        margin-left: 6px;
+        margin: 0 0 4px 6px;
         padding-left: 26px;
         height: 24px;
         line-height: 24px;
@@ -6554,6 +6524,39 @@ body {
   margin-top: 10px;
   overflow: hidden;
   border-radius: var(--radius-inner);
+}
+
+.social-account {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid var(--classC);
+
+  a {
+    transform: scale(0.9);
+    display: inline-block;
+    margin: 0 2px;
+    font-size: 0;
+    color: var(--minor);
+    transition: transform 0.2s;
+
+    img {
+      display: inline-block;
+      height: 20px;
+      border-radius: 3px;
+    }
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
+
+.katex-block {
+  overflow-x: hidden;
 }
 
 .canvas-backdrop {

@@ -10,7 +10,7 @@
       </div>
     </div>
     <ul class="joe_index__hot-list hotlist">
-      <#if settings.hot_category_source == 'auto'>
+      <#if settings.hot_category_source == 'hot'>
         <@categoryTag method="list">
           <#list categories?sort_by("postCount")?reverse as category>
             <#if category_index lt 4>
