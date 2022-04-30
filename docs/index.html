@@ -101,7 +101,7 @@
   <div id="app">加载中…</div>
   <script>
     var lastVersion = sessionStorage.getItem('joe2.0-docs-version') || '1.0.10'
-    var isProd = !location.href.indexOf('localhost') && !location.href.indexOf('127.0.0.1')
+    var isProd = location.href.indexOf('localhost') < 0 && location.href.indexOf('127.0.0.1') < 0
     window.$docsify = {
       name: 'Joe2.0文档',
       repo: 'https://github.com/qinhua/halo-theme-joe2.0',
