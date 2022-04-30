@@ -133,8 +133,8 @@
       instance.on('select2:select', function (e) {
         var data = e.params.data;
         sessionStorage.setItem('joe2.0-docs-version', data.id)
-        location.href = '/'
-      });;
+        location.href = location.origin + location.pathname
+      });
     });
   </script>
 </body>
