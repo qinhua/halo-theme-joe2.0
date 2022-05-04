@@ -22,7 +22,7 @@
           <span class="text">${settings.qrcode_title!'我的二维码'}</span>
         </div>
         <div class="joe_aside__item-contain">
-          <img class="qrcode_img lazyload" src="${LAZY_IMG}" data-src="${settings.qrcode_url!}" alt="二维码"/>
+          <img class="qrcode_img lazyload" src="${LAZY_IMG}" data-src="${settings.qrcode_url!}" onerror="Joe.errorImg(this)" alt="二维码"/>
           <#if settings.qrcode_description??>
             <p class="qrcode_description">${settings.qrcode_description!}</p>
           </#if>
@@ -63,7 +63,8 @@
               <#list comments.content as comment>
                 <li class="item">
                   <div class="user">
-                    <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar!}" src="${settings.lazyload_avatar!}" onerror="this.src='${settings.default_avatar!}'" alt="头像">
+                    <#assign avatar=(comment.avatar?? && comment.avatar!='')?then(comment.avatar,settings.default_avatar!)>
+                    <img width="35" height="35" class="avatar lazyload" data-src="${avatar}" src="${settings.lazyload_avatar!}" onerror="Joe.errorImg(this)" alt="头像">
                     <div class="info">
                       <div class="author">${comment.author!}</div>
                       <span class="date">${comment.createTime?string("yyyy-MM-dd")}</span>
@@ -94,7 +95,7 @@
         <div class="joe_aside__item-contain">
           <@tagTag method="list">
             <#if tags?size gt 0>
-              <div class="tags-cloud-list"${(settings.tag_cloud_type=='3d')?then(' style="display:none;"','')}>
+              <div class="tags-cloud-list${(settings.tag_cloud_width=='responsive')?then(' responsive','')}"${(settings.tag_cloud_type=='3d')?then(' style="display:none;"','')}>
                 <#list tags as tag>
                   <#if tag_index lt settings.tag_cloud_max?default(18)?number>
                     <a data-url="${tag.fullPath!}" data-label="${tag.name!}" href="${tag.fullPath!}" title="${tag.name!}">${tag.name!}</a>

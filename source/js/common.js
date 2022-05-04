@@ -23,24 +23,28 @@ const commonContext = {
 		// 手动切换
 		$(".joe_action_item.mode").on("click", function (e) {
 			e.stopPropagation();
-			local_theme = localStorage.getItem("data-mode");
-			let theme = "";
-			if (local_theme) {
-				theme = local_theme === "light" ? "dark" : "light";
-				$icon_light[`${local_theme === "light" ? "add" : "remove"}Class`](
-					"active"
-				);
-				$icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
-					"active"
-				);
-			} else {
-				theme = "dark";
-				$icon_light.removeClass("active");
-				$icon_dark.addClass("active");
+			try {
+				local_theme = localStorage.getItem("data-mode");
+				let theme = "";
+				if (local_theme) {
+					theme = local_theme === "light" ? "dark" : "light";
+					$icon_light[`${local_theme === "light" ? "add" : "remove"}Class`](
+						"active"
+					);
+					$icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
+						"active"
+					);
+				} else {
+					theme = "dark";
+					$icon_light.removeClass("active");
+					$icon_dark.addClass("active");
+				}
+				$html.attr("data-mode", theme);
+				localStorage.setItem("data-mode", theme);
+				commonContext.initCommentTheme();
+			} catch (err) {
+				console.log(err);
 			}
-			$html.attr("data-mode", theme);
-			localStorage.setItem("data-mode", theme);
-			commonContext.initCommentTheme();
 		});
 	},
 	/* 加载条 */
@@ -66,14 +70,12 @@ const commonContext = {
 		let activeIndex = 0;
 		const { href, pathname } = location;
 
-		if (pathname && pathname !== "/") {
-			$nav_menus.each((index, item) => {
-				const cur_href = item.getAttribute("href");
-				if (pathname.includes(cur_href) || href.includes(cur_href)) {
-					activeIndex = index;
-				}
-			});
-		}
+		$nav_menus.each((index, item) => {
+			const cur_href = item.getAttribute("href");
+			if (pathname.includes(cur_href) || href.includes(cur_href)) {
+				activeIndex = index;
+			}
+		});
 
 		// 高亮PC端
 		const $curMenu = $nav_menus.eq(activeIndex);
@@ -184,8 +186,12 @@ const commonContext = {
 	},
 	/*自动折叠长代码 <仅针对文章页>*/
 	foldCode() {
-		if (!$(".page-post").length) return;
-		if (ThemeConfig.enable_code_expander && ThemeConfig.fold_long_code) {
+		if (!$(".page-post").length) return; // 仅针对文章页
+		if (
+			ThemeConfig.enable_code_expander &&
+      ThemeConfig.enable_fold_long_code &&
+      PageAttrs.metas.enable_fold_long_code !== "false"
+		) {
 			$(".page-post pre[class*='language-']").each(function (_index, item) {
 				const $item = $(item);
 				if ($item.height() > ThemeConfig.long_code_height) {
@@ -281,7 +287,8 @@ const commonContext = {
 					loop: ThemeConfig.music_loop_play,
 					audio: res,
 				});
-			}).catch(err=>{
+			})
+			.catch((err) => {
 				console.log(err);
 			});
 	},
@@ -308,19 +315,22 @@ const commonContext = {
 			$(item).replaceWith(htmlStr);
 		});
 	},
-	/* 激活全局返回顶部功能 */
+	/* 全局返回顶 */
 	back2Top() {
 		if (!ThemeConfig.enable_back2top) return;
 		const $el = $(".joe_action_item.back2top");
-		const handleScroll = () =>
-			(document.documentElement.scrollTop || document.body.scrollTop) > 300
-				? $el.addClass("active")
-				: $el.removeClass("active");
+		const handleScroll = () => {
+			const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+			$el[(scrollTop > 300 ? "add" : "remove") + "Class"]("active");
+		};
+
 		handleScroll();
-		$(document).on("scroll", Utils.throttle(handleScroll, 100));
+
+		$(document).on("scroll", Utils.throttle(handleScroll, 120));
 		$el.on("click", function (e) {
 			e.stopPropagation();
-			$("html").animate(
+			$("html,body").animate(
 				{
 					scrollTop: 0,
 				},
@@ -328,7 +338,7 @@ const commonContext = {
 			);
 		});
 	},
-	/* 激活侧边栏人生倒计时功能 */
+	/* 激活侧边栏人生倒计时 */
 	initTimeCount() {
 		if (Joe.isMobile || !$(".joe_aside__item.timelife").length) return;
 		let timelife = [
@@ -414,7 +424,7 @@ const commonContext = {
 		});
 		$(".joe_aside__item.timelife .joe_aside__item-contain").html(htmlStr);
 	},
-	/* 激活侧边栏天气功能 */
+	/* 激活侧边栏天气 */
 	initWeather() {
 		if (
 			Joe.isMobile ||
@@ -449,7 +459,7 @@ const commonContext = {
 			"https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
 		);
 	},
-	/* 全局图片预览功能（文章、日志页等） */
+	/* 全局图片预览（文章、日志页等） */
 	initGallery() {
 		// 只对符合条件的图片开启预览功能
 		const $allImgs = $(
@@ -467,20 +477,52 @@ const commonContext = {
 			);
 		});
 	},
-	/* 设置文章/日志页的链接为新窗口打开 */
+	/* 设置页面中链接的打开方式 */
 	initExternalLink() {
-		const $allLink = $(
-			".page-post .joe_detail__article a[href], .joe_journal_body a[href]"
-		);
-		if (!$allLink.length) return;
-		$allLink.each(function () {
-			const $this = $(this);
-			// 排除内容中的锚点
-			$this.attr({
-				target: !$this.attr("href").startsWith("#") ? "_blank" : "",
-				rel: "noopener noreferrer nofollow",
+		let $allLink;
+
+		if (ThemeConfig.link_behavior !== "default") {
+			// 自定义行为（全局处理，不包括导航条和页脚，导航条可以在后台管理-菜单中配置）
+			$allLink = $(".joe_main_container a[href]"); // 页面中所有a标签
+
+			if (!$allLink.length) return;
+
+			$allLink.each(function () {
+				const $this = $(this);
+				const curHref=$this.attr("href");
+				if(!curHref.includes("javascript:;")){
+					let target = "";
+					target =
+          ThemeConfig.link_behavior === "new" &&
+          !$this.attr("href").startsWith("#")
+          	? "_blank"
+          	: "";
+					$this.attr({
+						target,
+						rel: "noopener noreferrer nofollow",
+					});
+				}
 			});
-		});
+		} else {
+			// 主题默认行为（只处理了部分页面的a标签）
+			$allLink = $(
+				".page-post .joe_detail__article a[href], .joe_journal_body a[href], .page-sheet .joe_detail__article a[href]"
+			); // 内容区域中所有a标签（文章/日志页）
+			if (!$allLink.length) return;
+
+			$allLink.each(function () {
+				const $this = $(this);
+				// 排除内容中的锚点、排除href设置为javascript:;的情况
+				const curHref=$this.attr("href");
+				if(!curHref.includes("javascript:;")){
+					const target = !curHref.startsWith("#") ? "_blank" : "";
+					$this.attr({
+						target,
+						rel: "noopener noreferrer nofollow",
+					});
+				}
+			});
+		}
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
@@ -576,7 +618,7 @@ const commonContext = {
 			$result.removeClass("active");
 		});
 	},
-	/* 激活全局下拉框功能 */
+	/* 激活全局下拉框 */
 	initDropMenu() {
 		$(".joe_dropdown").each(function (index, item) {
 			const menu = $(this).find(".joe_dropdown__menu");
@@ -658,7 +700,9 @@ const commonContext = {
 				$(".joe_header__mask").removeClass("active slideout");
 				$(".joe_header__searchout").removeClass("active");
 				$(".joe_header__slideout").removeClass("active");
+				$(".joe_header__toc").removeClass("active");
 				$(".joe_header__above").removeClass("solid");
+
 				// 还原滚动位置
 				const lastScroll = window.sessionStorage.getItem("lastScroll");
 				lastScroll && $html.scrollTop(lastScroll);
@@ -721,41 +765,6 @@ const commonContext = {
 
 		document.addEventListener("scroll", Utils.throttle(handleHeader, 100));
 	},
-	/* 渲染数学公式 */
-	initMathjax() {
-		const enable_mathjax =
-      PageAttrs.metas.enable_mathjax &&
-      PageAttrs.metas.enable_mathjax.trim() != ""
-      	? PageAttrs.metas.enable_mathjax.trim()
-      	: ThemeConfig.enable_mathjax;
-		if (/^true$/.test(enable_mathjax) && window.katex) {
-			renderMathInElement(document.body, {
-				delimiters: [
-					{
-						left: "$$",
-						right: "$$",
-						display: true,
-					},
-					{
-						left: "$",
-						right: "$",
-						display: false,
-					},
-					{
-						left: "\\(",
-						right: "\\)",
-						display: false,
-					},
-					{
-						left: "\\[",
-						right: "\\]",
-						display: true,
-					},
-				],
-				throwOnError: false,
-			});
-		}
-	},
 	/* 渲染最新评论中的 emoji */
 	renderReplyEmoji() {
 		const $replys = $(".aside-reply-content");
@@ -805,7 +814,7 @@ const commonContext = {
 		if ($targetEl && $targetEl.length > 0) {
 			const scrollTop = $targetEl.offset().top - headerHeight - 15;
 			if (duration > 0) {
-				$("html").animate(
+				$("html,body").animate(
 					{
 						scrollTop,
 					},
@@ -937,6 +946,11 @@ const commonContext = {
       	"padding: 6px 8px;color:#fff;background:linear-gradient(270deg, #4edb21, #f15206);border-radius: 3px;"
       );
 	},
+	/* 调试模式 */
+	debug() {
+		if (!ThemeConfig.enable_debug) return;
+		new window.VConsole();
+	},
 	/* 清理工作 */
 	clean() {
 		// 移除无用标签
@@ -959,6 +973,7 @@ const commonContext = {
 		"setFavicon",
 		"initUV",
 		"showLoadTime",
+		"debug",
 		"clean",
 	];
 

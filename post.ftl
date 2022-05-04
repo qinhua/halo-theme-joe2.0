@@ -7,9 +7,10 @@
     <div id="Joe">
       <#include "template/common/navbar.ftl">
       <#include "template/module/post_bread.ftl">
-      <div class="joe_container joe_main_container page-post${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')}">
+      <div class="joe_container joe_main_container page-post ${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')}">
         <div class="joe_main joe_post">
           <div class="joe_detail" data-status="${post.status!}" data-cid="${post.id?c}" data-clikes="${post.likes?c}" data-author="${user.nickname!}">
+            <#assign use_raw_content = (metas?? && metas.use_raw_content?? && metas.use_raw_content?trim!='')?then(metas.use_raw_content?trim, 'false')>
             <#include "template/macro/post_status.ftl">
             <@post_status status=post.status />
             <#if post.status=='PUBLISHED' && post.categories?size gt 0>
@@ -19,35 +20,41 @@
                 </#list>
               </div>
             </#if>
+            <#if use_raw_content=='true'>
+              <span class="joe_raw" title="原始内容"></span>
+            </#if>
             <div class="joe_detail-wrapper">
               <h1 class="joe_detail__title${settings.enable_title_shadow?string(' txt-shadow', '')}">${post.title!}</h1>
-              <div class="joe_detail__count">
-                <div class="joe_detail__count-information">
-                  <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="this.src='${settings.default_avatar!}'" alt="${user.nickname!}">
-                  <div class="meta">
-                    <div class="author">
-                      <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
-                    </div>
-                    <div class="item">
-                      <span class="text">${post.createTime?string('yyyy-MM-dd')}</span>
-                      <span class="line">/</span>
-                      <span class="text">${post.commentCount} 评论</span>
-                      <span class="line">/</span>
-                      <span class="text">${post.likes} 点赞</span>
-                      <span class="line">/</span>
-                      <span class="text" >${post.visits} 阅读</span>  
-                      <span class="line">/</span>
-                      <span class="text">${post.wordCount!0} 字</span>
-                      <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
-                      <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
+              <#assign enable_page_meta = (metas?? && metas.enable_page_meta?? && metas.enable_page_meta?trim!='')?then(metas.enable_page_meta?trim,'true')>
+              <#if settings.enable_page_meta && enable_page_meta=='true'>
+                <div class="joe_detail__count">
+                  <div class="joe_detail__count-information">
+                    <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="Joe.errorImg(this)" alt="${user.nickname!}">
+                    <div class="meta">
+                      <div class="author">
+                        <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
+                      </div>
+                      <div class="item">
+                        <span class="text">${post.createTime?string('yyyy-MM-dd')}</span>
                         <span class="line">/</span>
-                        <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
-                      </#if>
+                        <span class="text">${post.commentCount} 评论</span>
+                        <span class="line">/</span>
+                        <span class="text">${post.likes} 点赞</span>
+                        <span class="line">/</span>
+                        <span class="text" >${post.visits} 阅读</span>
+                        <span class="line">/</span>
+                        <span class="text">${post.wordCount!0} 字</span>
+                        <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
+                        <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
+                          <span class="line">/</span>
+                          <#include "template/module/baidu_push.ftl">
+                        </#if>
+                      </div>
                     </div>
                   </div>
+                  <time class="joe_detail__count-created" datetime="${post.createTime?string('MM/dd')}">${post.createTime?string('MM/dd')}</time>
                 </div>
-                <time class="joe_detail__count-created" datetime="${post.createTime?string('MM/dd')}">${post.createTime?string('MM/dd')}</time>
-              </div>
+              </#if>
               <div class="joe_detail__overdue">
               <#assign enable_passage_tips = (metas?? && metas.enable_passage_tips?? && metas.enable_passage_tips?trim!='')?then(metas.enable_passage_tips?trim,'true')>
                 <#if settings.enable_passage_tips && enable_passage_tips == 'true'>
@@ -74,8 +81,20 @@
               <@adpost.ads_post type="top" />
               <#assign enable_copy = (metas?? && metas.enable_copy?? && metas.enable_copy?trim!='')?then(metas.enable_copy?trim,'true')>
               <#assign img_align = (metas?? && metas.img_align?? && metas.img_align?trim!='')?then(metas.img_align?trim,settings.post_img_align!'center')>
-              <article class="joe_detail__article${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')} ${img_align+'-img'}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
-                ${post.formatContent!}
+              <#assign enable_read_limit = (metas?? && metas.enable_read_limit?? && metas.enable_read_limit?trim!='')?then(metas.enable_read_limit?trim,'false')>
+              <article class="joe_detail__article ${(settings.enable_show_in_up&&settings.enable_post_show_in_up)?then(' animated fadeIn','')} ${img_align+'-img'}${(enable_read_limit=='true')?then(' limited','')}${(enable_copy!='true' || settings.enable_copy!=true)?then(' uncopy', '')}${settings.enable_indent?then(' indent','')}${(settings.enable_code_line_number==true && settings.enable_code_newline!=true)?then(' line-numbers','')}${settings.enable_single_code_select?then(' single_code_select','')}">
+                <div id="post-inner">
+                  <#if use_raw_content == 'false'>
+                    ${post.formatContent!}
+                  <#else>
+                    <joe-raw-content>
+                      <div id="_raw">${post.formatContent!}</div>
+                    </joe-raw-content>
+                  </#if>
+                </div>
+                <#if enable_read_limit == 'true'>
+                  <joe-read-limited></joe-read-limited>
+                </#if>
               </article>
               <#assign enable_like = (metas?? && metas.enable_like?? && metas.enable_like?trim!='')?then(metas.enable_like?trim,'true')>
               <#if enable_like=='true' && settings.enable_like==true && post.status!='DRAFT'>
@@ -123,7 +142,10 @@
             </div>
           </#if>
         </div>
-        <#include "template/common/aside_post.ftl">
+        <#assign enable_aside = (metas?? && metas.enable_aside?? && metas.enable_aside?trim!='')?then(metas.enable_aside?trim,'true')>
+        <#if settings.enable_post_aside == true && enable_aside == 'true'>
+          <#include "template/common/aside_post.ftl">
+        </#if>
       </div>
       <#if settings.enable_progress_bar!true>
         <div class="joe_progress_bar" ${(settings.progress_bar_bgc?? && settings.progress_bar_bgc!='')?then('style="background:${settings.progress_bar_bgc}"','')}></div>

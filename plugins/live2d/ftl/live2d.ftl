@@ -24,7 +24,7 @@
   <script>
     var options = {
       modelAPI: "${((settings.live2d_modelAPI!'')?length>0)?string((settings.live2d_modelAPI!''), '//live2d.fghrsh.net/api/')}",
-      tipsMessage: "${((settings.live2d_tipsMessage!'')?length>0)?string((settings.live2d_tipsMessage!''), '${theme_base!}/plugins/live2d/json/takagi-tips.json')}",
+      tipsMessage: "${((settings.live2d_tipsMessage!'')?length>0)?string((settings.live2d_tipsMessage!''), '${BASE_RES_URL!}/plugins/live2d/json/takagi-tips.json')}",
       hitokotoAPI: "${((settings.live2d_hitokotoAPI!'')?length>0)?string((settings.live2d_hitokotoAPI!''), 'lwl12.com')}",
       modelId: ${settings.live2d_modelId!'1'},
       modelTexturesId: ${settings.live2d_modelTexturesId!'1'},

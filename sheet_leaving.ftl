@@ -11,12 +11,12 @@
           <div class="joe_detail">
             <#include "template/macro/post_status.ftl">
             <@post_status status=sheet.status />
-            <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id}">${sheet.title}</h1>
+            <h1 class="joe_detail__title txt-shadow" data-sheetid="${sheet.id?c}">${sheet.title}</h1>
             <#assign enable_page_meta = (metas?? && metas.enable_page_meta?? && metas.enable_page_meta?trim!='')?then(metas.enable_page_meta?trim,'true')>
             <#if enable_page_meta=='true'>
               <div class="joe_detail__count">
                 <div class="joe_detail__count-information">
-                  <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" alt="${user.nickname!}">
+                  <img width="35" height="35" class="avatar lazyload" src="${settings.lazyload_avatar!}" data-src="${USER_AVATAR}" onerror="Joe.errorImg(this)" alt="${user.nickname!}">
                   <div class="meta">
                     <div class="author">
                         <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
@@ -32,7 +32,7 @@
                       <#assign enable_collect_check = (metas?? && metas.enable_collect_check?? && metas.enable_collect_check?trim!='')?then(metas.enable_collect_check?trim,'true')>
                       <#if post.status=='PUBLISHED' && settings.check_baidu_collect==true && enable_collect_check == 'true'>
                         <span class="line">/</span>
-                        <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                        <#include "template/module/baidu_push.ftl">
                       </#if>
                     </div>
                   </div>

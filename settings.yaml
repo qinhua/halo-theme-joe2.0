@@ -106,7 +106,7 @@ theme:
         - value: false
           label: 否
     background_light_mode:
-      name: lazyload_avatar
+      name: background_light_mode
       label: 背景图（浅色模式）
       type: attachment
       default: ""
@@ -266,13 +266,26 @@ theme:
       label: "离屏文案（离开）"
       default: "歪，你去哪里了？"
       placeholder: "请输入"
-      description: "在切换到其它站点标签或后台时，页面title展示的文字"
+      description: "在切换到其它站点标签或后台时，页面title展示的文字（仅对首页生效）"
     offscreen_title_back:
       name: offscreen_title_back
       label: "离屏文案（回来）"
       default: "(つェ⊂)咦，又回来了!"
       placeholder: "请输入"
-      description: "在返回到当前标签时，通过title展示的文字"
+      description: "在返回到当前标签时，通过title展示的文字（仅对首页生效）"
+    link_behavior:
+      name: link_behavior
+      label: 链接跳转行为（全局-内容区域）
+      type: select
+      default: default
+      description: "配置网站 “内容区域（不包含导航条和页脚）” 的 a 标签跳转行为，暂时提供 3 种供选择【默认：遵循主题默认行为；当前页：在当前页打开链接；新标签：在新标签页中打开链接】"
+      options:
+        - value: default
+          label: 默认
+        - value: current
+          label: 当前页
+        - value: new
+          label: 新标签
     enable_back2top:
       name: enable_back2top
       label: 开启返回顶部
@@ -557,11 +570,11 @@ footer:
           label: 否
     driven_by:
       name: driven_by
-      label: 网站由xxx云提供云服务
+      label: 云服务提供商
       type: select
       data-type: text
       default: none
-      description: "配置本站点由xxx云提供云服务"
+      description: "配置本站点由xxx云提供云服务，若要修改相关跳转链接请自行到 template/common/footer.ftl 中修改"
       options:
         - value: none
           label: 不展示(默认)
@@ -569,10 +582,25 @@ footer:
           label: 阿里云
         - value: tencent
           label: 腾讯云
+        - value: baidu
+          label: 百度云
         - value: upyun
           label: 又拍云
         - value: qiniu
           label: 七牛云
+        - value: huawei
+          label: 华为云
+        - value: jinshan
+          label: 金山云
+        - value: custom
+          label: 自定义
+    custome_cloud:
+      name: custome_cloud
+      label: 自定义云服务商
+      type: textarea
+      default: ""
+      placeholder: "请按描述文字规定的格式输入"
+      description: "自定义云服务商，支持自己定义图标和链接。格式要求：图标+链接（务必用换行隔开并按顺序输入，否则展示不了，仅在 “云服务商” 选项为 “自定义” 时生效）"
     enable_rss:
       name: enable_rss
       label: 展示 RSS
@@ -595,17 +623,18 @@ footer:
           label: 是
         - value: false
           label: 否
-    # enable_visit_number:
-    #   name: enable_visit_number
-    #   label: 展示总访问量
-    #   type: switch
-    #   data-type: bool
-    #   default: false
-    #   options:
-    #     - value: true
-    #       label: 是
-    #     - value: false
-    #       label: 否
+    enable_busuanzi:
+      name: enable_busuanzi
+      label: 展示访问量数据
+      type: switch
+      data-type: bool
+      default: false
+      description: "开启后将启用卜算子对站点进行统计，并展示访问量、访客量等数据"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
 
 # 轮播图
 carousel:
@@ -657,12 +686,12 @@ carousel:
       default: ""
       placeholder: "请输入"
       description: "当数据源为 “特定关键词/分类/标签” 文章时，需要在这里设置【关键词/分类别名/标签别名】进行匹配，相关别名请到 “后台管理-文章” 菜单下获取。（填写错误的别名可能导致网站无法渲染，别名或内容为空时展示 “欢迎使用Joe2.0主题”） "
-    bannerData:
-      name: bannerData
+    banner_data:
+      name: banner_data
       label: 手动配置数据
       type: textarea
-      default: "欢迎使用Joe2.0主题-|||-https://bbchin.com/themes/joe2.0/source/img/dp/welcome.jpg-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
-      description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效（注意：主题内默认配置了演示数据）。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
+      default: "欢迎使用Joe2.0主题-|||-这是一款功能齐全的Halo博客主题，感谢大家的支持🙏-|||-/themes/joe2.0/source/img/dp/welcome.jpg-|||-https://github.com/qinhua/halo-theme-joe2.0#readme=====剪映创作不凡 - TRACK概念片-|||-超能剪辑力如何才能快速GET，且看这里-|||-https://img.zcool.cn/community/011ca2614d755911013e894390b399.png@1280w_1l_2o_100sh.png-|||-#"
+      description: "手动配置首页的轮播图数据，仅当数据来源为 “手动配置” 时生效（注意：主题内默认配置了演示数据）。【多个轮播图之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-副标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
     banner_amount_limit:
       name: banner_amount_limit
       label: 最大个数
@@ -782,7 +811,7 @@ carousel:
       name: banner_lazyload_img
       label: 图片预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/lazyload_h.gif"
+      default: "/themes/joe2.0/source/img/lazyload_h.gif"
       description: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
     
 # 侧边栏
@@ -820,6 +849,18 @@ aside:
       data-type: bool
       default: false
       description: "归档页右侧是否展示侧边栏"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_post_aside:
+      name: enable_post_aside
+      label: 文章页侧边栏
+      type: switch
+      data-type: bool
+      default: true
+      description: "文章页右侧是否展示侧边栏（关闭后，TOC 目录也就没有了）"
       options:
         - value: true
           label: 是
@@ -955,7 +996,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在侧边栏展示音乐播放器模块，必须配置歌单ID"
+      description: "在侧边栏展示音乐播放器模块，必须配置歌单ID（目前仅支持网易云歌单）"
       options:
         - value: true
           label: 开启
@@ -965,7 +1006,9 @@ aside:
       name: music_id
       label: 歌单ID
       type: text
-      placeholder: "网易歌单ID，不填则不展示播放器"
+      default: ""
+      placeholder: "请输入网易云歌单ID"
+      description: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
     enable_newest_post:
       name: enable_newest_post
       label: 展示最新文章
@@ -1044,6 +1087,18 @@ aside:
       default: "15"
       placeholder: "请输入数字"
       description: "设置标签云展示的最大数量，超过会显示 “更多” 按钮"
+    tag_cloud_width:
+      name: tag_cloud_width
+      label: 标签宽度
+      type: radio
+      data-type: text
+      default: static
+      description: "设置标签列表中标签的宽度样式，默认为 “固定宽度”（仅在标签云类型为 “标签列表” 时有效）"
+      options:
+        - value: static
+          label: 固定宽度
+        - value: responsive
+          label: 自适应宽度
 
 # 博主信息
 blogger:
@@ -1095,19 +1150,19 @@ blogger:
       name: lazyload_avatar
       label: 头像预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/svg/spinner-preloader.svg"
+      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
       description: "头像加载出来之前展示的图片"
     default_avatar:
       name: default_avatar
       label: 默认头像
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/default_avatar.jpg"
+      default: "/themes/joe2.0/source/img/default_avatar.jpg"
       description: "用于头像未设置或加载出错时显示的图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
     author_bg:
       name: author_bg
       label: 博主栏背景图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/author_bg.jpg"
+      default: "/themes/joe2.0/source/img/author_bg.jpg"
       description: "用于博主信息的背景图"
     avatar_type:
       name: avatar_type
@@ -1141,7 +1196,19 @@ blogger:
       type: switch
       data-type: bool
       default: true
-      description: "是否展示社交账号"
+      description: "是否展示社交账号，具体账号类型请到 “社交” 一栏配置"
+      options:
+        - value: true
+          label: 是
+        - value: false
+          label: 否
+    enable_mobile_social:
+      name: enable_mobile_social
+      label: 展示社交账号（移动端）
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否在移动端展示社交账号，默认关闭"
       options:
         - value: true
           label: 是
@@ -1171,7 +1238,7 @@ blogger:
       label: 头像框
       type: select
       default: "0"
-      description: "作用于博主头像的相框"
+      description: "作用于博主头像的相框，可以参考这里进行选择 https://bbchin.com/archives/style-guideline#%E5%A4%B4%E5%83%8F%E6%A1%86"
       options:
         - value: "0"
           label: 无
@@ -1337,7 +1404,7 @@ home:
       name: lazyload_thumbnail
       label: 文章预载图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/lazyload.gif"
+      default: "/themes/joe2.0/source/img/lazyload.gif"
       description: "文章配图加载出来之前展示的图片，体积尽可能的小"
     post_thumbnail:
       name: post_thumbnail
@@ -1350,7 +1417,7 @@ home:
       name: fallback_thumbnail
       label: 文章错误缺省图
       type: attachment
-      default: "https://bbchin.com/themes/joe2.0/source/img/default_thumbnail.png"
+      default: "/themes/joe2.0/source/img/default_thumbnail.png"
       description: "文章图片加载出错时生效，可使用占位图服务（350*200）"
     enable_random_img_api:
       name: enable_random_img_api
@@ -1368,7 +1435,6 @@ home:
       name: random_img_api
       label: 随机图 API
       type: text
-      # default: "https://tu.ltyuanfang.cn/api/fengjing.php"
       default: "https://bing.ioliu.cn/v1/rand?w=400&h=300"
       description: "自定义随机图API，用于填充没有设置封面的 “文章|分类|标签”，为空则使用默认随机图 API，免费 API 不会一直可用，请知悉"
     enable_index_list_effect:
@@ -1570,31 +1636,24 @@ home:
           label: 是
         - value: false
           label: 否
-    hot_cover1:
-      name: hot_cover1
-      label: 分类图1
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-      description: "对于首页的分类图封面，会优先取这里配置的，取不到再去取后台管理中配置的，都没有则展示默认封面"
-    hot_cover2:
-      name: hot_cover2
-      label: 分类图2
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-    hot_cover3:
-      name: hot_cover3
-      label: 分类图3
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
-    hot_cover4:
-      name: hot_cover4
-      label: 分类图4
-      type: attachment
-      default: ""
-      placeholder: "请填入图片地址"
+    hot_category_source:
+      name: hot_category_source
+      label: 精品分类数据源
+      type: select
+      data-type: text
+      default: hot
+      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类，“自定义”-展示自己配置的数据】，默认为“热门分类”"
+      options:
+        - value: hot
+          label: 热门分类
+        - value: custom
+          label: 自定义
+    custom_category_data:
+      name: custom_category_data
+      label: 自定义数据
+      type: textarea
+      default: "前端技术-|||-/themes/joe2.0/source/img/hot_cover1.jpg-|||-/categories/front=====后端技术-|||-/themes/joe2.0/source/img/hot_cover2.jpg-|||-#"
+      description: "手动配置精品分类展示的数据，仅当 “精品分类数据源” 为 “自定义” 时生效（注意：【多个分类数据之间用 '=====' 隔开，属性之间用 '-|||-' 隔开】(为了美观，允许换行)，【具体示例】标题-|||-图片链接-|||-跳转链接，不需要跳转写 '#' 即可（请严格按照此格式或默认示例进行配置，否则可能导致网站崩溃）"
 
 # 归档页
 archives:
@@ -1683,10 +1742,23 @@ post:
     #       label: 否
     enable_title_shadow:
       name: enable_title_shadow
-      label: 开启标题阴影
+      label: 标题阴影
       type: switch
       data-type: bool
       default: true
+      description: "是否为文章页标题应用文字阴影"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_page_meta:
+      name: enable_page_meta
+      label: 页面元数据
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否展示文章页/自定义页顶部的页面元数据（点赞、阅读、字数等）"
       options:
         - value: true
           label: 开启
@@ -1694,11 +1766,11 @@ post:
           label: 关闭
     enable_passage_tips:
       name: enable_passage_tips
-      label: 展示温馨提示
+      label: 温馨提示
       type: switch
       data-type: bool
-      default: true
-      description: "是否展示文章页顶部温馨提示"
+      default: false
+      description: "是否展示文章页顶部的温馨提示"
       options:
         - value: true
           label: 开启
@@ -1758,6 +1830,18 @@ post:
       data-type: bool
       default: true
       description: "可通过后台配置文章元属性 enable_toc 来启用/关闭单个文章的 Toc 目录，参见 theme.yaml 中的 postMetaField"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_mobile_toc:
+      name: enable_mobile_toc
+      label: 移动端文章TOC目录
+      type: switch
+      data-type: bool
+      default: false
+      description: "是否启用移动端的TOC目录，可通过后台配置文章元属性 enable_mobile_toc 来启用/关闭单个文章的 Toc 目录，参见 theme.yaml 中的 postMetaField"
       options:
         - value: true
           label: 开启
@@ -1883,25 +1967,13 @@ post:
       placeholder: 请输入版权文案
       default: ""
       description: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
-    enable_mathjax:
-      name: enable_mathjax
-      label: "开启 Mathjax 支持"
+    enable_katex:
+      name: enable_katex
+      label: "数学公式支持"
       type: switch
       data-type: bool
       default: false
-      description: "markdown中使用```math```包裹即可"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_mermaid:
-      name: enable_mermaid
-      label: "开启 Mermaid 支持"
-      type: switch
-      data-type: bool
-      default: false
-      description: "markdown中使用```mermaid```包裹即可"
+      description: "若文章中插入了数学公式，请开启此选项，保证公式正常渲染"
       options:
         - value: true
           label: 开启
@@ -2201,18 +2273,6 @@ journals:
           label: 是
         - value: false
           label: 否
-    enable_like_journal:
-      name: enable_like_journal
-      label: 开启日志点赞
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否开启对单条日志的点赞功能"
-      options:
-        - value: true
-          label: 是
-        - value: false
-          label: 否
     enable_comment_journal:
       name: enable_comment_journal
       label: 开启日志评论
@@ -2266,7 +2326,7 @@ photos:
     #   name: photo_lazyload_img
     #   label: 预载图
     #   type: attachment
-    #   default: "https://bbchin.com/themes/joe2.0/source/img/lazyload.gif"
+    #   default: "/themes/joe2.0/source/img/lazyload.gif"
     #   description: "图片加载出来之前展示的图片"
     # photos_layout:
     #   name: photos_layout
@@ -2283,8 +2343,8 @@ photos:
       name: photos_page_size
       label: 分页大小
       type: text
-      default: "10"
-      placeholder: '列表分页大小，默认10条（请填数字）'
+      default: "15"
+      placeholder: '图片列表分页大小，默认15条（请填数字，如果出现滚动时图片部分图片不出来，请加大分页数）'
     photos_gap:
       name: photos_gap
       label: 图片间距
@@ -2556,13 +2616,13 @@ code_block:
           label: 开启
         - value: false
           label: 关闭
-    fold_long_code:
-      name: fold_long_code
+    enable_fold_long_code:
+      name: enable_fold_long_code
       label: 自动折叠长代码块
       type: switch
       data-type: bool
       default: false
-      description: "自动折叠 <文章页> 中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效）"
+      description: "自动折叠 <文章页> 中内容很长的代码块，提高阅读效率，此操作会出现布局偏移，可能带来一些滚动相关问题，如无必要不建议开启（必须先开启“代码折叠”选项，否则无效，也可以通过元数据 enable_fold_long_code 单独控制）"
       options:
         - value: true
           label: 开启
@@ -2689,70 +2749,51 @@ social:
       name: email
       label: 邮箱
       type: text
-      defaut: ""
-      # default: "352484005@qq.com"
       placeholder: "邮箱地址"
     github:
       name: github
       label: Github
       type: text
-      defaut: ""
-      # default: "https://github.com/qinhua"
       placeholder: "github主页地址"
-      placeholder: "邮箱地址"
     gitee:
       name: gitee
       label: Gitee
       type: text
-      defaut: ""
-      # default: "https://gitee.com/duider"
       placeholder: "gitee主页地址"
     zhihu:
       name: zhihu
       label: 知乎
       type: text
-      defaut: ""
-      # default: "https://www.zhihu.com"
       placeholder: "知乎主页地址"
     telegram:
       name: telegram
       label: Telegram
       type: text
-      defaut: ""
       placeholder: "Telegram主页地址"
     juejin:
       name: juejin
       label: 掘金
       type: text
-      defaut: ""
-      # default: "https://juejin.cn/user/817692384432407"
       placeholder: "掘金主页地址"
     bilibili:
       name: bilibili
       label: B站
       type: text
-      defaut: ""
-      # default: "https://space.bilibili.com/89927969"
       placeholder: "B站主页地址"
     qq:
       name: qq
       label: QQ
       type: text
-      defaut: ""
-      # default: "352484005"
       placeholder: "QQ号"
     weibo:
       name: weibo
       label: 微博
       type: text
-      defaut: ""
-      # default: "https://weibo.com/duider"
       placeholder: "微博主页地址"
     custome_social_channel:
       name: custome_social_channel
       label: 自定义社交渠道
       type: textarea
-      defaut: ""
       placeholder: "请按描述文字规定的格式输入"
       description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
     qq_group:
@@ -3234,7 +3275,7 @@ live2d:
 
 # 评论插件
 comment:
-  label: 评论
+  label: 评论框
   items:
     gravatar_source:
       name: gravatar_source
@@ -3299,7 +3340,7 @@ comment:
       name: comment_author_poptext
       label: "提示文案（输入昵称时）"
       type: text
-      default: "输入QQ号将自动拉取昵称和头像"
+      default: "你的昵称是啥呢？"
       placeholder: 请输入
       description: "填写昵称时的提示文字"
     comment_email_poptext:
@@ -3314,14 +3355,14 @@ comment:
       label: 缺省头像
       type: text
       placeholder: 请输入
-      default: "https://bbchin.com/themes/joe2.0/source/img/error_avatar.jpg"
+      default: "/themes/joe2.0/source/img/error_avatar.jpg"
       description: "当评论头像加载不出来时展示的默认头像"
     comment_avatar_loading:
       name: comment_avatar_loading
       label: 头像加载图
       type: text
       placeholder: 请输入
-      default: "https://bbchin.com/themes/joe2.0/source/svg/spinner-preloader.svg"
+      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
       description: "头像加载时展示的loading图片"
     comment_empty_text:
       name: comment_empty_text
@@ -3521,12 +3562,10 @@ others:
       type: select
       data-type: text
       default: none
-      description: "目前提供 3 种类型，“无” 为不启用 CDN，从源站请求资源；“jsdelivr” 为使用 jsdelivr 的免费 CDN 从当前版本的主题仓库加载资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
+      description: "目前提供 2 种类型，“无” 为不启用 CDN，从源站请求资源；“自定义” 为使用自己配置的 CDN 服务加载资源，大家根据实际情况选择即可。（注意：若你在后台修改了模板中的样式等文件，需要选择 “无” 或者更新 CDN 上的资源才会读取最新的文件）"
       options:
         - value: none
           label: 无
-        - value: jsdelivr
-          label: jsdelivr
         - value: custom
           label: 自定义
     custom_cdn_url:
@@ -3570,13 +3609,25 @@ others:
     #       label: 开启
     #     - value: false
     #       label: 关闭
-    rip_mode:
-      name: rip_mode
-      label: RIP模式(灰色模式)
+    enable_debug:
+      name: enable_debug
+      label: 调试模式
       type: switch
       data-type: bool
       default: false
-      description: "向生命致敬，愿精神长存 <愿此功能永不被启用>"
+      description: "调试模式开启后，页面会展示 vconsole 的绿色调试按钮，便于排查移动端的线上问题"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    rip_mode:
+      name: rip_mode
+      label: RIP模式
+      type: switch
+      data-type: bool
+      default: false
+      description: "整站变灰，向生命致敬，愿精神长存 <愿此功能永不被启用>"
       options:
         - value: true
           label: 开启

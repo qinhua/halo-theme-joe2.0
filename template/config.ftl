@@ -15,16 +15,15 @@
   detectIE() && (alert('当前站点不支持IE浏览器或您开启了兼容模式，请使用其他浏览器访问或关闭兼容模式。'), (location.href = 'https://www.baidu.com'));
 </script>
 
-<#assign mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then("production", "development")>
+<#global mode = (blog_url?index_of("localhost") == -1 && blog_url?index_of("127.0.0.1") == -1)?then("production", "development")>
+<#global theme_path = theme_base?replace(".*(?=/themes)", "", "ri")>
 <#if mode == "development" || settings.cdn_type == "none">
-  <#global BASE_RES_URL = theme_base>
+  <#global BASE_RES_URL = theme_path>
 <#else>
-  <#if settings.cdn_type == "jsdelivr">
-    <#global BASE_RES_URL = "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@" + theme.version>
-  <#elseif settings.cdn_type == "custom" && settings.custom_cdn_url != "">
-    <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri") + "/themes/joe2.0">
+  <#if settings.cdn_type == "custom" && settings.custom_cdn_url != "">
+    <#global BASE_RES_URL = settings.custom_cdn_url?replace("/$", "", "ri") + theme_path>
   <#else>
-    <#global BASE_RES_URL = theme_base>
+    <#global BASE_RES_URL = theme_path>
   </#if>
 </#if>
 <#global DEFAULT_LOGO = BASE_RES_URL + "/source/img/logo.png">
@@ -60,6 +59,7 @@
   ThemeConfig['blog_title'] = '${blog_title?js_string!}';
   ThemeConfig['blog_url'] = '${blog_url!}';
   ThemeConfig['developer'] = 'M酷';
+  ThemeConfig['theme_path'] = '${theme_path}';
   ThemeConfig['BASE_URL'] = 'https://bbchin.com';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
   ThemeConfig['LAZY_IMG'] = '${LAZY_IMG}';
@@ -89,29 +89,38 @@
   }
   // 读取主题模式
   var initThemeMode = function() {
-    var curMode = "";
-    if (ThemeConfig.theme_mode === "auto") {
-      var light_scope = ThemeConfig.light_time_scope.split("~");
-      var now = new Date();
-      var today = now.toLocaleString().split(" ")[0];
-      var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
-      localStorage.removeItem("data-mode");
-    } else if (ThemeConfig.theme_mode === "user") {
-      // 用户模式下优先从本地取主题模式，默认为浅色
-      curMode = localStorage.getItem("data-mode") || "light";
-      localStorage.setItem("data-mode", curMode);
-    } else {
-      // 非用户模式下直接取后台配置的模式
-      curMode = ThemeConfig.theme_mode;
-      localStorage.removeItem("data-mode");
+    try {
+      var curMode = ""; 
+      if (ThemeConfig.theme_mode === "auto") {
+        var light_scope = ThemeConfig.light_time_scope.split("~");
+        var now = new Date();
+        var today = now.toLocaleString().split(" ")[0];
+        var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
+        localStorage.removeItem("data-mode");
+      } else if (ThemeConfig.theme_mode === "user") {
+        // 用户模式下优先从本地取主题模式，默认为浅色
+        curMode = localStorage.getItem("data-mode") || "light";
+        localStorage.setItem("data-mode", curMode);
+      } else {
+        // 非用户模式下直接取后台配置的模式
+        curMode = ThemeConfig.theme_mode;
+        localStorage.removeItem("data-mode");
+      }
+      document.querySelector("html").setAttribute("data-mode", curMode);
+    } catch(e) {
+      console.log(e);
     }
-    document.querySelector("html").setAttribute("data-mode", curMode);
   }
   initThemeMode();
   window.Joe = {
+    BASE_API: "",
     isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
-    BASE_API: ""
+    errorImg: function(target, src) {
+      target.setAttribute('src', src || '${EMPTY_IMG}'); 
+      setTimeout(function () {
+        target.setAttribute('onerror', null);
+        }, 1000)
+    }
   }
-  var meting_api='https://api.mizore.cn/meting/api.php?server=:server&type=:type&id=:id';
   ThemeConfig.enable_console_theme && console.log("%cTheme By " + ThemeConfig.developer + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>

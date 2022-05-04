@@ -11,21 +11,25 @@
       <div class="swiper-wrapper">
         <#--  手动配置  -->
         <#if source_type == 'manual'>
-          <#if settings.bannerData?? && settings.bannerData != ''>
-            <#list settings.bannerData?split('=====') as banners>
+          <#if settings.banner_data?? && settings.banner_data != ''>
+            <#list settings.banner_data?split('=====') as banners>
               <#if (banners_index + 1) lte limit>
                 <#assign banner = banners?split('-|||-')>
                 <#assign cur_title = (banner[0]?? && banner[0]?trim!='')?then(banner[0]?replace('\n','')?replace('\r','')?trim,'')>
-                <#assign cur_img = (banner[1]?? && banner[1]!='')?then(banner[1]?replace('\n','')?replace('\r','')?trim,'')>
-                <#assign cur_link = (banner[2]?? && banner[2]!='')?then(banner[2]?replace('\n','')?replace('\r','')?trim,'')>
+                <#assign cur_subtitle = (banner[1]?? && banner[1]?trim!='')?then(banner[1]?replace('\n','')?replace('\r','')?trim,'')>
+                <#assign cur_img = (banner[2]?? && banner[2]!='')?then(banner[2]?replace('\n','')?replace('\r','')?trim,'')>
+                <#assign cur_link = (banner[3]?? && banner[3]!='')?then(banner[3]?replace('\n','')?replace('\r','')?trim,'')>
                 <#assign clickable = cur_link != '' && cur_link != '#'>
                 <#if cur_title?index_of('欢迎使用Joe2.0主题') == -1>
                   <div class="swiper-slide">
                     <a class="item${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
-                      <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" alt="${cur_title!'banner'}">
+                      <img width="100%" height="100%" class="thumbnail lazyload" data-src="${cur_img!}" src="${settings.banner_lazyload_img}" onerror="Joe.errorImg(this)" alt="${cur_title!'banner'}">
                       <#if settings.enable_banner_title == true && cur_title!=''>
                         <div class="title-row">
                           <h3 class="title">${cur_title}</h3>
+                          <#if cur_subtitle!=''>
+                            <p class="subtitle">${cur_subtitle}</p>
+                          </#if>
                         </div>
                       </#if>
                       <i class="joe-font joe-icon-zhifeiji"></i>

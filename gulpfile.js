@@ -61,9 +61,9 @@ task("js", () => {
 			const result = {};
 			files.forEach((file) => {
 				const fileName = file.replace(/.js$/, "");
-				result[fileName] = resolve(`/source/js/${file}`);
+				result[fileName] = resolve(`./source/js/${file}`);
 			});
-			result.utils = resolve("/source/utils/utils.js");
+			result.utils = resolve("./source/utils/utils.js");
 
 			return result;
 		} catch (error) {

@@ -1,9 +1,7 @@
 <#macro link type>
   <link rel="shortcut icon" size="32x32" href="${options.blog_favicon!}">
   <link rel="canonical" href="${blog_url!}">
-  <#if settings.cdn_type == "jsdelivr">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <#elseif settings.cdn_type == "custom" && settings.custom_cdn_url?? && settings.custom_cdn_url != "">
+  <#if settings.cdn_type == "custom" && settings.custom_cdn_url != "">
     <link rel="dns-prefetch" href="${settings.custom_cdn_url}">
   </#if>
   <link rel="apple-touch-icon" sizes="180x180" href="${options.blog_favicon!}">
@@ -24,12 +22,11 @@
     </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/normalize.min.css?v=${theme.version!}"> 
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/font-awesome/css/font-awesome.min.css?v=${theme.version!}"> 
-  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_sf8gfvar1r.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_crkap1ed9j5.css">
   <#if settings.iconfont??>
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/theme.min.css?v=${theme.version!}">
-  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/global.min.css?v=${theme.version!}">
   <style>
     #Joe .joe_container {
       max-width: ${settings.content_max_width!"1320px"};
@@ -44,6 +41,7 @@
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.min.css?v=${theme.version!}">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme?trim!='')?then(metas.code_theme?trim,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
+  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/global.min.css?v=${theme.version!}">
   <#if type == 'index'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/index.min.css?v=${theme.version!}">
   </#if>

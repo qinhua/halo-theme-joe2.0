@@ -3,8 +3,9 @@ html {
   --font-default: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
   /* --theme: #fb6c28; */
-  --theme_reverse: #000;
+  --background-reverse: #000;
   --background: #fff;
+  --background-translucent: rgba(255, 255, 255, 0.7);
   --sub-background: #f5f5f5;
   --sib-background: #fff;
   --glass-background: rgba(255, 255, 255, 0.65);
@@ -26,6 +27,7 @@ html {
   --classJ: #f9e5fb;
   --classK: #e4e7ed;
   --classL: #666;
+  --classM: #2d2e37;
   --quote: #50bfff;
   --code: #409eff;
   --code-background: #e8f3ff;
@@ -58,8 +60,9 @@ html {
 
   &[data-mode="dark"] {
     /* --theme: #9999ff; */
-    --theme_reverse: #fff;
+    --background-reverse: #fff;
     --background: #232323;
+    --background-translucent: rgba(35, 35, 35, 0.7);
     --sub-background: #303030;
     --sib-background: #303030;
     --glass-background: rgba(0, 0, 0, 0.65);
@@ -81,6 +84,7 @@ html {
     --classJ: #39243c;
     --classK: #eee;
     --classL: #333;
+    --classM: #fff;
     --quote: #276b92;
     --code: #efa141;
     --code-background: #353246;
@@ -207,6 +211,23 @@ html {
 
     .joe_detail__friends {
       filter: brightness(0.8);
+    }
+
+    .toc-nodata {
+      em {
+        opacity: 0.4;
+      }
+    }
+
+    .site_driven {
+      img {
+
+        &.baidu,
+        &.huawei,
+        &.jinshan {
+          filter: invert(1);
+        }
+      }
     }
   }
 }

@@ -40,6 +40,12 @@
 .joe_post {
   position: relative;
 
+  .joe_raw {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+  }
+
   &__pagination {
     display: flex;
     justify-content: space-between;
@@ -79,11 +85,12 @@
   padding: 0 10px 0;
 
   article {
-    visibility: hidden;
+    position: relative;
     padding: 15px 0 30px;
 
-    &.show {
-      visibility: visible;
+    &.limited {
+      height: 100vh;
+      overflow: hidden;
     }
   }
 }
@@ -236,7 +243,9 @@
     padding: 20px;
     text-align: center;
     color: var(--minor);
+    user-select: none;
     font-style: italic;
+    background: var(--classD);
   }
 
   .is-collapsible {
@@ -277,6 +286,7 @@
 }
 
 .aside_operations {
+  display: none;
   position: fixed;
   top: 250px;
   margin-left: -70px;

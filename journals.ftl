@@ -17,7 +17,7 @@
             </#if>                
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
-                <img width="35" height="35" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" alt="${user.nickname!}">
+                <img width="35" height="35" class="avatar lazyload" data-src="${USER_AVATAR}" src="${settings.lazyload_avatar!}" onerror="Joe.errorImg(this)" alt="${user.nickname!}">
                 <div class="meta">
                   <div class="author">
                     <a class="link" href="${blog_url}/s/about" title="${user.nickname!}">${user.nickname!}</a>
@@ -27,7 +27,7 @@
                     <span class="text">${(settings.motto?? && settings.motto!='')?then(settings.motto, user.description!'一句话介绍自己吧！')}</span>
                     <#if settings.check_baidu_collect!false>
                       <span class="line">/</span>
-                      <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                      <#include "template/module/baidu_push.ftl">
                     </#if>
                   </div>
                 </div>

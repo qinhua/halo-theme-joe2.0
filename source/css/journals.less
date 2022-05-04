@@ -92,6 +92,7 @@
 
     &_body {
       position: relative;
+      box-sizing: content-box;
       max-height: 300px;
       overflow: hidden;
       padding: 10px 12px;
@@ -268,6 +269,23 @@
             transition: transform 0.35s, opacity 0.35s;
           }
         }
+
+        ins,
+        del {
+          >a:not([class]) {
+            text-decoration: inherit;
+
+            &::after {
+              display: none;
+            }
+          }
+        }
+
+        // 控制带删除线的a标签是否可点击
+        // del>a {
+        //   pointer-events: none;
+        //   cursor: not-allowed;
+        // }
 
         hr {
           border: none;

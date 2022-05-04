@@ -9,6 +9,7 @@
           </p>
           <#if settings.enable_powerby!true><p class="site_powered">Powered by<a class="a-powered" href="https://halo.run/" target="_blank" rel="noopener noreferrer">Halo</a>&nbsp;|&nbsp;🌈 Theme by<a class="a-theme" title="当前主题：Joe2.0 V${theme.version!}" href="${theme.repo!}" target="_blank" rel="noopener noreferrer">M酷</a></p></#if>
           <#if settings.driven_by?? && settings.driven_by!='none'>
+            <#assign driven_logo=BASE_RES_URL + '/source/img/cloud/' + settings.driven_by + '.svg'>
             <#switch settings.driven_by>  
               <#case 'aliyun'>  
                 <#assign driven_url='https://www.aliyun.com'>
@@ -16,18 +17,33 @@
               <#case 'tencent'>  
                 <#assign driven_url='https://cloud.tencent.com'>
                 <#break>  
+              <#case 'baidu'>  
+                <#assign driven_url='https://cloud.baidu.com'>
+                <#break>  
               <#case 'upyun'>  
                 <#assign driven_url='https://www.upyun.com'>
                 <#break>  
               <#case 'qiniu'>  
                 <#assign driven_url='https://www.qiniu.com'>
-                <#break>  
-              <#default>  
+                <#break>
+              <#case 'huawei'>  
+                <#assign driven_url='https://www.huaweicloud.com'>
+                <#break>    
+              <#case 'jinshan'>  
+                <#assign driven_url='https://www.ksyun.com'>
+                <#break>    
+              <#case 'custom'>
+                <#assign c_cloud=settings.custome_cloud?split('\n')>
+                <#assign driven_logo=(c_cloud[0]?? && c_cloud[0]?trim!='')?then(c_cloud[0]?trim,'')>
+                <#assign driven_url=(c_cloud[1]?? && c_cloud[1]?trim!='')?then(c_cloud[1]?trim,'')>
+                <#break>    
+              <#default>
                 <#assign driven_url=''>
-            </#switch> 
+            </#switch>
+            <#assign clickable = driven_url != '' && driven_url != '#'>
             <p class="site_driven">本站点由
-              <a href="${driven_url}" target="_blank" rel="noopener noreferrer nofollow">
-                <img src="${BASE_RES_URL}/source/img/cloud/${settings.driven_by}.svg"/>
+              <a href="${clickable?then(driven_url,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow">
+                <img class="${settings.driven_by}" src="${driven_logo}" onerror="Joe.errorImg(this)" alt="云服务商"/>
               </a>提供云服务
             </p>
           </#if>
@@ -43,13 +59,21 @@
             </p>
           </#if>
         </div>
+        <div class="side-col">
         <#if settings.enable_rss==true || settings.enable_sitemap==true>
           <div class="item">
             <#if settings.enable_rss><a class="rss" href="${rss_url!}" target="_blank" rel="noopener noreferrer"><i class="joe-font joe-icon-rss-fill"></i>&nbsp;RSS</a></#if>
             <#if settings.enable_sitemap><a href="${sitemap_xml_url!}" target="_blank" rel="noopener noreferrer">站点地图</a></#if>
-            <#--  <#if settings.enable_visit_number><a class="site_visit_number">—&nbsp;总访客：<span id="site-uv">0</span>&nbsp;</a></#if>  -->
           </div>
         </#if>
+        <#if settings.enable_busuanzi!false>
+          <div class="item busuanzi-statistic">
+            <span class="site-pv"><i class="joe-font joe-icon-zhexiantu"></i>访问量<em id="busuanzi_value_site_pv">0</em></span>
+            <span class="site-uv"><i class="joe-font joe-icon-monitor"></i>访客量<em id="busuanzi_value_site_uv">0</em></span>
+            <span class="site-page-pv"><i class="joe-font joe-icon-dianji"></i>本页访客<em id="busuanzi_value_page_pv">0</em></span>
+          </div>
+        </#if>
+      </div>
       </div>
     </#if>
     <#if settings.footer_source=='both' || settings.footer_source=='backend'>
