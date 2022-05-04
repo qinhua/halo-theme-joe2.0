@@ -9,7 +9,7 @@ website: https://bbchin.com
 repo: https://github.com/qinhua/halo-theme-joe2.0
 cover: https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg
 version: 1.0.10
-require: ^1.5.0
+require: ^1.5.0-alpha
 # 文章页 meta 变量
 postMetaField:
   - enable_aside
