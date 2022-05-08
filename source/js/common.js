@@ -99,6 +99,7 @@ const commonContext = {
 	/* 初始化评论主题 */
 	initCommentTheme() {
 		const comments = document.getElementsByTagName("halo-comment");
+		if(!comments.lengths) return;
 		const curMode = document.querySelector("html").getAttribute("data-mode");
 		// 黑夜模式下
 		for (let i = 0; i < comments.length; i++) {

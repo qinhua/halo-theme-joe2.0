@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="${settings.iconfont!}">
   </#if>
   <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/theme.min.css?v=${theme.version!}">
+  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/global.min.css?v=${theme.version!}">
   <style>
     #Joe .joe_container {
       max-width: ${settings.content_max_width!"1320px"};
@@ -41,7 +42,6 @@
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/prism.min.css?v=${theme.version!}">
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/lib/prism/themes/prism-${(meta?? && metas.code_theme?? && metas.code_theme?trim!='')?then(metas.code_theme?trim,settings.code_theme)}.css?v=${theme.version!}">
   </#if>
-  <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/global.min.css?v=${theme.version!}">
   <#if type == 'index'>
     <link rel="preload stylesheet" as="style" href="${BASE_RES_URL}/source/css/min/index.min.css?v=${theme.version!}">
   </#if>

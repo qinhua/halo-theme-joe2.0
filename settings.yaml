@@ -2380,7 +2380,7 @@ links:
       type: select
       data-type: text
       default: list
-      description: "配置友链的展示方式，默认按列表顺序展示，可在后台管理中配置排序值（分组暂不支持排序）"
+      description: "配置友链的展示方式，默认按列表顺序展示，可在后台管理中配置排序值（分组暂不支持排序），为了保证展示效率，建议定期检查死链，控制友情链接数量"
       options:
         - value: list
           label: 列表
@@ -2515,6 +2515,182 @@ tags:
 #       default: "5"
 #       placeholder: "请输入数字"
 #       description: "控制分页器展示的最大分页按钮个数，默认为5，分页数请到 “首页-系统-博客设置-文章设置” 中配置"
+
+# 社交
+social:
+  label: 社交
+  items:
+    email:
+      name: email
+      label: 邮箱
+      type: text
+      placeholder: "邮箱地址"
+    github:
+      name: github
+      label: Github
+      type: text
+      placeholder: "github主页地址"
+    gitee:
+      name: gitee
+      label: Gitee
+      type: text
+      placeholder: "gitee主页地址"
+    zhihu:
+      name: zhihu
+      label: 知乎
+      type: text
+      placeholder: "知乎主页地址"
+    telegram:
+      name: telegram
+      label: Telegram
+      type: text
+      placeholder: "Telegram主页地址"
+    juejin:
+      name: juejin
+      label: 掘金
+      type: text
+      placeholder: "掘金主页地址"
+    bilibili:
+      name: bilibili
+      label: B站
+      type: text
+      placeholder: "B站主页地址"
+    qq:
+      name: qq
+      label: QQ
+      type: text
+      placeholder: "QQ号"
+    weibo:
+      name: weibo
+      label: 微博
+      type: text
+      placeholder: "微博主页地址"
+    custome_social_channel:
+      name: custome_social_channel
+      label: 自定义社交渠道
+      type: textarea
+      placeholder: "请按描述文字规定的格式输入"
+      description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
+    qq_group:
+      name: qq_group
+      label: QQ交流群「首页」
+      type: textarea
+      default: ""
+      placeholder: "请填入QQ交流群链接"
+      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可，不填则不展示。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=JJ3FVO1i_plWJohono16N5z7XI_dqEpK&jump_from=webapi）"
+    qq_group_text:
+      name: qq_group_text
+      label: QQ交流群文案
+      type: textarea
+      default: "欢迎加入QQ交流群"
+      placeholder: "请输入"
+      description: "QQ交流群按钮展示的文案，对应首页 “推荐文章” 右侧的 “欢迎加入QQ交流群”"
+
+# 评论框
+comment:
+  label: 评论框
+  items:
+    gravatar_source:
+      name: gravatar_source
+      label: 评论头像源
+      type: text
+      default: "https://sdn.geekzu.org/avatar"
+      placeholder: 请输入源地址，末尾不需要斜杠
+      description: "用于修改全站评论的头像源地址（优先取主题中配置的源，取不到时才从后台管理中取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到 “后台管理-系统-博客设置-评论设置” 中配置"
+    enable_comment_autoload:
+      name: enable_comment_autoload
+      label: 自动加载评论
+      type: switch
+      data-type: bool
+      default: true
+      description: "是否自动加载评论数据，分页大小可在 “后台管理-系统-博客设置-评论设置-每页显示条数” 中统一配置"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    # comment_page_size:
+    #   name: comment_page_size
+    #   label: 评论分页大小
+    #   type: text
+    #   data-type: long
+    #   default: 10
+    #   description: "配置评论组件的分页大小，默认为 10"
+    enable_comment_ua:
+      name: enable_comment_ua
+      label: 展示评论者UA信息
+      type: switch
+      data-type: bool
+      default: false
+      description: "用来控制全局评论组件中是否展示评论者的UA信息（浏览器、操作系统等）"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    comment_loading_style:
+      name: comment_loading_style
+      label: 评论加载样式
+      type: radio
+      data-type: text
+      default: default
+      description: "选择加载评论时的样式"
+      options:
+        - value: default
+          label: 默认
+        - value: circle
+          label: 圆圈
+        - value: balls
+          label: 小球
+    comment_aword:
+      name: comment_aword
+      label: "评论框内的一言"
+      type: text
+      default: "你是我一生只会遇见一次的惊喜 ..."
+      placeholder: 请输入
+      description: "输入内容时展示的的一言内容"
+    comment_author_poptext:
+      name: comment_author_poptext
+      label: "提示文案（输入昵称时）"
+      type: text
+      default: "你的昵称是啥呢？"
+      placeholder: 请输入
+      description: "填写昵称时的提示文字"
+    comment_email_poptext:
+      name: comment_email_poptext
+      label: "提示文案（输入邮箱时）"
+      type: text
+      default: "你将收到回复通知"
+      placeholder: 请输入
+      description: "填写邮箱时的提示文字"
+    comment_avatar_error:
+      name: comment_avatar_error
+      label: 缺省头像
+      type: text
+      placeholder: 请输入
+      default: "/themes/joe2.0/source/img/error_avatar.jpg"
+      description: "当评论头像加载不出来时展示的默认头像"
+    comment_avatar_loading:
+      name: comment_avatar_loading
+      label: 头像加载图
+      type: text
+      placeholder: 请输入
+      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
+      description: "头像加载时展示的loading图片"
+    comment_empty_text:
+      name: comment_empty_text
+      label: 无评论时的文案
+      type: text
+      default: "暂无评论"
+      placeholder: 请输入
+      description: "没有评论数据时显示的文字"
+    enable_nocomment_tips:
+      name: enable_nocomment_tips
+      label: 评论被禁用时是否展示提示块
+      type: switch
+      data-type: bool
+      default: true
+      description: "当评论功能被禁用时，评论组件所在位置是否展示提示信息，如： “博主关闭了当前页面的评论”、“博主关闭了所有页面的评论”"
 
 # 代码块
 code_block:
@@ -2728,76 +2904,6 @@ code_block:
           label: 开启
         - value: false
           label: 关闭
-
-# 社交
-social:
-  label: 社交
-  items:
-    email:
-      name: email
-      label: 邮箱
-      type: text
-      placeholder: "邮箱地址"
-    github:
-      name: github
-      label: Github
-      type: text
-      placeholder: "github主页地址"
-    gitee:
-      name: gitee
-      label: Gitee
-      type: text
-      placeholder: "gitee主页地址"
-    zhihu:
-      name: zhihu
-      label: 知乎
-      type: text
-      placeholder: "知乎主页地址"
-    telegram:
-      name: telegram
-      label: Telegram
-      type: text
-      placeholder: "Telegram主页地址"
-    juejin:
-      name: juejin
-      label: 掘金
-      type: text
-      placeholder: "掘金主页地址"
-    bilibili:
-      name: bilibili
-      label: B站
-      type: text
-      placeholder: "B站主页地址"
-    qq:
-      name: qq
-      label: QQ
-      type: text
-      placeholder: "QQ号"
-    weibo:
-      name: weibo
-      label: 微博
-      type: text
-      placeholder: "微博主页地址"
-    custome_social_channel:
-      name: custome_social_channel
-      label: 自定义社交渠道
-      type: textarea
-      placeholder: "请按描述文字规定的格式输入"
-      description: "自定义社交渠道，支持自己定义渠道名称、图标和链接。格式要求：名称+图标+链接（务必用换行隔开并按顺序输入，否则展示不了）"
-    qq_group:
-      name: qq_group
-      label: QQ交流群「首页」
-      type: textarea
-      default: ""
-      placeholder: "请填入QQ交流群链接"
-      description: "可通过 https://qun.qq.com/join.html 获取代码，复制其中的链接地址即可，不填则不展示。（参考格式: https://qm.qq.com/cgi-bin/qm/qr?k=JJ3FVO1i_plWJohono16N5z7XI_dqEpK&jump_from=webapi）"
-    qq_group_text:
-      name: qq_group_text
-      label: QQ交流群文案
-      type: textarea
-      default: "欢迎加入QQ交流群"
-      placeholder: "请输入"
-      description: "QQ交流群按钮展示的文案，对应首页 “推荐文章” 右侧的 “欢迎加入QQ交流群”"
 
 # 看板娘
 live2d:
@@ -3260,105 +3366,6 @@ live2d:
 #           label: 随机
 #         - value: list
 #           label: 顺序
-
-# 评论插件
-comment:
-  label: 评论框
-  items:
-    gravatar_source:
-      name: gravatar_source
-      label: 评论头像源
-      type: text
-      default: "https://sdn.geekzu.org/avatar"
-      placeholder: 请输入源地址，末尾不需要斜杠
-      description: "用于修改全站评论的头像源地址（优先取主题中配置的源，取不到时才从后台管理中取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到 “后台管理-系统-博客设置-评论设置” 中配置"
-    enable_comment_autoload:
-      name: enable_comment_autoload
-      label: 自动加载评论
-      type: switch
-      data-type: bool
-      default: true
-      description: "是否自动加载评论数据，分页大小可在 “后台管理-系统-博客设置-评论设置-每页显示条数” 中统一配置"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    # comment_page_size:
-    #   name: comment_page_size
-    #   label: 评论分页大小
-    #   type: text
-    #   data-type: long
-    #   default: 10
-    #   description: "配置评论组件的分页大小，默认为 10"
-    enable_comment_ua:
-      name: enable_comment_ua
-      label: 展示评论者UA信息
-      type: switch
-      data-type: bool
-      default: false
-      description: "用来控制全局评论组件中是否展示评论者的UA信息（浏览器、操作系统等）"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    comment_loading_style:
-      name: comment_loading_style
-      label: 评论加载样式
-      type: radio
-      data-type: text
-      default: default
-      description: "选择加载评论时的样式"
-      options:
-        - value: default
-          label: 默认
-        - value: circle
-          label: 圆圈
-        - value: balls
-          label: 小球
-    comment_aword:
-      name: comment_aword
-      label: "评论框内的一言"
-      type: text
-      default: "你是我一生只会遇见一次的惊喜 ..."
-      placeholder: 请输入
-      description: "输入内容时展示的的一言内容"
-    comment_author_poptext:
-      name: comment_author_poptext
-      label: "提示文案（输入昵称时）"
-      type: text
-      default: "你的昵称是啥呢？"
-      placeholder: 请输入
-      description: "填写昵称时的提示文字"
-    comment_email_poptext:
-      name: comment_email_poptext
-      label: "提示文案（输入邮箱时）"
-      type: text
-      default: "你将收到回复通知"
-      placeholder: 请输入
-      description: "填写邮箱时的提示文字"
-    comment_avatar_error:
-      name: comment_avatar_error
-      label: 缺省头像
-      type: text
-      placeholder: 请输入
-      default: "/themes/joe2.0/source/img/error_avatar.jpg"
-      description: "当评论头像加载不出来时展示的默认头像"
-    comment_avatar_loading:
-      name: comment_avatar_loading
-      label: 头像加载图
-      type: text
-      placeholder: 请输入
-      default: "/themes/joe2.0/source/svg/spinner-preloader.svg"
-      description: "头像加载时展示的loading图片"
-    comment_empty_text:
-      name: comment_empty_text
-      label: 无评论时的文案
-      type: text
-      default: "暂无评论"
-      placeholder: 请输入
-      description: "没有评论数据时显示的文字"
 
 # 广告位
 advertise:

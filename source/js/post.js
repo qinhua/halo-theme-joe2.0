@@ -63,6 +63,7 @@ const postContext = {
 
 		// 监听评论成功事件（区分首次和后续提交）
 		const handleCallback = () => {
+			if(!document.getElementsByTagName("halo-comment").length) return;
 			// console.log("没有评论记录");
 			const commentNode = document.getElementsByTagName("halo-comment")[0];
 			commentNode.addEventListener("post-success", (_data) => {
@@ -385,7 +386,7 @@ const postContext = {
 		await Utils.sleep(1000);
 		try {
 			const commentEl = document.getElementsByTagName("halo-comment");
-			if (!commentEl) return;
+			if (!commentEl.length) return;
 			const el = $(commentEl[0].shadowRoot.getElementById("halo-comment")).find(
 				"#comment-" + commentId
 			);
