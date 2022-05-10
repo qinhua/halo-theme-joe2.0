@@ -263,7 +263,9 @@ const homeContext = {
 		$domLoad.on("click", async function (e) {
 			e.stopPropagation();
 			if ($(this).attr("loading")) return;
-			const lastItemTop = $domList.find(".joe_list__item:last").offset().top;
+			const lastItem = $domList.find(".joe_list__item:last");
+			if (!lastItem) return;
+			const lastItemTop = lastItem.offset().top;
 			queryData.page++;
 			await getDate();
 

@@ -394,7 +394,7 @@ var _viewer_compatibility = __webpack_require__(2);
 var _view_history = __webpack_require__(38);
 
 const DEFAULT_SCALE_DELTA = 1.1;
-const DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000;
+const DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 8000;
 const FORCE_PAGES_LOADED_TIMEOUT = 10000;
 const WHEEL_ZOOM_DISABLED_TIMEOUT = 1000;
 const ENABLE_PERMISSIONS_CLASS = "enablePermissions";
