@@ -1,4 +1,4 @@
-<aside class="joe_aside">
+<aside class="joe_aside${(settings.enable_show_in_up&&!settings.enable_post_show_in_up)?then(' animated fadeIn','')}">
   <#if settings.show_blogger!true>
     <#include "../module/blogger.ftl">
   </#if>
