@@ -214,7 +214,7 @@ const commonContext = {
 			method: "GET",
 			returnRaw: true,
 			data: {
-				url: window.location.href,
+				url: ThemeConfig.blog_url + window.location.pathname,
 			},
 		})
 			.then((res) => {
