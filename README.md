@@ -590,7 +590,7 @@ console.log("hello world!!!");
 > 这个有很多原因，常见的原因有如下这些：
 
 - 网络状况不好，导致上传超时（建议在网络稳定的情况下再试一次）；
-- 附件大小超过了 `Nginx` 中上传文件的最大限制（即 `client_max_body_size`，你可以设置的大一点）；
+- 附件大小超过了 `Nginx` 中上传文件的最大限制（即 http 属性中的 `client_max_body_size`，你可以设置的大一点）；
 - 后台解压时出错（这种情况建议手动用 FTP 工具上传主题文件夹到服务器 `~/.halo/template/themes/` 目录下，然后刷新主题页面）
 
 #### 27、FreeMarker 相关技巧
