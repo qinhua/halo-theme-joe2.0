@@ -19,7 +19,7 @@ const photosContext = {
 		const queryData = {
 			page: 0,
 			// size: ThemeConfig.photos_page_size,
-			size: 15,
+			size: 10,
 			sort: "createTime,desc",
 		};
 		let isLoading = false;
