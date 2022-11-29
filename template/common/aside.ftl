@@ -90,7 +90,7 @@
         <div class="joe_aside__item-title">
           <i class="joe-font joe-icon-tag"></i>
           <span class="text">标签云</span>
-          <#if tags?size gt settings.tag_cloud_max?default(18)?number><a class="tags_more" href="${blog_url!}/tags">更多<i class="joe-font joe-icon-more-right"></i></a></#if>
+          <#if tags?size gt settings.tag_cloud_max?default(18)?number><a class="tags_more" href="${tags_url!}">更多<i class="joe-font joe-icon-more-right"></i></a></#if>
         </div>
         <div class="joe_aside__item-contain">
           <@tagTag method="list">
