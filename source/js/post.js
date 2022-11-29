@@ -63,9 +63,10 @@ const postContext = {
 
 		// 监听评论成功事件（区分首次和后续提交）
 		const handleCallback = () => {
-			if(!document.getElementsByTagName("halo-comment").length) return;
+			const elComments=document.getElementsByTagName("halo-comment");
+			if(!elComments.length) return;
 			// console.log("没有评论记录");
-			const commentNode = document.getElementsByTagName("halo-comment")[0];
+			const commentNode = elComments[0];
 			commentNode.addEventListener("post-success", (_data) => {
 				// console.log(_data, "评论成功");
 				// 检查是否已经评论过该文章

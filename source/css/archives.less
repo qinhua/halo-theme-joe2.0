@@ -37,8 +37,7 @@
           padding: 15px 15px 12px;
           background: var(--background);
           box-shadow: var(--box-shadow);
-          border-radius: var(--radius-inner) var(--radius-wrap)
-            var(--radius-wrap) var(--radius-inner);
+          border-radius: var(--radius-inner) var(--radius-wrap) var(--radius-wrap) var(--radius-inner);
 
           .count {
             display: flex;
@@ -193,6 +192,7 @@
     .joe_category-list {
       overflow: auto;
       max-height: 400px;
+      padding: 10px;
 
       .item {
         float: left;
@@ -201,15 +201,17 @@
         margin-bottom: 10px;
         font-size: 14px;
         color: var(--routine);
-        background: var(--classH);
+        background: var(--background-tags);
         border: 1px solid var(--classB);
-        // transition: background 0.2s;
+        transition: transform 0.25s;
 
         a {
-          display: block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           padding: 0 6px;
-          height: 24px;
-          line-height: 24px;
+          height: 28px;
+          line-height: 28px;
           font-size: 0;
           color: var(--routine);
 
@@ -224,24 +226,26 @@
 
           em {
             display: inline-block;
-            padding-left: 5px;
-            vertical-align: top;
-            font-size: 14px;
+            margin-left: 5px;
+            padding: 0 4px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 13px;
             font-style: normal;
             color: var(--theme);
+            background: var(--background);
+            border-radius: 3px;
           }
         }
 
         &:hover {
+          transform: scale(1.1);
           background: var(--theme);
           border-color: var(--theme);
+          box-shadow: var(--box-shadow-tags);
 
           a {
             color: var(--classD);
-
-            em {
-              color: var(--classD);
-            }
           }
         }
       }
@@ -252,6 +256,8 @@
     animation-delay: 0.2s;
 
     .joe_archives-list {
+      padding: 0 10px;
+
       .item {
         position: relative;
         display: flex;
@@ -350,7 +356,7 @@
                 transform: rotate(180deg);
               }
 
-              + .panel-body {
+              +.panel-body {
                 opacity: 1;
               }
             }

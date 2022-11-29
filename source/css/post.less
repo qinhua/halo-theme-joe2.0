@@ -182,7 +182,6 @@
       }
 
       &>li>a {
-        font-weight: bold;
 
         &::before {
           position: absolute;
@@ -200,7 +199,7 @@
         }
 
         &.is-active-link {
-          font-weight: 700;
+          font-weight: bold;
           color: var(--theme);
           border-color: var(--classK);
 
@@ -222,6 +221,7 @@
 
     .toc-list-item {
       position: relative;
+      z-index: 1;
     }
 
     .toc-list {
@@ -232,9 +232,11 @@
   .toc-link {
     height: 100%;
     color: var(--routine);
+    transition: all .2s;
 
     &.is-active-link {
       font-weight: 700;
+      font-size: 16px;
       color: var(--theme);
     }
   }
@@ -295,20 +297,22 @@
 
   >li {
     position: relative;
-    cursor: pointer;
     width: 44px;
     height: 44px;
-    line-height: 44px;
     margin-bottom: 14px;
     user-select: none;
+    line-height: 44px;
     text-align: center;
     color: var(--routine);
     background: var(--background);
     box-shadow: var(--box-shadow);
     border-radius: 50%;
 
-    i {
+    >i {
+      cursor: pointer;
       display: block;
+      width: 44px;
+      height: 44px;
       font-size: 20px;
     }
 
@@ -373,6 +377,10 @@
   .post-operate-share {
     overflow: hidden;
 
+    .hover_trigger {
+      padding-left: 100px;
+    }
+
     .share-icon-list {
       pointer-events: none;
       opacity: 0;
@@ -399,11 +407,24 @@
         position: absolute;
         top: 44px;
         left: -20px;
+        z-index: 1;
         content: "";
         width: 0;
         height: 0;
         border: 10px solid transparent;
         border-right-color: var(--classG);
+      }
+
+      &:after {
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        left: -30px;
+        z-index: 0;
+        content: "";
+        width: 30px;
+        // background: red;
+        border-radius: 100px 0 0 100px;
       }
     }
 
@@ -471,11 +492,24 @@
         position: absolute;
         top: 40px;
         left: -20px;
+        z-index: 1;
         content: "";
         width: 0;
         height: 0;
         border: 10px solid transparent;
         border-right-color: var(--classG);
+      }
+
+      &:after {
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        left: -30px;
+        z-index: 0;
+        content: "";
+        width: 30px;
+        // background: red;
+        border-radius: 100px 0 0 100px;
       }
     }
 

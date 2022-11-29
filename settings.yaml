@@ -1062,7 +1062,7 @@ aside:
       type: switch
       data-type: bool
       default: false
-      description: "在侧边栏展示标签云，默认关闭以节省性能"
+      description: "在侧边栏展示标签云，默认关闭以减少性能消耗"
       options:
         - value: true
           label: 开启
@@ -1642,7 +1642,7 @@ home:
       type: select
       data-type: text
       default: hot
-      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类，“自定义”-展示自己配置的数据】，默认为“热门分类”"
+      description: "选择首页精品分类的数据来源【“热门分类”-自动获取阅读量排行前四的分类（最多展示4个），“自定义”-展示自己配置的数据（不限个数）】，默认为“热门分类”"
       options:
         - value: hot
           label: 热门分类
@@ -2597,6 +2597,18 @@ comment:
       default: "https://sdn.geekzu.org/avatar"
       placeholder: 请输入源地址，末尾不需要斜杠
       description: "用于修改全站评论的头像源地址（优先取主题中配置的源，取不到时才从后台管理中取），默认为 https://sdn.geekzu.org/avatar（若头像显示不出来，请自行更换源）。关于头像类型，可以到 “后台管理-系统-博客设置-评论设置” 中配置"
+    blogger_avatar_source:
+      name: blogger_avatar_source
+      label: 博主头像来源
+      type: radio
+      data-type: text
+      default: logo
+      description: "选择评论中展示的博主头像来源，可以是后台管理中配置的个人资料头像或博客Logo"
+      options:
+        - value: avatar
+          label: 博主头像
+        - value: logo
+          label: 博客Logo
     enable_comment_autoload:
       name: enable_comment_autoload
       label: 自动加载评论
@@ -2780,6 +2792,14 @@ code_block:
           label: 开启
         - value: false
           label: 关闭
+    code_max_height:
+      name: code_max_height
+      label: 代码块最大高度
+      type: text
+      data-type: long
+      default: ''
+      placeholder: "请输入数字"
+      description: "设置代码块的最大高度（单位px），超过该高度会展示滚动条，只填数字即可（默认为空，即不设置最大高度），填 0 或空格无效，【注意：设置了最大高度后，代码块将不再支持长代码块自动折叠功能】"
     enable_fold_long_code:
       name: enable_fold_long_code
       label: 自动折叠长代码块

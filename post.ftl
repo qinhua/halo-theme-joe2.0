@@ -117,7 +117,7 @@
             </#if>
           </ul>
           <#assign enable_comment = (metas?? && metas.enable_comment?? && metas.enable_comment?trim!='')?then(metas.enable_comment?trim,'true')>
-          <#if settings.enable_clean_mode!=true && settings.enable_comment==true && post.status!='DRAFT'>
+          <#if settings.enable_clean_mode!=true && settings.enable_comment==true && post.disallowComment!=true && post.status!='DRAFT'>
             <div class="joe_comment">
               <#if post.disallowComment == true || enable_comment == 'false'>
                 <#if settings.enable_nocomment_tips!true>

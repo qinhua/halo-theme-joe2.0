@@ -33,7 +33,6 @@
       <#else>
         <#if settings.custom_category_data?? && settings.custom_category_data != ''>
           <#list settings.custom_category_data?split('=====') as categorys>
-            <#if categorys_index lt 4>
               <#assign category = categorys?split('-|||-')>
               <#assign cur_title = (category[0]?? && category[0]?trim!='')?then(category[0]?replace('\n','')?replace('\r','')?trim,'')>
               <#assign cur_img = (category[1]?? && category[1]!='')?then(category[1]?replace('\n','')?replace('\r','')?trim,'')>
@@ -48,7 +47,6 @@
                   </figure>
                 </a>
               </li>
-            </#if>
           </#list> 
         <#else>
           <div class="joe_nodata"><i class="joe-font joe-icon-tips"></i>没有配置分类数据</div>

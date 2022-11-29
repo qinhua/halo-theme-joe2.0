@@ -239,28 +239,62 @@
 ></joe-anote>
 ```
 
-#### 网盘按钮
+#### 网盘链接
 
-<joe-cloud type="default" url="" password=""></joe-cloud>
-<joe-cloud type="360" url="" password=""></joe-cloud>
-<joe-cloud type="bd" url="" password="bn6f"></joe-cloud>
-<joe-cloud type="ty" url="" password=""></joe-cloud>
-<joe-cloud type="ct" url="" password=""></joe-cloud>
-<joe-cloud type="wy" url="" password=""></joe-cloud>
-<joe-cloud type="github" url="" password=""></joe-cloud>
-<joe-cloud type="gitee" url="" password=""></joe-cloud>
-<joe-cloud type="lz" url="" password=""></joe-cloud>
+> 支持展示常见的网盘或链接（百度、阿里、微云、360、天翼、城通、蓝奏云、github、gitee），通过传入相关属性来使用：
+
+- `type` 网盘类型（非必须）
+- `title` 标题（非必须）
+- `url` 跳转链接（非必须）
+- `password` 提取码/密码（非必须）
+- `width` 宽度（非必须）
+
+<joe-cloud></joe-cloud>
+<joe-cloud type="bd" title="《刺杀该死太保》高清无码" url="" password="bn6f">百度网盘</joe-cloud>
+<joe-cloud type="ali" title="《刺死比尔》TC枪版" url="" password="xmjw">阿里网盘</joe-cloud>
+<joe-cloud type="wy" title="小娜比的童年故事" url="" password="">微云</joe-cloud>
+<joe-cloud type="360" title="枕边的书信2" url="" password="">360 网盘</joe-cloud>
+<joe-cloud type="ty" title="拖拉机维修与保养.pdf" url="" password="">天翼云</joe-cloud>
+<joe-cloud type="ct" title="收割的艺术-柴进" url="" password="">城通网盘</joe-cloud>
+<joe-cloud type="lz" title="我当爸爸啦" url="" password="">蓝奏云</joe-cloud>
+<joe-cloud type="github" title="Joe2.0 主题" url="https://github.com/qinhua/halo-theme-joe2.0/releases/tag/1.0.10">github</joe-cloud>
+<joe-cloud type="gitee" title="Joe2.0 主题" url="https://gitee.com/duider/halo-theme-joe2.0/releases/1.0.10">gitee</joe-cloud>
+<joe-cloud title="我宽200px" width="200px"></joe-cloud>
 
 ```html
-<joe-cloud type="default" url="" password=""></joe-cloud>
-<joe-cloud type="360" url="" password=""></joe-cloud>
-<joe-cloud type="bd" url="" password="bn6f"></joe-cloud>
-<joe-cloud type="ty" url="" password=""></joe-cloud>
-<joe-cloud type="ct" url="" password=""></joe-cloud>
-<joe-cloud type="wy" url="" password=""></joe-cloud>
-<joe-cloud type="github" url="" password=""></joe-cloud>
-<joe-cloud type="gitee" url="" password=""></joe-cloud>
-<joe-cloud type="lz" url="" password=""></joe-cloud>
+<joe-cloud></joe-cloud>
+<joe-cloud type="bd" title="《刺杀该死太保》高清无码" url="" password="bn6f"
+  >百度网盘</joe-cloud
+>
+<joe-cloud type="ali" title="《刺死比尔》TC枪版" url="" password="xmjw"
+  >阿里网盘</joe-cloud
+>
+<joe-cloud type="wy" title="小娜比的童年故事" url="" password=""
+  >微云</joe-cloud
+>
+<joe-cloud type="360" title="枕边的书信2" url="" password=""
+  >360 网盘</joe-cloud
+>
+<joe-cloud type="ty" title="拖拉机维修与保养.pdf" url="" password=""
+  >天翼云</joe-cloud
+>
+<joe-cloud type="ct" title="收割的艺术-柴进" url="" password=""
+  >城通网盘</joe-cloud
+>
+<joe-cloud type="lz" title="我当爸爸啦" url="" password="">蓝奏云</joe-cloud>
+<joe-cloud
+  type="github"
+  title="Joe2.0 主题"
+  url="https://github.com/qinhua/halo-theme-joe2.0/releases/tag/1.0.10"
+  >github</joe-cloud
+>
+<joe-cloud
+  type="gitee"
+  title="Joe2.0 主题"
+  url="https://gitee.com/duider/halo-theme-joe2.0/releases/1.0.10"
+  >gitee</joe-cloud
+>
+<joe-cloud title="我宽200px" width="200px"></joe-cloud>
 ```
 
 ### 装饰元素
@@ -317,6 +351,66 @@
 </joe-tabs>
 ```
 
+#### 卡片（常规）
+
+<joe-card title="卡片标题">
+ <div class="_tpl">卡片内容</div>
+</joe-card>
+
+```xml
+<joe-card title="卡片标题">
+ <div class="_tpl">卡片内容</div>
+</joe-card>
+```
+
+#### 卡片（虚线）
+
+<joe-card-describe title="卡片标题">
+ <div class="_tpl">卡片内容</div>
+</joe-card-describe>
+
+```xml
+<joe-card-describe title="卡片标题">
+ <div class="_tpl">卡片内容</div>
+</joe-card-describe>
+```
+
+#### 卡片列表
+
+<joe-card-list title="卡片标题">
+ <div class="_tpl">
+  {card-list-item}这是一段内容{/card-list-item}
+  {card-list-item}这是一段内容{/card-list-item}
+  {card-list-item}这是一段内容{/card-list-item}
+ </div>
+</joe-card-list>
+
+```xml
+<joe-card-list title="卡片标题">
+ <div class="_tpl">
+  {card-list-item}这是一段内容{/card-list-item}
+  {card-list-item}这是一段内容{/card-list-item}
+  {card-list-item}这是一段内容{/card-list-item}
+ </div>
+</joe-card-list>
+```
+
+#### 折叠内容
+
+<joe-collapse open>
+ <div class="_tpl">
+   {collapse-item 标题}这是一段内容{/collapse-item}
+ </div>
+</joe-collapse>
+
+```xml
+<joe-collapse open>
+ <div class="_tpl">
+   {collapse-item 标题}这是一段内容{/collapse-item}
+ </div>
+</joe-collapse>
+```
+
 #### 时间线
 
 <joe-timeline>
@@ -335,14 +429,6 @@
    {timeline-item 2022}100元{/timeline-item}
  </div>
 </joe-timeline>
-```
-
-#### 评论后可见
-
-<joe-hide disabled></joe-hide>
-
-```html
-<joe-hide></joe-hide>
 ```
 
 #### 渲染原始内容
@@ -396,10 +482,17 @@
 
 #### 视频播放器
 
-<joe-dplayer src="https://stream7.iqilu.com/10339/upload_transcode/202002/17/20200217101826WjyFCbUXQ2.mp4"></joe-dplyer>
+> `joe-dplayer` 是基于 [Dplayer]() 这个播放插件的，组件支持传递如下属性：
+
+- `src` 视频地址
+- `cover` 封面图地址
+- `width` 播放器宽度
+- `height` 播放器高度
+
+<joe-dplayer src="https://stream7.iqilu.com/10339/upload_transcode/202002/17/20200217101826WjyFCbUXQ2.mp4" cover="https://bbchin.com/upload/2021/10/wallhaven-q2l51d-d16d8a9e49744b32bd266174fd70cf5c.jpeg"></joe-dplyer>
 
 ```html
-<joe-dplayer src="https://stream7.iqilu.com/10339/upload_transcode/202002/17/20200217101826WjyFCbUXQ2.mp4"></joe-dplyer>
+<joe-dplayer src="https://stream7.iqilu.com/10339/upload_transcode/202002/17/20200217101826WjyFCbUXQ2.mp4" cover="https://bbchin.com/upload/2021/10/wallhaven-q2l51d-d16d8a9e49744b32bd266174fd70cf5c.jpeg"></joe-dplyer>
 ```
 
 #### Bilibili 视频

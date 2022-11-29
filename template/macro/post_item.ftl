@@ -16,6 +16,17 @@
         <#if post.topped==true><span class="badge" style="display: inline-block">置顶</span></#if>${post.title!}
       </a>
       <a class="abstract" href="${post.fullPath}" title="文章摘要" target="_blank" rel="noopener noreferrer">${post.summary!}</a>
+      <#if post.tags?size gt 0>
+        <ul class="tags">
+          <#list post.tags as tag>
+            <#if tag_index lt 4>
+              <li class="ptag">
+                <a class="link" target="_blank" rel="noopener noreferrer" href="${tag.fullPath!}">${tag.name!'默认标签'}</a>
+              </li>
+            </#if>
+          </#list>
+        </ul>
+      </#if>
       <div class="meta">
         <ul class="items">
           <li>${post.createTime?string('yyyy-MM-dd')}</li>

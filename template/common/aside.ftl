@@ -95,7 +95,7 @@
         <div class="joe_aside__item-contain">
           <@tagTag method="list">
             <#if tags?size gt 0>
-              <div class="tags-cloud-list${(settings.tag_cloud_width=='responsive')?then(' responsive','')}"${(settings.tag_cloud_type=='3d')?then(' style="display:none;"','')}>
+              <div id="tags-cloud-list" class="tags-cloud-list${(settings.tag_cloud_width=='responsive')?then(' responsive','')}${(settings.tag_cloud_type=='3d')?then(' hidden','')}"${(settings.tag_cloud_type=='3d')?then(' style="display:none;"','')}>
                 <#list tags as tag>
                   <#if tag_index lt settings.tag_cloud_max?default(18)?number>
                     <a data-url="${tag.fullPath!}" data-label="${tag.name!}" href="${tag.fullPath!}" title="${tag.name!}">${tag.name!}</a>
@@ -105,6 +105,7 @@
               <#if settings.tag_cloud_type=='3d'>
                 <div id="tags-3d">
                   <div class="empty">加载中…</div>
+                  <canvas width="250" height="250" id="tags-canvas"></canvas>
                 </div>
               </#if>
             <#else>

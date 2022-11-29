@@ -15,6 +15,7 @@ const commonContext = {
 		const $icon_light = $(".mode-light");
 		const $icon_dark = $(".mode-dark");
 		let local_theme = localStorage.getItem("data-mode");
+		ThemeConfig.theme = local_theme;
 
 		// 图标状态
 		$icon_light[`${local_theme === "light" ? "remove" : "add"}Class`]("active");
@@ -41,7 +42,9 @@ const commonContext = {
 				}
 				$html.attr("data-mode", theme);
 				localStorage.setItem("data-mode", theme);
+				ThemeConfig.theme = theme;
 				commonContext.initCommentTheme();
+				commonContext.init3dTag(true);
 			} catch (err) {
 				console.log(err);
 			}
@@ -99,7 +102,7 @@ const commonContext = {
 	/* 初始化评论主题 */
 	initCommentTheme() {
 		const comments = document.getElementsByTagName("halo-comment");
-		if(!comments.lengths) return;
+		if (!comments.length) return;
 		const curMode = document.querySelector("html").getAttribute("data-mode");
 		// 黑夜模式下
 		for (let i = 0; i < comments.length; i++) {
@@ -142,16 +145,17 @@ const commonContext = {
 				// ) {
 				// 	$($curCode[0]).addClass("language-text");
 				// }
-				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
-				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
-				ThemeConfig.enable_code_macdot ? $item.addClass("c_macdot") : null;
-				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
-				ThemeConfig.show_tools_when_hover
-					? $item.addClass("c_hover_tools")
-					: null;
-				// ThemeConfig.enable_code_line_number
-				// 	? $item.addClass("line-numbers")
-				// 	: null;
+				const codeMaxHeight = Number(ThemeConfig.code_max_height);
+				!!codeMaxHeight &&
+          $item
+          	.children("code")
+          	.attr("style", "max-height:" + codeMaxHeight + "px");
+				ThemeConfig.enable_code_title && $item.addClass("c_title");
+				ThemeConfig.enable_code_hr && $item.addClass("c_hr");
+				ThemeConfig.enable_code_macdot && $item.addClass("c_macdot");
+				ThemeConfig.enable_code_newline && $item.addClass("c_newline");
+				ThemeConfig.show_tools_when_hover && $item.addClass("c_hover_tools");
+				// ThemeConfig.enable_code_line_number&& $item.addClass("line-numbers");
 				// 代码折叠
 				if (ThemeConfig.enable_code_expander) {
 					$item
@@ -188,8 +192,10 @@ const commonContext = {
 	/*自动折叠长代码 <仅针对文章页>*/
 	foldCode() {
 		if (!$(".page-post").length) return; // 仅针对文章页
+		const hasCodeMaxHeight = !!Number(ThemeConfig.code_max_height);
 		if (
 			ThemeConfig.enable_code_expander &&
+      !hasCodeMaxHeight &&
       ThemeConfig.enable_fold_long_code &&
       PageAttrs.metas.enable_fold_long_code !== "false"
 		) {
@@ -490,14 +496,14 @@ const commonContext = {
 
 			$allLink.each(function () {
 				const $this = $(this);
-				const curHref=$this.attr("href");
-				if(!curHref.includes("javascript:;")){
+				const curHref = $this.attr("href");
+				if (!curHref.includes("javascript:;")) {
 					let target = "";
 					target =
-          ThemeConfig.link_behavior === "new" &&
-          !$this.attr("href").startsWith("#")
-          	? "_blank"
-          	: "";
+            ThemeConfig.link_behavior === "new" &&
+            !$this.attr("href").startsWith("#")
+            	? "_blank"
+            	: "";
 					$this.attr({
 						target,
 						rel: "noopener noreferrer nofollow",
@@ -514,8 +520,8 @@ const commonContext = {
 			$allLink.each(function () {
 				const $this = $(this);
 				// 排除内容中的锚点、排除href设置为javascript:;的情况
-				const curHref=$this.attr("href");
-				if(!curHref.includes("javascript:;")){
+				const curHref = $this.attr("href");
+				if (!curHref.includes("javascript:;")) {
 					const target = !curHref.startsWith("#") ? "_blank" : "";
 					$this.attr({
 						target,
@@ -526,87 +532,34 @@ const commonContext = {
 		}
 	},
 	/* 初始化3D标签云 */
-	init3dTag() {
+	init3dTag(isReload) {
 		if (
 			Joe.isMobile ||
       !ThemeConfig.enable_tag_cloud ||
       ThemeConfig.tag_cloud_type !== "3d" ||
-      !$(".tags-cloud-list").length
+      !$("#tags-cloud-list").length
 		)
 			return;
-		$.getScript(
-			`${ThemeConfig.BASE_RES_URL}/source/lib/3dtag/3dtag.min.js`,
-			(_res) => {
-				const entries = [];
-				const colors = [
-					"#F8D800",
-					"#0396FF",
-					"#EA5455",
-					"#7367F0",
-					"#32CCBC",
-					"#F6416C",
-					"#28C76F",
-					"#9F44D3",
-					"#F55555",
-					"#736EFE",
-					"#E96D71",
-					"#DE4313",
-					"#D939CD",
-					"#4C83FF",
-					"#F072B6",
-					"#C346C2",
-					"#5961F9",
-					"#FD6585",
-					"#465EFB",
-					"#FFC600",
-					"#FA742B",
-					"#5151E5",
-					"#BB4E75",
-					"#FF52E5",
-					"#49C628",
-					"#00EAFF",
-					"#F067B4",
-					"#F067B4",
-					"#ff9a9e",
-					"#00f2fe",
-					"#4facfe",
-					"#f093fb",
-					"#6fa3ef",
-					"#bc99c4",
-					"#46c47c",
-					"#f9bb3c",
-					"#e8583d",
-					"#f68e5f",
-				];
-				const random = (min, max) => {
-					min = Math.ceil(min);
-					max = Math.floor(max);
-					return Math.floor(Math.random() * (max - min + 1)) + min;
-				};
-				$(".tags-cloud-list a").each((i, item) => {
-					entries.push({
-						label: $(item).attr("data-label"),
-						url: $(item).attr("data-url"),
-						target: "_blank",
-						fontColor: colors[random(0, colors.length - 1)],
-						fontSize: 16,
-					});
-				});
-				$("#tags-3d").svg3DTagCloud({
-					entries,
-					width: 250,
-					height: 250,
-					radius: "65%",
-					radiusMin: 75,
-					bgDraw: false,
-					fov: 800,
-					speed: 0.5,
-					fontWeight: 500,
-				});
-				$(".tags-cloud-list").remove();
+		const options = {
+			textColour: ThemeConfig.theme==="light" ? "#333" : "#fff",
+			outlineMethod: "colour",
+			outlineColour: ThemeConfig[`mode_color_${ThemeConfig.theme==="light"?"light":"dark"}`],
+			maxSpeed: 0.03,
+			depth: 0.75,
+		};
+		if(!isReload){
+			$.getScript(
+				`${ThemeConfig.BASE_RES_URL}/source/lib/tagcanvas/tagcanvas.min.js`,
+				(_res) => {
+					TagCanvas.Start("tags-canvas", "tags-cloud-list", options);
+					$("#tags-3d .empty").remove();
+				}
+			).fail(()=>{
 				$("#tags-3d .empty").remove();
-			}
-		);
+			});
+		}else{
+			TagCanvas.Start("tags-canvas", "tags-cloud-list", options);
+		}
 	},
 	/* 搜索框弹窗 */
 	searchDialog() {

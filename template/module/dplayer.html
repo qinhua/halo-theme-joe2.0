@@ -71,7 +71,8 @@
       volume: 0.5, // 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
       playbackSpeed: [2, 1.5, 1.25, 1], // 可选的播放速率，可以设置成自定义的数组
       video: {
-        url: getUrlParams('url')
+        url: getUrlParams('url'),
+        pic: getUrlParams('cover')
       }
     })
   </script>

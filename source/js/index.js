@@ -212,6 +212,18 @@ const homeContext = {
 }" title="文章摘要" target="${link_behavior}" rel="noopener noreferrer">${
 	post.summary
 }</a>
+${
+	post.tags.length > 0
+		? `<ul class="tags">${post.tags.slice(0,4).reduce(
+			(sum, ptag) => {
+				return (sum += `<li class="ptag">
+            <a class="link" target="${link_behavior}" rel="noopener noreferrer" href="${ptag.fullPath}">${ptag.name}</a>
+          </li>`);
+			},
+			""
+		)}</ul>`
+		: ""
+}
             <div class="meta">
                 <ul class="items">
                     <li>${Utils.formatDate(post.createTime)}</li>

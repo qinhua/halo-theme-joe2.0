@@ -66,7 +66,8 @@
                             <#if settings.enable_clean_mode!=true && settings.enable_comment_journal==true>
                               <div class="joe_journal_comment">
                                 <#assign sys_options = '{"blog_logo": "${options.blog_logo?js_string!}", "gravatar_source": "${options.gravatar_source!}", "comment_gravatar_default": "${options.comment_gravatar_default!}"}'>
-                                <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": "${settings.enable_comment_ua?string}", "gravatarSource": "${settings.gravatar_source!}", "loadingStyle": "${settings.comment_loading_style!}", "authorPopup": "${settings.comment_author_poptext!}", "emailPopup": "${settings.comment_email_poptext!}", "aWord": "${settings.comment_aword!}", "avatarLoading": "${settings.comment_avatar_loading!}", "avatarError": "${settings.comment_avatar_error!}", "notComment": "${settings.comment_empty_text!}"}'>
+                                <#assign blogger_avatar = (settings.blogger_avatar_source?? && settings.blogger_avatar_source == 'avatar')?then(USER_AVATAR, LOGO)>
+                                <#assign configs = '{"size": "small", "autoLoad": false, "showUserAgent": "${settings.enable_comment_ua?string}", "gravatarSource": "${settings.gravatar_source!}", "bloggerAvatar": "${blogger_avatar}", "loadingStyle": "${settings.comment_loading_style!}", "authorPopup": "${settings.comment_author_poptext!}", "emailPopup": "${settings.comment_email_poptext!}", "aWord": "${settings.comment_aword!}", "avatarLoading": "${settings.comment_avatar_loading!}", "avatarError": "${settings.comment_avatar_error!}", "notComment": "${settings.comment_empty_text!}"}'>
                                 <halo-comment id="${journal.id?c}" type="journal" configs='${configs}' options='${sys_options}'/>
                               </div>
                             </#if>

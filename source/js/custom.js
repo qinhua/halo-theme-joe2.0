@@ -224,20 +224,22 @@ document.addEventListener("DOMContentLoaded", () => {
 					title: this.getAttribute("title") || "默认标题",
 					url: this.getAttribute("url"),
 					password: this.getAttribute("password"),
+					width: this.getAttribute("width"),
 				};
 				const type = {
 					default: "默认网盘",
-					360: "360网盘",
 					bd: "百度网盘",
+					ali:"阿里网盘",
+					wy: "微云网盘",
+					360: "360网盘",
 					ty: "天翼网盘",
 					ct: "城通网盘",
-					wy: "微云网盘",
+					lz: "蓝奏云网盘",
 					github: "Github仓库",
 					gitee: "Gitee仓库",
-					lz: "蓝奏云网盘",
 				};
 				this.innerHTML = `
-					<span class="joe_cloud">
+					<span class="joe_cloud"${this.options.width?" style=\"width:"+this.options.width+"\"":""}>
 						<div class="joe_cloud__logo _${this.options.type}"></div>
 						<div class="joe_cloud__describe">
 							<div class="joe_cloud__describe-title">${this.options.title}</div>
@@ -247,9 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	this.options.password ? " | 提取码：" + this.options.password : ""
 }</div>
 						</div>
-						<a class="joe_cloud__btn" href="${
-	this.options.url
-}" target="_blank" rel="noopener noreferrer nofollow">
+						<a class="joe_cloud__btn"${this.options.url ? ` href="${this.options.url}" target="_blank"`:""} rel="noopener noreferrer nofollow">
 							<i class="fa fa-download"></i>
 						</a>
 					</span>
@@ -291,11 +291,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 
 	customElements.define(
-		"joe-card-default",
+		"joe-card",
 		class JoeCardDefault extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				const _temp = getChildren(this, "_tpl");
 				this.options = {
 					width: this.getAttribute("width") || "100%",
 					label: this.getAttribute("label") || "卡片标题",
@@ -303,6 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
             _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "") ||
             "卡片内容",
 				};
+				_temp.parentNode.removeChild(_temp); 
 				const htmlStr = `
 				<div class="joe_card__default" style="width: ${this.options.width}">
 					<div class="joe_card__default-title">${this.options.label}</div>
@@ -403,13 +404,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeCardDescribe extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				const _temp = getChildren(this, "_tpl");
 				this.options = {
-					title: this.getAttribute("title") || "卡片描述",
+					title: this.getAttribute("title") || "卡片标题",
 					content:
             _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "") ||
             "卡片内容",
 				};
+				_temp.parentNode.removeChild(_temp); 
 				const htmlStr = `
 					<div class="joe_card__describe">
 						<div class="joe_card__describe-title">${this.options.title}</div>
@@ -434,8 +436,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeCardList extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
+				_temp.parentNode.removeChild(_temp); 
 				let content = "";
 				_innerHTML.replace(
 					/{card-list-item}([\s\S]*?){\/card-list-item}/g,
@@ -500,6 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				super();
 				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
+				_temp.parentNode.removeChild(_temp); 
 				let content = "";
 				_innerHTML.replace(
 					/{timeline-item([^}]*)}([\s\S]*?){\/timeline-item}/g,
@@ -531,8 +535,6 @@ document.addEventListener("DOMContentLoaded", () => {
 						item.style.borderColor = color;
 					}
 				);
-				
-				_temp.parentNode.removeChild(_temp); // 清理无用标签
 			}
 		}
 	);
@@ -542,16 +544,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeCollapse extends HTMLElement {
 			constructor() {
 				super();
-				const _temp = getChildren(this, "_temp");
+				this.options = {
+					open: !!this.getAttribute("open"),
+				};
+				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
+				_temp.parentNode.removeChild(_temp); 
 				let content = "";
 				_innerHTML.replace(
 					/{collapse-item([^}]*)}([\s\S]*?){\/collapse-item}/g,
-					function ($0, $1, $2) {
+					 ($0, $1, $2) =>  {
 						content += `
-					<div class="joe_collapse__item" ${$1}>
+					<div class="joe_collapse__item"${this.options?" open":""}>
 						<div class="joe_collapse__item-head">
-							<div class="joe_collapse__item-head--label"></div>
+							<div class="joe_collapse__item-head--label">${$1}</div>
 							<svg class="joe_collapse__item-head--icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M7.406 7.828L12 12.422l4.594-4.594L18 9.234l-6 6-6-6z"/></svg>
 						</div>
 						<div class="joe_collapse__item-wrapper">
@@ -574,10 +580,10 @@ document.addEventListener("DOMContentLoaded", () => {
 					this.appendChild(span);
 				}
 				this.querySelectorAll(".joe_collapse__item").forEach((item) => {
-					const label = item.getAttribute("label") || "折叠标题";
+					// const label = item.getAttribute("label") || "折叠标题";
 					const head = getChildren(item, "joe_collapse__item-head");
-					const headLabel = getChildren(head, "joe_collapse__item-head--label");
-					headLabel.innerHTML = label;
+					// const headLabel = getChildren(head, "joe_collapse__item-head--label");
+					// headLabel.innerHTML = label;
 					const wrapper = getChildren(item, "joe_collapse__item-wrapper");
 					const content = getChildren(
 						wrapper,
@@ -618,6 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					player:
             this.getAttribute("player") ||
             `${ThemeConfig.BASE_RES_URL}/template/module/dplayer.html?url=`,
+					cover:this.getAttribute("cover"),
 					width: this.getAttribute("width") || "100%",
 					height: this.getAttribute("height") || "500px",
 				};
@@ -627,7 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (this.options.src)
 					this.innerHTML = `<iframe allowfullscreen="true" class="joe_vplayer" src="${
 						this.options.player + this.options.src
-					}" style="width:${this.options.width};height:${
+					}${this.options.cover?`&cover=${this.options.cover}`:""}" style="width:${this.options.width};height:${
 						this.options.height
 					}"></iframe>`;
 				else this.innerHTML = "视频地址未填写！";
@@ -684,6 +691,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				super();
 				const _temp = getChildren(this, "_tpl");
 				let _innerHTML = _temp.innerHTML.trim().replace(/^(<br>)|(<br>)$/g, "");
+				_temp.parentNode.removeChild(_temp); 
 				let navs = "";
 				let contents = "";
 				_innerHTML.replace(
@@ -730,8 +738,6 @@ document.addEventListener("DOMContentLoaded", () => {
 					});
 					if (index === 0) item.click();
 				});
-				
-				_temp.parentNode.removeChild(_temp); // 清理无用标签
 			}
 		}
 	);
