@@ -593,8 +593,8 @@ const commonContext = {
 				});
 				$("#tags-3d").svg3DTagCloud({
 					entries,
-					width: 250,
-					height: 250,
+					width: 320,
+					height: 320,
 					radius: "65%",
 					radiusMin: 75,
 					bgDraw: false,
