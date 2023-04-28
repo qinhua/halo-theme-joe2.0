@@ -10,6 +10,7 @@
       </div>
     </div>
     <ul class="joe_index__hot-list hotlist">
+      <#assign random_img_ok=settings.enable_random_img_api==true && settings.random_img_api!=''>
       <#if settings.hot_category_source == 'hot'>
         <@categoryTag method="list">
           <#list categories?sort_by("postCount")?reverse as category>
@@ -21,7 +22,7 @@
                       <#include "post_num.ftl">
                       <@post_num type="category" id="${category.id?c}" suffix="℃" />
                     </#if>
-                    <#assign cover=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail, BASE_RES_URL+'/source/img/hot_cover${category_index+1}.jpg')>
+                    <#assign cover=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + category.id,'https://picsum.photos/id/2${category_index}/350/200')) >
                     <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="Joe.errorImg(this)" alt="${category.name!}">
                     <figcaption class="title">${category.name!}</figcaption>
                   </figure>
@@ -42,14 +43,14 @@
               <li class="item animated fadeIn">
                 <a class="link${clickable?then(' clickable','')}" href="${clickable?then(cur_link,'javascript:;')}" ${clickable?then('target="_blank"','')} rel="noopener noreferrer nofollow" href="${cur_link!}" title="${cur_title!}">
                   <figure class="inner">
-                    <#assign cover=(cur_img!='')?then(cur_img, BASE_RES_URL+'/source/img/hot_cover${categorys_index+1}.jpg')>
+                    <#assign cover=(category.thumbnail?? && category.thumbnail!='')?then(category.thumbnail,(random_img_ok==true)?then(settings.random_img_api + ((settings.random_img_api?index_of('?')!=-1)?then('&','?')) + '_r=' + category.id,'https://picsum.photos/id/2${category_index}/350/200')) >
                     <img width="100%" height="120" class="image lazyload" data-src="${cover}" src="${LAZY_IMG}" onerror="Joe.errorImg(this)" alt="${cur_title!}">
                     <figcaption class="title">${cur_title!}</figcaption>
                   </figure>
                 </a>
               </li>
             </#if>
-          </#list> 
+          </#list>
         <#else>
           <div class="joe_nodata"><i class="joe-font joe-icon-tips"></i>没有配置分类数据</div>
         </#if>
