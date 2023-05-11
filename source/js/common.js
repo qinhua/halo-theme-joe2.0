@@ -210,11 +210,12 @@ const commonContext = {
 		if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
 			return;
 		Utils.request({
-			url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
+			url: ThemeConfig.BASE_URL + "/iscollect",
 			method: "GET",
 			returnRaw: true,
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
+				type: "BING"
 			},
 		})
 			.then((res) => {
@@ -228,7 +229,7 @@ const commonContext = {
 						);
 						let _timer = setTimeout(function () {
 							Utils.request({
-								url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
+								url: ThemeConfig.BASE_URL + "/baidu/push",
 								method: "POST",
 								returnRaw: true,
 								data: {
@@ -268,6 +269,72 @@ const commonContext = {
 				console.log(err);
 			});
 	},
+
+	/* 必应推送 */
+	initBing() {
+		if (!ThemeConfig.check_bing_collect || !$("#joe_bing_record").length)
+			return;
+		Utils.request({
+			url: ThemeConfig.BASE_URL + "/iscollect",
+			method: "GET",
+			returnRaw: true,
+			data: {
+				url: ThemeConfig.blog_url + window.location.pathname,
+				type: "BING"
+			},
+		})
+			.then((res) => {
+				if (res.data && res.data.collected) {
+					$("#joe_bing_record").css("color", "#67c23a").html("已收录");
+				} else {
+					/* 如果填写了Token，则自动推送给必应 */
+					if (ThemeConfig.bing_token) {
+						$("#joe_bing_record").html(
+							"<span style=\"color: #e6a23c\">未收录，推送中...</span>"
+						);
+						let _timer = setTimeout(function () {
+							Utils.request({
+								url: ThemeConfig.BASE_URL + "/bing/push",
+								method: "POST",
+								returnRaw: true,
+								data: {
+									site: ThemeConfig.blog_url,
+									token: ThemeConfig.bing_token,
+									urls: window.location.href,
+								},
+							})
+								.then((res) => {
+									if (res.data.success === 0) {
+										$("#joe_bing_record").html(
+											"<span style=\"color: #f56c6c\">推送失败，请检查！</span>"
+										);
+									} else {
+										$("#joe_bing_record").html(
+											"<span style=\"color: #67c23a\">推送成功！</span>"
+										);
+									}
+								})
+								.catch((err) => {
+									console.log(err);
+								});
+							clearTimeout(_timer);
+							_timer = null;
+						}, 1000);
+					} else {
+						const url = `https://www.bing.com/indexnow?url=${encodeURI(
+							window.location.href
+						)}`;
+						$("#joe_bing_record").html(
+							`<a target="_blank" href="${url}" rel="noopener noreferrer nofollow" style="color: #f56c6c">未收录，提交收录</a>`
+						);
+					}
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	},
+
 	/* 音乐播放器 */
 	initMusic() {
 		if (!ThemeConfig.enable_global_music_player) return;

@@ -3520,7 +3520,7 @@ others:
       type: switch
       data-type: bool
       default: false
-      description: "启用后，文章页打开时会自动检测百度收录情况，并显示状态文字（目前相关api为M酷自己搭建的服务，不能保证稳定性）"
+      description: "启用后，文章页打开时会自动检测百度收录情况，并显示状态文字"
       options:
         - value: true
           label: 开启
@@ -3532,6 +3532,24 @@ others:
       default: ""
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit"
+    check_bing_collect:
+      name: check_bing_collect
+      label: 检查必应收录情况
+      type: switch
+      data-type: bool
+      default: false
+      description: "启用后，文章页打开时会自动检测必应收录情况，并显示状态文字"
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    bing_token:
+      name: bing_token
+      label: 必应推送Token
+      default: ""
+      placeholder: "请填入token"
+      description: "文章页未收录时会自动将当前链接推送给必应加快收录，Token在必应站长工具indexNow获取（必须启用“检查必应收录”并填入token才生效），https://www.bing.com/indexnow"
     # enable_pjax:
     #   name: enable_pjax
     #   label: 全局Pjax
