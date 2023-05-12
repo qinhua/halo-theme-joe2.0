@@ -213,12 +213,9 @@ const commonContext = {
 			url: ThemeConfig.BASE_URL + "/iscollect",
 			method: "POST",
 			returnRaw: true,
-			headers:{
-				"Content-Type": "application/json",
-			},
 			data: {
-				"url": ThemeConfig.blog_url + window.location.pathname,
-				"type": "BAIDU"
+				url: ThemeConfig.blog_url + window.location.pathname,
+				type: "BAIDU",
 			},
 		})
 			.then((res) => {
@@ -284,12 +281,9 @@ const commonContext = {
 			url: ThemeConfig.BASE_URL + "/iscollect",
 			method: "POST",
 			returnRaw: true,
-			headers:{
-				"Content-Type": "application/json",
-			},
 			data: {
-				"url": ThemeConfig.blog_url + window.location.pathname,
-				"type": "BING"
+				url: ThemeConfig.blog_url + window.location.pathname,
+				type: "BING",
 			},
 		})
 			.then((res) => {
@@ -306,13 +300,10 @@ const commonContext = {
 								url: ThemeConfig.BASE_URL + "/bing/push",
 								method: "POST",
 								returnRaw: true,
-								headers:{
-									"Content-Type": "application/json",
-								},
 								data: {
-									"site": ThemeConfig.blog_url,
-									"token": ThemeConfig.bing_token,
-									"urls": new Array(window.location.href),
+									site: ThemeConfig.blog_url,
+									token: ThemeConfig.bing_token,
+									urls: new Array(window.location.href),
 								},
 							})
 								.then((res) => {
