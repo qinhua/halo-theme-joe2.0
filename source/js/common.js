@@ -233,7 +233,7 @@ const commonContext = {
 								method: "POST",
 								returnRaw: true,
 								data: {
-									site: ThemeConfig.blog_url,
+									site: ThemeConfig.blog_url.replace("https://", ""),
 									token: ThemeConfig.baidu_token,
 									urls: window.location.href,
 								},
