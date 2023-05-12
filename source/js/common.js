@@ -236,9 +236,9 @@ const commonContext = {
 									"Content-Type": "application/json",
 								},
 								data: {
-									"site": ThemeConfig.blog_url,
-									"token": ThemeConfig.baidu_token,
-									"urls": new Array(window.location.href),
+									site: ThemeConfig.blog_url,
+									token: ThemeConfig.baidu_token,
+									urls: [window.location.href],
 								},
 							})
 								.then((res) => {
@@ -303,7 +303,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.bing_token,
-									urls: new Array(window.location.href),
+									urls: [window.location.href],
 								},
 							})
 								.then((res) => {
