@@ -215,7 +215,7 @@ const commonContext = {
 			returnRaw: true,
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
-				type: "BING"
+				type: "BAIDU",
 			},
 		})
 			.then((res) => {
@@ -233,9 +233,9 @@ const commonContext = {
 								method: "POST",
 								returnRaw: true,
 								data: {
-									site: ThemeConfig.blog_url,
+									site: ThemeConfig.blog_url.replace("https://", ""),
 									token: ThemeConfig.baidu_token,
-									urls: new Array(window.location.href),
+									urls: window.location.href,
 								},
 							})
 								.then((res) => {
@@ -280,7 +280,7 @@ const commonContext = {
 			returnRaw: true,
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
-				type: "BING"
+				type: "BING",
 			},
 		})
 			.then((res) => {
@@ -300,7 +300,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.bing_token,
-									urls: new Array(window.location.href),
+									urls: window.location.href,
 								},
 							})
 								.then((res) => {
