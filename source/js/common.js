@@ -235,7 +235,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.baidu_token,
-									urls: window.location.href,
+									urls: new Array(window.location.href),
 								},
 							})
 								.then((res) => {
@@ -300,7 +300,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.bing_token,
-									urls: window.location.href,
+									urls: new Array(window.location.href),
 								},
 							})
 								.then((res) => {
