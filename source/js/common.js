@@ -213,6 +213,9 @@ const commonContext = {
 			url: ThemeConfig.BASE_URL + "/iscollect",
 			method: "POST",
 			returnRaw: true,
+			headers: {
+				"Content-Type": "application/json"
+			},
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
 				type: "BING"
@@ -232,6 +235,9 @@ const commonContext = {
 								url: ThemeConfig.BASE_URL + "/baidu/push",
 								method: "POST",
 								returnRaw: true,
+								headers: {
+									"Content-Type": "application/json"
+								},
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.baidu_token,
@@ -278,6 +284,9 @@ const commonContext = {
 			url: ThemeConfig.BASE_URL + "/iscollect",
 			method: "POST",
 			returnRaw: true,
+			headers: {
+				"Content-Type": "application/json"
+			},
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
 				type: "BING"
@@ -297,6 +306,9 @@ const commonContext = {
 								url: ThemeConfig.BASE_URL + "/bing/push",
 								method: "POST",
 								returnRaw: true,
+								headers: {
+									"Content-Type": "application/json"
+								},
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.bing_token,
