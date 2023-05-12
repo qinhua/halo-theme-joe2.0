@@ -211,7 +211,7 @@ const commonContext = {
 			return;
 		Utils.request({
 			url: ThemeConfig.BASE_URL + "/iscollect",
-			method: "GET",
+			method: "POST",
 			returnRaw: true,
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
@@ -276,7 +276,7 @@ const commonContext = {
 			return;
 		Utils.request({
 			url: ThemeConfig.BASE_URL + "/iscollect",
-			method: "GET",
+			method: "POST",
 			returnRaw: true,
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
