@@ -214,11 +214,11 @@ const commonContext = {
 			method: "POST",
 			returnRaw: true,
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
-				type: "BING"
+				type: "BAIDU"
 			},
 		})
 			.then((res) => {
@@ -285,7 +285,7 @@ const commonContext = {
 			method: "POST",
 			returnRaw: true,
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
 			data: {
 				url: ThemeConfig.blog_url + window.location.pathname,
