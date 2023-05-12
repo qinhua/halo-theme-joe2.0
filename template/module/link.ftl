@@ -1,6 +1,5 @@
 <#macro link type>
   <link rel="shortcut icon" size="32x32" href="${options.blog_favicon!}">
-  <link rel="canonical" href="${blog_url!}">
   <#if settings.cdn_type == "custom" && settings.custom_cdn_url != "">
     <link rel="dns-prefetch" href="${settings.custom_cdn_url}">
   </#if>

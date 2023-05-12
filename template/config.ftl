@@ -60,7 +60,7 @@
   ThemeConfig['blog_url'] = '${blog_url!}';
   ThemeConfig['developer'] = 'M酷';
   ThemeConfig['theme_path'] = '${theme_path}';
-  ThemeConfig['BASE_URL'] = 'https://bbchin.com';
+  ThemeConfig['BASE_URL'] = 'https://shiker.tech';
   ThemeConfig['BASE_RES_URL'] = '${BASE_RES_URL}';
   ThemeConfig['LAZY_IMG'] = '${LAZY_IMG}';
   ThemeConfig['post_index_page_size'] = '${options.post_index_page_size!15}';
