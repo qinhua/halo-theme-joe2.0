@@ -3546,7 +3546,13 @@ others:
           label: 关闭
     bing_token:
       name: bing_token
-      label: 必应推送Token
+      label: 必应API提交 Token
+      default: ""
+      placeholder: "请填入token"
+      description: "文章页未收录时会自动将当前链接推送给必应加快收录，Token在必应站长工具账户设置->API访问获取（必须启用“检查必应收录”并填入token才生效）"
+    bing_indexToken:
+      name: bing_indexToken
+      label: 必应indexNow Token
       default: ""
       placeholder: "请填入token"
       description: "文章页未收录时会自动将当前链接推送给必应加快收录，Token在必应站长工具indexNow获取（必须启用“检查必应收录”并填入token才生效），https://www.bing.com/indexnow"

@@ -235,6 +235,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url.replace("https://", ""),
 									token: ThemeConfig.baidu_token,
+									indexToken: "",
 									urls: window.location.href,
 								},
 							})
@@ -300,6 +301,7 @@ const commonContext = {
 								data: {
 									site: ThemeConfig.blog_url,
 									token: ThemeConfig.bing_token,
+									indexToken: ThemeConfig.bing_indexToken,
 									urls: window.location.href,
 								},
 							})
