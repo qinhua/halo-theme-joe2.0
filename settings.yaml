@@ -3368,7 +3368,7 @@ advertise:
       type: textarea
       default: ""
       placeholder: 请输入相应的广告代码
-      description:
+      description: "请输入相应的广告代码"
     enable_post_ads_top:
       name: enable_post_ads_top
       label: 展示文章页（顶部）广告
@@ -3382,11 +3382,11 @@ advertise:
           label: 否
     post_ad_cover_top:
       name: post_ad_cover_top
-      label: 广告图片URL（顶部）
+      label: 广告代码（顶部）
       type: textarea
       default: ""
       placeholder: 请输入相应的广告代码
-      description:
+      description: "请输入相应的广告代码"
     enable_post_ads_bottom:
       name: enable_post_ads_bottom
       label: 展示文章页（底部）广告
@@ -3400,11 +3400,11 @@ advertise:
           label: 否
     post_ad_cover_bottom:
       name: post_ad_cover_bottom
-      label: 广告图片URL（底部）
+      label: 广告代码（底部）
       type: textarea
       default: ""
       placeholder: 请输入相应的广告代码
-      description:
+      description: "请输入相应的广告代码"
 
 # 自定义
 custom:
