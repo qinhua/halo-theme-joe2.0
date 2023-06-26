@@ -978,18 +978,6 @@ aside:
       label: 二维码描述
       type: textarea
       placeholder: "请输入二维码描述（仅在二维码url不为空时生效）"
-    enable_qrcode:
-      name: enable_qrcode
-      label: 展示二维码
-      type: switch
-      data-type: bool
-      default: false
-      description: "在侧边栏展示二维码模块，必须配置图片url"
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
     enable_music_player:
       name: enable_music_player
       label: 展示音乐播放器
@@ -1922,7 +1910,6 @@ post:
         - value: true
           label: 开启
         - value: false
-          label: 关闭
           label: 关闭
     enable_indent:
       name: enable_indent
