@@ -256,7 +256,6 @@ theme:
       data-type: bool
       default: false
       description: "在切换到其它站点或后台时，通过页面title提示"
-      description: "在切换到其它站点或后台时，通过页面title提示"
       options:
         - value: true
           label: 开启
