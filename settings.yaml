@@ -256,6 +256,7 @@ theme:
       data-type: bool
       default: false
       description: "在切换到其它站点或后台时，通过页面title提示"
+      description: "在切换到其它站点或后台时，通过页面title提示"
       options:
         - value: true
           label: 开启
@@ -3377,18 +3378,11 @@ advertise:
           label: 否
     aside_ad_cover:
       name: aside_ad_cover
-      label: 广告图片URL（侧边栏）
-      type: text
+      label: 广告代码（侧边栏）
+      type: textarea
       default: ""
-      placeholder: 请输入
-      description: "和 “广告跳转URL” 组合生效，不填不展示"
-    aside_ad_link:
-      name: aside_ad_link
-      label: 广告跳转URL（侧边栏）
-      type: text
-      default: ""
-      placeholder: 请输入
-      description: "和 “广告图片URL” 组合生效，不填不展示"
+      placeholder: 请输入相应的广告代码
+      description:
     enable_post_ads_top:
       name: enable_post_ads_top
       label: 展示文章页（顶部）广告
@@ -3403,17 +3397,10 @@ advertise:
     post_ad_cover_top:
       name: post_ad_cover_top
       label: 广告图片URL（顶部）
-      type: text
+      type: textarea
       default: ""
-      placeholder: 请输入
-      description: "和 “广告跳转URL” 组合生效，不填不展示"
-    post_aside_ad_link_top:
-      name: post_aside_ad_link_top
-      label: 广告跳转URL（顶部）
-      type: text
-      default: ""
-      placeholder: 请输入
-      description: "和 “广告图片URL” 组合生效，不填不展示"
+      placeholder: 请输入相应的广告代码
+      description:
     enable_post_ads_bottom:
       name: enable_post_ads_bottom
       label: 展示文章页（底部）广告
@@ -3428,17 +3415,10 @@ advertise:
     post_ad_cover_bottom:
       name: post_ad_cover_bottom
       label: 广告图片URL（底部）
-      type: text
+      type: textarea
       default: ""
-      placeholder: 请输入
-      description: "和 “广告跳转URL” 组合生效，不填不展示"
-    post_aside_ad_link_bottom:
-      name: post_aside_ad_link_bottom
-      label: 广告跳转URL（底部）
-      type: text
-      default: ""
-      placeholder: 请输入
-      description: "和 “广告图片URL” 组合生效，不填不展示"
+      placeholder: 请输入相应的广告代码
+      description:
 
 # 自定义
 custom:
